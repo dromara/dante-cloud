@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>eurynome-cloud</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <name>eurynome-cloud</name>
+    <description>Top Eurynome project pom.xml file</description>
+
+    <parent>
+        <groupId>cn.herodotus.eurynome</groupId>
+        <artifactId>eurynome-cloud-dependencies</artifactId>
+        <version>1.0.0</version>
+        <relativePath>eurynome-cloud-dependencies/pom.xml</relativePath>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <!-- 所有的子项目默认依赖 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- 管理依赖版本号,子项目不会默认依赖 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-component-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 环境 -->
+    <profiles>
+        <!-- 开发 -->
+        <profile>
+            <id>development</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--当前环境-->
+                <profile.name>development</profile.name>
+                <database.type>postgresql</database.type>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>127.0.0.1:8848</config.server-addr>
+                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <config.namespace></config.namespace>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
+                <sentinel.server-addr>127.0.0.1:8849</sentinel.server-addr>
+            </properties>
+        </profile>
+        <!-- Docker -->
+        <profile>
+            <id>docker</id>
+            <properties>
+                <!--当前环境-->
+                <profile.name>docker</profile.name>
+                <database.type>postgresql</database.type>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>192.168.101.10:8848</config.server-addr>
+                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <config.namespace></config.namespace>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
+                <sentinel.server-addr>192.168.101.10:8849</sentinel.server-addr>
+            </properties>
+        </profile>
+        <!-- 测试 -->
+        <profile>
+            <id>testing</id>
+            <properties>
+                <!--当前环境-->
+                <profile.name>testing</profile.name>
+                <database.type>postgresql</database.type>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>10.180.80.80:8848</config.server-addr>
+                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <config.namespace></config.namespace>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>10.180.80.80:8848</discovery.server-addr>
+                <sentinel.server-addr>127.0.0.1:8849</sentinel.server-addr>
+            </properties>
+        </profile>
+        <!-- 生产 -->
+        <profile>
+            <id>production</id>
+            <properties>
+                <!--当前环境,生产环境为空-->
+                <profile.name>production</profile.name>
+                <database.type>postgresql</database.type>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>172.17.207.82:8848</config.server-addr>
+                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <config.namespace></config.namespace>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>172.17.207.82:8848</discovery.server-addr>
+                <sentinel.server-addr>127.0.0.1:8849</sentinel.server-addr>
+            </properties>
+        </profile>
+    </profiles>
+
+    <modules>
+        <module>eurynome-cloud-dependencies</module>
+        <module>eurynome-cloud-components</module>
+        <module>eurynome-cloud-platform</module>
+        <module>eurynome-cloud-services</module>
+    </modules>
+
+
+</project>
