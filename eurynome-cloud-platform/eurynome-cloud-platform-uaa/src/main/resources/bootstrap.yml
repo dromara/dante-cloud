@@ -1,0 +1,89 @@
+server:
+  port: 7070
+captcha:
+  session-name: upms_captcha
+spring:
+  application:
+    name:  @artifactId@ #拿到POM文件中的值
+  profiles:
+    active: @profile.name@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        namespace: @config.namespace@
+        server-addr: @config.server-addr@
+        refreshable-dataids: luban-cloud-@profile.name@-platform.yml
+        shared-dataids: luban-cloud-@profile.name@-platform.yml,luban-cloud-@profile.name@-redis.yml,luban-cloud-@profile.name@-database-@database.type@.yml,luban-cloud-@profile.name@-kafka.yml
+        file-extension: yml
+      discovery:
+        namespace: @config.namespace@
+        server-addr: @discovery.server-addr@
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: @sentinel.server-addr@
+  thymeleaf:
+    mode: HTML
+    cache: false
+    prefix: classpath:/templates
+
+#不同应用应是不同的配置，此处与hello_world相同，只为测试使用
+security:
+  oauth2:
+    client:
+      access-token-uri: ${luban.platform.access-token-uri}
+      user-authorization-uri: ${luban.platform.user-authorization-uri}
+      client-id: ${luban.platform.client-id}
+      client-secret: ${luban.platform.client-secret}
+      scope: ${luban.platform.scope}
+      authorized-grant-types: password
+    resource:
+      token-info-uri: ${luban.platform.token-info-uri}
+      user-info-uri: ${luban.platform.user-info-uri}
+
+luban:
+  platform:
+    application:
+      service-display-name: "用户中心"
+    security:
+      interceptor:
+        white-list:
+          - "/v2/**"
+          - "/login/token"
+          - "/application/clientdetails"
+          - "/user/findByUsername"
+          - "/user/findByUserId"
+          - "/captcha/getVerifiCode"
+          - "/captcha/checkVerifiCode"
+
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: caffeine
+      keyConvertor: fastjson
+      limit: 1000
+  remote:
+    default:
+      type: redis.lettuce
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: ${spring.redis.lettuce.pool.min-idle}
+        maxIdle: ${spring.redis.lettuce.pool.max-idle}
+        maxTotal: ${spring.redis.lettuce.pool.max-active}
+        maxWait: ${spring.redis.lettuce.pool.max-wait}
+      uri:
+        - redis://${spring.redis.host}:${spring.redis.port}/${spring.redis.database}
+
+logging:
+  level:
+    com:
+      alibaba: WARN
+    cn:
+      itcraftsman:
+        luban: DEBUG

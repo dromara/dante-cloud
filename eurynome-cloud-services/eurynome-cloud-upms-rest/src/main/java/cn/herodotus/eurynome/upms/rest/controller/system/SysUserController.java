@@ -1,0 +1,125 @@
+/*
+ * Copyright 2019-2019 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ * Project Name: luban-cloud
+ * Module Name: luban-cloud-upms-ability
+ * File Name: SysUserController.java
+ * Author: gengwei.zheng
+ * Date: 2019/11/25 上午10:55
+ * LastModified: 2019/11/25 上午10:55
+ */
+
+package cn.herodotus.eurynome.upms.rest.controller.system;
+
+import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.security.controller.AbstractController;
+import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
+import cn.herodotus.eurynome.upms.api.feign.service.ISysUserService;
+import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
+
+/** 
+ * <p>Description: TODO </p>
+ * 
+ * @author : gengwei.zheng
+ * @date : 2019/11/25 10:55
+ */
+@RestController
+@Api(value = "平台用户接口", tags = "用户中心服务")
+public class SysUserController extends AbstractController implements ISysUserService {
+
+    private final SysUserService sysUserService;
+
+    @Autowired
+    public SysUserController(SysUserService sysUserService) {
+        this.sysUserService = sysUserService;
+    }
+
+    @ApiOperation(value = "登录系统", notes = "登录系统")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", required = true, value = "用户名称")
+    })
+    @Override
+    public Result<SysUser> findByUsername(String username) {
+        SysUser sysUser = sysUserService.findSysUserByUserName(username);
+        if (sysUser != null) {
+            return Result.ok().data(sysUser);
+        } else {
+            return Result.failed().message("获取数据失败！");
+        }
+    }
+
+    @ApiOperation(value = "查询用户", notes = "根据用户ID查询用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", required = true, value = "用户ID")
+    })
+    @Override
+    public Result<SysUser> findById(String userId) {
+        return Result.ok().data(sysUserService.findById(userId));
+    }
+
+    @ApiOperation(value = "获取用户分页数据", notes = "通过pageNumber和pageSize获取分页数据")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数"),
+            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
+    })
+    @GetMapping("/user")
+    public Result findByPage(
+            @RequestParam("pageNumber") Integer pageNumber,
+            @RequestParam("pageSize") Integer pageSize) {
+        if (pageSize != 0) {
+            Page<SysUser> pages = sysUserService.findByPage(pageNumber, pageSize);
+            return Result.ok().data(getFrontPageMap(pages));
+        } else {
+            return Result.failed();
+        }
+    }
+
+    @ApiOperation(value = "保存或更新用户", notes = "接收JSON数据，转换为SysUser实体，进行保存或更新")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sysUser", required = true, value = "可转换为SysUser实体的json数据", paramType = "JSON")
+    })
+    @PostMapping("/user")
+    public Result saveOrUpdate(@RequestBody SysUser sysUser) {
+        SysUser newSysUser = sysUserService.saveOrUpdate(sysUser);
+        if (null != newSysUser) {
+            return Result.ok().data(newSysUser);
+        } else {
+            return Result.failed().message("保存失败！");
+        }
+    }
+
+    @ApiOperation(value = "删除用户", notes = "根据userId删除用户，以及相关联的关联关系数据")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", required = true, value = "用户ID", paramType = "JSON")
+    })
+    @DeleteMapping("/user")
+    public Result delete(@RequestBody String userId) {
+        if (StringUtils.isNotEmpty(userId)) {
+            sysUserService.deleteById(userId);
+            return Result.ok();
+        } else {
+            return Result.failed().message("参数错误，删除失败！");
+        }
+    }
+}

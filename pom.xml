@@ -156,10 +156,6 @@
         <module>eurynome-cloud-components</module>
         <module>eurynome-cloud-platform</module>
         <module>eurynome-cloud-services</module>
-        <module>eurynome-cloud-component-sdk</module>
-        <module>eurynome-cloud-bpmn-logic</module>
-        <module>eurynome-cloud-bpmn-starter</module>
     </modules>
-
 
 </project>
