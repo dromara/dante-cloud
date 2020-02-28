@@ -127,10 +127,10 @@ public class OkHttpUtils {
         try {
             Response response = getInstance().newCall(request).execute();
             String result = response.body().toString();
-            log.debug("[Luban] |- OkHttp Get Request returned value is : [{}]", result);
+            log.debug("[EURYNOME] |- OkHttp Get Request returned value is : [{}]", result);
             return result;
         } catch (IOException e) {
-            log.error("[Luban] |- OkHttp Post Request Catch the Error!", e);
+            log.error("[EURYNOME] |- OkHttp Post Request Catch the Error!", e);
             return null;
         }
     }
@@ -159,16 +159,16 @@ public class OkHttpUtils {
             formBodyBuilder.add(key, value);
         }
         FormBody formBody = formBodyBuilder.build();
-        log.debug("[Luban] |- OkHttp Post Request add params : [{}]", JSON.toJSONString(params));
+        log.debug("[EURYNOME] |- OkHttp Post Request add params : [{}]", JSON.toJSONString(params));
 
         try {
             Request request = new Request.Builder().url(url).post(formBody).build();
             Response response = getInstance().newCall(request).execute();
             String result = response.body().string();
-            log.debug("[Luban] |- OkHttp Post Request returned value is : [{}]", result);
+            log.debug("[EURYNOME] |- OkHttp Post Request returned value is : [{}]", result);
             return result;
         } catch (Exception e) {
-            log.error("[Luban] |- OkHttp Post Request Catch the Error!", e);
+            log.error("[EURYNOME] |- OkHttp Post Request Catch the Error!", e);
             return null;
         }
     }

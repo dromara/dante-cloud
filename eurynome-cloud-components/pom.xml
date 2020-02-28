@@ -16,6 +16,7 @@
     <modules>
         <module>eurynome-cloud-component-common</module>
         <module>eurynome-cloud-component-data</module>
+        <module>eurynome-cloud-component-security</module>
     </modules>
 
 </project>

@@ -31,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
@@ -66,14 +67,12 @@ import javax.annotation.PostConstruct;
         SwaggerProperties.class,
         SecurityProperities.class
 })
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.component.data.configuration"
-})
+@Import(RedisConfiguration.class)
 @EnableJpaAuditing
-public class DataComponentConfiguration {
+public class DataComponentBootstrap {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Luban] |- Bean [Data Component] Auto Configure.");
+        log.info("[EURYNOME] |- Bean [Data Component] Auto Configure.");
     }
 }

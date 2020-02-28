@@ -11,5 +11,8 @@
 
     <artifactId>eurynome-cloud-platform</artifactId>
 
+    <modules>
+        <module>eurynome-cloud-platform-uaa</module>
+    </modules>
 
 </project>

@@ -89,7 +89,7 @@ public class GlobalExceptionHandler {
 
     public static Result<Object> resolveException(Exception ex, String path) {
 
-        log.debug("[Luban] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
+        log.debug("[EURYNOME] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
 
         Result<Object> result = Result.failed();
 
@@ -98,12 +98,12 @@ public class GlobalExceptionHandler {
             if (exceptionDictionary.containsKey(exceptionName)) {
                 result = exceptionDictionary.get(exceptionName);
             } else {
-                log.warn("[Luban] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
+                log.warn("[EURYNOME] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
             }
         }
         result.path(path);
 
-        log.error("[Luban] |- Global Exception Handler, Error is : {}", result);
+        log.error("[EURYNOME] |- Global Exception Handler, Error is : {}", result);
 
         return result;
     }
