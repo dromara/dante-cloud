@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.herodotus.eurynome.component.autoconfigure.AutoConfiguration,\
+  cn.herodotus.eurynome.component.autoconfigure.JacksonAutoConfiguration,\
+  cn.herodotus.eurynome.component.autoconfigure.WebMvcAutoConfiguration

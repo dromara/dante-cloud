@@ -22,7 +22,7 @@
  * LastModified: 2019/11/26 上午10:51
  */
 
-package cn.herodotus.eurynome.component.data.properties;
+package cn.herodotus.eurynome.component.security.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

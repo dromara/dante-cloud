@@ -22,7 +22,7 @@
  * LastModified: 2019/11/22 上午10:40
  */
 
-package cn.herodotus.eurynome.component.data.properties;
+package cn.herodotus.eurynome.component.security.properties;
 
 import cn.herodotus.eurynome.component.common.enums.Architecture;
 import cn.herodotus.eurynome.component.common.utils.TreeUtils;

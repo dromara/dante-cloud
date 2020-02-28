@@ -34,7 +34,7 @@ import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:34
  */
-public class EurynomePhysicalNamingStrategy extends PhysicalNamingStrategyStandardImpl {
+public class HerodotusPhysicalNamingStrategy extends PhysicalNamingStrategyStandardImpl {
 
     @Override
     public Identifier toPhysicalColumnName(Identifier name, JdbcEnvironment context) {

@@ -22,17 +22,12 @@
  * LastModified: 2020/2/3 下午5:13
  */
 
-package cn.herodotus.eurynome.component.data.configuration;
+package cn.herodotus.eurynome.component.security.configuration;
 
-import cn.herodotus.eurynome.component.data.properties.ApplicationProperties;
-import cn.herodotus.eurynome.component.data.properties.SecurityProperities;
-import cn.herodotus.eurynome.component.data.properties.SwaggerProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
 
@@ -62,17 +57,14 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties({
-        ApplicationProperties.class,
-        SwaggerProperties.class,
-        SecurityProperities.class
+@Import(cn.hutool.extra.spring.SpringUtil.class)
+@ComponentScan(basePackages = {
+        "cn.herodotus.eurynome.component.security.configuration"
 })
-@Import(RedisConfiguration.class)
-@EnableJpaAuditing
-public class DataComponentBootstrap {
+public class SecurityComponentConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[EURYNOME] |- Bean [Data Component] Auto Configure.");
+        log.info("[Luban] |- Bean [Security Component] Auto Configure.");
     }
 }

@@ -22,7 +22,7 @@
  * LastModified: 2020/1/29 下午4:08
  */
 
-package cn.herodotus.eurynome.component.data.properties;
+package cn.herodotus.eurynome.component.security.properties;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaFont;

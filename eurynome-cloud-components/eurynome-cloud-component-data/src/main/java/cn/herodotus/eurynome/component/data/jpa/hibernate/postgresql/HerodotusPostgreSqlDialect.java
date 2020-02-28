@@ -34,9 +34,9 @@ import java.sql.Types;
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:31
  */
-public class EurynomePostgreSQLDialect extends PostgreSQL9Dialect {
+public class HerodotusPostgreSqlDialect extends PostgreSQL9Dialect {
 
-    public EurynomePostgreSQLDialect() {
+    public HerodotusPostgreSqlDialect() {
         super();
         // 注册自定义类型
         this.registerColumnType(Types.JAVA_OBJECT, "jsonb");
