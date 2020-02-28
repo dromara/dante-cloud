@@ -17,15 +17,14 @@
     <packaging>pom</packaging>
 
     <properties>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
 
         <spring-cloud-dependencies.version>Hoxton.SR1</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
 
         <!--覆盖Spring Boot 默认依赖版本-->
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <mysql.verison>5.1.48</mysql.verison>
 
         <!--Spring Boot Dependencies中没有的-->
         <commons-collections4.version>4.0</commons-collections4.version>
@@ -41,6 +40,7 @@
 
         <swagger.version>2.9.2</swagger.version>
         <p6spy.version>3.8.2</p6spy.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
         <shiro.version>1.4.1</shiro.version>
@@ -191,6 +191,17 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.verison}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -232,7 +243,7 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <encoding>${maven.compiler.encoding}</encoding>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>

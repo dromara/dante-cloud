@@ -12,10 +12,12 @@
     <artifactId>eurynome-cloud-upms-logic</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>eurynome-cloud-upms-api</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>

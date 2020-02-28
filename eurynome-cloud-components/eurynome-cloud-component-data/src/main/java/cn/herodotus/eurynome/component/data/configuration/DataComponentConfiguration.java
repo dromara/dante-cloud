@@ -24,10 +24,16 @@
 
 package cn.herodotus.eurynome.component.data.configuration;
 
+import cn.herodotus.eurynome.component.data.properties.ApplicationProperties;
+import cn.herodotus.eurynome.component.data.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.data.properties.SwaggerProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.annotation.PostConstruct;
 
@@ -57,12 +63,25 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@Import(RedisConfiguration.class)
+@EnableConfigurationProperties({
+        ApplicationProperties.class,
+        SwaggerProperties.class,
+        SecurityProperities.class
+})
+@ComponentScan(basePackages = {
+        "cn.herodotus.eurynome.component.data.configuration"
+})
+@EnableJpaRepositories(basePackages = {
+        "cn.herodotus.eurynome.component.data.jpa.repository"
+})
+@EntityScan(basePackages = {
+        "cn.herodotus.eurynome.component.data.entity"
+})
 @EnableJpaAuditing
 public class DataComponentConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[EURYNOME] |- Bean [Data Component] Auto Configure.");
+        log.info("[Luban] |- Bean [Data Component] Auto Configure.");
     }
 }

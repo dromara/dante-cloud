@@ -39,9 +39,6 @@ import java.util.Map;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum StatusEnum {
 
-    /**
-     * enum
-     */
     FORBIDDEN(0, "禁用"),
     ENABLE(1, "启用"),
     LOCKING(2, "锁定"),

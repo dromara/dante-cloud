@@ -50,6 +50,16 @@
                 <artifactId>eurynome-cloud-component-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-component-sdk</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-platform-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -59,6 +69,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-upms-logic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
@@ -141,6 +156,9 @@
         <module>eurynome-cloud-components</module>
         <module>eurynome-cloud-platform</module>
         <module>eurynome-cloud-services</module>
+        <module>eurynome-cloud-component-sdk</module>
+        <module>eurynome-cloud-bpmn-logic</module>
+        <module>eurynome-cloud-bpmn-starter</module>
     </modules>
 
 

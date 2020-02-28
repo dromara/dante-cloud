@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.configuration;
 
+import cn.herodotus.eurynome.component.data.configuration.DataComponentConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -56,10 +57,15 @@ import javax.annotation.PostConstruct;
  * @date : 2020/2/3 17:13
  */
 @Slf4j
+@Import({
+        DataComponentConfiguration.class
+})
 @Configuration
-@Import(cn.hutool.extra.spring.SpringUtil.class)
 @ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.component.security.configuration"
+        "cn.herodotus.eurynome.component.security.configuration",
+        "cn.herodotus.eurynome.component.security.authentication",
+        "cn.herodotus.eurynome.component.security.exception",
+        "cn.herodotus.eurynome.component.security.toolkits"
 })
 public class SecurityComponentConfiguration {
 

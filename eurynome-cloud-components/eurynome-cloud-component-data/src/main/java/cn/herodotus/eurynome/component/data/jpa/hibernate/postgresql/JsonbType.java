@@ -35,9 +35,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-/**
- * <p>Description: 扩展JsonbType </p>
- *
+/** 
+ * <p>Description: TODO </p>
+ * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:33
  */

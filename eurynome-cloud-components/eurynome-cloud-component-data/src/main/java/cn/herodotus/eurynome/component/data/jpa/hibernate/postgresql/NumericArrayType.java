@@ -30,7 +30,7 @@ import cn.herodotus.eurynome.component.data.jpa.hibernate.AbstractArrayType;
 import java.math.BigDecimal;
 
 /** 
- * <p>Description: 扩展NumericArrayType </p>
+ * <p>Description: TODO </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:33

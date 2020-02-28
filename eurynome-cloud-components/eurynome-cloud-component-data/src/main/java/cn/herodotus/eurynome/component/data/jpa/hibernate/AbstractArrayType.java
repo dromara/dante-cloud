@@ -31,7 +31,7 @@ import java.io.Serializable;
 import java.sql.*;
 
 /** 
- * <p>Description: 扩展AbstractArrayType </p>
+ * <p>Description: TODO </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:34

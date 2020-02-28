@@ -10,9 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>eurynome-cloud-platform</artifactId>
+    <packaging>pom</packaging>
 
     <modules>
+        <module>eurynome-cloud-platform-starter</module>
+        <module>eurynome-cloud-platform-gateway</module>
         <module>eurynome-cloud-platform-uaa</module>
     </modules>
+
 
 </project>

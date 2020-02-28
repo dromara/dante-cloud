@@ -2,15 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>eurynome-cloud-components</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>1.0.0</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>eurynome-cloud-component-common</artifactId>
+
+
+    <packaging>jar</packaging>
 
     <description>结对基础通用的工具类包,此包的定位是放在任何工程中都可以使用，而且尽可能依赖少的存在上下文组件</description>
 
@@ -22,6 +24,18 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
 
         <dependency>
@@ -86,6 +100,4 @@
             <artifactId>easy-captcha</artifactId>
         </dependency>
     </dependencies>
-
-
 </project>

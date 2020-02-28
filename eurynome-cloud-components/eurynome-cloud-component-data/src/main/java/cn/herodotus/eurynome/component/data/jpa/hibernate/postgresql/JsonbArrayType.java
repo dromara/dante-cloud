@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.component.data.jpa.hibernate.postgresql;
 
 /** 
- * <p>Description: 扩展 JsonbArrayType</p>
+ * <p>Description: TODO </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:32

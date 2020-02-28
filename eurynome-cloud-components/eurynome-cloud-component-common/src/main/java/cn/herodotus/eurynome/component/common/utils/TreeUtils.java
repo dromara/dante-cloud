@@ -45,7 +45,6 @@ public class TreeUtils {
 
     /**
      * 使用递归方法建树
-     *
      * @param treeNodes
      * @return
      */
@@ -57,7 +56,7 @@ public class TreeUtils {
         List<N> trees = new ArrayList<>();
         for (N treeNode : treeNodes) {
             if (root.equals(treeNode.getParentId())) {
-                trees.add(findChildren(treeNode, treeNodes));
+                trees.add(findChildren(treeNode,treeNodes));
             }
         }
         return trees;
@@ -65,17 +64,16 @@ public class TreeUtils {
 
     /**
      * 递归查找子节点
-     *
      * @param treeNodes
      * @return
      */
-    public static <N extends TreeNode> N findChildren(N parentTreeNode, List<N> treeNodes) {
+    public static <N extends TreeNode> N findChildren(N parentTreeNode,List<N> treeNodes) {
         for (N treeNode : treeNodes) {
-            if (parentTreeNode.getId().equals(treeNode.getParentId())) {
+            if(parentTreeNode.getId().equals(treeNode.getParentId())) {
                 if (parentTreeNode.getChildren() == null) {
                     parentTreeNode.setChildren(new ArrayList<>());
                 }
-                parentTreeNode.getChildren().add(findChildren(treeNode, treeNodes));
+                parentTreeNode.getChildren().add(findChildren(treeNode,treeNodes));
             }
         }
         return parentTreeNode;

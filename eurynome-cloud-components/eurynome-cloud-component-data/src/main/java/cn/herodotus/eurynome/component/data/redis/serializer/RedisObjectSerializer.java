@@ -15,12 +15,6 @@ import org.springframework.core.serializer.support.SerializingConverter;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
 
-/**
- * <p>Description: 自定义Redis对象序列化 </p>
- *
- * @author : gengwei.zheng
- * @date : 2020/2/28 7:37
- */
 public class RedisObjectSerializer implements RedisSerializer<Object> {
 
     private Converter<Object, byte[]> serializer = new SerializingConverter();

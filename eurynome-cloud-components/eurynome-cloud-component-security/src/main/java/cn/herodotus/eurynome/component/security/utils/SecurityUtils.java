@@ -24,10 +24,10 @@
 
 package cn.herodotus.eurynome.component.security.utils;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
-import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.hutool.core.bean.BeanUtil;
+import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.component.security.domain.ArtisanRole;
+import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -69,13 +69,13 @@ public class SecurityUtils {
 
     /**
      * 当用户角色发生变化，或者用户角色对应的权限发生变化，那么就从数据库中重新查询用户相关信息
-     * @param newHerodotusUserDetails 从数据库中重新查询并生成的用户信息
+     * @param newArtisanUserDetails 从数据库中重新查询并生成的用户信息
      */
-    public static void reloadAuthority(HerodotusUserDetails newHerodotusUserDetails) {
+    public static void reloadAuthority(ArtisanUserDetails newArtisanUserDetails) {
         // 重新new一个token，因为Authentication中的权限是不可变的.
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                newHerodotusUserDetails, newHerodotusUserDetails.getPassword(),
-                newHerodotusUserDetails.getAuthorities());
+                newArtisanUserDetails, newArtisanUserDetails.getPassword(),
+                newArtisanUserDetails.getAuthorities());
         token.setDetails(getDetails());
         getSecurityContext().setAuthentication(token);
     }
@@ -85,14 +85,14 @@ public class SecurityUtils {
      *
      * @return
      */
-    public static HerodotusUserDetails getPrincipal() {
+    public static ArtisanUserDetails getPrincipal() {
         if (isAuthenticated()) {
             Authentication authentication = getAuthentication();
-            if (authentication.getPrincipal() instanceof HerodotusUserDetails) {
-                return (HerodotusUserDetails) authentication.getPrincipal();
+            if (authentication.getPrincipal() instanceof ArtisanUserDetails) {
+                return (ArtisanUserDetails) authentication.getPrincipal();
             }
             if (authentication.getPrincipal() instanceof Map) {
-                return BeanUtil.mapToBean((Map) authentication.getPrincipal(), HerodotusUserDetails.class, true);
+                return BeanUtil.mapToBean((Map) authentication.getPrincipal(), ArtisanUserDetails.class, true);
             }
         }
 
@@ -100,7 +100,7 @@ public class SecurityUtils {
     }
 
     public static String getUsername() {
-        HerodotusUserDetails user = getPrincipal();
+        ArtisanUserDetails user = getPrincipal();
         if (user != null) {
             return user.getUsername();
         }
@@ -108,18 +108,18 @@ public class SecurityUtils {
     }
 
     public static String getClientId() {
-        HerodotusUserDetails user = getPrincipal();
+        ArtisanUserDetails user = getPrincipal();
         if (user != null) {
             return user.getClientId();
         }
         return null;
     }
 
-    public static HerodotusUserDetails getPrincipals() {
+    public static ArtisanUserDetails getPrincipals() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {
-            if (principal instanceof HerodotusUserDetails) {
-                return (HerodotusUserDetails) principal;
+            if (principal instanceof ArtisanUserDetails) {
+                return (ArtisanUserDetails) principal;
             } else if (principal instanceof LinkedHashMap) {
                 // TODO: zhangyu 2019/7/15 感觉还可以升级一把，不吐linkedhashmap 直接就是oauth2user
                 // 2019/7/20 试验过将OAuth2UserAuthenticationConverter map<string,?>中的?强制转换成oauth2user，试验失败，问题不是很急，可以先放着
@@ -127,7 +127,7 @@ public class SecurityUtils {
                  * https://blog.csdn.net/m0_37834471/article/details/81814233
                  * cn/itcraftsman/luban/auth/oauth2/OAuth2UserAuthenticationConverter.java
                  */
-                HerodotusUserDetails user = new HerodotusUserDetails();
+                ArtisanUserDetails user = new ArtisanUserDetails();
                 BeanUtil.fillBeanWithMap((LinkedHashMap) principal, user, true);
                 return user;
             } else if (principal instanceof String && principal.equals("anonymousUser")) {
@@ -145,9 +145,9 @@ public class SecurityUtils {
             return false;
         }
 
-        HerodotusUserDetails herodotusUserDetails = getPrincipal();
-        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
-            List<HerodotusRole> roles = herodotusUserDetails.getRoles();
+        ArtisanUserDetails artisanUserDetails = getPrincipal();
+        if (ObjectUtils.isNotEmpty(artisanUserDetails)) {
+            List<ArtisanRole> roles = artisanUserDetails.getRoles();
             if (CollectionUtils.isNotEmpty(roles)) {
                 Collection filteredResult = roles.stream().filter(artisanRole -> artisanRole.getAuthority().equals(role)).collect(Collectors.toList());
                 return CollectionUtils.isNotEmpty(filteredResult);
@@ -158,27 +158,27 @@ public class SecurityUtils {
     }
 
     public static String getUserId() {
-        HerodotusUserDetails herodotusUserDetails = getPrincipal();
-        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
-            return herodotusUserDetails.getUserId();
+        ArtisanUserDetails artisanUserDetails = getPrincipal();
+        if (ObjectUtils.isNotEmpty(artisanUserDetails)) {
+            return artisanUserDetails.getUserId();
         }
 
         return null;
     }
 
     public static String getNickName() {
-        HerodotusUserDetails herodotusUserDetails = getPrincipal();
-        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
-            return herodotusUserDetails.getNickName();
+        ArtisanUserDetails artisanUserDetails = getPrincipal();
+        if (ObjectUtils.isNotEmpty(artisanUserDetails)) {
+            return artisanUserDetails.getNickName();
         }
 
         return null;
     }
 
     public static String getAvatar() {
-        HerodotusUserDetails herodotusUserDetails = getPrincipal();
-        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
-            return herodotusUserDetails.getAvatar();
+        ArtisanUserDetails artisanUserDetails = getPrincipal();
+        if (ObjectUtils.isNotEmpty(artisanUserDetails)) {
+            return artisanUserDetails.getAvatar();
         }
 
         return null;
@@ -190,9 +190,9 @@ public class SecurityUtils {
             return false;
         }
 
-        HerodotusUserDetails herodotusUserDetails = getPrincipal();
-        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
-            Collection<? extends GrantedAuthority> authorities = herodotusUserDetails.getAuthorities();
+        ArtisanUserDetails artisanUserDetails = getPrincipal();
+        if (ObjectUtils.isNotEmpty(artisanUserDetails)) {
+            Collection<? extends GrantedAuthority> authorities = artisanUserDetails.getAuthorities();
             if (CollectionUtils.isNotEmpty(authorities)) {
                 Collection filteredResult = authorities.stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(authority)).collect(Collectors.toList());
                 return CollectionUtils.isNotEmpty(filteredResult);

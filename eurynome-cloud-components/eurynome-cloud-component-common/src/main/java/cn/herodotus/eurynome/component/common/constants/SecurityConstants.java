@@ -26,8 +26,8 @@ package cn.herodotus.eurynome.component.common.constants;
 
 import cn.herodotus.eurynome.component.common.enums.OAuth2GrantType;
 
-/**
- * <p>Description: SecurityConstants </p>
+/** 
+ * <p>Description: TODO </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/18 8:37

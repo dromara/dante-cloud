@@ -37,13 +37,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <p>Description: 自定义统一响应实体 </p>
- *
- * @author : gengwei.zheng
- * @date : 2020/2/28 7:00
- */
-@ApiModel(value = "Result", description = "自定义统一响应实体")
+@ApiModel(value = "Result", description = "自定义统一响应最想")
 public class Result<T> implements Serializable {
 
     /**
@@ -153,46 +147,46 @@ public class Result<T> implements Serializable {
     }
 
 
-    public static Result<Object> ok() {
-        return new Result<>().code(ResultStatus.OK.getCode()).message(ResultStatus.OK.getMessage()).httpStatus(HttpStatus.SC_OK);
+    public static Result ok() {
+        return new Result().code(ResultStatus.OK.getCode()).message(ResultStatus.OK.getMessage()).httpStatus(HttpStatus.SC_OK);
     }
 
-    public static Result<Object> failed() {
-        return new Result<>().code(ResultStatus.FAIL.getCode()).message(ResultStatus.FAIL.getMessage()).httpStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+    public static Result failed() {
+        return new Result().code(ResultStatus.FAIL.getCode()).message(ResultStatus.FAIL.getMessage()).httpStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
     }
 
-    public Result<T> code(int code) {
+    public Result code(int code) {
         this.code = code;
         return this;
     }
 
-    public Result<T> message(String message) {
+    public Result message(String message) {
         this.message = message;
         return this;
     }
 
-    public Result<T> data(T data) {
+    public Result data(T data) {
         this.data = data;
         return this;
     }
 
-    public Result<T> path(String path) {
+    public Result path(String path) {
         this.path = path;
         return this;
     }
 
-    public Result<T> type(ResultStatus resultStatus) {
+    public Result type(ResultStatus resultStatus) {
         this.code = resultStatus.getCode();
         this.message = resultStatus.getMessage();
         return this;
     }
 
-    public Result<T> httpStatus(int httpStatus) {
+    public Result httpStatus(int httpStatus) {
         this.httpStatus = httpStatus;
         return this;
     }
 
-    public Result<T> put(String key, Object value) {
+    public Result put(String key, Object value) {
         if (this.extra == null) {
             this.extra = new HashMap<>(8);
         }

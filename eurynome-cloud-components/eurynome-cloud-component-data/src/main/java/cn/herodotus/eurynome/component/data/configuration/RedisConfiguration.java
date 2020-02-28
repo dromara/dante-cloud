@@ -78,7 +78,7 @@ public class RedisConfiguration {
         redisTemplate.setDefaultSerializer(valueSerializer());
         redisTemplate.afterPropertiesSet();
 
-        log.debug("[EURYNOME] |- Bean [Redis Template] Auto Configure.");
+        log.debug("[Luban] |- Bean [Redis Template] Auto Configure.");
 
         return redisTemplate;
     }
@@ -86,13 +86,13 @@ public class RedisConfiguration {
 //    @Bean
 //    @ConditionalOnBean(RedisTemplate.class)
 //    public RedisCaffeineCacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
-//        log.debug("[EURYNOME] |- Bean [Redis Caffeine Cache Manager] Auto Configure.");
+//        log.debug("[Luban] |- Bean [Redis Caffeine Cache Manager] Auto Configure.");
 //        return new RedisCaffeineCacheManager(redisCaffeineCacheProperties, redisTemplate);
 //    }
 //
 //    @Bean(name = CacheConstants.DEFAULT_KEY_GENERATOR)
 //    public KeyGenerator keyGenerator(){
-//        log.debug("[EURYNOME] |- Bean [Redis Caffeine Cache Key Generator] Auto Configure.");
+//        log.debug("[Luban] |- Bean [Redis Caffeine Cache Key Generator] Auto Configure.");
 //        return new RedisCaffeineCacheKeyGenerator();
 //    }
 //
@@ -104,7 +104,7 @@ public class RedisConfiguration {
 //        CacheMessageListener cacheMessageListener = new CacheMessageListener(redisTemplate, redisCaffeineCacheManager);
 //        redisMessageListenerContainer.addMessageListener(cacheMessageListener, new ChannelTopic(redisCaffeineCacheProperties.getRedis().getTopic()));
 //
-//        log.debug("[EURYNOME] |- Bean [Redis Message Listener Container] Auto Configure.");
+//        log.debug("[Luban] |- Bean [Redis Message Listener Container] Auto Configure.");
 //        return redisMessageListenerContainer;
 //    }
 }

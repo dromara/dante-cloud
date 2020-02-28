@@ -59,10 +59,43 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
      */
     public static final String DEFAULT_ERROR_VIEW = "/error";
 
-    @ExceptionHandler({Exception.class, PlatformException.class, AuthenticationException.class, OAuth2Exception.class, InvalidTokenException.class})
+    @ExceptionHandler({Exception.class, PlatformException.class})
     @ResponseBody
-    public static Result<Object> exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
-        Result<Object> result = resolveException(ex, request.getRequestURI());
+    public static Result exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result result = resolveException(ex, request.getRequestURI());
+        response.setStatus(result.getHttpStatus());
+        return result;
+    }
+
+    /**
+     * 统一异常处理
+     * AuthenticationException
+     *
+     * @param ex
+     * @param request
+     * @param response
+     * @return
+     */
+    @ExceptionHandler({AuthenticationException.class})
+    @ResponseBody
+    public static Result authenticationException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result result = resolveException(ex, request.getRequestURI());
+        response.setStatus(result.getHttpStatus());
+        return result;
+    }
+
+    /**
+     * OAuth2Exception
+     *
+     * @param ex
+     * @param request
+     * @param response
+     * @return
+     */
+    @ExceptionHandler({OAuth2Exception.class, InvalidTokenException.class})
+    @ResponseBody
+    public static Result oauth2Exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getHttpStatus());
         return result;
     }
@@ -73,9 +106,9 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
      * @param ex
      * @return
      */
-    public static Result<Object> resolveOauthException(Exception ex, String path) {
+    public static Result resolveOauthException(Exception ex, String path) {
 
-        Result<Object> result = getResult(ResultStatus.BAD_CREDENTIALS, HttpStatus.OK.value());
+        Result result = getResult(ResultStatus.BAD_CREDENTIALS, HttpStatus.OK.value());
 
         if (ex instanceof OAuth2Exception) {
             OAuth2Exception aex = (OAuth2Exception) ex;

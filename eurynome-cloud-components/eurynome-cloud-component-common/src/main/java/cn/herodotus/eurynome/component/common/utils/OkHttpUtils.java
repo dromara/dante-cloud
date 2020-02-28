@@ -26,10 +26,7 @@ package cn.herodotus.eurynome.component.common.utils;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,10 +36,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p>Description: OkHttpUtils </p>
- *
- * @author : gengwei.zheng
- * @date : 2020/2/28 7:05
+ * @author gengwei.zheng
+ * @title OkHttpUtils
+ * @description TODO
+ * @date 2019/10/22 10:58
  */
 @Slf4j
 public class OkHttpUtils {
@@ -127,10 +124,10 @@ public class OkHttpUtils {
         try {
             Response response = getInstance().newCall(request).execute();
             String result = response.body().toString();
-            log.debug("[EURYNOME] |- OkHttp Get Request returned value is : [{}]", result);
+            log.debug("[Luban] |- OkHttp Get Request returned value is : [{}]", result);
             return result;
         } catch (IOException e) {
-            log.error("[EURYNOME] |- OkHttp Post Request Catch the Error!", e);
+            log.error("[Luban] |- OkHttp Post Request Catch the Error!", e);
             return null;
         }
     }
@@ -159,16 +156,16 @@ public class OkHttpUtils {
             formBodyBuilder.add(key, value);
         }
         FormBody formBody = formBodyBuilder.build();
-        log.debug("[EURYNOME] |- OkHttp Post Request add params : [{}]", JSON.toJSONString(params));
+        log.debug("[Luban] |- OkHttp Post Request add params : [{}]", JSON.toJSONString(params));
 
         try {
             Request request = new Request.Builder().url(url).post(formBody).build();
             Response response = getInstance().newCall(request).execute();
             String result = response.body().string();
-            log.debug("[EURYNOME] |- OkHttp Post Request returned value is : [{}]", result);
+            log.debug("[Luban] |- OkHttp Post Request returned value is : [{}]", result);
             return result;
         } catch (Exception e) {
-            log.error("[EURYNOME] |- OkHttp Post Request Catch the Error!", e);
+            log.error("[Luban] |- OkHttp Post Request Catch the Error!", e);
             return null;
         }
     }

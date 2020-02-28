@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.component.data.jpa.hibernate.postgresql;
 import cn.herodotus.eurynome.component.data.jpa.hibernate.AbstractArrayType;
 
 /** 
- * <p>Description: 扩展TextArrayType </p>
+ * <p>Description: TODO </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:34

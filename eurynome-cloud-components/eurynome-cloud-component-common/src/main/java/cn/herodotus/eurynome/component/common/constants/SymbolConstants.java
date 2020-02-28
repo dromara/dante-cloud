@@ -25,10 +25,7 @@
 package cn.herodotus.eurynome.component.common.constants;
 
 /**
- * <p>Description: 常用字符常量 </p>
- *
- * @author : gengwei.zheng
- * @date : 2020/2/28 7:09
+ * @author gengwei.zheng
  */
 public class SymbolConstants {
 

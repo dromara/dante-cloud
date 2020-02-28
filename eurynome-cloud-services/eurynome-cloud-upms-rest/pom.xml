@@ -10,9 +10,8 @@
 
     <artifactId>eurynome-cloud-upms-rest</artifactId>
     <version>1.0.0</version>
-
     <name>eurynome-cloud-upms-rest</name>
-    <description>Demo project for Spring Boot</description>
+    <description>通用权限，人员信息服务供应商</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -21,20 +20,18 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-platform-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>eurynome-cloud-upms-logic</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
+
     </dependencies>
 
     <build>
