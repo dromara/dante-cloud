@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.domain;
 
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

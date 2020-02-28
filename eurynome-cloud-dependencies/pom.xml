@@ -44,7 +44,7 @@
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
         <shiro.version>1.4.1</shiro.version>
-        <flowable.version>6.4.2</flowable.version>
+        <flowable.version>6.5.0</flowable.version>
         <jasypt.version>2.1.2</jasypt.version>
         <minio.version>6.0.11</minio.version>
         <mybatis.version>2.1.1</mybatis.version>

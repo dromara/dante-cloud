@@ -34,6 +34,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,6 +76,6 @@ public class SysOrganizationService extends BaseCrudService<SysOrganization, Str
     }
 
     public List<SysOrganization> findAll() {
-        return sysOrganizationRepository.findAll(new Sort(Sort.Direction.ASC, "ranking"));
+        return sysOrganizationRepository.findAll(Sort.by(Sort.Direction.ASC, "ranking"));
     }
 }

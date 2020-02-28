@@ -4,7 +4,7 @@ package cn.herodotus.eurynome.upms.rest.controller;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
 import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
-import cn.herodotus.eurynome.upms.ability.configuration.Oauth2ClientConfig;
+import cn.herodotus.eurynome.upms.rest.configuration.Oauth2ClientConfig;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
