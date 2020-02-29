@@ -15,19 +15,41 @@
  *
  *
  * Project Name: luban-cloud
- * Module Name: luban-cloud-component-data
- * File Name: BaseService.java
+ * Module Name: luban-cloud-component-common
+ * File Name: DataTableParameter.java
  * Author: gengwei.zheng
- * Date: 2019/11/24 下午3:09
+ * Date: 2019/11/24 下午3:48
  * LastModified: 2019/11/7 下午2:28
  */
 
-package cn.herodotus.eurynome.component.data.service;
-
-import cn.herodotus.eurynome.component.common.domain.AbstractDomain;
+package cn.herodotus.eurynome.component.common.domain.datatables;
 
 import java.io.Serializable;
 
-public abstract class BaseService<D extends AbstractDomain, ID extends Serializable> extends AbstractService {
+/**
+ * <p>Description: JQuery Datatables 组件只用的参数对象封装 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2019/11/24 15:48
+ */
+public class DataTableParameter implements Serializable {
 
+    private String name;
+    private Object value;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
 }

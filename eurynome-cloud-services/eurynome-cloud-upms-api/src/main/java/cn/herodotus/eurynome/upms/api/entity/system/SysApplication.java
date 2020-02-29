@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
-import cn.herodotus.eurynome.component.data.entity.BaseSysEntity;
+import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.ApplicationType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;

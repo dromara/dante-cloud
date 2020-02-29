@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.component.common.domain;
 
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;

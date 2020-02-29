@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
-import cn.herodotus.eurynome.component.common.domain.AbstractDomain;
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
 import com.alibaba.fastjson.JSON;
 import org.hibernate.annotations.GenericGenerator;

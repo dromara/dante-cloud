@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.domain;
 
-import cn.herodotus.eurynome.component.common.domain.AbstractDomain;
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import io.swagger.annotations.ApiModel;
 
 import java.util.List;

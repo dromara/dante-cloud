@@ -1,6 +1,6 @@
-package cn.herodotus.eurynome.component.data.service;
+package cn.herodotus.eurynome.component.data.base.service;
 
-import cn.herodotus.eurynome.component.data.entity.BaseEntity;
+import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
 import com.alicp.jetcache.Cache;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;

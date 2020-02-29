@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.gateway.entity;
 
-import cn.herodotus.eurynome.component.data.entity.BaseSysEntity;
+import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.component.data.jpa.JpaConverterListJson;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

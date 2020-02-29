@@ -16,29 +16,21 @@
  *
  * Project Name: luban-cloud
  * Module Name: luban-cloud-component-common
- * File Name: ResourceStore.java
+ * File Name: AbstractDomain.java
  * Author: gengwei.zheng
- * Date: 2019/11/21 上午11:40
- * LastModified: 2019/11/21 上午11:39
+ * Date: 2019/11/8 下午4:12
+ * LastModified: 2019/10/28 上午11:56
  */
 
-package cn.herodotus.eurynome.component.common.domain;
+package cn.herodotus.eurynome.component.common.definition;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * <p> Description : 资源存储接口 </p>
+ * <p>Description: 实体 </p>
  *
  * @author : gengwei.zheng
- * @date : 2019/11/21 11:38
+ * @date : 2020/2/29 14:40
  */
-
-public interface RequestMappingStore {
-
-    /**
-     * 对接口的扫描结果进行存储
-     * @param requestMappingResources
-     * @return
-     */
-    boolean storeRequestMappings(List<RequestMappingResource> requestMappingResources);
+public abstract class AbstractDomain implements Serializable {
 }

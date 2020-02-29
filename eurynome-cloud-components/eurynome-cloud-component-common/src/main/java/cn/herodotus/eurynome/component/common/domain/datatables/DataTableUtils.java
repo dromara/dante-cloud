@@ -22,7 +22,7 @@
  * LastModified: 2019/11/7 下午2:28
  */
 
-package cn.herodotus.eurynome.component.common.display.datatables;
+package cn.herodotus.eurynome.component.common.domain.datatables;
 
 import java.util.List;
 

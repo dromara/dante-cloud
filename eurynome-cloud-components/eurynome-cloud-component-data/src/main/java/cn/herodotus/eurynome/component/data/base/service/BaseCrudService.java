@@ -1,6 +1,6 @@
-package cn.herodotus.eurynome.component.data.service;
+package cn.herodotus.eurynome.component.data.base.service;
 
-import cn.herodotus.eurynome.component.common.domain.AbstractDomain;
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import org.springframework.data.domain.Page;
 
 import java.io.Serializable;

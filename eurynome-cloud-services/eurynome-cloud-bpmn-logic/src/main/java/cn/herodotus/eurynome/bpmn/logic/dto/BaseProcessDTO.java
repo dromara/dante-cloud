@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.bpmn.logic.dto;
 
-import cn.herodotus.eurynome.component.common.domain.dto.BaseDTO;
+import cn.herodotus.eurynome.component.data.base.dto.BaseDTO;
 
 /**
  * <p> Description : 流程参数基础类 </p>

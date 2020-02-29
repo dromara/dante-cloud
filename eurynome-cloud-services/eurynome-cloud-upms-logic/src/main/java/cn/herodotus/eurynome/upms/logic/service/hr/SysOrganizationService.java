@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.component.data.service.BaseCrudService;
+import cn.herodotus.eurynome.component.data.base.service.BaseCrudService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysOrganizationRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

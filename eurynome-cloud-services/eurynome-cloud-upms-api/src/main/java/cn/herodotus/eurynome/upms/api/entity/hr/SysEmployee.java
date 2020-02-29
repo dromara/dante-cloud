@@ -11,7 +11,7 @@ package cn.herodotus.eurynome.upms.api.entity.hr;
 
 import cn.herodotus.eurynome.component.common.enums.Gender;
 import cn.herodotus.eurynome.component.common.enums.Identity;
-import cn.herodotus.eurynome.component.data.entity.BaseEntity;
+import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;

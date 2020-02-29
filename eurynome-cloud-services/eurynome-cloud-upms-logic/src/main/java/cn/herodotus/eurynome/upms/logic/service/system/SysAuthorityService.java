@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.upms.logic.service.system;
 
 import cn.herodotus.eurynome.component.common.enums.AuthorityType;
-import cn.herodotus.eurynome.component.data.service.BaseCrudWithCacheSerivce;
+import cn.herodotus.eurynome.component.data.base.service.BaseCrudWithCacheSerivce;
 import cn.herodotus.eurynome.upms.api.constants.UpmsCacheConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysAuthorityRepository;

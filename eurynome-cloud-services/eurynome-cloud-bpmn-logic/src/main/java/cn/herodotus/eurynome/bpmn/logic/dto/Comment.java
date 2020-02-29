@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.bpmn.logic.dto;
 
-import cn.herodotus.eurynome.component.common.domain.AbstractDomain;
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 
 import java.util.Arrays;
 import java.util.Date;

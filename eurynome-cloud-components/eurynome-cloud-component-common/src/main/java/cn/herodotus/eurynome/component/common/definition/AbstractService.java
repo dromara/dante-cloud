@@ -1,7 +1,7 @@
-package cn.herodotus.eurynome.component.data.service;
+package cn.herodotus.eurynome.component.common.definition;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 服务 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/2/9 10:09

@@ -7,7 +7,7 @@
  * LastModified: 19-1-20 下午6:21
  */
 
-package cn.herodotus.eurynome.component.common.p6spy;
+package cn.herodotus.eurynome.component.data.p6spy;
 
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 import org.apache.commons.lang3.StringUtils;

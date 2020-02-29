@@ -22,7 +22,7 @@
  * LastModified: 2019/11/8 下午4:47
  */
 
-package cn.herodotus.eurynome.component.data.entity;
+package cn.herodotus.eurynome.component.data.base.entity;
 
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
 

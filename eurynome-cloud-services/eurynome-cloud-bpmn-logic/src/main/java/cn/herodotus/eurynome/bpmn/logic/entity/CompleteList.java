@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.bpmn.logic.entity;
 
-import cn.herodotus.eurynome.component.common.domain.AbstractDomain;
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Column;

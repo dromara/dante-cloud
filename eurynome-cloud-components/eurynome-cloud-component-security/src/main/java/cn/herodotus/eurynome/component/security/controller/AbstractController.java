@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.controller;
 
-import cn.herodotus.eurynome.component.common.display.datatables.DataTableResult;
+import cn.herodotus.eurynome.component.common.domain.datatables.DataTableResult;
 import com.alibaba.fastjson.JSON;
 import org.springframework.data.domain.Page;
 

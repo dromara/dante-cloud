@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.api.entity.social;
 
 import cn.herodotus.eurynome.component.common.enums.Gender;
-import cn.herodotus.eurynome.component.data.entity.BaseEntity;
+import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;

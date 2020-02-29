@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.component.data.service.BaseCrudService;
+import cn.herodotus.eurynome.component.data.base.service.BaseCrudService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysDepartmentRepository;
 import lombok.extern.slf4j.Slf4j;

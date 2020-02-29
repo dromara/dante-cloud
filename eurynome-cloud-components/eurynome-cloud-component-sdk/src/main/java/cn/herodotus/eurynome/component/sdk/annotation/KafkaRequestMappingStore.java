@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.component.sdk.annotation;
 
 import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
-import cn.herodotus.eurynome.component.common.domain.RequestMappingStore;
+import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
 import cn.herodotus.eurynome.component.sdk.configuration.kafka.KafkaProducer;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;

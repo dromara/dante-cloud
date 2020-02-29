@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.autoconfigure;
 
-import cn.herodotus.eurynome.component.common.domain.RequestMappingStore;
+import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
 import cn.herodotus.eurynome.component.data.properties.ApplicationProperties;
 import cn.herodotus.eurynome.component.sdk.annotation.KafkaRequestMappingStore;
 import cn.herodotus.eurynome.component.sdk.configuration.kafka.KafkaProducer;

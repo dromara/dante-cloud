@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.component.common.domain;
 
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.enums.AuthorityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
