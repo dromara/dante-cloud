@@ -36,10 +36,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author gengwei.zheng
- * @title OkHttpUtils
- * @description TODO
- * @date 2019/10/22 10:58
+ * <p>Description: OkHttpUtils </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/2/29 17:06
  */
 @Slf4j
 public class OkHttpUtils {
@@ -124,10 +124,10 @@ public class OkHttpUtils {
         try {
             Response response = getInstance().newCall(request).execute();
             String result = response.body().toString();
-            log.debug("[Luban] |- OkHttp Get Request returned value is : [{}]", result);
+            log.debug("[OkHttp] |- OkHttp Get Request returned value is : [{}]", result);
             return result;
         } catch (IOException e) {
-            log.error("[Luban] |- OkHttp Post Request Catch the Error!", e);
+            log.error("[OkHttp] |- OkHttp Post Request Catch the Error!", e);
             return null;
         }
     }
@@ -156,16 +156,16 @@ public class OkHttpUtils {
             formBodyBuilder.add(key, value);
         }
         FormBody formBody = formBodyBuilder.build();
-        log.debug("[Luban] |- OkHttp Post Request add params : [{}]", JSON.toJSONString(params));
+        log.debug("[OkHttp] |- OkHttp Post Request add params : [{}]", JSON.toJSONString(params));
 
         try {
             Request request = new Request.Builder().url(url).post(formBody).build();
             Response response = getInstance().newCall(request).execute();
             String result = response.body().string();
-            log.debug("[Luban] |- OkHttp Post Request returned value is : [{}]", result);
+            log.debug("[OkHttp] |- OkHttp Post Request returned value is : [{}]", result);
             return result;
         } catch (Exception e) {
-            log.error("[Luban] |- OkHttp Post Request Catch the Error!", e);
+            log.error("[OkHttp] |- OkHttp Post Request Catch the Error!", e);
             return null;
         }
     }

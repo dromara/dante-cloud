@@ -8,7 +8,7 @@ import com.wf.captcha.base.Captcha;
  * @author : gengwei.zheng
  * @date : 2020/2/25 14:53
  */
-public enum CaptchaContent {
+public enum CaptchaLetterType {
 
     /**
      * enum
@@ -22,7 +22,7 @@ public enum CaptchaContent {
 
     private int type;
 
-    CaptchaContent(int type) {
+    CaptchaLetterType(int type) {
         this.type = type;
     }
 

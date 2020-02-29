@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.component.data.properties;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaContent;
+import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaLetterType;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaFont;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -193,7 +193,7 @@ public class SecurityProperities implements Serializable {
         private int height = 48;
         private int length = 5;
         private CaptchaFont captchaFont = CaptchaFont.FONT_4;
-        private CaptchaContent captchaContent = CaptchaContent.DEFAULT;
+        private CaptchaLetterType captchaLetterType = CaptchaLetterType.DEFAULT;
         private CaptchaType captchaType = CaptchaType.LETTERS;
 
         public String getSessionAttribute() {
@@ -252,12 +252,12 @@ public class SecurityProperities implements Serializable {
             this.captchaFont = captchaFont;
         }
 
-        public CaptchaContent getCaptchaContent() {
-            return captchaContent;
+        public CaptchaLetterType getCaptchaLetterType() {
+            return captchaLetterType;
         }
 
-        public void setCaptchaContent(CaptchaContent captchaContent) {
-            this.captchaContent = captchaContent;
+        public void setCaptchaLetterType(CaptchaLetterType captchaLetterType) {
+            this.captchaLetterType = captchaLetterType;
         }
 
         public CaptchaType getCaptchaType() {
