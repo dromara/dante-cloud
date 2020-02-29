@@ -28,7 +28,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
+import java.security.Principal;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * ·AuthenticationManager: 身份验证的主要策略设置接口
@@ -50,8 +52,8 @@ import java.util.Arrays;
  * ·将OAuth2AuthenticationProcessingFilter用于加载给定的认证访问令牌请求的认证。
  *
  * [/oauth/authorize]
- * [/oauth/token]
- * [/oauth/check_token]
+ * [/oauth/token] {@link org.springframework.security.oauth2.provider.endpoint.TokenEndpoint#getAccessToken(Principal, Map)}
+ * [/oauth/check_token] {@link org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint#checkToken(String)}
  * [/oauth/confirm_access]
  * [/oauth/token_key]
  * [/oauth/error]

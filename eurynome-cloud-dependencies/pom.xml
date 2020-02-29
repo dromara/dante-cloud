@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.5.RELEASE</version>
+        <version>2.1.13.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -19,8 +19,8 @@
     <properties>
         <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
 
-        <spring-cloud-dependencies.version>Hoxton.SR1</spring-cloud-dependencies.version>
-        <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-dependencies.version>Greenwich.SR5</spring-cloud-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.1.1.RELEASE</spring-cloud-alibaba-dependencies.version>
 
         <!--覆盖Spring Boot 默认依赖版本-->
         <commons-lang3.version>3.9</commons-lang3.version>
@@ -44,7 +44,7 @@
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
         <shiro.version>1.4.1</shiro.version>
-        <flowable.version>6.5.0</flowable.version>
+        <flowable.version>6.4.2</flowable.version>
         <jasypt.version>2.1.2</jasypt.version>
         <minio.version>6.0.11</minio.version>
         <mybatis.version>2.1.1</mybatis.version>

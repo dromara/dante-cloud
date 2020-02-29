@@ -1,10 +1,8 @@
 server:
-  port: 7070
-captcha:
-  session-name: upms_captcha
+  port: 8846
 spring:
   application:
-    name:  @artifactId@ #拿到POM文件中的值
+    name: @artifactId@ #拿到POM文件中的值
   profiles:
     active: @profile.name@
   main:
@@ -28,62 +26,67 @@ spring:
     mode: HTML
     cache: false
     prefix: classpath:/templates
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
 
-#不同应用应是不同的配置，此处与hello_world相同，只为测试使用
-security:
-  oauth2:
-    client:
-      access-token-uri: ${luban.platform.access-token-uri}
-      user-authorization-uri: ${luban.platform.user-authorization-uri}
-      client-id: ${luban.platform.client-id}
-      client-secret: ${luban.platform.client-secret}
-      scope: ${luban.platform.scope}
-      authorized-grant-types: password
-    resource:
-      token-info-uri: ${luban.platform.token-info-uri}
-      user-info-uri: ${luban.platform.user-info-uri}
-
-luban:
-  platform:
-    application:
-      service-display-name: "用户中心"
-    security:
-      interceptor:
-        white-list:
-          - "/v2/**"
-          - "/login/token"
-          - "/application/clientdetails"
-          - "/user/findByUsername"
-          - "/user/findByUserId"
-          - "/captcha/getVerifiCode"
-          - "/captcha/checkVerifiCode"
-
-jetcache:
-  statIntervalMinutes: 15
-  areaInCacheName: false
-  local:
-    default:
-      type: caffeine
-      keyConvertor: fastjson
-      limit: 1000
-  remote:
-    default:
-      type: redis.lettuce
-      keyConvertor: fastjson
-      valueEncoder: java
-      valueDecoder: java
-      poolConfig:
-        minIdle: ${spring.redis.lettuce.pool.min-idle}
-        maxIdle: ${spring.redis.lettuce.pool.max-idle}
-        maxTotal: ${spring.redis.lettuce.pool.max-active}
-        maxWait: ${spring.redis.lettuce.pool.max-wait}
-      uri:
-        - redis://${spring.redis.host}:${spring.redis.port}/${spring.redis.database}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 logging:
   level:
+    org:
+      springframework: INFO
     com:
-      alibaba: WARN
+      alibaba:
+        nacos:
+          client: WARN
     cn:
-      itcraftsman:
-        luban: DEBUG
+      herodotus:
+        eurynome: DEBUG
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            ##断路器的超时时间需要大于ribbon的超时时间，不然不会触发重试
+            timeoutInMilliseconds: 30000
+  threadpool:
+    default:
+      coreSize: 20
+
+ribbon:
+  ##请求处理的超时时间
+  ReadTimeout: 5000
+  ##请求连接的超时时间
+  ConnectTimeout: 2000
+  ##对当前实例的重试次数
+  MaxAutoRetries: 1
+  ##对所有操作请求都进行重试
+  OkToRetryOnAllOperations: true
+  ##切换实例的重试次数
+  MaxAutoRetriesNextServer: 1
+  http:
+    client:
+      enabled: false
+  okhttp:
+    enabled: true # 用OkHttp代替HttpClient
+  eager-load:
+    enabled: true

@@ -9,7 +9,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = "luban.gateway")
 public class ArtisanGatewayProperties {
 
-    private static final String DEFAULT_TOKEN_CHECK_URI = "http://luban-cloud-platform-oauth/oauth/check_token";
+    private static final String DEFAULT_TOKEN_CHECK_URI = "http://eurynome-cloud-platform-uaa/oauth/check_token";
 
     private String tokenCheckUri;
     private List<String> whiteList;

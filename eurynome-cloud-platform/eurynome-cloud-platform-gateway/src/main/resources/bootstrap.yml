@@ -44,11 +44,8 @@ ribbon:
       enabled: false
   okhttp:
     enabled: true # 用OkHttp代替HttpClient
-
-feign:
-  hystrix:
+  eager-load:
     enabled: true
-
 
 management:
   endpoint:
@@ -61,7 +58,7 @@ management:
 
 luban:
   gateway:
-    token-check-uri: "http://luban-cloud-platform-oauth/oauth/check_token"
+    token-check-uri: "http://eurynome-cloud-platform-uaa/oauth/check_token"
     white-list:
       - "/oauth/token"
       - "/oauth/check_token"
