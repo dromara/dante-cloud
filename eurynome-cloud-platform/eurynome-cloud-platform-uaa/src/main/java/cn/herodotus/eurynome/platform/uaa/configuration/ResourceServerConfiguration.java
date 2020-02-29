@@ -74,12 +74,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 authentication = tokenExtractor.extract(request);
                 if (authentication != null && authentication.getPrincipal() != null) {
                     String tokenValue = authentication.getPrincipal().toString();
-                    log.debug("[Luban] |- RevokeToken tokenValue:{}", tokenValue);
+                    log.debug("[Herodotus] |- RevokeToken tokenValue:{}", tokenValue);
                     // 移除token
                     tokenStore.removeAccessToken(tokenStore.readAccessToken(tokenValue));
                 }
             } catch (Exception e) {
-                log.error("[Luban] |- RevokeToken error:{}", e);
+                log.error("[Herodotus] |- RevokeToken error:{}", e);
             }
             super.onLogoutSuccess(request, response, authentication);
         }

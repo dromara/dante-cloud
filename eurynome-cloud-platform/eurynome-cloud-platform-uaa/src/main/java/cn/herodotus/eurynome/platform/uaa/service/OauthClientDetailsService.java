@@ -41,7 +41,7 @@ public class OauthClientDetailsService implements ClientDetailsService {
             String status = clientDetails.getAdditionalInformation().getOrDefault("status", "1").toString();
 
             if (String.valueOf(StatusEnum.FORBIDDEN.getStatus()).equals(status)) {
-                log.warn("[Luban] |- Client [{}] has been Forbidden! ", clientDetails.getClientId());
+                log.warn("[Herodotus] |- Client [{}] has been Forbidden! ", clientDetails.getClientId());
                 throw new ClientRegistrationException("客户端已被禁用");
             }
         }
@@ -67,13 +67,13 @@ public class OauthClientDetailsService implements ClientDetailsService {
         ArtisanApplication oauthApplication = sysApplicationRemoteService.findByClientId(clientId).getData();
 
         if (oauthApplication == null) {
-            log.error("[Luban] |- OAuth2 Can not Fetch the Remote Client Details!");
+            log.error("[Herodotus] |- OAuth2 Can not Fetch the Remote Client Details!");
             return null;
         } else {
             ArtisanClientDetails artisanClientDetails = oauthApplication.getArtisanClientDetails();
             artisanClientDetails.setAuthorities(oauthApplication.getArtisanAuthorities());
 
-            log.info("[Luban] |- OAuth2 Fetch Remote Client Details Successfully!");
+            log.info("[Herodotus] |- OAuth2 Fetch Remote Client Details Successfully!");
             return artisanClientDetails;
         }
     }

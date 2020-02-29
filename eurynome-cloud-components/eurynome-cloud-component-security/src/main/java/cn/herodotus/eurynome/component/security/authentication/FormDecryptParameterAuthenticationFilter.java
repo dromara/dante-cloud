@@ -84,7 +84,7 @@ public class FormDecryptParameterAuthenticationFilter extends UsernamePasswordAu
             byte[] byteKey = SymmetricUtils.getDecryptdSymmetricKey(key);
             username = SymmetricUtils.decrypt(username, byteKey);
             password = SymmetricUtils.decrypt(password, byteKey);
-            log.debug("[Luban] |- Decrypt Username is : [{}], Password is : [{}]", username, password);
+            log.debug("[Herodotus] |- Decrypt Username is : [{}], Password is : [{}]", username, password);
 
         }
 

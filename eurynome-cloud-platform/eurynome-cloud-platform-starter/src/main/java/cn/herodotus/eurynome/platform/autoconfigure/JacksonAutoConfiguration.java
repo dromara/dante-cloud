@@ -23,7 +23,7 @@ public class JacksonAutoConfiguration {
     @Bean(name = "jacksonObjectMapper")
     @Primary
     public ObjectMapper jacksonObjectMapper() {
-        log.debug("[Luban] |- Bean [Jackson Object Mapper] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Jackson Object Mapper] Auto Configure.");
         return JacksonUtils.getObjectMapper();
     }
 

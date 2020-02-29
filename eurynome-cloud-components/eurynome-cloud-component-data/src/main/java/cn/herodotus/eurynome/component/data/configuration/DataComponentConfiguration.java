@@ -82,6 +82,6 @@ public class DataComponentConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Luban] |- Bean [Data Component] Auto Configure.");
+        log.info("[Herodotus] |- Bean [Data Component] Auto Configure.");
     }
 }

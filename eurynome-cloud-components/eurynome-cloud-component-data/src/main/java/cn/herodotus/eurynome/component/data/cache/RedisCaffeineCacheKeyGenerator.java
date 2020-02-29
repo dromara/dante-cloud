@@ -31,7 +31,7 @@ public class RedisCaffeineCacheKeyGenerator implements KeyGenerator {
         }
         for (Object param : params) {
             if (param == null) {
-                log.warn("[Luban] |- RedisCaffeineCache : input null param for Spring cache, use default key={}", NULL_PARAM_KEY);
+                log.warn("[Herodotus] |- RedisCaffeineCache : input null param for Spring cache, use default key={}", NULL_PARAM_KEY);
                 key.append(NULL_PARAM_KEY);
             } else if (ClassUtils.isPrimitiveArray(param.getClass())) {
                 int length = Array.getLength(param);
@@ -42,7 +42,7 @@ public class RedisCaffeineCacheKeyGenerator implements KeyGenerator {
             } else if (ClassUtils.isPrimitiveOrWrapper(param.getClass()) || param instanceof String) {
                 key.append(param);
             } else {
-                log.warn("[Luban] |- RedisCaffeineCache : Using an object as a cache key may lead to unexpected results. " +
+                log.warn("[Herodotus] |- RedisCaffeineCache : Using an object as a cache key may lead to unexpected results. " +
                         "Either use @Cacheable(key=..) or implement CacheKey. Method is " + target.getClass() + "#" + method.getName());
                 key.append(param.hashCode());
             }
@@ -51,7 +51,7 @@ public class RedisCaffeineCacheKeyGenerator implements KeyGenerator {
 
         String finalKey = key.toString();
         long cacheKeyHash = Hashing.murmur3_128().hashString(finalKey, Charset.defaultCharset()).asLong();
-        log.debug("[Luban] |- RedisCaffeineCache : using cache key={} hashCode={}", finalKey, cacheKeyHash);
+        log.debug("[Herodotus] |- RedisCaffeineCache : using cache key={} hashCode={}", finalKey, cacheKeyHash);
         return key.toString();
     }
 }

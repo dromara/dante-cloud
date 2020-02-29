@@ -24,7 +24,7 @@ public class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
     public Mono<ServerResponse> handle(ServerRequest serverRequest) {
         Optional<Object> originalUris = serverRequest.attribute(GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
 
-        originalUris.ifPresent(originalUri -> log.error("[Luban] |- Gateway execute request for:[{}] error!, Hystrix processing", originalUri));
+        originalUris.ifPresent(originalUri -> log.error("[Herodotus] |- Gateway execute request for:[{}] error!, Hystrix processing", originalUri));
 
         return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .contentType(MediaType.TEXT_PLAIN).body(BodyInserters.fromObject("Service Error!"));

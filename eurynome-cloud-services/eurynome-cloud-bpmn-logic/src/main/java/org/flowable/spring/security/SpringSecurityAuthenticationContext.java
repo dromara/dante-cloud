@@ -19,13 +19,13 @@ public class SpringSecurityAuthenticationContext implements AuthenticationContex
 
     @Override
     public String getAuthenticatedUserId() {
-        log.debug("[Luban] |- Flowable get AuthenticatedUserId from LUBAN CLOUD!");
+        log.debug("[Herodotus] |- Flowable get AuthenticatedUserId from LUBAN CLOUD!");
         return SecurityUtils.getClientId();
     }
 
     @Override
     public Principal getPrincipal() {
-        log.debug("[Luban] |- Flowable get getPrincipal from LUBAN CLOUD!");
+        log.debug("[Herodotus] |- Flowable get getPrincipal from LUBAN CLOUD!");
         return SecurityUtils.getAuthentication();
     }
 

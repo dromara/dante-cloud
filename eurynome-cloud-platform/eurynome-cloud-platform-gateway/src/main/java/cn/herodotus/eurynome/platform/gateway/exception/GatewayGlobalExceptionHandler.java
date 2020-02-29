@@ -94,7 +94,7 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
         Result<String> result = new Result<String>().path(path);
         if (ex instanceof NotFoundException) {
             result.type(ResultStatus.SERVICE_UNAVAILABLE).httpStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
-            log.error("[Luban] |- ERROR ==> Service Unavailable : {}", result);
+            log.error("[Herodotus] |- ERROR ==> Service Unavailable : {}", result);
         } else if (ex instanceof ResponseStatusException) {
             ResponseStatusException responseStatusException = (ResponseStatusException) ex;
             HttpStatus httpStatus = responseStatusException.getStatus();
@@ -105,7 +105,7 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
             result.type(resultType);
 
 
-            log.error("[Luban] |- ERROR ==> Response Status Exception : {}", result);
+            log.error("[Herodotus] |- ERROR ==> Response Status Exception : {}", result);
         } else {
             result = GlobalExceptionHandler.resolveException((Exception) ex, path);
         }

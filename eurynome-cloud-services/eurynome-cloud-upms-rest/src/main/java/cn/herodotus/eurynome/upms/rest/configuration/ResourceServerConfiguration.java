@@ -41,10 +41,10 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     private String[] getWhiteList() {
         if (securityProperities != null) {
-            log.info("[Luban] |- OAuth2 Fetch The Resource White List.");
+            log.info("[Herodotus] |- OAuth2 Fetch The Resource White List.");
             return securityProperities.getInterceptor().getWhiteList();
         } else {
-            log.warn("[Luban] |- OAuth2 Can not Fetch The Resource White List Configurations.");
+            log.warn("[Herodotus] |- OAuth2 Can not Fetch The Resource White List Configurations.");
             return new String[] {};
         }
     }

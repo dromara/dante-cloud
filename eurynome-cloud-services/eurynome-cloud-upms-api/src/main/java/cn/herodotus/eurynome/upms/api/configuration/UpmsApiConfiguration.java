@@ -70,6 +70,6 @@ public class UpmsApiConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Luban] |- Bean [Upms Api] Auto Configure.");
+        log.info("[Herodotus] |- Bean [Upms Api] Auto Configure.");
     }
 }

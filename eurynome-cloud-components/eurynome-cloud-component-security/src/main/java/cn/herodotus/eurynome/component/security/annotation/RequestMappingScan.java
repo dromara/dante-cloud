@@ -137,9 +137,9 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
             }
 
             requestMappingStore.storeRequestMappings(resources);
-            log.info("[Luban] |- Platform Store the Resource For Service: [{}]", serviceId);
+            log.info("[Herodotus] |- Platform Store the Resource For Service: [{}]", serviceId);
         } else {
-            log.warn("[Luban] |- If you want to auto scan and store REST Api, please config the ResourceStore!");
+            log.warn("[Herodotus] |- If you want to auto scan and store REST Api, please config the ResourceStore!");
         }
     }
 

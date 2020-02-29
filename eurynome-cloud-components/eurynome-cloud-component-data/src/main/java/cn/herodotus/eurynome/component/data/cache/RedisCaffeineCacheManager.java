@@ -51,7 +51,7 @@ public class RedisCaffeineCacheManager implements CacheManager {
 
         cache = new RedisCaffeineCache(name, redisTemplate, caffeineCache(), cacheRedisCaffeineProperties);
         Cache oldCache = cacheMap.putIfAbsent(name, cache);
-        log.debug("[Luban] |- RedisCaffeineCacheManager : create cache instance, the cache name is : {}", name);
+        log.debug("[Herodotus] |- RedisCaffeineCacheManager : create cache instance, the cache name is : {}", name);
         return oldCache == null ? cache : oldCache;
     }
 

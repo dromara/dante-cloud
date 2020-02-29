@@ -31,7 +31,7 @@ public class RequestMappingProcessor extends AbstractRequestMappingProcessor{
 
     @Async
     public void storeRequestMappings(String message) {
-        log.debug("[Luban] |- Received Service Resources Message: [{}]", message);
+        log.debug("[Herodotus] |- Received Service Resources Message: [{}]", message);
 
         List<RequestMappingResource> requestMappingResources = JSON.parseArray(message, RequestMappingResource.class);
         if (CollectionUtils.isNotEmpty(requestMappingResources)) {

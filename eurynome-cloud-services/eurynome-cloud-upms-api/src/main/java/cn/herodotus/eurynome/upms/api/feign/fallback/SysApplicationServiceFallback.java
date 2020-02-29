@@ -15,7 +15,7 @@ public class SysApplicationServiceFallback implements ISysApplicationService {
 
     @Override
     public Result<ArtisanApplication> findByClientId(String clientId) {
-        log.error("[Luban] |- SysApplicationService findByClientId Invoke Failed!", cause);
+        log.error("[Herodotus] |- SysApplicationService findByClientId Invoke Failed!", cause);
         return new Result<ArtisanApplication>().failed().error(cause);
     }
 }

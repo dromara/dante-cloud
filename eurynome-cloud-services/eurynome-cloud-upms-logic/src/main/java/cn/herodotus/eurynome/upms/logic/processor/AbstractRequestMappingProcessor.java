@@ -55,10 +55,10 @@ public abstract class AbstractRequestMappingProcessor {
         List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
 
         if (CollectionUtils.isNotEmpty(result)) {
-            log.info("[Luban] |- Store Service Resources Success!");
+            log.info("[Herodotus] |- Store Service Resources Success!");
             return true;
         } else {
-            log.error("[Luban] |- Store Service Resources May Be Error, Please Check!");
+            log.error("[Herodotus] |- Store Service Resources May Be Error, Please Check!");
             return false;
         }
     }

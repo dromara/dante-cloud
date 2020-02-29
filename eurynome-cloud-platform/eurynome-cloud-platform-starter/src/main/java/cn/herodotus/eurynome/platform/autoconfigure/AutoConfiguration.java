@@ -28,7 +28,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(KafkaProducer.class)
     public KafkaProducer kafkaProducer(KafkaTemplate kafkaTemplate) {
         KafkaProducer kafkaProducer = new KafkaProducer(kafkaTemplate);
-        log.debug("[Luban] |- Bean [Kafka Producer] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Kafka Producer] Auto Configure.");
         return kafkaProducer;
     }
 
@@ -37,7 +37,7 @@ public class AutoConfiguration {
     @ConditionalOnBean(KafkaProducer.class)
     public RequestMappingStore requestMappingStore(KafkaProducer kafkaProducer) {
         KafkaRequestMappingStore kafkaRequestMappingStore = new KafkaRequestMappingStore(kafkaProducer);
-        log.debug("[Luban] |- Bean [Kafka Request Mapping Store] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Kafka Request Mapping Store] Auto Configure.");
         return kafkaRequestMappingStore;
     }
 
@@ -51,7 +51,7 @@ public class AutoConfiguration {
     @ConditionalOnBean(RequestMappingStore.class)
     public RequestMappingScan requestMappingScan(RequestMappingStore requestMappingStore, ApplicationProperties applicationProperties) {
         RequestMappingScan scan = new RequestMappingScan(requestMappingStore, applicationProperties);
-        log.debug("[Luban] |- Bean [Request Mapping Scan] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Request Mapping Scan] Auto Configure.");
         return scan;
     }
 }

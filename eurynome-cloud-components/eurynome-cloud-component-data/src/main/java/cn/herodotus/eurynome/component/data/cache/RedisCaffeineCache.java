@@ -169,14 +169,14 @@ public class RedisCaffeineCache extends AbstractValueAdaptingCache {
         Object cacheKey = getKey(key);
         Object value = caffeineCache.getIfPresent(key);
         if (value != null) {
-            log.trace("[Luban] |- RedisCaffeineCache : get cache from caffeine, the key is : {}", cacheKey);
+            log.trace("[Herodotus] |- RedisCaffeineCache : get cache from caffeine, the key is : {}", cacheKey);
             return value;
         }
 
         value = redisTemplate.opsForValue().get(cacheKey);
 
         if (value != null) {
-            log.trace("[Luban] |- RedisCaffeineCache : get cache from redis and put in caffeine, the key is : {}", cacheKey);
+            log.trace("[Herodotus] |- RedisCaffeineCache : get cache from redis and put in caffeine, the key is : {}", cacheKey);
             caffeineCache.put(key, value);
         }
         return value;
@@ -205,7 +205,7 @@ public class RedisCaffeineCache extends AbstractValueAdaptingCache {
      * @description 清理本地缓存
      */
     public void clearLocal(Object key) {
-        log.trace("[Luban] |- RedisCaffeineCache : clear local cache, the key is : {}", key);
+        log.trace("[Herodotus] |- RedisCaffeineCache : clear local cache, the key is : {}", key);
         if (key == null) {
             caffeineCache.invalidateAll();
         } else {

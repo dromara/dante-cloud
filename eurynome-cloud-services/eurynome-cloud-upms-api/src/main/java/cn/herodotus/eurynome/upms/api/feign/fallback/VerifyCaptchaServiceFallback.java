@@ -12,13 +12,13 @@ public class VerifyCaptchaServiceFallback implements IVerifyCaptchaService {
 
     @Override
     public byte[] getVerifiCode() throws Exception {
-        log.error("[Luban] |- VerifyCaptchaService getVerifiCode Invoke Failed!", cause);
+        log.error("[Herodotus] |- VerifyCaptchaService getVerifiCode Invoke Failed!", cause);
         return new byte[0];
     }
 
     @Override
     public Boolean checkVerifiCode(String code) {
-        log.error("[Luban] |- VerifyCaptchaService checkVerifiCode Invoke Failed!", cause);
+        log.error("[Herodotus] |- VerifyCaptchaService checkVerifiCode Invoke Failed!", cause);
         return Boolean.FALSE;
     }
 }

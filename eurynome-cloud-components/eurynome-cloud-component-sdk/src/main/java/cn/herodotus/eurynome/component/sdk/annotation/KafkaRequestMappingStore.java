@@ -52,7 +52,7 @@ public class KafkaRequestMappingStore implements RequestMappingStore {
 
         String result = JSON.toJSONString(requestMappingResources);
 
-        log.debug("[Luban] |- Platform Prepared the Resources [{}]", result);
+        log.debug("[Herodotus] |- Platform Prepared the Resources [{}]", result);
 
         kafkaProducer.sendMessage("AUTHORITY_AUTO_SCAN", result);
 

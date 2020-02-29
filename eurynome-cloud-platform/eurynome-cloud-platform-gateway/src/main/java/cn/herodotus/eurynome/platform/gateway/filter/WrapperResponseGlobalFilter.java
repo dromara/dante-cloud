@@ -39,12 +39,12 @@ public class WrapperResponseGlobalFilter implements GlobalFilter, Ordered {
                         DataBufferUtils.release(dataBuffer);
                         //responseData就是下游系统返回的内容,可以查看修改
                         String responseData = new String(content, StandardCharsets.UTF_8);
-                        log.info("[Luban] |- Gateway Response: {}", responseData);
+                        log.info("[Herodotus] |- Gateway Response: {}", responseData);
 
                         return bufferFactory.wrap(responseData.getBytes());
                     }));
                 } else {
-                    log.error("[Luban] |- Gateway Response Error: {}", getStatusCode());
+                    log.error("[Herodotus] |- Gateway Response Error: {}", getStatusCode());
                 }
                 return super.writeWith(body);
             }

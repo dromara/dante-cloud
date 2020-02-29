@@ -60,7 +60,7 @@ public class ModelerIndexController {
         if (ObjectUtils.isNotEmpty(artisanUserDetails)) {
             FlowableUserHelper.setAuthenticatedUser(artisanUserDetails);
         } else {
-            log.warn("[Luban] |- SecurityUtils.getPrincipal() is null, So can not set Flowable User Info!");
+            log.warn("[Herodotus] |- SecurityUtils.getPrincipal() is null, So can not set Flowable User Info!");
         }
         return "/flowable-modeler/index.html";
     }

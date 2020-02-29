@@ -29,7 +29,7 @@ public class CompleteListService extends BaseReadableService<CompleteList, Strin
 
     @Override
     public Page<CompleteList> findByPageWithEmployeeId(String employeeId, int pageNumber, int pageSize) {
-        log.debug("[Luban] |- Complete Task Service findByPageWithEmployeeId.");
+        log.debug("[Herodotus] |- Complete Task Service findByPageWithEmployeeId.");
         return completeListRepository.findAllByApproverId(employeeId, PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "startTime"));
     }
 }

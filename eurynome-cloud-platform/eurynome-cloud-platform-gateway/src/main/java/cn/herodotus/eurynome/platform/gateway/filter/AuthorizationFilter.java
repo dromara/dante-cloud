@@ -66,7 +66,7 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
         } else { // 有token 验证是否有效
             Result result = authorizationTokenService.checkToken(token);
             result.path(url);
-            log.info("[Luban] |- Gateway Check Token Result: {}", result.toString());
+            log.info("[Herodotus] |- Gateway Check Token Result: {}", result.toString());
 
             if (result.getHttpStatus() != 200) {
                 return GatewayUtils.writeJsonResponse(exchangeResponse, result);

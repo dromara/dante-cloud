@@ -36,6 +36,6 @@ public class BpmnLogicAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Luban] |- Bean [Bpmn Logic] Auto Configure.");
+        log.info("[Herodotus] |- Bean [Bpmn Logic] Auto Configure.");
     }
 }

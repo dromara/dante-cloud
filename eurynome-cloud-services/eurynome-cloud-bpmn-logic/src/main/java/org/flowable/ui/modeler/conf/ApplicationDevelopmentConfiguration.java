@@ -60,7 +60,7 @@ public class ApplicationDevelopmentConfiguration {
                 hostAddress = address.getHostAddress();
             }
         } catch (UnknownHostException e) {
-            log.error("[Luban] |- Get Local Host Error", e);
+            log.error("[Herodotus] |- Get Local Host Error", e);
         }
 
         return "http://" + hostAddress + ":" + getServerPort() + ProcessConstants.FLOWABLE_APP_REST_API_MAPPEED_TO;
@@ -73,7 +73,7 @@ public class ApplicationDevelopmentConfiguration {
         String deploymentApiUrl = getContextRoot();
         flowableModelerAppProperties.setDeploymentApiUrl(deploymentApiUrl);
 
-        log.info("[Luban] |- Auto Configuration the flowable [Deployment Api Url]");
-        log.debug("[Luban] |- The Deployment Api Url is [{}]", deploymentApiUrl);
+        log.info("[Herodotus] |- Auto Configuration the flowable [Deployment Api Url]");
+        log.debug("[Herodotus] |- The Deployment Api Url is [{}]", deploymentApiUrl);
     }
 }

@@ -21,7 +21,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-            log.debug("[Luban] |- Bean [Api Web Security Configuration] Auto Configure.");
+            log.debug("[Herodotus] |- Bean [Api Web Security Configuration] Auto Configure.");
             web.ignoring().antMatchers(
                     "/error",
                     "/static/**",

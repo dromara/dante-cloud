@@ -77,7 +77,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 	 */
 	public static void clearHolder() {
 		if (log.isDebugEnabled()) {
-			log.debug("[Luban] |- Remove ApplicationContext In SpringContextHolder: [{}]", applicationContext);
+			log.debug("[Herodotus] |- Remove ApplicationContext In SpringContextHolder: [{}]", applicationContext);
 		}
 		applicationContext = null;
 	}

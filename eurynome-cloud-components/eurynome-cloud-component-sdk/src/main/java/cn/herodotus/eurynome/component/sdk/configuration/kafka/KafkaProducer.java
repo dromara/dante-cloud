@@ -22,21 +22,21 @@ public class KafkaProducer {
     }
 
     public void sendMessage(String topic, String data) {
-        log.debug("[Luban] |- Kafka Send Message Start!");
+        log.debug("[Herodotus] |- Kafka Send Message Start!");
 
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, data);
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
             @Override
             public void onFailure(Throwable ex) {
-                log.error("[Luban] |- Kafka Send Message Error! => ex = {}, topic = {}, data = {}", ex, topic, data);
+                log.error("[Herodotus] |- Kafka Send Message Error! => ex = {}, topic = {}, data = {}", ex, topic, data);
             }
 
             @Override
             public void onSuccess(SendResult<String, String> result) {
-                log.debug("[Luban] |- Kafka Send Message Success! => topic = {}, data = {}",topic, data);
+                log.debug("[Herodotus] |- Kafka Send Message Success! => topic = {}, data = {}",topic, data);
             }
         });
 
-        log.debug("[Luban] |- Kafka Send Message Finished!");
+        log.debug("[Herodotus] |- Kafka Send Message Finished!");
     }
 }

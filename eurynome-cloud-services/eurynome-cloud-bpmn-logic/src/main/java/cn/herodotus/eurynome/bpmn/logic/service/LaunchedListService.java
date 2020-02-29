@@ -29,7 +29,7 @@ public class LaunchedListService extends BaseReadableService<LaunchedList, Strin
 
     @Override
     public Page<LaunchedList> findByPageWithEmployeeId(String employeeId, int pageNumber, int pageSize) {
-        log.debug("[Luban] |- Launched Task Service findByPageWithEmployeeId");
+        log.debug("[Herodotus] |- Launched Task Service findByPageWithEmployeeId");
         return launchedListRepository.findAllByInitiatorId(employeeId, PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "startTime"));
     }
 }

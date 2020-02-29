@@ -105,10 +105,10 @@ public abstract class BaseProcessService {
 
     protected void deleteActivity(String processInstanceId, String activityId) {
         runtimeActivityInstanceService.deleteRuntimeActivityInstance(processInstanceId, activityId);
-        log.debug("[Luban] |- Flowable deleteRuntimeActivity");
+        log.debug("[Herodotus] |- Flowable deleteRuntimeActivity");
 
         historyActivityInstanceService.deleteHistoryActivityInstance(processInstanceId, activityId);
-        log.debug("[Luban] |- Flowable deleteHistoryActivity");
+        log.debug("[Herodotus] |- Flowable deleteHistoryActivity");
     }
 
     /**

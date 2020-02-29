@@ -71,6 +71,6 @@ public class SecurityComponentConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Luban] |- Bean [Security Component] Auto Configure.");
+        log.info("[Herodotus] |- Bean [Security Component] Auto Configure.");
     }
 }
