@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections4.MapUtils;
@@ -16,12 +17,13 @@ public class UpmsConstantsController {
 
     @ApiOperation(value = "获取服务使用常量", notes = "获取服务涉及的常量以及信息")
     @GetMapping(value = "/enums")
-    public Result findAllEnums() {
+    public Result<Map<String, Object>> findAllEnums() {
+        Result<Map<String, Object>> result = new Result<>();
         Map<String, Object> allEnums =  UpmsConstants.getAllEnums();
         if (MapUtils.isNotEmpty(allEnums)) {
-            return Result.ok().data(allEnums);
+            return result.ok().data(allEnums);
         } else {
-            return Result.failed();
+            return result.failed().message("获取服务常量失败");
         }
     }
 }

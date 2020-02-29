@@ -40,7 +40,7 @@ import java.util.Map;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private static Map<String, Result> exceptionDictionary = new HashMap<>();
+    private static Map<String, Result<String>> exceptionDictionary = new HashMap<>();
 
     static {
         exceptionDictionary.put("UsernameNotFoundException", getUnauthorizedResult(ResultStatus.USERNAME_NOT_FOUND));
@@ -71,27 +71,27 @@ public class GlobalExceptionHandler {
         exceptionDictionary.put("MethodArgumentNotValidException", getResult(ResultStatus.ALERT));
     }
 
-    private static Result getBadRequestResult(ResultStatus resultCode) {
+    private static Result<String> getBadRequestResult(ResultStatus resultCode) {
         return getResult(resultCode, HttpStatus.SC_BAD_REQUEST);
     }
 
-    private static Result getUnauthorizedResult(ResultStatus resultCode) {
+    private static Result<String> getUnauthorizedResult(ResultStatus resultCode) {
         return getResult(resultCode, HttpStatus.SC_UNAUTHORIZED);
     }
 
-    private static Result getResult(ResultStatus resultCode) {
+    private static Result<String> getResult(ResultStatus resultCode) {
         return getResult(resultCode, HttpStatus.SC_INTERNAL_SERVER_ERROR);
     }
 
-    protected static Result getResult(ResultStatus resultCode, int httpStatus) {
-        return Result.failed().code(resultCode.getCode()).message(resultCode.getMessage()).httpStatus(httpStatus);
+    protected static Result<String> getResult(ResultStatus resultCode, int httpStatus) {
+        return new Result<String>().failed().code(resultCode.getCode()).message(resultCode.getMessage()).httpStatus(httpStatus);
     }
 
-    public static Result resolveException(Exception ex, String path) {
+    public static Result<String> resolveException(Exception ex, String path) {
 
         log.debug("[Luban] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
 
-        Result result = Result.failed();
+        Result<String> result = new Result<String>().failed();
 
         String exceptionName = ex.getClass().getSimpleName();
         if (StringUtils.isNotEmpty(exceptionName)) {
@@ -101,7 +101,9 @@ public class GlobalExceptionHandler {
                 log.warn("[Luban] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
             }
         }
+
         result.path(path);
+        result.error(ex);
 
         log.error("[Luban] |- Global Exception Handler, Error is : {}", result);
 

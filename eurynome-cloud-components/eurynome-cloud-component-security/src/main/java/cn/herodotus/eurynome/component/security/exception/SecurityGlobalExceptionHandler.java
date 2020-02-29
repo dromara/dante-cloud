@@ -61,8 +61,8 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
 
     @ExceptionHandler({Exception.class, PlatformException.class})
     @ResponseBody
-    public static Result exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
-        Result result = resolveException(ex, request.getRequestURI());
+    public static Result<String> exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result<String> result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getHttpStatus());
         return result;
     }
@@ -78,8 +78,8 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
      */
     @ExceptionHandler({AuthenticationException.class})
     @ResponseBody
-    public static Result authenticationException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
-        Result result = resolveException(ex, request.getRequestURI());
+    public static Result<String> authenticationException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result<String> result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getHttpStatus());
         return result;
     }
@@ -94,8 +94,8 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
      */
     @ExceptionHandler({OAuth2Exception.class, InvalidTokenException.class})
     @ResponseBody
-    public static Result oauth2Exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
-        Result result = resolveException(ex, request.getRequestURI());
+    public static Result<String> oauth2Exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result<String> result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getHttpStatus());
         return result;
     }
@@ -106,9 +106,9 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
      * @param ex
      * @return
      */
-    public static Result resolveOauthException(Exception ex, String path) {
+    public static Result<String> resolveOauthException(Exception ex, String path) {
 
-        Result result = getResult(ResultStatus.BAD_CREDENTIALS, HttpStatus.OK.value());
+        Result<String> result = getResult(ResultStatus.BAD_CREDENTIALS, HttpStatus.OK.value());
 
         if (ex instanceof OAuth2Exception) {
             OAuth2Exception aex = (OAuth2Exception) ex;
@@ -123,7 +123,7 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
         return result.message(ex.getMessage()).path(path);
     }
 
-    public static ModelAndView errorView(Result result) {
+    public static ModelAndView errorView(Result<String> result) {
         // 设置跳转路径
         ModelAndView modelAndView = new ModelAndView(DEFAULT_ERROR_VIEW);
         // 将异常对象传递过去

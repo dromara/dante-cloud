@@ -62,7 +62,7 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
         ServerHttpResponse exchangeResponse = exchange.getResponse();
         // 没有token
         if (StringUtils.isBlank(token)) {
-            return GatewayUtils.writeJsonResponse(exchangeResponse, Result.failed().type(ResultStatus.UNAUTHORIZED));
+            return GatewayUtils.writeJsonResponse(exchangeResponse, new Result().type(ResultStatus.UNAUTHORIZED));
         } else { // 有token 验证是否有效
             Result result = authorizationTokenService.checkToken(token);
             result.path(url);

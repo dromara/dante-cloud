@@ -26,6 +26,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.controller.AbstractController;
+import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.service.system.SysRoleService;
 import io.swagger.annotations.Api;
@@ -37,10 +38,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/role")
 @Api(value = "平台角色接口", tags = "用户中心服务")
-public class SysRoleController extends AbstractController {
+public class SysRoleController extends BaseCrudController {
 
     private final SysRoleService sysRoleService;
 
@@ -55,15 +58,12 @@ public class SysRoleController extends AbstractController {
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
     @GetMapping
-    public Result findByPage(
+    public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
-        if (pageSize != 0) {
-            Page<SysRole> pages = sysRoleService.findByPage(pageNumber, pageSize);
-            return Result.ok().data(getFrontPageMap(pages));
-        } else {
-            return Result.failed();
-        }
+
+        Page<SysRole> pages = sysRoleService.findByPage(pageNumber, pageSize);
+        return result(pages);
     }
 
     @ApiOperation(value = "保存或更新角色", notes = "接收JSON数据，转换为SysRole实体，进行保存或更新")
@@ -71,13 +71,9 @@ public class SysRoleController extends AbstractController {
             @ApiImplicitParam(name = "sysRole", required = true, value = "可转换为SysRole实体的json数据", paramType = "JSON")
     })
     @PostMapping
-    public Result saveOrUpdate(@RequestBody SysRole sysRole) {
+    public Result<SysRole> saveOrUpdate(@RequestBody SysRole sysRole) {
         SysRole newSysRole = sysRoleService.saveOrUpdate(sysRole);
-        if (null != newSysRole) {
-            return Result.ok().data(newSysRole);
-        } else {
-            return Result.failed().message("保存失败！");
-        }
+        return result(newSysRole);
     }
 
     @ApiOperation(value = "删除角色", notes = "根据roleId删除角色，以及相关联的关联关系数据")
@@ -85,13 +81,10 @@ public class SysRoleController extends AbstractController {
             @ApiImplicitParam(name = "roleId", required = true, value = "角色ID", paramType = "JSON")
     })
     @DeleteMapping
-    public Result delete(@RequestBody String roleId) {
-        if (StringUtils.isNotEmpty(roleId)) {
-            sysRoleService.deleteById(roleId);
-            return Result.ok();
-        } else {
-            return Result.failed().message("参数错误，删除失败！");
-        }
+    public Result<String> delete(@RequestBody String roleId) {
+        Result<String> result = result(roleId);
+        sysRoleService.deleteById(roleId);
+        return result;
     }
 
     @ApiOperation(value = "给角色授权", notes = "为角色赋予权限")
@@ -100,12 +93,8 @@ public class SysRoleController extends AbstractController {
             @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组")
     })
     @PutMapping
-    public Result authorize(@RequestParam(name = "roleId") String roleId, @RequestParam(name = "authorities[]") String[] authorities) {
+    public Result<SysRole> authorize(@RequestParam(name = "roleId") String roleId, @RequestParam(name = "authorities[]") String[] authorities) {
         SysRole sysRole = sysRoleService.authorize(roleId, authorities);
-        if (null != sysRole) {
-            return Result.ok();
-        } else {
-            return Result.failed().message("授权失败");
-        }
+        return result(sysRole);
     }
 }

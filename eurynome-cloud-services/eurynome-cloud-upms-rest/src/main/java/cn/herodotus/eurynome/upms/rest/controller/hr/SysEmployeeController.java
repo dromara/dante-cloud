@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysEmployeeService;
 import io.swagger.annotations.Api;
@@ -12,10 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/employee")
 @Api(value = "人员管理接口", tags = "用户中心服务")
-public class SysEmployeeController {
+public class SysEmployeeController extends BaseCrudController {
 
     private final SysEmployeeService sysEmployeeService;
 
@@ -30,15 +33,13 @@ public class SysEmployeeController {
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
     @GetMapping
-    public Result<Page<SysEmployee>> findByPage(
+    public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
-        if (pageSize != 0) {
-            Page<SysEmployee> pages = sysEmployeeService.findByPage(pageNumber, pageSize);
-            return Result.ok().data(pages);
-        } else {
-            return Result.failed();
-        }
+
+        Page<SysEmployee> pages = sysEmployeeService.findByPage(pageNumber, pageSize);
+        return result(pages);
+
     }
 
     @ApiOperation(value = "保存或更新人员", notes = "接收JSON数据，转换为SysEmployee实体，进行保存或更新")
@@ -46,13 +47,9 @@ public class SysEmployeeController {
             @ApiImplicitParam(name = "sysEmployee", required = true, value = "可转换为SysEmployee实体的json数据", paramType = "JSON")
     })
     @PostMapping
-    public Result saveOrUpdate(@RequestBody SysEmployee sysEmployee) {
+    public Result<SysEmployee> saveOrUpdate(@RequestBody SysEmployee sysEmployee) {
         SysEmployee newSysEmployee = sysEmployeeService.saveOrUpdate(sysEmployee);
-        if (null != newSysEmployee) {
-            return Result.ok().data(newSysEmployee);
-        } else {
-            return Result.failed().message("保存失败！");
-        }
+        return result(newSysEmployee);
     }
 
     @ApiOperation(value = "删除人员", notes = "根据employeeId删除人员，以及相关联的关联关系数据")
@@ -60,12 +57,9 @@ public class SysEmployeeController {
             @ApiImplicitParam(name = "employeeId", required = true, value = "人员ID", paramType = "JSON")
     })
     @DeleteMapping
-    public Result delete(@RequestBody String employeeId) {
-        if (StringUtils.isNotEmpty(employeeId)) {
-            sysEmployeeService.deleteById(employeeId);
-            return Result.ok();
-        } else {
-            return Result.failed().message("参数错误，删除失败！");
-        }
+    public Result<String> delete(@RequestBody String employeeId) {
+        Result<String> result = result(employeeId);
+        sysEmployeeService.deleteById(employeeId);
+        return result;
     }
 }

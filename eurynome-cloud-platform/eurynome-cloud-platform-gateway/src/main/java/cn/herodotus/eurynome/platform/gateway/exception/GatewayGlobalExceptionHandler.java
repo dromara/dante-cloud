@@ -87,11 +87,11 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
 
-        if(FAVICON_ICO.equals(path)){
+        if (FAVICON_ICO.equals(path)) {
             return Mono.empty();
         }
 
-        Result result = Result.failed().path(path);
+        Result<String> result = new Result<String>().path(path);
         if (ex instanceof NotFoundException) {
             result.type(ResultStatus.SERVICE_UNAVAILABLE).httpStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
             log.error("[Luban] |- ERROR ==> Service Unavailable : {}", result);
@@ -101,9 +101,9 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
             result.httpStatus(responseStatusException.getStatus().value());
 
             ResultStatus resultType = ResultStatus.valueOf(httpStatus.name());
-            if (null != resultType) {
-                result.type(resultType);
-            }
+
+            result.type(resultType);
+
 
             log.error("[Luban] |- ERROR ==> Response Status Exception : {}", result);
         } else {

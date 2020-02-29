@@ -40,6 +40,8 @@ public class LoginController {
     @ApiOperation(value = "获取当前登录用户信息", notes = "获取当前登录用户信息")
     @GetMapping("/current/user")
     public Result<ArtisanUserDetails> getUserProfile() {
+
+        Result<ArtisanUserDetails> result = new Result<>();
         ArtisanUserDetails userDetails = SecurityUtils.getPrincipal();
 
         String name123 = "";
@@ -54,7 +56,7 @@ public class LoginController {
 //        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        //anonymousUser
         //    Object principal1 =  userInfoRemoteService.getUser();//SecurityUtils.getPrincipal();
-        return Result.ok().data(userDetails);
+        return result.data(userDetails);
     }
 
 
@@ -78,9 +80,9 @@ public class LoginController {
         log.warn("id:{},sec:{}", clientConfig.getClient_id(), clientConfig.getClient_secret());
         if (verificationCodeController.checkVerifiCode(code)) {
 
-            return Result.failed().message("验证码正确").data(getToken(username, password, null, headers));
+            return new Result<Object>().ok().message("验证码正确").data(getToken(username, password, null, headers));
         } else {
-            return Result.failed().message("验证码错误");
+            return new Result<Object>().failed().message("验证码错误");
         }
         //return null;
 //        JSONObject result = getToken(username,password,null,headers);

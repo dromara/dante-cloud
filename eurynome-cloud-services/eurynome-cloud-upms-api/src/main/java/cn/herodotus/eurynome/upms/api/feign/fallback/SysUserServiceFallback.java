@@ -21,12 +21,12 @@ public class SysUserServiceFallback implements ISysUserService {
     @Override
     public Result<SysUser> findByUsername(String username) {
         log.error("[Luban] |- SysUserService findByUsername Invoke Failed!", cause);
-        return Result.failed().data(cause);
+        return new Result<SysUser>().failed().error(cause);
     }
 
     @Override
     public Result<SysUser> findById(String userId) {
         log.error("[Luban] |- SysUserService findByUserId Invoke Failed!", cause);
-        return Result.failed().data(cause);
+        return new Result<SysUser>().failed().error(cause);
     }
 }

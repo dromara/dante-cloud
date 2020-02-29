@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.security.controller.AbstractController;
+import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
 import cn.herodotus.eurynome.component.security.domain.ArtisanApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;
@@ -48,7 +48,7 @@ import java.util.Map;
 
 @RestController
 @Api(value = "平台终端接口", tags = "用户中心服务")
-public class SysApplicationController extends AbstractController implements ISysApplicationService {
+public class SysApplicationController extends BaseCrudController implements ISysApplicationService {
 
     private final SysApplicationService sysApplicationService;
 
@@ -70,16 +70,16 @@ public class SysApplicationController extends AbstractController implements ISys
 
             Map additionalInformationMap = new HashMap();
             if (StringUtils.isNotEmpty(sysClientDetail.getAdditionalInformation())) {
-                additionalInformationMap = JSON.parseObject(sysClientDetail.getAdditionalInformation(),Map.class);
+                additionalInformationMap = JSON.parseObject(sysClientDetail.getAdditionalInformation(), Map.class);
             }
 
             ArtisanApplication oauthApplication = new ArtisanApplication();
             oauthApplication.setArtisanClientDetails(UpmsHelper.convertSysClientDetailToOAuth2ClientDetails(sysClientDetail, additionalInformationMap));
             oauthApplication.setArtisanAuthorities(UpmsHelper.convertSysAuthoritiesToArtisanAuthorities(sysApplication.getAuthorities()));
 
-            return Result.ok().data(oauthApplication);
+            return new Result<ArtisanApplication>().ok().data(oauthApplication);
         } else {
-            return Result.failed().message("获取数据失败！");
+            return new Result<ArtisanApplication>().failed().message("获取数据失败！");
         }
     }
 
@@ -89,15 +89,11 @@ public class SysApplicationController extends AbstractController implements ISys
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
     @GetMapping("/application")
-    public Result findByPage(
+    public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
-        if (pageSize != 0) {
-            Page<SysApplication> pages = sysApplicationService.findByPage(pageNumber, pageSize);
-            return Result.ok().data(getFrontPageMap(pages));
-        } else {
-            return Result.failed();
-        }
+        Page<SysApplication> pages = sysApplicationService.findByPage(pageNumber, pageSize);
+        return result(pages);
     }
 
     @ApiOperation(value = "保存或更新终端", notes = "接收JSON数据，转换为SysApplication实体，进行保存或更新")
@@ -105,28 +101,22 @@ public class SysApplicationController extends AbstractController implements ISys
             @ApiImplicitParam(name = "sysApplication", required = true, value = "可转换为SysApplication实体的json数据", paramType = "JSON")
     })
     @PostMapping("/application")
-    public Result saveOrUpdate(@RequestBody SysApplication sysApplication) {
+    public Result<SysApplication> saveOrUpdate(@RequestBody SysApplication sysApplication) {
         SysApplication newSysApplication = sysApplicationService.saveOrUpdate(sysApplication);
-        if (null != newSysApplication) {
-            return Result.ok().data(newSysApplication);
-        } else {
-            return Result.failed().message("保存失败！");
-        }
+        return result(newSysApplication);
     }
-
 
     @ApiOperation(value = "删除终端", notes = "根据applicationId删除终端，以及相关联的关联关系数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "applicationId", required = true, value = "终端ID", paramType = "JSON")
     })
     @DeleteMapping("/application")
-    public Result delete(@RequestBody String applicationId) {
-        if (StringUtils.isNotEmpty(applicationId)) {
-            sysApplicationService.deleteById(applicationId);
-            return Result.ok();
-        } else {
-            return Result.failed().message("参数错误，删除失败！");
-        }
+    public Result<String> delete(@RequestBody String applicationId) {
+        Result<String> result = result(applicationId);
+
+        sysApplicationService.deleteById(applicationId);
+        return result;
+
     }
 
     @ApiOperation(value = "给终端授权", notes = "为终端赋予权限")
@@ -135,12 +125,8 @@ public class SysApplicationController extends AbstractController implements ISys
             @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组")
     })
     @PutMapping("/application")
-    public Result authorize(@RequestParam(name = "applicationId") String applicationId, @RequestParam(name = "authorities[]") String[] authorities) {
+    public Result<SysApplication> authorize(@RequestParam(name = "applicationId") String applicationId, @RequestParam(name = "authorities[]") String[] authorities) {
         SysApplication sysApplication = sysApplicationService.authorize(applicationId, authorities);
-        if (null != sysApplication) {
-            return Result.ok();
-        } else {
-            return Result.failed().message("授权失败");
-        }
+        return result(sysApplication);
     }
 }

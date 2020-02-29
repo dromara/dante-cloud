@@ -34,10 +34,14 @@ import org.apache.http.HttpStatus;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-@ApiModel(value = "Result", description = "自定义统一响应最想")
+/**
+ * <p>Description: 自定义统一响应实体 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/2/29 14:50
+ */
+@ApiModel(value = "Result", description = "自定义统一响应实体")
 public class Result<T> implements Serializable {
 
     /**
@@ -72,8 +76,8 @@ public class Result<T> implements Serializable {
     /**
      * 附加数据
      */
-    @ApiParam(name = "extra", value = "附加数据")
-    private Map<String, Object> extra;
+    @ApiParam(name = "error", value = "错误信息")
+    private Throwable error;
 
     /**
      * 响应时间
@@ -101,40 +105,12 @@ public class Result<T> implements Serializable {
         return data;
     }
 
-    public Map<String, Object> getExtra() {
-        return extra;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
     public int getHttpStatus() {
         return httpStatus;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public void setHttpStatus(int httpStatus) {
-        this.httpStatus = httpStatus;
-    }
-
-    public void setExtra(Map<String, Object> extra) {
-        this.extra = extra;
+    public Date getTimestamp() {
+        return timestamp;
     }
 
     public void setTimestamp(Date timestamp) {
@@ -146,64 +122,67 @@ public class Result<T> implements Serializable {
         return this.code == ResultStatus.OK.getCode();
     }
 
-
-    public static Result ok() {
-        return new Result().code(ResultStatus.OK.getCode()).message(ResultStatus.OK.getMessage()).httpStatus(HttpStatus.SC_OK);
+    public Result<T> ok() {
+        this.code = ResultStatus.OK.getCode();
+        this.message = ResultStatus.OK.getMessage();
+        this.httpStatus = HttpStatus.SC_OK;
+        return this;
     }
 
-    public static Result failed() {
-        return new Result().code(ResultStatus.FAIL.getCode()).message(ResultStatus.FAIL.getMessage()).httpStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+    public Result<T> failed() {
+        this.code = ResultStatus.FAIL.getCode();
+        this.message = ResultStatus.FAIL.getMessage();
+        this.httpStatus = HttpStatus.SC_INTERNAL_SERVER_ERROR;
+        return this;
     }
 
-    public Result code(int code) {
+    public Result<T> code(int code) {
         this.code = code;
         return this;
     }
 
-    public Result message(String message) {
+    public Result<T> message(String message) {
         this.message = message;
         return this;
     }
 
-    public Result data(T data) {
+    public Result<T> data(T data) {
         this.data = data;
         return this;
     }
 
-    public Result path(String path) {
+    public Result<T> path(String path) {
         this.path = path;
         return this;
     }
 
-    public Result type(ResultStatus resultStatus) {
+    public Result<T> type(ResultStatus resultStatus) {
         this.code = resultStatus.getCode();
         this.message = resultStatus.getMessage();
         return this;
     }
 
-    public Result httpStatus(int httpStatus) {
+    public Result<T> httpStatus(int httpStatus) {
         this.httpStatus = httpStatus;
         return this;
     }
 
-    public Result put(String key, Object value) {
-        if (this.extra == null) {
-            this.extra = new HashMap<>(8);
-        }
-        this.extra.put(key, value);
+    public Result<T> error(Throwable error) {
+        this.error = error;
+        this.message = error.getMessage();
         return this;
     }
 
     @Override
     public String toString() {
-        return "Result {" +
+        return "Result{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
                 ", path='" + path + '\'' +
                 ", data=" + data +
                 ", httpStatus=" + httpStatus +
-                ", extra=" + extra +
+                ", error=" + error +
                 ", timestamp=" + timestamp +
-                " }";
+                '}';
     }
 }

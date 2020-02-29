@@ -41,7 +41,7 @@ public class AuthorizationTokenService {
             Result result = JSON.parseObject(resultContent, Result.class);
             return result;
         } else {
-            return Result.ok();
+            return new Result().ok();
         }
     }
 }

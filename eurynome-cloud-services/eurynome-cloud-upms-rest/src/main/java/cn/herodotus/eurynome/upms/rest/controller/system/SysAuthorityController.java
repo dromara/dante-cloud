@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.domain.TreeNode;
 import cn.herodotus.eurynome.component.common.utils.TreeUtils;
-import cn.herodotus.eurynome.component.security.controller.AbstractController;
+import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import io.swagger.annotations.Api;
@@ -35,18 +35,18 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/authority")
 @Api(value = "平台角色接口", tags = "用户中心服务")
-public class SysAuthorityController extends AbstractController  {
+public class SysAuthorityController extends BaseCrudController {
 
     private final SysAuthorityService sysAuthorityService;
 
@@ -61,15 +61,12 @@ public class SysAuthorityController extends AbstractController  {
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
     @GetMapping
-    public Result findByPage(
+    public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
-        if (pageSize != 0) {
-            Page<SysAuthority> pages = sysAuthorityService.findByPage(pageNumber, pageSize);
-            return Result.ok().data(getFrontPageMap(pages));
-        } else {
-            return Result.failed();
-        }
+
+        Page<SysAuthority> pages = sysAuthorityService.findByPage(pageNumber, pageSize);
+        return result(pages);
     }
 
     @ApiOperation(value = "保存或更新权限", notes = "接收JSON数据，转换为SysAuthority实体，进行保存或更新")
@@ -77,13 +74,9 @@ public class SysAuthorityController extends AbstractController  {
             @ApiImplicitParam(name = "sysAuthority", required = true, value = "可转换为SysAuthority实体的json数据", paramType = "JSON")
     })
     @PostMapping
-    public Result saveOrUpdate(@RequestBody SysAuthority sysAuthority) {
+    public Result<SysAuthority> saveOrUpdate(@RequestBody SysAuthority sysAuthority) {
         SysAuthority newSysAuthority = sysAuthorityService.saveOrUpdate(sysAuthority);
-        if (null != newSysAuthority) {
-            return Result.ok().data(newSysAuthority);
-        } else {
-            return Result.failed().message("保存失败！");
-        }
+        return result(newSysAuthority);
     }
 
     @ApiOperation(value = "删除权限", notes = "根据authorityId删除权限，以及相关联的关联关系数据")
@@ -91,18 +84,17 @@ public class SysAuthorityController extends AbstractController  {
             @ApiImplicitParam(name = "authorityId", required = true, value = "权限ID", paramType = "JSON")
     })
     @DeleteMapping
-    public Result delete(@RequestBody String authorityId) {
-        if (StringUtils.isNotEmpty(authorityId)) {
-            sysAuthorityService.deleteById(authorityId);
-            return Result.ok();
-        } else {
-            return Result.failed().message("参数错误，删除失败！");
-        }
+    public Result<String> delete(@RequestBody String authorityId) {
+        Result<String> result = result(authorityId);
+        sysAuthorityService.deleteById(authorityId);
+        return result;
     }
 
     @ApiOperation(value = "获取权限树", notes = "获取权限树形数据")
     @GetMapping("/tree")
     public Result<List<TreeNode>> findTree() {
+        Result<List<TreeNode>> result = new Result<>();
+
         List<SysAuthority> sysAuthorities = sysAuthorityService.findAll();
         if (CollectionUtils.isNotEmpty(sysAuthorities)) {
             List<TreeNode> treeNodes = sysAuthorities.stream().map(sysAuthority -> {
@@ -112,9 +104,9 @@ public class SysAuthorityController extends AbstractController  {
                 treeNode.setParentId(sysAuthority.getParentId());
                 return treeNode;
             }).collect(Collectors.toList());
-            return Result.ok().data(TreeUtils.build(treeNodes));
+            return result.data(TreeUtils.build(treeNodes));
         } else {
-            return Result.failed().message("获取数据失败");
+            return result.message("获取数据失败");
         }
     }
 }

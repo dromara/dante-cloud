@@ -19,12 +19,11 @@ public class RevokeTokenController {
     private ConsumerTokenServices consumerTokenServices;
 
     @GetMapping("/logout/quit")
-    public String wuJinLogout(@RequestParam("access_token")String accessToken){
-        Result result = Result.failed().message("注销失败");
+    public Result<String> wuJinLogout(@RequestParam("access_token") String accessToken) {
         if (consumerTokenServices.revokeToken(accessToken)) {
-            result = Result.ok().message("注销成功");
-            return JSON.toJSONString(result);
+            return new Result<String>().ok().message("注销成功！");
+        } else {
+            return new Result<String>().ok().message("注销失败！");
         }
-        return JSON.toJSONString(result);
     }
 }

@@ -54,15 +54,7 @@ public abstract class AbstractController {
         result.put("iTotalPages",totalPages);
         return result;
     }
-
-    public Map<String, Object> getFrontPageMap(Page pages) {
-        Map<String, Object> result = new HashMap<>(8);
-        result.put("content", pages.getContent());
-        result.put("totalPages", pages.getTotalPages());
-        result.put("totalElements", pages.getTotalElements());
-        return result;
-    }
-
+    
     protected String ajaxSuccess(String message) {
         return ajaxMessage(message, Message.success.name());
     }

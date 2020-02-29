@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 网关中重要的两个概念：路由配置和路由规则
  * Spring Cloud Gateway在启动时将路由配置和规则加载到内存中，无法做到不重启网关就可以动态加载对应的路由配置和规则。
@@ -40,15 +42,15 @@ public class GatewayRouteController {
 
     // TODO: Gateway 自身没有安全机制，相关Controller可以直接访问，后面需要提取出来。
     @GetMapping
-    public Result<GatewayRouteDefinition> findByPage(
+    public Result<List<GatewayRouteDefinition>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
 
         if (pageSize != 0) {
             Page<GatewayRouteDefinition> pages = gatewayRouteDefinitionService.findByPage(pageNumber, pageSize);
-            return Result.ok().data(pages.getContent());
+            return new Result<List<GatewayRouteDefinition>>().ok().data(pages.getContent());
         } else {
-            return Result.failed();
+            return new Result<List<GatewayRouteDefinition>>().failed();
         }
     }
 
