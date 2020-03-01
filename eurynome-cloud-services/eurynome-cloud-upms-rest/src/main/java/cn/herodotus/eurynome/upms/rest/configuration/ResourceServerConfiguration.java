@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.configuration;
 
 import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
-import cn.herodotus.eurynome.component.security.web.access.ArtisanAccessDeniedHandler;
-import cn.herodotus.eurynome.component.security.web.authentication.ArtisanAuthenticationEntryPoint;
+import cn.herodotus.eurynome.component.security.response.HerodotusAccessDeniedHandler;
+import cn.herodotus.eurynome.component.security.response.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +33,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(new ArtisanAccessDeniedHandler())
-                .authenticationEntryPoint(new ArtisanAuthenticationEntryPoint())
+                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .and()
                 .csrf().disable();
     }

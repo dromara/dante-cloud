@@ -22,7 +22,7 @@
  * LastModified: 2019/11/17 下午8:55
  */
 
-package cn.herodotus.eurynome.component.security.web.authentication;
+package cn.herodotus.eurynome.component.security.response;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.exception.SecurityGlobalExceptionHandler;
@@ -38,15 +38,16 @@ import java.io.IOException;
 
 /**
  * 自定义未认证处理
+ *
  * @author gengwei.zheng
  */
 @Slf4j
-public class ArtisanAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class HerodotusAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException exception) throws IOException, ServletException {
-        Result result = SecurityGlobalExceptionHandler.resolveException(exception, request.getRequestURI());
+        Result<String> result = SecurityGlobalExceptionHandler.resolveException(exception, request.getRequestURI());
         response.setStatus(result.getHttpStatus());
         WebUtils.renderJson(response, result);
     }

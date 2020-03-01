@@ -10,7 +10,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 基于Hutool的Aes加解密工具 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/1/28 17:25
@@ -41,7 +41,7 @@ public class SymmetricUtils {
         return builder.toString();
     }
 
-    public static byte[] getDecryptdSymmetricKey(String key) {
+    public static byte[] getDecryptedSymmetricKey(String key) {
         if (!StringUtils.contains(key, SymbolConstants.FORWARD_SLASH)) {
             throw new IllegalSymmetricKeyException("Parameter Illegal!");
         }

@@ -46,6 +46,9 @@ public class SessionUtils {
     public static HttpSession session() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
+
+        assert servletRequestAttributes != null;
+
         HttpServletRequest request = servletRequestAttributes.getRequest();
         return request.getSession();
     }

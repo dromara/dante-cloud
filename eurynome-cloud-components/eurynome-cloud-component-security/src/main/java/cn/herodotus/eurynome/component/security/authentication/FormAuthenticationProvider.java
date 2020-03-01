@@ -18,7 +18,7 @@ public class FormAuthenticationProvider extends DaoAuthenticationProvider {
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        FormWebAuthenticationDetails details = (FormWebAuthenticationDetails) authentication.getDetails();
+        FormLoginWebAuthenticationDetails details = (FormLoginWebAuthenticationDetails) authentication.getDetails();
 
         if (!details.isClose()) {
 

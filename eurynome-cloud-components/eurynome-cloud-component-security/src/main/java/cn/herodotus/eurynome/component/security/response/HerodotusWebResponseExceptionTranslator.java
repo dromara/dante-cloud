@@ -22,7 +22,7 @@
  * LastModified: 2019/11/18 上午8:07
  */
 
-package cn.herodotus.eurynome.component.security.oauth2.provider.error;
+package cn.herodotus.eurynome.component.security.response;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.exception.SecurityGlobalExceptionHandler;
@@ -33,18 +33,19 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * @author gengwei.zheng
  */
 
 @Slf4j
-public class ArtisanWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
+public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator<Result<String>> {
 
     @Override
-    public ResponseEntity translate(Exception e) throws Exception {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Result result = SecurityGlobalExceptionHandler.resolveOauthException(e, request.getRequestURI());
+    public ResponseEntity<Result<String>> translate(Exception e) throws Exception {
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        Result<String> result = SecurityGlobalExceptionHandler.resolveOauthException(e, request.getRequestURI());
         return ResponseEntity.status(result.getHttpStatus()).body(result);
     }
 }

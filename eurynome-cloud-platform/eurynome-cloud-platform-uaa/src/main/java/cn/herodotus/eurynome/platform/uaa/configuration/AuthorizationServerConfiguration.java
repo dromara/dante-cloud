@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
-import cn.herodotus.eurynome.component.security.oauth2.provider.error.ArtisanWebResponseExceptionTranslator;
+import cn.herodotus.eurynome.component.security.response.HerodotusWebResponseExceptionTranslator;
 import cn.herodotus.eurynome.platform.uaa.extend.OauthJwtAccessTokenConverter;
 import cn.herodotus.eurynome.platform.uaa.extend.OauthUserAuthenticationConverter;
 import cn.herodotus.eurynome.platform.uaa.service.OauthClientDetailsService;
@@ -156,7 +156,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // 自定义错误页
         endpoints.pathMapping("/oauth/error", "/oauth/error");
         // 自定义异常转换类
-        endpoints.exceptionTranslator(new ArtisanWebResponseExceptionTranslator());
+        endpoints.exceptionTranslator(new HerodotusWebResponseExceptionTranslator());
     }
 
     /**

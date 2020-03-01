@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest;
  * @date : 2019/11/29 15:49
  */
 @Component
-public class FormWebAuthenticationDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> {
+public class FormLoginWebAuthenticationDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> {
 
     @Autowired
     private SecurityProperities securityProperities;
 
     @Override
     public WebAuthenticationDetails buildDetails(HttpServletRequest request) {
-        return new FormWebAuthenticationDetails(request, securityProperities);
+        return new FormLoginWebAuthenticationDetails(request, securityProperities);
     }
 }

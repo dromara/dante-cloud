@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * @author : gengwei.zheng
  * @date : 2019/11/29 14:29
  */
-public class FormWebAuthenticationDetails extends WebAuthenticationDetails {
+public class FormLoginWebAuthenticationDetails extends WebAuthenticationDetails {
 
     private boolean codeRight = true;
     private boolean codeEmpty = false;
@@ -28,7 +28,7 @@ public class FormWebAuthenticationDetails extends WebAuthenticationDetails {
      *
      * @param request that the authentication request was received from
      */
-    public FormWebAuthenticationDetails(HttpServletRequest request, SecurityProperities securityProperities) {
+    public FormLoginWebAuthenticationDetails(HttpServletRequest request, SecurityProperities securityProperities) {
         super(request);
         this.securityProperities = securityProperities;
         checkVerificationCode(request);
@@ -58,7 +58,7 @@ public class FormWebAuthenticationDetails extends WebAuthenticationDetails {
     }
 
     private boolean checkCodeRight(String encryptedCode, String savedCode, String key) {
-        byte[] byteKey = SymmetricUtils.getDecryptdSymmetricKey(key);
+        byte[] byteKey = SymmetricUtils.getDecryptedSymmetricKey(key);
         String code = SymmetricUtils.decrypt(encryptedCode, byteKey);
         codeRight = StringUtils.equals(code, savedCode);
         return codeRight;

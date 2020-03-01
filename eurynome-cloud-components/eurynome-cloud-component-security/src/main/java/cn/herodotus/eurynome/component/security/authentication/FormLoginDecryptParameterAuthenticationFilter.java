@@ -23,11 +23,11 @@ import java.io.IOException;
  * @date : 2020/1/27 17:38
  */
 @Slf4j
-public class FormDecryptParameterAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class FormLoginDecryptParameterAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private SecurityProperities securityProperities;
 
-    public FormDecryptParameterAuthenticationFilter(SecurityProperities securityProperities) {
+    public FormLoginDecryptParameterAuthenticationFilter(SecurityProperities securityProperities) {
         super();
         this.securityProperities = securityProperities;
     }
@@ -81,7 +81,7 @@ public class FormDecryptParameterAuthenticationFilter extends UsernamePasswordAu
         }
 
         if(StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)) {
-            byte[] byteKey = SymmetricUtils.getDecryptdSymmetricKey(key);
+            byte[] byteKey = SymmetricUtils.getDecryptedSymmetricKey(key);
             username = SymmetricUtils.decrypt(username, byteKey);
             password = SymmetricUtils.decrypt(password, byteKey);
             log.debug("[Herodotus] |- Decrypt Username is : [{}], Password is : [{}]", username, password);

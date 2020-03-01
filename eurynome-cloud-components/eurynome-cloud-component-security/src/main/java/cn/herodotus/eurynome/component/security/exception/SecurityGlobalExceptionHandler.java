@@ -103,24 +103,24 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
     /**
      * 静态解析认证异常
      *
-     * @param ex
+     * @param exception
      * @return
      */
-    public static Result<String> resolveOauthException(Exception ex, String path) {
+    public static Result<String> resolveOauthException(Exception exception, String path) {
 
         Result<String> result = getResult(ResultStatus.BAD_CREDENTIALS, HttpStatus.OK.value());
 
-        if (ex instanceof OAuth2Exception) {
-            OAuth2Exception aex = (OAuth2Exception) ex;
+        if (exception instanceof OAuth2Exception) {
+            OAuth2Exception aex = (OAuth2Exception) exception;
             result = resolveException(OAuth2Exception.create(aex.getOAuth2ErrorCode(), aex.getMessage()), path);
         } else {
-            String error = Optional.ofNullable(ex.getMessage()).orElse("");
+            String error = Optional.ofNullable(exception.getMessage()).orElse("");
             if (error.contains(ResultStatus.USER_IS_DISABLED.getMessage())) {
                 result.code(ResultStatus.ACCOUNT_DISABLED.getCode());
             }
         }
 
-        return result.message(ex.getMessage()).path(path);
+        return result.message(exception.getMessage()).path(path);
     }
 
     public static ModelAndView errorView(Result<String> result) {
