@@ -1,13 +1,13 @@
 package cn.herodotus.eurynome.upms.logic.repository.system;
 
-import cn.herodotus.eurynome.component.data.jpa.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface SysApplicationRepository extends BaseRepository<SysApplication, String> {
+public interface SysApplicationRepository extends JpaRepository<SysApplication, String> {
 
     @EntityGraph(value = "SysApplicationWithAuthority", type = EntityGraph.EntityGraphType.FETCH)
     SysApplication findByApplicationId(String applicationId);

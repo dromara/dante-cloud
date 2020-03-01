@@ -26,10 +26,7 @@
 
     <!-- 所有的子项目默认依赖 -->
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+
     </dependencies>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->

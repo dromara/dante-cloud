@@ -1,11 +1,12 @@
 package cn.herodotus.eurynome.platform.autoconfigure;
 
 import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
-import cn.herodotus.eurynome.component.data.properties.ApplicationProperties;
+import cn.herodotus.eurynome.component.data.annotation.EnableHerodotusData;
+import cn.herodotus.eurynome.component.security.annotation.EnableHerodotusSecurity;
+import cn.herodotus.eurynome.component.security.properties.ApplicationProperties;
 import cn.herodotus.eurynome.component.sdk.annotation.KafkaRequestMappingStore;
 import cn.herodotus.eurynome.component.sdk.configuration.kafka.KafkaProducer;
 import cn.herodotus.eurynome.component.security.annotation.RequestMappingScan;
-import cn.herodotus.eurynome.component.security.configuration.SecurityComponentConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,11 +18,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 /**
  * @author gengwei.zheng
  */
-@Import({
-        SecurityComponentConfiguration.class
-})
 @Slf4j
 @Configuration
+@EnableHerodotusData
+@EnableHerodotusSecurity
 public class AutoConfiguration {
 
     @Bean

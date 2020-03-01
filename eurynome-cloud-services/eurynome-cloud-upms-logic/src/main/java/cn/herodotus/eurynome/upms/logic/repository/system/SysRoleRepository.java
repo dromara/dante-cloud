@@ -1,13 +1,13 @@
 package cn.herodotus.eurynome.upms.logic.repository.system;
 
-import cn.herodotus.eurynome.component.data.jpa.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface SysRoleRepository extends BaseRepository<SysRole, String> {
+public interface SysRoleRepository extends JpaRepository<SysRole, String> {
 
     @EntityGraph(value = "SysRoleWithAndAuthority", type = EntityGraph.EntityGraphType.FETCH)
     SysRole findByRoleId(String roleId);

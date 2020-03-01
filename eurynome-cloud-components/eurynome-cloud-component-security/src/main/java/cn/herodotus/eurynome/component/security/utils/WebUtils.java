@@ -26,7 +26,7 @@ package cn.herodotus.eurynome.component.security.utils;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.security.toolkits.SpringContextHolder;
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.net.HttpHeaders;
 import com.google.common.net.MediaType;
@@ -251,7 +251,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
     }
 
     public static boolean isStaticResources(String uri) {
-        ResourceUrlProvider resourceUrlProvider = SpringContextHolder.getBean(ResourceUrlProvider.class);
+        ResourceUrlProvider resourceUrlProvider = SpringUtil.getBean(ResourceUrlProvider.class);
         String staticUri = resourceUrlProvider.getForLookupPath(uri);
         return staticUri != null;
     }

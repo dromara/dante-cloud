@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.rest.configuration;
 
-import cn.herodotus.eurynome.component.data.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
 import cn.herodotus.eurynome.component.security.web.access.ArtisanAccessDeniedHandler;
 import cn.herodotus.eurynome.component.security.web.authentication.ArtisanAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;

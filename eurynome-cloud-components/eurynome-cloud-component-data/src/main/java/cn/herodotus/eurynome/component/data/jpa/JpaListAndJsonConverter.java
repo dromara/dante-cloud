@@ -34,7 +34,7 @@ import javax.persistence.AttributeConverter;
  * @description TODO
  * @date 2019/10/23 12:16
  */
-public class JpaConverterListJson implements AttributeConverter<Object, String> {
+public class JpaListAndJsonConverter implements AttributeConverter<Object, String> {
     @Override
     public String convertToDatabaseColumn(Object o) {
         return JSON.toJSONString(o);

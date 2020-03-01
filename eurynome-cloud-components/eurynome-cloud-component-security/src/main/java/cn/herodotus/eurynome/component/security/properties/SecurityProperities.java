@@ -22,12 +22,12 @@
  * LastModified: 2020/1/29 下午4:08
  */
 
-package cn.herodotus.eurynome.component.data.properties;
+package cn.herodotus.eurynome.component.security.properties;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaLetterType;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaFont;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaLetterType;
+import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaFont;
+import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.hr;
 
-import cn.herodotus.eurynome.component.data.jpa.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author : gengwei.zheng
  * @date : 2020/1/20 11:37
  */
-public interface SysOrganizationRepository extends BaseRepository<SysOrganization, String> {
+public interface SysOrganizationRepository extends JpaRepository<SysOrganization, String> {
 
     SysOrganization findByOrganizationId(String organizationId);
 

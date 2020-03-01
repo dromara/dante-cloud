@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.security.authentication;
 
-import cn.herodotus.eurynome.component.data.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
 import cn.herodotus.eurynome.component.security.utils.SymmetricUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;

@@ -22,7 +22,7 @@
  * LastModified: 2019/11/17 下午8:55
  */
 
-package cn.herodotus.eurynome.component.security.configuration.undertow;
+package cn.herodotus.eurynome.component.security.configuration;
 
 import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Configuration;
  * @date : 2019/11/17 16:07
  */
 @Configuration
-public class ArtisanWebServerFactoryCustomizer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+public class CustomWebServerFactoryCustomizer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
     @Override
     public void customize(UndertowServletWebServerFactory factory) {
         factory.addDeploymentInfoCustomizers(deploymentInfo -> {
