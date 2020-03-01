@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.platform.uaa.extend;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -46,7 +46,7 @@ public class OauthUserAuthenticationConverter extends DefaultUserAuthenticationC
             if (USERNAME.equals(key)) {
                 if (map.get(key) instanceof Map) {
                     params.putAll((Map) map.get(key));
-                } else if (map.get(key) instanceof ArtisanUserDetails) {
+                } else if (map.get(key) instanceof HerodotusUserDetails) {
                     return map.get(key);
                 } else {
                     params.put(key, map.get(key));
@@ -55,7 +55,7 @@ public class OauthUserAuthenticationConverter extends DefaultUserAuthenticationC
                 params.put(key, map.get(key));
             }
         }
-        ArtisanUserDetails auth = BeanUtil.mapToBean(params, ArtisanUserDetails.class, true);
+        HerodotusUserDetails auth = BeanUtil.mapToBean(params, HerodotusUserDetails.class, true);
         if (params.get(USERNAME) != null) {
             auth.setUsername(params.get(USERNAME).toString());
         }
@@ -76,7 +76,7 @@ public class OauthUserAuthenticationConverter extends DefaultUserAuthenticationC
             Object principal = converter(map);
             Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
             if (principal != null) {
-                ArtisanUserDetails user = (ArtisanUserDetails) principal;
+                HerodotusUserDetails user = (HerodotusUserDetails) principal;
                 authorities = user.getAuthorities();
             }
             return new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);

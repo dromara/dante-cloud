@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.bpmn.logic.helper;
 
-import cn.herodotus.eurynome.component.security.domain.ArtisanRole;
-import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
+import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import org.apache.commons.collections4.CollectionUtils;
 import org.flowable.ui.common.model.RemoteGroup;
 import org.flowable.ui.common.model.RemoteUser;
@@ -45,34 +45,34 @@ import java.util.stream.Collectors;
  */
 public class FlowableUserHelper {
 
-    public static void setAuthenticatedUser(ArtisanUserDetails artisanUserDetails) {
-        SecurityUtils.assumeUser(convertArtisanUserDetailsToFlowableUser(artisanUserDetails));
+    public static void setAuthenticatedUser(HerodotusUserDetails herodotusUserDetails) {
+        SecurityUtils.assumeUser(convertArtisanUserDetailsToFlowableUser(herodotusUserDetails));
     }
 
-    public static RemoteUser convertArtisanUserDetailsToFlowableUser(ArtisanUserDetails artisanUserDetails) {
+    public static RemoteUser convertArtisanUserDetailsToFlowableUser(HerodotusUserDetails herodotusUserDetails) {
         RemoteUser remoteUser = new RemoteUser();
-        remoteUser.setId(artisanUserDetails.getUserId());
-        remoteUser.setFirstName(artisanUserDetails.getUsername());
-        remoteUser.setLastName(artisanUserDetails.getUsername());
-        remoteUser.setDisplayName(artisanUserDetails.getNickName());
-        remoteUser.setFullName(artisanUserDetails.getUsername());
-        remoteUser.setGroups(convertArtisanRolesToFlowableGroups(artisanUserDetails.getRoles()));
+        remoteUser.setId(herodotusUserDetails.getUserId());
+        remoteUser.setFirstName(herodotusUserDetails.getUsername());
+        remoteUser.setLastName(herodotusUserDetails.getUsername());
+        remoteUser.setDisplayName(herodotusUserDetails.getNickName());
+        remoteUser.setFullName(herodotusUserDetails.getUsername());
+        remoteUser.setGroups(convertArtisanRolesToFlowableGroups(herodotusUserDetails.getRoles()));
         remoteUser.setPrivileges(getDefaultPrivileges());
         return remoteUser;
     }
 
-    public static List<RemoteGroup> convertArtisanRolesToFlowableGroups(List<ArtisanRole> artisanRoles) {
-        if (CollectionUtils.isNotEmpty(artisanRoles)) {
-            return artisanRoles.stream().map(FlowableUserHelper::convertArtisanRoleToFlowableGroup).collect(Collectors.toList());
+    public static List<RemoteGroup> convertArtisanRolesToFlowableGroups(List<HerodotusRole> herodotusRoles) {
+        if (CollectionUtils.isNotEmpty(herodotusRoles)) {
+            return herodotusRoles.stream().map(FlowableUserHelper::convertArtisanRoleToFlowableGroup).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    public static RemoteGroup convertArtisanRoleToFlowableGroup(ArtisanRole artisanRole) {
+    public static RemoteGroup convertArtisanRoleToFlowableGroup(HerodotusRole herodotusRole) {
         RemoteGroup remoteGroup = new RemoteGroup();
-        remoteGroup.setId(artisanRole.getRoleId());
-        remoteGroup.setName(artisanRole.getRoleName());
-        remoteGroup.setType(artisanRole.getRoleCode());
+        remoteGroup.setId(herodotusRole.getRoleId());
+        remoteGroup.setName(herodotusRole.getRoleName());
+        remoteGroup.setType(herodotusRole.getRoleCode());
         return remoteGroup;
     }
 

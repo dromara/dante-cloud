@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.uaa.controller;
 
-import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.component.security.utils.VerificationCodeUtils;
 import cn.herodotus.eurynome.platform.uaa.service.feign.VerifyCaptchaRemoteService;
@@ -28,7 +28,7 @@ public class LoginController {
 
     @GetMapping("/current/user")
     @ApiOperation("获取当前用户信息")
-    public ArtisanUserDetails getUserPrincipal() {
+    public HerodotusUserDetails getUserPrincipal() {
         return SecurityUtils.getPrincipal();
     }
 

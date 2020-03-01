@@ -1,8 +1,7 @@
 package cn.herodotus.eurynome.upms.api.feign.fallback;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.security.domain.ArtisanApplication;
-import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
+import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
 import cn.herodotus.eurynome.upms.api.feign.service.ISysApplicationService;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +13,8 @@ public class SysApplicationServiceFallback implements ISysApplicationService {
     private Throwable cause;
 
     @Override
-    public Result<ArtisanApplication> findByClientId(String clientId) {
+    public Result<HerodotusApplication> findByClientId(String clientId) {
         log.error("[Herodotus] |- SysApplicationService findByClientId Invoke Failed!", cause);
-        return new Result<ArtisanApplication>().failed().error(cause);
+        return new Result<HerodotusApplication>().failed().error(cause);
     }
 }

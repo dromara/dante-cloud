@@ -26,7 +26,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
-import cn.herodotus.eurynome.component.security.domain.ArtisanApplication;
+import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;
 import cn.herodotus.eurynome.upms.api.feign.service.ISysApplicationService;
@@ -62,7 +62,7 @@ public class SysApplicationController extends BaseCrudController implements ISys
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", required = true, value = "终端ID")
     })
-    public Result<ArtisanApplication> findByClientId(String clientId) {
+    public Result<HerodotusApplication> findByClientId(String clientId) {
         SysApplication sysApplication = sysApplicationService.findByClientId(clientId);
         if (sysApplication != null) {
 
@@ -73,13 +73,13 @@ public class SysApplicationController extends BaseCrudController implements ISys
                 additionalInformationMap = JSON.parseObject(sysClientDetail.getAdditionalInformation(), Map.class);
             }
 
-            ArtisanApplication oauthApplication = new ArtisanApplication();
-            oauthApplication.setArtisanClientDetails(UpmsHelper.convertSysClientDetailToOAuth2ClientDetails(sysClientDetail, additionalInformationMap));
+            HerodotusApplication oauthApplication = new HerodotusApplication();
+            oauthApplication.setHerodotusClientDetails(UpmsHelper.convertSysClientDetailToOAuth2ClientDetails(sysClientDetail, additionalInformationMap));
             oauthApplication.setArtisanAuthorities(UpmsHelper.convertSysAuthoritiesToArtisanAuthorities(sysApplication.getAuthorities()));
 
-            return new Result<ArtisanApplication>().ok().data(oauthApplication);
+            return new Result<HerodotusApplication>().ok().data(oauthApplication);
         } else {
-            return new Result<ArtisanApplication>().failed().message("获取数据失败！");
+            return new Result<HerodotusApplication>().failed().message("获取数据失败！");
         }
     }
 

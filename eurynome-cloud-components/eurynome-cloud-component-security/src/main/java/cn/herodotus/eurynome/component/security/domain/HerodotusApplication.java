@@ -33,25 +33,25 @@ import java.util.List;
  * @author gengwei.zheng
  */
 @ApiModel(value = "ArtisanApplication", description = "终端信息")
-public class ArtisanApplication extends AbstractDomain {
+public class HerodotusApplication extends AbstractDomain {
 
-    private ArtisanClientDetails artisanClientDetails;
+    private HerodotusClientDetails herodotusClientDetails;
 
-    private List<ArtisanAuthority> artisanAuthorities;
+    private List<HerodotusAuthority> artisanAuthorities;
 
-    public ArtisanClientDetails getArtisanClientDetails() {
-        return artisanClientDetails;
+    public HerodotusClientDetails getHerodotusClientDetails() {
+        return herodotusClientDetails;
     }
 
-    public void setArtisanClientDetails(ArtisanClientDetails artisanClientDetails) {
-        this.artisanClientDetails = artisanClientDetails;
+    public void setHerodotusClientDetails(HerodotusClientDetails herodotusClientDetails) {
+        this.herodotusClientDetails = herodotusClientDetails;
     }
 
-    public List<ArtisanAuthority> getArtisanAuthorities() {
+    public List<HerodotusAuthority> getArtisanAuthorities() {
         return artisanAuthorities;
     }
 
-    public void setArtisanAuthorities(List<ArtisanAuthority> artisanAuthorities) {
+    public void setArtisanAuthorities(List<HerodotusAuthority> artisanAuthorities) {
         this.artisanAuthorities = artisanAuthorities;
     }
 }

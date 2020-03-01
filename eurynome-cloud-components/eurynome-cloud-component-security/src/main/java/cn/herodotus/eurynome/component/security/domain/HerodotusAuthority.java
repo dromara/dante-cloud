@@ -30,7 +30,7 @@ import org.springframework.security.core.GrantedAuthority;
 /**
  * @author gengwei.zheng
  */
-public final class ArtisanAuthority implements GrantedAuthority {
+public final class HerodotusAuthority implements GrantedAuthority {
 
     private String authorityId;
 
@@ -48,7 +48,7 @@ public final class ArtisanAuthority implements GrantedAuthority {
 
     private AuthorityType authorityType;
 
-    public ArtisanAuthority() {
+    public HerodotusAuthority() {
     }
 
     public String getAuthorityId() {

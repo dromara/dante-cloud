@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.bpmn.logic.controller;
 
 import cn.herodotus.eurynome.bpmn.logic.helper.FlowableUserHelper;
-import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -56,9 +56,9 @@ public class ModelerIndexController {
 
         // 在此处设置Flowable User是为了避免 Flowable的 SecurityUtils 在获取用户信息时抛出Null。
         // 逻辑上在登录处设置比较合适。但是发现，重新刷新flowable-modeler连接之后，之前设置的用户信息会丢失。因此改为在此处进行设置。
-        ArtisanUserDetails artisanUserDetails = SecurityUtils.getPrincipal();
-        if (ObjectUtils.isNotEmpty(artisanUserDetails)) {
-            FlowableUserHelper.setAuthenticatedUser(artisanUserDetails);
+        HerodotusUserDetails herodotusUserDetails = SecurityUtils.getPrincipal();
+        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
+            FlowableUserHelper.setAuthenticatedUser(herodotusUserDetails);
         } else {
             log.warn("[Herodotus] |- SecurityUtils.getPrincipal() is null, So can not set Flowable User Info!");
         }

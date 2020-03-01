@@ -31,7 +31,7 @@ import org.springframework.security.core.GrantedAuthority;
 /**
  * @author gengwei.zheng
  */
-public final class ArtisanRole implements GrantedAuthority {
+public final class HerodotusRole implements GrantedAuthority {
 
     private String roleId;
 
@@ -39,7 +39,7 @@ public final class ArtisanRole implements GrantedAuthority {
 
     private String roleCode;
 
-    public ArtisanRole() {
+    public HerodotusRole() {
     }
 
     public String getRoleId() {
@@ -81,7 +81,7 @@ public final class ArtisanRole implements GrantedAuthority {
             return false;
         }
 
-        ArtisanRole that = (ArtisanRole) o;
+        HerodotusRole that = (HerodotusRole) o;
 
         return new EqualsBuilder()
                 .append(getRoleId(), that.getRoleId())

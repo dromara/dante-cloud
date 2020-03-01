@@ -42,7 +42,7 @@ import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ArtisanClientDetails implements ClientDetails, Serializable {
+public class HerodotusClientDetails implements ClientDetails, Serializable {
 
     @JsonProperty("client_id")
     private String clientId;
@@ -80,10 +80,10 @@ public class ArtisanClientDetails implements ClientDetails, Serializable {
     @JsonProperty("additional_information")
     private Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
 
-    public ArtisanClientDetails() {
+    public HerodotusClientDetails() {
     }
 
-    public ArtisanClientDetails(ClientDetails prototype) {
+    public HerodotusClientDetails(ClientDetails prototype) {
         this();
         setAccessTokenValiditySeconds(prototype.getAccessTokenValiditySeconds());
         setRefreshTokenValiditySeconds(prototype.getRefreshTokenValiditySeconds());
@@ -96,11 +96,11 @@ public class ArtisanClientDetails implements ClientDetails, Serializable {
         setResourceIds(prototype.getResourceIds());
     }
 
-    public ArtisanClientDetails(String clientId, String resourceIds, String scopes, String grantTypes, String authorities) {
+    public HerodotusClientDetails(String clientId, String resourceIds, String scopes, String grantTypes, String authorities) {
         this(clientId, resourceIds, scopes, grantTypes, authorities, null);
     }
 
-    public ArtisanClientDetails(String clientId, String resourceIds, String scopes, String grantTypes, String authorities, String redirectUris) {
+    public HerodotusClientDetails(String clientId, String resourceIds, String scopes, String grantTypes, String authorities, String redirectUris) {
 
         this.clientId = clientId;
 
@@ -308,7 +308,7 @@ public class ArtisanClientDetails implements ClientDetails, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ArtisanClientDetails other = (ArtisanClientDetails) obj;
+        HerodotusClientDetails other = (HerodotusClientDetails) obj;
         if (accessTokenValiditySeconds == null) {
             if (other.accessTokenValiditySeconds != null) {
                 return false;

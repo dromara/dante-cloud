@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.platform.uaa.extend;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -25,11 +25,11 @@ public class OauthJwtAccessTokenConverter extends JwtAccessTokenConverter {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         DefaultOAuth2AccessToken defaultOAuth2AccessToken = new DefaultOAuth2AccessToken(accessToken);
-        if (authentication.getPrincipal() != null && authentication.getPrincipal() instanceof ArtisanUserDetails) {
+        if (authentication.getPrincipal() != null && authentication.getPrincipal() instanceof HerodotusUserDetails) {
             // 设置额外用户信息
-            ArtisanUserDetails artisanUserDetails = (ArtisanUserDetails) authentication.getPrincipal();// 与登录时候放进去的UserDetail实现类一直查看link{SecurityConfiguration}
+            HerodotusUserDetails herodotusUserDetails = (HerodotusUserDetails) authentication.getPrincipal();// 与登录时候放进去的UserDetail实现类一直查看link{SecurityConfiguration}
             final Map<String, Object> additionalInfo = new HashMap<>(8);
-            additionalInfo.put(SecurityConstants.OPEN_ID, artisanUserDetails.getUserId());
+            additionalInfo.put(SecurityConstants.OPEN_ID, herodotusUserDetails.getUserId());
             defaultOAuth2AccessToken.setAdditionalInformation(additionalInfo);
         }
 

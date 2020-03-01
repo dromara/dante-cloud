@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * @author gengwei.zheng
  */
-public class ArtisanUserDetails implements UserDetails {
+public class HerodotusUserDetails implements UserDetails {
 
     private String userId;
 
@@ -50,7 +50,7 @@ public class ArtisanUserDetails implements UserDetails {
 
     private String clientId;
 
-    private List<ArtisanRole> roles = new ArrayList<>();
+    private List<HerodotusRole> roles = new ArrayList<>();
 
     private Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
 
@@ -160,11 +160,11 @@ public class ArtisanUserDetails implements UserDetails {
         this.clientId = clientId;
     }
 
-    public List<ArtisanRole> getRoles() {
+    public List<HerodotusRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<ArtisanRole> roles) {
+    public void setRoles(List<HerodotusRole> roles) {
         this.roles = roles;
     }
 

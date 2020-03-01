@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.platform.uaa.service;
 
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
-import cn.herodotus.eurynome.component.security.domain.ArtisanApplication;
-import cn.herodotus.eurynome.component.security.domain.ArtisanClientDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
+import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
 import cn.herodotus.eurynome.platform.uaa.service.feign.SysApplicationRemoteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,18 +63,18 @@ public class OauthClientDetailsService implements ClientDetailsService {
      * @param clientId
      * @return
      */
-    public ArtisanClientDetails getRemoteOAuth2ClientDetails(String clientId) {
-        ArtisanApplication oauthApplication = sysApplicationRemoteService.findByClientId(clientId).getData();
+    public HerodotusClientDetails getRemoteOAuth2ClientDetails(String clientId) {
+        HerodotusApplication oauthApplication = sysApplicationRemoteService.findByClientId(clientId).getData();
 
         if (oauthApplication == null) {
             log.error("[Herodotus] |- OAuth2 Can not Fetch the Remote Client Details!");
             return null;
         } else {
-            ArtisanClientDetails artisanClientDetails = oauthApplication.getArtisanClientDetails();
-            artisanClientDetails.setAuthorities(oauthApplication.getArtisanAuthorities());
+            HerodotusClientDetails herodotusClientDetails = oauthApplication.getHerodotusClientDetails();
+            herodotusClientDetails.setAuthorities(oauthApplication.getArtisanAuthorities());
 
             log.info("[Herodotus] |- OAuth2 Fetch Remote Client Details Successfully!");
-            return artisanClientDetails;
+            return herodotusClientDetails;
         }
     }
 }

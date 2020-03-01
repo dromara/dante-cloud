@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.upms.rest.controller;
 
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.upms.rest.configuration.Oauth2ClientConfig;
 import com.alibaba.fastjson.JSON;
@@ -39,10 +39,10 @@ public class LoginController {
      */
     @ApiOperation(value = "获取当前登录用户信息", notes = "获取当前登录用户信息")
     @GetMapping("/current/user")
-    public Result<ArtisanUserDetails> getUserProfile() {
+    public Result<HerodotusUserDetails> getUserProfile() {
 
-        Result<ArtisanUserDetails> result = new Result<>();
-        ArtisanUserDetails userDetails = SecurityUtils.getPrincipal();
+        Result<HerodotusUserDetails> result = new Result<>();
+        HerodotusUserDetails userDetails = SecurityUtils.getPrincipal();
 
         String name123 = "";
         if (userDetails != null) {

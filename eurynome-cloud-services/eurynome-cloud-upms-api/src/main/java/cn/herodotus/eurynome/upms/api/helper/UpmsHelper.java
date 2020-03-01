@@ -3,10 +3,10 @@ package cn.herodotus.eurynome.upms.api.helper;
 
 import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
-import cn.herodotus.eurynome.component.security.domain.ArtisanAuthority;
-import cn.herodotus.eurynome.component.security.domain.ArtisanClientDetails;
-import cn.herodotus.eurynome.component.security.domain.ArtisanRole;
-import cn.herodotus.eurynome.component.security.domain.ArtisanUserDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusAuthority;
+import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
+import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
+import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
@@ -27,72 +27,72 @@ import java.util.stream.Collectors;
  */
 public class UpmsHelper {
 
-    public static ArtisanRole convertSysRoleToArtisanRole(SysRole sysRole) {
-        ArtisanRole artisanRole = new ArtisanRole();
-        artisanRole.setRoleId(sysRole.getRoleId());
-        artisanRole.setRoleName(sysRole.getRoleName());
-        artisanRole.setRoleCode(sysRole.getRoleCode());
-        return artisanRole;
+    public static HerodotusRole convertSysRoleToArtisanRole(SysRole sysRole) {
+        HerodotusRole herodotusRole = new HerodotusRole();
+        herodotusRole.setRoleId(sysRole.getRoleId());
+        herodotusRole.setRoleName(sysRole.getRoleName());
+        herodotusRole.setRoleCode(sysRole.getRoleCode());
+        return herodotusRole;
     }
 
-    public static List<ArtisanAuthority> convertSysAuthoritiesToArtisanAuthorities(Collection<SysAuthority> sysAuthorities) {
+    public static List<HerodotusAuthority> convertSysAuthoritiesToArtisanAuthorities(Collection<SysAuthority> sysAuthorities) {
         if (CollectionUtils.isNotEmpty(sysAuthorities)) {
             return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToArtisanAuthority).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    private static ArtisanAuthority convertSysAuthorityToArtisanAuthority(SysAuthority sysAuthority) {
-        ArtisanAuthority artisanAuthority = new ArtisanAuthority();
-        artisanAuthority.setAuthorityId(sysAuthority.getAuthorityId());
-        artisanAuthority.setAuthorityName(sysAuthority.getAuthorityName());
-        artisanAuthority.setUrl(sysAuthority.getUrl());
-        artisanAuthority.setParentId(sysAuthority.getParentId());
-        artisanAuthority.setAuthorityCode(sysAuthority.getAuthorityCode());
-        artisanAuthority.setAuthorityType(sysAuthority.getAuthorityType());
-        artisanAuthority.setMenuClass(sysAuthority.getMenuClass());
-        artisanAuthority.setRanking(sysAuthority.getRanking());
-        return artisanAuthority;
+    private static HerodotusAuthority convertSysAuthorityToArtisanAuthority(SysAuthority sysAuthority) {
+        HerodotusAuthority herodotusAuthority = new HerodotusAuthority();
+        herodotusAuthority.setAuthorityId(sysAuthority.getAuthorityId());
+        herodotusAuthority.setAuthorityName(sysAuthority.getAuthorityName());
+        herodotusAuthority.setUrl(sysAuthority.getUrl());
+        herodotusAuthority.setParentId(sysAuthority.getParentId());
+        herodotusAuthority.setAuthorityCode(sysAuthority.getAuthorityCode());
+        herodotusAuthority.setAuthorityType(sysAuthority.getAuthorityType());
+        herodotusAuthority.setMenuClass(sysAuthority.getMenuClass());
+        herodotusAuthority.setRanking(sysAuthority.getRanking());
+        return herodotusAuthority;
     }
 
-    public static ArtisanClientDetails convertSysClientDetailToOAuth2ClientDetails(SysClientDetail sysClientDetail, Map<String, Object> additionalInformation) {
-        ArtisanClientDetails artisanClientDetails = new ArtisanClientDetails(
+    public static HerodotusClientDetails convertSysClientDetailToOAuth2ClientDetails(SysClientDetail sysClientDetail, Map<String, Object> additionalInformation) {
+        HerodotusClientDetails herodotusClientDetails = new HerodotusClientDetails(
                 sysClientDetail.getClientId(),
                 sysClientDetail.getResourceIds(),
                 sysClientDetail.getScope(),
                 sysClientDetail.getAuthorizedGrantTypes(),
                 sysClientDetail.getAuthorities(),
                 sysClientDetail.getWebServerRedirectUri());
-        artisanClientDetails.setAccessTokenValiditySeconds(sysClientDetail.getAccessTokenValidity());
-        artisanClientDetails.setRefreshTokenValiditySeconds(sysClientDetail.getRefreshTokenValidity());
-        artisanClientDetails.setClientSecret(sysClientDetail.getClientSecret());
-        artisanClientDetails.setAdditionalInformation(additionalInformation);
-        return artisanClientDetails;
+        herodotusClientDetails.setAccessTokenValiditySeconds(sysClientDetail.getAccessTokenValidity());
+        herodotusClientDetails.setRefreshTokenValiditySeconds(sysClientDetail.getRefreshTokenValidity());
+        herodotusClientDetails.setClientSecret(sysClientDetail.getClientSecret());
+        herodotusClientDetails.setAdditionalInformation(additionalInformation);
+        return herodotusClientDetails;
     }
 
-    public static ArtisanUserDetails convertSysUserToArtisanUserDetails(SysUser sysUser) {
-        ArtisanUserDetails artisanUserDetails = new ArtisanUserDetails();
-        artisanUserDetails.setUserId(sysUser.getUserId());
-        artisanUserDetails.setUsername(sysUser.getUserName());
-        artisanUserDetails.setPassword(sysUser.getPassword());
-        artisanUserDetails.setNickName(sysUser.getNickName());
-        artisanUserDetails.setClientId(sysUser.getEmployeeId());
-        artisanUserDetails.setAccountNonExpired(sysUser.getStatus() != StatusEnum.EXPIRED);
-        artisanUserDetails.setAccountNonLocked(sysUser.getStatus() != StatusEnum.LOCKING);
-        artisanUserDetails.setEnabled(sysUser.getStatus() == StatusEnum.ENABLE);
+    public static HerodotusUserDetails convertSysUserToArtisanUserDetails(SysUser sysUser) {
+        HerodotusUserDetails herodotusUserDetails = new HerodotusUserDetails();
+        herodotusUserDetails.setUserId(sysUser.getUserId());
+        herodotusUserDetails.setUsername(sysUser.getUserName());
+        herodotusUserDetails.setPassword(sysUser.getPassword());
+        herodotusUserDetails.setNickName(sysUser.getNickName());
+        herodotusUserDetails.setClientId(sysUser.getEmployeeId());
+        herodotusUserDetails.setAccountNonExpired(sysUser.getStatus() != StatusEnum.EXPIRED);
+        herodotusUserDetails.setAccountNonLocked(sysUser.getStatus() != StatusEnum.LOCKING);
+        herodotusUserDetails.setEnabled(sysUser.getStatus() == StatusEnum.ENABLE);
 
-        List<ArtisanRole> artisanRoles = new ArrayList<>();
-        List<ArtisanAuthority> artisanAuthorities = new ArrayList<>();
+        List<HerodotusRole> herodotusRoles = new ArrayList<>();
+        List<HerodotusAuthority> artisanAuthorities = new ArrayList<>();
 
         for (SysRole sysRole : sysUser.getRoles()) {
-            artisanRoles.add(convertSysRoleToArtisanRole(sysRole));
+            herodotusRoles.add(convertSysRoleToArtisanRole(sysRole));
             artisanAuthorities.addAll(convertSysAuthoritiesToArtisanAuthorities(sysRole.getAuthorities()));
         }
 
-        artisanUserDetails.setRoles(artisanRoles);
-        artisanUserDetails.setAuthorities(artisanAuthorities);
+        herodotusUserDetails.setRoles(herodotusRoles);
+        herodotusUserDetails.setAuthorities(artisanAuthorities);
 
-        return artisanUserDetails;
+        return herodotusUserDetails;
     }
 
     public static List<SysAuthority> convertServiceResourceToSysAuthorities(Collection<RequestMappingResource> requestMappingResources) {
