@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.domain.TreeNode;
 import cn.herodotus.eurynome.component.common.utils.TreeUtils;
-import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import io.swagger.annotations.Api;

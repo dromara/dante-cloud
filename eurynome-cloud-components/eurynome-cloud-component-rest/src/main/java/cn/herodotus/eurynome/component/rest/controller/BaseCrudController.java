@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.component.security.controller;
+package cn.herodotus.eurynome.component.rest.controller;
 
 import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.domain.Result;

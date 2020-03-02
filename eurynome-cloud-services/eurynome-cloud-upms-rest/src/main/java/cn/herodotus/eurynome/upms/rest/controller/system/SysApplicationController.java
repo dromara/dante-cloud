@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
 import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;

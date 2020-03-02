@@ -25,15 +25,13 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.security.controller.AbstractController;
-import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.service.system.SysRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;

@@ -22,10 +22,11 @@
  * LastModified: 2019/11/17 下午8:55
  */
 
-package cn.herodotus.eurynome.component.security.configuration;
+package cn.herodotus.eurynome.component.rest.configuration;
 
 import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Configuration;
@@ -36,10 +37,14 @@ import org.springframework.context.annotation.Configuration;
  * @author : gengwei.zheng
  * @date : 2019/11/17 16:07
  */
+@Slf4j
 @Configuration
-public class CustomWebServerFactoryCustomizer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+public class UndertowWebServerFactoryCustomizer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
     @Override
     public void customize(UndertowServletWebServerFactory factory) {
+
+        log.info("[Herodotus] |- Bean [Undertow Websockets] Auto Configure.");
+
         factory.addDeploymentInfoCustomizers(deploymentInfo -> {
             WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
             webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 1024));

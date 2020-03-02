@@ -2,7 +2,6 @@ package cn.herodotus.eurynome.component.rest.feign;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.exception.GlobalExceptionHandler;
-import com.alibaba.fastjson.JSON;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,9 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 自定义通用的Feign Fallback处理工厂 </p>
+ * <p>
+ * {@see: https://blog.csdn.net/ttzommed/article/details/90669320}
  *
  * @author : gengwei.zheng
  * @date : 2020/3/1 18:09

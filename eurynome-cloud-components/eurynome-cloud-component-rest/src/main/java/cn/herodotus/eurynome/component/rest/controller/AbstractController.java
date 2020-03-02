@@ -22,7 +22,7 @@
  * LastModified: 2019/11/11 下午11:33
  */
 
-package cn.herodotus.eurynome.component.security.controller;
+package cn.herodotus.eurynome.component.rest.controller;
 
 import cn.herodotus.eurynome.component.common.domain.datatables.DataTableResult;
 import com.alibaba.fastjson.JSON;

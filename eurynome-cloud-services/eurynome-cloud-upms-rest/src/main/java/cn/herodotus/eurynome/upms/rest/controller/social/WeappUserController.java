@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.social;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
 import cn.herodotus.eurynome.upms.api.entity.social.WeappUser;
 import cn.herodotus.eurynome.upms.logic.service.social.WeappUserService;
 import io.swagger.annotations.Api;

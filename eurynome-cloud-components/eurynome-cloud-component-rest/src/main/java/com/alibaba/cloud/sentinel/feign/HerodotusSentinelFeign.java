@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 自定义通用的Feign Fallback处理工厂(基于Sentinel) </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/3/1 18:30
