@@ -29,7 +29,7 @@ import cn.herodotus.eurynome.component.security.controller.BaseCrudController;
 import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;
-import cn.herodotus.eurynome.upms.api.feign.service.ISysApplicationService;
+import cn.herodotus.eurynome.upms.api.service.fegin.SysApplicationFeignService;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysApplicationService;
 import com.alibaba.fastjson.JSON;
@@ -48,7 +48,7 @@ import java.util.Map;
 
 @RestController
 @Api(value = "平台终端接口", tags = "用户中心服务")
-public class SysApplicationController extends BaseCrudController implements ISysApplicationService {
+public class SysApplicationController extends BaseCrudController implements SysApplicationFeignService {
 
     private final SysApplicationService sysApplicationService;
 

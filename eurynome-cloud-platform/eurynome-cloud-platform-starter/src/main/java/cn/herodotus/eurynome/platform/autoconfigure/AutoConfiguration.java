@@ -2,6 +2,7 @@ package cn.herodotus.eurynome.platform.autoconfigure;
 
 import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
 import cn.herodotus.eurynome.component.data.annotation.EnableHerodotusData;
+import cn.herodotus.eurynome.component.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.component.security.annotation.EnableHerodotusSecurity;
 import cn.herodotus.eurynome.component.security.properties.ApplicationProperties;
 import cn.herodotus.eurynome.component.sdk.annotation.KafkaRequestMappingStore;
@@ -21,6 +22,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 @Slf4j
 @Configuration
 @EnableHerodotusData
+@EnableHerodotusRest
 @EnableHerodotusSecurity
 public class AutoConfiguration {
 

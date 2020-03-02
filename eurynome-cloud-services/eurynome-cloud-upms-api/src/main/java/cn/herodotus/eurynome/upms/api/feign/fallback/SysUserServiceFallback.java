@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.upms.api.feign.fallback;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
-import cn.herodotus.eurynome.upms.api.feign.service.ISysUserService;
+import cn.herodotus.eurynome.upms.api.service.fegin.SysUserFeginService;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date : 2019/11/25 11:07
  */
 @Slf4j
-public class SysUserServiceFallback implements ISysUserService {
+public class SysUserServiceFallback implements SysUserFeginService {
 
     @Setter
     private Throwable cause;

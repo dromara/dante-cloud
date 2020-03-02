@@ -1,8 +1,7 @@
-package cn.herodotus.eurynome.platform.uaa.service.feign;
+package cn.herodotus.eurynome.upms.api.service.remote;
 
 import cn.herodotus.eurynome.upms.api.constants.ServiceNameConstants;
-import cn.herodotus.eurynome.upms.api.feign.factory.SysUserServiceFallbackFactory;
-import cn.herodotus.eurynome.upms.api.feign.service.ISysUserService;
+import cn.herodotus.eurynome.upms.api.service.fegin.SysUserFeginService;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -17,6 +16,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author gengwei.zheng
  */
 
-@FeignClient(value = ServiceNameConstants.UPMS_SERVICE, fallbackFactory = SysUserServiceFallbackFactory.class)
-public interface SysUserRemoteService extends ISysUserService {
+@FeignClient(value = ServiceNameConstants.UPMS_SERVICE)
+public interface RemoteSysUserService extends SysUserFeginService {
 }

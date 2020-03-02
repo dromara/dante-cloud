@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.platform.uaa.service;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
 import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
 import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
-import cn.herodotus.eurynome.platform.uaa.service.feign.SysApplicationRemoteService;
+import cn.herodotus.eurynome.upms.api.service.remote.RemoteSysApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class OauthClientDetailsService implements ClientDetailsService {
 
     @Autowired
-    private SysApplicationRemoteService sysApplicationRemoteService;
+    private RemoteSysApplicationService remoteSysApplicationService;
 
 
     /**
@@ -64,7 +64,7 @@ public class OauthClientDetailsService implements ClientDetailsService {
      * @return
      */
     public HerodotusClientDetails getRemoteOAuth2ClientDetails(String clientId) {
-        HerodotusApplication oauthApplication = sysApplicationRemoteService.findByClientId(clientId).getData();
+        HerodotusApplication oauthApplication = remoteSysApplicationService.findByClientId(clientId).getData();
 
         if (oauthApplication == null) {
             log.error("[Herodotus] |- OAuth2 Can not Fetch the Remote Client Details!");

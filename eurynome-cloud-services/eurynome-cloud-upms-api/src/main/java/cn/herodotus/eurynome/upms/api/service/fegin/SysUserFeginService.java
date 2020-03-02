@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.api.feign.service;
+package cn.herodotus.eurynome.upms.api.service.fegin;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date : 2019/11/24 15:37
  */
 
-public interface ISysUserService {
+public interface SysUserFeginService {
 
     /**
      * 通过用户名获取用户

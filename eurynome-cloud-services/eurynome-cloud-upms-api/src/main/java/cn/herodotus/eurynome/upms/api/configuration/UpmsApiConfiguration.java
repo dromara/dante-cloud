@@ -57,10 +57,6 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.upms.api.configuration",
-        "cn.herodotus.eurynome.upms.api.feign.factory"
-})
 @EntityScan(basePackages = {
         "cn.herodotus.eurynome.upms.api.entity.system",
         "cn.herodotus.eurynome.upms.api.entity.social",

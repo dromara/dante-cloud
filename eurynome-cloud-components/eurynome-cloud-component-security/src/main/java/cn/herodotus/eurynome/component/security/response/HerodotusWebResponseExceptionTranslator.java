@@ -28,6 +28,7 @@ import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.exception.SecurityGlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -40,10 +41,10 @@ import java.util.Objects;
  */
 
 @Slf4j
-public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator<Result<String>> {
+public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
 
     @Override
-    public ResponseEntity<Result<String>> translate(Exception e) throws Exception {
+    public ResponseEntity translate(Exception e) throws Exception {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Result<String> result = SecurityGlobalExceptionHandler.resolveOauthException(e, request.getRequestURI());
         return ResponseEntity.status(result.getHttpStatus()).body(result);

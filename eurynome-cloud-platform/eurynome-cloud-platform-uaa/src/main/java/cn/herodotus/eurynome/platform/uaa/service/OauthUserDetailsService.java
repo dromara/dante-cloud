@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.platform.uaa.service;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
-import cn.herodotus.eurynome.platform.uaa.service.feign.SysUserRemoteService;
+import cn.herodotus.eurynome.upms.api.service.remote.RemoteSysUserService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ import org.springframework.stereotype.Service;
 public class OauthUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private SysUserRemoteService sysUserRemoteService;
+    private RemoteSysUserService remoteSysUserService;
 
     @Override
     public HerodotusUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Result<SysUser> result = sysUserRemoteService.findByUsername(username);
+        Result<SysUser> result = remoteSysUserService.findByUsername(username);
 
         SysUser sysUser = result.getData();
 
