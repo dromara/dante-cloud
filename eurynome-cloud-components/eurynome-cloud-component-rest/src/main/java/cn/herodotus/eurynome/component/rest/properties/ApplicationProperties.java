@@ -22,9 +22,9 @@
  * LastModified: 2019/11/22 上午10:40
  */
 
-package cn.herodotus.eurynome.component.security.properties;
+package cn.herodotus.eurynome.component.rest.properties;
 
-import cn.herodotus.eurynome.component.common.enums.Architecture;
+import cn.herodotus.eurynome.component.rest.enums.Architecture;
 import cn.herodotus.eurynome.component.common.utils.TreeUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

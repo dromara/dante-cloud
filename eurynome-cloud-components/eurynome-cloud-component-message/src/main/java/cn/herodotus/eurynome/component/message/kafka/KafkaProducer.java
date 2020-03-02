@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.component.sdk.configuration.kafka;
+package cn.herodotus.eurynome.component.message.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

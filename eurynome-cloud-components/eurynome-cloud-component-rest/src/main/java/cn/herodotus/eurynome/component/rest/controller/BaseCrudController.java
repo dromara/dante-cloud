@@ -1,7 +1,10 @@
 package cn.herodotus.eurynome.component.rest.controller;
 
+import cn.herodotus.eurynome.component.common.definition.AbstractController;
 import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.rest.domain.datatables.DataTableResult;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -50,5 +53,52 @@ public abstract class BaseCrudController extends AbstractController {
         result.put("totalPages", pages.getTotalPages());
         result.put("totalElements", pages.getTotalElements());
         return result;
+    }
+
+    public enum Message {
+        success, info, warning, error
+    }
+
+    public Map<String, Object> getDataTablePageMap(DataTableResult dataTableResult, long totalCount, int totalPages) {
+        Map<String, Object> result = new HashMap<>(8);
+        result.put("sEcho", dataTableResult.getSEcho());
+        // 总数
+        result.put("iTotalRecords", totalCount);
+        // 显示的行数,这个要和上面写的一样
+        result.put("iTotalDisplayRecords", totalCount);
+        // 多少页
+        result.put("iTotalPages",totalPages);
+        return result;
+    }
+
+    protected String ajaxSuccess(String message) {
+        return ajaxMessage(message, Message.success.name());
+    }
+
+    protected String ajaxInfo(String message) {
+        return ajaxMessage(message, Message.info.name());
+    }
+
+    protected String ajaxWarning(String message) {
+        return ajaxMessage(message, Message.warning.name());
+    }
+
+    protected String ajaxError(String message) {
+        return ajaxMessage(message, Message.error.name());
+    }
+
+    protected String ajaxDefault(String message) {
+        return ajaxMessage(message, "default");
+    }
+
+    private String ajaxMessage(String message, Message messageType) {
+        return ajaxMessage(message, messageType.name());
+    }
+
+    private String ajaxMessage(String message, String type) {
+        Map<String, Object> map = new HashMap<>(8);
+        map.put("type", type);
+        map.put("msg", message);
+        return JSON.toJSONString(map);
     }
 }

@@ -22,14 +22,14 @@
  * LastModified: 2019/11/18 下午2:42
  */
 
-package cn.herodotus.eurynome.component.security.annotation;
+package cn.herodotus.eurynome.component.rest.annotation;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.component.rest.enums.Architecture;
 import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
-import cn.herodotus.eurynome.component.common.enums.Architecture;
-import cn.herodotus.eurynome.component.security.properties.ApplicationProperties;
+import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -40,7 +40,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
@@ -50,6 +49,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.lang.annotation.Annotation;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +68,12 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
     private ApplicationProperties applicationProperties;
     private RequestMappingStore requestMappingStore;
+    private Class<? extends Annotation> scanAnnotationClass;
 
-    public RequestMappingScan(RequestMappingStore requestMappingStore, ApplicationProperties applicationProperties) {
+    public RequestMappingScan(RequestMappingStore requestMappingStore, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
         this.applicationProperties = applicationProperties;
         this.requestMappingStore = requestMappingStore;
+        this.scanAnnotationClass = scanAnnotationClass;
     }
 
     @Override
@@ -89,7 +91,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
             // 2、只针对有EnableResourceServer注解的微服务进行扫描。Hammer目前不会用到EnableResourceServer所以增加的了一个Architecture判断
             if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
-                Map<String, Object> resrouceServer = applicationContext.getBeansWithAnnotation(EnableResourceServer.class);
+                Map<String, Object> resrouceServer = applicationContext.getBeansWithAnnotation(scanAnnotationClass);
                 if (MapUtils.isEmpty(resrouceServer)) {
                     // 只扫描资源服务器
                     return;

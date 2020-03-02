@@ -1,6 +1,10 @@
 package cn.herodotus.eurynome.component.rest.annotation;
 
 import cn.herodotus.eurynome.component.rest.configuration.HerodotusRestConfiguration;
+import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.component.rest.properties.SwaggerProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -15,5 +19,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import(HerodotusRestConfiguration.class)
+@EnableDiscoveryClient
+@EnableConfigurationProperties({
+        ApplicationProperties.class,
+        SwaggerProperties.class
+})
 public @interface EnableHerodotusRest {
 }

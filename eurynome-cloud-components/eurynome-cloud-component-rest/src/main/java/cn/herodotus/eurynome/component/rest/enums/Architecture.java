@@ -22,7 +22,7 @@
  * LastModified: 2019/11/26 上午11:33
  */
 
-package cn.herodotus.eurynome.component.common.enums;
+package cn.herodotus.eurynome.component.rest.enums;
 
 /**
  * <p> Description : 用于区分是单体应用还是微服务应用 </p>
@@ -32,9 +32,8 @@ package cn.herodotus.eurynome.component.common.enums;
  */
 public enum Architecture {
 
+    /**
+     * 架构 enum
+     */
     MICROSERVICE, MONOMER;
-
-    private Architecture() {
-
-    }
 }

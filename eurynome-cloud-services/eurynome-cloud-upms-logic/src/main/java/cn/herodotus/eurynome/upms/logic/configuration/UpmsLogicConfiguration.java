@@ -28,6 +28,7 @@ import cn.herodotus.eurynome.upms.api.configuration.UpmsApiConfiguration;
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -75,6 +76,11 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.repository.system",
         "cn.herodotus.eurynome.upms.logic.repository.social",
         "cn.herodotus.eurynome.upms.logic.repository.hr",
+})
+@EntityScan(basePackages = {
+        "cn.herodotus.eurynome.upms.api.entity.system",
+        "cn.herodotus.eurynome.upms.api.entity.social",
+        "cn.herodotus.eurynome.upms.api.entity.hr",
 })
 @EnableMethodCache(basePackages = {
         "cn.herodotus.eurynome.upms.logic.service.system",

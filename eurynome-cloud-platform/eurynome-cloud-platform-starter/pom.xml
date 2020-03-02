@@ -16,7 +16,11 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-component-sdk</artifactId>
+            <artifactId>eurynome-cloud-component-message</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-component-security</artifactId>
         </dependency>
     </dependencies>
 

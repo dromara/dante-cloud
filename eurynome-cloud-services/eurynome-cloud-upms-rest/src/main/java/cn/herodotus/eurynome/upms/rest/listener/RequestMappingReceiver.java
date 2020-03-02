@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.rest.configuration;
+package cn.herodotus.eurynome.upms.rest.listener;
 
 import cn.herodotus.eurynome.upms.logic.processor.RequestMappingProcessor;
 import org.springframework.beans.factory.annotation.Autowired;

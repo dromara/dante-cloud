@@ -27,7 +27,6 @@ import javax.annotation.PostConstruct;
  * 1、如果一个模块中有需要扫描的内容，例如properties和configuration等。那么就新建一个@Component进行辅助。
  * 2、@ComponentScan尽可能定位到具体的包，尽量不要用通配符。
  *
-
  * @author : gengwei.zheng
  * @date : 2020/3/2 14:54
  */

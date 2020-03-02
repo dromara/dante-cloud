@@ -22,11 +22,10 @@
  * LastModified: 2019/11/21 上午11:53
  */
 
-package cn.herodotus.eurynome.component.sdk.annotation;
+package cn.herodotus.eurynome.component.message.kafka;
 
-import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
-import cn.herodotus.eurynome.component.sdk.configuration.kafka.KafkaProducer;
+import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 

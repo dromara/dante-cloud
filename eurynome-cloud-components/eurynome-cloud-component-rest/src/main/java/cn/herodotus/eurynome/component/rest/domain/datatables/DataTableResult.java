@@ -16,40 +16,42 @@
  *
  * Project Name: luban-cloud
  * Module Name: luban-cloud-component-common
- * File Name: DataTableParameter.java
+ * File Name: DataTableResult.java
  * Author: gengwei.zheng
  * Date: 2019/11/24 下午3:48
  * LastModified: 2019/11/7 下午2:28
  */
 
-package cn.herodotus.eurynome.component.common.domain.datatables;
+package cn.herodotus.eurynome.component.rest.domain.datatables;
+
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * <p>Description: JQuery Datatables 组件只用的参数对象封装 </p>
+ * <p>Description: 返回给JQuery Datatables 组件使用的结果 </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/24 15:48
  */
-public class DataTableParameter implements Serializable {
+@Data
+public class DataTableResult implements Serializable {
 
-    private String name;
-    private Object value;
+    private int pageNumber;
+    private int pageSize;
+    private String sEcho;
+    private int iDisplayStart = 0;
+    private int iDisplayLength = 0;
+    private String jsonString;
+    private long total;
 
-    public String getName() {
-        return name;
+    public DataTableResult(String sEcho, int iDisplayStart, int iDisplayLength, String jsonString) {
+        this.sEcho = sEcho;
+        this.iDisplayStart = iDisplayStart;
+        this.iDisplayLength = iDisplayLength;
+        this.pageNumber = this.iDisplayStart / this.iDisplayLength;
+        this.pageSize = this.iDisplayLength;
+        this.jsonString = jsonString;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
 }
