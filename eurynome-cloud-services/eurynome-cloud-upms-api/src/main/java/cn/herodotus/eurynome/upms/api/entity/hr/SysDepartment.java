@@ -55,7 +55,7 @@ public class SysDepartment extends BaseEntity {
     private String organizationId;
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getDepartmentId();
     }
 

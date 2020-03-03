@@ -20,7 +20,7 @@ public class SysAuthority extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "authority-uuid")
-    @GenericGenerator(name = "authority-uuid", strategy = "cn.herodotus.eurynome.upms.api.helper.SysAuthorityUUIDGenerator")
+    @GenericGenerator(name = "authority-uuid", strategy = "cn.herodotus.eurynome.upms.api.generator.SysAuthorityUUIDGenerator")
     @Column(name = "authority_id", length = 64)
     private String authorityId;
 
@@ -72,7 +72,7 @@ public class SysAuthority extends BaseSysEntity {
     private String parentId;
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getAuthorityId();
     }
 

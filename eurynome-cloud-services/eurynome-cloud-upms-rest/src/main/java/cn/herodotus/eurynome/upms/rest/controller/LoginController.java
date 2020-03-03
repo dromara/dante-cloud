@@ -78,7 +78,7 @@ public class LoginController {
     public Result<Object> getLoginToken(@RequestParam String username, @RequestParam String password, @RequestParam String code, @RequestHeader HttpHeaders headers) {
 
         log.warn("id:{},sec:{}", clientConfig.getClient_id(), clientConfig.getClient_secret());
-        if (verificationCodeController.checkVerifiCode(code)) {
+        if (verificationCodeController.checkVerificationCode(code)) {
 
             return new Result<Object>().ok().message("验证码正确").data(getToken(username, password, null, headers));
         } else {

@@ -32,6 +32,9 @@ package cn.herodotus.eurynome.component.common.enums;
  */
 public enum AuthorityType {
 
+    /**
+     * enum
+     */
     API(0, "REST API"),
     MENU(1, "功能菜单"),
     PAGE(2, "Web Page"),

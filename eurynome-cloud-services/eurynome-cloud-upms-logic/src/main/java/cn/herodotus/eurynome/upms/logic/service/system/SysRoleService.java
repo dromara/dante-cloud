@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCrudWithCacheSerivce;
-import cn.herodotus.eurynome.upms.api.constants.UpmsCacheConstants;
+import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysRoleRepository;
@@ -43,18 +43,21 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-/** 
+/**
  * <p>Description: TODO </p>
- * 
+ *
  * @author : gengwei.zheng
  * @date : 2019/11/25 11:07
  */
 @Service
 @Slf4j
-public class SysRoleService extends BaseCrudWithCacheSerivce<SysRole, String> {
+public class SysRoleService extends BaseCacheService<SysRole, String> {
 
-    @CreateCache(name = UpmsCacheConstants.CACHE_NAME_SYSROLE, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSROLE, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysRole> sysRoleCache;
+
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSROLE_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    private Cache<String, Set<String>> sysRoleIndexCache;
 
     private final SysRoleRepository sysRoleRepository;
 
@@ -69,9 +72,14 @@ public class SysRoleService extends BaseCrudWithCacheSerivce<SysRole, String> {
     }
 
     @Override
+    public Cache<String, Set<String>> getIndexCache() {
+        return sysRoleIndexCache;
+    }
+
+    @Override
     public SysRole saveOrUpdate(SysRole sysRole) {
         SysRole savedSysRole = sysRoleRepository.saveAndFlush(sysRole);
-        this.cacheEntity(savedSysRole);
+        this.cache(savedSysRole);
         log.debug("[Luban UPMS] |- SysRole Service saveOrUpdate.");
         return savedSysRole;
     }
@@ -95,10 +103,10 @@ public class SysRoleService extends BaseCrudWithCacheSerivce<SysRole, String> {
 
     @Override
     public SysRole findById(String roleId) {
-        SysRole sysRole = this.getCache().get(roleId);
+        SysRole sysRole = this.getFromCache(roleId);
         if (ObjectUtils.isEmpty(sysRole)) {
             sysRole = sysRoleRepository.findByRoleId(roleId);
-            this.cacheEntity(sysRole);
+            this.cache(sysRole);
         }
         log.debug("[Luban UPMS] |- SysRole Service findByRoleId.");
         return sysRole;
@@ -108,13 +116,13 @@ public class SysRoleService extends BaseCrudWithCacheSerivce<SysRole, String> {
     public void deleteById(String roleId) {
         log.debug("[Luban UPMS] |- SysRole Service deleteById.");
         sysRoleRepository.deleteByRoleId(roleId);
-        getCache().remove(roleId);
+        this.remove(roleId);
     }
 
     @Override
     public Page<SysRole> findByPage(int pageNumber, int pageSize) {
         Page<SysRole> pages = sysRoleRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "roleId"));
-        this.cacheCollection(pages.getContent());
+        this.cache(pages.getContent());
         log.debug("[Luban UPMS] |- SysRole Service findByPage.");
         return pages;
     }

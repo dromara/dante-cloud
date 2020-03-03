@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCrudWithCacheSerivce;
-import cn.herodotus.eurynome.upms.api.constants.UpmsCacheConstants;
+import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
 import com.alicp.jetcache.Cache;
@@ -39,6 +39,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 /**
  * <p>Description: TODO </p>
  *
@@ -47,10 +49,13 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class SysUserService extends BaseCrudWithCacheSerivce<SysUser, String> {
+public class SysUserService extends BaseCacheService<SysUser, String> {
 
-    @CreateCache(name = UpmsCacheConstants.CACHE_NAME_SYSUSER, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSUSER, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysUser> sysUserCache;
+
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSUSER_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    private Cache<String, Set<String>> sysUserIndexCache;
 
     private final SysUserRepository sysUserRepository;
 
@@ -64,9 +69,13 @@ public class SysUserService extends BaseCrudWithCacheSerivce<SysUser, String> {
         return sysUserCache;
     }
 
+    @Override
+    public Cache<String, Set<String>> getIndexCache() {
+        return sysUserIndexCache;
+    }
+
     public SysUser findSysUserByUserName(String userName) {
         SysUser sysUser = sysUserRepository.findByUserName(userName);
-        this.cacheEntity(sysUser);
         log.debug("[Luban UPMS] |- SysUser Service findSysUserByUserName.");
         return sysUser;
     }
@@ -74,7 +83,7 @@ public class SysUserService extends BaseCrudWithCacheSerivce<SysUser, String> {
     @Override
     public SysUser saveOrUpdate(SysUser sysUser) {
         SysUser savedSysUser = sysUserRepository.saveAndFlush(sysUser);
-        this.cacheEntity(savedSysUser);
+        this.cache(savedSysUser);
         log.debug("[Luban UPMS] |- SysUser Service saveOrUpdate.");
         return savedSysUser;
     }
@@ -88,11 +97,11 @@ public class SysUserService extends BaseCrudWithCacheSerivce<SysUser, String> {
      */
     @Override
     public SysUser findById(String userId) {
-        SysUser sysUser = this.getCache().get(userId);
+        SysUser sysUser = this.getFromCache(userId);
 
         if (ObjectUtils.isEmpty(sysUser)) {
             sysUser = sysUserRepository.findByUserId(userId);
-            this.cacheEntity(sysUser);
+            this.cache(sysUser);
         }
 
         log.debug("[Luban UPMS] |- SysUser Service findById.");
@@ -103,13 +112,13 @@ public class SysUserService extends BaseCrudWithCacheSerivce<SysUser, String> {
     public void deleteById(String userId) {
         log.debug("[Luban UPMS] |- SysUser Service delete.");
         sysUserRepository.deleteByUserId(userId);
-        this.getCache().remove(userId);
+        this.remove(userId);
     }
 
     @Override
     public Page<SysUser> findByPage(int pageNumber, int pageSize) {
         Page<SysUser> pages = sysUserRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "userId"));
-        this.cacheCollection(pages.getContent());
+        this.cache(pages.getContent());
         log.debug("[Luban UPMS] |- SysUser Service findByPage.");
         return pages;
     }

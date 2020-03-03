@@ -22,8 +22,9 @@
  * LastModified: 2019/10/28 上午11:56
  */
 
-package cn.herodotus.eurynome.component.common.enums;
+package cn.herodotus.eurynome.component.security.enums;
 
+import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.ArrayList;
@@ -33,10 +34,13 @@ import java.util.Map;
 
 public enum OAuth2GrantType {
 
-    AUTHORIZATION_CODE("authorization_code", "授权码授权模式"),
-    IMPLICIT("implicit", "隐式授权模式"),
-    PASSWORD("password", "密码模式"),
-    CLIENT_CREDENTIALS("client_credentials", "客户端凭证模式");
+    /**
+     * enum
+     */
+    AUTHORIZATION_CODE(SecurityConstants.AUTHORIZATION_CODE, "授权码授权模式"),
+    IMPLICIT(SecurityConstants.IMPLICIT, "隐式授权模式"),
+    PASSWORD(SecurityConstants.PASSWORD, "密码模式"),
+    CLIENT_CREDENTIALS(SecurityConstants.CLIENT_CREDENTIALS, "客户端凭证模式");
 
     private String grant;
     private String description;

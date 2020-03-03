@@ -24,9 +24,7 @@
 
 package cn.herodotus.eurynome.component.common.constants;
 
-import cn.herodotus.eurynome.component.common.enums.OAuth2GrantType;
-
-/** 
+/**
  * <p>Description: TODO </p>
  * 
  * @author : gengwei.zheng
@@ -37,10 +35,10 @@ public class SecurityConstants {
     /**
      * Oauth2 四种模式类型
      */
-    public static final String AUTHORIZATION_CODE = OAuth2GrantType.AUTHORIZATION_CODE.getGrant();
-    public static final String IMPLICIT = OAuth2GrantType.IMPLICIT.getGrant();
-    public static final String PASSWORD = OAuth2GrantType.PASSWORD.getGrant();
-    public static final String CLIENT_CREDENTIALS = OAuth2GrantType.CLIENT_CREDENTIALS.getGrant();
+    public static final String AUTHORIZATION_CODE = "authorization_code";
+    public static final String IMPLICIT = "implicit";
+    public static final String PASSWORD = "password";
+    public static final String CLIENT_CREDENTIALS = "client_credentials";
 
     /**
      * 访问 /oauth/authorize地址的两种 response_type类型值

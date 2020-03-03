@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.social;
 
-import cn.herodotus.eurynome.component.common.enums.Gender;
+import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
 import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -52,7 +52,7 @@ public class WeappUser extends BaseEntity {
     private String countryCode;
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getOpenId();
     }
 

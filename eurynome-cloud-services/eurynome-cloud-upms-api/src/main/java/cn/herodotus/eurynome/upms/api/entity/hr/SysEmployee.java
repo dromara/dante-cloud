@@ -9,9 +9,11 @@
 
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
-import cn.herodotus.eurynome.component.common.enums.Gender;
-import cn.herodotus.eurynome.component.common.enums.Identity;
+import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
+import cn.herodotus.eurynome.upms.api.constants.enums.Identity;
 import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -115,7 +117,7 @@ public class SysEmployee extends BaseEntity {
     private Set<SysPosition> positions = new HashSet<>();
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getEmployeeId();
     }
 
@@ -293,6 +295,30 @@ public class SysEmployee extends BaseEntity {
 
     public void setIdentity(Identity identity) {
         this.identity = identity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SysEmployee that = (SysEmployee) o;
+
+        return new EqualsBuilder()
+                .append(getEmployeeId(), that.getEmployeeId())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getEmployeeId())
+                .toHashCode();
     }
 
     @Override

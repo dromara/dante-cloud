@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCrudWithCacheSerivce;
-import cn.herodotus.eurynome.upms.api.constants.UpmsCacheConstants;
+import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysApplicationRepository;
@@ -49,10 +49,13 @@ import java.util.Set;
  */
 @Slf4j
 @Service
-public class SysApplicationService extends BaseCrudWithCacheSerivce<SysApplication, String> {
+public class SysApplicationService extends BaseCacheService<SysApplication, String> {
 
-    @CreateCache(name = UpmsCacheConstants.CACHE_NAME_SYSAPPLICATION, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAPPLICATION, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysApplication> sysApplicationCache;
+
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAPPLICATION_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    private Cache<String, Set<String>> sysApplicationIndexCache;
 
     private final SysApplicationRepository sysApplicationRepository;
 
@@ -67,16 +70,20 @@ public class SysApplicationService extends BaseCrudWithCacheSerivce<SysApplicati
     }
 
     @Override
+    public Cache<String, Set<String>> getIndexCache() {
+        return sysApplicationIndexCache;
+    }
+
+    @Override
     public SysApplication saveOrUpdate(SysApplication sysApplication) {
         SysApplication savedSysApplication = sysApplicationRepository.saveAndFlush(sysApplication);
-        this.cacheEntity(savedSysApplication);
+        this.cache(savedSysApplication);
         log.debug("[Luban UPMS] |- SysApplication Service saveOrUpdate.");
         return savedSysApplication;
     }
 
     public SysApplication findByClientId(String clientId) {
         SysApplication sysApplication = sysApplicationRepository.findByClientId(clientId);
-        this.cacheEntity(sysApplication);
         log.debug("[Luban UPMS] |- SysApplication Service findByClientId.");
         return sysApplication;
     }
@@ -100,17 +107,17 @@ public class SysApplicationService extends BaseCrudWithCacheSerivce<SysApplicati
 
     @Override
     public SysApplication findById(String applicationId) {
-        SysApplication sysApplication = this.getCache().get(applicationId);
+        SysApplication sysApplication = this.getFromCache(applicationId);
 
         if (ObjectUtils.isEmpty(sysApplication)){
             sysApplication = sysApplicationRepository.findByApplicationId(applicationId);
-            this.cacheEntity(sysApplication);
+            this.cache(sysApplication);
         }
         log.debug("[Luban UPMS] |- SysApplication Service findById.");
         return sysApplication;
     }
 
-    @CacheInvalidate(name = UpmsCacheConstants.CACHE_NAME_SYSAPPLICATION, key = "#applicationId")
+    @CacheInvalidate(name = UpmsConstants.CACHE_NAME_SYSAPPLICATION, key = "#applicationId")
     @Override
     public void deleteById(String applicationId) {
         log.debug("[Luban UPMS] |- SysApplication Service deleteById.");
@@ -128,7 +135,7 @@ public class SysApplicationService extends BaseCrudWithCacheSerivce<SysApplicati
     @Override
     public Page<SysApplication> findByPage(int pageNumber, int pageSize) {
         Page<SysApplication> pages = sysApplicationRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
-        this.cacheCollection(pages.getContent());
+        this.cache(pages.getContent());
         log.debug("[Luban UPMS] |- SysApplication Service findByPage.");
         return pages;
     }

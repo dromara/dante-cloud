@@ -52,7 +52,7 @@ public class SysOrganization extends BaseEntity {
     private String parentId;
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getOrganizationId();
     }
 

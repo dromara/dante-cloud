@@ -7,7 +7,7 @@
  * LastModified: 19-2-15 下午2:12
  */
 
-package cn.herodotus.eurynome.component.common.enums;
+package cn.herodotus.eurynome.upms.api.constants.enums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +19,9 @@ import java.util.Map;
  * @date 2019/2/15
  */
 public enum Identity {
+    /**
+     * enum
+     */
     LEADERSHIP(0, "领导"),
     SECTION_LEADER(1, "部所负责人"),
     STAFF(2, "员工");

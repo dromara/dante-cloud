@@ -24,7 +24,6 @@
 
 package cn.herodotus.eurynome.component.data.base.entity;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -38,9 +37,7 @@ import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity extends AbstractDomain {
-
-    public abstract String getId();
+public abstract class BaseEntity extends BaseCacheEntity {
 
     @Column(name = "create_time", updatable = false)
     @CreatedDate

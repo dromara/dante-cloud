@@ -2,6 +2,8 @@ package cn.herodotus.eurynome.upms.api.entity.hr;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -36,7 +38,7 @@ public class SysPosition extends BaseEntity {
     private Set<SysEmployee> employees = new HashSet<>();
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getPositionId();
     }
 
@@ -62,6 +64,30 @@ public class SysPosition extends BaseEntity {
 
     public void setEmployees(Set<SysEmployee> employees) {
         this.employees = employees;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SysPosition that = (SysPosition) o;
+
+        return new EqualsBuilder()
+                .append(getPositionId(), that.getPositionId())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getPositionId())
+                .toHashCode();
     }
 
     @Override

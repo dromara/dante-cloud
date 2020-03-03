@@ -44,6 +44,11 @@ public class GatewayRouteDefinition extends BaseSysEntity {
     @Column(name = "filter_order")
     private Integer order = 0;
 
+    @Override
+    public String getDomainCacheKey() {
+        return this.getId();
+    }
+
     public String getId() {
         return id;
     }

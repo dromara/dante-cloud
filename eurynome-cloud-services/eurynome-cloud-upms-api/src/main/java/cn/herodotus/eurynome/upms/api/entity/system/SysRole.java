@@ -62,7 +62,7 @@ public class SysRole extends BaseSysEntity {
     private Set<SysAuthority> authorities = new HashSet<>();
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getRoleId();
     }
 

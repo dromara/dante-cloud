@@ -56,7 +56,7 @@ public class SysApplication extends BaseSysEntity {
     private SysClientDetail sysClientDetail;
 
     @Override
-    public String getId() {
+    public String getDomainCacheKey() {
         return getApplicationId();
     }
 

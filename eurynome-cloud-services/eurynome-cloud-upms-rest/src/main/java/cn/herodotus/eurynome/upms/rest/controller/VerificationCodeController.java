@@ -1,54 +1,38 @@
 package cn.herodotus.eurynome.upms.rest.controller;
 
+import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
 import cn.herodotus.eurynome.component.security.utils.SessionUtils;
-import cn.herodotus.eurynome.component.security.utils.VerificationCodeUtils;
-import cn.herodotus.eurynome.upms.api.feign.service.IVerifyCaptchaService;
-import com.google.code.kaptcha.impl.DefaultKaptcha;
+import cn.herodotus.eurynome.upms.api.service.fegin.VerificationCodeFeignService;
+import com.wf.captcha.*;
+import com.wf.captcha.base.Captcha;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
+import java.awt.*;
+import java.io.IOException;
 
 @Slf4j
 @Api(tags = "应用系统管理")
 @RestController
-public class VerificationCodeController implements IVerifyCaptchaService {
-    @Value("${captcha.session-name}")
-    private String sessionName;
+public class VerificationCodeController implements VerificationCodeFeignService {
 
-    @Resource
-    private DefaultKaptcha defaultKaptcha;
+    @Autowired
+    private SecurityProperities securityProperities;
 
-    @Override
-    public byte[] getVerifiCode() throws Exception {
-        //证码字符串生成验
-        String text = defaultKaptcha.createText();
-        //验证码存入session（可以将text加密储存）
-        log.warn("verify code is {}",text);
-        SessionUtils.session().setAttribute(sessionName, text);//read from nacos yml
-        //验证码转换
-        BufferedImage image = defaultKaptcha.createImage(text);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        ImageIO.write(image, "jpg", byteArrayOutputStream);
-        //定义响应值，写入byte
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        VerificationCodeUtils.buildImageResponse(bytes);
-        return bytes;
-
-    }
 
     @Override
-    public Boolean checkVerifiCode(String code) {
+    public Boolean checkVerificationCode(String code) {
         HttpSession session = SessionUtils.session();
-        String text = (String) session.getAttribute(sessionName);//read from nacos yml
-        log.warn("verify code is {}",text);
+        //read from nacos yml
+        String text = (String) session.getAttribute(securityProperities.getVerificationCode().getSessionAttribute());
+        log.warn("verify code is {}", text);
         if (StringUtils.isBlank(text)) {
             return Boolean.FALSE;
         }
@@ -56,7 +40,51 @@ public class VerificationCodeController implements IVerifyCaptchaService {
             return Boolean.FALSE;
         }
         //从session中移除验证码text
-        session.removeAttribute(sessionName);//read from nacos yml
+        session.removeAttribute(securityProperities.getVerificationCode().getSessionAttribute());
         return Boolean.TRUE;
+    }
+
+    @Override
+    public void getVerificationCode(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        // 设置请求头为输出图片类型
+        httpServletResponse.setContentType("image/gif");
+        httpServletResponse.setHeader("Pragma", "No-cache");
+        httpServletResponse.setHeader("Cache-Control", "no-cache");
+        httpServletResponse.setDateHeader("Expires", 0);
+
+        Captcha captcha = createCaptcha();
+        // 验证码存入session
+        //read from nacos yml
+        SessionUtils.session().setAttribute(securityProperities.getVerificationCode().getSessionAttribute(), captcha.text().toLowerCase());
+        // 输出图片流
+        captcha.out(httpServletResponse.getOutputStream());
+    }
+
+    private Captcha createCaptcha() throws IOException, FontFormatException {
+        Captcha captcha;
+
+        CaptchaType captchaType = securityProperities.getVerificationCode().getCaptchaType();
+        switch (captchaType) {
+            case LETTERS_GIF:
+                captcha = new GifCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                captcha.setCharType(securityProperities.getVerificationCode().getCaptchaLetterType().getType());
+                break;
+            case CHINESE:
+                captcha = new ChineseCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                break;
+            case CHINESE_GIF:
+                captcha = new ChineseGifCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                break;
+            case ARITHMETIC:
+                captcha = new ArithmeticCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                break;
+            default:
+                captcha = new SpecCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                captcha.setCharType(securityProperities.getVerificationCode().getCaptchaLetterType().getType());
+                break;
+        }
+
+        captcha.setFont(securityProperities.getVerificationCode().getCaptchaFont().getIndex());
+        return captcha;
     }
 }

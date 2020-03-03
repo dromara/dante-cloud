@@ -25,8 +25,8 @@
 package cn.herodotus.eurynome.upms.logic.service.system;
 
 import cn.herodotus.eurynome.component.common.enums.AuthorityType;
-import cn.herodotus.eurynome.component.data.base.service.BaseCrudWithCacheSerivce;
-import cn.herodotus.eurynome.upms.api.constants.UpmsCacheConstants;
+import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysAuthorityRepository;
 import com.alicp.jetcache.Cache;
@@ -41,19 +41,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
- * <p>Description: SysAuthority 服务 </p>
+ * <p>Description: SysAuthorityService </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/25 16:11
  */
 @Slf4j
 @Service
-public class SysAuthorityService extends BaseCrudWithCacheSerivce<SysAuthority, String> {
+public class SysAuthorityService extends BaseCacheService<SysAuthority, String> {
 
-    @CreateCache(name = UpmsCacheConstants.CACHE_NAME_SYSAUTHORITY, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAUTHORITY, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysAuthority> sysAuthorityCache;
+
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAUTHORITY_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    private Cache<String, Set<String>> sysAuthorityIndexCache;
 
     private final SysAuthorityRepository sysAuthorityRepository;
 
@@ -67,9 +71,17 @@ public class SysAuthorityService extends BaseCrudWithCacheSerivce<SysAuthority, 
         return sysAuthorityCache;
     }
 
+    @Override
+    public Cache<String, Set<String>> getIndexCache() {
+        return sysAuthorityIndexCache;
+    }
+
     public List<SysAuthority> findAll() {
-        List<SysAuthority> sysAuthorities = sysAuthorityRepository.findAll();
-        this.cacheCollection(sysAuthorities);
+        List<SysAuthority> sysAuthorities = getAllFromCache();
+        if (sysAuthorities.isEmpty()) {
+            sysAuthorities = sysAuthorityRepository.findAll();
+            cacheAll(sysAuthorities);
+        }
         log.debug("[Luban UPMS] |- SysAuthority Service findAll.");
         return sysAuthorities;
     }
@@ -82,17 +94,17 @@ public class SysAuthorityService extends BaseCrudWithCacheSerivce<SysAuthority, 
     @Override
     public SysAuthority saveOrUpdate(SysAuthority sysAuthority) {
         SysAuthority savedSysAuthority = sysAuthorityRepository.saveAndFlush(sysAuthority);
-        this.cacheEntity(savedSysAuthority);
+        cache(savedSysAuthority);
         log.debug("[Luban UPMS] |- SysAuthority Service saveOrUpdate.");
         return savedSysAuthority;
     }
 
     @Override
     public SysAuthority findById(String authorityId) {
-        SysAuthority sysAuthority = this.getCache().get(authorityId);
+        SysAuthority sysAuthority = getFromCache(authorityId);
         if (ObjectUtils.isEmpty(sysAuthority)) {
             sysAuthority = sysAuthorityRepository.findByAuthorityId(authorityId);
-            this.cacheEntity(sysAuthority);
+            cache(sysAuthority);
         }
         log.debug("[Luban UPMS] |- SysAuthority Service findById.");
         return sysAuthority;
@@ -108,14 +120,14 @@ public class SysAuthorityService extends BaseCrudWithCacheSerivce<SysAuthority, 
     @Override
     public Page<SysAuthority> findByPage(int pageNumber, int pageSize) {
         Page<SysAuthority> pages = sysAuthorityRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
-        this.cacheCollection( pages.getContent());
+        cache( pages.getContent());
         log.debug("[Luban UPMS] |- SysAuthority Service findByPage.");
         return pages;
     }
 
     public List<SysAuthority> findAllByAuthorityType(AuthorityType authorityType) {
         List<SysAuthority> sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
-        this.cacheCollection( sysAuthorities);
+        cache( sysAuthorities);
         return sysAuthorities;
     }
 }

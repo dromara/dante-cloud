@@ -22,7 +22,7 @@
  * LastModified: 2019/10/28 上午11:56
  */
 
-package cn.herodotus.eurynome.component.common.enums;
+package cn.herodotus.eurynome.upms.api.constants.enums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +31,9 @@ import java.util.Map;
  * @author gengwei.zheng
  */
 public enum Gender {
+    /**
+     * enum
+     */
     OTHERS(0, "其它"),
     MAN(1, "男"),
     WOMAN(2, "女");

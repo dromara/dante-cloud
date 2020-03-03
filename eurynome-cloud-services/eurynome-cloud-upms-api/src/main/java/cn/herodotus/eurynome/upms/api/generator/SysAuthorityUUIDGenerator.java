@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.api.helper;
+package cn.herodotus.eurynome.upms.api.generator;
 
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import org.apache.commons.lang3.ObjectUtils;
