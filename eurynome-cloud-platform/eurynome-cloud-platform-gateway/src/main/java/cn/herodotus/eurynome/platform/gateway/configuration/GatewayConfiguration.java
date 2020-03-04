@@ -52,6 +52,10 @@ public class GatewayConfiguration {
         return new SentinelGatewayFilter();
     }
 
+    /**
+     * Gateway 跨域处理
+     * @return
+     */
     @Bean
     public WebFilter corsFilter() {
         return (ServerWebExchange ctx, WebFilterChain chain) -> {

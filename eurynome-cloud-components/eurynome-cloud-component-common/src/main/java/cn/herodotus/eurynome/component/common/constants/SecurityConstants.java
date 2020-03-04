@@ -53,16 +53,10 @@ public class SecurityConstants {
     public static final String AUTHORITY_PREFIX = "OP_";
 
     public final static String OPEN_ID = "openid";
+    public final static String LICENSE = "license";
 
     public static final String CODE = "code";
-    public static final String UNKNOWN = "unknown";
-    public static final String USERNAME = "username";
 
-    public static final String XML_HTTP_REQUEST = "XMLHttpRequest";
-
-    public static final String PROXY_CLIENT_IP = "Proxy-Client-IP";
-    public static final String WL_PROXY_CLIENT_IP = "WL-Proxy-Client-IP";
-    public static final String HTTP_CLIENT_IP = "HTTP_CLIENT_IP";
-    public static final String HTTP_X_FORWARDED_FOR = "HTTP_X_FORWARDED_FOR";
-    public static final String X_REAL_IP = "X-Real-IP";
+    public static final String GATEWAY_TRACE_HEADER = "Gateway";
+    public static final String GATEWAY_STORAGE_KEY = "gateway:trace";
 }

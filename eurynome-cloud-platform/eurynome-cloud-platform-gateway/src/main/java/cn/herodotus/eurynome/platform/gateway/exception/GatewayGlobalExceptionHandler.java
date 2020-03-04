@@ -50,7 +50,7 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
     /**
      * 存储处理异常后的信息
      */
-    private ThreadLocal<Result> exceptionHandlerResult = new ThreadLocal<>();
+    private ThreadLocal<Result<String>> exceptionHandlerResult = new ThreadLocal<>();
 
     /**
      * 参考AbstractErrorWebExceptionHandler
@@ -104,7 +104,6 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
 
             result.type(resultType);
 
-
             log.error("[Herodotus] |- ERROR ==> Response Status Exception : {}", result);
         } else {
             result = GlobalExceptionHandler.resolveException((Exception) ex, path);
@@ -132,7 +131,7 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
      */
 
     protected Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
-        Result result = exceptionHandlerResult.get();
+        Result<String> result = exceptionHandlerResult.get();
         return ServerResponse.status(result.getHttpStatus())
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .body(BodyInserters.fromObject(result));

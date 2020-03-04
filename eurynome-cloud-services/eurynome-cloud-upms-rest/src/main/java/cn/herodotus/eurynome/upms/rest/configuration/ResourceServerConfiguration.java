@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.rest.configuration;
 
-import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.eurynome.component.security.response.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
     @Resource
-    private SecurityProperities securityProperities;
+    private SecurityProperties securityProperties;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -40,9 +40,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     }
 
     private String[] getWhiteList() {
-        if (securityProperities != null) {
+        if (securityProperties != null) {
             log.info("[Herodotus] |- OAuth2 Fetch The Resource White List.");
-            return securityProperities.getInterceptor().getWhiteList();
+            return securityProperties.getInterceptor().getWhiteList();
         } else {
             log.warn("[Herodotus] |- OAuth2 Can not Fetch The Resource White List Configurations.");
             return new String[] {};

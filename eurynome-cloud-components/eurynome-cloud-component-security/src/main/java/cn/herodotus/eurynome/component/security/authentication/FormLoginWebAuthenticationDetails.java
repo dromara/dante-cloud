@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.security.authentication;
 
-import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.utils.SymmetricUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -20,7 +20,7 @@ public class FormLoginWebAuthenticationDetails extends WebAuthenticationDetails 
     private boolean codeEmpty = false;
     private boolean codeNotExist = false;
 
-    private SecurityProperities securityProperities;
+    private SecurityProperties securityProperties;
 
     /**
      * Records the remote address and will also set the session Id if a session already
@@ -28,19 +28,19 @@ public class FormLoginWebAuthenticationDetails extends WebAuthenticationDetails 
      *
      * @param request that the authentication request was received from
      */
-    public FormLoginWebAuthenticationDetails(HttpServletRequest request, SecurityProperities securityProperities) {
+    public FormLoginWebAuthenticationDetails(HttpServletRequest request, SecurityProperties securityProperties) {
         super(request);
-        this.securityProperities = securityProperities;
+        this.securityProperties = securityProperties;
         checkVerificationCode(request);
     }
 
     private void checkVerificationCode(HttpServletRequest request) {
-        String encryptedCode = request.getParameter(securityProperities.getVerificationCode().getVerficationCodeParamter());
+        String encryptedCode = request.getParameter(securityProperties.getVerificationCode().getVerificationCodeParameter());
 
         String key = request.getParameter("symmetric");
 
         HttpSession session = request.getSession();
-        String savedCode = (String) session.getAttribute(securityProperities.getVerificationCode().getSessionAttribute());
+        String savedCode = (String) session.getAttribute(securityProperties.getVerificationCode().getSessionAttribute());
 
         if (!checkCodeExist(savedCode) && !checkCodeEmpty(encryptedCode)) {
             checkCodeRight(encryptedCode, savedCode, key);
@@ -77,6 +77,6 @@ public class FormLoginWebAuthenticationDetails extends WebAuthenticationDetails 
     }
 
     public boolean isClose() {
-        return securityProperities.getVerificationCode().isClosed();
+        return securityProperties.getVerificationCode().isClosed();
     }
 }

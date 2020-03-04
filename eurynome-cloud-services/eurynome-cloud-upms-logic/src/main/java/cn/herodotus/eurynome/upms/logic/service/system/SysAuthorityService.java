@@ -33,6 +33,7 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +41,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -78,7 +80,7 @@ public class SysAuthorityService extends BaseCacheService<SysAuthority, String> 
 
     public List<SysAuthority> findAll() {
         List<SysAuthority> sysAuthorities = getAllFromCache();
-        if (sysAuthorities.isEmpty()) {
+        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
             sysAuthorities = sysAuthorityRepository.findAll();
             cacheAll(sysAuthorities);
         }

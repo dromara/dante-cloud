@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.security.authentication;
 
-import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.utils.SymmetricUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,11 +25,11 @@ import java.io.IOException;
 @Slf4j
 public class FormLoginDecryptParameterAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private SecurityProperities securityProperities;
+    private SecurityProperties securityProperties;
 
-    public FormLoginDecryptParameterAuthenticationFilter(SecurityProperities securityProperities) {
+    public FormLoginDecryptParameterAuthenticationFilter(SecurityProperties securityProperties) {
         super();
-        this.securityProperities = securityProperities;
+        this.securityProperties = securityProperties;
     }
 
     @Override

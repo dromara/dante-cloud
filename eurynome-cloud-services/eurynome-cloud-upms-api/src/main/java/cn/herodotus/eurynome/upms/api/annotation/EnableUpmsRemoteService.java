@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.upms.api.annotation;
 
-import cn.herodotus.eurynome.component.rest.configuration.HerodotusFeignFallbackConfiguration;
 import cn.herodotus.eurynome.upms.api.configuration.UpmsApiConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;

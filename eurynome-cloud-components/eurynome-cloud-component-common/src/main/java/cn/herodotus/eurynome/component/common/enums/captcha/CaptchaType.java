@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.component.security.enums.captcha;
+package cn.herodotus.eurynome.component.common.enums.captcha;
 
 /**
  * <p> Description : TODO </p>

@@ -24,7 +24,6 @@
 
 package cn.herodotus.eurynome.component.security.utils;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson.JSON;
@@ -50,11 +49,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Http与Servlet工具类.
+ * <p>Description:  Http与Servlet工具类. </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/3/4 11:39
  */
-
 @Slf4j
 public class WebUtils extends org.springframework.web.util.WebUtils {
+
+    private static final String UNKNOWN = "unknown";
+    private static final String PROXY_CLIENT_IP = "Proxy-Client-IP";
+    private static final String WL_PROXY_CLIENT_IP = "WL-Proxy-Client-IP";
+    private static final String HTTP_CLIENT_IP = "HTTP_CLIENT_IP";
+    private static final String HTTP_X_FORWARDED_FOR = "HTTP_X_FORWARDED_FOR";
+    private static final String X_REAL_IP = "X-Real-IP";
+
+    public static final String XML_HTTP_REQUEST = "XMLHttpRequest";
 
     private static final PathMatcher pathMatcher = new AntPathMatcher();
 
@@ -178,25 +188,25 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
     public String getIP(HttpServletRequest request) {
         Assert.notNull(request, "HttpServletRequest is null");
         String ip = request.getHeader(HttpHeaders.X_FORWARDED_FOR);
-        if (StringUtils.isBlank(ip) || SecurityConstants.UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader(HttpHeaders.X_FORWARDED_FOR);
         }
-        if (StringUtils.isBlank(ip) || SecurityConstants.UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader(SecurityConstants.PROXY_CLIENT_IP);
+        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader(PROXY_CLIENT_IP);
         }
-        if (StringUtils.isBlank(ip) || SecurityConstants.UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader(SecurityConstants.WL_PROXY_CLIENT_IP);
+        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader(WL_PROXY_CLIENT_IP);
         }
-        if (StringUtils.isBlank(ip) || SecurityConstants.UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader(SecurityConstants.HTTP_CLIENT_IP);
+        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader(HTTP_CLIENT_IP);
         }
-        if (StringUtils.isBlank(ip) || SecurityConstants.UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader(SecurityConstants.HTTP_X_FORWARDED_FOR);
+        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader(HTTP_X_FORWARDED_FOR);
         }
-        if (StringUtils.isBlank(ip) || SecurityConstants.UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader(SecurityConstants.X_REAL_IP);
+        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            ip = request.getHeader(X_REAL_IP);
         }
-        if (StringUtils.isBlank(ip) || SecurityConstants.UNKNOWN.equalsIgnoreCase(ip)) {
+        if (StringUtils.isBlank(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
         return StringUtils.isBlank(ip) ? null : ip.split(SymbolConstants.COMMA)[0];
@@ -226,7 +236,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 
     private static boolean isContainAjaxFlag(ServletRequest request) {
         String xRequestedWith = WebUtils.toHttp(request).getHeader(HttpHeaders.X_REQUESTED_WITH);
-        return SecurityConstants.XML_HTTP_REQUEST.equalsIgnoreCase(xRequestedWith);
+        return XML_HTTP_REQUEST.equalsIgnoreCase(xRequestedWith);
     }
 
     public static boolean isAjaxRequest(ServletRequest request) {

@@ -22,18 +22,18 @@
  * LastModified: 2020/1/29 下午4:08
  */
 
-package cn.herodotus.eurynome.component.security.properties;
+package cn.herodotus.eurynome.component.data.properties;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaLetterType;
-import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaFont;
-import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaLetterType;
+import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaFont;
+import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 多出都需要使用Security的配置信息，所以放到data组件中 </p>
  * <p>
  * loginPage()： 自定义登录页面
  * loginProcessingUrl()：将用户名和密码提交到的URL
@@ -46,7 +46,9 @@ import java.io.Serializable;
  * @date : 2019/11/28 13:08
  */
 @ConfigurationProperties(prefix = "luban.platform.security")
-public class SecurityProperities implements Serializable {
+public class SecurityProperties implements Serializable {
+
+    private String signingKey = "eurynome-cloud";
 
     private Login login = new Login();
 
@@ -54,7 +56,17 @@ public class SecurityProperities implements Serializable {
 
     private VerificationCode verificationCode = new VerificationCode();
 
+    private Gateway gateway = new Gateway();
+
     private Interceptor interceptor = new Interceptor();
+
+    public String getSigningKey() {
+        return signingKey;
+    }
+
+    public void setSigningKey(String signingKey) {
+        this.signingKey = signingKey;
+    }
 
     public Login getLogin() {
         return login;
@@ -76,16 +88,24 @@ public class SecurityProperities implements Serializable {
         return verificationCode;
     }
 
+    public void setVerificationCode(VerificationCode verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public Gateway getGateway() {
+        return gateway;
+    }
+
+    public void setGateway(Gateway gateway) {
+        this.gateway = gateway;
+    }
+
     public Interceptor getInterceptor() {
         return interceptor;
     }
 
     public void setInterceptor(Interceptor interceptor) {
         this.interceptor = interceptor;
-    }
-
-    public void setVerificationCode(VerificationCode verificationCode) {
-        this.verificationCode = verificationCode;
     }
 
     public static class Login implements Serializable {
@@ -188,7 +208,7 @@ public class SecurityProperities implements Serializable {
 
         private String sessionAttribute = "captcha";
         private boolean closed = false;
-        private String verficationCodeParamter = sessionAttribute;
+        private String verificationCodeParameter = sessionAttribute;
         private int width = 130;
         private int height = 48;
         private int length = 5;
@@ -204,12 +224,12 @@ public class SecurityProperities implements Serializable {
             this.sessionAttribute = sessionAttribute;
         }
 
-        public String getVerficationCodeParamter() {
-            return verficationCodeParamter;
+        public String getVerificationCodeParameter() {
+            return verificationCodeParameter;
         }
 
-        public void setVerficationCodeParamter(String verficationCodeParamter) {
-            this.verficationCodeParamter = verficationCodeParamter;
+        public void setVerificationCodeParameter(String verificationCodeParameter) {
+            this.verificationCodeParameter = verificationCodeParameter;
         }
 
         public boolean isClosed() {
@@ -269,8 +289,49 @@ public class SecurityProperities implements Serializable {
         }
     }
 
+    public static class Gateway implements Serializable {
+        /**
+         * 是否必须通过Gateway进行服务的访问
+         */
+        private boolean mustBeAccessed = true;
+        /**
+         * Trace key 在Redis中有效时间，单位秒, 默认5分钟
+         */
+        private long expired = 60 * 5;
+        /**
+         * Trace key 在Redis中效时间还是剩余多长时间，就需要进行更新，单位秒, 默认1分钟
+         * 即，如果Trace key在Redis中过期时间小于60秒，那么就重新创建Trace key
+         */
+        private long threshold = 60;
+
+        public boolean isMustBeAccessed() {
+            return mustBeAccessed;
+        }
+
+        public void setMustBeAccessed(boolean mustBeAccessed) {
+            this.mustBeAccessed = mustBeAccessed;
+        }
+
+        public long getExpired() {
+            return expired;
+        }
+
+        public void setExpired(long expired) {
+            this.expired = expired;
+        }
+
+        public long getThreshold() {
+            return threshold;
+        }
+
+        public void setThreshold(long threshold) {
+            this.threshold = threshold;
+        }
+    }
+
     public static class Interceptor implements Serializable {
         private boolean rejectPublicInvocations = false;
+
         private String[] whiteList;
 
         public boolean isRejectPublicInvocations() {

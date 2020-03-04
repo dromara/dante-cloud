@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller;
 
-import cn.herodotus.eurynome.component.security.enums.captcha.CaptchaType;
-import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.utils.SessionUtils;
 import cn.herodotus.eurynome.upms.api.service.fegin.VerificationCodeFeignService;
 import com.wf.captcha.*;
@@ -24,14 +24,14 @@ import java.io.IOException;
 public class VerificationCodeController implements VerificationCodeFeignService {
 
     @Autowired
-    private SecurityProperities securityProperities;
+    private SecurityProperties securityProperties;
 
 
     @Override
     public Boolean checkVerificationCode(String code) {
         HttpSession session = SessionUtils.session();
         //read from nacos yml
-        String text = (String) session.getAttribute(securityProperities.getVerificationCode().getSessionAttribute());
+        String text = (String) session.getAttribute(securityProperties.getVerificationCode().getSessionAttribute());
         log.warn("verify code is {}", text);
         if (StringUtils.isBlank(text)) {
             return Boolean.FALSE;
@@ -40,7 +40,7 @@ public class VerificationCodeController implements VerificationCodeFeignService 
             return Boolean.FALSE;
         }
         //从session中移除验证码text
-        session.removeAttribute(securityProperities.getVerificationCode().getSessionAttribute());
+        session.removeAttribute(securityProperties.getVerificationCode().getSessionAttribute());
         return Boolean.TRUE;
     }
 
@@ -55,7 +55,7 @@ public class VerificationCodeController implements VerificationCodeFeignService 
         Captcha captcha = createCaptcha();
         // 验证码存入session
         //read from nacos yml
-        SessionUtils.session().setAttribute(securityProperities.getVerificationCode().getSessionAttribute(), captcha.text().toLowerCase());
+        SessionUtils.session().setAttribute(securityProperties.getVerificationCode().getSessionAttribute(), captcha.text().toLowerCase());
         // 输出图片流
         captcha.out(httpServletResponse.getOutputStream());
     }
@@ -63,28 +63,28 @@ public class VerificationCodeController implements VerificationCodeFeignService 
     private Captcha createCaptcha() throws IOException, FontFormatException {
         Captcha captcha;
 
-        CaptchaType captchaType = securityProperities.getVerificationCode().getCaptchaType();
+        CaptchaType captchaType = securityProperties.getVerificationCode().getCaptchaType();
         switch (captchaType) {
             case LETTERS_GIF:
-                captcha = new GifCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
-                captcha.setCharType(securityProperities.getVerificationCode().getCaptchaLetterType().getType());
+                captcha = new GifCaptcha(securityProperties.getVerificationCode().getWidth(), securityProperties.getVerificationCode().getHeight(), securityProperties.getVerificationCode().getLength());
+                captcha.setCharType(securityProperties.getVerificationCode().getCaptchaLetterType().getType());
                 break;
             case CHINESE:
-                captcha = new ChineseCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                captcha = new ChineseCaptcha(securityProperties.getVerificationCode().getWidth(), securityProperties.getVerificationCode().getHeight(), securityProperties.getVerificationCode().getLength());
                 break;
             case CHINESE_GIF:
-                captcha = new ChineseGifCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                captcha = new ChineseGifCaptcha(securityProperties.getVerificationCode().getWidth(), securityProperties.getVerificationCode().getHeight(), securityProperties.getVerificationCode().getLength());
                 break;
             case ARITHMETIC:
-                captcha = new ArithmeticCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
+                captcha = new ArithmeticCaptcha(securityProperties.getVerificationCode().getWidth(), securityProperties.getVerificationCode().getHeight(), securityProperties.getVerificationCode().getLength());
                 break;
             default:
-                captcha = new SpecCaptcha(securityProperities.getVerificationCode().getWidth(), securityProperities.getVerificationCode().getHeight(), securityProperities.getVerificationCode().getLength());
-                captcha.setCharType(securityProperities.getVerificationCode().getCaptchaLetterType().getType());
+                captcha = new SpecCaptcha(securityProperties.getVerificationCode().getWidth(), securityProperties.getVerificationCode().getHeight(), securityProperties.getVerificationCode().getLength());
+                captcha.setCharType(securityProperties.getVerificationCode().getCaptchaLetterType().getType());
                 break;
         }
 
-        captcha.setFont(securityProperities.getVerificationCode().getCaptchaFont().getIndex());
+        captcha.setFont(securityProperties.getVerificationCode().getCaptchaFont().getIndex());
         return captcha;
     }
 }

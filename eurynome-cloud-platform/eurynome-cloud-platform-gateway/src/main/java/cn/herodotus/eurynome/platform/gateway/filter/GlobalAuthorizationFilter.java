@@ -1,41 +1,45 @@
 package cn.herodotus.eurynome.platform.gateway.filter;
 
+import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.enums.ResultStatus;
+import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
 import cn.herodotus.eurynome.platform.gateway.properties.ArtisanGatewayProperties;
-import cn.herodotus.eurynome.platform.gateway.service.AuthorizationTokenService;
 import cn.herodotus.eurynome.platform.gateway.utils.GatewayUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>Description: GlobalAuthorizationFilter </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/3/4 11:01
+ */
 @Slf4j
 @Component
 @Data
-public class AuthorizationFilter implements GlobalFilter, Ordered {
+public class GlobalAuthorizationFilter implements GlobalFilter, Ordered {
 
     @Autowired
-    private AuthorizationTokenService authorizationTokenService;
+    private RedisGatewayTrace redisGatewayTrace;
 
     @Resource
     private ArtisanGatewayProperties artisanGatewayProperties;
-
-    @Value(value = "${token-check-uri}")
-    private String token_check_uri;
 
     private static final String COUNT_START_TIME = "countStartTime";
     // 放行名单
@@ -48,6 +52,19 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
 
         String url = exchange.getRequest().getURI().getPath();
 
+        if (redisGatewayTrace.isMustBeAccessed()) {
+            // 设置跟踪标识
+            String secretKey = redisGatewayTrace.create(SecurityConstants.GATEWAY_STORAGE_KEY);
+
+            ServerHttpRequest request = exchange.getRequest().mutate().headers(httpHeaders -> {
+                List<String> gatewayHeaderValues = new ArrayList<>();
+                gatewayHeaderValues.add(secretKey);
+                httpHeaders.put(SecurityConstants.GATEWAY_TRACE_HEADER, gatewayHeaderValues);
+            }).build();
+
+            exchange.mutate().request(request).build();
+        }
+
         this.skipAuthUrls = artisanGatewayProperties.getWhiteList();
 
         // 跳过不需要验证的路径
@@ -57,21 +74,11 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
 
         // 获取token
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-
         // 检查token
-        ServerHttpResponse exchangeResponse = exchange.getResponse();
-        // 没有token
         if (StringUtils.isBlank(token)) {
-            return GatewayUtils.writeJsonResponse(exchangeResponse, new Result().type(ResultStatus.UNAUTHORIZED));
-        } else { // 有token 验证是否有效
-            Result result = authorizationTokenService.checkToken(token);
-            result.path(url);
-            log.info("[Herodotus] |- Gateway Check Token Result: {}", result.toString());
-
-            if (result.getHttpStatus() != 200) {
-                return GatewayUtils.writeJsonResponse(exchangeResponse, result);
-            }
+            return GatewayUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED));
         }
+
         //先放行
         return chain.filter(exchange).then(
                 Mono.fromRunnable(() -> {

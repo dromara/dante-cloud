@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.security.authentication;
 
-import cn.herodotus.eurynome.component.security.properties.SecurityProperities;
+import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 public class FormLoginWebAuthenticationDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> {
 
     @Autowired
-    private SecurityProperities securityProperities;
+    private SecurityProperties securityProperties;
 
     @Override
     public WebAuthenticationDetails buildDetails(HttpServletRequest request) {
-        return new FormLoginWebAuthenticationDetails(request, securityProperities);
+        return new FormLoginWebAuthenticationDetails(request, securityProperties);
     }
 }

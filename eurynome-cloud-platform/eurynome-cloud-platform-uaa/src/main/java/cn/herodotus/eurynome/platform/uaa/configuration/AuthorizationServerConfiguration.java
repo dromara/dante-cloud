@@ -1,7 +1,8 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
+import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.response.HerodotusWebResponseExceptionTranslator;
-import cn.herodotus.eurynome.platform.uaa.extend.OauthJwtAccessTokenConverter;
+import cn.herodotus.eurynome.platform.uaa.extend.OauthJwtTokenEnhancer;
 import cn.herodotus.eurynome.platform.uaa.extend.OauthUserAuthenticationConverter;
 import cn.herodotus.eurynome.platform.uaa.service.OauthClientDetailsService;
 import cn.herodotus.eurynome.platform.uaa.service.OauthUserDetailsService;
@@ -20,10 +21,7 @@ import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.*;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
@@ -67,9 +65,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     private DataSource dataSource;
     @Autowired
-    private LettuceConnectionFactory lettuceConnectionFactory;
-    @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private LettuceConnectionFactory lettuceConnectionFactory;
     /**
      * 声明 ClientDetails实现 Load a client by the client id. This method must not return null
      */
@@ -79,37 +77,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private OauthUserDetailsService oauthUserDetailsService;
     @Autowired
     private OauthUserAuthenticationConverter oauthUserAuthenticationConverter;
+    @Autowired
+    private SecurityProperties securityProperties;
 
-    /**
-     * 声明 TokenStore 管理方式实现
-     *
-     * @return TokenStore
-     */
-    @Bean
-    public TokenStore tokenStore() {
-        return new RedisTokenStore(lettuceConnectionFactory);
-//        return new JdbcTokenStore(dataSource);
-    }
-
-    /**
-     * 授权store
-     *
-     * @return ApprovalStore
-     */
-    @Bean
-    public ApprovalStore createApprovalStore() {
-        return new JdbcApprovalStore(dataSource);
-    }
-
-    /**
-     * 授权码
-     *
-     * @return
-     */
-    @Bean
-    public AuthorizationCodeServices createAuthorizationCodeServices() {
-        return new JdbcAuthorizationCodeServices(dataSource);
-    }
 
     /**
      * 配置令牌端点(Token Endpoint)的安全约束
@@ -140,6 +110,84 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         clients.withClientDetails(oauthClientDetailsService);
     }
 
+    /**
+     * 授权store
+     *
+     * @return ApprovalStore
+     */
+    @Bean
+    public ApprovalStore createApprovalStore() {
+        return new JdbcApprovalStore(dataSource);
+    }
+
+    /**
+     * 授权码
+     *
+     * @return AuthorizationCodeServices
+     */
+    @Bean
+    public AuthorizationCodeServices createAuthorizationCodeServices() {
+        return new JdbcAuthorizationCodeServices(dataSource);
+    }
+
+    /**
+     * setAccessTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 access_token_validity
+     * setRefreshTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 refresh_token_validity
+     * 如果 数据 库定义了，则代码处配置失效
+     */
+    @Bean
+    public DefaultTokenServices createDefaultTokenServices() {
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setSupportRefreshToken(true);
+        defaultTokenServices.setReuseRefreshToken(true);
+        defaultTokenServices.setClientDetailsService(oauthClientDetailsService);
+        defaultTokenServices.setTokenEnhancer(createAccessTokenEnhancerChain());
+        return defaultTokenServices;
+    }
+
+    @Bean
+    public TokenEnhancerChain createAccessTokenEnhancerChain() {
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(createJwtTokenEnhancer(), createJwtAccessTokenConverter()));
+        return tokenEnhancerChain;
+    }
+
+    @Bean
+    public JwtAccessTokenConverter createJwtAccessTokenConverter(){
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey(securityProperties.getSigningKey());
+        return jwtAccessTokenConverter;
+    }
+
+    @Bean
+    public TokenEnhancer createJwtTokenEnhancer() {
+        return new OauthJwtTokenEnhancer();
+    }
+
+    /**
+     * 将所有授权信息都返回到资源服务器
+     * 调用自定义用户转换器
+     * 用于token解析转换
+     */
+    @Bean
+    public DefaultAccessTokenConverter createDefaultAccessTokenConverter() {
+        DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
+        defaultAccessTokenConverter.setUserTokenConverter(oauthUserAuthenticationConverter);
+        return defaultAccessTokenConverter;
+    }
+
+    /**
+     * 声明 TokenStore 管理方式实现
+     *
+     * @return TokenStore
+     */
+    @Bean
+    public TokenStore tokenStore() {
+        return new RedisTokenStore(lettuceConnectionFactory);
+//        return new JdbcTokenStore(dataSource);
+    }
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
@@ -158,43 +206,4 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // 自定义异常转换类
         endpoints.exceptionTranslator(new HerodotusWebResponseExceptionTranslator());
     }
-
-    /**
-     * 将所有授权信息都返回到资源服务器
-     * 调用自定义用户转换器
-     * 用于token解析转换
-     */
-
-    private DefaultAccessTokenConverter createDefaultAccessTokenConverter() {
-        DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
-        defaultAccessTokenConverter.setUserTokenConverter(oauthUserAuthenticationConverter);
-        return defaultAccessTokenConverter;
-    }
-
-    /**
-     * setAccessTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 access_token_validity
-     * setRefreshTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 refresh_token_validity
-     * 如果 数据 库定义了，则代码处配置失效
-     */
-    private DefaultTokenServices createDefaultTokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setReuseRefreshToken(true);
-        defaultTokenServices.setClientDetailsService(oauthClientDetailsService);
-        defaultTokenServices.setTokenEnhancer(createAccessTokenEnhancer());
-        return defaultTokenServices;
-    }
-
-    private TokenEnhancerChain createAccessTokenEnhancer() {
-        JwtAccessTokenConverter jwtAccessTokenConverter = new OauthJwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("luban-cloud");
-
-        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtAccessTokenConverter));
-
-        return tokenEnhancerChain;
-    }
-
-
 }
