@@ -108,16 +108,13 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
      */
     public static Result<String> resolveOauthException(Exception exception, String path) {
 
-        Result<String> result = getResult(ResultStatus.BAD_CREDENTIALS, HttpStatus.OK.value());
+        Result<String> result;
 
         if (exception instanceof OAuth2Exception) {
             OAuth2Exception aex = (OAuth2Exception) exception;
             result = resolveException(OAuth2Exception.create(aex.getOAuth2ErrorCode(), aex.getMessage()), path);
         } else {
-            String error = Optional.ofNullable(exception.getMessage()).orElse("");
-            if (error.contains(ResultStatus.USER_IS_DISABLED.getMessage())) {
-                result.code(ResultStatus.ACCOUNT_DISABLED.getCode());
-            }
+            result = resolveException(exception, exception.getMessage());
         }
 
         return result.message(exception.getMessage()).path(path);

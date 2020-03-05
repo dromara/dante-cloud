@@ -2,7 +2,6 @@ package cn.herodotus.eurynome.platform.gateway.filter;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
-import cn.herodotus.eurynome.platform.gateway.properties.ArtisanGatewayProperties;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +29,6 @@ public class GlobalTraceFilter implements GlobalFilter, Ordered {
 
     @Autowired
     private RedisGatewayTrace redisGatewayTrace;
-
-    @Resource
-    private ArtisanGatewayProperties artisanGatewayProperties;
 
     private static final String COUNT_START_TIME = "countStartTime";
     // 放行名单

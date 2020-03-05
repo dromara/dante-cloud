@@ -55,6 +55,7 @@ public class GlobalExceptionHandler {
         exceptionDictionary.put("InvalidScopeException", getUnauthorizedResult(ResultStatus.INVALID_SCOPE));
         exceptionDictionary.put("InvalidTokenException", getResult(ResultStatus.INVALID_TOKEN, HttpStatus.SC_FORBIDDEN));
         exceptionDictionary.put("InvalidRequestException", getBadRequestResult(ResultStatus.INVALID_REQUEST));
+        exceptionDictionary.put("IOException", getResult(ResultStatus.SERVICE_UNAVAILABLE, HttpStatus.SC_SERVICE_UNAVAILABLE));
         exceptionDictionary.put("RedirectMismatchException", getResult(ResultStatus.REDIRECT_URI_MISMATCH));
         exceptionDictionary.put("UnsupportedGrantTypeException", getResult(ResultStatus.UNSUPPORTED_GRANT_TYPE));
         exceptionDictionary.put("UnsupportedResponseTypeException", getResult(ResultStatus.UNSUPPORTED_RESPONSE_TYPE));
