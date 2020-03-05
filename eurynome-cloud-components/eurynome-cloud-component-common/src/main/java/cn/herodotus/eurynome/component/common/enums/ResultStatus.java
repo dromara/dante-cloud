@@ -41,7 +41,7 @@ public enum ResultStatus {
     /**
      * oauth2返回码
      */
-    INVALID_TOKEN(2000, "Token has expired"),
+    INVALID_TOKEN(2000, "Token was not recognised"),
     INVALID_SCOPE(2001, "Invalid Scope"),
     INVALID_REQUEST(2002, "Invalid Request"),
     INVALID_CLIENT(2003, "Invalid Client"),

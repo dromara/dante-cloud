@@ -28,6 +28,7 @@ import cn.herodotus.eurynome.component.data.jpa.hibernate.AbstractUserType;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.type.SerializationException;
+import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -41,7 +42,7 @@ import java.sql.Types;
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:33
  */
-public class JsonbType extends AbstractUserType {
+public class JsonbType extends AbstractUserType implements Serializable{
 
     @Override
     public int[] sqlTypes() {
@@ -90,5 +91,19 @@ public class JsonbType extends AbstractUserType {
             return (Serializable) copy;
         }
         throw new SerializationException(String.format("Cannot serialize '%s', %s is not Serializable.", o, o.getClass()), null);
+    }
+
+    @Override
+    public int hashCode(Object x) throws HibernateException {
+        if (x == null) {
+            return 0;
+        }
+
+        return x.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object x, Object y) throws HibernateException {
+        return ObjectUtils.nullSafeEquals(x, y);
     }
 }

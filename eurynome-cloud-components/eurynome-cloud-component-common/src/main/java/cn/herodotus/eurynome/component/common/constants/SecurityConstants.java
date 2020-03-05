@@ -57,6 +57,7 @@ public class SecurityConstants {
 
     public static final String CODE = "code";
 
+
     public static final String GATEWAY_TRACE_HEADER = "Gateway";
     public static final String GATEWAY_STORAGE_KEY = "gateway:trace";
 }

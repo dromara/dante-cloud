@@ -1,20 +1,14 @@
 package cn.herodotus.eurynome.platform.gateway.filter;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.common.enums.ResultStatus;
 import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
 import cn.herodotus.eurynome.platform.gateway.properties.ArtisanGatewayProperties;
-import cn.herodotus.eurynome.platform.gateway.utils.GatewayUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -33,7 +27,7 @@ import java.util.List;
 @Slf4j
 @Component
 @Data
-public class GlobalAuthorizationFilter implements GlobalFilter, Ordered {
+public class GlobalTraceFilter implements GlobalFilter, Ordered {
 
     @Autowired
     private RedisGatewayTrace redisGatewayTrace;
@@ -47,11 +41,12 @@ public class GlobalAuthorizationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        log.debug("[Herodotus] |- Gateway Global Trace Filter in use!");
+
         // 记录用时
         exchange.getAttributes().put(COUNT_START_TIME, System.currentTimeMillis());
 
-        String url = exchange.getRequest().getURI().getPath();
-
+        // 是否约束从gateway访问
         if (redisGatewayTrace.isMustBeAccessed()) {
             // 设置跟踪标识
             String secretKey = redisGatewayTrace.create(SecurityConstants.GATEWAY_STORAGE_KEY);
@@ -65,27 +60,12 @@ public class GlobalAuthorizationFilter implements GlobalFilter, Ordered {
             exchange.mutate().request(request).build();
         }
 
-        this.skipAuthUrls = artisanGatewayProperties.getWhiteList();
-
-        // 跳过不需要验证的路径
-        if (CollectionUtils.isNotEmpty(skipAuthUrls) && skipAuthUrls.contains(url)) {
-            return chain.filter(exchange);
-        }
-
-        // 获取token
-        String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        // 检查token
-        if (StringUtils.isBlank(token)) {
-            return GatewayUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED));
-        }
-
-        //先放行
         return chain.filter(exchange).then(
                 Mono.fromRunnable(() -> {
                     Long startTime = exchange.getAttribute(COUNT_START_TIME);
                     if (startTime != null) {
                         long endTime = (System.currentTimeMillis() - startTime);
-                        log.info(exchange.getRequest().getURI().getRawPath() + ": " + endTime + "ms");
+                        log.info("[Herodotus] |- Request [{}] use: {} ms", exchange.getRequest().getURI().getRawPath(), endTime);
                     }
                 })
         );
@@ -93,7 +73,6 @@ public class GlobalAuthorizationFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        //值越小优先级越高
-        return Ordered.LOWEST_PRECEDENCE;
+        return FilterOrder.GLOBAL_TRACE_FILTER_ORDER;
     }
 }

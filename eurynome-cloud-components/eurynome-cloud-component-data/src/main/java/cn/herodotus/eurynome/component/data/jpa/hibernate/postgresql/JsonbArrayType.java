@@ -24,16 +24,40 @@
 
 package cn.herodotus.eurynome.component.data.jpa.hibernate.postgresql;
 
-/** 
+import org.hibernate.HibernateException;
+import org.springframework.util.ObjectUtils;
+
+import java.io.Serializable;
+
+/**
  * <p>Description: TODO </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:32
  */
-public class JsonbArrayType extends TextArrayType {
+public class JsonbArrayType extends TextArrayType implements Serializable  {
 
     @Override
     protected String dbRealTypeName() {
         return "JSONB";
+    }
+
+    @Override
+    public boolean isMutable() {
+        return true;
+    }
+
+    @Override
+    public int hashCode(Object x) throws HibernateException {
+        if (x == null) {
+            return 0;
+        }
+
+        return x.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object x, Object y) throws HibernateException {
+        return ObjectUtils.nullSafeEquals(x, y);
     }
 }
