@@ -1,7 +1,6 @@
 package cn.herodotus.eurynome.component.rest.annotation;
 
 import cn.herodotus.eurynome.component.rest.configuration.HerodotusRestConfiguration;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -16,6 +15,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import(HerodotusRestConfiguration.class)
-@EnableDiscoveryClient
 public @interface EnableHerodotusRest {
 }

@@ -5,12 +5,13 @@ import cn.herodotus.eurynome.component.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.component.message.kafka.KafkaProducer;
 import cn.herodotus.eurynome.component.message.kafka.KafkaRequestMappingStore;
 import cn.herodotus.eurynome.component.rest.annotation.EnableHerodotusRest;
-import cn.herodotus.eurynome.component.security.annotation.EnableHerodotusSecurity;
-import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.component.rest.annotation.RequestMappingScan;
+import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.component.security.annotation.EnableHerodotusSecurity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableHerodotusData
 @EnableHerodotusRest
 @EnableHerodotusSecurity
+@EnableDiscoveryClient
 public class AutoConfiguration {
 
     @Bean

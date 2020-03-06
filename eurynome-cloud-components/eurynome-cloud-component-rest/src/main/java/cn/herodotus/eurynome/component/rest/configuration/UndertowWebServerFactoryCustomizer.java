@@ -29,7 +29,7 @@ import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>Description: TODO </p>
@@ -38,17 +38,20 @@ import org.springframework.context.annotation.Configuration;
  * @date : 2019/11/17 16:07
  */
 @Slf4j
-@Configuration
+@Component
 public class UndertowWebServerFactoryCustomizer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+
+    public UndertowWebServerFactoryCustomizer() {
+        log.info("[Herodotus] |- Bean [Undertow Websockets] Auto Configure.");
+    }
+
     @Override
     public void customize(UndertowServletWebServerFactory factory) {
-
-        log.info("[Herodotus] |- Bean [Undertow Websockets] Auto Configure.");
 
         factory.addDeploymentInfoCustomizers(deploymentInfo -> {
             WebSocketDeploymentInfo webSocketDeploymentInfo = new WebSocketDeploymentInfo();
             webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 1024));
-            deploymentInfo.addServletContextAttribute("io.undertow.websockets.jsr.WebSocketDeploymentInfo", webSocketDeploymentInfo);
+            deploymentInfo.addServletContextAttribute(WebSocketDeploymentInfo.ATTRIBUTE_NAME, webSocketDeploymentInfo);
         });
     }
 }

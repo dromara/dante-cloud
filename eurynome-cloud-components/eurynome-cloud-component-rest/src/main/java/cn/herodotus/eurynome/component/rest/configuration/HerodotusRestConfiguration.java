@@ -41,13 +41,14 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.component.rest.configuration"
-})
 @EnableConfigurationProperties({
         ApplicationProperties.class,
         SwaggerProperties.class
 })
+@ComponentScan(basePackages = {
+        "cn.herodotus.eurynome.component.rest.configuration"
+})
+
 public class HerodotusRestConfiguration {
 
     @PostConstruct
