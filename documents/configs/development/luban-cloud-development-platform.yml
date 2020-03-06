@@ -1,0 +1,20 @@
+luban:
+  platform:
+    gateway-server-addr: http://localhost:8847
+    auth-server-addr: http://localhost:8846
+    access-token-uri: ${luban.platform.auth-server-addr}/oauth/token
+    user-authorization-uri: ${luban.platform.auth-server-addr}/oauth/authorize
+    token-info-uri: ${luban.platform.auth-server-addr}/oauth/check_token
+    user-info-uri: ${luban.platform.auth-server-addr}/current/user
+    scope: all
+    client-id: 1552294656514
+    client-secret: 123456
+    jwt-signing-key: luban-cloud
+    upms-server-addr: http://localhost:7070
+  swagger2:
+    access-token-uri: ${luban.platform.access-token-uri}
+    client-id: ${luban.platform.client-id}
+    client-secret: ${luban.platform.client-secret}
+    enabled: true
+    scope: ${luban.platform.scope}
+    user-authorization-uri: ${luban.platform.user-authorization-uri}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ooops!! 好像,哪里遇到了错误啦！</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script type="application/x-javascript">
+        addEventListener("load",
+            function () {
+                setTimeout(hideURLbar, 0);
+            }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    <link th:href="@{/features/error/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script th:src="@{https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
+    <script th:src="@{https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js}"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="main w3l">
+        <div class="nav_w3l">
+            <ul>
+                <li><a th:href="@{/logout}" class="back">返回首页</a></li>
+                <li><a href="javascript:history.go(-1)" class="back">返回上一页</a></li>
+                <li><a th:href="@{'https://www.google.com/webhp?hl=zh-CN#safe=strict&hl=zh-CN&q='+${message}}" class="back" target="_blank" id="Google">Google</a></li>
+                <li><a th:href="@{'https://www.baidu.com/s?wd='+${message}}" class="back"  target="_blank" id="Baidu">Baidu</a></li>
+                <li><a th:href="@{'http://stackoverflow.com/search?q='+${message}}" class="back"  target="_blank" id="StackOverFlow">StackOverFlow</a></li>
+            </ul>
+        </div>
+
+        <h2 th:text="${status} + '     错误!'"></h2>
+        <hr/>
+        <h3 th:text="'错误信息： '+ ${message}"></h3>
+        <h3 th:text="'请求地址： '+ ${path}"></h3>
+        <h3 th:text="'请求时间： '+ ${timestamp}"></h3>
+        <h3>异常堆栈跟踪日志,StackTrace: </h3>
+        <div>
+            <div th:each="line:${error}">
+                <h5 th:inline="text">[[${line}]]</h5>
+            </div>
+        </div>
+
+         <div class="footer agileits">
+            <p>Copyright © 2018. All Rights Reserved | Design by <a href="www.baidu.com" target="_blank">Felix</a></p>
+        </div>
+    </div>
+</body>
+</html>
