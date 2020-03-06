@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller;
 
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
-import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
+import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.utils.SessionUtils;
 import cn.herodotus.eurynome.upms.api.service.fegin.VerificationCodeFeignService;
 import com.wf.captcha.*;

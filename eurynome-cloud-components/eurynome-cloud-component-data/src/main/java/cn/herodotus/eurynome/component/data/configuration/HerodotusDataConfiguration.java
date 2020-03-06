@@ -1,8 +1,6 @@
 package cn.herodotus.eurynome.component.data.configuration;
 
-import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -35,9 +33,6 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Configuration
 @Import(RedisConfiguration.class)
-@EnableConfigurationProperties({
-        SecurityProperties.class
-})
 public class HerodotusDataConfiguration {
 
     @PostConstruct

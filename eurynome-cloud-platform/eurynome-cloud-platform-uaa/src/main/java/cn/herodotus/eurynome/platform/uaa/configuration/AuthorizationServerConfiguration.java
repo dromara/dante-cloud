@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
-import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
+import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.response.HerodotusWebResponseExceptionTranslator;
 import cn.herodotus.eurynome.platform.uaa.extend.OauthJwtTokenEnhancer;
 import cn.herodotus.eurynome.platform.uaa.extend.OauthUserAuthenticationConverter;

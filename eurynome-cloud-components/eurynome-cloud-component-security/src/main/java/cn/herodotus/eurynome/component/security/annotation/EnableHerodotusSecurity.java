@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.component.security.annotation;
 
 import cn.herodotus.eurynome.component.security.configuration.HerodotusSecurityConfiguration;
-import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
+import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 

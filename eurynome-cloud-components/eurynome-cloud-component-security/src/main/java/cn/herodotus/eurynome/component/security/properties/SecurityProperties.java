@@ -22,12 +22,13 @@
  * LastModified: 2020/1/29 下午4:08
  */
 
-package cn.herodotus.eurynome.component.data.properties;
+package cn.herodotus.eurynome.component.security.properties;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaLetterType;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaFont;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
@@ -45,6 +46,7 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2019/11/28 13:08
  */
+@Slf4j
 @ConfigurationProperties(prefix = "luban.platform.security")
 public class SecurityProperties implements Serializable {
 
@@ -59,6 +61,10 @@ public class SecurityProperties implements Serializable {
     private Gateway gateway = new Gateway();
 
     private Interceptor interceptor = new Interceptor();
+
+    public SecurityProperties() {
+        log.info("[Herodotus] |- Properties [Security] is Enabled.");
+    }
 
     public String getSigningKey() {
         return signingKey;
