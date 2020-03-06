@@ -10,7 +10,10 @@ package cn.herodotus.eurynome.platform.gateway.filter;
  */
 public class FilterOrder {
 
-    public static final int GLOBAL_RESPONSE_FILTER_ORDER = -10;
-    public static final int GLOBAL_TRACE_FILTER_ORDER = GLOBAL_RESPONSE_FILTER_ORDER + 10;
-    public static final int GLOBAL_CERTIFICATION_FILTER_ORDER = GLOBAL_TRACE_FILTER_ORDER + 10;
+    private static final int INITIAL_ORDER = -10;
+    private static final int ORDER_STEP = 10;
+
+    public static final int GLOBAL_RESPONSE_FILTER_ORDER = INITIAL_ORDER;
+    public static final int GLOBAL_TRACE_FILTER_ORDER = GLOBAL_RESPONSE_FILTER_ORDER + ORDER_STEP;
+    public static final int GLOBAL_CERTIFICATION_FILTER_ORDER = GLOBAL_TRACE_FILTER_ORDER + ORDER_STEP;
 }

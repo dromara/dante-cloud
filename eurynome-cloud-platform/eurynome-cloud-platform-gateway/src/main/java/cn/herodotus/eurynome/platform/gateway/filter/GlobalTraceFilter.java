@@ -2,19 +2,26 @@ package cn.herodotus.eurynome.platform.gateway.filter;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
+import cn.herodotus.eurynome.platform.gateway.properties.GatewaySecurityProperties;
+import cn.hutool.core.lang.UUID;
+import cn.hutool.crypto.SecureUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Description: GlobalAuthorizationFilter </p>
@@ -27,12 +34,12 @@ import java.util.List;
 @Data
 public class GlobalTraceFilter implements GlobalFilter, Ordered {
 
-    @Autowired
-    private RedisGatewayTrace redisGatewayTrace;
+    @Resource
+    private RedisTemplate<Object, Object> redisTemplate;
+    @Resource
+    private GatewaySecurityProperties gatewaySecurityProperties;
 
     private static final String COUNT_START_TIME = "countStartTime";
-    // 放行名单
-    private List<String> skipAuthUrls;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -41,10 +48,9 @@ public class GlobalTraceFilter implements GlobalFilter, Ordered {
         // 记录用时
         exchange.getAttributes().put(COUNT_START_TIME, System.currentTimeMillis());
 
-        // 是否约束从gateway访问
-        if (redisGatewayTrace.isMustBeAccessed()) {
+
             // 设置跟踪标识
-            String secretKey = redisGatewayTrace.create(SecurityConstants.GATEWAY_STORAGE_KEY);
+            String secretKey = create(SecurityConstants.GATEWAY_STORAGE_KEY);
 
             ServerHttpRequest request = exchange.getRequest().mutate().headers(httpHeaders -> {
                 List<String> gatewayHeaderValues = new ArrayList<>();
@@ -53,7 +59,7 @@ public class GlobalTraceFilter implements GlobalFilter, Ordered {
             }).build();
 
             exchange.mutate().request(request).build();
-        }
+
 
         return chain.filter(exchange).then(
                 Mono.fromRunnable(() -> {
@@ -69,5 +75,26 @@ public class GlobalTraceFilter implements GlobalFilter, Ordered {
     @Override
     public int getOrder() {
         return FilterOrder.GLOBAL_TRACE_FILTER_ORDER;
+    }
+
+    private String create(String key) {
+
+        long threshold = gatewaySecurityProperties.getTrace().getThreshold();
+        long expired = gatewaySecurityProperties.getTrace().getExpired();
+
+        if (StringUtils.isBlank(key)) {
+            return null;
+        }
+        String secretKey;
+        if (redisTemplate.hasKey(key)) {
+            if (redisTemplate.boundHashOps(key).getExpire() < threshold) {
+                redisTemplate.opsForValue().set(key, SecureUtil.md5(UUID.randomUUID().toString()), expired, TimeUnit.SECONDS);
+            }
+            secretKey = (String) redisTemplate.opsForValue().get(key);
+        } else {
+            secretKey = SecureUtil.md5(UUID.randomUUID().toString());
+            redisTemplate.opsForValue().set(key, secretKey, expired, TimeUnit.SECONDS);
+        }
+        return secretKey;
     }
 }

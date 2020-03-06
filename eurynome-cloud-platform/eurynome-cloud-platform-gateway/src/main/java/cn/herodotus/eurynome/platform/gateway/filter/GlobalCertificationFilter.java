@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.platform.gateway.filter;
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.enums.ResultStatus;
-import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
+import cn.herodotus.eurynome.platform.gateway.properties.GatewaySecurityProperties;
 import cn.herodotus.eurynome.platform.gateway.utils.WebFluxUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -18,9 +18,10 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : GlobalCertificationFilter </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/3/4 18:36
@@ -30,7 +31,7 @@ import javax.annotation.Resource;
 public class GlobalCertificationFilter implements GlobalFilter, Ordered {
 
     @Resource
-    private SecurityProperties securityProperties;
+    private GatewaySecurityProperties gatewaySecurityProperties;
     @Resource
     private RedisTemplate<Object, Object> redisTemplate;
 
@@ -40,8 +41,8 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
 
         String url = exchange.getRequest().getURI().getPath();
 
-         String[] skipAuthUrls = securityProperties.getInterceptor().getWhiteList();
-        if (WebFluxUtils.isPathMatch(skipAuthUrls, url)) {
+         List<String> whiteList = gatewaySecurityProperties.getWhiteList();
+        if (WebFluxUtils.isPathMatch(whiteList, url)) {
             return chain.filter(exchange);
         }
 

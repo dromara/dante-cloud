@@ -45,6 +45,11 @@ public class ApplicationProperties {
 
     private String serviceDisplayName;
     private String authorityTreeRoot;
+    /**
+     * 是否必须通过Gateway进行服务的访问
+     */
+    private boolean accessedThroughGateway = true;
+
     private Architecture architecture = Architecture.MICROSERVICE;
     private RequestMapping requestMapping = new RequestMapping();
 
@@ -54,6 +59,14 @@ public class ApplicationProperties {
 
     public void setServiceDisplayName(String serviceDisplayName) {
         this.serviceDisplayName = serviceDisplayName;
+    }
+
+    public boolean isAccessedThroughGateway() {
+        return accessedThroughGateway;
+    }
+
+    public void setAccessedThroughGateway(boolean accessedThroughGateway) {
+        this.accessedThroughGateway = accessedThroughGateway;
     }
 
     public String getAuthorityTreeRoot() {
