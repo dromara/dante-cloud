@@ -1,14 +1,10 @@
 package cn.herodotus.eurynome.component.data.configuration;
 
-import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
 import cn.herodotus.eurynome.component.data.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -47,12 +43,5 @@ public class HerodotusDataConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.info("[Herodotus] |- Bean [Herodotus Data] Auto Configure.");
-    }
-
-    @Bean
-    @ConditionalOnBean(RedisTemplate.class)
-    public RedisGatewayTrace redisTrace(RedisTemplate<Object, Object> redisTemplate, SecurityProperties securityProperties) {
-        log.debug("[Herodotus] |- Bean [Redis Trace] Auto Configure.");
-        return new RedisGatewayTrace(redisTemplate, securityProperties);
     }
 }

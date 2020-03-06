@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.platform.autoconfigure;
 
-import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
 import cn.herodotus.eurynome.component.rest.interceptor.GlobalInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

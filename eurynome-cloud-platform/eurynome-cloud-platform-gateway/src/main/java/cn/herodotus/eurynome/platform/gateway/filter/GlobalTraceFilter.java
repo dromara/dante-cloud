@@ -1,14 +1,12 @@
 package cn.herodotus.eurynome.platform.gateway.filter;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
 import cn.herodotus.eurynome.platform.gateway.properties.GatewaySecurityProperties;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.crypto.SecureUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;

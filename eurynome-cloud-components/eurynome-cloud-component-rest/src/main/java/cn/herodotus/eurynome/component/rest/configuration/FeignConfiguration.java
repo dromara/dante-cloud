@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.component.rest.configuration;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
+import cn.herodotus.eurynome.component.rest.security.ThroughGatewayTrace;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.apache.commons.lang3.ObjectUtils;
@@ -19,13 +19,13 @@ import org.springframework.context.annotation.Configuration;
 public class FeignConfiguration implements RequestInterceptor {
 
     @Autowired
-    private RedisGatewayTrace redisGatewayTrace;
+    private ThroughGatewayTrace throughGatewayTrace;
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
         // 如果开启了gateway 的MustBeAccessed设置，才会在请求中设置参数
-        if (redisGatewayTrace.isMustBeAccessed()) {
-            String trace = redisGatewayTrace.get(SecurityConstants.GATEWAY_STORAGE_KEY);
+        if (throughGatewayTrace.isAccessedThroughGateway()) {
+            String trace = throughGatewayTrace.get(SecurityConstants.GATEWAY_STORAGE_KEY);
             if (ObjectUtils.isNotEmpty(requestTemplate) && StringUtils.isNotBlank(trace)) {
                 requestTemplate.header(SecurityConstants.GATEWAY_TRACE_HEADER, trace);
             }
