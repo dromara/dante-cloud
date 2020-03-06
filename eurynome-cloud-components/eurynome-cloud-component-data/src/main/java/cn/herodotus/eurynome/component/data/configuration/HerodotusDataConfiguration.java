@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.PostConstruct;
+
 /**
  * <p> Description : 模块辅助注册类 </p>
  * <p>
@@ -40,7 +42,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableConfigurationProperties({
         SecurityProperties.class
 })
-public class DataComponentConfiguration {
+public class HerodotusDataConfiguration {
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Bean [Herodotus Data] Auto Configure.");
+    }
 
     @Bean
     @ConditionalOnBean(RedisTemplate.class)

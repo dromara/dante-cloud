@@ -1,8 +1,17 @@
 package cn.herodotus.eurynome.component.rest.configuration;
 
+import cn.herodotus.eurynome.component.rest.interceptor.GlobalInterceptor;
+import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.component.rest.properties.SwaggerProperties;
+import cn.herodotus.eurynome.component.rest.security.ThroughGatewayTrace;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -35,10 +44,32 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.component.rest.configuration"
 })
+@EnableConfigurationProperties({
+        ApplicationProperties.class,
+        SwaggerProperties.class
+})
 public class HerodotusRestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
         log.info("[Herodotus] |- Bean [Herodotus Rest] Auto Configure.");
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(ThroughGatewayTrace.class)
+    @ConditionalOnBean(RedisTemplate.class)
+    public ThroughGatewayTrace throughGatewayTrace(RedisTemplate<Object, Object> redisTemplate, ApplicationProperties applicationProperties) {
+        ThroughGatewayTrace throughGatewayTrace = new ThroughGatewayTrace(redisTemplate, applicationProperties);
+        log.info("[Herodotus] |- Bean [Through Gateway Trace] Auto Configure.");
+        return throughGatewayTrace;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(GlobalInterceptor.class)
+    @ConditionalOnBean(ThroughGatewayTrace.class)
+    public GlobalInterceptor globalInterceptor(ThroughGatewayTrace throughGatewayTrace) {
+        GlobalInterceptor globalInterceptor = new GlobalInterceptor(throughGatewayTrace);
+        log.info("[Herodotus] |- Bean [Global Interceptor] Auto Configure.");
+        return globalInterceptor;
     }
 }

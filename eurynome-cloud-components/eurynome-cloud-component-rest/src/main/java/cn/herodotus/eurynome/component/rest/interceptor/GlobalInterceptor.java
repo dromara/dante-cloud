@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.component.rest.interceptor;
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.enums.ResultStatus;
-import cn.herodotus.eurynome.component.data.component.RedisGatewayTrace;
+import cn.herodotus.eurynome.component.rest.security.ThroughGatewayTrace;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
@@ -21,23 +21,23 @@ import java.io.PrintWriter;
  */
 public class GlobalInterceptor implements HandlerInterceptor {
 
-    private RedisGatewayTrace redisGatewayTrace;
+    private ThroughGatewayTrace throughGatewayTrace;
 
-    public void setRedisGatewayTrace(RedisGatewayTrace redisGatewayTrace) {
-        this.redisGatewayTrace = redisGatewayTrace;
+    public GlobalInterceptor(ThroughGatewayTrace throughGatewayTrace) {
+        this.throughGatewayTrace = throughGatewayTrace;
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if (!redisGatewayTrace.isMustBeAccessed()) {
+        if (!throughGatewayTrace.isAccessedThroughGateway()) {
             return true;
         }
 
         String secretKey = request.getHeader(SecurityConstants.GATEWAY_TRACE_HEADER);
-        if(StringUtils.isNotBlank(secretKey)){
-            String key = redisGatewayTrace.get(SecurityConstants.GATEWAY_STORAGE_KEY);
-            if(StringUtils.isNotBlank(secretKey) && secretKey.equals(key)){
+        if (StringUtils.isNotBlank(secretKey)) {
+            String key = throughGatewayTrace.get(SecurityConstants.GATEWAY_STORAGE_KEY);
+            if (StringUtils.isNotBlank(secretKey) && secretKey.equals(key)) {
                 return true;
             }
         }
