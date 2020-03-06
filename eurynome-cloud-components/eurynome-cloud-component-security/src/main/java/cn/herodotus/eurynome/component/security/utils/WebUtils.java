@@ -28,9 +28,9 @@ import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.net.HttpHeaders;
-import com.google.common.net.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.MediaType;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Assert;
 import org.springframework.util.PathMatcher;
@@ -39,9 +39,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.resource.ResourceUrlProvider;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -148,7 +150,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
      * @return
      */
     public static void renderJson(HttpServletResponse response, Object object) {
-        renderJson(response, JSON.toJSONString(object), MediaType.JSON_UTF_8.toString());
+        renderJson(response, JSON.toJSONString(object), MediaType.APPLICATION_JSON_UTF8.toString());
     }
 
     /**
@@ -214,6 +216,10 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 
     public static HttpServletRequest toHttp(ServletRequest request) {
         return (HttpServletRequest)request;
+    }
+
+    public static HttpServletResponse toHttp(ServletResponse response) {
+        return (HttpServletResponse)response;
     }
 
 
@@ -318,5 +324,20 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
         }
 
         return null;
+    }
+
+    public static String getRequestPayload(ServletRequest request) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader reader = request.getReader();) {
+            char[] buffer = new char[1024];
+            int length;
+            while ((length = reader.read(buffer)) != -1) {
+                stringBuilder.append(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            log.error("[Herodotus] |- Get Request Payload Error!");
+        }
+
+        return stringBuilder.toString();
     }
 }

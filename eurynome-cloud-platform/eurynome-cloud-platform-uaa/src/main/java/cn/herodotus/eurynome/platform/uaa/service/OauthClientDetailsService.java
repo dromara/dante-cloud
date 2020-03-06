@@ -67,13 +67,13 @@ public class OauthClientDetailsService implements ClientDetailsService {
         HerodotusApplication oauthApplication = remoteSysApplicationService.findByClientId(clientId).getData();
 
         if (oauthApplication == null) {
-            log.error("[Herodotus] |- OAuth2 Can not Fetch the Remote Client Details!");
+            log.error("[Herodotus] |- Can not Fetch the Remote Client Details!");
             return null;
         } else {
             HerodotusClientDetails herodotusClientDetails = oauthApplication.getHerodotusClientDetails();
             herodotusClientDetails.setAuthorities(oauthApplication.getArtisanAuthorities());
 
-            log.info("[Herodotus] |- OAuth2 Fetch Remote Client Details Successfully!");
+            log.debug("[Herodotus] |- Fetch Remote Client Details Successfully! [{}]", herodotusClientDetails.getClientId());
             return herodotusClientDetails;
         }
     }

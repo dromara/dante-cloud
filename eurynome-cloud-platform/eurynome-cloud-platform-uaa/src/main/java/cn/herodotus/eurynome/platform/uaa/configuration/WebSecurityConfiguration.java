@@ -1,5 +1,6 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
+import cn.herodotus.eurynome.component.security.filter.TenantSecurityContextFilter;
 import cn.herodotus.eurynome.platform.uaa.service.OauthUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 /**
  * @author gengwei.zheng
@@ -82,9 +84,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
+    @Bean
+    public TenantSecurityContextFilter tenantSecurityContextFilter() {
+        return new TenantSecurityContextFilter();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class)
+                .authorizeRequests()
                 // 如果有允许匿名的url，填在下面
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()

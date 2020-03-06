@@ -2,9 +2,11 @@ package cn.herodotus.eurynome.platform.uaa.service;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
+import cn.herodotus.eurynome.component.security.utils.ThreadLocalContextUtils;
 import cn.herodotus.eurynome.upms.api.service.remote.RemoteSysUserService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @author : gengwei.zheng
  * @date : 2019/11/25 11:02
  */
+@Slf4j
 @Service
 public class OauthUserDetailsService implements UserDetailsService {
 
@@ -25,6 +28,10 @@ public class OauthUserDetailsService implements UserDetailsService {
     @Override
     public HerodotusUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+        String tenantId = ThreadLocalContextUtils.getString("tenantId");
+
+        log.debug("[Herodotus] |- UserDetailsService Fetched tenantId is : [{}]", tenantId);
+
         Result<SysUser> result = remoteSysUserService.findByUsername(username);
 
         SysUser sysUser = result.getData();
@@ -32,6 +39,8 @@ public class OauthUserDetailsService implements UserDetailsService {
         if (sysUser == null) {
             throw new UsernameNotFoundException("系统用户 " + username + " 不存在!");
         }
+
+        ThreadLocalContextUtils.clear();
 
         return UpmsHelper.convertSysUserToArtisanUserDetails(sysUser);
     }
