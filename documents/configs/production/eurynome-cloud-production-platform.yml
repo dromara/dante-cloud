@@ -1,20 +1,20 @@
-herodotus:
+eurynome:
   platform:
     gateway-server-addr: http://localhost:8847
     auth-server-addr: http://localhost:8846
-    access-token-uri: ${herodotus.platform.auth-server-addr}/oauth/token
-    user-authorization-uri: ${herodotus.platform.auth-server-addr}/oauth/authorize
-    token-info-uri: ${herodotus.platform.auth-server-addr}/oauth/check_token
-    user-info-uri: ${herodotus.platform.auth-server-addr}/current/user
+    access-token-uri: ${eurynome.platform.auth-server-addr}/oauth/token
+    user-authorization-uri: ${eurynome.platform.auth-server-addr}/oauth/authorize
+    token-info-uri: ${eurynome.platform.auth-server-addr}/oauth/check_token
+    user-info-uri: ${eurynome.platform.auth-server-addr}/current/user
     scope: all
     client-id: 1552294656514
     client-secret: 123456
-    jwt-signing-key: herodotus-cloud
+    jwt-signing-key: eurynome-cloud
     upms-server-addr: http://localhost:7070
   swagger2:
-    access-token-uri: ${herodotus.platform.access-token-uri}
-    client-id: ${herodotus.platform.client-id}
-    client-secret: ${herodotus.platform.client-secret}
+    access-token-uri: ${eurynome.platform.access-token-uri}
+    client-id: ${eurynome.platform.client-id}
+    client-secret: ${eurynome.platform.client-secret}
     enabled: true
-    scope: ${herodotus.platform.scope}
-    user-authorization-uri: ${herodotus.platform.user-authorization-uri}
+    scope: ${eurynome.platform.scope}
+    user-authorization-uri: ${eurynome.platform.user-authorization-uri}

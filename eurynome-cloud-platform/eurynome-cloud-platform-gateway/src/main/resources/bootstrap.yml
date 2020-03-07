@@ -60,7 +60,6 @@ herodotus:
   gateway:
     white-list:
       - "/oauth/token"
-      - "/oauth/check_token"
       - "/oauth/authorize"
       - "/captcha/getVerifiCode"
       - "/login/token"

@@ -5,6 +5,7 @@ import cn.herodotus.eurynome.component.common.exception.GlobalExceptionHandler;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ClassUtils;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 
@@ -33,7 +34,7 @@ public class HerodotusFeignFallback<T> implements MethodInterceptor {
 
         log.error("[Herodotus] |- Feign Fallback:[{}.{}] serviceId:[{}] message:[{}]", targetType.getName(), method.getName(), targetName, errorMessage);
 
-        if (method.getAnnotatedReturnType().getType() instanceof Result) {
+        if (method.getReturnType() == Result.class) {
             Result<String> result = new Result<>();
             if (cause instanceof FeignException) {
                 FeignException exception = (FeignException) cause;

@@ -41,7 +41,7 @@ security:
       token-info-uri: ${eurynome.platform.token-info-uri}
       user-info-uri: ${eurynome.platform.user-info-uri}
 
-eurynome:
+herodotus:
   platform:
     application:
       service-display-name: "用户中心"

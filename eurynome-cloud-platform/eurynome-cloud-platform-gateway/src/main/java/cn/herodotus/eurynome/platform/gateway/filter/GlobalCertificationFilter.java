@@ -39,18 +39,18 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         log.debug("[Herodotus] |- Gateway Global Certification Filter in use!");
 
-        String url = exchange.getRequest().getURI().getPath();
-
-         List<String> whiteList = gatewaySecurityProperties.getWhiteList();
-        if (WebFluxUtils.isPathMatch(whiteList, url)) {
-            return chain.filter(exchange);
-        }
-
         // 获取token
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         // 检查token
-        if (StringUtils.isBlank(token)) {
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).httpStatus(HttpStatus.SC_UNAUTHORIZED));
+        if (!isTokenWellFormed(token)) {
+            String url = exchange.getRequest().getURI().getPath();
+
+            List<String> whiteList = gatewaySecurityProperties.getWhiteList();
+            if (WebFluxUtils.isPathMatch(whiteList, url)) {
+                return chain.filter(exchange);
+            } else {
+                return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).httpStatus(HttpStatus.SC_UNAUTHORIZED));
+            }
         } else {
             String redisTokenKey = StringUtils.replace(token, SecurityConstants.BEARER_TOKEN, "access:");
             if (!redisTemplate.hasKey(redisTokenKey)) {
@@ -65,5 +65,12 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         return FilterOrder.GLOBAL_CERTIFICATION_FILTER_ORDER;
     }
-    
+
+    private boolean isTokenWellFormed(String token) {
+        if (StringUtils.isBlank(token) || StringUtils.containsOnly(token, SecurityConstants.BEARER_TOKEN)) {
+            return false;
+        }
+
+        return true;
+    }
 }
