@@ -50,13 +50,14 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             }
         }
 
-        log.debug("[Herodotus] |- Feign Request Interceptor [{}]", requestTemplate.toString());
+        log.trace("[Herodotus] |- Feign Request Interceptor [{}]", requestTemplate.toString());
     }
 
     private HttpServletRequest getHttpServletRequest() {
         try {
             return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         } catch (Exception e) {
+            log.error("[Herodotus] |- Feign Request Interceptor can not get Request.");
             return null;
         }
     }

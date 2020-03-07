@@ -13,6 +13,7 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -37,27 +38,40 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+
         log.debug("[Herodotus] |- Gateway Global Certification Filter in use!");
 
+        // 1.检查是否是免登陆连接
         String url = exchange.getRequest().getURI().getPath();
-
         List<String> whiteList = gatewaySecurityProperties.getWhiteList();
         if (WebFluxUtils.isPathMatch(whiteList, url)) {
-            return chain.filter(exchange);
-        }
-
-        // 获取token
-        String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        // 检查token
-        if (!isTokenWellFormed(token)) {
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).httpStatus(HttpStatus.SC_UNAUTHORIZED));
-        } else {
-            String redisTokenKey = StringUtils.replace(token, SecurityConstants.BEARER_TOKEN, "access:");
-            if (!redisTemplate.hasKey(redisTokenKey)) {
-                return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).httpStatus(HttpStatus.SC_FORBIDDEN));
+            // 1.1. 如果是免登陆接口，看一下是否有AUTHORIZATION头，有就把AUTHORIZATION头给去掉，避免免登录接口会校验token。
+            //      主要是针对/oauth/token : https://www.cnblogs.com/mxmbk/p/9782409.html
+            //      逻辑上可以在前端处理，即根据Token的情况，合理的设置AUTHORIZATION头。但是不好控，所以在这里控制。
+            if (exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                ServerHttpRequest request = exchange.getRequest().mutate()
+                        .headers(httpHeaders -> httpHeaders.remove(HttpHeaders.AUTHORIZATION))
+                        .build();
+                return chain.filter(exchange.mutate().request(request).build());
             } else {
+                // 1.2 如果没有AUTHORIZATION,正常执行
                 return chain.filter(exchange);
             }
+        }
+
+        // 2.非免登陆地址，获取token 检查token，如果未空，或者不是 Bearer XXX形式，则认为未授权。
+        String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        if (!isTokenWellFormed(token)) {
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).httpStatus(HttpStatus.SC_UNAUTHORIZED));
+        }
+
+        // 3. 非免登陆接口，同时也有格式正确的Token，那么就验证Token是否过期
+        //    就看Redis中，是否有这个Token
+        String redisTokenKey = StringUtils.replace(token, SecurityConstants.BEARER_TOKEN, "access:");
+        if (!redisTemplate.hasKey(redisTokenKey)) {
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).httpStatus(HttpStatus.SC_FORBIDDEN));
+        } else {
+            return chain.filter(exchange);
         }
     }
 
