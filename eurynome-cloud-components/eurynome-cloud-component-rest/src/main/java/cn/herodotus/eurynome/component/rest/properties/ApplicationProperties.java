@@ -42,7 +42,7 @@ import java.util.List;
  * @date : 2019/11/17 15:22
  */
 @Slf4j
-@ConfigurationProperties(prefix = "luban.platform.application")
+@ConfigurationProperties(prefix = "herodotus.platform.application")
 public class ApplicationProperties {
 
     private String serviceDisplayName;

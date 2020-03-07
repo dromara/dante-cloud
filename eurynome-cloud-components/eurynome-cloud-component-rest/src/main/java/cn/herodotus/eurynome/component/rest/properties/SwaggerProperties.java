@@ -34,7 +34,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date : 2019/11/26 10:51
  */
 @Slf4j
-@ConfigurationProperties(prefix = "luban.platform.swagger")
+@ConfigurationProperties(prefix = "herodotus.platform.swagger")
 public class SwaggerProperties {
 
     /**

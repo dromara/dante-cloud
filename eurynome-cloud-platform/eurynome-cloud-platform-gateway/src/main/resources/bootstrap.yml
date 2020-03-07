@@ -31,8 +31,8 @@ spring:
       config:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
-        refreshable-dataids: luban-cloud-@profile.name@-platform.yml
-        shared-dataids: luban-cloud-@profile.name@-platform.yml,luban-cloud-@profile.name@-database-@database.type@.yml,luban-cloud-@profile.name@-redis.yml
+        refreshable-dataids: eurynome-cloud-@profile.name@-platform.yml
+        shared-dataids: eurynome-cloud-@profile.name@-platform.yml,eurynome-cloud-@profile.name@-database-@database.type@.yml,eurynome-cloud-@profile.name@-redis.yml
         file-extension: yml
       discovery:
         namespace: @config.namespace@
@@ -64,17 +64,7 @@ herodotus:
       - "/oauth/authorize"
       - "/captcha/getVerifiCode"
       - "/login/token"
-
-luban:
-  platform:
-    security:
-      interceptor:
-        white-list:
-          - "/oauth/token"
-          - "/oauth/check_token"
-          - "/oauth/authorize"
-          - "/captcha/getVerifiCode"
-          - "/login/token"
+      - 
 logging:
   level:
     cn.herodotus.eurynome: DEBUG

@@ -47,7 +47,7 @@ import java.io.Serializable;
  * @date : 2019/11/28 13:08
  */
 @Slf4j
-@ConfigurationProperties(prefix = "luban.platform.security")
+@ConfigurationProperties(prefix = "herodotus.platform.security")
 public class SecurityProperties implements Serializable {
 
     private String signingKey = "eurynome-cloud";

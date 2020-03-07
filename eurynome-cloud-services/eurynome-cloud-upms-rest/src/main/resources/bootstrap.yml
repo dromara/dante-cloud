@@ -1,7 +1,5 @@
 server:
   port: 7070
-captcha:
-  session-name: upms_captcha
 spring:
   application:
     name:  @artifactId@ #拿到POM文件中的值
@@ -14,8 +12,8 @@ spring:
       config:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
-        refreshable-dataids: luban-cloud-@profile.name@-platform.yml
-        shared-dataids: luban-cloud-@profile.name@-platform.yml,luban-cloud-@profile.name@-redis.yml,luban-cloud-@profile.name@-database-@database.type@.yml,luban-cloud-@profile.name@-kafka.yml
+        refreshable-dataids: eurynome-cloud-@profile.name@-platform.yml
+        shared-dataids: eurynome-cloud-@profile.name@-platform.yml,eurynome-cloud-@profile.name@-redis.yml,eurynome-cloud-@profile.name@-database-@database.type@.yml,eurynome-cloud-@profile.name@-kafka.yml
         file-extension: yml
       discovery:
         namespace: @config.namespace@
@@ -33,17 +31,17 @@ spring:
 security:
   oauth2:
     client:
-      access-token-uri: ${luban.platform.access-token-uri}
-      user-authorization-uri: ${luban.platform.user-authorization-uri}
-      client-id: ${luban.platform.client-id}
-      client-secret: ${luban.platform.client-secret}
-      scope: ${luban.platform.scope}
+      access-token-uri: ${eurynome.platform.access-token-uri}
+      user-authorization-uri: ${eurynome.platform.user-authorization-uri}
+      client-id: ${eurynome.platform.client-id}
+      client-secret: ${eurynome.platform.client-secret}
+      scope: ${eurynome.platform.scope}
       authorized-grant-types: password
     resource:
-      token-info-uri: ${luban.platform.token-info-uri}
-      user-info-uri: ${luban.platform.user-info-uri}
+      token-info-uri: ${eurynome.platform.token-info-uri}
+      user-info-uri: ${eurynome.platform.user-info-uri}
 
-luban:
+eurynome:
   platform:
     application:
       service-display-name: "用户中心"
@@ -86,4 +84,4 @@ logging:
       alibaba: WARN
     cn:
       itcraftsman:
-        luban: DEBUG
+        eurynome: DEBUG

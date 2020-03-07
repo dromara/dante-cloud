@@ -12,8 +12,8 @@ spring:
       config:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
-        refreshable-dataids: luban-cloud-@profile.name@-platform.yml
-        shared-dataids: luban-cloud-@profile.name@-platform.yml,luban-cloud-@profile.name@-redis.yml,luban-cloud-@profile.name@-database-@database.type@.yml,luban-cloud-@profile.name@-kafka.yml
+        refreshable-dataids: eurynome-cloud-@profile.name@-platform.yml
+        shared-dataids: eurynome-cloud-@profile.name@-platform.yml,eurynome-cloud-@profile.name@-redis.yml,eurynome-cloud-@profile.name@-database-@database.type@.yml,eurynome-cloud-@profile.name@-kafka.yml
         file-extension: yml
       discovery:
         namespace: @config.namespace@
