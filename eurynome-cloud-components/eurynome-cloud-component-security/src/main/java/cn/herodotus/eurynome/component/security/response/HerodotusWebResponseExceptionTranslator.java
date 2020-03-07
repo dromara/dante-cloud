@@ -28,6 +28,7 @@ import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.exception.SecurityGlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.web.context.request.RequestContextHolder;

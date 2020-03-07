@@ -89,9 +89,22 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.allowFormAuthenticationForClients()
-                .tokenKeyAccess("isAuthenticated()")
-                .checkTokenAccess("permitAll()");
+        security
+                // 默认都是denyAll()
+                // exposes public key for token verification if using JWT tokens
+                .tokenKeyAccess("permitAll()")
+                // 开启/oauth/check_token验证端口认证权限访问
+                // used by Resource Servers to decode access tokens
+                .checkTokenAccess("isAuthenticated()")
+                // 开启表单认证
+                // allowFormAuthenticationForClients是为了注册clientCredentialsTokenEndpointFilter
+                // clientCredentialsTokenEndpointFilter,解析request中的client_id和client_secret
+                // 构造成UsernamePasswordAuthenticationToken,然后通过UserDetailsService查询作简单的认证而已
+                // 一般是针对password模式和client_credentials
+                // 当然也可以使用http basic认证
+                // 如果使用了http basic认证,就不用使用clientCredentialsTokenEndpointFilter
+                // 因为本质是一样的
+                .allowFormAuthenticationForClients();
     }
 
     /**
