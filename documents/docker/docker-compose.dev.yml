@@ -2,7 +2,7 @@ version: "2"
 services:
   nacos:
     image: nacos/nacos-server:latest
-    container_name: nacos-standalone
+    container_name: nacos
     network_mode: "bridge"
     environment:
       MODE: standalone
