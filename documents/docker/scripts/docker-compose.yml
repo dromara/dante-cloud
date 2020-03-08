@@ -1,0 +1,78 @@
+version: "3"
+services:
+  nacos:
+    image: nacos/nacos-server:latest
+    container_name: nacos-standalone-mysql
+    environment:
+      MODE: standalone
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_DB_NAME: luban-cloud-platform
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: itcraftsman
+      MYSQL_SERVICE_PASSWORD: itcraftsman
+    volumes:
+      - ./standalone-logs/:/home/nacos/logs
+      - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+      - "8848:8848"
+    restart: unless-stopped
+  zookeeper:
+    image: zookeeper:latest
+    container_name: zookeeper
+    restart: unless-stopped
+    ports:
+      - 2181:2181
+    volumes:
+      - /usr/local/docker/zookeeper/data:/data
+      - /usr/local/docker/zookeeper/datalog:/datalog
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: kafka
+    restart: unless-stopped
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.101.10:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+    depends_on:
+      - zookeeper
+  upms:
+    image: eurynome.cloud/eurynome-cloud-platform-upms
+    container_name: eurynome.cloud.upms
+    restart: unless-stopped
+    ports:
+      - 7070
+    depends_on:
+      - nacos
+      - kafka
+    links:
+      - nacos:nacos-server
+      - kafka:kafka-server
+  gateway:
+    image: eurynome.cloud/eurynome-cloud-platform-gateway:1.0.0
+    container_name: eurynome.cloud.gateway
+    restart: unless-stopped
+    ports:
+      - 8847:8847
+    depends_on:
+      - nacos
+    links:
+      - nacos:nacos-server
+      - uaa:uaa-server
+  uaa:
+    image: eurynome.cloud/eurynome-cloud-platform-uaa:1.0.0
+    container_name: eurynome.cloud.uaa
+    restart: unless-stopped
+    ports:
+      - 8846:8846
+    depends_on:
+      - nacos
+      - kafka
+      - upms
+    links:
+      - nacos:nacos-server
+      - kafka:kafka-server
+      - upms:upms-service

@@ -10,9 +10,9 @@
 - --name是指定容器名称  
 - -p 8080:8080 是指将容器的8080端口映射给宿主机的8080端口 格式为：主机(宿主)端口:容器端口  
 ```docker
-docker run -d --name gateway -p 8847:8847 luban.cloud/luban-cloud-platform-gateway:1.0.0
-docker run -d --name oauth -p 8846:8846 luban.cloud/luban-cloud-platform-oauth:1.0.0
-docker run -d --name upms -p 7070:7070 luban.cloud/luban-cloud-upms-ability:1.0.0
+docker run -d --name gateway -p 8847:8847 eurynome.cloud/eurynome-cloud-platform-gateway:1.0.0
+docker run -d --name oauth -p 8846:8846 eurynome.cloud/eurynome-cloud-platform-uaa:1.0.0
+docker run -d --name upms -p 7070:7070 eurynome.cloud/eurynome-cloud-upms-rest:1.0.0
 ```
 # 二、zookeeper 和 kafka
 ## 1、zookeeper
@@ -46,3 +46,8 @@ dcoker pull sebp/elk
 docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 5044:5044 -e ES_MIN_MEM=128m  -e ES_MAX_MEM=1024m -v D:\Development\docker-files:/data -it --name elk sebp/elk
 ```
  
+# 五、Nacos
+```docker
+docker pull nacos/nacos-server
+docker run --env MODE=standalone --name nacos-server -e SPRING_DATASOURCE_PLATFORM=mysql -e MYSQL_SERVICE_HOST=192.168.101.10 -e MYSQL_SERVICE_PORT=3306 -e MYSQL_SERVICE_DB_NAME=luban-cloud-platform -e MYSQL_SERVICE_USER=itcraftsman -e MYSQL_SERVICE_PASSWORD=itcraftsman -d -p 8848:8848 nacos/nacos-server
+```
