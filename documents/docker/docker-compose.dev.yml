@@ -2,7 +2,8 @@ version: "2"
 services:
   nacos:
     image: nacos/nacos-server:latest
-    container_name: nacos-standalone-mysql
+    container_name: nacos-standalone
+    network_mode: "bridge"
     environment:
       MODE: standalone
       SPRING_DATASOURCE_PLATFORM: mysql
