@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
   nacos:
     image: nacos/nacos-server:latest
@@ -6,30 +6,22 @@ services:
     environment:
       MODE: standalone
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_HOST: 192.168.101.10
       MYSQL_SERVICE_DB_NAME: luban-cloud-platform
       MYSQL_SERVICE_PORT: 3306
       MYSQL_SERVICE_USER: itcraftsman
       MYSQL_SERVICE_PASSWORD: itcraftsman
-    volumes:
-      - ./standalone-logs/:/home/nacos/logs
-      - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
     ports:
-      - "8848:8848"
-    restart: unless-stopped
+      - 8848:8848
   zookeeper:
     image: zookeeper:latest
     container_name: zookeeper
-    restart: unless-stopped
+    restart: always
     ports:
       - 2181:2181
-    volumes:
-      - /usr/local/docker/zookeeper/data:/data
-      - /usr/local/docker/zookeeper/datalog:/datalog
   kafka:
     image: wurstmeister/kafka:latest
     container_name: kafka
-    restart: unless-stopped
     ports:
       - 9092:9092
     environment:
@@ -40,11 +32,13 @@ services:
     depends_on:
       - zookeeper
   upms:
-    image: eurynome.cloud/eurynome-cloud-platform-upms
-    container_name: eurynome.cloud.upms
-    restart: unless-stopped
+    image: eurynome-cloud-upms-rest:latest
+    build:
+      context: ../../eurynome-cloud-services/eurynome-cloud-upms-rest
+      dockerfile: Compose-Dockerfile
+    container_name: upms
     ports:
-      - 7070
+      - 7070:7070
     depends_on:
       - nacos
       - kafka
@@ -52,20 +46,23 @@ services:
       - nacos:nacos-server
       - kafka:kafka-server
   gateway:
-    image: eurynome.cloud/eurynome-cloud-platform-gateway:1.0.0
-    container_name: eurynome.cloud.gateway
-    restart: unless-stopped
+    image: eurynome-cloud-platform-gateway:latest
+    build:
+      context: ../../eurynome-cloud-platform/eurynome-cloud-platform-gateway
+      dockerfile: Compose-Dockerfile
+    container_name: gateway
     ports:
       - 8847:8847
     depends_on:
       - nacos
     links:
       - nacos:nacos-server
-      - uaa:uaa-server
   uaa:
-    image: eurynome.cloud/eurynome-cloud-platform-uaa:1.0.0
-    container_name: eurynome.cloud.uaa
-    restart: unless-stopped
+    image: eurynome-cloud-platform-uaa:latest
+    build:
+      context: ../../eurynome-cloud-platform/eurynome-cloud-platform-uaa
+      dockerfile: Compose-Dockerfile
+    container_name: uaa
     ports:
       - 8846:8846
     depends_on:

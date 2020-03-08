@@ -47,7 +47,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>${maven-dockerfile-plugin.version}</version>
                 <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <repository>${project.artifactId}</repository>
                     <tag>${project.version}</tag>
                     <dockerfile>Dockerfile</dockerfile>
                     <buildArgs>
