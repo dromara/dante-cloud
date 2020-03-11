@@ -36,7 +36,7 @@
         <alibaba.fastjson.version>1.2.60</alibaba.fastjson.version>
         <alibaba.jetcache.version>2.5.16</alibaba.jetcache.version>
         <google.guava.version>28.2-jre</google.guava.version>
-        <hutool.version>5.1.1</hutool.version>
+        <hutool.version>5.2.1</hutool.version>
 
         <swagger.version>2.9.2</swagger.version>
         <p6spy.version>3.8.2</p6spy.version>

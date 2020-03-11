@@ -24,10 +24,12 @@
 
 package cn.herodotus.eurynome.component.security.utils;
 
+import cn.herodotus.eurynome.component.common.utils.BeanUtils;
 import cn.hutool.core.bean.BeanUtil;
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
 import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
+import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -85,6 +87,7 @@ public class SecurityUtils {
      *
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static HerodotusUserDetails getPrincipal() {
         if (isAuthenticated()) {
             Authentication authentication = getAuthentication();
@@ -92,7 +95,8 @@ public class SecurityUtils {
                 return (HerodotusUserDetails) authentication.getPrincipal();
             }
             if (authentication.getPrincipal() instanceof Map) {
-                return BeanUtil.mapToBean((Map) authentication.getPrincipal(), HerodotusUserDetails.class, true);
+                Map<String, Object> principal = (Map<String, Object>) authentication.getPrincipal();
+                return BeanUtils.mapToBean(principal, HerodotusUserDetails.class);
             }
         }
 
