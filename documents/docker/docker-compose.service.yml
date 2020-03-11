@@ -1,0 +1,30 @@
+version: "2"
+services:
+  upms:
+    image: eurynome-cloud-upms-rest:latest
+    build:
+      context: ../../eurynome-cloud-services/eurynome-cloud-upms-rest
+      dockerfile: Compose-Dockerfile
+    container_name: upms
+    ports:
+      - 7070:7070
+  gateway:
+    image: eurynome-cloud-platform-gateway:latest
+    build:
+      context: ../../eurynome-cloud-platform/eurynome-cloud-platform-gateway
+      dockerfile: Compose-Dockerfile
+    container_name: gateway
+    ports:
+      - 8847:8847
+  uaa:
+    image: eurynome-cloud-platform-uaa:latest
+    build:
+      context: ../../eurynome-cloud-platform/eurynome-cloud-platform-uaa
+      dockerfile: Compose-Dockerfile
+    container_name: uaa
+    ports:
+      - 8846:8846
+    depends_on:
+      - upms
+    links:
+      - upms:upms-service
