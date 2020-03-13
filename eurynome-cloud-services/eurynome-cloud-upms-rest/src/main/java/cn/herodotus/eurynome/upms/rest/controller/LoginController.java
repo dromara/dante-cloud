@@ -32,30 +32,6 @@ public class LoginController {
     @Autowired
     private Oauth2ClientConfig clientConfig;
 
-    /**
-     * 获取用户基础信息
-     *
-     * @return
-     */
-    @ApiOperation(value = "获取当前登录用户信息", notes = "获取当前登录用户信息")
-    @GetMapping("/current/user")
-    public String getUserProfile() {
-
-        Result<HerodotusUserDetails> result = new Result<>();
-        HerodotusUserDetails userDetails = SecurityUtils.getPrincipal();
-
-        String name123 = "";
-        if (userDetails != null) {
-            name123 = userDetails.getUsername();
-            System.out.println(userDetails);
-        }
-
-
-        log.info("hi,i'am hello world service!!!" + JSON.toJSONString(userDetails));
-
-        return JSON.toJSONString(userDetails);
-    }
-
 
     /**
      * 获取用户访问令牌
