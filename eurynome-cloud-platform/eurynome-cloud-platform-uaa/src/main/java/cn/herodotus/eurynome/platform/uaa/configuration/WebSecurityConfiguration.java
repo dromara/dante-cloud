@@ -111,7 +111,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class)
 
                     // 指定该配置对应拦截的内容
-                    .antMatcher("/**")
+                    .antMatcher("/oauth/**")
                         .authorizeRequests()
                         .antMatchers("/oauth/token", "/oauth/authorize", "/login**", "/error**").permitAll()
                 .and()
