@@ -1,16 +1,16 @@
 eurynome:
   platform:
     gateway-server-addr: http://localhost:8847
-    auth-server-addr: http://localhost:8846
-    access-token-uri: ${eurynome.platform.auth-server-addr}/oauth/token
-    user-authorization-uri: ${eurynome.platform.auth-server-addr}/oauth/authorize
-    token-info-uri: ${eurynome.platform.auth-server-addr}/oauth/check_token
-    user-info-uri: ${eurynome.platform.auth-server-addr}/current/user
+    uaa-server-addr: ${eurynome.platform.gateway-server-addr}/eurynome-cloud-platform-uaa
+    upms-server-addr: ${eurynome.platform.gateway-server-addr}/eurynome-cloud-upms-rest
+    access-token-uri: ${eurynome.platform.uaa-server-addr}/oauth/token
+    user-authorization-uri: ${eurynome.platform.uaa-server-addr}/oauth/authorize
+    token-info-uri: ${eurynome.platform.uaa-server-addr}/oauth/check_token
+    user-info-uri: ${eurynome.platform.uaa-server-addr}/current/user
     scope: all
     client-id: 1552294656514
     client-secret: 123456
     jwt-signing-key: eurynome-cloud
-    upms-server-addr: http://localhost:7070
   swagger2:
     access-token-uri: ${eurynome.platform.access-token-uri}
     client-id: ${eurynome.platform.client-id}

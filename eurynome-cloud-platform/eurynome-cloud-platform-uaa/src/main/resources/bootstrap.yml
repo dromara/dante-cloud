@@ -32,6 +32,10 @@ spring:
       force: true
       enabled: true
 
+herodotus:
+  platform:
+    application:
+      accessed-through-gateway: false
 
 management:
   endpoints:
@@ -41,7 +45,7 @@ management:
 
 logging:
   level:
-    org.springframework.security: INFO
+    org.springframework.security: DEBUG
     com.alibaba.nacos.client: WARN
     cn.herodotus.eurynome: DEBUG
 

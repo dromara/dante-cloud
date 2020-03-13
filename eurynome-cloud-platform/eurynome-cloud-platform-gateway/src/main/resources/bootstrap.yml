@@ -60,11 +60,9 @@ herodotus:
   gateway:
     white-list:
       - "/oauth/token"
-      - "/oauth/authorize"
-      - "/captcha/getVerifiCode"
-      - "/login/token"
-      - 
+
 logging:
   level:
+    org.springframework.security: INFO
+    com.alibaba.nacos.client: WARN
     cn.herodotus.eurynome: DEBUG
-

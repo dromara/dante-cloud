@@ -1,12 +1,12 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
+import cn.herodotus.eurynome.component.security.filter.TenantSecurityContextFilter;
 import cn.herodotus.eurynome.component.security.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.eurynome.component.security.response.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.provider.authentication.BearerTokenExtractor;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 import javax.servlet.ServletException;
@@ -23,16 +22,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * ResourceServerConfigurerAdapter 用于保护 OAuth2 要开放的资源，同时主要作用于client端以及token的认证(Bearer Auth)，
- * 由于后面 OAuth2 服务端后续还需要提供用户信息，所以也是一个 Resource Server，
- * 默认拦截了所有的请求，也可以通过重新方法方式自定义自己想要拦截的资源 URL 地址
  * <p>
- * ResourceServerConfig 用于保护oauth相关的endpoints，同时主要作用于用户的登录(form login,Basic auth)
- * SecurityConfig 用于保护oauth要开放的资源，同时主要作用于client端以及token的认证(Bearer auth)
+ * WebSecurityConfigurerAdapter与ResourceServerConfigurerAdapter同时在的话且都配置了处理url为：/api/**，默认是后者会生效。
+ * 为什么是后者生效，因为
+ * · 默认的WebSecurityConfigurerAdapter里的@Order值是100（我们可以在该类上可以明确看到@Order(100)），
+ * · 而在ResourceServerConfigurerAdapter上添加了@EnableResourceServer注解，他的作用之一就是定义了@Order值为3（该注解里引用了ResourceServerConfiguration，这个类里面定义了Order值）.
+ * · 在spring 的体系里Order值越小优先级越高，所以ResourceServerConfigurerAdapter优先级比另外一个更高，他会优先处理，而WebSecurityConfigurerAdapter会失效。
+ * <p>
+ * 如果想让WebSecurityConfigurerAdapter比ResourceServerConfigurerAdapter优先级高的话，只须要让前者的@Order值比后者的@Order值更低就行了。
+ * 似乎也可以在配置文件中这么配置
+ * security:
+ * oauth2:
+ * resource:
+ * filter-order: 3
+ * <p>
+ * 注意：每声明一个*Adapter类，都会产生一个filterChain。一个request（匹配url）只能被一个filterChain处理，这就解释了为什么二者Adapter同时在的时候，前者默认为什么会失效的原因。
+ * <p>
+ * {@link :https://www.jianshu.com/p/fe1194ca8ecd}
  *
  * @author gengwei.zheng
  */
-@Order(6)
 @Slf4j
 @Configuration
 @EnableResourceServer
@@ -43,25 +52,25 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     private BearerTokenExtractor tokenExtractor = new BearerTokenExtractor();
 
+    @Bean
+    public TenantSecurityContextFilter tenantSecurityContextFilter() {
+        return new TenantSecurityContextFilter();
+    }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/login/**", "/oauth/**", "/hello/**").permitAll()
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .anyRequest().authenticated()
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll()
-                .addLogoutHandler(new CookieClearingLogoutHandler("token", "remember-me"))
-                .logoutSuccessHandler(new LogoutSuccessHandler())
+                .authorizeRequests().anyRequest().authenticated()
                 .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
                 .exceptionHandling()
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
-                .and().csrf().disable()
-                .httpBasic().disable(); // 禁用httpBasic
+                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+
+        // 关闭csrf 跨站（域）攻击防控
+        http.csrf().disable();
+        http.httpBasic().disable();
     }
 
 

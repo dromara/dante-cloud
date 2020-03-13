@@ -38,10 +38,11 @@ public enum ResultStatus {
     FAIL(1000, "Fail"),
     ALERT(1001, "Alert"),
 
+    // TODO: 状态码和错误信息要重新梳理，重点要看对应的HttpStatus是否合适
     /**
      * oauth2返回码
      */
-    INVALID_TOKEN(2000, "Token was not recognised"),
+    INVALID_TOKEN(2000, "无法解析的Token，也许Token已经失效"),
     INVALID_SCOPE(2001, "Invalid Scope"),
     INVALID_REQUEST(2002, "Invalid Request"),
     INVALID_CLIENT(2003, "Invalid Client"),
@@ -77,11 +78,11 @@ public enum ResultStatus {
     /**
      * 请求错误
      */
-    BAD_REQUEST(4000, "Bad Request"),
-    NOT_FOUND(4004, "Not Found"),
-    METHOD_NOT_ALLOWED(4005, "Method Not Allowed"),
-    MEDIA_TYPE_NOT_ACCEPTABLE(4006, "Media Type Not Acceptable"),
-    TOO_MANY_REQUESTS(4029, "Too Many Requests"),
+    BAD_REQUEST(4100, "Bad Request"),
+    NOT_FOUND(4104, "Not Found"),
+    METHOD_NOT_ALLOWED(4105, "Method Not Allowed"),
+    MEDIA_TYPE_NOT_ACCEPTABLE(4106, "Media Type Not Acceptable"),
+    TOO_MANY_REQUESTS(4129, "Too Many Requests"),
     /**
      * 系统错误
      */

@@ -45,6 +45,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         String url = exchange.getRequest().getURI().getPath();
         List<String> whiteList = gatewaySecurityProperties.getWhiteList();
         if (WebFluxUtils.isPathMatch(whiteList, url)) {
+            log.debug("[Herodotus] |- Is White List Request: {}", url);
             // 1.1. 如果是免登陆接口，看一下是否有AUTHORIZATION头，有就把AUTHORIZATION头给去掉，避免免登录接口会校验token。
             //      主要是针对/oauth/token : https://www.cnblogs.com/mxmbk/p/9782409.html
             //      逻辑上可以在前端处理，即根据Token的情况，合理的设置AUTHORIZATION头。但是不好控，所以在这里控制。
@@ -52,6 +53,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
                 ServerHttpRequest request = exchange.getRequest().mutate()
                         .headers(httpHeaders -> httpHeaders.remove(HttpHeaders.AUTHORIZATION))
                         .build();
+                log.debug("[Herodotus] |- Remove additional authorization header！");
                 return chain.filter(exchange.mutate().request(request).build());
             } else {
                 // 1.2 如果没有AUTHORIZATION,正常执行
@@ -62,6 +64,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         // 2.非免登陆地址，获取token 检查token，如果未空，或者不是 Bearer XXX形式，则认为未授权。
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (!isTokenWellFormed(token)) {
+            log.debug("[Herodotus] |- Token is not Well Formed！");
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).httpStatus(HttpStatus.SC_UNAUTHORIZED));
         }
 
@@ -69,8 +72,10 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         //    就看Redis中，是否有这个Token
         String redisTokenKey = StringUtils.replace(token, SecurityConstants.BEARER_TOKEN, "access:");
         if (!redisTemplate.hasKey(redisTokenKey)) {
+            log.debug("[Herodotus] |- Token is Expired！");
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).httpStatus(HttpStatus.SC_FORBIDDEN));
         } else {
+            log.debug("[Herodotus] |- Token is OK！");
             return chain.filter(exchange);
         }
     }

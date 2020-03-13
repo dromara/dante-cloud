@@ -41,6 +41,7 @@ security:
       token-info-uri: ${eurynome.platform.token-info-uri}
       user-info-uri: ${eurynome.platform.user-info-uri}
 
+
 herodotus:
   platform:
     application:
@@ -80,8 +81,6 @@ jetcache:
 
 logging:
   level:
-    com:
-      alibaba: WARN
-    cn:
-      itcraftsman:
-        eurynome: DEBUG
+    org.springframework.security: DEBUG
+    com.alibaba.nacos.client: WARN
+    cn.herodotus.eurynome: DEBUG

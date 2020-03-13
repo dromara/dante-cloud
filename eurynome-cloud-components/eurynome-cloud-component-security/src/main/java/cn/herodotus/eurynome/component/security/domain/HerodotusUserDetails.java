@@ -71,6 +71,7 @@ public class HerodotusUserDetails implements UserDetails {
 
     /**
      * JSON转换的时候忽略该属性，以保证敏感信息不会泄露。
+     *
      * @return 密码
      */
     @JsonIgnore

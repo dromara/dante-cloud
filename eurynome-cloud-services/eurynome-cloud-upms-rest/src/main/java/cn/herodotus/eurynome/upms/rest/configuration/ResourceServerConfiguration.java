@@ -36,7 +36,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .httpBasic().disable();
+
     }
 
     private String[] getWhiteList() {

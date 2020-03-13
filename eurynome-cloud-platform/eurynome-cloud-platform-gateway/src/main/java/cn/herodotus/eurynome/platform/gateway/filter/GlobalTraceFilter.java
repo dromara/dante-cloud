@@ -46,17 +46,18 @@ public class GlobalTraceFilter implements GlobalFilter, Ordered {
         // 记录用时
         exchange.getAttributes().put(COUNT_START_TIME, System.currentTimeMillis());
 
+        // 设置跟踪标识
+        String secretKey = create(SecurityConstants.GATEWAY_STORAGE_KEY);
 
-            // 设置跟踪标识
-            String secretKey = create(SecurityConstants.GATEWAY_STORAGE_KEY);
+        ServerHttpRequest request = exchange.getRequest().mutate().headers(httpHeaders -> {
+            List<String> gatewayHeaderValues = new ArrayList<>();
+            gatewayHeaderValues.add(secretKey);
+            httpHeaders.put(SecurityConstants.GATEWAY_TRACE_HEADER, gatewayHeaderValues);
+        }).build();
 
-            ServerHttpRequest request = exchange.getRequest().mutate().headers(httpHeaders -> {
-                List<String> gatewayHeaderValues = new ArrayList<>();
-                gatewayHeaderValues.add(secretKey);
-                httpHeaders.put(SecurityConstants.GATEWAY_TRACE_HEADER, gatewayHeaderValues);
-            }).build();
+        exchange.mutate().request(request).build();
 
-            exchange.mutate().request(request).build();
+        log.debug("[Herodotus] |- Gateway Generate Trace Key: [{}].", secretKey);
 
 
         return chain.filter(exchange).then(

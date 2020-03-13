@@ -117,11 +117,6 @@ public class Result<T> implements Serializable {
         this.timestamp = timestamp;
     }
 
-    @JsonIgnore
-    public boolean isOk() {
-        return this.code == ResultStatus.OK.getCode();
-    }
-
     public Result<T> ok() {
         this.code = ResultStatus.OK.getCode();
         this.message = ResultStatus.OK.getMessage();

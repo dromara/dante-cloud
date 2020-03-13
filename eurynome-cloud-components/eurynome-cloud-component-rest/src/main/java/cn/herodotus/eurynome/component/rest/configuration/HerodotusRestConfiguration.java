@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.rest.configuration;
 
-import cn.herodotus.eurynome.component.rest.interceptor.GlobalInterceptor;
+import cn.herodotus.eurynome.component.rest.interceptor.GlobalRequestInterceptor;
 import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.component.rest.properties.SwaggerProperties;
 import cn.herodotus.eurynome.component.rest.security.ThroughGatewayTrace;
@@ -66,11 +66,11 @@ public class HerodotusRestConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(GlobalInterceptor.class)
+    @ConditionalOnMissingBean(GlobalRequestInterceptor.class)
     @ConditionalOnBean(ThroughGatewayTrace.class)
-    public GlobalInterceptor globalInterceptor(ThroughGatewayTrace throughGatewayTrace) {
-        GlobalInterceptor globalInterceptor = new GlobalInterceptor(throughGatewayTrace);
+    public GlobalRequestInterceptor globalInterceptor(ThroughGatewayTrace throughGatewayTrace) {
+        GlobalRequestInterceptor globalRequestInterceptor = new GlobalRequestInterceptor(throughGatewayTrace);
         log.info("[Herodotus] |- Bean [Global Interceptor] Auto Configure.");
-        return globalInterceptor;
+        return globalRequestInterceptor;
     }
 }

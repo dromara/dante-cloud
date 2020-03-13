@@ -3,7 +3,6 @@ package cn.herodotus.eurynome.platform.uaa.controller;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
-import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,7 @@ public class SecurityController {
      * @return Result<HerodotusUserDetails>
      */
     @ApiOperation(value = "获取当前登录用户信息", notes = "获取当前登录用户信息")
-    @GetMapping("/oauth/profile")
+    @GetMapping("/profile")
     public Result<HerodotusUserDetails> getUserProfile() {
 
         HerodotusUserDetails userDetails = SecurityUtils.getPrincipal();

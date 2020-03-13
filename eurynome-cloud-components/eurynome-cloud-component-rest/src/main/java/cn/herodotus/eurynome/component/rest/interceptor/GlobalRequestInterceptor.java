@@ -5,6 +5,7 @@ import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.enums.ResultStatus;
 import cn.herodotus.eurynome.component.rest.security.ThroughGatewayTrace;
 import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,11 +20,12 @@ import java.io.PrintWriter;
  * @author : gengwei.zheng
  * @date : 2020/3/3 17:55
  */
-public class GlobalInterceptor implements HandlerInterceptor {
+@Slf4j
+public class GlobalRequestInterceptor implements HandlerInterceptor {
 
     private ThroughGatewayTrace throughGatewayTrace;
 
-    public GlobalInterceptor(ThroughGatewayTrace throughGatewayTrace) {
+    public GlobalRequestInterceptor(ThroughGatewayTrace throughGatewayTrace) {
         this.throughGatewayTrace = throughGatewayTrace;
     }
 
@@ -31,13 +33,15 @@ public class GlobalInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         if (!throughGatewayTrace.isAccessedThroughGateway()) {
+            log.trace("[Herodotus] |- GlobalInterceptor Current Service set isAccessedThroughGateway to false!");
             return true;
         }
 
         String secretKey = request.getHeader(SecurityConstants.GATEWAY_TRACE_HEADER);
         if (StringUtils.isNotBlank(secretKey)) {
             String key = throughGatewayTrace.get(SecurityConstants.GATEWAY_STORAGE_KEY);
-            if (StringUtils.isNotBlank(secretKey) && secretKey.equals(key)) {
+            if (StringUtils.isNotBlank(key) && secretKey.equals(key)) {
+                log.debug("[Herodotus] |- GlobalInterceptor Request is come from gateway!");
                 return true;
             }
         }
@@ -45,6 +49,8 @@ public class GlobalInterceptor implements HandlerInterceptor {
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         PrintWriter writer = response.getWriter();
         writer.write(JSON.toJSONString(new Result<String>().failed().type(ResultStatus.BAD_REQUEST).message("Disable access from outside the gateway！")));
+
+        log.warn("[Herodotus] |- GlobalInterceptor Request is not come from gateway!");
         return false;
     }
 }

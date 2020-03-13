@@ -40,6 +40,8 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 requestTemplate.header(entry.getKey(), entry.getValue());
             }
+
+            log.debug("[Herodotus] |- FeignRequestInterceptor copy all need transfer header!");
         }
 
         // 如果开启了gateway 的MustBeAccessed设置，才会在请求中设置参数
@@ -47,6 +49,7 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             String trace = throughGatewayTrace.get(SecurityConstants.GATEWAY_STORAGE_KEY);
             if (ObjectUtils.isNotEmpty(requestTemplate) && StringUtils.isNotBlank(trace)) {
                 requestTemplate.header(SecurityConstants.GATEWAY_TRACE_HEADER, trace);
+                log.debug("[Herodotus] |- FeignRequestInterceptor set gateway track key [{}] to header!", trace);
             }
         }
 

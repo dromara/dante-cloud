@@ -25,8 +25,8 @@
 package cn.herodotus.eurynome.component.security.properties;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaLetterType;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaFont;
+import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaLetterType;
 import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -57,8 +57,6 @@ public class SecurityProperties implements Serializable {
     private RememberMe rememberMe = new RememberMe();
 
     private VerificationCode verificationCode = new VerificationCode();
-
-    private Gateway gateway = new Gateway();
 
     private Interceptor interceptor = new Interceptor();
 
@@ -96,14 +94,6 @@ public class SecurityProperties implements Serializable {
 
     public void setVerificationCode(VerificationCode verificationCode) {
         this.verificationCode = verificationCode;
-    }
-
-    public Gateway getGateway() {
-        return gateway;
-    }
-
-    public void setGateway(Gateway gateway) {
-        this.gateway = gateway;
     }
 
     public Interceptor getInterceptor() {
@@ -292,46 +282,6 @@ public class SecurityProperties implements Serializable {
 
         public void setCaptchaType(CaptchaType captchaType) {
             this.captchaType = captchaType;
-        }
-    }
-
-    public static class Gateway implements Serializable {
-        /**
-         * 是否必须通过Gateway进行服务的访问
-         */
-        private boolean mustBeAccessed = true;
-        /**
-         * Trace key 在Redis中有效时间，单位秒, 默认5分钟
-         */
-        private long expired = 60 * 5;
-        /**
-         * Trace key 在Redis中效时间还是剩余多长时间，就需要进行更新，单位秒, 默认1分钟
-         * 即，如果Trace key在Redis中过期时间小于60秒，那么就重新创建Trace key
-         */
-        private long threshold = 60;
-
-        public boolean isMustBeAccessed() {
-            return mustBeAccessed;
-        }
-
-        public void setMustBeAccessed(boolean mustBeAccessed) {
-            this.mustBeAccessed = mustBeAccessed;
-        }
-
-        public long getExpired() {
-            return expired;
-        }
-
-        public void setExpired(long expired) {
-            this.expired = expired;
-        }
-
-        public long getThreshold() {
-            return threshold;
-        }
-
-        public void setThreshold(long threshold) {
-            this.threshold = threshold;
         }
     }
 

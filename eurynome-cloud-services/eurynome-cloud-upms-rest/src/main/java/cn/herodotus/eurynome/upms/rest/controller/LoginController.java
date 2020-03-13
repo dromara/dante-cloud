@@ -39,7 +39,7 @@ public class LoginController {
      */
     @ApiOperation(value = "获取当前登录用户信息", notes = "获取当前登录用户信息")
     @GetMapping("/current/user")
-    public Result<HerodotusUserDetails> getUserProfile() {
+    public String getUserProfile() {
 
         Result<HerodotusUserDetails> result = new Result<>();
         HerodotusUserDetails userDetails = SecurityUtils.getPrincipal();
@@ -52,11 +52,8 @@ public class LoginController {
 
 
         log.info("hi,i'am hello world service!!!" + JSON.toJSONString(userDetails));
-//
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        //anonymousUser
-        //    Object principal1 =  userInfoRemoteService.getUser();//SecurityUtils.getPrincipal();
-        return result.data(userDetails);
+
+        return JSON.toJSONString(userDetails);
     }
 
 

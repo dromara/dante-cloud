@@ -68,9 +68,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private AuthenticationManager authenticationManager;
     @Autowired
     private LettuceConnectionFactory lettuceConnectionFactory;
-    /**
-     * 声明 ClientDetails实现 Load a client by the client id. This method must not return null
-     */
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;
     @Autowired
@@ -80,10 +77,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     private SecurityProperties securityProperties;
 
-
     /**
      * 配置令牌端点(Token Endpoint)的安全约束
-     *
+     * {@link org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerSecurityConfiguration}
      * @param security security
      * @throws Exception security
      */
@@ -95,7 +91,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .tokenKeyAccess("permitAll()")
                 // 开启/oauth/check_token验证端口认证权限访问
                 // used by Resource Servers to decode access tokens
-                .checkTokenAccess("isAuthenticated()")
+                .checkTokenAccess("permitAll()")
                 // 开启表单认证
                 // allowFormAuthenticationForClients是为了注册clientCredentialsTokenEndpointFilter
                 // clientCredentialsTokenEndpointFilter,解析request中的client_id和client_secret

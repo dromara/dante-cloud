@@ -39,7 +39,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     public Flux<RouteDefinition> getRouteDefinitions() {
         List<RouteDefinition> routeDefinitions = new ArrayList<>();
         redisTemplate.opsForHash().entries(GATEWAY_ROUTES).values().forEach(routeDefinition -> routeDefinitions.add(JSON.parseObject(routeDefinition.toString(), RouteDefinition.class)));
-        log.debug("[Herodotus] |- Get all gateway route definition from redis!");
+        log.trace("[Herodotus] |- Get all gateway route definition from redis!");
         return Flux.fromIterable(routeDefinitions);
     }
 
