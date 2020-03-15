@@ -1,13 +1,10 @@
 package cn.herodotus.eurynome.platform.autoconfigure;
 
-import cn.herodotus.eurynome.component.rest.interceptor.GlobalRequestInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -20,16 +17,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Slf4j
 @Configuration
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {
-
-    @Autowired
-    private GlobalRequestInterceptor globalRequestInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        // 如果interceptor中不注入redis或其他项目可以直接new
-        // 将拦截器对像手动添加到拦截器链中（在addInterceptors方法中添加）
-        registry.addInterceptor(globalRequestInterceptor).addPathPatterns("/**");
-    }
 
     /**
      * 多个WebSecurityConfigurerAdapter
