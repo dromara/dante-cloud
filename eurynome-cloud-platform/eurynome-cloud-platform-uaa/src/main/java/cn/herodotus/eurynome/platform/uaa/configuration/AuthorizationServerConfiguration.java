@@ -41,6 +41,7 @@ import java.util.Map;
  * ·SecurityContextHolder: 提供访问 SecurityContext。
  * ·SecurityContext: 保存Authentication，和一些其它的信息
  *
+ * '@EnableAuthorizationServer' 提供/oauth/authorize,/oauth/token,/oauth/check_token,/oauth/confirm_access,/oauth/error
  *
  * 为了实现OAuth 2.0授权服务器，Spring Security过滤器链中需要以下端点：
  * ·AuthorizationEndpoint用于为授权请求提供服务。默认网址：/oauth/authorize。
@@ -64,6 +65,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private DataSource dataSource;
+    /**
+     * 注入authenticationManager
+     * 来支持 password grant type
+     */
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -88,7 +93,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         security
                 // 默认都是denyAll()
                 // exposes public key for token verification if using JWT tokens
-                .tokenKeyAccess("permitAll()")
+                .tokenKeyAccess("isAuthenticated()")
                 // 开启/oauth/check_token验证端口认证权限访问
                 // used by Resource Servers to decode access tokens
 //                .checkTokenAccess("isAuthenticated()")
@@ -103,6 +108,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 // 因为本质是一样的
                 .allowFormAuthenticationForClients();
     }
+
+
+
 
     /**
      * 配置客户端详情信息(Client Details)

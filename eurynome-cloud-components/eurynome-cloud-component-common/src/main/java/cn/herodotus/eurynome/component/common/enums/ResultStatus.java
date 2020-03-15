@@ -80,7 +80,7 @@ public enum ResultStatus {
      */
     BAD_REQUEST(4100, "Bad Request"),
     NOT_FOUND(4104, "Not Found"),
-    METHOD_NOT_ALLOWED(4105, "Method Not Allowed"),
+    METHOD_NOT_ALLOWED(4105, "请求方法不支持！"),
     MEDIA_TYPE_NOT_ACCEPTABLE(4106, "Media Type Not Acceptable"),
     TOO_MANY_REQUESTS(4129, "Too Many Requests"),
     /**

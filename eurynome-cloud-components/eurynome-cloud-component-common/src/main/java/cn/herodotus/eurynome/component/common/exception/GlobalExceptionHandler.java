@@ -102,6 +102,7 @@ public class GlobalExceptionHandler {
      */
     static {
         exceptionDictionary.put("InvalidTokenException", getResult(ResultStatus.INVALID_TOKEN, HttpStatus.SC_FORBIDDEN));
+        exceptionDictionary.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
         // 以下是没有重新梳理过的错误。
         exceptionDictionary.put("UsernameNotFoundException", getUnauthorizedResult(ResultStatus.USERNAME_NOT_FOUND));
         exceptionDictionary.put("BadCredentialsException", getUnauthorizedResult(ResultStatus.BAD_CREDENTIALS));
@@ -123,7 +124,7 @@ public class GlobalExceptionHandler {
         exceptionDictionary.put("TypeMismatchException", getBadRequestResult(ResultStatus.BAD_REQUEST));
         exceptionDictionary.put("MissingServletRequestParameterException", getBadRequestResult(ResultStatus.BAD_REQUEST));
         exceptionDictionary.put("NoHandlerFoundException", getResult(ResultStatus.NOT_FOUND, HttpStatus.SC_NOT_FOUND));
-        exceptionDictionary.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
+
         exceptionDictionary.put("HttpMediaTypeNotAcceptableException", getBadRequestResult(ResultStatus.MEDIA_TYPE_NOT_ACCEPTABLE));
         exceptionDictionary.put("IllegalArgumentException", getBadRequestResult(ResultStatus.ALERT));
         exceptionDictionary.put("InvalidGrantException", getUnauthorizedResult(ResultStatus.ALERT));
@@ -144,7 +145,7 @@ public class GlobalExceptionHandler {
     }
 
     protected static Result<String> getResult(ResultStatus resultCode, int httpStatus) {
-        return new Result<String>().failed().code(resultCode.getCode()).message(resultCode.getMessage()).httpStatus(httpStatus);
+        return new Result<String>().failed().code(resultCode.getCode()).data(resultCode.getMessage()).httpStatus(httpStatus);
     }
 
     public static Result<String> resolveException(Exception ex, String path) {

@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
 import cn.herodotus.eurynome.component.security.filter.TenantSecurityContextFilter;
+import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.eurynome.component.security.response.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
@@ -54,6 +55,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     private TokenStore tokenStore;
 
     private BearerTokenExtractor tokenExtractor = new BearerTokenExtractor();
+    @Autowired
+    private SecurityProperties securityProperties;
 
     @Bean
     public TenantSecurityContextFilter tenantSecurityContextFilter() {
@@ -63,20 +66,23 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         log.info("[Herodotus] |- ResourceServerConfigurerAdapter configuration!");
-        // @formatter:off
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
-                .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class)
-                .antMatcher("/**")
-                    .authorizeRequests()
-                    .antMatchers("/oauth/token", "/oauth/authorize").permitAll()
-                    .anyRequest().authenticated()
-                .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
-                .exceptionHandling()
-                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+                .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class);
 
-        // 关闭csrf 跨站（域）攻击防控
-        http.csrf().disable();
+        // @formatter:off
+        http.requestMatchers().antMatchers("/identity/**")
+                .and()
+                    .authorizeRequests()
+                    .antMatchers("/identity/**").authenticated()
+                .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
+                    .exceptionHandling()
+                    .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                    .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
+                .and()
+                    .csrf().disable()
+                    .httpBasic().disable();
+        // @formatter:on
     }
 
 

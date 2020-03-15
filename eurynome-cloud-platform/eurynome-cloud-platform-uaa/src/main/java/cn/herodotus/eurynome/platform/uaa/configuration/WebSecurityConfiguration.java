@@ -105,17 +105,25 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         log.info("[Herodotus] |- WebSecurityConfigurerAdapter configuration!");
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+                .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class);
+
         // @formatter:off
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
-                .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class)
-                .authorizeRequests()
-                .anyRequest().authenticated()
+        http.requestMatchers().antMatchers("/oauth/**", "/login**")
+                .and()
+                    .authorizeRequests()
+                    .antMatchers("/oauth/**").authenticated()
+                .and()
+                    .authorizeRequests()
+                    .anyRequest().authenticated()
                 .and()
                     .formLogin()
                 // 可以设置自定义的登录页面 或者 （登录）接口
                 // 注意1： 一般来说设置成（登录）接口后，该接口会配置成无权限即可访问，所以会走匿名filter, 也就意味着不会走认证过程了，所以我们一般不直接设置成接口地址
                 // 注意2： 这里配置的 地址一定要配置成无权限访问，否则将出现 一直重定向问题（因为无权限后又会重定向到这里配置的登录页url）
                         .loginPage(securityProperties.getLogin().getLoginUrl()).permitAll()
+                        .defaultSuccessUrl("/oauth/confirm_access")
                 .and()
                     .logout().permitAll()
                 .and()

@@ -61,6 +61,7 @@ herodotus:
     white-list:
       - "/oauth/token"
       - "/oauth/check_token"
+      - "/oauth/authorize"
 
 logging:
   level:

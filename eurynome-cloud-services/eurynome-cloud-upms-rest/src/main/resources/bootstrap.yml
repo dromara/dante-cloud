@@ -46,6 +46,7 @@ herodotus:
   platform:
     application:
       service-display-name: "用户中心"
+      accessed-through-gateway: false
     security:
       interceptor:
         white-list:

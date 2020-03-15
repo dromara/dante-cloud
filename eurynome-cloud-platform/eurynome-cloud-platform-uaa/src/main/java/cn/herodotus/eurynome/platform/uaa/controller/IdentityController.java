@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @Api(tags = "认证接口")
-public class SecurityController {
+public class IdentityController {
 
     /**
      * 获取用户基础信息
      * @return Result<HerodotusUserDetails>
      */
     @ApiOperation(value = "获取当前登录用户信息", notes = "获取当前登录用户信息")
-    @GetMapping("/profile")
+    @GetMapping("/identity/profile")
     public Result<HerodotusUserDetails> getUserProfile() {
 
         HerodotusUserDetails userDetails = SecurityUtils.getPrincipal();
