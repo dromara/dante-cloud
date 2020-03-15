@@ -36,6 +36,15 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
     @Resource
     private RedisTemplate<Object, Object> redisTemplate;
 
+    /**
+     * 说明：目前所有请求均是通过Gateway进行访问。
+     * /oauth/check_token，是比较特殊的地址，不是使用token的方式进行鉴权。
+     * 虽然目前使用的是“permitAll”的方式，不够安全。但是不管什么情况，在Gateway这一端，不应该进行拦截。
+     * 后续可以根据IP，以及OAuth2鉴权的方式进行安全控制。
+     * @param exchange
+     * @param chain
+     * @return
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -64,7 +73,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         // 2.非免登陆地址，获取token 检查token，如果未空，或者不是 Bearer XXX形式，则认为未授权。
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (!isTokenWellFormed(token)) {
-            log.debug("[Herodotus] |- Token is not Well Formed！");
+            log.debug("[Herodotus] |- Token is not Well Formed!");
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).httpStatus(HttpStatus.SC_UNAUTHORIZED));
         }
 

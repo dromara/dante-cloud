@@ -91,6 +91,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .tokenKeyAccess("permitAll()")
                 // 开启/oauth/check_token验证端口认证权限访问
                 // used by Resource Servers to decode access tokens
+//                .checkTokenAccess("isAuthenticated()")
                 .checkTokenAccess("permitAll()")
                 // 开启表单认证
                 // allowFormAuthenticationForClients是为了注册clientCredentialsTokenEndpointFilter

@@ -60,6 +60,7 @@ herodotus:
   gateway:
     white-list:
       - "/oauth/token"
+      - "/oauth/check_token"
 
 logging:
   level:

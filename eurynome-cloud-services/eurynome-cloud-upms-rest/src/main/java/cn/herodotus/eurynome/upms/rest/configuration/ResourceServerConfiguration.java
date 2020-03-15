@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 import javax.annotation.Resource;
 
@@ -24,21 +25,18 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and()
+        log.info("[Herodotus] |- ResourceServerConfigurerAdapter configuration!");
+        // @formatter:off
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
                 .authorizeRequests()
-                .antMatchers(getWhiteList()).permitAll()
-                // 指定监控访问权限
-                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().authenticated()
-                .and()
+                .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
                 .exceptionHandling()
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
-                .and()
-                .csrf().disable()
-                .httpBasic().disable();
+                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
 
+        // 关闭csrf 跨站（域）攻击防控
+        http.csrf().disable();
     }
 
     private String[] getWhiteList() {

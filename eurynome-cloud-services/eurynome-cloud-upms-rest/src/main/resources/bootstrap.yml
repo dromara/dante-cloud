@@ -52,6 +52,7 @@ herodotus:
           - "/v2/**"
           - "/login/token"
           - "/application/clientdetails"
+          - "/oauth/check_token"
           - "/user/findByUsername"
           - "/user/findByUserId"
           - "/captcha/getVerifiCode"

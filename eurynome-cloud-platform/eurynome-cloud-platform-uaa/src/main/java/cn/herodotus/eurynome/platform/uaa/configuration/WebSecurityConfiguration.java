@@ -104,19 +104,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        log.info("[Herodotus] |- WebSecurityConfigurerAdapter configuration!");
         // @formatter:off
-        http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and()
-                    .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class)
-
-                    // 指定该配置对应拦截的内容
-                    .antMatcher("/**")
-                        .authorizeRequests()
-                        .antMatchers("/oauth/token", "/oauth/authorize", "/login**", "/error**").permitAll()
-                .and()
-                    .authorizeRequests()
-                        .anyRequest().authenticated()
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
+                .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class)
+                .authorizeRequests()
+                .anyRequest().authenticated()
                 .and()
                     .formLogin()
                 // 可以设置自定义的登录页面 或者 （登录）接口
@@ -126,8 +119,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout().permitAll()
                 .and()
-                    .csrf().disable()
-                    .httpBasic().disable();
-                // @formatter:on
+                    .csrf().disable();
+        // @formatter:on
     }
 }
