@@ -30,7 +30,9 @@ public class UpmsConstants {
     public static final String CACHE_NAME_SYSUSER = "data:upms:sysuser:";
     public static final String CACHE_NAME_SYSUSER_INDEX = CACHE_NAME_SYSUSER + INDEX_CACHE_NAME;
 
-    public static final String CACHE_NAME_OAUTHSCOPE = "data:upms:oauthscope:";
+    public static final String CACHE_NAME_OAUTHCLIENTDETAIL = "data:upms:oauthclientdetails:";
+    public static final String CACHE_NAME_OAUTHCLIENTDETAIL_INDEX = CACHE_NAME_OAUTHCLIENTDETAIL + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_OAUTHSCOPE = "data:upms:oauthscopes:";
     public static final String CACHE_NAME_OAUTHSCOPE_INDEX = CACHE_NAME_OAUTHSCOPE + INDEX_CACHE_NAME;
 
     private static final List<Map<String, Object>> STATUS_ENUM = StatusEnum.getToJsonStruct();

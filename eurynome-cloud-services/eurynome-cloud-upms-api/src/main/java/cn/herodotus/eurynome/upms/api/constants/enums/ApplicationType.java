@@ -12,13 +12,17 @@ import java.util.Map;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ApplicationType {
 
-    WEB(0, "常规Web应用"),
-    NODE(1, "纯网页应用"),
-    MOBILE(2, "手机移动端"),
-    WEAPP(3, "微信小程序");
+    /**
+     * 应用类型
+     */
+    WEB(0, "PC网页应用"),
+    SERVICE(1, "服务应用"),
+    APP(2, "手机应用"),
+    WAP(3, "手机网页应用"),
+    MINI(4, "小程序应用");
 
 
-    private Integer status;
+    private Integer type;
     private String description;
 
     private static Map<Integer, ApplicationType> indexMap = new HashMap<>();
@@ -26,10 +30,10 @@ public enum ApplicationType {
 
     static {
         for (ApplicationType applicationType : ApplicationType.values()) {
-            indexMap.put(applicationType.status, applicationType);
-            toJsonStruct.add(applicationType.status,
+            indexMap.put(applicationType.type, applicationType);
+            toJsonStruct.add(applicationType.type,
                     ImmutableMap.<String, Object>builder()
-                            .put("value", applicationType.getStatus())
+                            .put("value", applicationType.getType())
                             .put("key", applicationType.name())
                             .put("text", applicationType.description)
                             .build());
@@ -37,8 +41,8 @@ public enum ApplicationType {
     }
 
 
-    ApplicationType(Integer status, String description) {
-        this.status = status;
+    ApplicationType(Integer type, String description) {
+        this.type = type;
         this.description = description;
     }
 
@@ -49,8 +53,8 @@ public enum ApplicationType {
      * @return
      */
     @JsonValue
-    public Integer getStatus() {
-        return this.status;
+    public Integer getType() {
+        return this.type;
     }
 
     public String getDescription() {

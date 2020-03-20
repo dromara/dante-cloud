@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.social;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.social.WeappUser;
 import cn.herodotus.eurynome.upms.logic.service.social.WeappUserService;
 import io.swagger.annotations.Api;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/weapp/user")
 @Api(value = "小程序用户接口", tags = "用户中心服务")
-public class WeappUserController extends BaseCrudController {
+public class WeappUserController extends BaseController {
 
     private final WeappUserService weappUserService;
 

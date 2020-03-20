@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ComponentScan(value = { "org.flowable.ui.modeler.rest.api", "org.flowable.ui.common.rest.exception" })
 @EnableAsync
 public class ApiDispatcherServletConfiguration extends WebMvcConfigurationSupport {
@@ -40,13 +40,11 @@ public class ApiDispatcherServletConfiguration extends WebMvcConfigurationSuppor
         return new SessionLocaleResolver();
     }
 
-    @Bean
     @Override
-    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
+    protected RequestMappingHandlerMapping createRequestMappingHandlerMapping() {
         RequestMappingHandlerMapping requestMappingHandlerMapping = new RequestMappingHandlerMapping();
         requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
         requestMappingHandlerMapping.setRemoveSemicolonContent(false);
-        requestMappingHandlerMapping.setInterceptors(getInterceptors());
         return requestMappingHandlerMapping;
     }
 
@@ -62,3 +60,4 @@ public class ApiDispatcherServletConfiguration extends WebMvcConfigurationSuppor
         }
     }
 }
+

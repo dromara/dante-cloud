@@ -101,6 +101,7 @@ public class GlobalExceptionHandler {
      * 505	HTTP Version not supported	服务器不支持请求的HTTP协议的版本，无法完成处理
      */
     static {
+        exceptionDictionary.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
         exceptionDictionary.put("InvalidTokenException", getResult(ResultStatus.INVALID_TOKEN, HttpStatus.SC_FORBIDDEN));
         exceptionDictionary.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
         // 以下是没有重新梳理过的错误。
@@ -131,6 +132,7 @@ public class GlobalExceptionHandler {
         exceptionDictionary.put("AccessDeniedException", getResult(ResultStatus.ACCESS_DENIED, HttpStatus.SC_FORBIDDEN));
         exceptionDictionary.put("MethodArgumentNotValidException", getResult(ResultStatus.ALERT));
     }
+
 
     private static Result<String> getBadRequestResult(ResultStatus resultCode) {
         return getResult(resultCode, HttpStatus.SC_BAD_REQUEST);

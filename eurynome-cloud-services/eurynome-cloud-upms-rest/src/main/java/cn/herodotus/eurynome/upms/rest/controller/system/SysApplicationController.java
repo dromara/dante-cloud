@@ -25,62 +25,29 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
-import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
-import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;
-import cn.herodotus.eurynome.upms.api.service.fegin.SysApplicationFeignService;
-import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysApplicationService;
-import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
 @RestController
 @Api(value = "平台终端接口", tags = "用户中心服务")
-public class SysApplicationController extends BaseCrudController implements SysApplicationFeignService {
+public class SysApplicationController extends BaseController {
 
     private final SysApplicationService sysApplicationService;
 
     @Autowired
     public SysApplicationController(SysApplicationService sysApplicationService) {
         this.sysApplicationService = sysApplicationService;
-    }
-
-    @Override
-    @ApiOperation(value = "获取终端信息", notes = "通过clientId获取封装后的终端信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "终端ID")
-    })
-    public Result<HerodotusApplication> findByClientId(String clientId) {
-        SysApplication sysApplication = sysApplicationService.findByClientId(clientId);
-        if (sysApplication != null) {
-
-            SysClientDetail sysClientDetail = sysApplication.getSysClientDetail();
-
-            Map additionalInformationMap = new HashMap();
-            if (StringUtils.isNotEmpty(sysClientDetail.getAdditionalInformation())) {
-                additionalInformationMap = JSON.parseObject(sysClientDetail.getAdditionalInformation(), Map.class);
-            }
-
-            HerodotusApplication oauthApplication = new HerodotusApplication();
-            oauthApplication.setHerodotusClientDetails(UpmsHelper.convertSysClientDetailToOAuth2ClientDetails(sysClientDetail, additionalInformationMap));
-            oauthApplication.setArtisanAuthorities(UpmsHelper.convertSysAuthoritiesToArtisanAuthorities(sysApplication.getAuthorities()));
-
-            return new Result<HerodotusApplication>().ok().data(oauthApplication);
-        } else {
-            return new Result<HerodotusApplication>().failed().message("获取数据失败！");
-        }
     }
 
     @ApiOperation(value = "获取终端分页数据", notes = "通过pageNumber和pageSize获取分页数据")

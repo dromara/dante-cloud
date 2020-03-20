@@ -24,6 +24,7 @@ import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeSe
 import org.springframework.security.oauth2.provider.token.*;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.sql.DataSource;
 import java.security.Principal;
@@ -50,7 +51,7 @@ import java.util.Map;
  * 以下过滤器是实现OAuth 2.0资源服务器所必需的：
  * ·将OAuth2AuthenticationProcessingFilter用于加载给定的认证访问令牌请求的认证。
  *
- * [/oauth/authorize]
+ * [/oauth/authorize] {@link org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint#authorize(Map, Map, SessionStatus, Principal)}
  * [/oauth/token] {@link org.springframework.security.oauth2.provider.endpoint.TokenEndpoint#getAccessToken(Principal, Map)}
  * [/oauth/check_token] {@link org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint#checkToken(String)}
  * [/oauth/confirm_access]

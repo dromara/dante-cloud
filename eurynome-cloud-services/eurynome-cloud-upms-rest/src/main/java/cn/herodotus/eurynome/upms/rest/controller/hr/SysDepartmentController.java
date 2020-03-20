@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysDepartmentService;
 import io.swagger.annotations.Api;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/department")
 @Api(value = "部门管理接口", tags = "用户中心服务")
-public class SysDepartmentController extends BaseCrudController {
+public class SysDepartmentController extends BaseController {
 
     private final SysDepartmentService sysDepartmentService;
 

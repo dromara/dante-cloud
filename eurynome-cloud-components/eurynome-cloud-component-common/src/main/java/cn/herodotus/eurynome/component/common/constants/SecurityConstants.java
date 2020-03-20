@@ -51,6 +51,7 @@ public class SecurityConstants {
 
     public static final String ROLE_PREFIX = "ROLE_";
     public static final String AUTHORITY_PREFIX = "OP_";
+    public static final String AUTHORITY_PREFIX_API = "API_";
 
     public final static String OPEN_ID = "openid";
     public final static String LICENSE = "license";

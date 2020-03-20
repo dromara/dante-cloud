@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.service.system.SysRoleService;
 import io.swagger.annotations.Api;
@@ -41,7 +41,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/role")
 @Api(value = "平台角色接口", tags = "用户中心服务")
-public class SysRoleController extends BaseCrudController {
+public class SysRoleController extends BaseController {
 
     private final SysRoleService sysRoleService;
 

@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.domain.TreeNode;
 import cn.herodotus.eurynome.component.common.utils.TreeUtils;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import io.swagger.annotations.Api;
@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/authority")
 @Api(value = "平台角色接口", tags = "用户中心服务")
-public class SysAuthorityController extends BaseCrudController {
+public class SysAuthorityController extends BaseController {
 
     private final SysAuthorityService sysAuthorityService;
 

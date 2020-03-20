@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.domain;
 
+import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,7 +43,7 @@ import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HerodotusClientDetails implements ClientDetails, Serializable {
+public class HerodotusClientDetails extends AbstractDomain implements ClientDetails {
 
     @JsonProperty("client_id")
     private String clientId;
@@ -265,7 +266,7 @@ public class HerodotusClientDetails implements ClientDetails, Serializable {
         this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
     }
 
-    public void setAdditionalInformation(Map<String, ?> additionalInformation) {
+    public void setAdditionalInformation(Map<String, Object> additionalInformation) {
         this.additionalInformation = new LinkedHashMap<>(additionalInformation);
     }
 

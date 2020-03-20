@@ -78,19 +78,13 @@ public class SysApplicationService extends BaseCacheService<SysApplication, Stri
     public SysApplication saveOrUpdate(SysApplication sysApplication) {
         SysApplication savedSysApplication = sysApplicationRepository.saveAndFlush(sysApplication);
         this.cache(savedSysApplication);
-        log.debug("[Luban UPMS] |- SysApplication Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysApplication Service saveOrUpdate.");
         return savedSysApplication;
-    }
-
-    public SysApplication findByClientId(String clientId) {
-        SysApplication sysApplication = sysApplicationRepository.findByClientId(clientId);
-        log.debug("[Luban UPMS] |- SysApplication Service findByClientId.");
-        return sysApplication;
     }
 
     public SysApplication authorize(String applicationId, String[] authorities) {
 
-        log.debug("[Luban UPMS] |- SysApplication Service authorize.");
+        log.debug("[Herodotus] |- SysApplication Service authorize.");
 
         Set<SysAuthority> sysAuthorities = new HashSet<>();
         for (String authority : authorities) {
@@ -113,14 +107,13 @@ public class SysApplicationService extends BaseCacheService<SysApplication, Stri
             sysApplication = sysApplicationRepository.findByApplicationId(applicationId);
             this.cache(sysApplication);
         }
-        log.debug("[Luban UPMS] |- SysApplication Service findById.");
+        log.debug("[Herodotus] |- SysApplication Service findById.");
         return sysApplication;
     }
 
-    @CacheInvalidate(name = UpmsConstants.CACHE_NAME_SYSAPPLICATION, key = "#applicationId")
     @Override
     public void deleteById(String applicationId) {
-        log.debug("[Luban UPMS] |- SysApplication Service deleteById.");
+        log.debug("[Herodotus] |- SysApplication Service deleteById.");
         sysApplicationRepository.deleteById(applicationId);
         this.getCache().remove(applicationId);
     }
@@ -136,7 +129,7 @@ public class SysApplicationService extends BaseCacheService<SysApplication, Stri
     public Page<SysApplication> findByPage(int pageNumber, int pageSize) {
         Page<SysApplication> pages = sysApplicationRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
         this.cache(pages.getContent());
-        log.debug("[Luban UPMS] |- SysApplication Service findByPage.");
+        log.debug("[Herodotus] |- SysApplication Service findByPage.");
         return pages;
     }
 

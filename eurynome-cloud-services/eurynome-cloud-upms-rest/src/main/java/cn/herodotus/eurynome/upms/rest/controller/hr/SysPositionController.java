@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysPosition;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysPositionService;
 import io.swagger.annotations.Api;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/position")
 @Api(value = "岗位管理接口", tags = "用户中心服务")
-public class SysPositionController extends BaseCrudController {
+public class SysPositionController extends BaseController {
 
     private final SysPositionService sysPositionService;
 

@@ -18,7 +18,7 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/2/29 15:28
  */
-public abstract class BaseCrudController extends AbstractController {
+public abstract class BaseController extends AbstractController {
 
     protected <D extends AbstractDomain> Result<D> result(D domain) {
         Result<D> result = new Result<>();

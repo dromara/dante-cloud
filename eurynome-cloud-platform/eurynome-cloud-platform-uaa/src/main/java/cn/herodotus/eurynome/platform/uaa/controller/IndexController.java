@@ -61,11 +61,11 @@ public class IndexController {
      */
     @RequestMapping("/oauth/confirm_access")
     public String confirm_access(HttpServletRequest request, HttpSession session, Map<String, Object> model) {
-        Map<String, String> scopeMap;
+        Map<String, Object> scopeMap;
         if (model.containsKey("scopes")) {
-            scopeMap = (Map<String, String>) model.get("scopes");
+            scopeMap = (Map<String, Object>) model.get("scopes");
         } else {
-            scopeMap = (Map<String, String>) request.getAttribute("scopes");
+            scopeMap = (Map<String, Object>) request.getAttribute("scopes");
         }
 
         List<String> scopeList = new ArrayList<>();
@@ -79,7 +79,7 @@ public class IndexController {
         if (auth != null) {
             AuthorizationRequest authorizationRequest = (AuthorizationRequest) auth;
             // TODO 这里后面需要完善一下。Client Details 信息不够完整
-            ClientDetails clientDetails = oauthClientDetailsService.getRemoteOAuth2ClientDetails(authorizationRequest.getClientId());
+            ClientDetails clientDetails = oauthClientDetailsService.getRemoteOauthClientDetails(authorizationRequest.getClientId());
             model.put("app", clientDetails.getAdditionalInformation());
             model.put("user", SecurityUtils.getPrincipal());
         }

@@ -51,6 +51,7 @@ herodotus:
       interceptor:
         white-list:
           - "/v2/**"
+          - "/oauth/client_details"
           - "/login/token"
           - "/application/clientdetails"
           - "/user/findByUsername"

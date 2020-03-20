@@ -71,21 +71,25 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.system",
         "cn.herodotus.eurynome.upms.logic.service.social",
         "cn.herodotus.eurynome.upms.logic.service.hr",
+        "cn.herodotus.eurynome.upms.logic.service.oauth"
 })
 @EnableJpaRepositories(basePackages = {
         "cn.herodotus.eurynome.upms.logic.repository.system",
         "cn.herodotus.eurynome.upms.logic.repository.social",
         "cn.herodotus.eurynome.upms.logic.repository.hr",
+        "cn.herodotus.eurynome.upms.logic.repository.oauth",
 })
 @EntityScan(basePackages = {
         "cn.herodotus.eurynome.upms.api.entity.system",
         "cn.herodotus.eurynome.upms.api.entity.social",
         "cn.herodotus.eurynome.upms.api.entity.hr",
+        "cn.herodotus.eurynome.upms.api.entity.oauth"
 })
 @EnableMethodCache(basePackages = {
         "cn.herodotus.eurynome.upms.logic.service.system",
         "cn.herodotus.eurynome.upms.logic.service.social",
         "cn.herodotus.eurynome.upms.logic.service.hr",
+        "cn.herodotus.eurynome.upms.logic.service.oauth"
 })
 @EnableCreateCacheAnnotation
 public class UpmsLogicConfiguration {

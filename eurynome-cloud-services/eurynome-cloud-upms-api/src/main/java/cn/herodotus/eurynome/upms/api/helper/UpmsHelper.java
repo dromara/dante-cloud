@@ -8,7 +8,7 @@ import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
 import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
 import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
-import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import org.apache.commons.collections4.CollectionUtils;
@@ -55,17 +55,17 @@ public class UpmsHelper {
         return herodotusAuthority;
     }
 
-    public static HerodotusClientDetails convertSysClientDetailToOAuth2ClientDetails(SysClientDetail sysClientDetail, Map<String, Object> additionalInformation) {
+    public static HerodotusClientDetails convertOauthClientDetailsToHerodotusClientDetails(OauthClientDetails oauthClientDetails, Map<String, Object> additionalInformation) {
         HerodotusClientDetails herodotusClientDetails = new HerodotusClientDetails(
-                sysClientDetail.getClientId(),
-                sysClientDetail.getResourceIds(),
-                sysClientDetail.getScope(),
-                sysClientDetail.getAuthorizedGrantTypes(),
-                sysClientDetail.getAuthorities(),
-                sysClientDetail.getWebServerRedirectUri());
-        herodotusClientDetails.setAccessTokenValiditySeconds(sysClientDetail.getAccessTokenValidity());
-        herodotusClientDetails.setRefreshTokenValiditySeconds(sysClientDetail.getRefreshTokenValidity());
-        herodotusClientDetails.setClientSecret(sysClientDetail.getClientSecret());
+                oauthClientDetails.getClientId(),
+                oauthClientDetails.getResourceIds(),
+                oauthClientDetails.getScope(),
+                oauthClientDetails.getAuthorizedGrantTypes(),
+                oauthClientDetails.getAuthorities(),
+                oauthClientDetails.getWebServerRedirectUri());
+        herodotusClientDetails.setAccessTokenValiditySeconds(oauthClientDetails.getAccessTokenValidity());
+        herodotusClientDetails.setRefreshTokenValiditySeconds(oauthClientDetails.getRefreshTokenValidity());
+        herodotusClientDetails.setClientSecret(oauthClientDetails.getClientSecret());
         herodotusClientDetails.setAdditionalInformation(additionalInformation);
         return herodotusClientDetails;
     }

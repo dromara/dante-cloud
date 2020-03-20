@@ -12,9 +12,6 @@ public interface SysApplicationRepository extends JpaRepository<SysApplication, 
     @EntityGraph(value = "SysApplicationWithAuthority", type = EntityGraph.EntityGraphType.FETCH)
     SysApplication findByApplicationId(String applicationId);
 
-    @Query("from SysApplication sa where sa.sysClientDetail.clientId = ?1")
-    SysApplication findByClientId(String clientId);
-
     @Modifying
     @Transactional
     @Query("delete from SysApplication sa where sa.applicationId = ?1")

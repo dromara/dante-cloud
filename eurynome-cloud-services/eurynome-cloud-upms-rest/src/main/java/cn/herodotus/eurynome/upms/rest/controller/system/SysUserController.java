@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.service.fegin.SysUserFeginService;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
@@ -47,7 +47,7 @@ import java.util.Map;
  */
 @RestController
 @Api(value = "平台用户接口", tags = "用户中心服务")
-public class SysUserController extends BaseCrudController implements SysUserFeginService {
+public class SysUserController extends BaseController implements SysUserFeginService {
 
     private final SysUserService sysUserService;
 

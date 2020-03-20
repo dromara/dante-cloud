@@ -51,10 +51,6 @@ public class SysApplication extends BaseSysEntity {
             indexes = {@Index(name = "sys_application_authority_aid_idx", columnList = "application_id"), @Index(name = "sys_application_authority_pid_idx", columnList = "authority_id")})
     private Set<SysAuthority> authorities = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "client_id")
-    private SysClientDetail sysClientDetail;
-
     @Override
     public String getDomainCacheKey() {
         return getApplicationId();
@@ -122,14 +118,6 @@ public class SysApplication extends BaseSysEntity {
 
     public void setAuthorities(Set<SysAuthority> authorities) {
         this.authorities = authorities;
-    }
-
-    public SysClientDetail getSysClientDetail() {
-        return sysClientDetail;
-    }
-
-    public void setSysClientDetail(SysClientDetail sysClientDetail) {
-        this.sysClientDetail = sysClientDetail;
     }
 
     @Override

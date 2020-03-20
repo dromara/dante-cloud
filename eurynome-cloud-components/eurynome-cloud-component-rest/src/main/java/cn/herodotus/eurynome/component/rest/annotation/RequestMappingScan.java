@@ -26,9 +26,9 @@ package cn.herodotus.eurynome.component.rest.annotation;
 
 import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.rest.enums.Architecture;
 import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
 import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.component.rest.enums.Architecture;
 import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -81,8 +81,6 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
         if (ObjectUtils.isNotEmpty(requestMappingStore) && applicationProperties.getRequestMapping().isRegisterRequestMapping()) {
 
-            List<RequestMappingResource> resources = new ArrayList<>();
-
             ConfigurableApplicationContext applicationContext = applicationReadyEvent.getApplicationContext();
 
             // 1、获取服务ID：该服务ID对于微服务是必需的，对于Hammer只是备用。
@@ -91,13 +89,14 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
             // 2、只针对有EnableResourceServer注解的微服务进行扫描。Hammer目前不会用到EnableResourceServer所以增加的了一个Architecture判断
             if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
-                Map<String, Object> resrouceServer = applicationContext.getBeansWithAnnotation(scanAnnotationClass);
-                if (MapUtils.isEmpty(resrouceServer)) {
+                Map<String, Object> resourceServer = applicationContext.getBeansWithAnnotation(scanAnnotationClass);
+                if (MapUtils.isEmpty(resourceServer)) {
                     // 只扫描资源服务器
                     return;
                 }
             }
 
+            List<RequestMappingResource> resources = new ArrayList<>();
             // 3、微服务需要设置服务资源的上级节点
             if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
                 RequestMappingResource requestMappingResourceRoot = new RequestMappingResource();
@@ -188,7 +187,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
         // 5.2.10、组装对象
         RequestMappingResource requestMappingResource = new RequestMappingResource();
         requestMappingResource.setId(id);
-        requestMappingResource.setCode(getCode(classSimpleName, methodName, parameterCount));
+        requestMappingResource.setCode(SecurityConstants.AUTHORITY_PREFIX + id);
         // 微服务需要明确ServiceId，同时也知道ParentId，Hammer有办法，但是太繁琐，还是生成数据后，配置一把好点。
         if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
             requestMappingResource.setServiceId(identifyingCode);
@@ -237,20 +236,6 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
         return stringBuilder.toString();
-    }
-
-    private String getCode(String classSimpleName, String methodName, Integer parameterCount) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(SecurityConstants.AUTHORITY_PREFIX);
-        builder.append(classSimpleName.toUpperCase());
-        builder.append(SymbolConstants.UNDERLINE);
-        builder.append(methodName.toUpperCase());
-        if (parameterCount > 0) {
-            builder.append(SymbolConstants.UNDERLINE);
-            builder.append(parameterCount);
-        }
-
-        return builder.toString();
     }
 
     private boolean isLegalGroup(String className) {

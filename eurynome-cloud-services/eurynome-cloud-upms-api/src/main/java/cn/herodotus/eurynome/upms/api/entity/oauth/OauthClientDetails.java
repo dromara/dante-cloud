@@ -1,7 +1,7 @@
-package cn.herodotus.eurynome.upms.api.entity.system;
+package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
+import cn.herodotus.eurynome.component.data.base.entity.BaseCacheEntity;
 import com.alibaba.fastjson.JSON;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,13 +9,19 @@ import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>Description: Oauth client details 实体 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/3/19 16:39
+ */
 @Entity
 @Table(name = "oauth_client_details", indexes = {@Index(name = "oauth_client_details_id_idx", columnList = "client_id")})
-public class SysClientDetail extends AbstractDomain {
+public class OauthClientDetails extends BaseCacheEntity {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @GeneratedValue(generator = "client-detail-uuid")
+    @GenericGenerator(name = "client-detail-uuid", strategy = "cn.herodotus.eurynome.upms.api.generator.OauthClientDetailsUUIDGenerator")
     @Column(name = "client_id", length = 128)
     private String clientId;
 
@@ -49,7 +55,7 @@ public class SysClientDetail extends AbstractDomain {
     @Column(name = "autoapprove", length = 256)
     private String autoApprove;
 
-    public SysClientDetail() {
+    public OauthClientDetails() {
         Map<String, Object> defaultAdditionalInformation = new HashMap<>();
         defaultAdditionalInformation.put("status", StatusEnum.ENABLE);
         setAdditionalInformation(JSON.toJSONString(defaultAdditionalInformation));
@@ -158,5 +164,10 @@ public class SysClientDetail extends AbstractDomain {
                 ", additionalInformation='" + additionalInformation + '\'' +
                 ", autoApprove='" + autoApprove + '\'' +
                 '}';
+    }
+
+    @Override
+    public String getDomainCacheKey() {
+        return this.getClientId();
     }
 }

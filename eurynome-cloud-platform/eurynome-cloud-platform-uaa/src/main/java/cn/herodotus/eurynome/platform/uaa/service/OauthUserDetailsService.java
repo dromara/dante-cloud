@@ -8,6 +8,7 @@ import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class OauthUserDetailsService implements UserDetailsService {
 
     @Override
     public HerodotusUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+        
         String tenantId = ThreadLocalContextUtils.getString("tenantId");
 
         log.debug("[Herodotus] |- UserDetailsService Fetched tenantId is : [{}]", tenantId);

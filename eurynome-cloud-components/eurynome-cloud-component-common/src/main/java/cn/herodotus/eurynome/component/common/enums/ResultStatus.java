@@ -88,8 +88,12 @@ public enum ResultStatus {
      */
     ERROR(5000, "Error"),
     GATEWAY_TIMEOUT(5004, "Gateway Timeout"),
-    SERVICE_UNAVAILABLE(5003, "Service Unavailable");
+    SERVICE_UNAVAILABLE(5003, "Service Unavailable"),
 
+    /**
+     * 数据操作错误
+     */
+    BAD_SQL_GRAMMAR(6001, "低级SQL语法错误，检查SQL能否正常运行或者字段名称是否正确！");
 
     private int code;
     private String message;

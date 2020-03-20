@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.controller.BaseCrudController;
+import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysOrganizationService;
 import io.swagger.annotations.Api;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/organization")
 @Api(value = "单位管理接口", tags = "用户中心服务")
-public class SysOrganizationController extends BaseCrudController {
+public class SysOrganizationController extends BaseController {
 
     private final SysOrganizationService sysOrganizationService;
 

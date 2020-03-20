@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.generator;
 
-import cn.herodotus.eurynome.upms.api.entity.system.SysClientDetail;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2020/2/22 13:16
  */
-public class OauthClientDetailUUIDGenerator extends UUIDGenerator {
+public class OauthClientDetailsUUIDGenerator extends UUIDGenerator {
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
@@ -23,12 +23,12 @@ public class OauthClientDetailUUIDGenerator extends UUIDGenerator {
             throw new HibernateException(new NullPointerException());
         }
 
-        SysClientDetail oauthClientDetail = (SysClientDetail) object;
+        OauthClientDetails oauthClientDetails = (OauthClientDetails) object;
 
-        if (StringUtils.isEmpty(oauthClientDetail.getClientId())) {
+        if (StringUtils.isEmpty(oauthClientDetails.getClientId())) {
             return super.generate(session, object);
         } else {
-            return oauthClientDetail.getClientId();
+            return oauthClientDetails.getClientId();
         }
     }
 }

@@ -59,11 +59,10 @@ public class TenantSecurityContextFilter extends GenericFilterBean {
         String tenantId = null;
 
         String contentType = request.getContentType();
-        if (StringUtils.contains(contentType, MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
-            tenantId = searchTenantIdFromParameter(request);
-        }
         if (StringUtils.contains(contentType, MediaType.APPLICATION_JSON_VALUE)) {
             tenantId = searchTenantIdFromPayload(request);
+        } else {
+            tenantId = searchTenantIdFromParameter(request);
         }
 
         if (StringUtils.isNotBlank(tenantId) && ObjectUtils.isNotEmpty(filterChain)) {
