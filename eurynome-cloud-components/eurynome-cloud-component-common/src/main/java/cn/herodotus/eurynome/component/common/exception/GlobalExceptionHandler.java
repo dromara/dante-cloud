@@ -102,6 +102,7 @@ public class GlobalExceptionHandler {
      */
     static {
         exceptionDictionary.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
+        exceptionDictionary.put("InvalidGrantException", getUnauthorizedResult(ResultStatus.INVALID_GRANT));
         exceptionDictionary.put("InvalidTokenException", getResult(ResultStatus.INVALID_TOKEN, HttpStatus.SC_FORBIDDEN));
         exceptionDictionary.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
         // 以下是没有重新梳理过的错误。
@@ -128,7 +129,7 @@ public class GlobalExceptionHandler {
 
         exceptionDictionary.put("HttpMediaTypeNotAcceptableException", getBadRequestResult(ResultStatus.MEDIA_TYPE_NOT_ACCEPTABLE));
         exceptionDictionary.put("IllegalArgumentException", getBadRequestResult(ResultStatus.ALERT));
-        exceptionDictionary.put("InvalidGrantException", getUnauthorizedResult(ResultStatus.ALERT));
+
         exceptionDictionary.put("AccessDeniedException", getResult(ResultStatus.ACCESS_DENIED, HttpStatus.SC_FORBIDDEN));
         exceptionDictionary.put("MethodArgumentNotValidException", getResult(ResultStatus.ALERT));
     }

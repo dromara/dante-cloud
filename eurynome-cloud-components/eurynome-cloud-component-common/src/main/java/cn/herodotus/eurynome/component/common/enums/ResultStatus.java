@@ -46,7 +46,7 @@ public enum ResultStatus {
     INVALID_SCOPE(2001, "Invalid Scope"),
     INVALID_REQUEST(2002, "Invalid Request"),
     INVALID_CLIENT(2003, "Invalid Client"),
-    INVALID_GRANT(2004, "Invalid Grant"),
+    INVALID_GRANT(2004, "用户名或密码不正确"),
     REDIRECT_URI_MISMATCH(2005, "Redirect Uri Mismatch"),
     UNAUTHORIZED_CLIENT(2006, "Unauthorized Client"),
     EXPIRED_TOKEN(2007, "Expired Token"),
