@@ -53,10 +53,10 @@ import java.util.Set;
 @Slf4j
 public class SysRoleService extends BaseCacheService<SysRole, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSROLE, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysRole> sysRoleCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSROLE_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, Set<String>> sysRoleIndexCache;
 
     private final SysRoleRepository sysRoleRepository;

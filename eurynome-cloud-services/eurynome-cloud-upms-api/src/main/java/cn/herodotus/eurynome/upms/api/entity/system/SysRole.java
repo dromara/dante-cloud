@@ -1,6 +1,8 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -96,6 +98,30 @@ public class SysRole extends BaseSysEntity {
 
     public void setAuthorities(Set<SysAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SysRole sysRole = (SysRole) o;
+
+        return new EqualsBuilder()
+                .append(getRoleId(), sysRole.getRoleId())
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(getRoleId())
+                .toHashCode();
     }
 
     @Override

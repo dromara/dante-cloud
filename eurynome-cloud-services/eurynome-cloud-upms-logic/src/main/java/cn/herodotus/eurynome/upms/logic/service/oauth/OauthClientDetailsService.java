@@ -2,7 +2,9 @@ package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
+import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthClientDetailsRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
@@ -26,10 +28,10 @@ import java.util.Set;
 @Service
 public class OauthClientDetailsService extends BaseCacheService<OauthClientDetails, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTHCLIENTDETAIL, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, OauthClientDetails> oauthClientDetailCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTHCLIENTDETAIL_INDEX, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS_INDEX, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, Set<String>> oauthClientDetailIndexCache;
 
     @Autowired
@@ -51,7 +53,7 @@ public class OauthClientDetailsService extends BaseCacheService<OauthClientDetai
 
         if (ObjectUtils.isEmpty(oauthClientDetails)) {
             oauthClientDetails = oauthClientDetailsRepository.findByClientId(clientId);
-            this.cache(oauthClientDetails);
+            cache(oauthClientDetails);
         }
 
         log.debug("[Herodotus] |- OauthClientDetails Service findById.");
@@ -68,7 +70,7 @@ public class OauthClientDetailsService extends BaseCacheService<OauthClientDetai
     @Override
     public OauthClientDetails saveOrUpdate(OauthClientDetails domain) {
         OauthClientDetails savedOauthClientDetails = oauthClientDetailsRepository.saveAndFlush(domain);
-        this.cache(savedOauthClientDetails);
+        cache(savedOauthClientDetails);
         log.debug("[Herodotus] |- OauthClientDetails Service saveOrUpdate.");
         return savedOauthClientDetails;
     }
@@ -76,8 +78,14 @@ public class OauthClientDetailsService extends BaseCacheService<OauthClientDetai
     @Override
     public Page<OauthClientDetails> findByPage(int pageNumber, int pageSize) {
         Page<OauthClientDetails> pages = oauthClientDetailsRepository.findAll(PageRequest.of(pageNumber, pageSize));
-        this.cache(pages.getContent());
+        cache(pages.getContent());
         log.debug("[Herodotus] |- OauthClientDetails Service findByPage.");
         return pages;
+    }
+
+    public OauthClientDetails create(OauthApplications oauthApplications) {
+        OauthClientDetails oauthClientDetails = UpmsHelper.convertOauthApplicationsToOauthClientDetails(oauthApplications);
+        log.debug("[Herodotus] |- OauthClientDetails Service create.");
+        return saveOrUpdate(oauthClientDetails);
     }
 }

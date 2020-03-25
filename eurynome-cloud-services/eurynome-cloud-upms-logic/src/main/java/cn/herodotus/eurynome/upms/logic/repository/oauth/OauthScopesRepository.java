@@ -1,32 +1,33 @@
 package cn.herodotus.eurynome.upms.logic.repository.oauth;
 
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * <p> Description : OauthApplicationRepository </p>
+ * <p> Description : OauthScopeRepository </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/19 16:52
+ * @date : 2020/3/19 16:57
  */
-public interface OauthApplicationRepository extends JpaRepository<OauthApplications, String> {
+public interface OauthScopesRepository extends JpaRepository<OauthScopes, String> {
 
     /**
      * 删除人员基本操作
-     * @param appKey OauthApplication ID
+     * @param scopeId OauthScopes ID
      */
     @Modifying
     @Transactional(rollbackFor = Exception.class)
-    @Query("delete from OauthApplications oa where oa.appKey = ?1")
-    void deleteByAppKey(String appKey);
+    @Query("delete from OauthScopes os where os.scopeId = ?1")
+    void deleteByScopeId(String scopeId);
 
     /**
-     * 根据appKey查找OauthApplication
-     * @param appKey OauthApplication ID
-     * @return OauthApplication 对象
+     * 根据appKey查找 OauthScopes
+     * @param scopeId OauthScopes ID
+     * @return OauthScopes 对象
      */
-    OauthApplications findByAppKey(String appKey);
+    OauthScopes findByScopeId(String scopeId);
 }

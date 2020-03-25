@@ -21,19 +21,21 @@ public class UpmsConstants {
     public static final String CACHE_NAME_SYSACCOUNT = "data:upms:sysaccount:";
     public static final String CACHE_NAME_SYSACCOUNT_INDEX = CACHE_NAME_SYSACCOUNT + INDEX_CACHE_NAME;
 
-    public static final String CACHE_NAME_SYSAPPLICATION = "data:upms:sysapplication:";
-    public static final String CACHE_NAME_SYSAPPLICATION_INDEX = CACHE_NAME_SYSAPPLICATION + INDEX_CACHE_NAME;
-    public static final String CACHE_NAME_SYSAUTHORITY = "data:upms:sysauthority:";
-    public static final String CACHE_NAME_SYSAUTHORITY_INDEX = CACHE_NAME_SYSAUTHORITY + INDEX_CACHE_NAME;
-    public static final String CACHE_NAME_SYSROLE = "data:upms:sysrole:";
-    public static final String CACHE_NAME_SYSROLE_INDEX = CACHE_NAME_SYSROLE + INDEX_CACHE_NAME;
-    public static final String CACHE_NAME_SYSUSER = "data:upms:sysuser:";
-    public static final String CACHE_NAME_SYSUSER_INDEX = CACHE_NAME_SYSUSER + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_SYS_APPLICATION = "data:upms:sys:application:";
+    public static final String CACHE_NAME_SYS_APPLICATION_INDEX = CACHE_NAME_SYS_APPLICATION + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_SYS_AUTHORITY = "data:upms:sys:authority:";
+    public static final String CACHE_NAME_SYS_AUTHORITY_INDEX = CACHE_NAME_SYS_AUTHORITY + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_SYS_ROLE = "data:upms:sys:role:";
+    public static final String CACHE_NAME_SYS_ROLE_INDEX = CACHE_NAME_SYS_ROLE + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_SYS_USER = "data:upms:sys:user:";
+    public static final String CACHE_NAME_SYS_USER_INDEX = CACHE_NAME_SYS_USER + INDEX_CACHE_NAME;
 
-    public static final String CACHE_NAME_OAUTHCLIENTDETAIL = "data:upms:oauthclientdetails:";
-    public static final String CACHE_NAME_OAUTHCLIENTDETAIL_INDEX = CACHE_NAME_OAUTHCLIENTDETAIL + INDEX_CACHE_NAME;
-    public static final String CACHE_NAME_OAUTHSCOPE = "data:upms:oauthscopes:";
-    public static final String CACHE_NAME_OAUTHSCOPE_INDEX = CACHE_NAME_OAUTHSCOPE + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_OAUTH_CLIENTDETAILS = "data:upms:oauth:clientdetails:";
+    public static final String CACHE_NAME_OAUTH_CLIENTDETAILS_INDEX = CACHE_NAME_OAUTH_CLIENTDETAILS + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_OAUTH_APPLICATIONS = "data:upms:oauth:applications:";
+    public static final String CACHE_NAME_OAUTH_APPLICATIONS_INDEX = CACHE_NAME_OAUTH_APPLICATIONS + INDEX_CACHE_NAME;
+    public static final String CACHE_NAME_OAUTH_SCOPES = "data:upms:oauth:scopes:";
+    public static final String CACHE_NAME_OAUTH_SCOPES_INDEX = CACHE_NAME_OAUTH_SCOPES + INDEX_CACHE_NAME;
 
     private static final List<Map<String, Object>> STATUS_ENUM = StatusEnum.getToJsonStruct();
     private static final List<Map<String, Object>> APPLICATION_TYPE_ENUM = ApplicationType.getToJsonStruct();

@@ -26,6 +26,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.service.fegin.SysUserFeginService;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
@@ -39,9 +40,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-/** 
+/**
  * <p>Description: TODO </p>
- * 
+ *
  * @author : gengwei.zheng
  * @date : 2019/11/25 10:55
  */
@@ -86,8 +87,8 @@ public class SysUserController extends BaseController implements SysUserFeginSer
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
 
-            Page<SysUser> pages = sysUserService.findByPage(pageNumber, pageSize);
-            return result(pages);
+        Page<SysUser> pages = sysUserService.findByPage(pageNumber, pageSize);
+        return result(pages);
 
     }
 
@@ -110,5 +111,16 @@ public class SysUserController extends BaseController implements SysUserFeginSer
         Result<String> result = result(userId);
         sysUserService.deleteById(userId);
         return result;
+    }
+
+    @ApiOperation(value = "给用户分配角色", notes = "给用户分配角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", required = true, value = "userId"),
+            @ApiImplicitParam(name = "roles[]", required = true, value = "角色对象组成的数组")
+    })
+    @PutMapping
+    public Result<SysUser> assign(@RequestParam(name = "userId") String userId, @RequestParam(name = "roles[]") String[] roles) {
+        SysUser sysUser = sysUserService.assign(userId, roles);
+        return result(sysUser);
     }
 }

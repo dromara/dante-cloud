@@ -41,7 +41,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -55,10 +54,10 @@ import java.util.Set;
 @Service
 public class SysAuthorityService extends BaseCacheService<SysAuthority, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAUTHORITY, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_AUTHORITY, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysAuthority> sysAuthorityCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAUTHORITY_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_AUTHORITY_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, Set<String>> sysAuthorityIndexCache;
 
     private final SysAuthorityRepository sysAuthorityRepository;

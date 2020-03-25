@@ -1,22 +1,23 @@
 package cn.herodotus.eurynome.upms.api.helper;
 
 
+import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
 import cn.herodotus.eurynome.component.security.domain.HerodotusAuthority;
 import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
 import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
 import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
+import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /** 
@@ -114,6 +115,31 @@ public class UpmsHelper {
         sysAuthority.setClassName(requestMappingResource.getClassName());
         sysAuthority.setMethodName(requestMappingResource.getMethodName());
         return sysAuthority;
+    }
+
+    public static OauthClientDetails convertOauthApplicationsToOauthClientDetails(OauthApplications oauthApplications) {
+        OauthClientDetails oauthClientDetails = new OauthClientDetails();
+        oauthClientDetails.setClientId(oauthApplications.getAppKey());
+        oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthApplications.getAppSecret()));
+
+        if (CollectionUtils.isNotEmpty( oauthApplications.getScopes())) {
+            Set<SysAuthority> sysAuthorities = new HashSet<>();
+            for (OauthScopes oauthScopes : oauthApplications.getScopes() ) {
+
+                if (CollectionUtils.isNotEmpty(oauthScopes.getAuthorities())) {
+                    sysAuthorities.addAll(oauthScopes.getAuthorities());
+                }
+            }
+            String scope = oauthApplications.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
+            oauthClientDetails.setScope(scope);
+
+            if (CollectionUtils.isNotEmpty(sysAuthorities)) {
+                String authorities = sysAuthorities.stream().map(SysAuthority::getAuthorityCode).collect(Collectors.joining(SymbolConstants.COMMA));
+                oauthClientDetails.setAuthorities(authorities);
+            }
+        }
+
+        return oauthClientDetails;
     }
 
 }

@@ -30,7 +30,6 @@ import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysApplicationRepository;
 import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheInvalidate;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
@@ -51,10 +50,10 @@ import java.util.Set;
 @Service
 public class SysApplicationService extends BaseCacheService<SysApplication, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAPPLICATION, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_APPLICATION, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysApplication> sysApplicationCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSAPPLICATION_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_APPLICATION_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, Set<String>> sysApplicationIndexCache;
 
     private final SysApplicationRepository sysApplicationRepository;

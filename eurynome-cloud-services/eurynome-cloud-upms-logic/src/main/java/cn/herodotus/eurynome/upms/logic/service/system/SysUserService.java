@@ -26,6 +26,9 @@ package cn.herodotus.eurynome.upms.logic.service.system;
 
 import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
+import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
 import com.alicp.jetcache.Cache;
@@ -39,6 +42,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -51,10 +55,10 @@ import java.util.Set;
 @Service
 public class SysUserService extends BaseCacheService<SysUser, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSUSER, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_USER, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, SysUser> sysUserCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYSUSER_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_USER_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
     private Cache<String, Set<String>> sysUserIndexCache;
 
     private final SysUserRepository sysUserRepository;
@@ -76,7 +80,7 @@ public class SysUserService extends BaseCacheService<SysUser, String> {
 
     public SysUser findSysUserByUserName(String userName) {
         SysUser sysUser = sysUserRepository.findByUserName(userName);
-        log.debug("[Luban UPMS] |- SysUser Service findSysUserByUserName.");
+        log.debug("[Herodotus] |- SysUser Service findSysUserByUserName.");
         return sysUser;
     }
 
@@ -84,7 +88,7 @@ public class SysUserService extends BaseCacheService<SysUser, String> {
     public SysUser saveOrUpdate(SysUser sysUser) {
         SysUser savedSysUser = sysUserRepository.saveAndFlush(sysUser);
         this.cache(savedSysUser);
-        log.debug("[Luban UPMS] |- SysUser Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysUser Service saveOrUpdate.");
         return savedSysUser;
     }
 
@@ -104,13 +108,13 @@ public class SysUserService extends BaseCacheService<SysUser, String> {
             this.cache(sysUser);
         }
 
-        log.debug("[Luban UPMS] |- SysUser Service findById.");
+        log.debug("[Herodotus] |- SysUser Service findById.");
         return sysUser;
     }
 
     @Override
     public void deleteById(String userId) {
-        log.debug("[Luban UPMS] |- SysUser Service delete.");
+        log.debug("[Herodotus] |- SysUser Service delete.");
         sysUserRepository.deleteByUserId(userId);
         this.remove(userId);
     }
@@ -119,7 +123,24 @@ public class SysUserService extends BaseCacheService<SysUser, String> {
     public Page<SysUser> findByPage(int pageNumber, int pageSize) {
         Page<SysUser> pages = sysUserRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "userId"));
         this.cache(pages.getContent());
-        log.debug("[Luban UPMS] |- SysUser Service findByPage.");
+        log.debug("[Herodotus] |- SysUser Service findByPage.");
         return pages;
+    }
+
+    public SysUser assign(String userId, String[] roleIds) {
+
+        log.debug("[Herodotus] |- SysUser Service assign.");
+
+        Set<SysRole> sysRoleSet = new HashSet<>();
+        for (String roleId : roleIds) {
+            SysRole sysRole = new SysRole();
+            sysRole.setRoleId(roleId);
+            sysRoleSet.add(sysRole);
+        }
+
+        SysUser sysUser = findById(userId);
+        sysUser.setRoles(sysRoleSet);
+
+        return saveOrUpdate(sysUser);
     }
 }
