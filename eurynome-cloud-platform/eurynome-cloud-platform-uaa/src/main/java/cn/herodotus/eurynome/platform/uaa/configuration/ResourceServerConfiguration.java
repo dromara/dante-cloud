@@ -6,6 +6,7 @@ import cn.herodotus.eurynome.component.security.response.HerodotusAccessDeniedHa
 import cn.herodotus.eurynome.component.security.response.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -71,9 +72,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class);
 
         // @formatter:off
-        http.requestMatchers().antMatchers("/identity/**")
+        http.requestMatchers().antMatchers("/identity/**", "/actuator/**")
                 .and()
                     .authorizeRequests()
+                    // 指定监控访问权限
+                    .antMatchers("/actuator/**").permitAll()
                     .antMatchers("/identity/**").authenticated()
                 .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
                     .exceptionHandling()

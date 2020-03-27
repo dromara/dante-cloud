@@ -36,6 +36,7 @@ spring:
       force: true
       enabled: true
 
+
 herodotus:
   platform:
     application:
@@ -46,6 +47,9 @@ management:
     web:
       exposure:
         include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 logging:
   level:

@@ -45,6 +45,15 @@ security:
       token-info-uri: ${eurynome.platform.token-info-uri}
       user-info-uri: ${eurynome.platform.user-info-uri}
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
 
 herodotus:
   platform:

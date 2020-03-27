@@ -30,6 +30,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
                 .authorizeRequests()
                 .antMatchers(getWhiteList()).permitAll()
+                // 指定监控访问权限
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().authenticated()
                 .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
                 .exceptionHandling()

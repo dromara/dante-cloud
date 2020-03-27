@@ -40,6 +40,10 @@ spring:
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: @sentinel.server-addr@
 
 ribbon:
   http:
@@ -51,13 +55,13 @@ ribbon:
     enabled: true
 
 management:
-  endpoint:
-    gateway:
-      enabled: true
   endpoints:
     web:
       exposure:
-        include: gateway
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 herodotus:
   gateway:
