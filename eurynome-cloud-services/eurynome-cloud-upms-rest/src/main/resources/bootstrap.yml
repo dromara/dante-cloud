@@ -12,8 +12,12 @@ spring:
       config:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
-        refreshable-dataids: eurynome-cloud-@profile.name@-platform.yml
-        shared-dataids: eurynome-cloud-@profile.name@-platform.yml,eurynome-cloud-@profile.name@-redis.yml,eurynome-cloud-@profile.name@-database-@database.type@.yml,eurynome-cloud-@profile.name@-kafka.yml
+        shared-configs:
+          - data-id: eurynome-cloud-@profile.name@-platform.yml
+            refresh: true
+          - data-id: eurynome-cloud-@profile.name@-database-@database.type@.yml
+          - data-id: eurynome-cloud-@profile.name@-redis.yml
+          - data-id: eurynome-cloud-@profile.name@-kafka.yml
         file-extension: yml
       discovery:
         namespace: @config.namespace@

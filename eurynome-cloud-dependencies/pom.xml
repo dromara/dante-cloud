@@ -21,6 +21,7 @@
 
         <spring-cloud-dependencies.version>Hoxton.SR3</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
 
         <!--覆盖Spring Boot 默认依赖版本-->
         <commons-lang3.version>3.9</commons-lang3.version>
@@ -70,6 +71,11 @@
                 <version>${spring-cloud-alibaba-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
