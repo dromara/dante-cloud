@@ -1,5 +1,13 @@
 version: "2"
 services:
+  sba:
+    image: eurynome-cloud-platform-admin:latest
+    build:
+      context: ../../eurynome-cloud-platform/eurynome-cloud-platform-admin
+      dockerfile: Compose-Dockerfile
+    container_name: sba
+    ports:
+      - 8845:8845
   upms:
     image: eurynome-cloud-upms-rest:latest
     build:
@@ -8,6 +16,10 @@ services:
     container_name: upms
     ports:
       - 7070:7070
+    depends_on:
+      - sba
+    links:
+      - sba:sba-service
   gateway:
     image: eurynome-cloud-platform-gateway:latest
     build:
@@ -16,6 +28,10 @@ services:
     container_name: gateway
     ports:
       - 8847:8847
+    depends_on:
+      - sba
+    links:
+      - sba:sba-service
   uaa:
     image: eurynome-cloud-platform-uaa:latest
     build:
@@ -26,5 +42,7 @@ services:
       - 8846:8846
     depends_on:
       - upms
+      - sba
     links:
       - upms:upms-service
+      - sba:sba-service
