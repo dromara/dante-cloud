@@ -34,10 +34,11 @@
         <commons-io.version>2.6</commons-io.version>
 
 
-        <alibaba.fastjson.version>1.2.66</alibaba.fastjson.version>
-        <alibaba.jetcache.version>2.5.16</alibaba.jetcache.version>
-        <google.guava.version>28.2-jre</google.guava.version>
+        <alibaba-fastjson.version>1.2.66</alibaba-fastjson.version>
+        <alibaba-jetcache.version>2.5.16</alibaba-jetcache.version>
+        <google-guava.version>28.2-jre</google-guava.version>
         <hutool.version>5.2.1</hutool.version>
+
 
         <swagger.version>2.9.2</swagger.version>
         <p6spy.version>3.8.2</p6spy.version>
@@ -49,6 +50,7 @@
         <jasypt.version>2.1.2</jasypt.version>
         <minio.version>6.0.11</minio.version>
         <mybatis.version>2.1.1</mybatis.version>
+        <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
 
         <!--镜像前缀-->
         <docker.image.prefix>eurynome.cloud</docker.image.prefix>
@@ -113,13 +115,13 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>${alibaba.fastjson.version}</version>
+                <version>${alibaba-fastjson.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>${google.guava.version}</version>
+                <version>${google-guava.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -218,7 +220,7 @@
             <dependency>
                 <groupId>com.alicp.jetcache</groupId>
                 <artifactId>jetcache-starter-redis-lettuce</artifactId>
-                <version>${alibaba.jetcache.version}</version>
+                <version>${alibaba-jetcache.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
             <dependency>
@@ -226,6 +228,13 @@
                 <artifactId>easy-captcha</artifactId>
                 <version>${easy-captcha.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash-logback-encoder.version}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
