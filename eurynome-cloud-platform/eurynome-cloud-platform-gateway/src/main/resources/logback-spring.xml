@@ -60,7 +60,7 @@
                 <pattern>
                     <pattern>
                         {
-                        "severity": "%level",
+                        "level": "%level",
                         "service": "${spring.application.name:-}",
                         "trace": "%X{X-B3-TraceId:-}",
                         "span": "%X{X-B3-SpanId:-}",
@@ -68,7 +68,7 @@
                         "exportable": "%X{X-Span-Export:-}",
                         "pid": "${PID:-}",
                         "thread": "%thread",
-                        "class": "%logger{40}",
+                        "class": "%logger",
                         "log": "%message"
                         }
                     </pattern>
@@ -90,6 +90,17 @@
     </springProfile>
 
     <!--生产环境:打印控制台-->
+    <springProfile name="docker">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="LOGSTASH"/>
+        </root>
+        <logger name="cn.herodotus" level="debug"/>
+        <logger name="org.springframework.security" level="info"/>
+        <logger name="com.alibaba.nacos.client.naming" level="off"/>
+    </springProfile>
+
     <springProfile name="production">
         <root level="info">
             <appender-ref ref="CONSOLE"/>
