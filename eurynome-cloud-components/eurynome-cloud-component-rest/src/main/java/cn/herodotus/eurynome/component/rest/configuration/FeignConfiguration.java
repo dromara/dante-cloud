@@ -18,6 +18,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * <p> Description : 自定义通用的Feign Fallback处理工厂(基于Sentinel) </p>
  *
@@ -28,9 +30,6 @@ import org.springframework.context.annotation.Scope;
 @Slf4j
 @Configuration
 public class FeignConfiguration {
-
-    public static int connectTimeOutMillis = 12000;
-    public static int readTimeOutMillis = 12000;
 
     @Bean
     @Scope("prototype")
@@ -51,7 +50,7 @@ public class FeignConfiguration {
 
     @Bean
     public Request.Options options() {
-        return new Request.Options(connectTimeOutMillis, readTimeOutMillis);
+        return new Request.Options(10, TimeUnit.SECONDS, 60, TimeUnit.SECONDS, true);
     }
 
     @Bean

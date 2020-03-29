@@ -41,6 +41,7 @@ import java.util.Objects;
  * @author gengwei.zheng
  */
 
+@SuppressWarnings("rawtypes")
 @Slf4j
 public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
 

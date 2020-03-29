@@ -46,7 +46,7 @@ public class GlobalRequestInterceptor implements HandlerInterceptor {
             }
         }
 
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         PrintWriter writer = response.getWriter();
         writer.write(JSON.toJSONString(new Result<String>().failed().type(ResultStatus.BAD_REQUEST).message("Disable access from outside the gateway！")));
 

@@ -150,7 +150,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
      * @return
      */
     public static void renderJson(HttpServletResponse response, Object object) {
-        renderJson(response, JSON.toJSONString(object), MediaType.APPLICATION_JSON_UTF8.toString());
+        renderJson(response, JSON.toJSONString(object), MediaType.APPLICATION_JSON.toString());
     }
 
     /**

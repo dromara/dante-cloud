@@ -33,11 +33,11 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.client.Jackson2ArrayOrStringDeserializer;
 import org.springframework.util.StringUtils;
 
-import java.io.Serializable;
 import java.util.*;
 
 /**
  * 自定义客户端信息
+ *
  * @author gengwei.zheng
  */
 
@@ -79,7 +79,7 @@ public class HerodotusClientDetails extends AbstractDomain implements ClientDeta
     private Integer refreshTokenValiditySeconds;
 
     @JsonProperty("additional_information")
-    private Map<String, Object> additionalInformation = new LinkedHashMap<String, Object>();
+    private Map<String, Object> additionalInformation = new LinkedHashMap<>();
 
     public HerodotusClientDetails() {
     }
@@ -231,7 +231,7 @@ public class HerodotusClientDetails extends AbstractDomain implements ClientDeta
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
         if (authorities == null) {
-            return Collections.EMPTY_LIST;
+            return new ArrayList<>();
         }
         return this.authorities;
     }
@@ -374,13 +374,10 @@ public class HerodotusClientDetails extends AbstractDomain implements ClientDeta
             return false;
         }
         if (additionalInformation == null) {
-            if (other.additionalInformation != null) {
-                return false;
-            }
-        } else if (!additionalInformation.equals(other.additionalInformation)) {
-            return false;
+            return other.additionalInformation == null;
+        } else {
+            return additionalInformation.equals(other.additionalInformation);
         }
-        return true;
     }
 
     @Override

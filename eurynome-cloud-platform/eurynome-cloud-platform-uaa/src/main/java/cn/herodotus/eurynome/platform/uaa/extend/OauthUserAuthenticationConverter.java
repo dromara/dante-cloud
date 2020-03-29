@@ -26,7 +26,7 @@ public class OauthUserAuthenticationConverter extends DefaultUserAuthenticationC
 
     @Override
     public Map<String, ?> convertUserAuthentication(Authentication authentication) {
-        Map<String, Object> response = new LinkedHashMap();
+        Map<String, Object> response = new LinkedHashMap<>();
         response.put(USERNAME, authentication.getPrincipal());
         if (authentication.getAuthorities() != null && !authentication.getAuthorities().isEmpty()) {
             response.put(AUTHORITIES, AuthorityUtils.authorityListToSet(authentication.getAuthorities()));
