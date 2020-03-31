@@ -1,7 +1,8 @@
 package cn.herodotus.eurynome.platform.gateway.entity;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
-import cn.herodotus.eurynome.component.data.jpa.JpaListAndJsonConverter;
+import cn.herodotus.eurynome.platform.gateway.entity.jpa.GatewayFilterDefinitionJsonListConverter;
+import cn.herodotus.eurynome.platform.gateway.entity.jpa.GatewayPredicateDefinitionJsonListConverter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -26,11 +27,11 @@ public class GatewayRouteDefinition extends BaseSysEntity {
     @Column(name = "id", length = 64)
     private String id;
 
-    @Convert(converter = JpaListAndJsonConverter.class)
+    @Convert(converter = GatewayPredicateDefinitionJsonListConverter.class)
     @Column(name = "predicates", columnDefinition = "TEXT")
     private List<GatewayPredicateDefinition> predicates = new ArrayList<>();
 
-    @Convert(converter = JpaListAndJsonConverter.class)
+    @Convert(converter = GatewayFilterDefinitionJsonListConverter.class)
     @Column(name = "filters", columnDefinition = "TEXT")
     private List<GatewayFilterDefinition> filters = new ArrayList<>();
 
