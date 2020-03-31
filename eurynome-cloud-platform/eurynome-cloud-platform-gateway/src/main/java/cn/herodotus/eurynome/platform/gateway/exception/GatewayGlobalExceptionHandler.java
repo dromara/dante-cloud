@@ -133,14 +133,14 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
     protected Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
         Result<String> result = exceptionHandlerResult.get();
         return ServerResponse.status(result.getHttpStatus())
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .body(BodyInserters.fromObject(result));
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(result));
     }
 
     public static Mono<ServerResponse> renderErrorResponse(Result result) {
         return ServerResponse.status(result.getHttpStatus())
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .body(BodyInserters.fromObject(result));
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(result));
     }
 
     /**

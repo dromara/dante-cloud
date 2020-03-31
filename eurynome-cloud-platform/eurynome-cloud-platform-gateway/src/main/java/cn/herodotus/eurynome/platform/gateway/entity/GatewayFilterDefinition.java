@@ -11,7 +11,6 @@ import java.util.Map;
 /**
  * @author gengwei.zheng
  */
-@Data
 public class GatewayFilterDefinition extends AbstractDomain {
 
     /**

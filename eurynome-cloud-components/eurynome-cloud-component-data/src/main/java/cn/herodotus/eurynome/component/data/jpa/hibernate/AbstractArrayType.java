@@ -36,6 +36,7 @@ import java.sql.*;
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:34
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractArrayType<T extends Serializable> extends AbstractUserType {
 
     protected static final int[] SQL_TYPES = { Types.ARRAY };

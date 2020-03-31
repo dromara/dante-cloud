@@ -60,7 +60,7 @@ public class JacksonUtils {
         objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         // 空值不序列化
 //        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        //序列化时，日期的统一格式
+        // 序列化时，日期的统一格式
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         // 排序key
         objectMapper.configure(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS, true);
@@ -120,6 +120,7 @@ public class JacksonUtils {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> List<T> toList(String json, Class<T> clazz) {
         JavaType javaType = getObjectMapper().getTypeFactory().constructParametricType(ArrayList.class, clazz);
         try {

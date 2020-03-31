@@ -1,6 +1,8 @@
 spring:
   kafka:
     bootstrap-servers: 192.168.101.10:9092
+    listener:
+      missing-topics-fatal: false
 
     producer:
       retries: 0

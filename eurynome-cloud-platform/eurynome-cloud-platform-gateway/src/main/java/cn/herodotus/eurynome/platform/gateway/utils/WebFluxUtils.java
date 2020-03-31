@@ -64,7 +64,7 @@ public class WebFluxUtils {
     }
 
     public static Mono<Void> writeJsonResponse(ServerHttpResponse response, Result result) {
-        response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.setStatusCode(HttpStatus.valueOf(result.getHttpStatus()));
 
         String jsonResult = JSON.toJSONString(result);

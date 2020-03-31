@@ -31,6 +31,7 @@ spring:
     cache: false
     prefix: classpath:/templates
 
+
 #不同应用应是不同的配置，此处与hello_world相同，只为测试使用
 security:
   oauth2:
@@ -53,6 +54,7 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
 
 
 herodotus:
