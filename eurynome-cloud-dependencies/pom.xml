@@ -17,31 +17,34 @@
     <packaging>pom</packaging>
 
     <properties>
-        <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
-
+        <!--Spring 家族-->
         <spring-cloud-dependencies.version>Hoxton.SR3</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
 
+        <!--Spring Boot Dependencies中没有的Maven Plugin-->
+        <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
+
         <!--覆盖Spring Boot 默认依赖版本-->
         <mysql.verison>5.1.48</mysql.verison>
 
-        <!--Spring Boot Dependencies中没有的-->
+        <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.0</commons-collections4.version>
         <commons-text.version>1.7</commons-text.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.6</commons-io.version>
-
-
-        <alibaba-fastjson.version>1.2.66</alibaba-fastjson.version>
-        <alibaba-jetcache.version>2.5.16</alibaba-jetcache.version>
         <google-guava.version>28.2-jre</google-guava.version>
         <hutool.version>5.2.5</hutool.version>
 
+        <!--Alibaba开源的工具包-->
+        <alibaba-fastjson.version>1.2.66</alibaba-fastjson.version>
+        <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
+
+        <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.2</starter-jasypt.version>
         <starter-mybatis.version>2.1.2</starter-mybatis.version>
 
-
+        <!--Spring Boot Dependencies中没有的依赖组件-->
         <swagger.version>2.9.2</swagger.version>
         <knife4j.version>2.0.2</knife4j.version>
         <p6spy.version>3.8.7</p6spy.version>
@@ -67,7 +70,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
