@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.5.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -24,7 +24,6 @@
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
 
         <!--覆盖Spring Boot 默认依赖版本-->
-        <commons-lang3.version>3.9</commons-lang3.version>
         <mysql.verison>5.1.48</mysql.verison>
 
         <!--Spring Boot Dependencies中没有的-->
@@ -37,20 +36,21 @@
         <alibaba-fastjson.version>1.2.66</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.5.16</alibaba-jetcache.version>
         <google-guava.version>28.2-jre</google-guava.version>
-        <hutool.version>5.2.1</hutool.version>
+        <hutool.version>5.2.5</hutool.version>
+
+        <starter-jasypt.version>3.0.2</starter-jasypt.version>
+        <starter-mybatis.version>2.1.2</starter-mybatis.version>
 
 
         <swagger.version>2.9.2</swagger.version>
         <knife4j.version>2.0.2</knife4j.version>
-        <p6spy.version>3.8.2</p6spy.version>
+        <p6spy.version>3.8.7</p6spy.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
         <shiro.version>1.4.1</shiro.version>
         <flowable.version>6.5.0</flowable.version>
-        <jasypt.version>2.1.2</jasypt.version>
-        <minio.version>6.0.11</minio.version>
-        <mybatis.version>2.1.1</mybatis.version>
+        <minio.version>7.0.1</minio.version>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
 
         <!--镜像前缀-->
@@ -129,20 +129,17 @@
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-ui</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/swagger-bootstrap-ui -->
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>swagger-bootstrap-ui</artifactId>
-                <version>1.9.6</version>
-            </dependency>
-
-
             <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
             <dependency>
                 <groupId>p6spy</groupId>
@@ -195,7 +192,7 @@
             <dependency>
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-spring-boot-starter</artifactId>
-                <version>${jasypt.version}</version>
+                <version>${starter-jasypt.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/io.minio/minio -->
             <dependency>
@@ -224,7 +221,7 @@
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
+                <version>${starter-mybatis.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-starter-redis -->
             <dependency>
