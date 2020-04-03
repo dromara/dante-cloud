@@ -20,11 +20,11 @@ import java.util.List;
 
 public class WebFluxUtils {
 
-    private static final PathMatcher pathmatcher = new AntPathMatcher();
+    private static final PathMatcher pathMatcher = new AntPathMatcher();
     private static final ResourceUrlProvider resourceUrlProvider = new ResourceUrlProvider();
 
     public static PathMatcher getPathMatcher() {
-        return pathmatcher;
+        return pathMatcher;
     }
 
     public static ResourceUrlProvider getResourceUrlProvider() {
@@ -63,7 +63,7 @@ public class WebFluxUtils {
         return false;
     }
 
-    public static Mono<Void> writeJsonResponse(ServerHttpResponse response, Result result) {
+    public static Mono<Void> writeJsonResponse(ServerHttpResponse response, Result<String> result) {
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.setStatusCode(HttpStatus.valueOf(result.getHttpStatus()));
 
