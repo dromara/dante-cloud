@@ -63,6 +63,30 @@
                     </buildArgs>
                 </configuration>
             </plugin>
+
+            <!-- 拷贝插件 -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-jar-file</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!--jar包保存位置 -->
+                                <copy todir="${docker.build.directory}">
+                                    <fileset dir="${project.basedir}/target">
+                                        <include name="*.jar" />
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

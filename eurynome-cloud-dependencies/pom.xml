@@ -37,7 +37,7 @@
         <hutool.version>5.2.5</hutool.version>
 
         <!--Alibaba开源的工具包-->
-        <alibaba-fastjson.version>1.2.66</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.68</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->

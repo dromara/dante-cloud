@@ -14,6 +14,10 @@ services:
       context: ../../eurynome-cloud-services/eurynome-cloud-upms-rest
       dockerfile: Compose-Dockerfile
     container_name: upms
+    environment:
+      SW_AGENT_FILE: ./skywalking-agent.jar
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-gateway
+      SW_COLLECTOR_BACKEND_SERVICE: 192.168.101.10:11800
     ports:
       - 7070:7070
     depends_on:
@@ -26,6 +30,10 @@ services:
       context: ../../eurynome-cloud-platform/eurynome-cloud-platform-gateway
       dockerfile: Compose-Dockerfile
     container_name: gateway
+    environment:
+      SW_AGENT_FILE: ./skywalking-agent.jar
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-gateway
+      SW_COLLECTOR_BACKEND_SERVICE: 192.168.101.10:11800
     ports:
       - 8847:8847
     depends_on:
@@ -38,6 +46,10 @@ services:
       context: ../../eurynome-cloud-platform/eurynome-cloud-platform-uaa
       dockerfile: Compose-Dockerfile
     container_name: uaa
+    environment:
+      SW_AGENT_FILE: ./skywalking-agent.jar
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-gateway
+      SW_COLLECTOR_BACKEND_SERVICE: 192.168.101.10:11800
     ports:
       - 8846:8846
     depends_on:
