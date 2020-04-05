@@ -15,7 +15,7 @@ services:
       dockerfile: Config-Upms-Dockerfile
     container_name: upms
     environment:
-      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-gateway
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-upms-rest
       SW_COLLECTOR_BACKEND_SERVICE: oap:11800
     ports:
       - 7070:7070
@@ -43,15 +43,10 @@ services:
       dockerfile: Config-Uaa-Dockerfile
     container_name: uaa
     environment:
-      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-gateway
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-uaa
       SW_COLLECTOR_BACKEND_SERVICE: oap:11800
     ports:
       - 8846:8846
     depends_on:
       - upms
       - sba
-
-networks:
-  default:
-    external:
-      name: herodotus_standalone_env

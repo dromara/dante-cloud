@@ -45,6 +45,17 @@ docker run -p 9000:9000 --name minio1 -e "MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE"
 dcoker pull sebp/elk
 docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 5044:5044 -e ES_MIN_MEM=128m  -e ES_MAX_MEM=1024m -v D:\Development\docker-files:/data -it --name elk sebp/elk
 ```
+> sebp/elk经常出现问题
+> 以下采用独立安装
+
+```docker
+docker cp elasticsearch:/usr/share/elasticsearch/config/ D:/Development/docker-volumes/elasticsearch/config/
+
+docker cp logstash:/usr/share/logstash/config D:/Development/docker-volumes/logstash
+docker cp logstash:/usr/share/logstash/pipeline D:/Development/docker-volumes/logstash
+docker cp logstash:/usr/share/logstash/logstash-core/lib/jars D:/Development/docker-volumes/logstash
+
+```
  
 # 五、Nacos
 ```docker
