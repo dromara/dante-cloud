@@ -1,10 +1,10 @@
-version: "2"
+version: "3"
 services:
-  sba:
-    image: eurynome-cloud-platform-admin:latest
+  monitor:
+    image: eurynome-cloud-platform-monitor:latest
     build:
       context: ../../context
-      dockerfile: Config-Admin-Dockerfile
+      dockerfile: ../../context/Config-Monitor-Dockerfile
     container_name: sba
     ports:
       - 8845:8845
@@ -34,7 +34,7 @@ services:
     ports:
       - 8847:8847
     depends_on:
-      - sba
+      - monitor
 
   uaa:
     image: eurynome-cloud-platform-uaa:latest
@@ -49,4 +49,4 @@ services:
       - 8846:8846
     depends_on:
       - upms
-      - sba
+      - monitor

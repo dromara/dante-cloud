@@ -8,17 +8,13 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>eurynome-cloud-platform-admin</artifactId>
+    <artifactId>eurynome-cloud-platform-monitor</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>eurynome-cloud-platform-admin</name>
-    <description>Demo project for Spring Boot</description>
+    <name>eurynome-cloud-platform-monitor</name>
+    <description>Eurynome监控模块，基于 spring boot admin</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -39,10 +35,17 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-server</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
     </dependencies>

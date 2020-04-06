@@ -16,7 +16,7 @@
         <module>eurynome-cloud-platform-starter</module>
         <module>eurynome-cloud-platform-gateway</module>
         <module>eurynome-cloud-platform-uaa</module>
-        <module>eurynome-cloud-platform-admin</module>
+        <module>eurynome-cloud-platform-monitor</module>
     </modules>
 
 

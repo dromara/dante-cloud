@@ -1,17 +1,20 @@
-package cn.herodotus.eurynome.admin;
+package cn.herodotus.eurynome.platform.monitor;
 
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-
+/**
+ * <p>Description: MonitorApplication </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/4/6 12:26
+ */
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableAdminServer
-public class AdminApplication {
+public class MonitorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminApplication.class, args);
+        SpringApplication.run(MonitorApplication.class, args);
     }
 
 }

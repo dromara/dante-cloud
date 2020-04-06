@@ -1,0 +1,12 @@
+server:
+  port: 8845
+spring:
+  application:
+    name: @artifactId@ #拿到POM文件中的值
+  profiles:
+    active: @profile.name@
+  cloud:
+    nacos:
+      discovery:
+        namespace: @config.namespace@
+        server-addr: @discovery.server-addr@
