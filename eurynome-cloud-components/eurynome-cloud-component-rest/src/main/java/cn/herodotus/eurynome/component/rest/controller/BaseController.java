@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.component.rest.controller;
 import cn.herodotus.eurynome.component.common.definition.AbstractController;
 import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.rest.domain.datatables.DataTableResult;
+import cn.herodotus.eurynome.component.common.domain.datatables.DataTableResult;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
