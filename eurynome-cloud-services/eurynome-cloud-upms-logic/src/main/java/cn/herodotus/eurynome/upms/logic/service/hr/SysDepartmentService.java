@@ -55,35 +55,35 @@ public class SysDepartmentService extends BaseCrudService<SysDepartment, String>
 
     @Override
     public SysDepartment findById(String departmentId) {
-        log.debug("[Luban UPMS] |- SysDepartment Service findById.");
+        log.debug("[Herodotus] |- SysDepartment Service findById.");
         return sysDepartmentRepository.findByDepartmentId(departmentId);
     }
 
     @Override
     public void deleteById(String departmentId) {
-        log.debug("[Luban UPMS] |- SysDepartment Service deleteById.");
+        log.debug("[Herodotus] |- SysDepartment Service deleteById.");
         sysDepartmentRepository.deleteByDepartmentId(departmentId);
     }
 
     @Override
     public Page<SysDepartment> findByPage(int pageNumber, int pageSize) {
-        log.debug("[Luban UPMS] |- SysDepartment Service findByPage.");
+        log.debug("[Herodotus] |- SysDepartment Service findByPage.");
         return sysDepartmentRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
     }
 
     @Override
     public SysDepartment saveOrUpdate(SysDepartment sysDepartment) {
-        log.debug("[Luban UPMS] |- SysDepartment Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysDepartment Service saveOrUpdate.");
         return sysDepartmentRepository.saveAndFlush(sysDepartment);
     }
 
     public List<SysDepartment> findAllByOrganizationId(String organizationId) {
-        log.debug("[Luban UPMS] |- SysDepartment Service findAllByOrganizationId.");
+        log.debug("[Herodotus] |- SysDepartment Service findAllByOrganizationId.");
         return sysDepartmentRepository.findAllByOrganizationId(organizationId);
     }
 
     public Page<SysDepartment> findByPage(String organizationId, int pageNumber, int pageSize) {
-        log.debug("[Luban UPMS] |- SysDepartment Service findByPage.");
+        log.debug("[Herodotus] |- SysDepartment Service findByPage.");
         return sysDepartmentRepository.findAllByOrganizationId(organizationId, PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
     }
 

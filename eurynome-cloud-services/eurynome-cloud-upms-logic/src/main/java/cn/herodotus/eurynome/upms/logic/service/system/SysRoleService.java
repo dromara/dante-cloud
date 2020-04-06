@@ -80,13 +80,13 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
     public SysRole saveOrUpdate(SysRole sysRole) {
         SysRole savedSysRole = sysRoleRepository.saveAndFlush(sysRole);
         this.cache(savedSysRole);
-        log.debug("[Luban UPMS] |- SysRole Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysRole Service saveOrUpdate.");
         return savedSysRole;
     }
 
     public SysRole authorize(String roleId, String[] authorities) {
 
-        log.debug("[Luban UPMS] |- SysRole Service authorize.");
+        log.debug("[Herodotus] |- SysRole Service authorize.");
 
         Set<SysAuthority> sysAuthorities = new HashSet<>();
         for (String authority : authorities) {
@@ -108,13 +108,13 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
             sysRole = sysRoleRepository.findByRoleId(roleId);
             this.cache(sysRole);
         }
-        log.debug("[Luban UPMS] |- SysRole Service findByRoleId.");
+        log.debug("[Herodotus] |- SysRole Service findByRoleId.");
         return sysRole;
     }
 
     @Override
     public void deleteById(String roleId) {
-        log.debug("[Luban UPMS] |- SysRole Service deleteById.");
+        log.debug("[Herodotus] |- SysRole Service deleteById.");
         sysRoleRepository.deleteByRoleId(roleId);
         this.remove(roleId);
     }
@@ -123,7 +123,7 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
     public Page<SysRole> findByPage(int pageNumber, int pageSize) {
         Page<SysRole> pages = sysRoleRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "roleId"));
         this.cache(pages.getContent());
-        log.debug("[Luban UPMS] |- SysRole Service findByPage.");
+        log.debug("[Herodotus] |- SysRole Service findByPage.");
         return pages;
     }
 

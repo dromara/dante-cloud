@@ -54,7 +54,7 @@ public class GatewayConfiguration {
 
     /**
      * Gateway 跨域处理
-     * @return
+     * @return WebFilter
      */
     @Bean
     public WebFilter corsFilter() {

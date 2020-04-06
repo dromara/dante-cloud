@@ -70,7 +70,7 @@ public class SysOrganizationService extends BaseCrudService<SysOrganization, Str
 
     @Override
     public SysOrganization saveOrUpdate(SysOrganization sysOrganization) {
-        log.debug("[Luban UPMS] |- SysOrganization Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysOrganization Service saveOrUpdate.");
         return sysOrganizationRepository.saveAndFlush(sysOrganization);
     }
 

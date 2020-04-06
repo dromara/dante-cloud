@@ -53,30 +53,30 @@ public class SysEmployeeService extends BaseCrudService<SysEmployee, String> {
 
     @Override
     public SysEmployee findById(String employeeId) {
-        log.debug("[Luban UPMS] |- SysEmployee Service findById.");
+        log.debug("[Herodotus] |- SysEmployee Service findById.");
         return sysEmployeeRepository.findByEmployeeId(employeeId);
     }
 
     @Override
     public void deleteById(String employeeId) {
-        log.debug("[Luban UPMS] |- SysEmployee Service deleteById.");
+        log.debug("[Herodotus] |- SysEmployee Service deleteById.");
         sysEmployeeRepository.deleteByEmployeeId(employeeId);
     }
 
     @Override
     public Page<SysEmployee> findByPage(int pageNumber, int pageSize) {
-        log.debug("[Luban UPMS] |- SysEmployee Service findByPage.");
+        log.debug("[Herodotus] |- SysEmployee Service findByPage.");
         return sysEmployeeRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
     }
 
     public Page<SysEmployee> findByPage(String departmentId, int pageNumber, int pageSize) {
-        log.debug("[Luban UPMS] |- SysEmployee Service findByPage.");
+        log.debug("[Herodotus] |- SysEmployee Service findByPage.");
         return sysEmployeeRepository.findAllByDepartmentId(departmentId, PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
     }
 
     @Override
     public SysEmployee saveOrUpdate(SysEmployee sysEmployee) {
-        log.debug("[Luban UPMS] |- SysEmployee Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysEmployee Service saveOrUpdate.");
         return sysEmployeeRepository.saveAndFlush(sysEmployee);
     }
 }

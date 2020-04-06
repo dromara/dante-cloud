@@ -49,12 +49,12 @@ public class SysPositionService {
     }
 
     public SysPosition saveOrUpdate(SysPosition sysPosition) {
-        log.debug("[Luban UPMS] |- SysPosition Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysPosition Service saveOrUpdate.");
         return sysPositionRepository.saveAndFlush(sysPosition);
     }
 
     public void delete(String positionId) {
-        log.debug("[Luban UPMS] |- SysPosition Service delete.");
+        log.debug("[Herodotus] |- SysPosition Service delete.");
         sysPositionRepository.deleteById(positionId);
     }
 }
