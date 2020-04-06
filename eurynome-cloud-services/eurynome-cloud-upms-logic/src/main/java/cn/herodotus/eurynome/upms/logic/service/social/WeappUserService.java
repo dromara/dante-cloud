@@ -49,12 +49,12 @@ public class WeappUserService {
     }
 
     public WeappUser saveOrUpdate(WeappUser weappUser) {
-        log.debug("[Luban UPMS] |- WeappUser Service saveOrUpdate.");
+        log.debug("[Herodotus] |- WeappUser Service saveOrUpdate.");
         return weappUserRepository.saveAndFlush(weappUser);
     }
 
     public void delete(String openId) {
-        log.debug("[Luban UPMS] |- WeappUser Service delete.");
+        log.debug("[Herodotus] |- WeappUser Service delete.");
         weappUserRepository.deleteById(openId);
     }
 }

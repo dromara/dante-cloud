@@ -83,12 +83,12 @@ public class SysAuthorityService extends BaseCacheService<SysAuthority, String> 
             sysAuthorities = sysAuthorityRepository.findAll();
             cacheAll(sysAuthorities);
         }
-        log.debug("[Luban UPMS] |- SysAuthority Service findAll.");
+        log.debug("[Herodotus] |- SysAuthority Service findAll.");
         return sysAuthorities;
     }
 
     public List<SysAuthority> batchSaveOrUpdate(List<SysAuthority> sysAuthorities) {
-        log.debug("[Luban UPMS] |- SysAuthority Service batchSaveOrUpdate.");
+        log.debug("[Herodotus] |- SysAuthority Service batchSaveOrUpdate.");
         return sysAuthorityRepository.saveAll(sysAuthorities);
     }
 
@@ -96,7 +96,7 @@ public class SysAuthorityService extends BaseCacheService<SysAuthority, String> 
     public SysAuthority saveOrUpdate(SysAuthority sysAuthority) {
         SysAuthority savedSysAuthority = sysAuthorityRepository.saveAndFlush(sysAuthority);
         cache(savedSysAuthority);
-        log.debug("[Luban UPMS] |- SysAuthority Service saveOrUpdate.");
+        log.debug("[Herodotus] |- SysAuthority Service saveOrUpdate.");
         return savedSysAuthority;
     }
 
@@ -107,13 +107,13 @@ public class SysAuthorityService extends BaseCacheService<SysAuthority, String> 
             sysAuthority = sysAuthorityRepository.findByAuthorityId(authorityId);
             cache(sysAuthority);
         }
-        log.debug("[Luban UPMS] |- SysAuthority Service findById.");
+        log.debug("[Herodotus] |- SysAuthority Service findById.");
         return sysAuthority;
     }
 
     @Override
     public void deleteById(String authorityId) {
-        log.debug("[Luban UPMS] |- SysAuthority Service deleteById.");
+        log.debug("[Herodotus] |- SysAuthority Service deleteById.");
         sysAuthorityRepository.deleteByAuthorityId(authorityId);
         this.getCache().remove(authorityId);
     }
@@ -122,7 +122,7 @@ public class SysAuthorityService extends BaseCacheService<SysAuthority, String> 
     public Page<SysAuthority> findByPage(int pageNumber, int pageSize) {
         Page<SysAuthority> pages = sysAuthorityRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
         cache( pages.getContent());
-        log.debug("[Luban UPMS] |- SysAuthority Service findByPage.");
+        log.debug("[Herodotus] |- SysAuthority Service findByPage.");
         return pages;
     }
 
