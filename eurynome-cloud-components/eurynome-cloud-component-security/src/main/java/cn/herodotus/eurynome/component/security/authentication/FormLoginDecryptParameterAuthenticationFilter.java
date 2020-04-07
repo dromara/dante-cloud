@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 自定义表单登录参数加密filter </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/1/27 17:38

@@ -1,0 +1,29 @@
+#header {
+	display: none;
+}
+
+#sidebar {
+	display: none;
+}
+
+.page-header {
+	display: none;
+}
+
+.box-title {
+	display: none;
+}
+
+.footer-tools {
+	display: none;
+}
+
+#content {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+#main-content {
+	margin-left: 0px !important;
+	border: none;
+}
