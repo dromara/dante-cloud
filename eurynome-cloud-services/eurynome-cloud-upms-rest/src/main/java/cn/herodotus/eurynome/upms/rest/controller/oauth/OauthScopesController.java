@@ -28,10 +28,10 @@ public class OauthScopesController extends BaseController {
     @Autowired
     private OauthScopesService oauthScopesService;
 
-    @ApiOperation(value = "获取应用分页数据", notes = "通过pageNumber和pageSize获取分页数据")
+    @ApiOperation(value = "获取OauthScopes分页数据", notes = "通过pageNumber和pageSize获取OauthScopes分页数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
+            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目数")
     })
     @GetMapping
     public Result<Map<String, Object>> findByPage(
@@ -42,7 +42,7 @@ public class OauthScopesController extends BaseController {
         return result(pages);
     }
 
-    @ApiOperation(value = "保存或更新应用", notes = "接收JSON数据，转换为OauthScopes实体，进行保存或更新")
+    @ApiOperation(value = "保存或更新OauthScopes", notes = "接收JSON数据，转换为OauthScopes实体，进行保存或更新")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "oauthScopes", required = true, value = "可转换为OauthScopes实体的json数据", paramType = "JSON")
     })
@@ -52,7 +52,7 @@ public class OauthScopesController extends BaseController {
         return result(newOauthScopes);
     }
 
-    @ApiOperation(value = "删除应用", notes = "根据appKey删除应用，以及相关联的关联关系数据")
+    @ApiOperation(value = "删除OauthScopes", notes = "根据scopeId删除OauthScopes，以及相关联的关系数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "scopeId", required = true, value = "ScopeID", paramType = "JSON")
     })
@@ -63,7 +63,7 @@ public class OauthScopesController extends BaseController {
         return result;
     }
 
-    @ApiOperation(value = "给范围授权", notes = "为角色赋予权限")
+    @ApiOperation(value = "给OauthScopes授权", notes = "为OauthScopes分配接口权限")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "scopeId", required = true, value = "ScopeID"),
             @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组")
