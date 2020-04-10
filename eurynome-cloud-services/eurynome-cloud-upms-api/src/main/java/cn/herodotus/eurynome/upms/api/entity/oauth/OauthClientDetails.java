@@ -150,6 +150,16 @@ public class OauthClientDetails extends BaseCacheEntity {
     }
 
     @Override
+    public String getDomainCacheKey() {
+        return this.getClientId();
+    }
+
+    @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "SysClientDetail{" +
                 "clientId='" + clientId + '\'' +
@@ -164,10 +174,5 @@ public class OauthClientDetails extends BaseCacheEntity {
                 ", additionalInformation='" + additionalInformation + '\'' +
                 ", autoApprove='" + autoApprove + '\'' +
                 '}';
-    }
-
-    @Override
-    public String getDomainCacheKey() {
-        return this.getClientId();
     }
 }

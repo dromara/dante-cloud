@@ -16,6 +16,10 @@ import java.util.Map;
  */
 public class UpmsConstants {
 
+    public static final int DEFAULT_UPMS_CACHE_EXPIRE = 86400;
+    public static final int DEFAULT_UPMS_LOCAL_LIMIT = 1000;
+
+
     public static final String INDEX_CACHE_NAME = "index:";
 
     public static final String CACHE_NAME_SYSACCOUNT = "data:upms:sysaccount:";

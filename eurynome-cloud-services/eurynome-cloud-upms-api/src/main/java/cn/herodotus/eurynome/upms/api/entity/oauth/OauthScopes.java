@@ -19,7 +19,8 @@ import java.util.Set;
  * @date : 2020/3/19 14:15
  */
 @Entity
-@Table(name = "oauth_scopes", indexes = {@Index(name = "oauth_scope_id_idx", columnList = "scope_id")})
+@Table(name = "oauth_scopes", uniqueConstraints = {@UniqueConstraint(columnNames = {"scope_code"})},
+        indexes = {@Index(name = "oauth_scope_id_idx", columnList = "scope_id"), @Index(name = "oauth_scope_code_idx", columnList = "scope_code")})
 public class OauthScopes extends BaseSysEntity {
 
     @Id
@@ -95,6 +96,12 @@ public class OauthScopes extends BaseSysEntity {
     public String getDomainCacheKey() {
         return this.getScopeId();
     }
+
+    @Override
+    public String getLinkedProperty() {
+        return getScopeCode();
+    }
+
 
     @Override
     public boolean equals(Object o) {

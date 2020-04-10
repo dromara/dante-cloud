@@ -26,8 +26,6 @@ package cn.herodotus.eurynome.upms.logic.service.system;
 
 import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
@@ -35,6 +33,7 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,10 +54,10 @@ import java.util.Set;
 @Service
 public class SysUserService extends BaseCacheService<SysUser, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_USER, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_USER, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, SysUser> sysUserCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_USER_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_USER_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, Set<String>> sysUserIndexCache;
 
     private final SysUserRepository sysUserRepository;
@@ -79,35 +78,30 @@ public class SysUserService extends BaseCacheService<SysUser, String> {
     }
 
     public SysUser findSysUserByUserName(String userName) {
-        SysUser sysUser = sysUserRepository.findByUserName(userName);
+        SysUser sysUser = getFromLinkedProperties(userName);
+        if (ObjectUtils.isEmpty(sysUser)) {
+            sysUser = sysUserRepository.findByUserName(userName);
+            cache(sysUser);
+        }
         log.debug("[Herodotus] |- SysUser Service findSysUserByUserName.");
         return sysUser;
     }
 
     @Override
-    public SysUser saveOrUpdate(SysUser sysUser) {
-        SysUser savedSysUser = sysUserRepository.saveAndFlush(sysUser);
-        this.cache(savedSysUser);
+    public SysUser saveOrUpdate(SysUser domain) {
+        SysUser sysUser = sysUserRepository.saveAndFlush(domain);
+        cache(sysUser);
         log.debug("[Herodotus] |- SysUser Service saveOrUpdate.");
-        return savedSysUser;
+        return sysUser;
     }
 
-    /**
-     * @param userId
-     * @return
-     * @Cacheable 应用到读取数据的方法上，即可缓存的方法，如查找方法：先从缓存中读取，如果没有再调用方法获取数据，然后把数据添加到缓存中
-     * @CachePut 应用到写数据的方法上，如新增/修改方法，调用方法时会自动把相应的数据放入缓存
-     * @CacheEvict 即应用到移除数据的方法上，如删除方法，调用方法时会从缓存中移除相应的数据
-     */
     @Override
     public SysUser findById(String userId) {
-        SysUser sysUser = this.getFromCache(userId);
-
+        SysUser sysUser = getFromCache(userId);
         if (ObjectUtils.isEmpty(sysUser)) {
             sysUser = sysUserRepository.findByUserId(userId);
-            this.cache(sysUser);
+            cache(sysUser);
         }
-
         log.debug("[Herodotus] |- SysUser Service findById.");
         return sysUser;
     }
@@ -116,13 +110,16 @@ public class SysUserService extends BaseCacheService<SysUser, String> {
     public void deleteById(String userId) {
         log.debug("[Herodotus] |- SysUser Service delete.");
         sysUserRepository.deleteByUserId(userId);
-        this.remove(userId);
+        remove(userId);
     }
 
     @Override
     public Page<SysUser> findByPage(int pageNumber, int pageSize) {
-        Page<SysUser> pages = sysUserRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "userId"));
-        this.cache(pages.getContent());
+        Page<SysUser> pages = getPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = sysUserRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "userId"));
+            cachePage(pages);
+        }
         log.debug("[Herodotus] |- SysUser Service findByPage.");
         return pages;
     }

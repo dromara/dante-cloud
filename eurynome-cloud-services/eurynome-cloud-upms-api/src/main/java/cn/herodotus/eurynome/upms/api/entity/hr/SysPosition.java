@@ -42,6 +42,11 @@ public class SysPosition extends BaseEntity {
         return getPositionId();
     }
 
+    @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
     public String getPositionId() {
         return positionId;
     }

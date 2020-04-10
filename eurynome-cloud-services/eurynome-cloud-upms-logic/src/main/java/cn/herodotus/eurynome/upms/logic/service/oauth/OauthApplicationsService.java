@@ -10,6 +10,7 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,10 +31,10 @@ import java.util.Set;
 @Service
 public class OauthApplicationsService extends BaseCacheService<OauthApplications, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, OauthApplications> oauthApplicationsCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS_INDEX, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, Set<String>> oauthApplicationsIndexCache;
 
     @Autowired
@@ -51,11 +52,10 @@ public class OauthApplicationsService extends BaseCacheService<OauthApplications
 
     @Override
     public OauthApplications findById(String appKey) {
-        OauthApplications oauthApplications = this.getFromCache(appKey);
-
+        OauthApplications oauthApplications = getFromCache(appKey);
         if (ObjectUtils.isEmpty(oauthApplications)) {
             oauthApplications = oauthApplicationsRepository.findByAppKey(appKey);
-            this.cache(oauthApplications);
+            cache(oauthApplications);
         }
 
         log.debug("[Herodotus] |- OauthApplications Service findById.");
@@ -65,22 +65,26 @@ public class OauthApplicationsService extends BaseCacheService<OauthApplications
     @Override
     public void deleteById(String appKey) {
         log.debug("[Herodotus] |- OauthApplications Service delete.");
-        oauthApplicationsRepository.deleteById(appKey);
-        this.remove(appKey);
+        oauthApplicationsRepository.deleteByAppKey(appKey);
+        remove(appKey);
     }
 
     @Override
     public OauthApplications saveOrUpdate(OauthApplications domain) {
-        OauthApplications savedOauthApplications = oauthApplicationsRepository.saveAndFlush(domain);
-        this.cache(savedOauthApplications);
+        OauthApplications oauthApplications = oauthApplicationsRepository.saveAndFlush(domain);
+        cache(oauthApplications);
         log.debug("[Herodotus] |- OauthApplications Service saveOrUpdate.");
-        return savedOauthApplications;
+        return oauthApplications;
     }
 
     @Override
     public Page<OauthApplications> findByPage(int pageNumber, int pageSize) {
-        Page<OauthApplications> pages = oauthApplicationsRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "createTime"));
-        cache(pages.getContent());
+        Page<OauthApplications> pages = getPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = oauthApplicationsRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "createTime"));
+            cachePage(pages);
+        }
+
         log.debug("[Herodotus] |- OauthApplications Service findByPage.");
         return pages;
     }

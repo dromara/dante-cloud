@@ -50,6 +50,11 @@ public class GatewayRouteDefinition extends BaseSysEntity {
         return this.getId();
     }
 
+    @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
     public String getId() {
         return id;
     }

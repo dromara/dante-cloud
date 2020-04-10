@@ -26,6 +26,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.domain.TreeNode;
+import cn.herodotus.eurynome.component.common.enums.AuthorityType;
 import cn.herodotus.eurynome.component.common.utils.TreeUtils;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
@@ -43,9 +44,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * <p>Description: SysAuthorityController </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/4/10 13:21
+ */
 @RestController
 @RequestMapping("/authority")
-@Api(value = "平台角色接口", tags = "用户中心服务")
+@Api(value = "Upms权限接口", tags = "用户中心服务")
 public class SysAuthorityController extends BaseController {
 
     private final SysAuthorityService sysAuthorityService;
@@ -105,6 +112,19 @@ public class SysAuthorityController extends BaseController {
                 return treeNode;
             }).collect(Collectors.toList());
             return result.data(TreeUtils.build(treeNodes));
+        } else {
+            return result.message("获取数据失败");
+        }
+    }
+
+    @ApiOperation(value = "获取全部API接口", notes = "获取全部API接口")
+    @GetMapping("/api")
+    public Result<List<SysAuthority>> findAllApi() {
+        Result<List<SysAuthority>> result = new Result<>();
+
+        List<SysAuthority> sysAuthorities = sysAuthorityService.findAllByAuthorityType(AuthorityType.API);
+        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
+            return result.data(sysAuthorities);
         } else {
             return result.message("获取数据失败");
         }

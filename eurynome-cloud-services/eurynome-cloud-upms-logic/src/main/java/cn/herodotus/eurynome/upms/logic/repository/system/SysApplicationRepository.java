@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface SysApplicationRepository extends JpaRepository<SysApplication, String> {
 
-    @EntityGraph(value = "SysApplicationWithAuthority", type = EntityGraph.EntityGraphType.FETCH)
     SysApplication findByApplicationId(String applicationId);
 
     @Modifying

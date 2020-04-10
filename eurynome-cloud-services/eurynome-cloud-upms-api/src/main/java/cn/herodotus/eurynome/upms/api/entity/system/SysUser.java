@@ -17,23 +17,15 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>Description: SysUser </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/4/10 11:06
+ */
 @Entity
-@Table(name = "sys_user", indexes = {@Index(name = "sys_user_id_idx", columnList = "user_id")},
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})})
-@NamedEntityGraphs({
-        @NamedEntityGraph(
-                name = "SysUserWithRolesAndAuthority",
-                attributeNodes = {
-                        @NamedAttributeNode(value = "roles", subgraph = "SysRoleWithAuthority")
-                },
-                subgraphs = {
-                        @NamedSubgraph(
-                                name = "SysRoleWithAuthority",
-                                attributeNodes = {
-                                        @NamedAttributeNode(value = "authorities")
-                                })
-                })
-})
+@Table(name = "sys_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})},
+        indexes = {@Index(name = "sys_user_id_idx", columnList = "user_id"), @Index(name = "sys_user_unm_idx", columnList = "user_name")})
 public class SysUser extends BaseSysEntity {
 
     @Id
@@ -43,7 +35,7 @@ public class SysUser extends BaseSysEntity {
     private String userId;
 
     @Column(name = "user_name", length = 128, unique = true)
-    private String userName;//账号.
+    private String userName;
 
     @Column(name = "password", length = 256)
     private String password;
@@ -66,6 +58,11 @@ public class SysUser extends BaseSysEntity {
     @Override
     public String getDomainCacheKey() {
         return getUserId();
+    }
+
+    @Override
+    public String getLinkedProperty() {
+        return getUserName();
     }
 
     public String getUserId() {

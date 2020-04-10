@@ -28,6 +28,7 @@ import cn.herodotus.eurynome.component.common.enums.AuthorityType;
 import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
+import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysAuthorityRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
@@ -54,10 +55,10 @@ import java.util.Set;
 @Service
 public class SysAuthorityService extends BaseCacheService<SysAuthority, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_AUTHORITY, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_AUTHORITY, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, SysAuthority> sysAuthorityCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_AUTHORITY_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_AUTHORITY_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, Set<String>> sysAuthorityIndexCache;
 
     private final SysAuthorityRepository sysAuthorityRepository;
@@ -78,10 +79,10 @@ public class SysAuthorityService extends BaseCacheService<SysAuthority, String> 
     }
 
     public List<SysAuthority> findAll() {
-        List<SysAuthority> sysAuthorities = getAllFromCache();
+        List<SysAuthority> sysAuthorities = getFindAllFromCache();
         if (CollectionUtils.isNotEmpty(sysAuthorities)) {
             sysAuthorities = sysAuthorityRepository.findAll();
-            cacheAll(sysAuthorities);
+            cacheFindAll(sysAuthorities);
         }
         log.debug("[Herodotus] |- SysAuthority Service findAll.");
         return sysAuthorities;
@@ -115,20 +116,27 @@ public class SysAuthorityService extends BaseCacheService<SysAuthority, String> 
     public void deleteById(String authorityId) {
         log.debug("[Herodotus] |- SysAuthority Service deleteById.");
         sysAuthorityRepository.deleteByAuthorityId(authorityId);
-        this.getCache().remove(authorityId);
+        remove(authorityId);
     }
 
     @Override
     public Page<SysAuthority> findByPage(int pageNumber, int pageSize) {
-        Page<SysAuthority> pages = sysAuthorityRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
-        cache( pages.getContent());
+        Page<SysAuthority> pages = getPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = sysAuthorityRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
+            cachePage(pages);
+        }
         log.debug("[Herodotus] |- SysAuthority Service findByPage.");
         return pages;
     }
 
     public List<SysAuthority> findAllByAuthorityType(AuthorityType authorityType) {
-        List<SysAuthority> sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
-        cache( sysAuthorities);
+        List<SysAuthority> sysAuthorities = getConditionalFromCache(authorityType);
+        if (CollectionUtils.isEmpty(sysAuthorities)) {
+            sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
+            cacheConditional(sysAuthorities, authorityType);
+        }
+
         return sysAuthorities;
     }
 }

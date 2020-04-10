@@ -12,6 +12,7 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,10 +33,10 @@ import java.util.Set;
 @Service
 public class OauthScopesService extends BaseCacheService<OauthScopes, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_SCOPES, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_SCOPES, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, OauthScopes> oauthScopesCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_SCOPES_INDEX, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_SCOPES_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, Set<String>> oauthScopesIndexCache;
 
     @Autowired
@@ -53,11 +54,10 @@ public class OauthScopesService extends BaseCacheService<OauthScopes, String> {
 
     @Override
     public OauthScopes findById(String scopeId) {
-        OauthScopes oauthScopes = this.getFromCache(scopeId);
-
+        OauthScopes oauthScopes = getFromCache(scopeId);
         if (ObjectUtils.isEmpty(oauthScopes)) {
             oauthScopes = oauthScopesRepository.findByScopeId(scopeId);
-            this.cache(oauthScopes);
+            cache(oauthScopes);
         }
 
         log.debug("[Herodotus] |- OauthScopes Service findById.");
@@ -67,22 +67,25 @@ public class OauthScopesService extends BaseCacheService<OauthScopes, String> {
     @Override
     public void deleteById(String scopeId) {
         log.debug("[Herodotus] |- OauthScopes Service delete.");
-        oauthScopesRepository.deleteById(scopeId);
-        this.remove(scopeId);
+        oauthScopesRepository.deleteByScopeId(scopeId);
+        remove(scopeId);
     }
 
     @Override
     public OauthScopes saveOrUpdate(OauthScopes domain) {
-        OauthScopes savedOauthScopes = oauthScopesRepository.saveAndFlush(domain);
-        this.cache(savedOauthScopes);
+        OauthScopes oauthScopes = oauthScopesRepository.saveAndFlush(domain);
+        cache(oauthScopes);
         log.debug("[Herodotus] |- OauthScopes Service saveOrUpdate.");
-        return savedOauthScopes;
+        return oauthScopes;
     }
 
     @Override
     public Page<OauthScopes> findByPage(int pageNumber, int pageSize) {
-        Page<OauthScopes> pages = oauthScopesRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "createTime"));
-        cache(pages.getContent());
+        Page<OauthScopes> pages = getPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = oauthScopesRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "createTime"));
+            cachePage(pages);
+        }
         log.debug("[Herodotus] |- OauthScopes Service findByPage.");
         return pages;
     }

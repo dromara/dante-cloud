@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface SysRoleRepository extends JpaRepository<SysRole, String> {
 
-    @EntityGraph(value = "SysRoleWithAndAuthority", type = EntityGraph.EntityGraphType.FETCH)
     SysRole findByRoleId(String roleId);
 
     @Modifying

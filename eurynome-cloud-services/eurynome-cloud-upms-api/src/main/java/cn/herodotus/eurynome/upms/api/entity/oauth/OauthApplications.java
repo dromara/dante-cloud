@@ -138,6 +138,11 @@ public class OauthApplications extends BaseSysEntity {
     }
 
     @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

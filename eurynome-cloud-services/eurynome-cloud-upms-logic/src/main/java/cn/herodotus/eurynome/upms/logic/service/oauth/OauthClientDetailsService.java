@@ -28,10 +28,10 @@ import java.util.Set;
 @Service
 public class OauthClientDetailsService extends BaseCacheService<OauthClientDetails, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, OauthClientDetails> oauthClientDetailCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS_INDEX, expire = 86400, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, Set<String>> oauthClientDetailIndexCache;
 
     @Autowired

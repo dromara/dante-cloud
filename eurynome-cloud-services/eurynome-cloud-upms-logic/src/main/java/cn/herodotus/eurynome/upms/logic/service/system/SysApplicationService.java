@@ -33,6 +33,7 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,10 +51,10 @@ import java.util.Set;
 @Service
 public class SysApplicationService extends BaseCacheService<SysApplication, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_APPLICATION, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_APPLICATION, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, SysApplication> sysApplicationCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_APPLICATION_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_APPLICATION_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, Set<String>> sysApplicationIndexCache;
 
     private final SysApplicationRepository sysApplicationRepository;
@@ -74,11 +75,11 @@ public class SysApplicationService extends BaseCacheService<SysApplication, Stri
     }
 
     @Override
-    public SysApplication saveOrUpdate(SysApplication sysApplication) {
-        SysApplication savedSysApplication = sysApplicationRepository.saveAndFlush(sysApplication);
-        this.cache(savedSysApplication);
+    public SysApplication saveOrUpdate(SysApplication domain) {
+        SysApplication sysApplication = sysApplicationRepository.saveAndFlush(domain);
+        cache(sysApplication);
         log.debug("[Herodotus] |- SysApplication Service saveOrUpdate.");
-        return savedSysApplication;
+        return sysApplication;
     }
 
     public SysApplication authorize(String applicationId, String[] authorities) {
@@ -104,7 +105,7 @@ public class SysApplicationService extends BaseCacheService<SysApplication, Stri
 
         if (ObjectUtils.isEmpty(sysApplication)){
             sysApplication = sysApplicationRepository.findByApplicationId(applicationId);
-            this.cache(sysApplication);
+            cache(sysApplication);
         }
         log.debug("[Herodotus] |- SysApplication Service findById.");
         return sysApplication;
@@ -113,21 +114,17 @@ public class SysApplicationService extends BaseCacheService<SysApplication, Stri
     @Override
     public void deleteById(String applicationId) {
         log.debug("[Herodotus] |- SysApplication Service deleteById.");
-        sysApplicationRepository.deleteById(applicationId);
-        this.getCache().remove(applicationId);
+        sysApplicationRepository.deleteByApplicationId(applicationId);
+        remove(applicationId);
     }
 
-    /**
-     * 使用Spring Data Jpa对Page，缓存会出错。
-     *
-     * @param pageNumber
-     * @param pageSize
-     * @return
-     */
     @Override
     public Page<SysApplication> findByPage(int pageNumber, int pageSize) {
-        Page<SysApplication> pages = sysApplicationRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
-        this.cache(pages.getContent());
+        Page<SysApplication> pages = getPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = sysApplicationRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "updateTime"));
+            cachePage(pages);
+        }
         log.debug("[Herodotus] |- SysApplication Service findByPage.");
         return pages;
     }

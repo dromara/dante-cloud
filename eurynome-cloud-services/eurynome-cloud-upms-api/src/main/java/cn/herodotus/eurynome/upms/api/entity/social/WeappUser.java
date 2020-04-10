@@ -56,6 +56,12 @@ public class WeappUser extends BaseEntity {
         return getOpenId();
     }
 
+    @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
+
     public String getOpenId() {
         return openId;
     }

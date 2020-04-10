@@ -33,6 +33,7 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,10 +54,10 @@ import java.util.Set;
 @Slf4j
 public class SysRoleService extends BaseCacheService<SysRole, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, SysRole> sysRoleCache;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE_INDEX, expire = 3600, cacheType = CacheType.BOTH, localLimit = 100)
+    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
     private Cache<String, Set<String>> sysRoleIndexCache;
 
     private final SysRoleRepository sysRoleRepository;
@@ -77,11 +78,11 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
     }
 
     @Override
-    public SysRole saveOrUpdate(SysRole sysRole) {
-        SysRole savedSysRole = sysRoleRepository.saveAndFlush(sysRole);
-        this.cache(savedSysRole);
+    public SysRole saveOrUpdate(SysRole domain) {
+        SysRole sysRole = sysRoleRepository.saveAndFlush(domain);
+        cache(sysRole);
         log.debug("[Herodotus] |- SysRole Service saveOrUpdate.");
-        return savedSysRole;
+        return sysRole;
     }
 
     public SysRole authorize(String roleId, String[] authorities) {
@@ -103,10 +104,10 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
 
     @Override
     public SysRole findById(String roleId) {
-        SysRole sysRole = this.getFromCache(roleId);
+        SysRole sysRole = getFromCache(roleId);
         if (ObjectUtils.isEmpty(sysRole)) {
             sysRole = sysRoleRepository.findByRoleId(roleId);
-            this.cache(sysRole);
+            cache(sysRole);
         }
         log.debug("[Herodotus] |- SysRole Service findByRoleId.");
         return sysRole;
@@ -116,13 +117,16 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
     public void deleteById(String roleId) {
         log.debug("[Herodotus] |- SysRole Service deleteById.");
         sysRoleRepository.deleteByRoleId(roleId);
-        this.remove(roleId);
+        remove(roleId);
     }
 
     @Override
     public Page<SysRole> findByPage(int pageNumber, int pageSize) {
-        Page<SysRole> pages = sysRoleRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "roleId"));
-        this.cache(pages.getContent());
+        Page<SysRole> pages = getPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = sysRoleRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "roleId"));
+            cachePage(pages);
+        }
         log.debug("[Herodotus] |- SysRole Service findByPage.");
         return pages;
     }

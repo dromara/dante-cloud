@@ -12,9 +12,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "sys_application", indexes = {@Index(name = "sys_application_aid_idx", columnList = "application_id")})
-@NamedEntityGraphs({
-        @NamedEntityGraph(name = "SysApplicationWithAuthority", attributeNodes = {@NamedAttributeNode(value = "authorities")})
-})
 public class SysApplication extends BaseSysEntity {
 
     @Id
@@ -55,6 +52,12 @@ public class SysApplication extends BaseSysEntity {
     public String getDomainCacheKey() {
         return getApplicationId();
     }
+
+    @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
 
     public String getApplicationId() {
         return applicationId;

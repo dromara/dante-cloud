@@ -121,6 +121,11 @@ public class SysEmployee extends BaseEntity {
         return getEmployeeId();
     }
 
+    @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }

@@ -12,31 +12,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(
-        name = "sys_role",
-        indexes = {
-                @Index(name = "sys_role_rid_idx", columnList = "role_id")
-        },
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"role_code"})
-        })
-@NamedEntityGraphs({
-        @NamedEntityGraph(
-                name = "SysRoleWithAndAuthority",
-                attributeNodes = {
-                        @NamedAttributeNode(value = "authorities")
-                })
-})
+@Table(name = "sys_role", uniqueConstraints = {@UniqueConstraint(columnNames = {"role_code"})},
+        indexes = {@Index(name = "sys_role_rid_idx", columnList = "role_id"), @Index(name = "sys_role_rcd_idx", columnList = "role_code")})
 public class SysRole extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "role_id", length = 64)
-    private String roleId; // 编号
+    private String roleId;
 
     @Column(name = "role_code", length = 128, unique = true)
-    private String roleCode; // 角色标识程序中判断使用,如"admin",这个是唯一的:
+    private String roleCode;
 
     @Column(name = "role_name", length = 128)
     private String roleName;
@@ -50,10 +37,9 @@ public class SysRole extends BaseSysEntity {
      * 使用@Fetch(FetchMode.JOIN)需要注意的是：它在Join查询时是Full Join, 所以会有重复City出现
      * (4) 加上@Fetch(FetchMode.SUBSELECT), 那么Hibernate将强行设置为fetch=FetchType.EAGER, 用户设置fetch=FetchType.LAZY将不会生效 从输出可看出，在执行criteria.list()时通过两条sql分别获取City和Hotel
      *
-     * @link：https://www.jianshu.com/p/23bd82a7b96e
+     * {@link :https://www.jianshu.com/p/23bd82a7b96e}
      */
 
-    //角色 -- 权限关系：多对多关系;
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "sys_role_authority",
@@ -67,6 +53,12 @@ public class SysRole extends BaseSysEntity {
     public String getDomainCacheKey() {
         return getRoleId();
     }
+
+    @Override
+    public String getLinkedProperty() {
+        return getRoleCode();
+    }
+
 
     public String getRoleId() {
         return roleId;
