@@ -20,7 +20,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "oauth_scopes", uniqueConstraints = {@UniqueConstraint(columnNames = {"scope_code"})},
-        indexes = {@Index(name = "oauth_scope_id_idx", columnList = "scope_id"), @Index(name = "oauth_scope_code_idx", columnList = "scope_code")})
+        indexes = {@Index(name = "oauth_scopes_id_idx", columnList = "scope_id"), @Index(name = "oauth_scopes_code_idx", columnList = "scope_code")})
 public class OauthScopes extends BaseSysEntity {
 
     @Id
@@ -51,13 +51,13 @@ public class OauthScopes extends BaseSysEntity {
      * {@link :https://www.jianshu.com/p/23bd82a7b96e}
      */
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
-    @JoinTable(name = "oauth_scope_authority",
+    @JoinTable(name = "oauth_scopes_authority",
             joinColumns = {@JoinColumn(name = "scope_id")},
             inverseJoinColumns = {@JoinColumn(name = "authority_id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"scope_id", "authority_id"})},
-            indexes = {@Index(name = "oauth_scope_authority_sid_idx", columnList = "scope_id"), @Index(name = "oauth_scope_authority_aid_idx", columnList = "authority_id")})
+            indexes = {@Index(name = "oauth_scopes_authority_sid_idx", columnList = "scope_id"), @Index(name = "oauth_scopes_authority_aid_idx", columnList = "authority_id")})
     private Set<SysAuthority> authorities = new HashSet<>();
 
     public String getScopeId() {

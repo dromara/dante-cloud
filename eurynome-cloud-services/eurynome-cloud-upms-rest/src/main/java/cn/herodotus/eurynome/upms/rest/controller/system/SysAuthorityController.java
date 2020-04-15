@@ -81,9 +81,9 @@ public class SysAuthorityController extends BaseController {
             @ApiImplicitParam(name = "sysAuthority", required = true, value = "可转换为SysAuthority实体的json数据", paramType = "JSON")
     })
     @PostMapping
-    public Result<SysAuthority> saveOrUpdate(@RequestBody SysAuthority sysAuthority) {
-        SysAuthority newSysAuthority = sysAuthorityService.saveOrUpdate(sysAuthority);
-        return result(newSysAuthority);
+    public Result<SysAuthority> saveOrUpdate(@RequestBody SysAuthority domain) {
+        SysAuthority sysAuthority = sysAuthorityService.saveOrUpdate(domain);
+        return result(sysAuthority);
     }
 
     @ApiOperation(value = "删除权限", notes = "根据authorityId删除权限，以及相关联的关联关系数据")
@@ -118,15 +118,9 @@ public class SysAuthorityController extends BaseController {
     }
 
     @ApiOperation(value = "获取全部API接口", notes = "获取全部API接口")
-    @GetMapping("/api")
-    public Result<List<SysAuthority>> findAllApi() {
-        Result<List<SysAuthority>> result = new Result<>();
-
+    @GetMapping("/apis")
+    public Result<List<SysAuthority>> findAllApis() {
         List<SysAuthority> sysAuthorities = sysAuthorityService.findAllByAuthorityType(AuthorityType.API);
-        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-            return result.data(sysAuthorities);
-        } else {
-            return result.message("获取数据失败");
-        }
+        return result(sysAuthorities);
     }
 }

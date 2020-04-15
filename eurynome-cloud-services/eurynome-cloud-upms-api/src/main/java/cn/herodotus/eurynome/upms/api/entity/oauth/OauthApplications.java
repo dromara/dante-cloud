@@ -20,7 +20,7 @@ import java.util.Set;
  * @date : 2020/3/19 16:13
  */
 @Entity
-@Table(name = "oauth_applications", indexes = {@Index(name = "oauth_application_id_idx", columnList = "app_key")})
+@Table(name = "oauth_applications", indexes = {@Index(name = "oauth_applications_id_idx", columnList = "app_key")})
 public class OauthApplications extends BaseSysEntity {
 
     @Id
@@ -53,11 +53,11 @@ public class OauthApplications extends BaseSysEntity {
 
     @ManyToMany
     @Fetch(FetchMode.SUBSELECT)
-    @JoinTable(name = "oauth_application_scope",
+    @JoinTable(name = "oauth_applications_scopes",
             joinColumns = {@JoinColumn(name = "app_id")},
             inverseJoinColumns = {@JoinColumn(name = "scope_id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"app_id", "scope_id"})},
-            indexes = {@Index(name = "oauth_application_scope_aid_idx", columnList = "app_id"), @Index(name = "oauth_application_scope_sid_idx", columnList = "scope_id")})
+            indexes = {@Index(name = "oauth_applications_scopes_aid_idx", columnList = "app_id"), @Index(name = "oauth_applications_scopes_sid_idx", columnList = "scope_id")})
     private Set<OauthScopes> scopes = new HashSet<>();
 
     public String getAppKey() {

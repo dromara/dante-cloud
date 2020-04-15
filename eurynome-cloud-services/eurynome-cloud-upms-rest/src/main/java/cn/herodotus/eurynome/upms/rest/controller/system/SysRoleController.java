@@ -25,9 +25,11 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.common.utils.JacksonUtils;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.service.system.SysRoleService;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -61,6 +63,9 @@ public class SysRoleController extends BaseController {
             @RequestParam("pageSize") Integer pageSize) {
 
         Page<SysRole> pages = sysRoleService.findByPage(pageNumber, pageSize);
+        Result<Map<String, Object>> result = result(pages);
+        System.out.println(JSON.toJSONString(result));
+        System.out.println(JacksonUtils.toJson(result));
         return result(pages);
     }
 

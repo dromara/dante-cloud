@@ -98,14 +98,14 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
             List<RequestMappingResource> resources = new ArrayList<>();
             // 3、微服务需要设置服务资源的上级节点
-            if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
-                RequestMappingResource requestMappingResourceRoot = new RequestMappingResource();
-                requestMappingResourceRoot.setId(serviceId);
-                requestMappingResourceRoot.setServiceId(serviceId);
-                requestMappingResourceRoot.setParentId(applicationProperties.getAuthorityTreeRoot());
-                requestMappingResourceRoot.setName(applicationProperties.getServiceDisplayName());
-                resources.add(requestMappingResourceRoot);
-            }
+//            if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
+//                RequestMappingResource requestMappingResourceRoot = new RequestMappingResource();
+//                requestMappingResourceRoot.setId(serviceId);
+//                requestMappingResourceRoot.setServiceId(serviceId);
+//                requestMappingResourceRoot.setParentId(applicationProperties.getAuthorityTreeRoot());
+//                requestMappingResourceRoot.setName(applicationProperties.getServiceDisplayName());
+//                resources.add(requestMappingResourceRoot);
+//            }
 
 
             // 4、获取所有接口映射

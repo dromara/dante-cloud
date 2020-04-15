@@ -5,11 +5,13 @@ import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.domain.datatables.DataTableResult;
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +28,15 @@ public abstract class BaseController extends AbstractController {
             return result.ok().message("操作成功！").data(domain);
         } else {
             return result.failed().message("操作失败！");
+        }
+    }
+
+    protected <D extends AbstractDomain> Result<List<D>> result(List<D> domains) {
+        Result<List<D>> result = new Result<>();
+        if (CollectionUtils.isNotEmpty(domains)) {
+            return result.ok().message("获取数据成功！").data(domains);
+        } else {
+            return result.failed().message("获取数据失败！");
         }
     }
 

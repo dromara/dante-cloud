@@ -31,6 +31,8 @@ import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFa
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 /**
  * <p>Description: TODO </p>
  * 
@@ -41,7 +43,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UndertowWebServerFactoryCustomizer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
-    public UndertowWebServerFactoryCustomizer() {
+    @PostConstruct
+    public void postConstruct() {
         log.info("[Herodotus] |- Bean [Undertow Websockets] Auto Configure.");
     }
 

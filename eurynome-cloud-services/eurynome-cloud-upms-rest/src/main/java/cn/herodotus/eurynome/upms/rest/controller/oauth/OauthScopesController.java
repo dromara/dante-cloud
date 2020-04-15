@@ -1,9 +1,11 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.common.utils.JacksonUtils;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthScopesService;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -39,7 +41,10 @@ public class OauthScopesController extends BaseController {
             @RequestParam("pageSize") Integer pageSize) {
 
         Page<OauthScopes> pages = oauthScopesService.findByPage(pageNumber, pageSize);
-        return result(pages);
+        Result<Map<String, Object>> result = result(pages);
+        System.out.println(JSON.toJSONString(result));
+        System.out.println(JacksonUtils.toJson(result));
+        return result;
     }
 
     @ApiOperation(value = "保存或更新OauthScopes", notes = "接收JSON数据，转换为OauthScopes实体，进行保存或更新")
