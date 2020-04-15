@@ -1,0 +1,52 @@
+version: "3"
+services:
+  monitor:
+    image: eurynome-cloud-platform-monitor:latest
+    build:
+      context: ../../context
+      dockerfile: ./production/Config-Monitor-Dockerfile
+    container_name: monitor
+    ports:
+      - 8845:8845
+  upms:
+    image: eurynome-cloud-upms-rest:latest
+    build:
+      context: ../../context
+      dockerfile: ./production/Config-Upms-Dockerfile
+    container_name: upms
+    environment:
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-upms-rest
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - 7070:7070
+    depends_on:
+      - monitor
+
+  gateway:
+    image: eurynome-cloud-platform-gateway:latest
+    build:
+      context: ../../context
+      dockerfile: ./production/Config-Gateway-Dockerfile
+    container_name: gateway
+    environment:
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-gateway
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - 8847:8847
+    depends_on:
+      - monitor
+
+  uaa:
+    image: eurynome-cloud-platform-uaa:latest
+    build:
+      context: ../../context
+      dockerfile: ./production/Config-Uaa-Dockerfile
+    container_name: uaa
+    environment:
+      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-uaa
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - 8846:8846
+    depends_on:
+      - upms
+      - monitor

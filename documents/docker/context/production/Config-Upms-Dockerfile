@@ -18,7 +18,7 @@ ENV SW_AGENT_SERVICE_NAME="default" SW_COLLECTOR_BACKEND_SERVICE="127.0.0.1:1180
 VOLUME /tmp
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
-ADD target/eurynome-cloud-platform-gateway-1.0.0.jar app.jar
+ADD ./target/eurynome-cloud-upms-rest-1.0.0.jar app.jar
 ADD skywalking-agent.jar skywalking-agent.jar
 
 # 声明运行时端口
