@@ -22,11 +22,11 @@ public enum ApplicationType {
     MINI(4, "小程序应用");
 
 
-    private Integer type;
-    private String description;
+    private final Integer type;
+    private final String description;
 
-    private static Map<Integer, ApplicationType> indexMap = new HashMap<>();
-    private static List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+    private static final Map<Integer, ApplicationType> indexMap = new HashMap<>();
+    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
 
     static {
         for (ApplicationType applicationType : ApplicationType.values()) {
@@ -61,8 +61,8 @@ public enum ApplicationType {
         return this.description;
     }
 
-    public static ApplicationType getStatus(Integer status) {
-        return indexMap.get(status);
+    public static ApplicationType getApplicationType(Integer type) {
+        return indexMap.get(type);
     }
 
     public static List<Map<String, Object>> getToJsonStruct() {

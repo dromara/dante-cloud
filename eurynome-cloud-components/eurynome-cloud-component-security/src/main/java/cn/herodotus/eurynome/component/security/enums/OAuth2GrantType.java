@@ -42,11 +42,11 @@ public enum OAuth2GrantType {
     PASSWORD(SecurityConstants.PASSWORD, "密码模式"),
     CLIENT_CREDENTIALS(SecurityConstants.CLIENT_CREDENTIALS, "客户端凭证模式");
 
-    private String grant;
-    private String description;
+    private final String grant;
+    private final String description;
 
-    private static Map<Integer, OAuth2GrantType> indexMap = new HashMap<>();
-    private static List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+    private static final Map<Integer, OAuth2GrantType> indexMap = new HashMap<>();
+    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
 
     static {
         for (OAuth2GrantType oAuth2GrantType : OAuth2GrantType.values()) {
