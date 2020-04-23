@@ -3,6 +3,7 @@ package cn.herodotus.eurynome.upms.api.entity.oauth;
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.ApplicationType;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
+import cn.hutool.core.util.IdUtil;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.Fetch;
@@ -30,7 +31,7 @@ public class OauthApplications extends BaseSysEntity {
     private String appKey;
 
     @Column(name = "app_secret", length = 128)
-    private String appSecret;
+    private String appSecret = IdUtil.randomUUID();
 
     @Column(name = "app_name", length = 128)
     private String appName;
@@ -46,6 +47,7 @@ public class OauthApplications extends BaseSysEntity {
     private ApplicationType applicationType = ApplicationType.WEB;
 
     @Column(name = "app_technology")
+    @Enumerated(EnumType.STRING)
     private TechnologyType technologyType = TechnologyType.JAVA;
 
     @Column(name = "website", length = 1024)

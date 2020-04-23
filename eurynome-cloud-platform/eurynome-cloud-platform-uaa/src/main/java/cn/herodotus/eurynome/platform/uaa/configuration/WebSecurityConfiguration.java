@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
-import cn.herodotus.eurynome.component.security.filter.TenantSecurityContextFilter;
 import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.platform.uaa.service.OauthUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 /**
  * <p>Description: 说明 </p>
@@ -89,11 +87,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-    @Bean
-    public TenantSecurityContextFilter tenantSecurityContextFilter() {
-        return new TenantSecurityContextFilter();
-    }
-
     /**
      * 大体意思就是antMatcher()``是HttpSecurity的一个方法，他只告诉了Spring我只配置了一个我这个Adapter能处理哪个的url，它与authorizeRequests()没有任何关系。
      * <p>
@@ -104,10 +97,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        log.info("[Herodotus] |- WebSecurityConfigurerAdapter configuration!");
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and()
-                .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class);
+
+        log.info("[Herodotus] |- UAA WebSecurityConfigurerAdapter configuration!");
+
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
         // @formatter:off
         http.requestMatchers().antMatchers("/oauth/**", "/login**")

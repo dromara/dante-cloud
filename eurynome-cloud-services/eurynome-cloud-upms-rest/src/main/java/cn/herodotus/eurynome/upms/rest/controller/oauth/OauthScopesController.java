@@ -41,10 +41,7 @@ public class OauthScopesController extends BaseController {
             @RequestParam("pageSize") Integer pageSize) {
 
         Page<OauthScopes> pages = oauthScopesService.findByPage(pageNumber, pageSize);
-        Result<Map<String, Object>> result = result(pages);
-        System.out.println(JSON.toJSONString(result));
-        System.out.println(JacksonUtils.toJson(result));
-        return result;
+        return result(pages);
     }
 
     @ApiOperation(value = "保存或更新OauthScopes", notes = "接收JSON数据，转换为OauthScopes实体，进行保存或更新")

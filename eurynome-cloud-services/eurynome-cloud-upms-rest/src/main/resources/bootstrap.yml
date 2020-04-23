@@ -13,10 +13,11 @@ spring:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
         shared-configs:
-          - data-id: eurynome-cloud-@profile.name@-platform.yml
-            refresh: true
+          - data-id: eurynome-cloud-@profile.name@-oauth.yml
           - data-id: eurynome-cloud-@profile.name@-database-@database.type@.yml
+          - data-id: eurynome-cloud-@profile.name@-rest.yml
           - data-id: eurynome-cloud-@profile.name@-redis.yml
+          - data-id: eurynome-cloud-@profile.name@-cache.yml
           - data-id: eurynome-cloud-@profile.name@-kafka.yml
         file-extension: yml
       discovery:
@@ -46,22 +47,13 @@ security:
       token-info-uri: ${eurynome.platform.token-info-uri}
       user-info-uri: ${eurynome.platform.user-info-uri}
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: ALWAYS
-
-
-
 herodotus:
   platform:
     application:
       service-display-name: "用户中心"
       accessed-through-gateway: false
+      request-mapping:
+        register-request-mapping: false
     security:
       interceptor:
         white-list:
@@ -73,31 +65,3 @@ herodotus:
           - "/user/findByUserId"
           - "/captcha/getVerifiCode"
           - "/captcha/checkVerifiCode"
-
-jetcache:
-  statIntervalMinutes: 15
-  areaInCacheName: false
-  local:
-    default:
-      type: caffeine
-      keyConvertor: fastjson
-      limit: 1000
-  remote:
-    default:
-      type: redis.lettuce
-      keyConvertor: fastjson
-      valueEncoder: java
-      valueDecoder: java
-      poolConfig:
-        minIdle: ${spring.redis.lettuce.pool.min-idle}
-        maxIdle: ${spring.redis.lettuce.pool.max-idle}
-        maxTotal: ${spring.redis.lettuce.pool.max-active}
-        maxWait: ${spring.redis.lettuce.pool.max-wait}
-      uri:
-        - redis://${spring.redis.host}:${spring.redis.port}/${spring.redis.database}
-
-logging:
-  level:
-    org.springframework.security: DEBUG
-    com.alibaba.nacos.client: WARN
-    cn.herodotus.eurynome: DEBUG

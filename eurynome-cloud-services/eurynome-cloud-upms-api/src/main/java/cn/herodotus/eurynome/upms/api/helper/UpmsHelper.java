@@ -4,6 +4,7 @@ package cn.herodotus.eurynome.upms.api.helper;
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
+import cn.herodotus.eurynome.component.common.utils.JacksonUtils;
 import cn.herodotus.eurynome.component.security.domain.HerodotusAuthority;
 import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
 import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
@@ -15,7 +16,11 @@ import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -56,18 +61,28 @@ public class UpmsHelper {
         return herodotusAuthority;
     }
 
-    public static HerodotusClientDetails convertOauthClientDetailsToHerodotusClientDetails(OauthClientDetails oauthClientDetails, Map<String, Object> additionalInformation) {
-        HerodotusClientDetails herodotusClientDetails = new HerodotusClientDetails(
-                oauthClientDetails.getClientId(),
-                oauthClientDetails.getResourceIds(),
-                oauthClientDetails.getScope(),
-                oauthClientDetails.getAuthorizedGrantTypes(),
-                oauthClientDetails.getAuthorities(),
-                oauthClientDetails.getWebServerRedirectUri());
-        herodotusClientDetails.setAccessTokenValiditySeconds(oauthClientDetails.getAccessTokenValidity());
-        herodotusClientDetails.setRefreshTokenValiditySeconds(oauthClientDetails.getRefreshTokenValidity());
-        herodotusClientDetails.setClientSecret(oauthClientDetails.getClientSecret());
-        herodotusClientDetails.setAdditionalInformation(additionalInformation);
+    public static HerodotusClientDetails convertOauthClientDetailsToHerodotusClientDetails(OauthClientDetails oauthClientDetails) {
+        HerodotusClientDetails herodotusClientDetails = null;
+
+        if (ObjectUtils.isNotEmpty(oauthClientDetails)) {
+            herodotusClientDetails = new HerodotusClientDetails(
+                    oauthClientDetails.getClientId(),
+                    oauthClientDetails.getResourceIds(),
+                    oauthClientDetails.getScope(),
+                    oauthClientDetails.getAuthorizedGrantTypes(),
+                    oauthClientDetails.getAuthorities(),
+                    oauthClientDetails.getWebServerRedirectUri());
+            herodotusClientDetails.setAccessTokenValiditySeconds(oauthClientDetails.getAccessTokenValidity());
+            herodotusClientDetails.setRefreshTokenValiditySeconds(oauthClientDetails.getRefreshTokenValidity());
+            herodotusClientDetails.setClientSecret(oauthClientDetails.getClientSecret());
+
+            if (StringUtils.isNotEmpty(oauthClientDetails.getAdditionalInformation())) {
+                Map<String, Object> additionalInformation = JSON.parseObject(oauthClientDetails.getAdditionalInformation(), new TypeReference<Map<String, Object>>() {
+                });
+                herodotusClientDetails.setAdditionalInformation(additionalInformation);
+            }
+        }
+
         return herodotusClientDetails;
     }
 
@@ -117,28 +132,20 @@ public class UpmsHelper {
         return sysAuthority;
     }
 
-    public static OauthClientDetails convertOauthApplicationsToOauthClientDetails(OauthApplications oauthApplications) {
-        OauthClientDetails oauthClientDetails = new OauthClientDetails();
+    public static OauthClientDetails convertOauthApplicationsToOauthClientDetails(OauthApplications oauthApplications, OauthClientDetails oauthClientDetails) {
+        if (ObjectUtils.isEmpty(oauthClientDetails)) {
+            oauthClientDetails = new OauthClientDetails();
+        }
+
         oauthClientDetails.setClientId(oauthApplications.getAppKey());
         oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthApplications.getAppSecret()));
 
         if (CollectionUtils.isNotEmpty( oauthApplications.getScopes())) {
-            Set<SysAuthority> sysAuthorities = new HashSet<>();
-            for (OauthScopes oauthScopes : oauthApplications.getScopes() ) {
-
-                if (CollectionUtils.isNotEmpty(oauthScopes.getAuthorities())) {
-                    sysAuthorities.addAll(oauthScopes.getAuthorities());
-                }
-            }
             String scope = oauthApplications.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
             oauthClientDetails.setScope(scope);
-
-            if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-                String authorities = sysAuthorities.stream().map(SysAuthority::getAuthorityCode).collect(Collectors.joining(SymbolConstants.COMMA));
-                oauthClientDetails.setAuthorities(authorities);
-            }
         }
 
+        oauthClientDetails.setAdditionalInformation(JSON.toJSONString(oauthApplications));
         return oauthClientDetails;
     }
 

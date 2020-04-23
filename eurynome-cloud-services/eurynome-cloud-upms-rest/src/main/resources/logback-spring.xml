@@ -32,9 +32,9 @@
         </encoder>
     </appender>
 
-    <!-- Log file debug output -->
+    <!-- Log file info output -->
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_FILE}/error.log</file>
+        <file>${LOG_FILE}/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${LOG_FILE}/%d{yyyy-MM}/info.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <maxFileSize>50MB</maxFileSize>
@@ -43,8 +43,21 @@
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
+    </appender>
+
+    <!-- Log file error output -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}/%d{yyyy-MM}/error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>error</level>
         </filter>
     </appender>
 
@@ -93,11 +106,12 @@
     <springProfile name="docker">
         <root level="info">
             <appender-ref ref="CONSOLE"/>
-            <appender-ref ref="INFO"/>
+            <appender-ref ref="DEBUG"/>
             <appender-ref ref="LOGSTASH"/>
         </root>
         <logger name="cn.herodotus" level="debug"/>
-        <logger name="org.springframework.security" level="info"/>
+        <logger name="org.springframework.security" level="debug"/>
+        <logger name="com.alibaba" level="debug"/>
         <logger name="com.alibaba.nacos.client.naming" level="off"/>
     </springProfile>
 
@@ -105,6 +119,7 @@
         <root level="info">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="INFO"/>
+            <appender-ref ref="ERROR"/>
             <appender-ref ref="LOGSTASH"/>
         </root>
         <logger name="cn.herodotus" level="info"/>

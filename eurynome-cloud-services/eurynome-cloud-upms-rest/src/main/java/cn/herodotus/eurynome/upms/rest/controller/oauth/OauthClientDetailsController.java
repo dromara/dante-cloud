@@ -2,30 +2,24 @@ package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
-import cn.herodotus.eurynome.component.security.domain.HerodotusApplication;
 import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
-import cn.herodotus.eurynome.upms.api.entity.system.SysApplication;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.api.service.fegin.OauthClientDetailFeignService;
-import cn.herodotus.eurynome.upms.logic.service.oauth.OauthApplicationsService;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p> Description : OauthClientDetailsController </p>
@@ -39,9 +33,6 @@ public class OauthClientDetailsController extends BaseController implements Oaut
 
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;
-    @Autowired
-    private OauthApplicationsService oauthApplicationsService;
-
 
     @Override
     @ApiOperation(value = "获取终端信息", notes = "通过clientId获取封装后的终端信息")
@@ -49,32 +40,37 @@ public class OauthClientDetailsController extends BaseController implements Oaut
             @ApiImplicitParam(name = "clientId", required = true, value = "终端ID")
     })
     public Result<HerodotusClientDetails> findByClientId(String clientId) {
-
         OauthClientDetails oauthClientDetails = oauthClientDetailsService.findById(clientId);
-
-        Map<String, Object> additionalInformationMap = new HashMap<>(8);
-        if (StringUtils.isNotEmpty(oauthClientDetails.getAdditionalInformation())) {
-            additionalInformationMap = JSON.parseObject(oauthClientDetails.getAdditionalInformation(), new TypeReference<Map<String, Object>>() {
-            });
-        }
-
-        HerodotusClientDetails herodotusClientDetails = UpmsHelper.convertOauthClientDetailsToHerodotusClientDetails(oauthClientDetails, additionalInformationMap);
-
+        HerodotusClientDetails herodotusClientDetails = UpmsHelper.convertOauthClientDetailsToHerodotusClientDetails(oauthClientDetails);
         return result(herodotusClientDetails);
-
     }
 
-    @ApiOperation(value = "创建Oauth Client", notes = "配置好Oauth Application通过appKey创建Oauth必须要的信息")
+    @ApiOperation(value = "获取ClientDetails分页数据", notes = "通过pageNumber和pageSize获取分页数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "appKey", required = true, value = "应用ID")
+            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数"),
+            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
-    public Result<OauthClientDetails> create(String appKey) {
-        OauthApplications oauthApplications = oauthApplicationsService.findById(appKey);
-        if (ObjectUtils.isNotEmpty(oauthApplications) && CollectionUtils.isNotEmpty(oauthApplications.getScopes())) {
-            OauthClientDetails oauthClientDetails = oauthClientDetailsService.create(oauthApplications);
-            return result(oauthClientDetails);
-        } else {
-            return new Result<OauthClientDetails>().failed().message("该应用尚未配置Scope").httpStatus(HttpStatus.SC_NOT_ACCEPTABLE);
+    @GetMapping("/oauth/herodotus_client_details")
+    public Result<Map<String, Object>> findByPage(
+            @RequestParam("pageNumber") Integer pageNumber,
+            @RequestParam("pageSize") Integer pageSize) {
+
+        Page<OauthClientDetails> pages = oauthClientDetailsService.findByPage(pageNumber, pageSize);
+        if (ObjectUtils.isNotEmpty(pages) && CollectionUtils.isNotEmpty(pages.getContent())) {
+            List<HerodotusClientDetails> herodotusClientDetails = pages.getContent().stream().map(UpmsHelper::convertOauthClientDetailsToHerodotusClientDetails).collect(Collectors.toList());
+            return result(getPageInfoMap(herodotusClientDetails, pages.getTotalPages(), pages.getTotalElements()));
         }
+
+        return new Result<Map<String, Object>>().failed().message("查询数据失败！");
+    }
+
+    @ApiOperation(value = "更新ClientDetails", notes = "接收JSON数据，转换为OauthClientDetails实体，进行更新")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "oauthClientDetails", required = true, value = "可转换为OauthClientDetails实体的json数据", paramType = "JSON")
+    })
+    @PostMapping("/oauth/client_details")
+    public Result<OauthClientDetails> update(@RequestBody OauthClientDetails domain) {
+        OauthClientDetails oauthClientDetails = oauthClientDetailsService.saveOrUpdate(domain);
+        return result(oauthClientDetails);
     }
 }

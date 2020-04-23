@@ -6,6 +6,7 @@ import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.domain.datatables.DataTableResult;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -34,9 +35,9 @@ public abstract class BaseController extends AbstractController {
     protected <D extends AbstractDomain> Result<List<D>> result(List<D> domains) {
         Result<List<D>> result = new Result<>();
         if (CollectionUtils.isNotEmpty(domains)) {
-            return result.ok().message("获取数据成功！").data(domains);
+            return result.ok().message("查询数据成功！").data(domains);
         } else {
-            return result.failed().message("获取数据失败！");
+            return result.failed().message("查询数据失败！");
         }
     }
 
@@ -44,6 +45,15 @@ public abstract class BaseController extends AbstractController {
         Result<Map<String, Object>> result = new Result<>();
         if (ObjectUtils.isNotEmpty(pages)) {
             return result.ok().message("查询数据成功！").data(getPageInfoMap(pages));
+        } else {
+            return result.failed().message("查询失败！");
+        }
+    }
+
+    protected <D extends AbstractDomain> Result<Map<String, Object>> result(Map<String, Object> map) {
+        Result<Map<String, Object>> result = new Result<>();
+        if (MapUtils.isNotEmpty(map)) {
+            return result.ok().message("查询数据成功！").data(map);
         } else {
             return result.failed().message("查询失败！");
         }
@@ -59,10 +69,14 @@ public abstract class BaseController extends AbstractController {
     }
 
     protected <D extends AbstractDomain> Map<String, Object> getPageInfoMap(Page<D> pages) {
+        return getPageInfoMap(pages.getContent(), pages.getTotalPages(), pages.getTotalElements());
+    }
+
+    protected <D extends AbstractDomain> Map<String, Object> getPageInfoMap(List<D> content, int totalPages, long totalElements) {
         Map<String, Object> result = new HashMap<>(8);
-        result.put("content", pages.getContent());
-        result.put("totalPages", pages.getTotalPages());
-        result.put("totalElements", pages.getTotalElements());
+        result.put("content", content);
+        result.put("totalPages", totalPages);
+        result.put("totalElements", totalElements);
         return result;
     }
 

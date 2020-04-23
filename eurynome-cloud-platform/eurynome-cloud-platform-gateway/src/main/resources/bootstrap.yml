@@ -32,10 +32,9 @@ spring:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
         shared-configs:
-          - data-id: eurynome-cloud-@profile.name@-platform.yml
-            refresh: true
           - data-id: eurynome-cloud-@profile.name@-database-@database.type@.yml
           - data-id: eurynome-cloud-@profile.name@-redis.yml
+          - data-id: eurynome-cloud-@profile.name@-rest.yml
         file-extension: yml
       discovery:
         namespace: @config.namespace@
@@ -45,24 +44,6 @@ spring:
         port: 8719
         dashboard: @sentinel.server-addr@
 
-ribbon:
-  http:
-    client:
-      enabled: false
-  okhttp:
-    enabled: true # 用OkHttp代替HttpClient
-  eager-load:
-    enabled: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: ALWAYS
-
 herodotus:
   gateway:
     white-list:
@@ -70,9 +51,3 @@ herodotus:
       - "/oauth/check_token"
       - "/oauth/authorize"
       - "/v2/api-docs/**"
-
-logging:
-  level:
-    org.springframework.security: INFO
-    com.alibaba.nacos.client: WARN
-    cn.herodotus.eurynome: DEBUG

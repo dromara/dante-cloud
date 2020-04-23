@@ -13,9 +13,8 @@ spring:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
         shared-configs:
-          - data-id: eurynome-cloud-@profile.name@-platform.yml
-            refresh: true
           - data-id: eurynome-cloud-@profile.name@-database-@database.type@.yml
+          - data-id: eurynome-cloud-@profile.name@-rest.yml
           - data-id: eurynome-cloud-@profile.name@-redis.yml
           - data-id: eurynome-cloud-@profile.name@-kafka.yml
         file-extension: yml
@@ -36,65 +35,7 @@ spring:
       force: true
       enabled: true
 
-
 herodotus:
   platform:
     application:
       accessed-through-gateway: false
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: ALWAYS
-
-logging:
-  level:
-    org.springframework.security: DEBUG
-    com.alibaba.nacos.client: WARN
-    cn.herodotus.eurynome: DEBUG
-
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
-  sentinel:
-    enabled: true
-
-hystrix:
-  command:
-    default:
-      execution:
-        timeout:
-          enabled: true
-        isolation:
-          thread:
-            ##断路器的超时时间需要大于ribbon的超时时间，不然不会触发重试
-            timeoutInMilliseconds: 30000
-  threadpool:
-    default:
-      coreSize: 20
-
-ribbon:
-  ##请求处理的超时时间
-  ReadTimeout: 5000
-  ##请求连接的超时时间
-  ConnectTimeout: 2000
-  ##对当前实例的重试次数
-  MaxAutoRetries: 1
-  ##对所有操作请求都进行重试
-  OkToRetryOnAllOperations: true
-  ##切换实例的重试次数
-  MaxAutoRetriesNextServer: 1
-  http:
-    client:
-      enabled: false
-  okhttp:
-    enabled: true # 用OkHttp代替HttpClient
-  eager-load:
-    enabled: true

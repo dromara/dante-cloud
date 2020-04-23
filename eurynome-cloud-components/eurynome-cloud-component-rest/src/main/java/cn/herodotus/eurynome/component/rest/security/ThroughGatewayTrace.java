@@ -11,8 +11,8 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 public class ThroughGatewayTrace {
 
-    private RedisTemplate<Object, Object> redisTemplate;
-    private ApplicationProperties applicationProperties;
+    private final RedisTemplate<Object, Object> redisTemplate;
+    private final ApplicationProperties applicationProperties;
 
     public ThroughGatewayTrace(RedisTemplate<Object, Object> redisTemplate, ApplicationProperties applicationProperties) {
         this.redisTemplate = redisTemplate;

@@ -37,14 +37,14 @@ public class FeignConfiguration {
     @ConditionalOnProperty(name = "feign.sentinel.enabled")
     @Primary
     public Feign.Builder feignSentinelBuilder() {
-        log.info("[Herodotus] |- Bean [Herodotus Sentinel Feign] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Herodotus Sentinel Feign] Auto Configure.");
         return HerodotusSentinelFeign.builder();
     }
 
     @Bean
     public FeignRequestInterceptor feignRequestInterceptor(ThroughGatewayTrace throughGatewayTrace) {
         FeignRequestInterceptor feignRequestInterceptor = new FeignRequestInterceptor(throughGatewayTrace);
-        log.info("[Herodotus] |- Bean [Feign Request Interceptor] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Feign Request Interceptor] Auto Configure.");
         return feignRequestInterceptor;
     }
 

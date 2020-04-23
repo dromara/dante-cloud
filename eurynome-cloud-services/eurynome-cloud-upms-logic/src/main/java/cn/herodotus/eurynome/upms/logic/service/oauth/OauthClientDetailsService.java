@@ -62,9 +62,9 @@ public class OauthClientDetailsService extends BaseCacheService<OauthClientDetai
 
     @Override
     public void deleteById(String clientId) {
-        log.debug("[Herodotus] |- OauthClientDetails Service delete.");
         oauthClientDetailsRepository.deleteById(clientId);
-        this.remove(clientId);
+        remove(clientId);
+        log.debug("[Herodotus] |- OauthClientDetails Service delete.");
     }
 
     @Override
@@ -83,9 +83,11 @@ public class OauthClientDetailsService extends BaseCacheService<OauthClientDetai
         return pages;
     }
 
-    public OauthClientDetails create(OauthApplications oauthApplications) {
-        OauthClientDetails oauthClientDetails = UpmsHelper.convertOauthApplicationsToOauthClientDetails(oauthApplications);
-        log.debug("[Herodotus] |- OauthClientDetails Service create.");
+    public OauthClientDetails synchronize(OauthApplications oauthApplications) {
+        OauthClientDetails oauthClientDetails = findById(oauthApplications.getAppKey());
+        oauthClientDetails = UpmsHelper.convertOauthApplicationsToOauthClientDetails(oauthApplications, oauthClientDetails);
+
+        log.debug("[Herodotus] |- OauthClientDetails Service synchronize.");
         return saveOrUpdate(oauthClientDetails);
     }
 }

@@ -30,6 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class ApplicationProperties {
 
     private Architecture architecture = Architecture.MICROSERVICE;
     private RequestMapping requestMapping = new RequestMapping();
+    private RestTemplate restTemplate = new RestTemplate();
 
     public ApplicationProperties() {
         log.info("[Herodotus] |- Properties [Application] is Enabled.");
@@ -102,6 +104,14 @@ public class ApplicationProperties {
         this.architecture = architecture;
     }
 
+    public RestTemplate getRestTemplate() {
+        return restTemplate;
+    }
+
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     public static class RequestMapping implements Serializable {
         private boolean registerRequestMapping = false;
         private List<String> scanGroupIds;
@@ -129,6 +139,33 @@ public class ApplicationProperties {
             }
 
             return scanGroupIds;
+        }
+    }
+
+    public static class RestTemplate implements Serializable {
+        /**
+         * RestTemplate 读取超时5秒,默认无限限制,单位：毫秒
+         */
+        private int readTimeout = 5000;
+        /**
+         * 连接超时10秒，默认无限制，单位：毫秒
+         */
+        private int connectTimeout = 10000;
+
+        public int getReadTimeout() {
+            return readTimeout;
+        }
+
+        public void setReadTimeout(int readTimeout) {
+            this.readTimeout = readTimeout;
+        }
+
+        public int getConnectTimeout() {
+            return connectTimeout;
+        }
+
+        public void setConnectTimeout(int connectTimeout) {
+            this.connectTimeout = connectTimeout;
         }
     }
 

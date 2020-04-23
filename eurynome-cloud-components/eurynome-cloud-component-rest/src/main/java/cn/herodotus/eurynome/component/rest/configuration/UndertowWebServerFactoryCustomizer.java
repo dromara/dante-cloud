@@ -45,7 +45,7 @@ public class UndertowWebServerFactoryCustomizer implements WebServerFactoryCusto
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Bean [Undertow Websockets] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Undertow Websockets] Auto Configure.");
     }
 
     @Override

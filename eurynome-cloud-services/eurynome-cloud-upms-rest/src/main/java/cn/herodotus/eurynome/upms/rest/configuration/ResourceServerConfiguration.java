@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 import javax.annotation.Resource;
@@ -25,10 +26,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        log.info("[Herodotus] |- ResourceServerConfigurerAdapter configuration!");
+        log.info("[Herodotus] |- UPMS ResourceServerConfigurerAdapter configuration!");
+
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+
         // @formatter:off
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers(getWhiteList()).permitAll()
                 // 指定监控访问权限
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
@@ -40,6 +43,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
         // 关闭csrf 跨站（域）攻击防控
         http.csrf().disable();
+        // @formatter:on
     }
 
     private String[] getWhiteList() {

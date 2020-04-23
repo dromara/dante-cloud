@@ -41,16 +41,16 @@ import java.util.Map;
  * ·UserDetailsService: 通过String username返回一个UserDetails
  * ·SecurityContextHolder: 提供访问 SecurityContext。
  * ·SecurityContext: 保存Authentication，和一些其它的信息
- *
+ * <p>
  * '@EnableAuthorizationServer' 提供/oauth/authorize,/oauth/token,/oauth/check_token,/oauth/confirm_access,/oauth/error
- *
+ * <p>
  * 为了实现OAuth 2.0授权服务器，Spring Security过滤器链中需要以下端点：
  * ·AuthorizationEndpoint用于为授权请求提供服务。默认网址：/oauth/authorize。
  * ·TokenEndpoint用于服务访问令牌的请求。默认网址：/oauth/token
- *
+ * <p>
  * 以下过滤器是实现OAuth 2.0资源服务器所必需的：
  * ·将OAuth2AuthenticationProcessingFilter用于加载给定的认证访问令牌请求的认证。
- *
+ * <p>
  * [/oauth/authorize] {@link org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint#authorize(Map, Map, SessionStatus, Principal)}
  * [/oauth/token] {@link org.springframework.security.oauth2.provider.endpoint.TokenEndpoint#getAccessToken(Principal, Map)}
  * [/oauth/check_token] {@link org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint#checkToken(String)}
@@ -86,6 +86,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     /**
      * 配置令牌端点(Token Endpoint)的安全约束
      * {@link org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerSecurityConfiguration}
+     *
      * @param security security
      * @throws Exception security
      */
@@ -97,8 +98,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .tokenKeyAccess("isAuthenticated()")
                 // 开启/oauth/check_token验证端口认证权限访问
                 // used by Resource Servers to decode access tokens
-//                .checkTokenAccess("isAuthenticated()")
-                .checkTokenAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
+//                .checkTokenAccess("permitAll()")
                 // 开启表单认证
                 // allowFormAuthenticationForClients是为了注册clientCredentialsTokenEndpointFilter
                 // clientCredentialsTokenEndpointFilter,解析request中的client_id和client_secret
@@ -109,9 +110,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 // 因为本质是一样的
                 .allowFormAuthenticationForClients();
     }
-
-
-
 
     /**
      * 配置客户端详情信息(Client Details)
@@ -173,7 +171,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     @Bean
-    public JwtAccessTokenConverter createJwtAccessTokenConverter(){
+    public JwtAccessTokenConverter createJwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(securityProperties.getSigningKey());
         return jwtAccessTokenConverter;

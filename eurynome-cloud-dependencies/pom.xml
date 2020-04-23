@@ -34,7 +34,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.6</commons-io.version>
         <google-guava.version>28.2-jre</google-guava.version>
-        <hutool.version>5.2.5</hutool.version>
+        <hutool.version>5.3.1</hutool.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.68</alibaba-fastjson.version>
@@ -47,7 +47,7 @@
         <!--Spring Boot Dependencies中没有的依赖组件-->
         <swagger.version>2.9.2</swagger.version>
         <knife4j.version>2.0.2</knife4j.version>
-        <p6spy.version>3.8.7</p6spy.version>
+        <p6spy.version>3.9.0</p6spy.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <oltu.oauth2.version>1.0.2</oltu.oauth2.version>

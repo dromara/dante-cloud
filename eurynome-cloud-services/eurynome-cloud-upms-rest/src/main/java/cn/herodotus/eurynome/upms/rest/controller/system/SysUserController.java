@@ -118,7 +118,7 @@ public class SysUserController extends BaseController implements SysUserFeginSer
             @ApiImplicitParam(name = "userId", required = true, value = "userId"),
             @ApiImplicitParam(name = "roles[]", required = true, value = "角色对象组成的数组")
     })
-    @PutMapping
+    @PutMapping("/user")
     public Result<SysUser> assign(@RequestParam(name = "userId") String userId, @RequestParam(name = "roles[]") String[] roles) {
         SysUser sysUser = sysUserService.assign(userId, roles);
         return result(sysUser);

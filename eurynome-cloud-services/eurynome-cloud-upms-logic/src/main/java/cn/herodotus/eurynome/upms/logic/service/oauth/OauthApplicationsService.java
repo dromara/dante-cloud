@@ -39,6 +39,8 @@ public class OauthApplicationsService extends BaseCacheService<OauthApplications
 
     @Autowired
     private OauthApplicationsRepository oauthApplicationsRepository;
+    @Autowired
+    private OauthClientDetailsService oauthClientDetailsService;
 
     @Override
     public Cache<String, OauthApplications> getCache() {
@@ -64,9 +66,10 @@ public class OauthApplicationsService extends BaseCacheService<OauthApplications
 
     @Override
     public void deleteById(String appKey) {
-        log.debug("[Herodotus] |- OauthApplications Service delete.");
         oauthApplicationsRepository.deleteByAppKey(appKey);
         remove(appKey);
+        log.debug("[Herodotus] |- OauthApplications Service delete.");
+        oauthClientDetailsService.deleteById(appKey);
     }
 
     @Override
@@ -74,6 +77,7 @@ public class OauthApplicationsService extends BaseCacheService<OauthApplications
         OauthApplications oauthApplications = oauthApplicationsRepository.saveAndFlush(domain);
         cache(oauthApplications);
         log.debug("[Herodotus] |- OauthApplications Service saveOrUpdate.");
+        oauthClientDetailsService.synchronize(oauthApplications);
         return oauthApplications;
     }
 

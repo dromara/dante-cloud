@@ -23,10 +23,10 @@ public enum TechnologyType {
     PHP(2, "PHP PC网页应用"),
     NODE(3, "前后端分离 PC网页应用"),
     IOS(4, "苹果手机应用"),
-    ANDROID(4, "安卓手机应用"),
-    WEAPP(4, "微信小程序应用"),
-    ALIAPP(4, "支付宝小程序应用"),
-    DUAPP(4, "百度小程序应用");
+    ANDROID(5, "安卓手机应用"),
+    WEAPP(6, "微信小程序应用"),
+    ALIAPP(7, "支付宝小程序应用"),
+    DUAPP(8, "百度小程序应用");
 
     private final Integer type;
     private final String description;

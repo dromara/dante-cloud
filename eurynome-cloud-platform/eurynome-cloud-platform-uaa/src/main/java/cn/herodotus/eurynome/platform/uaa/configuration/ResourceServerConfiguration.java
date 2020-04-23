@@ -1,13 +1,9 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
-import cn.herodotus.eurynome.component.security.filter.TenantSecurityContextFilter;
-import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.component.security.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.eurynome.component.security.response.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.provider.authentication.BearerTokenExtractor;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
-import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -55,21 +50,14 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Autowired
     private TokenStore tokenStore;
 
-    private BearerTokenExtractor tokenExtractor = new BearerTokenExtractor();
-    @Autowired
-    private SecurityProperties securityProperties;
-
-    @Bean
-    public TenantSecurityContextFilter tenantSecurityContextFilter() {
-        return new TenantSecurityContextFilter();
-    }
+    private final BearerTokenExtractor tokenExtractor = new BearerTokenExtractor();
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        log.info("[Herodotus] |- ResourceServerConfigurerAdapter configuration!");
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and()
-                .addFilterAfter(tenantSecurityContextFilter(), WebAsyncManagerIntegrationFilter.class);
+
+        log.info("[Herodotus] |- UAA ResourceServerConfigurerAdapter configuration!");
+
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
         // @formatter:off
         http.requestMatchers().antMatchers("/identity/**", "/actuator/**")

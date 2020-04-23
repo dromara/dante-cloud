@@ -53,7 +53,7 @@ public class HerodotusRestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Bean [Herodotus Rest] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Herodotus Rest] Auto Configure.");
     }
 
     @Bean
@@ -61,7 +61,7 @@ public class HerodotusRestConfiguration {
     @ConditionalOnBean(RedisTemplate.class)
     public ThroughGatewayTrace throughGatewayTrace(RedisTemplate<Object, Object> redisTemplate, ApplicationProperties applicationProperties) {
         ThroughGatewayTrace throughGatewayTrace = new ThroughGatewayTrace(redisTemplate, applicationProperties);
-        log.info("[Herodotus] |- Bean [Through Gateway Trace] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Through Gateway Trace] Auto Configure.");
         return throughGatewayTrace;
     }
 
@@ -70,7 +70,7 @@ public class HerodotusRestConfiguration {
     @ConditionalOnBean(ThroughGatewayTrace.class)
     public GlobalRequestInterceptor globalInterceptor(ThroughGatewayTrace throughGatewayTrace) {
         GlobalRequestInterceptor globalRequestInterceptor = new GlobalRequestInterceptor(throughGatewayTrace);
-        log.info("[Herodotus] |- Bean [Global Interceptor] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Global Interceptor] Auto Configure.");
         return globalRequestInterceptor;
     }
 }
