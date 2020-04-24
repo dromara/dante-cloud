@@ -53,7 +53,7 @@ public class OauthApplications extends BaseSysEntity {
     @Column(name = "website", length = 1024)
     private String website;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "oauth_applications_scopes",
             joinColumns = {@JoinColumn(name = "app_id")},

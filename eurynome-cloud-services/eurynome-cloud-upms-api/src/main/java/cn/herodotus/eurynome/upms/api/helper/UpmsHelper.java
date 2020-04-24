@@ -4,25 +4,27 @@ package cn.herodotus.eurynome.upms.api.helper;
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
-import cn.herodotus.eurynome.component.common.utils.JacksonUtils;
 import cn.herodotus.eurynome.component.security.domain.HerodotusAuthority;
 import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
 import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
 import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StringUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /** 
@@ -76,7 +78,7 @@ public class UpmsHelper {
             herodotusClientDetails.setRefreshTokenValiditySeconds(oauthClientDetails.getRefreshTokenValidity());
             herodotusClientDetails.setClientSecret(oauthClientDetails.getClientSecret());
 
-            if (StringUtils.isNotEmpty(oauthClientDetails.getAdditionalInformation())) {
+            if (StringUtils.hasText(oauthClientDetails.getAdditionalInformation())) {
                 Map<String, Object> additionalInformation = JSON.parseObject(oauthClientDetails.getAdditionalInformation(), new TypeReference<Map<String, Object>>() {
                 });
                 herodotusClientDetails.setAdditionalInformation(additionalInformation);
@@ -84,6 +86,22 @@ public class UpmsHelper {
         }
 
         return herodotusClientDetails;
+    }
+
+
+    public static OauthClientDetails convertHerodotusClientDetailsToOauthClientDetails(HerodotusClientDetails herodotusClientDetails) {
+        OauthClientDetails oauthClientDetails = new OauthClientDetails();
+        oauthClientDetails.setClientId(herodotusClientDetails.getClientId());
+        oauthClientDetails.setClientSecret(herodotusClientDetails.getClientSecret());
+        oauthClientDetails.setResourceIds(StringUtils.collectionToCommaDelimitedString(herodotusClientDetails.getResourceIds()));
+        oauthClientDetails.setScope(StringUtils.collectionToCommaDelimitedString(herodotusClientDetails.getScope()));
+        oauthClientDetails.setAuthorizedGrantTypes(StringUtils.collectionToCommaDelimitedString(herodotusClientDetails.getAuthorizedGrantTypes()));
+        oauthClientDetails.setWebServerRedirectUri(StringUtils.collectionToCommaDelimitedString(herodotusClientDetails.getRegisteredRedirectUri()));
+        oauthClientDetails.setAuthorities(StringUtils.collectionToCommaDelimitedString(herodotusClientDetails.getAuthorities()));
+        oauthClientDetails.setAccessTokenValidity(herodotusClientDetails.getAccessTokenValiditySeconds());
+        oauthClientDetails.setRefreshTokenValidity(herodotusClientDetails.getRefreshTokenValiditySeconds());
+        oauthClientDetails.setAdditionalInformation(JSON.toJSONString(herodotusClientDetails.getAdditionalInformation()));
+        return oauthClientDetails;
     }
 
     public static HerodotusUserDetails convertSysUserToArtisanUserDetails(SysUser sysUser) {

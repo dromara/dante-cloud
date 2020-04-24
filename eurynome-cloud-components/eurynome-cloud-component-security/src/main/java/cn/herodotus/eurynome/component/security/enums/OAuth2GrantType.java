@@ -37,10 +37,10 @@ public enum OAuth2GrantType {
     /**
      * enum
      */
-    AUTHORIZATION_CODE(SecurityConstants.AUTHORIZATION_CODE, "授权码授权模式"),
-    IMPLICIT(SecurityConstants.IMPLICIT, "隐式授权模式"),
-    PASSWORD(SecurityConstants.PASSWORD, "密码模式"),
-    CLIENT_CREDENTIALS(SecurityConstants.CLIENT_CREDENTIALS, "客户端凭证模式");
+    AUTHORIZATION_CODE(SecurityConstants.AUTHORIZATION_CODE, "Authorization Code 模式"),
+    IMPLICIT(SecurityConstants.IMPLICIT, "Implicit 模式"),
+    PASSWORD(SecurityConstants.PASSWORD, "Password 模式"),
+    CLIENT_CREDENTIALS(SecurityConstants.CLIENT_CREDENTIALS, "Client Credentials 模式");
 
     private final String grant;
     private final String description;

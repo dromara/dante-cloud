@@ -69,8 +69,19 @@ public class OauthClientDetailsController extends BaseController implements Oaut
             @ApiImplicitParam(name = "oauthClientDetails", required = true, value = "可转换为OauthClientDetails实体的json数据", paramType = "JSON")
     })
     @PostMapping("/oauth/client_details")
-    public Result<OauthClientDetails> update(@RequestBody OauthClientDetails domain) {
-        OauthClientDetails oauthClientDetails = oauthClientDetailsService.saveOrUpdate(domain);
+    public Result<OauthClientDetails> update(@RequestBody HerodotusClientDetails domain) {
+        OauthClientDetails oauthClientDetails = oauthClientDetailsService.saveOrUpdate(UpmsHelper.convertHerodotusClientDetailsToOauthClientDetails(domain));
         return result(oauthClientDetails);
+    }
+
+    @ApiOperation(value = "删除ClientDetails", notes = "根据clientId删除ClientDetails，以及相关联的关系数据")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
+    })
+    @DeleteMapping("/oauth/client_details")
+    public Result<String> delete(@RequestBody String clientId) {
+        Result<String> result = result(clientId);
+        oauthClientDetailsService.deleteById(clientId);
+        return result;
     }
 }
