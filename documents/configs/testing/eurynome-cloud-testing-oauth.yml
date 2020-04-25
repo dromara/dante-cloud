@@ -7,8 +7,8 @@ eurynome:
     token-info-uri: ${eurynome.platform.uaa-server-addr}/oauth/check_token
     user-info-uri: ${eurynome.platform.uaa-server-addr}/current/user
     scope: all
-    client-id: 1552294656514
-    client-secret: 123456
+    client-id: 010e659a-4005-4610-98f6-00b822f4758e
+    client-secret: 04165a07-cffd-45cf-a20a-1c2a69f65fb1
     jwt-signing-key: eurynome-cloud
   swagger2:
     access-token-uri: ${eurynome.platform.access-token-uri}

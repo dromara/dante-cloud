@@ -56,10 +56,10 @@ public class OauthApplications extends BaseSysEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "oauth_applications_scopes",
-            joinColumns = {@JoinColumn(name = "app_id")},
+            joinColumns = {@JoinColumn(name = "app_key")},
             inverseJoinColumns = {@JoinColumn(name = "scope_id")},
-            uniqueConstraints = {@UniqueConstraint(columnNames = {"app_id", "scope_id"})},
-            indexes = {@Index(name = "oauth_applications_scopes_aid_idx", columnList = "app_id"), @Index(name = "oauth_applications_scopes_sid_idx", columnList = "scope_id")})
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"app_key", "scope_id"})},
+            indexes = {@Index(name = "oauth_applications_scopes_aid_idx", columnList = "app_key"), @Index(name = "oauth_applications_scopes_sid_idx", columnList = "scope_id")})
     private Set<OauthScopes> scopes = new HashSet<>();
 
     public String getAppKey() {
