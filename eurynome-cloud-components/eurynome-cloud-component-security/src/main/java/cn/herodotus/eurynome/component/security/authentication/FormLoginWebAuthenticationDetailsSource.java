@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.component.security.authentication;
 
 import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.component.security.web.authentication.FormLoginWebAuthenticationDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;

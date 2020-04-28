@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.configuration;
 
 import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.component.security.response.HerodotusAccessDeniedHandler;
-import cn.herodotus.eurynome.component.security.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.eurynome.component.security.web.access.HerodotusAccessDeniedHandler;
+import cn.herodotus.eurynome.component.security.web.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 
 import javax.annotation.Resource;
 

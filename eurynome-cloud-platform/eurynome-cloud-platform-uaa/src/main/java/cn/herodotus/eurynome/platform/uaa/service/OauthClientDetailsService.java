@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.platform.uaa.service;
 
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
-import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
-import cn.herodotus.eurynome.upms.api.service.remote.RemoteOauthClientDetailService;
+import cn.herodotus.eurynome.component.security.oauth2.provider.HerodotusClientDetails;
+import cn.herodotus.eurynome.upms.api.service.remote.RemoteOauthClientDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class OauthClientDetailsService implements ClientDetailsService {
 
     @Autowired
-    private RemoteOauthClientDetailService remoteOauthClientDetailService;
+    private RemoteOauthClientDetailsService remoteOauthClientDetailsService;
 
 
     /**
@@ -64,7 +64,7 @@ public class OauthClientDetailsService implements ClientDetailsService {
      * @return HerodotusClientDetails
      */
     public HerodotusClientDetails getRemoteOauthClientDetails(String clientId) {
-        HerodotusClientDetails herodotusClientDetails = remoteOauthClientDetailService.findByClientId(clientId).getData();
+        HerodotusClientDetails herodotusClientDetails = remoteOauthClientDetailsService.findByClientId(clientId).getData();
 
         if (ObjectUtils.isEmpty(herodotusClientDetails)) {
             log.error("[Herodotus] |- Can not Fetch the Remote Client Details!");

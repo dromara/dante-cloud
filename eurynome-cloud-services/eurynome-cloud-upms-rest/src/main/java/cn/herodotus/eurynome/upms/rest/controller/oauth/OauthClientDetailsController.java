@@ -2,10 +2,10 @@ package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
-import cn.herodotus.eurynome.component.security.domain.HerodotusClientDetails;
+import cn.herodotus.eurynome.component.security.oauth2.provider.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
-import cn.herodotus.eurynome.upms.api.service.fegin.OauthClientDetailFeignService;
+import cn.herodotus.eurynome.upms.api.service.fegin.OauthClientDetailsFeignService;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 @Api(value = "OauthClientDetails接口", tags = "用户中心服务")
 @RestController
-public class OauthClientDetailsController extends BaseController implements OauthClientDetailFeignService {
+public class OauthClientDetailsController extends BaseController implements OauthClientDetailsFeignService {
 
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;

@@ -38,7 +38,6 @@ import javax.annotation.PostConstruct;
         "cn.hutool.extra.spring",
         "cn.herodotus.eurynome.component.security.configuration",
         "cn.herodotus.eurynome.component.security.authentication",
-        "cn.herodotus.eurynome.component.security.exception"
 })
 public class HerodotusSecurityConfiguration {
 

@@ -37,12 +37,8 @@ spring:
 security:
   oauth2:
     client:
-      access-token-uri: ${eurynome.platform.access-token-uri}
-      user-authorization-uri: ${eurynome.platform.user-authorization-uri}
       client-id: ${eurynome.platform.client-id}
       client-secret: ${eurynome.platform.client-secret}
-      scope: ${eurynome.platform.scope}
-      authorized-grant-types: password
     resource:
       token-info-uri: ${eurynome.platform.token-info-uri}
       user-info-uri: ${eurynome.platform.user-info-uri}

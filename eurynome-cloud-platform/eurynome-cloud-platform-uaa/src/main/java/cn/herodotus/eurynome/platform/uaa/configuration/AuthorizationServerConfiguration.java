@@ -1,9 +1,9 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
+import cn.herodotus.eurynome.component.security.oauth2.provider.error.HerodotusWebResponseExceptionTranslator;
+import cn.herodotus.eurynome.component.security.oauth2.provider.token.HerodotusJwtTokenEnhancer;
+import cn.herodotus.eurynome.component.security.oauth2.provider.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.component.security.response.HerodotusWebResponseExceptionTranslator;
-import cn.herodotus.eurynome.platform.uaa.extend.OauthJwtTokenEnhancer;
-import cn.herodotus.eurynome.platform.uaa.extend.OauthUserAuthenticationConverter;
 import cn.herodotus.eurynome.platform.uaa.service.OauthClientDetailsService;
 import cn.herodotus.eurynome.platform.uaa.service.OauthUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,10 @@ import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.token.*;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.web.bind.support.SessionStatus;
@@ -78,8 +81,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private OauthClientDetailsService oauthClientDetailsService;
     @Autowired
     private OauthUserDetailsService oauthUserDetailsService;
-    @Autowired
-    private OauthUserAuthenticationConverter oauthUserAuthenticationConverter;
     @Autowired
     private SecurityProperties securityProperties;
 
@@ -147,22 +148,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return new JdbcAuthorizationCodeServices(dataSource);
     }
 
-    /**
-     * setAccessTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 access_token_validity
-     * setRefreshTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 refresh_token_validity
-     * 如果 数据 库定义了，则代码处配置失效
-     */
-    @Bean
-    public DefaultTokenServices createDefaultTokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setReuseRefreshToken(true);
-        defaultTokenServices.setClientDetailsService(oauthClientDetailsService);
-        defaultTokenServices.setTokenEnhancer(createAccessTokenEnhancerChain());
-        return defaultTokenServices;
-    }
-
     @Bean
     public TokenEnhancerChain createAccessTokenEnhancerChain() {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
@@ -179,7 +164,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Bean
     public TokenEnhancer createJwtTokenEnhancer() {
-        return new OauthJwtTokenEnhancer();
+        return new HerodotusJwtTokenEnhancer();
     }
 
     /**
@@ -189,8 +174,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Bean
     public DefaultAccessTokenConverter createDefaultAccessTokenConverter() {
+        HerodotusUserAuthenticationConverter herodotusUserAuthenticationConverter = new HerodotusUserAuthenticationConverter();
+
         DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
-        defaultAccessTokenConverter.setUserTokenConverter(oauthUserAuthenticationConverter);
+        defaultAccessTokenConverter.setUserTokenConverter(herodotusUserAuthenticationConverter);
         return defaultAccessTokenConverter;
     }
 
@@ -200,20 +187,37 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * @return TokenStore
      */
     @Bean
-    public TokenStore tokenStore() {
+    public TokenStore createTokenStore() {
         return new RedisTokenStore(lettuceConnectionFactory);
 //        return new JdbcTokenStore(dataSource);
     }
 
+    /**
+     * 之前是采用自己定一个DefaultTokenServices的方式对Token的一些内容进行设置。
+     * 但是这样就存在一个问题，这会让人混淆有些属性，例如tokenStore，到底是应该设置在endpoints还是DefaultTokenServices中。
+     *
+     * 后来查阅的oauth的源代码{@link AuthorizationServerEndpointsConfigurer#getDefaultAuthorizationServerTokenServices()}，发现：
+     * 这个类会判断是否已经设置了DefaultTokenServices，如果没有就帮助创建一个。
+     * 通过对比发现oauth源代码创建DefaultTokenServices内容，和自己创建的没有多大区别，因此考虑没有比较自己创建，还引起了不必要的混乱。
+     *
+     * setAccessTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 access_token_validity
+     * setRefreshTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 refresh_token_validity
+     *
+     * @param endpoints AuthorizationServerEndpointsConfigurer
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
                 .authenticationManager(authenticationManager)
+                // 授权允许存储方式
                 .approvalStore(createApprovalStore())
+                // 授权码模式code存储方式
                 .authorizationCodeServices(createAuthorizationCodeServices())
+                // token存储方式
+                .tokenStore(createTokenStore())
                 .userDetailsService(oauthUserDetailsService)
-                .tokenServices(createDefaultTokenServices())
+                .tokenEnhancer(createAccessTokenEnhancerChain())
                 .accessTokenConverter(createDefaultAccessTokenConverter());
 
         // 自定义确认授权页面

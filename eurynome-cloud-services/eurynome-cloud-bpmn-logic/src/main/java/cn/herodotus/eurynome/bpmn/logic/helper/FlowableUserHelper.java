@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.bpmn.logic.helper;
 
-import cn.herodotus.eurynome.component.security.domain.HerodotusRole;
-import cn.herodotus.eurynome.component.security.domain.HerodotusUserDetails;
+import cn.herodotus.eurynome.component.security.core.HerodotusRole;
+import cn.herodotus.eurynome.component.security.core.userdetails.HerodotusUserDetails;
 import org.apache.commons.collections4.CollectionUtils;
 import org.flowable.ui.common.model.RemoteGroup;
 import org.flowable.ui.common.model.RemoteUser;
