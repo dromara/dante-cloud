@@ -30,7 +30,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -113,8 +112,20 @@ public class ApplicationProperties {
     }
 
     public static class RequestMapping implements Serializable {
+        /**
+         * 是否开启RequestMapping的扫描，默认不开启。
+         */
         private boolean registerRequestMapping = false;
+        /**
+         * 指定扫描的命名空间。未指定的命名空间中，即使包含RequestMapping，也不会被添加进来。
+         */
         private List<String> scanGroupIds;
+        /**
+         * Spring 中会包含 Controller和 RestController，
+         * 如果该配置设置为True，那么就只扫描RestController
+         * 如果该配置设置为False，那么Controller和 RestController斗扫描。
+         */
+        private boolean justScanRestController = false;
 
         public boolean isRegisterRequestMapping() {
             return registerRequestMapping;
@@ -139,6 +150,14 @@ public class ApplicationProperties {
             }
 
             return scanGroupIds;
+        }
+
+        public boolean isJustScanRestController() {
+            return justScanRestController;
+        }
+
+        public void setJustScanRestController(boolean justScanRestController) {
+            this.justScanRestController = justScanRestController;
         }
     }
 
