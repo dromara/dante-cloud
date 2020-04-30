@@ -93,7 +93,7 @@ public class OauthScopes extends BaseSysEntity {
     }
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return this.getScopeId();
     }
 

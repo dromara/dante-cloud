@@ -9,9 +9,9 @@
 
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
+import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
 import cn.herodotus.eurynome.upms.api.constants.enums.Identity;
-import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
@@ -31,7 +31,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "sys_employee", indexes = {@Index(name = "sys_employee_id_idx", columnList = "employee_id")})
-public class SysEmployee extends BaseEntity {
+public class SysEmployee extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -117,7 +117,7 @@ public class SysEmployee extends BaseEntity {
     private Set<SysPosition> positions = new HashSet<>();
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return getEmployeeId();
     }
 

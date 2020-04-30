@@ -1,34 +1,73 @@
-/*
- * Copyright 2019-2019 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- *
- * Project Name: luban-cloud
- * Module Name: luban-cloud-component-data
- * File Name: BaseService.java
- * Author: gengwei.zheng
- * Date: 2019/11/24 下午3:09
- * LastModified: 2019/11/7 下午2:28
- */
-
 package cn.herodotus.eurynome.component.data.base.service;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
-import cn.herodotus.eurynome.component.common.definition.AbstractService;
+import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
 import java.io.Serializable;
+import java.util.List;
 
-public abstract class BaseService<D extends AbstractDomain, ID extends Serializable> extends AbstractService {
+/**
+ * <p> Description : BaseService </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/4/29 18:22
+ */
+@Slf4j
+public abstract class BaseService<E extends AbstractEntity, ID extends Serializable> extends AbstractCacheService<E, ID> {
 
+
+
+    @Override
+    public E findById(ID id) {
+        E domain = getFromCache(String.valueOf(id));
+        if (ObjectUtils.isEmpty(domain)) {
+            domain = super.findById(id);
+            cache(domain);
+        }
+
+        log.debug("[Herodotus] |- AbstractCrudService Service findById.");
+        return domain;
+    }
+
+    @Override
+    public void deleteById(ID id) {
+        super.deleteById(id);
+        remove(String.valueOf(id));
+        log.debug("[Herodotus] |- AbstractCrudService Service delete.");
+    }
+
+    @Override
+    public E saveOrUpdate(E domain) {
+        E savedDomain = super.saveAndFlush(domain);
+        cache(savedDomain);
+        log.debug("[Herodotus] |- AbstractCrudService Service saveOrUpdate.");
+        return savedDomain;
+    }
+
+    @Override
+    public Page<E> findByPage(int pageNumber, int pageSize, Sort.Direction direction, String... properties) {
+        Page<E> pages = getPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = super.findByPage(pageNumber, pageSize, direction, properties);
+            cachePage(pages);
+        }
+
+        log.debug("[Herodotus] |- AbstractCrudService Service findByPage.");
+        return pages;
+    }
+
+    @Override
+    public List<E> findAll() {
+        List<E> domains = getFindAllFromCache();
+        if (CollectionUtils.isNotEmpty(domains)) {
+            domains = super.findAll();
+            cacheFindAll(domains);
+        }
+        log.debug("[Herodotus] |- AbstractCrudService Service findAll.");
+        return domains;
+    }
 }

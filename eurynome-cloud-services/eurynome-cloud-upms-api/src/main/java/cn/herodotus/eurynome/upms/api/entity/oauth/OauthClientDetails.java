@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
-import cn.herodotus.eurynome.component.data.base.entity.BaseCacheEntity;
+import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
 import com.alibaba.fastjson.JSON;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @Entity
 @Table(name = "oauth_client_details", indexes = {@Index(name = "oauth_client_details_id_idx", columnList = "client_id")})
-public class OauthClientDetails extends BaseCacheEntity {
+public class OauthClientDetails extends AbstractEntity {
 
     @Id
     @GeneratedValue(generator = "client-detail-uuid")
@@ -150,7 +150,7 @@ public class OauthClientDetails extends BaseCacheEntity {
     }
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return this.getClientId();
     }
 

@@ -24,18 +24,31 @@
 
 package cn.herodotus.eurynome.upms.logic.service.social;
 
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.social.WeappUser;
 import cn.herodotus.eurynome.upms.logic.repository.social.WeappUserRepository;
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Slf4j
 @Service
-public class WeappUserService {
+public class WeappUserService extends BaseService<WeappUser, String> {
+
+    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_WEAPP_USER;
+
+    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, WeappUser> dataCache;
+
+    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, Set<String>> indexCache;
 
     private final WeappUserRepository weappUserRepository;
 
@@ -44,17 +57,18 @@ public class WeappUserService {
         this.weappUserRepository = weappUserRepository;
     }
 
-    public Page<WeappUser> findByPage(Integer pageNumber, Integer pageSize) {
-        return weappUserRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "openId"));
+    @Override
+    public Cache<String, WeappUser> getCache() {
+        return this.dataCache;
     }
 
-    public WeappUser saveOrUpdate(WeappUser weappUser) {
-        log.debug("[Herodotus] |- WeappUser Service saveOrUpdate.");
-        return weappUserRepository.saveAndFlush(weappUser);
+    @Override
+    public Cache<String, Set<String>> getIndexCache() {
+        return this.indexCache;
     }
 
-    public void delete(String openId) {
-        log.debug("[Herodotus] |- WeappUser Service delete.");
-        weappUserRepository.deleteById(openId);
+    @Override
+    public BaseRepository<WeappUser, String> getRepository() {
+        return this.weappUserRepository;
     }
 }

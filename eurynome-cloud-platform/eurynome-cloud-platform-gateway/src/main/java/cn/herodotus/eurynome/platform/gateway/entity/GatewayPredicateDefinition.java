@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.gateway.entity;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
+import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author gengwei.zheng
  */
-public class GatewayPredicateDefinition extends AbstractDomain {
+public class GatewayPredicateDefinition extends AbstractEntity {
 
     /**
      * 断言对应的Name
@@ -60,5 +60,15 @@ public class GatewayPredicateDefinition extends AbstractDomain {
         return new HashCodeBuilder(17, 37)
                 .append(name)
                 .toHashCode();
+    }
+
+    @Override
+    public String getLinkedProperty() {
+        return null;
+    }
+
+    @Override
+    public String getId() {
+        return this.name;
     }
 }

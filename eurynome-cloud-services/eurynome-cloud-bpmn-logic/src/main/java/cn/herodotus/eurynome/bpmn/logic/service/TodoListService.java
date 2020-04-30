@@ -2,7 +2,6 @@ package cn.herodotus.eurynome.bpmn.logic.service;
 
 import cn.herodotus.eurynome.bpmn.logic.entity.TodoList;
 import cn.herodotus.eurynome.bpmn.logic.repository.TodoListRepository;
-import cn.herodotus.eurynome.component.data.base.service.BaseReadableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class TodoListService extends BaseReadableService<TodoList, String> {
+public class TodoListService {
 
     private final TodoListRepository todoListRepository;
 
@@ -27,7 +26,6 @@ public class TodoListService extends BaseReadableService<TodoList, String> {
         this.todoListRepository = todoListRepository;
     }
 
-    @Override
     public Page<TodoList> findByPageWithEmployeeId(String employeeId, int pageNumber, int pageSize) {
         log.debug("[Herodotus] |- Todo Task Service findByPageWithEmployeeId");
         return todoListRepository.findDistinctTopByCandidateUserIdOrAssigneeIdOrLinkUserId(employeeId, employeeId, employeeId, PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "startTime"));

@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.bpmn.logic.service;
 
 import cn.herodotus.eurynome.bpmn.logic.entity.CompleteList;
 import cn.herodotus.eurynome.bpmn.logic.repository.CompleteListRepository;
-import cn.herodotus.eurynome.component.data.base.service.BaseReadableService;
+import cn.herodotus.eurynome.component.data.base.service.ReadableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class CompleteListService extends BaseReadableService<CompleteList, String> {
+public class CompleteListService {
 
     private final CompleteListRepository completeListRepository;
 
@@ -27,7 +27,6 @@ public class CompleteListService extends BaseReadableService<CompleteList, Strin
         this.completeListRepository = completeListRepository;
     }
 
-    @Override
     public Page<CompleteList> findByPageWithEmployeeId(String employeeId, int pageNumber, int pageSize) {
         log.debug("[Herodotus] |- Complete Task Service findByPageWithEmployeeId.");
         return completeListRepository.findAllByApproverId(employeeId, PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "startTime"));

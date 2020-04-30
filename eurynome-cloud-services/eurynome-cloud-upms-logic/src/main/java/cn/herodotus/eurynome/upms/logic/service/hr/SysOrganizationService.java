@@ -24,9 +24,16 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCrudService;
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.component.data.base.service.AbstractService;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
+import cn.herodotus.eurynome.upms.api.entity.hr.SysPosition;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysOrganizationRepository;
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +42,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>Description: 单位管理服务 </p>
@@ -44,7 +52,15 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class SysOrganizationService extends BaseCrudService<SysOrganization, String> {
+public class SysOrganizationService extends BaseService<SysOrganization, String> {
+
+    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_ORGANIZATION;
+
+    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, SysOrganization> dataCache;
+
+    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, Set<String>> indexCache;
 
     private final SysOrganizationRepository sysOrganizationRepository;
 
@@ -53,28 +69,19 @@ public class SysOrganizationService extends BaseCrudService<SysOrganization, Str
         this.sysOrganizationRepository = sysOrganizationRepository;
     }
 
+
     @Override
-    public SysOrganization findById(String organizationId) {
-        return sysOrganizationRepository.findByOrganizationId(organizationId);
+    public Cache<String, SysOrganization> getCache() {
+        return dataCache;
     }
 
     @Override
-    public void deleteById(String organizationId) {
-        sysOrganizationRepository.deleteByOrganizationId(organizationId);
+    public Cache<String, Set<String>> getIndexCache() {
+        return indexCache;
     }
 
     @Override
-    public Page<SysOrganization> findByPage(int pageNumber, int pageSize) {
-        return sysOrganizationRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
-    }
-
-    @Override
-    public SysOrganization saveOrUpdate(SysOrganization sysOrganization) {
-        log.debug("[Herodotus] |- SysOrganization Service saveOrUpdate.");
-        return sysOrganizationRepository.saveAndFlush(sysOrganization);
-    }
-
-    public List<SysOrganization> findAll() {
-        return sysOrganizationRepository.findAll(Sort.by(Sort.Direction.ASC, "ranking"));
+    public BaseRepository<SysOrganization, String> getRepository() {
+        return sysOrganizationRepository;
     }
 }

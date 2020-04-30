@@ -1,14 +1,14 @@
 package cn.herodotus.eurynome.upms.api.entity.social;
 
+import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
-import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 
-@Entity
+@javax.persistence.Entity
 @Table(name = "social_weapp_user", indexes = {@Index(name = "weapp_user_id_idx", columnList = "openid")})
-public class WeappUser extends BaseEntity {
+public class WeappUser extends BaseSysEntity {
 
     @Id
     @Column(name = "openid", length = 64)
@@ -52,7 +52,7 @@ public class WeappUser extends BaseEntity {
     private String countryCode;
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return getOpenId();
     }
 
@@ -60,7 +60,6 @@ public class WeappUser extends BaseEntity {
     public String getLinkedProperty() {
         return null;
     }
-
 
     public String getOpenId() {
         return openId;

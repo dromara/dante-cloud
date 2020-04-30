@@ -24,17 +24,18 @@
 
 package cn.herodotus.eurynome.component.common.domain;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import cn.herodotus.eurynome.component.common.enums.AuthorityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
- * <p>Description: TODO </p>
+ * <p>Description: RequestMappingResource </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/8 16:53
  */
-public class RequestMappingResource extends AbstractDomain {
+public class RequestMappingResource implements Serializable {
 
     @JsonProperty("authorityId")
     private String id;

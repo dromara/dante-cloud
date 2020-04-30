@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.component.security.oauth2.provider.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
@@ -29,10 +30,19 @@ import java.util.stream.Collectors;
  */
 @Api(value = "OauthClientDetails接口", tags = "用户中心服务")
 @RestController
-public class OauthClientDetailsController extends BaseController implements OauthClientDetailsFeignService {
+public class OauthClientDetailsController extends BaseController<OauthClientDetails, String> implements OauthClientDetailsFeignService {
+
+    private final OauthClientDetailsService oauthClientDetailsService;
 
     @Autowired
-    private OauthClientDetailsService oauthClientDetailsService;
+    public OauthClientDetailsController(OauthClientDetailsService oauthClientDetailsService) {
+        this.oauthClientDetailsService = oauthClientDetailsService;
+    }
+
+    @Override
+    public BaseService<OauthClientDetails, String> getBaseService() {
+        return null;
+    }
 
     @Override
     @ApiOperation(value = "获取终端信息", notes = "通过clientId获取封装后的终端信息")
@@ -80,8 +90,6 @@ public class OauthClientDetailsController extends BaseController implements Oaut
     })
     @DeleteMapping("/oauth/client_details")
     public Result<String> delete(@RequestBody String clientId) {
-        Result<String> result = result(clientId);
-        oauthClientDetailsService.deleteById(clientId);
-        return result;
+        return super.delete(clientId);
     }
 }

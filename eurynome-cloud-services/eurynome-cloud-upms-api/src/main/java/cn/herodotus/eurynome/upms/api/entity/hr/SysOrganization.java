@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
-import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
+import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,9 +11,9 @@ import javax.persistence.*;
  * @author : gengwei.zheng
  * @date : 2020/1/19 16:41
  */
-@Entity
+@javax.persistence.Entity
 @Table(name = "sys_organization", indexes = {@Index(name = "sys_organization_id_idx", columnList = "organization_id")})
-public class SysOrganization extends BaseEntity {
+public class SysOrganization extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -52,7 +52,7 @@ public class SysOrganization extends BaseEntity {
     private String parentId;
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return getOrganizationId();
     }
 

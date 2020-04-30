@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.component.data.base.service;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.data.base.entity.BaseCacheEntity;
+import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
 import com.alicp.jetcache.Cache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * @date : 2020/2/19 21:43
  */
 @Slf4j
-public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Serializable> extends BaseCrudService<D, ID> {
+public abstract class AbstractCacheService<E extends AbstractEntity, ID extends Serializable> implements Service<E, ID> {
 
     private static final String INDEX_CACHE_KEY_FIND_ALL = "all";
     private static final String INDEX_CACHE_KEY_PAGE_CONTENT = "pagination:content";
@@ -40,7 +40,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      *
      * @return jetcache
      */
-    public abstract Cache<String, D> getCache();
+    public abstract Cache<String, E> getCache();
 
     /**
      * jetcache 索引缓存
@@ -55,8 +55,8 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param objects 实体集合
      * @return Map
      */
-    private Map<String, D> collectionToMap(Collection<D> objects) {
-        return objects.stream().map(this::createLink).collect(Collectors.toMap(D::getDomainCacheKey, object -> object));
+    private Map<String, E> collectionToMap(Collection<E> objects) {
+        return objects.stream().map(this::createLink).collect(Collectors.toMap(E::getId, object -> object));
     }
 
     /**
@@ -65,8 +65,8 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param objects 实体集合
      * @return 实体Id Set
      */
-    private Set<String> collectionIdToSet(Collection<D> objects) {
-        return objects.stream().map(D::getDomainCacheKey).collect(Collectors.toSet());
+    private Set<String> collectionIdToSet(Collection<E> objects) {
+        return objects.stream().map(E::getId).collect(Collectors.toSet());
     }
 
     private String getOneFromSet(Set<String> collection) {
@@ -83,11 +83,11 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param objects 实体集合
      * @return 是否为空
      */
-    private boolean isNotEmpty(Collection<D> objects) {
+    private boolean isNotEmpty(Collection<E> objects) {
         return CollectionUtils.isNotEmpty(objects) && ObjectUtils.isNotEmpty(getCache()) && ObjectUtils.isNotEmpty(getIndexCache());
     }
 
-    private boolean isNotEmpty(D object) {
+    private boolean isNotEmpty(E object) {
         return ObjectUtils.isNotEmpty(object) && ObjectUtils.isNotEmpty(getCache()) && ObjectUtils.isNotEmpty(getIndexCache());
     }
 
@@ -97,22 +97,22 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param object 实体
      * @return 是否存在
      */
-    private boolean isExist(D object) {
-        D domain = getFromCache(object.getDomainCacheKey());
+    private boolean isExist(E object) {
+        E domain = getFromCache(object.getId());
         return !ObjectUtils.isEmpty(domain);
     }
 
-    private boolean isNotExist(D object) {
+    private boolean isNotExist(E object) {
         return !isExist(object);
     }
 
     /**
      * 读取一个已缓存实体
      *
-     * @param key 实体标识 {@link BaseCacheEntity#getDomainCacheKey()}
+     * @param key 实体标识 {@link AbstractEntity#getId()}
      * @return 缓存的实体
      */
-    protected D getFromCache(String key) {
+    protected E getFromCache(String key) {
         return getCache().get(key);
     }
 
@@ -139,10 +139,10 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param indexKey 索引缓存Key
      * @return List<D> 缓存实体
      */
-    protected List<D> findFromCache(String indexKey) {
+    protected List<E> findFromCache(String indexKey) {
         Set<String> indexes = getFromIndexCache(indexKey);
         if (CollectionUtils.isNotEmpty(indexes)) {
-            Map<String, D> domains = getCache().getAll(indexes);
+            Map<String, E> domains = getCache().getAll(indexes);
             return new ArrayList<>(domains.values());
         }
         return new ArrayList<>();
@@ -202,7 +202,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param objects  实体集合
      * @param indexKey 索引缓存Key
      */
-    private void appendIndexes(Collection<D> objects, String indexKey) {
+    private void appendIndexes(Collection<E> objects, String indexKey) {
         Set<String> dataIndexes = collectionIdToSet(objects);
         appendIndexes(indexKey, dataIndexes);
     }
@@ -278,12 +278,12 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
         clearConditionalIndex();
     }
 
-    private D createLink(D object) {
+    private E createLink(E object) {
         if (ObjectUtils.isNotEmpty(object) && StringUtils.isNotBlank(object.getLinkedProperty())) {
             appendIndex(INDEX_CACHE_KEY_PROPERTY_LINK, object.getLinkedProperty());
-            appendIndex(INDEX_CACHE_KEY_PROPERTY_REVERSE, object.getDomainCacheKey());
-            cacheIndex(object.getLinkedProperty(), object.getDomainCacheKey());
-            cacheIndex(object.getDomainCacheKey(), object.getLinkedProperty());
+            appendIndex(INDEX_CACHE_KEY_PROPERTY_REVERSE, object.getId());
+            cacheIndex(object.getLinkedProperty(), object.getId());
+            cacheIndex(object.getId(), object.getLinkedProperty());
         }
 
         return object;
@@ -302,7 +302,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param linkedProperty 实体关联property值
      * @return 缓存实体
      */
-    protected D getFromLinkedProperties(String linkedProperty) {
+    protected E getFromLinkedProperties(String linkedProperty) {
         Set<String> linkIndex = getFromIndexCache(linkedProperty);
         String reverseIndex = getOneFromSet(linkIndex);
         if (StringUtils.isNotBlank(reverseIndex)) {
@@ -316,13 +316,13 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      *
      * @param object 实体对象
      */
-    protected void cache(D object) {
+    protected void cache(E object) {
         if (isNotEmpty(object)) {
             if (isNotExist(object)) {
                 clearIndex();
                 createLink(object);
             }
-            getCache().put(object.getDomainCacheKey(), object);
+            getCache().put(object.getId(), object);
         }
     }
 
@@ -331,7 +331,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      *
      * @param objects 实体集合
      */
-    protected void cache(Collection<D> objects) {
+    protected void cache(Collection<E> objects) {
         getCache().putAll(collectionToMap(objects));
     }
 
@@ -342,7 +342,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param objects  实体集合
      * @param indexKey 集合索引Key
      */
-    private void cache(Collection<D> objects, String indexKey) {
+    private void cache(Collection<E> objects, String indexKey) {
         if (isNotEmpty(objects)) {
             appendIndexes(objects, indexKey);
             cache(objects);
@@ -358,7 +358,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      *
      * @param objects 实体对象集合
      */
-    protected void cacheFindAll(Collection<D> objects) {
+    protected void cacheFindAll(Collection<E> objects) {
         cache(objects, INDEX_CACHE_KEY_FIND_ALL);
     }
 
@@ -367,7 +367,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      *
      * @return 全部实体集合
      */
-    protected List<D> getFindAllFromCache() {
+    protected List<E> getFindAllFromCache() {
         return findFromCache(INDEX_CACHE_KEY_FIND_ALL);
     }
 
@@ -378,7 +378,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param objects 实体集合
      * @param params  动态参数
      */
-    protected void cacheConditional(Collection<D> objects, Object... params) {
+    protected void cacheConditional(Collection<E> objects, Object... params) {
         String key = generateConditionalIndexKey(params);
         appendIndex(INDEX_CACHE_KEY_CONDITIONALS, key);
         cache(objects, key);
@@ -390,7 +390,7 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param params 动态参数
      * @return List 实体集合
      */
-    protected List<D> getConditionalFromCache(Object... params) {
+    protected List<E> getConditionalFromCache(Object... params) {
         String key = generateConditionalIndexKey(params);
         return findFromCache(key);
     }
@@ -401,8 +401,8 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      *
      * @param pages jpa 分页查询结果
      */
-    protected void cachePage(Page<D> pages) {
-        Collection<D> objects = pages.getContent();
+    protected void cachePage(Page<E> pages) {
+        Collection<E> objects = pages.getContent();
         if (isNotEmpty(objects)) {
             String pageIndexKey = generatePageDataIndexKey(pages.getNumber(), pages.getSize());
             appendIndex(INDEX_CACHE_KEY_PAGE_TURN, pageIndexKey);
@@ -419,8 +419,8 @@ public abstract class BaseCacheService<D extends BaseCacheEntity, ID extends Ser
      * @param pageSize 每页数据条数
      * @return Page Jpa Page对象
      */
-    protected Page<D> getPageFromCache(int pageNumber, int pageSize) {
-        List<D> content = findFromCache(generatePageDataIndexKey(pageNumber, pageSize));
+    protected Page<E> getPageFromCache(int pageNumber, int pageSize) {
+        List<E> content = findFromCache(generatePageDataIndexKey(pageNumber, pageSize));
         Set<String> totalIndexes = getFromIndexCache(INDEX_CACHE_KEY_PAGE_TOTAL);
         String totalValue = getOneFromSet(totalIndexes);
 

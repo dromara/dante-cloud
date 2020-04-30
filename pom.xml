@@ -93,7 +93,6 @@
             <id>development</id>
             <activation>
                 <!--默认激活配置-->
-                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <!--当前环境-->
@@ -113,6 +112,10 @@
         <!-- Docker -->
         <profile>
             <id>docker</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <!--当前环境-->
                 <profile.name>docker</profile.name>

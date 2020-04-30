@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
-import cn.herodotus.eurynome.component.data.base.entity.BaseEntity;
+import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -19,9 +19,9 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2020/1/19 16:40
  */
-@Entity
+@javax.persistence.Entity
 @Table(name = "sys_position", indexes = {@Index(name = "sys_position_id_idx", columnList = "position_id")})
-public class SysPosition extends BaseEntity {
+public class SysPosition extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -38,7 +38,7 @@ public class SysPosition extends BaseEntity {
     private Set<SysEmployee> employees = new HashSet<>();
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return getPositionId();
     }
 

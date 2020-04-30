@@ -28,20 +28,19 @@ import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.common.domain.TreeNode;
 import cn.herodotus.eurynome.component.common.enums.AuthorityType;
 import cn.herodotus.eurynome.component.common.utils.TreeUtils;
-import cn.herodotus.eurynome.component.rest.controller.BaseController;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -53,7 +52,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/authority")
 @Api(value = "Upms权限接口", tags = "用户中心服务")
-public class SysAuthorityController extends BaseController {
+public class SysAuthorityController extends BaseRestController<SysAuthority, String> {
 
     private final SysAuthorityService sysAuthorityService;
 
@@ -62,39 +61,9 @@ public class SysAuthorityController extends BaseController {
         this.sysAuthorityService = sysAuthorityService;
     }
 
-    @ApiOperation(value = "获取权限分页数据", notes = "通过pageNumber和pageSize获取分页数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
-    })
-    @GetMapping
-    public Result<Map<String, Object>> findByPage(
-            @RequestParam("pageNumber") Integer pageNumber,
-            @RequestParam("pageSize") Integer pageSize) {
-
-        Page<SysAuthority> pages = sysAuthorityService.findByPage(pageNumber, pageSize);
-        return result(pages);
-    }
-
-    @ApiOperation(value = "保存或更新权限", notes = "接收JSON数据，转换为SysAuthority实体，进行保存或更新")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "sysAuthority", required = true, value = "可转换为SysAuthority实体的json数据", paramType = "JSON")
-    })
-    @PostMapping
-    public Result<SysAuthority> saveOrUpdate(@RequestBody SysAuthority domain) {
-        SysAuthority sysAuthority = sysAuthorityService.saveOrUpdate(domain);
-        return result(sysAuthority);
-    }
-
-    @ApiOperation(value = "删除权限", notes = "根据authorityId删除权限，以及相关联的关联关系数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "authorityId", required = true, value = "权限ID", paramType = "JSON")
-    })
-    @DeleteMapping
-    public Result<String> delete(@RequestBody String authorityId) {
-        Result<String> result = result(authorityId);
-        sysAuthorityService.deleteById(authorityId);
-        return result;
+    @Override
+    public BaseService<SysAuthority, String> getBaseService() {
+        return this.sysAuthorityService;
     }
 
     @ApiOperation(value = "获取权限树", notes = "获取权限树形数据")

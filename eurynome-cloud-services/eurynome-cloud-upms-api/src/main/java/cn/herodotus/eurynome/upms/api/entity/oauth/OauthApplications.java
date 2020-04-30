@@ -135,7 +135,7 @@ public class OauthApplications extends BaseSysEntity {
     }
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return this.getAppKey();
     }
 

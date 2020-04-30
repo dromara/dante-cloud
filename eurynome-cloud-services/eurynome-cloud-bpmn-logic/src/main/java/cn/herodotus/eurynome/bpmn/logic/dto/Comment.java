@@ -1,7 +1,6 @@
 package cn.herodotus.eurynome.bpmn.logic.dto;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
-
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -11,7 +10,7 @@ import java.util.Date;
  * @author : gengwei.zheng
  * @date : 2020/2/4 10:18
  */
-public class Comment extends AbstractDomain {
+public class Comment implements Serializable {
 
     /**
      * 备注ID

@@ -2,7 +2,6 @@ package cn.herodotus.eurynome.bpmn.logic.service;
 
 import cn.herodotus.eurynome.bpmn.logic.entity.LaunchedList;
 import cn.herodotus.eurynome.bpmn.logic.repository.LaunchedListRepository;
-import cn.herodotus.eurynome.component.data.base.service.BaseReadableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class LaunchedListService extends BaseReadableService<LaunchedList, String> {
+public class LaunchedListService {
 
     private final LaunchedListRepository launchedListRepository;
 
@@ -27,7 +26,6 @@ public class LaunchedListService extends BaseReadableService<LaunchedList, Strin
         this.launchedListRepository = launchedListRepository;
     }
 
-    @Override
     public Page<LaunchedList> findByPageWithEmployeeId(String employeeId, int pageNumber, int pageSize) {
         log.debug("[Herodotus] |- Launched Task Service findByPageWithEmployeeId");
         return launchedListRepository.findAllByInitiatorId(employeeId, PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "startTime"));

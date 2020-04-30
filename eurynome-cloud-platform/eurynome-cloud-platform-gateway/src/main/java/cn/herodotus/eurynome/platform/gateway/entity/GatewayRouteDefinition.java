@@ -46,17 +46,13 @@ public class GatewayRouteDefinition extends BaseSysEntity {
     private Integer order = 0;
 
     @Override
-    public String getDomainCacheKey() {
-        return this.getId();
+    public String getId() {
+        return this.id;
     }
 
     @Override
     public String getLinkedProperty() {
         return null;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public void setId(String id) {

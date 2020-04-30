@@ -24,17 +24,19 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCrudService;
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysDepartmentRepository;
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * <p>Description: 部门管理服务 </p>
@@ -44,7 +46,15 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class SysDepartmentService extends BaseCrudService<SysDepartment, String> {
+public class SysDepartmentService extends BaseService<SysDepartment, String> {
+
+    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_DEPARTMENT;
+
+    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, SysDepartment> dataCache;
+
+    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, Set<String>> indexCache;
 
     private final SysDepartmentRepository sysDepartmentRepository;
 
@@ -54,37 +64,17 @@ public class SysDepartmentService extends BaseCrudService<SysDepartment, String>
     }
 
     @Override
-    public SysDepartment findById(String departmentId) {
-        log.debug("[Herodotus] |- SysDepartment Service findById.");
-        return sysDepartmentRepository.findByDepartmentId(departmentId);
+    public BaseRepository<SysDepartment, String> getRepository() {
+        return sysDepartmentRepository;
     }
 
     @Override
-    public void deleteById(String departmentId) {
-        log.debug("[Herodotus] |- SysDepartment Service deleteById.");
-        sysDepartmentRepository.deleteByDepartmentId(departmentId);
+    public Cache<String, SysDepartment> getCache() {
+        return dataCache;
     }
 
     @Override
-    public Page<SysDepartment> findByPage(int pageNumber, int pageSize) {
-        log.debug("[Herodotus] |- SysDepartment Service findByPage.");
-        return sysDepartmentRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
+    public Cache<String, Set<String>> getIndexCache() {
+        return indexCache;
     }
-
-    @Override
-    public SysDepartment saveOrUpdate(SysDepartment sysDepartment) {
-        log.debug("[Herodotus] |- SysDepartment Service saveOrUpdate.");
-        return sysDepartmentRepository.saveAndFlush(sysDepartment);
-    }
-
-    public List<SysDepartment> findAllByOrganizationId(String organizationId) {
-        log.debug("[Herodotus] |- SysDepartment Service findAllByOrganizationId.");
-        return sysDepartmentRepository.findAllByOrganizationId(organizationId);
-    }
-
-    public Page<SysDepartment> findByPage(String organizationId, int pageNumber, int pageSize) {
-        log.debug("[Herodotus] |- SysDepartment Service findByPage.");
-        return sysDepartmentRepository.findAllByOrganizationId(organizationId, PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
-    }
-
 }

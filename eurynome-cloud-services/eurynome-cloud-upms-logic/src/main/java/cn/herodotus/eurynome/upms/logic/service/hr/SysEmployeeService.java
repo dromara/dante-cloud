@@ -24,15 +24,19 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCrudService;
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysEmployeeRepository;
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * <p>Description: 人员 服务 </p>
@@ -42,7 +46,15 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class SysEmployeeService extends BaseCrudService<SysEmployee, String> {
+public class SysEmployeeService extends BaseService<SysEmployee, String> {
+
+    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_EMPLOYEE;
+
+    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, SysEmployee> dataCache;
+
+    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, Set<String>> indexCache;
 
     private final SysEmployeeRepository sysEmployeeRepository;
 
@@ -51,32 +63,19 @@ public class SysEmployeeService extends BaseCrudService<SysEmployee, String> {
         this.sysEmployeeRepository = sysEmployeeRepository;
     }
 
+
     @Override
-    public SysEmployee findById(String employeeId) {
-        log.debug("[Herodotus] |- SysEmployee Service findById.");
-        return sysEmployeeRepository.findByEmployeeId(employeeId);
+    public Cache<String, SysEmployee> getCache() {
+        return dataCache;
     }
 
     @Override
-    public void deleteById(String employeeId) {
-        log.debug("[Herodotus] |- SysEmployee Service deleteById.");
-        sysEmployeeRepository.deleteByEmployeeId(employeeId);
+    public Cache<String, Set<String>> getIndexCache() {
+        return indexCache;
     }
 
     @Override
-    public Page<SysEmployee> findByPage(int pageNumber, int pageSize) {
-        log.debug("[Herodotus] |- SysEmployee Service findByPage.");
-        return sysEmployeeRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
-    }
-
-    public Page<SysEmployee> findByPage(String departmentId, int pageNumber, int pageSize) {
-        log.debug("[Herodotus] |- SysEmployee Service findByPage.");
-        return sysEmployeeRepository.findAllByDepartmentId(departmentId, PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "ranking"));
-    }
-
-    @Override
-    public SysEmployee saveOrUpdate(SysEmployee sysEmployee) {
-        log.debug("[Herodotus] |- SysEmployee Service saveOrUpdate.");
-        return sysEmployeeRepository.saveAndFlush(sysEmployee);
+    public BaseRepository<SysEmployee, String> getRepository() {
+        return sysEmployeeRepository;
     }
 }

@@ -1,12 +1,12 @@
 package cn.herodotus.eurynome.bpmn.logic.entity;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "act_task_todo_list")
-public class TodoList extends AbstractDomain {
+public class TodoList implements Serializable {
 
     @Id
     @Column(name = "task_id")

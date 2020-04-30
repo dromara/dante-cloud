@@ -24,7 +24,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
@@ -33,32 +34,29 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: SysRoleService </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/25 11:07
  */
 @Service
 @Slf4j
-public class SysRoleService extends BaseCacheService<SysRole, String> {
+public class SysRoleService extends BaseService<SysRole, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, SysRole> sysRoleCache;
+    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_ROLE;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_SYS_ROLE_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> sysRoleIndexCache;
+    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, SysRole> dataCache;
+
+    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, Set<String>> indexCache;
 
     private final SysRoleRepository sysRoleRepository;
 
@@ -69,20 +67,17 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
 
     @Override
     public Cache<String, SysRole> getCache() {
-        return sysRoleCache;
+        return dataCache;
     }
 
     @Override
     public Cache<String, Set<String>> getIndexCache() {
-        return sysRoleIndexCache;
+        return indexCache;
     }
 
     @Override
-    public SysRole saveOrUpdate(SysRole domain) {
-        SysRole sysRole = sysRoleRepository.saveAndFlush(domain);
-        cache(sysRole);
-        log.debug("[Herodotus] |- SysRole Service saveOrUpdate.");
-        return sysRole;
+    public BaseRepository<SysRole, String> getRepository() {
+        return this.sysRoleRepository;
     }
 
     public SysRole authorize(String roleId, String[] authorities) {
@@ -102,33 +97,5 @@ public class SysRoleService extends BaseCacheService<SysRole, String> {
         return saveOrUpdate(sysRole);
     }
 
-    @Override
-    public SysRole findById(String roleId) {
-        SysRole sysRole = getFromCache(roleId);
-        if (ObjectUtils.isEmpty(sysRole)) {
-            sysRole = sysRoleRepository.findByRoleId(roleId);
-            cache(sysRole);
-        }
-        log.debug("[Herodotus] |- SysRole Service findByRoleId.");
-        return sysRole;
-    }
-
-    @Override
-    public void deleteById(String roleId) {
-        log.debug("[Herodotus] |- SysRole Service deleteById.");
-        sysRoleRepository.deleteByRoleId(roleId);
-        remove(roleId);
-    }
-
-    @Override
-    public Page<SysRole> findByPage(int pageNumber, int pageSize) {
-        Page<SysRole> pages = getPageFromCache(pageNumber, pageSize);
-        if (CollectionUtils.isEmpty(pages.getContent())) {
-            pages = sysRoleRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "roleId"));
-            cachePage(pages);
-        }
-        log.debug("[Herodotus] |- SysRole Service findByPage.");
-        return pages;
-    }
 
 }

@@ -24,18 +24,31 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysPosition;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysPositionRepository;
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Slf4j
 @Service
-public class SysPositionService {
+public class SysPositionService extends BaseService<SysPosition, String> {
+
+    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_POSITION;
+
+    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, SysPosition> dataCache;
+
+    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, Set<String>> indexCache;
 
     private final SysPositionRepository sysPositionRepository;
 
@@ -44,17 +57,18 @@ public class SysPositionService {
         this.sysPositionRepository = sysPositionRepository;
     }
 
-    public Page<SysPosition> findByPage(Integer pageNumber, Integer pageSize) {
-        return sysPositionRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "organizationId"));
+    @Override
+    public Cache<String, SysPosition> getCache() {
+        return this.dataCache;
     }
 
-    public SysPosition saveOrUpdate(SysPosition sysPosition) {
-        log.debug("[Herodotus] |- SysPosition Service saveOrUpdate.");
-        return sysPositionRepository.saveAndFlush(sysPosition);
+    @Override
+    public Cache<String, Set<String>> getIndexCache() {
+        return this.indexCache;
     }
 
-    public void delete(String positionId) {
-        log.debug("[Herodotus] |- SysPosition Service delete.");
-        sysPositionRepository.deleteById(positionId);
+    @Override
+    public BaseRepository<SysPosition, String> getRepository() {
+        return this.sysPositionRepository;
     }
 }

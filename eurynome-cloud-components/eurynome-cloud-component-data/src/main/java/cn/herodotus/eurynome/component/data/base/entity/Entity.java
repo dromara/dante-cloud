@@ -15,22 +15,28 @@
  *
  *
  * Project Name: luban-cloud
- * Module Name: luban-cloud-component-common
- * File Name: AbstractDomain.java
+ * Module Name: luban-cloud-component-data
+ * File Name: BaseEntity.java
  * Author: gengwei.zheng
- * Date: 2019/11/8 下午4:12
- * LastModified: 2019/10/28 上午11:56
+ * Date: 2019/11/8 下午5:51
+ * LastModified: 2019/11/8 下午4:13
  */
 
-package cn.herodotus.eurynome.component.common.definition;
+package cn.herodotus.eurynome.component.data.base.entity;
 
 import java.io.Serializable;
 
 /**
- * <p>Description: 实体 </p>
+ * <p>Description: BaseEntity </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/2/29 14:40
+ * @date : 2020/4/29 17:27
  */
-public abstract class AbstractDomain implements Serializable {
+public interface Entity extends Serializable {
+
+    /**
+     * 根据该值作为缓存对象的Key
+     * @return CacheKey
+     */
+    public String getId();
 }

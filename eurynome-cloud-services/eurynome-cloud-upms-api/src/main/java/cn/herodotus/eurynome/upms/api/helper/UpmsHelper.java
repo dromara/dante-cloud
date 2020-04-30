@@ -11,6 +11,7 @@ import cn.herodotus.eurynome.component.security.core.userdetails.HerodotusUserDe
 import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
@@ -164,6 +165,17 @@ public class UpmsHelper {
         }
 
         oauthClientDetails.setAdditionalInformation(JSON.toJSONString(oauthApplications));
+        return oauthClientDetails;
+    }
+
+    public static OauthClientDetails convertOauthMicroserviceToOauthClientDetails(OauthMicroservices oauthMicroservices, OauthClientDetails oauthClientDetails) {
+        if (ObjectUtils.isEmpty(oauthClientDetails)) {
+            oauthClientDetails = new OauthClientDetails();
+        }
+
+        oauthClientDetails.setClientId(oauthMicroservices.getServiceId());
+        oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthMicroservices.getServiceSecret()));
+        oauthClientDetails.setAdditionalInformation(JSON.toJSONString(oauthMicroservices));
         return oauthClientDetails;
     }
 

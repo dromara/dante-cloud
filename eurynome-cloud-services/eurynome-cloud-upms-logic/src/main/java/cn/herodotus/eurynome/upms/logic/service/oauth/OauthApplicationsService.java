@@ -1,21 +1,16 @@
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseCacheService;
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
-import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthApplicationsRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -29,13 +24,15 @@ import java.util.Set;
  */
 @Slf4j
 @Service
-public class OauthApplicationsService extends BaseCacheService<OauthApplications, String> {
+public class OauthApplicationsService extends BaseService<OauthApplications, String> {
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, OauthApplications> oauthApplicationsCache;
+    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS;
 
-    @CreateCache(name = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS_INDEX, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> oauthApplicationsIndexCache;
+    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, OauthApplications> dataCache;
+
+    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
+    private Cache<String, Set<String>> indexCache;
 
     @Autowired
     private OauthApplicationsRepository oauthApplicationsRepository;
@@ -44,53 +41,30 @@ public class OauthApplicationsService extends BaseCacheService<OauthApplications
 
     @Override
     public Cache<String, OauthApplications> getCache() {
-        return this.oauthApplicationsCache;
+        return this.dataCache;
     }
 
     @Override
     public Cache<String, Set<String>> getIndexCache() {
-        return this.oauthApplicationsIndexCache;
+        return this.indexCache;
     }
 
     @Override
-    public OauthApplications findById(String appKey) {
-        OauthApplications oauthApplications = getFromCache(appKey);
-        if (ObjectUtils.isEmpty(oauthApplications)) {
-            oauthApplications = oauthApplicationsRepository.findByAppKey(appKey);
-            cache(oauthApplications);
-        }
-
-        log.debug("[Herodotus] |- OauthApplications Service findById.");
-        return oauthApplications;
+    public BaseRepository<OauthApplications, String> getRepository() {
+        return oauthApplicationsRepository;
     }
 
     @Override
     public void deleteById(String appKey) {
-        oauthApplicationsRepository.deleteByAppKey(appKey);
-        remove(appKey);
-        log.debug("[Herodotus] |- OauthApplications Service delete.");
+        super.deleteById(appKey);
         oauthClientDetailsService.deleteById(appKey);
     }
 
     @Override
     public OauthApplications saveOrUpdate(OauthApplications domain) {
-        OauthApplications oauthApplications = oauthApplicationsRepository.saveAndFlush(domain);
-        cache(oauthApplications);
-        log.debug("[Herodotus] |- OauthApplications Service saveOrUpdate.");
+        OauthApplications oauthApplications = super.saveOrUpdate(domain);
         oauthClientDetailsService.synchronize(oauthApplications);
         return oauthApplications;
-    }
-
-    @Override
-    public Page<OauthApplications> findByPage(int pageNumber, int pageSize) {
-        Page<OauthApplications> pages = getPageFromCache(pageNumber, pageSize);
-        if (CollectionUtils.isEmpty(pages.getContent())) {
-            pages = oauthApplicationsRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.Direction.DESC, "createTime"));
-            cachePage(pages);
-        }
-
-        log.debug("[Herodotus] |- OauthApplications Service findByPage.");
-        return pages;
     }
 
     public OauthApplications assign(String appKey, String[] scopeIds) {

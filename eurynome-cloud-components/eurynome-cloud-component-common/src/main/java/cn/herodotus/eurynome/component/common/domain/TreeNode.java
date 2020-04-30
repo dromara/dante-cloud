@@ -24,9 +24,9 @@
 
 package cn.herodotus.eurynome.component.common.domain;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -34,7 +34,7 @@ import java.util.List;
  *
  * @author gengwei.zheng
  */
-public class TreeNode extends AbstractDomain {
+public class TreeNode implements Serializable {
 
     /**
      * 本节点id

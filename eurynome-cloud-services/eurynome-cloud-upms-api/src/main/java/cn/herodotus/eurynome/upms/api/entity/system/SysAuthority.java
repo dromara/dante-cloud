@@ -72,7 +72,7 @@ public class SysAuthority extends BaseSysEntity {
     private String parentId;
 
     @Override
-    public String getDomainCacheKey() {
+    public String getId() {
         return getAuthorityId();
     }
 

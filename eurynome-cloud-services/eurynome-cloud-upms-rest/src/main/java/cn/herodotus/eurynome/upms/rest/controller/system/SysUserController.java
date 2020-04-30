@@ -25,8 +25,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.service.fegin.SysUserFeginService;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
@@ -35,26 +35,30 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: SysUserController </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/25 10:55
  */
 @RestController
 @Api(value = "平台用户接口", tags = "用户中心服务")
-public class SysUserController extends BaseController implements SysUserFeginService {
+public class SysUserController extends BaseController<SysUser, String> implements SysUserFeginService {
 
     private final SysUserService sysUserService;
 
     @Autowired
     public SysUserController(SysUserService sysUserService) {
         this.sysUserService = sysUserService;
+    }
+
+    @Override
+    public BaseService<SysUser, String> getBaseService() {
+        return this.sysUserService;
     }
 
     @ApiOperation(value = "登录系统", notes = "登录系统")
@@ -86,10 +90,7 @@ public class SysUserController extends BaseController implements SysUserFeginSer
     public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
-
-        Page<SysUser> pages = sysUserService.findByPage(pageNumber, pageSize);
-        return result(pages);
-
+        return super.findByPage(pageNumber, pageSize);
     }
 
     @ApiOperation(value = "保存或更新用户", notes = "接收JSON数据，转换为SysUser实体，进行保存或更新")
@@ -98,8 +99,7 @@ public class SysUserController extends BaseController implements SysUserFeginSer
     })
     @PostMapping("/user")
     public Result<SysUser> saveOrUpdate(@RequestBody SysUser sysUser) {
-        SysUser newSysUser = sysUserService.saveOrUpdate(sysUser);
-        return result(newSysUser);
+        return super.saveOrUpdate(sysUser);
     }
 
     @ApiOperation(value = "删除用户", notes = "根据userId删除用户，以及相关联的关联关系数据")
@@ -108,9 +108,7 @@ public class SysUserController extends BaseController implements SysUserFeginSer
     })
     @DeleteMapping("/user")
     public Result<String> delete(@RequestBody String userId) {
-        Result<String> result = result(userId);
-        sysUserService.deleteById(userId);
-        return result;
+        return super.delete(userId);
     }
 
     @ApiOperation(value = "给用户分配角色", notes = "给用户分配角色")

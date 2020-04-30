@@ -71,25 +71,29 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.system",
         "cn.herodotus.eurynome.upms.logic.service.social",
         "cn.herodotus.eurynome.upms.logic.service.hr",
-        "cn.herodotus.eurynome.upms.logic.service.oauth"
+        "cn.herodotus.eurynome.upms.logic.service.oauth",
+        "cn.herodotus.eurynome.upms.logic.service.microservice"
 })
 @EnableJpaRepositories(basePackages = {
         "cn.herodotus.eurynome.upms.logic.repository.system",
         "cn.herodotus.eurynome.upms.logic.repository.social",
         "cn.herodotus.eurynome.upms.logic.repository.hr",
         "cn.herodotus.eurynome.upms.logic.repository.oauth",
+        "cn.herodotus.eurynome.upms.logic.repository.microservice",
 })
 @EntityScan(basePackages = {
         "cn.herodotus.eurynome.upms.api.entity.system",
         "cn.herodotus.eurynome.upms.api.entity.social",
         "cn.herodotus.eurynome.upms.api.entity.hr",
-        "cn.herodotus.eurynome.upms.api.entity.oauth"
+        "cn.herodotus.eurynome.upms.api.entity.oauth",
+        "cn.herodotus.eurynome.upms.api.entity.microservice"
 })
 @EnableMethodCache(basePackages = {
         "cn.herodotus.eurynome.upms.logic.service.system",
         "cn.herodotus.eurynome.upms.logic.service.social",
         "cn.herodotus.eurynome.upms.logic.service.hr",
-        "cn.herodotus.eurynome.upms.logic.service.oauth"
+        "cn.herodotus.eurynome.upms.logic.service.oauth",
+        "cn.herodotus.eurynome.upms.logic.service.microservice"
 })
 @EnableCreateCacheAnnotation
 public class UpmsLogicConfiguration {

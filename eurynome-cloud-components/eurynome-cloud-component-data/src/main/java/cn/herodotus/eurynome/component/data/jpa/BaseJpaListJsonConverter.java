@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.data.jpa;
 
-import cn.herodotus.eurynome.component.common.definition.AbstractDomain;
+import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.apache.commons.collections4.CollectionUtils;
@@ -15,7 +15,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/3/31 11:11
  */
-public abstract class BaseJpaListJsonConverter<T extends AbstractDomain> implements AttributeConverter<List<T>, String> {
+public abstract class BaseJpaListJsonConverter<T extends AbstractEntity> implements AttributeConverter<List<T>, String> {
 
     @Override
     public String convertToDatabaseColumn(List<T> ts) {

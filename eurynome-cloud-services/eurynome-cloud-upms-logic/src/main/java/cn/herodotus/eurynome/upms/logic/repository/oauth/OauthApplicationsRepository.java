@@ -1,10 +1,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.oauth;
 
+import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p> Description : OauthApplicationRepository </p>
@@ -12,21 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author : gengwei.zheng
  * @date : 2020/3/19 16:52
  */
-public interface OauthApplicationsRepository extends JpaRepository<OauthApplications, String> {
+public interface OauthApplicationsRepository extends BaseRepository<OauthApplications, String> {
 
-    /**
-     * 删除人员基本操作
-     * @param appKey OauthApplication ID
-     */
-    @Modifying
-    @Transactional(rollbackFor = Exception.class)
-    @Query("delete from OauthApplications oa where oa.appKey = ?1")
-    void deleteByAppKey(String appKey);
-
-    /**
-     * 根据appKey查找OauthApplication
-     * @param appKey OauthApplication ID
-     * @return OauthApplication 对象
-     */
-    OauthApplications findByAppKey(String appKey);
 }
