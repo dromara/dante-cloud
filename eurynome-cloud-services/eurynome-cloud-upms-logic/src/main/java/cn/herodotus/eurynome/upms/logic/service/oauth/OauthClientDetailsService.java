@@ -1,7 +1,10 @@
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
+import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.component.management.nacos.ConfigContentFactory;
+import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
@@ -12,6 +15,8 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

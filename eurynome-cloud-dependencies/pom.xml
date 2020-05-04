@@ -27,6 +27,7 @@
 
         <!--覆盖Spring Boot 默认依赖版本-->
         <mysql.verison>5.1.48</mysql.verison>
+        <nacos.client.version>1.2.1</nacos.client.version>
 
         <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.0</commons-collections4.version>
@@ -242,6 +243,12 @@
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
                 <version>${logstash-logback-encoder.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
 
 

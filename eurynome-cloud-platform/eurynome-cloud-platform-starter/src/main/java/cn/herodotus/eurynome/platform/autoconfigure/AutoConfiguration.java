@@ -2,6 +2,7 @@ package cn.herodotus.eurynome.platform.autoconfigure;
 
 import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
 import cn.herodotus.eurynome.component.data.annotation.EnableHerodotusData;
+import cn.herodotus.eurynome.component.management.annotation.EnableHerodotusManagement;
 import cn.herodotus.eurynome.component.message.kafka.KafkaProducer;
 import cn.herodotus.eurynome.component.message.kafka.KafkaRequestMappingStore;
 import cn.herodotus.eurynome.component.rest.annotation.EnableHerodotusRest;
@@ -21,6 +22,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  */
 @Slf4j
 @Configuration
+@EnableHerodotusManagement
 @EnableHerodotusData
 @EnableHerodotusRest
 @EnableHerodotusSecurity

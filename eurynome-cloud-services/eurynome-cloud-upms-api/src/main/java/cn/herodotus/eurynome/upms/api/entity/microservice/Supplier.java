@@ -1,7 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.microservice;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
-import cn.herodotus.eurynome.component.data.base.entity.DefaultSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -33,6 +32,9 @@ public class Supplier extends BaseSysEntity {
     @Column(name = "supplier_type")
     @Enumerated(EnumType.STRING)
     private SupplierType supplierType = SupplierType.CORE;
+
+    @Column(name = "parent_id", length = 64)
+    private String parentId;
 
     public String getSupplierId() {
         return supplierId;
@@ -66,6 +68,14 @@ public class Supplier extends BaseSysEntity {
         this.supplierType = supplierType;
     }
 
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
     @Override
     public String getId() {
         return this.getSupplierId();
@@ -79,11 +89,11 @@ public class Supplier extends BaseSysEntity {
     @Override
     public String toString() {
         return "Supplier{" +
+                "supplierId='" + supplierId + '\'' +
                 ", supplierName='" + supplierName + '\'' +
                 ", supplierCode='" + supplierCode + '\'' +
                 ", supplierType=" + supplierType +
+                ", parentId='" + parentId + '\'' +
                 '}';
     }
-
-
 }

@@ -186,6 +186,8 @@ public class SymbolConstants {
 	public static final String SUFFIX_SWF = ".swf";
 	
 	public static final String SUFFIX_PROPERTIES = ".properties";
-	
+
+	public static final String SUFFIX_YML = ".yml";
+
 	public static final String XML_DECLARATION = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 }

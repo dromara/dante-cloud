@@ -44,6 +44,11 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-component-management</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-component-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>

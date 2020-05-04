@@ -18,6 +18,7 @@
         <module>eurynome-cloud-component-rest</module>
         <module>eurynome-cloud-component-security</module>
         <module>eurynome-cloud-component-message</module>
+        <module>eurynome-cloud-component-management</module>
     </modules>
 
 

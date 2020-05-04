@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.upms.api.entity.microservice.Supplier;
 import cn.hutool.core.util.IdUtil;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -25,8 +26,9 @@ public class OauthMicroservices extends BaseSysEntity {
     @Column(name = "service_secret", length = 128)
     private String serviceSecret = IdUtil.randomUUID();
 
-    @Column(name = "supplier_id", length = 64)
-    private String supplierId;
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
     public String getServiceId() {
         return serviceId;
@@ -44,12 +46,12 @@ public class OauthMicroservices extends BaseSysEntity {
         this.serviceSecret = serviceSecret;
     }
 
-    public String getSupplierId() {
-        return supplierId;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class OauthMicroservices extends BaseSysEntity {
         return "OauthMicroservices{" +
                 "serviceId='" + serviceId + '\'' +
                 ", serviceSecret='" + serviceSecret + '\'' +
-                ", supplierId='" + supplierId + '\'' +
+                ", supplier=" + supplier +
                 '}';
     }
 }

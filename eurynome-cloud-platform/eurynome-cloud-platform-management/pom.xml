@@ -8,13 +8,11 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>eurynome-cloud-platform-monitor</artifactId>
+    <artifactId>eurynome-cloud-platform-management</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
 
-    <name>eurynome-cloud-platform-monitor</name>
-    <description>Eurynome监控模块，基于 spring boot admin</description>
-
+    <name>eurynome-cloud-platform-management</name>
+    <description>Demo project for Spring Boot</description>
 
     <dependencies>
         <dependency>
