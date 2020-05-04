@@ -1,11 +1,11 @@
 version: "3"
 services:
-  monitor:
-    image: eurynome-cloud-platform-monitor:latest
+  management:
+    image: eurynome-cloud-platform-management:latest
     build:
       context: ../../context
-      dockerfile: ./development/Config-Monitor-Dockerfile
-    container_name: monitor
+      dockerfile: ./development/Config-Management-Dockerfile
+    container_name: management
     ports:
       - 8845:8845
   upms:
