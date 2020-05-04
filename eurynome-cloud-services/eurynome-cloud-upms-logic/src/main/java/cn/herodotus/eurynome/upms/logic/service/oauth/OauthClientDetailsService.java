@@ -110,7 +110,7 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
         OauthMicroservices oauthMicroservices = getOauthMicroservices(oauthClientDetails);
         if(ObjectUtils.isNotEmpty(oauthMicroservices)&&ObjectUtils.isNotEmpty(oauthMicroservices.getSupplier())) {
             Config config = new Config();
-            config.setDataId(oauthMicroservices.getServiceId() + SymbolConstants.SUFFIX_YML);
+            config.setDataId(oauthMicroservices.getAppCode() + SymbolConstants.SUFFIX_YML);
             if (StringUtils.isNotBlank(oauthMicroservices.getSupplier().getSupplierCode())) {
                 config.setGroup(oauthMicroservices.getSupplier().getSupplierCode());
             }

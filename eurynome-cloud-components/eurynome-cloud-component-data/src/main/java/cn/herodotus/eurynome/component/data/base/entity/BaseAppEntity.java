@@ -23,6 +23,9 @@ public abstract class BaseAppEntity extends BaseSysEntity{
     @Column(name = "app_name", length = 128)
     private String appName;
 
+    @Column(name = "app_code", length = 128)
+    private String appCode;
+
     @Column(name = "app_type")
     @Enumerated(EnumType.STRING)
     private ApplicationType applicationType = ApplicationType.WEB;
@@ -49,5 +52,13 @@ public abstract class BaseAppEntity extends BaseSysEntity{
 
     public void setApplicationType(ApplicationType applicationType) {
         this.applicationType = applicationType;
+    }
+
+    public String getAppCode() {
+        return appCode;
+    }
+
+    public void setAppCode(String appCode) {
+        this.appCode = appCode;
     }
 }

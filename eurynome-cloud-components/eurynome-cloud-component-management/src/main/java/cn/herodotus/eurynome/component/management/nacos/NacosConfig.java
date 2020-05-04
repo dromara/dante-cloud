@@ -26,6 +26,7 @@ public class NacosConfig extends AbstractNacos {
      * 单位：字节
      */
     public static final int MAX_CONFIG_CONTENT_SIZE = 102400;
+    public static final String GROUP_SUFFIX = "_GROUP";
 
     public NacosConfig(String serverAddress) {
         super(serverAddress);
@@ -81,7 +82,7 @@ public class NacosConfig extends AbstractNacos {
         try {
             ConfigService configService = getConfigService();
             if (isValidConfigService(configService)) {
-                return configService.publishConfig(dataId, group, content);
+                return configService.publishConfig(dataId, groupNameRegulate(group), content);
             } else {
                 return false;
             }
@@ -109,7 +110,7 @@ public class NacosConfig extends AbstractNacos {
         try {
             ConfigService configService = getConfigService();
             if (isValidConfigService(configService)) {
-                return configService.removeConfig(dataId, group);
+                return configService.removeConfig(dataId, groupNameRegulate(group));
             } else {
                 return false;
             }
@@ -134,7 +135,7 @@ public class NacosConfig extends AbstractNacos {
         try {
             ConfigService configService = getConfigService();
             if (isValidConfigService(configService)) {
-                return configService.getConfig(dataId, group, timeout);
+                return configService.getConfig(dataId, groupNameRegulate(group), timeout);
             } else {
                 return null;
             }
@@ -145,6 +146,18 @@ public class NacosConfig extends AbstractNacos {
         }
 
         return null;
+    }
+
+    private String groupNameRegulate(String group) {
+        if (StringUtils.isNotBlank(group)) {
+            String resource = StringUtils.upperCase(group) ;
+            if (StringUtils.endsWith(resource, GROUP_SUFFIX)) {
+                return resource;
+            } else {
+                return resource + GROUP_SUFFIX;
+            }
+        }
+        return group;
     }
 
 }
