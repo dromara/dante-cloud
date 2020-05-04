@@ -16,6 +16,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
  */
 @Api(value = "OauthClientDetails接口", tags = "用户中心服务")
 @RestController
+@Transactional(rollbackFor = Exception.class)
 public class OauthClientDetailsController extends BaseController<OauthClientDetails, String> implements OauthClientDetailsFeignService {
 
     private final OauthClientDetailsService oauthClientDetailsService;
@@ -61,6 +63,7 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
     @GetMapping("/oauth/herodotus_client_details")
+    @Override
     public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
@@ -79,9 +82,24 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
             @ApiImplicitParam(name = "oauthClientDetails", required = true, value = "可转换为OauthClientDetails实体的json数据", paramType = "JSON")
     })
     @PostMapping("/oauth/client_details")
-    public Result<OauthClientDetails> update(@RequestBody HerodotusClientDetails domain) {
+    public Result<OauthClientDetails> saveOrUpdate(@RequestBody HerodotusClientDetails domain) {
         OauthClientDetails oauthClientDetails = oauthClientDetailsService.saveOrUpdate(UpmsHelper.convertHerodotusClientDetailsToOauthClientDetails(domain));
         return result(oauthClientDetails);
+    }
+
+    @ApiOperation(value = "发布或更新ClientDetails配置", notes = "如果ClientDetails中，存储数据的ApplicationType为Service，那么就可以进行配置信息的发布")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
+    })
+    @PostMapping("/oauth/client_details/config")
+    public Result<String> publishConfig(@RequestBody String clientId) {
+        boolean isPublishOk = oauthClientDetailsService.publishOrUpdateConfig(clientId);
+        Result<String> result = new Result<>();
+        if (isPublishOk) {
+            return result.ok().message("发布配置成功！");
+        } else {
+            return result.failed().message("发布配置失败！");
+        }
     }
 
     @ApiOperation(value = "删除ClientDetails", notes = "根据clientId删除ClientDetails，以及相关联的关系数据")
@@ -89,7 +107,24 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
             @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
     })
     @DeleteMapping("/oauth/client_details")
+    @Override
     public Result<String> delete(@RequestBody String clientId) {
         return super.delete(clientId);
+    }
+
+
+    @ApiOperation(value = "删除微服务配置", notes = "根据clientId删除ClientDetails对应Service的Nacos配置。")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
+    })
+    @DeleteMapping("/oauth/client_details/config")
+    public Result<String> deleteConfig(@RequestBody String clientId) {
+        boolean isDeleteOk = oauthClientDetailsService.deleteConfig(clientId);
+        Result<String> result = new Result<>();
+        if (isDeleteOk) {
+            return result.ok().message("删除配置成功！");
+        } else {
+            return result.failed().message("删除配置失败！");
+        }
     }
 }

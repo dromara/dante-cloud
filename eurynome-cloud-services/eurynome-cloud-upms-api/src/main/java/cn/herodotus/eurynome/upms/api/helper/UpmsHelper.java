@@ -105,7 +105,7 @@ public class UpmsHelper {
         return oauthClientDetails;
     }
 
-    public static HerodotusUserDetails convertSysUserToArtisanUserDetails(SysUser sysUser) {
+    public static HerodotusUserDetails convertSysUserToHerodotusUserDetails(SysUser sysUser) {
         HerodotusUserDetails herodotusUserDetails = new HerodotusUserDetails();
         herodotusUserDetails.setUserId(sysUser.getUserId());
         herodotusUserDetails.setUsername(sysUser.getUserName());
@@ -174,7 +174,7 @@ public class UpmsHelper {
         }
 
         oauthClientDetails.setClientId(oauthMicroservices.getServiceId());
-        oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthMicroservices.getServiceSecret()));
+        oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthMicroservices.getAppSecret()));
         oauthClientDetails.setAdditionalInformation(JSON.toJSONString(oauthMicroservices));
         return oauthClientDetails;
     }

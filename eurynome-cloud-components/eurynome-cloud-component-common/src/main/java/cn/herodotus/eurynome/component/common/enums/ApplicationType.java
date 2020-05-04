@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.api.constants.enums;
+package cn.herodotus.eurynome.component.common.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -9,6 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>Description: 应用类别 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/5/4 12:01
+ */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ApplicationType {
 

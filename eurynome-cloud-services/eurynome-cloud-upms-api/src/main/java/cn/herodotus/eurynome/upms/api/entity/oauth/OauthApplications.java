@@ -1,9 +1,8 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
-import cn.herodotus.eurynome.upms.api.constants.enums.ApplicationType;
+import cn.herodotus.eurynome.component.common.enums.ApplicationType;
+import cn.herodotus.eurynome.component.data.base.entity.BaseAppEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
-import cn.hutool.core.util.IdUtil;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.Fetch;
@@ -22,7 +21,11 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "oauth_applications", indexes = {@Index(name = "oauth_applications_id_idx", columnList = "app_key")})
-public class OauthApplications extends BaseSysEntity {
+public class OauthApplications extends BaseAppEntity {
+
+    public OauthApplications() {
+        super.setApplicationType(ApplicationType.WEB);
+    }
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -30,21 +33,11 @@ public class OauthApplications extends BaseSysEntity {
     @Column(name = "app_key", length = 64)
     private String appKey;
 
-    @Column(name = "app_secret", length = 128)
-    private String appSecret = IdUtil.randomUUID();
-
-    @Column(name = "app_name", length = 128)
-    private String appName;
-
     @Column(name = "app_name_en", length = 128)
     private String appNameEn;
 
     @Column(name = "app_icon", length = 1024)
     private String appIcon;
-
-    @Column(name = "app_type")
-    @Enumerated(EnumType.STRING)
-    private ApplicationType applicationType = ApplicationType.WEB;
 
     @Column(name = "app_technology")
     @Enumerated(EnumType.STRING)
@@ -70,44 +63,12 @@ public class OauthApplications extends BaseSysEntity {
         this.appKey = appKey;
     }
 
-    public String getAppSecret() {
-        return appSecret;
-    }
-
-    public void setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
-    }
-
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
     public String getAppNameEn() {
         return appNameEn;
     }
 
     public void setAppNameEn(String appNameEn) {
         this.appNameEn = appNameEn;
-    }
-
-    public String getAppIcon() {
-        return appIcon;
-    }
-
-    public void setAppIcon(String appIcon) {
-        this.appIcon = appIcon;
-    }
-
-    public ApplicationType getApplicationType() {
-        return applicationType;
-    }
-
-    public void setApplicationType(ApplicationType applicationType) {
-        this.applicationType = applicationType;
     }
 
     public TechnologyType getTechnologyType() {
@@ -170,16 +131,12 @@ public class OauthApplications extends BaseSysEntity {
 
     @Override
     public String toString() {
-        return "OauthApplication{" +
+        return "OauthApplications{" +
                 "appKey='" + appKey + '\'' +
-                ", appSecret='" + appSecret + '\'' +
-                ", appName='" + appName + '\'' +
                 ", appNameEn='" + appNameEn + '\'' +
                 ", appIcon='" + appIcon + '\'' +
-                ", applicationType=" + applicationType +
                 ", technologyType=" + technologyType +
                 ", website='" + website + '\'' +
-                ", scopes=" + scopes +
                 '}';
     }
 }

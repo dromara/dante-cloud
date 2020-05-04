@@ -1,0 +1,9 @@
+eurynome:
+  platform:
+    gateway-server-addr: ${eurynome.environment.gateway-server-addr}
+    uaa-server-addr: ${eurynome.platform.gateway-server-addr}/eurynome-cloud-platform-uaa
+    upms-server-addr: ${eurynome.platform.gateway-server-addr}/eurynome-cloud-upms-rest
+    access-token-uri: ${eurynome.platform.uaa-server-addr}/oauth/token
+    user-authorization-uri: ${eurynome.platform.uaa-server-addr}/oauth/authorize
+    token-info-uri: ${eurynome.platform.uaa-server-addr}/oauth/check_token
+    user-info-uri: ${eurynome.platform.uaa-server-addr}/current/user

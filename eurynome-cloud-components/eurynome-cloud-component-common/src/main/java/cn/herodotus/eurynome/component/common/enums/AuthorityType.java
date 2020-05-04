@@ -38,10 +38,10 @@ public enum AuthorityType {
     API(0, "REST API"),
     MENU(1, "功能菜单"),
     PAGE(2, "Web Page"),
-    WEAPP_PAGE(3, "小程序页面");
+    MINI_PAGE(3, "小程序页面");
 
-    private Integer type;
-    private String description;
+    private final Integer type;
+    private final String description;
 
     AuthorityType(Integer type, String description) {
         this.type = type;

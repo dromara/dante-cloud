@@ -1,8 +1,10 @@
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.component.common.enums.ApplicationType;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.component.management.domain.Config;
 import cn.herodotus.eurynome.component.management.nacos.ConfigContentFactory;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
@@ -11,6 +13,8 @@ import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthClientDetailsRepository;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
@@ -42,6 +46,8 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
 
     @Autowired
     private OauthClientDetailsRepository oauthClientDetailsRepository;
+    @Autowired
+    private NacosConfig nacosConfig;
 
     @Override
     public Cache<String, OauthClientDetails> getCache() {
@@ -72,5 +78,58 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
 
         log.debug("[Herodotus] |- OauthClientDetails Service synchronize.");
         return saveOrUpdate(oauthClientDetails);
+    }
+
+    @Override
+    public void deleteById(String clientId) {
+        deleteConfig(clientId);
+        super.deleteById(clientId);
+    }
+
+    public boolean deleteConfig(String clientId) {
+        OauthClientDetails oauthClientDetails = findById(clientId);
+        return deleteConfig(oauthClientDetails);
+    }
+
+    private boolean deleteConfig(OauthClientDetails oauthClientDetails) {
+        Config config = convertOauthClientDetailsToConfig(oauthClientDetails);
+        return nacosConfig.removeConfig(config);
+    }
+
+    public boolean publishOrUpdateConfig(String clientId) {
+        OauthClientDetails oauthClientDetails = findById(clientId);
+        return publishOrUpdateConfig(oauthClientDetails);
+    }
+
+    private boolean publishOrUpdateConfig(OauthClientDetails oauthClientDetails) {
+        Config config = convertOauthClientDetailsToConfig(oauthClientDetails);
+        return nacosConfig.publishOrUpdateConfig(config);
+    }
+
+    private Config convertOauthClientDetailsToConfig(OauthClientDetails oauthClientDetails) {
+        OauthMicroservices oauthMicroservices = getOauthMicroservices(oauthClientDetails);
+        if(ObjectUtils.isNotEmpty(oauthMicroservices)&&ObjectUtils.isNotEmpty(oauthMicroservices.getSupplier())) {
+            Config config = new Config();
+            config.setDataId(oauthMicroservices.getServiceId() + SymbolConstants.SUFFIX_YML);
+            if (StringUtils.isNotBlank(oauthMicroservices.getSupplier().getSupplierCode())) {
+                config.setGroup(oauthMicroservices.getSupplier().getSupplierCode());
+            }
+            config.setContent(ConfigContentFactory.createOauthProperty(oauthClientDetails.getClientId(), oauthClientDetails.getClientSecret()));
+            return config;
+        }
+
+        return null;
+    }
+
+    private OauthMicroservices getOauthMicroservices(OauthClientDetails oauthClientDetails) {
+        if (ObjectUtils.isNotEmpty(oauthClientDetails) && StringUtils.isNotBlank(oauthClientDetails.getAdditionalInformation())) {
+            JSONObject jsonObject = JSON.parseObject(oauthClientDetails.getAdditionalInformation());
+            String applicationType = jsonObject.getString("applicationType");
+            if (StringUtils.isNotBlank(applicationType) && StringUtils.equals(applicationType, ApplicationType.SERVICE.name())) {
+                return JSON.toJavaObject(jsonObject, OauthMicroservices.class);
+            }
+        }
+
+        return null;
     }
 }

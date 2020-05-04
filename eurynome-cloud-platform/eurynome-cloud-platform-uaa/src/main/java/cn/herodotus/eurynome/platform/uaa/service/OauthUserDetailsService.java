@@ -42,6 +42,6 @@ public class OauthUserDetailsService implements UserDetailsService {
 
         ThreadLocalContextUtils.clear();
 
-        return UpmsHelper.convertSysUserToArtisanUserDetails(sysUser);
+        return UpmsHelper.convertSysUserToHerodotusUserDetails(sysUser);
     }
 }

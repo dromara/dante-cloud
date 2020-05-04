@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.upms.api.constants;
 
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
 import cn.herodotus.eurynome.component.security.oauth2.GrantType;
-import cn.herodotus.eurynome.upms.api.constants.enums.ApplicationType;
+import cn.herodotus.eurynome.component.common.enums.ApplicationType;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
 
 import java.util.HashMap;

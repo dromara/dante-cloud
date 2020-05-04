@@ -1,22 +1,17 @@
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
-import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
-import cn.herodotus.eurynome.component.management.nacos.ConfigContentFactory;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthMicroservicesRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -61,37 +56,15 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public OauthMicroservices saveOrUpdate(OauthMicroservices domain) {
         OauthMicroservices oauthMicroservices = super.saveOrUpdate(domain);
-        OauthClientDetails oauthClientDetails = oauthClientDetailsService.synchronize(oauthMicroservices);
-        createOrUpdateConfig(oauthMicroservices, oauthClientDetails);
+        oauthClientDetailsService.synchronize(oauthMicroservices);
         return oauthMicroservices;
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public void deleteById(String serviceId) {
-        OauthMicroservices oauthMicroservices = findById(serviceId);
         super.deleteById(serviceId);
         oauthClientDetailsService.deleteById(serviceId);
-        nacosConfig.removeConfig(getDataId(oauthMicroservices), getGroup(oauthMicroservices));
-    }
-
-    private void createOrUpdateConfig(OauthMicroservices oauthMicroservices, OauthClientDetails oauthClientDetails) {
-        if(ObjectUtils.isNotEmpty(oauthMicroservices)&&ObjectUtils.isNotEmpty(oauthMicroservices.getSupplier())) {
-            String dataId = getDataId(oauthMicroservices);
-            String group = getGroup(oauthMicroservices);
-            String content = ConfigContentFactory.createOauthProperty(oauthClientDetails.getClientId(), oauthClientDetails.getClientSecret());
-            nacosConfig.publishOrUpdateConfig(dataId, group, content);
-        }
-    }
-
-    private String getGroup(OauthMicroservices oauthMicroservices) {
-        return ObjectUtils.isNotEmpty(oauthMicroservices.getSupplier()) ? oauthMicroservices.getSupplier().getSupplierCode() : NacosConfig.DEFAULT_GROUP;
-    }
-
-    private String getDataId(OauthMicroservices oauthMicroservices) {
-        return oauthMicroservices.getServiceId() + SymbolConstants.SUFFIX_YML;
     }
 }

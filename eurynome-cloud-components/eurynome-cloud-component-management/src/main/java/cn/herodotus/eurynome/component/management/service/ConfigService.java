@@ -1,5 +1,6 @@
 package cn.herodotus.eurynome.component.management.service;
 
+import cn.herodotus.eurynome.component.management.domain.Config;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -63,14 +64,14 @@ public class ConfigService {
 
     private String getGroupName(Resource resource) throws IOException {
         if (ObjectUtils.isEmpty(resource)) {
-            return NacosConfig.DEFAULT_GROUP;
+            return Config.DEFAULT_GROUP;
         }
 
         String group = resource.getFile().getParentFile().getName();
         if (StringUtils.isNotBlank(group) && !StringUtils.equals(group, CONFIG_FILE_FOLDER)) {
             return group;
         } else {
-            return NacosConfig.DEFAULT_GROUP;
+            return Config.DEFAULT_GROUP;
         }
     }
 

@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/oauth/applications")
 @Api(value = "Oauth应用接口", tags = "用户中心服务")
+@Transactional(rollbackFor = Exception.class)
 public class OauthApplicationsController extends BaseRestController<OauthApplications, String> {
 
     private final OauthApplicationsService oauthApplicationsService;

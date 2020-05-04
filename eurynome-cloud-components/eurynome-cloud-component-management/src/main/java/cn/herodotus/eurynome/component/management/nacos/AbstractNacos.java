@@ -1,5 +1,7 @@
 package cn.herodotus.eurynome.component.management.nacos;
 
+import cn.herodotus.eurynome.component.management.domain.Config;
+
 /**
  * <p> Description : AbstractNacos </p>
  *
@@ -9,7 +11,7 @@ package cn.herodotus.eurynome.component.management.nacos;
 public abstract class AbstractNacos {
 
     protected static final String SERVER_STATUS_UP = "UP";
-    public static final String DEFAULT_GROUP = "DEFAULT_GROUP";
+    protected static final String DEFAULT_GROUP = Config.DEFAULT_GROUP;
     protected static final long DEFAULT_TIMEOUT = 3000;
 
     private String serverAddress;

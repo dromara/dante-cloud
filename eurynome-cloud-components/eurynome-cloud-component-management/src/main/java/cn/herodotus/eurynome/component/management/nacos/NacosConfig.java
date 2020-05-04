@@ -1,6 +1,8 @@
 package cn.herodotus.eurynome.component.management.nacos;
 
 import cn.herodotus.eurynome.component.common.exception.PlatformException;
+import cn.herodotus.eurynome.component.management.domain.Config;
+import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.exception.NacosException;
@@ -60,6 +62,13 @@ public class NacosConfig extends AbstractNacos {
         return publishOrUpdateConfig(dataId, DEFAULT_GROUP, content);
     }
 
+    public boolean publishOrUpdateConfig(Config config) {
+        if (BeanUtil.isEmpty(config)) {
+            return false;
+        }
+        return publishOrUpdateConfig(config.getDataId(), config.getGroup(), config.getContent());
+    }
+
     /**
      * 创建和修改配置时使用的同一个发布接口，当配置不存在时会创建配置，当配置已存在时会更新配置。
      *
@@ -87,6 +96,13 @@ public class NacosConfig extends AbstractNacos {
 
     public boolean removeConfig(String dataId) {
         return removeConfig(dataId, DEFAULT_GROUP);
+    }
+
+    public boolean removeConfig(Config config) {
+        if (BeanUtil.isEmpty(config)) {
+            return false;
+        }
+        return removeConfig(config.getDataId(), config.getGroup());
     }
 
     public boolean removeConfig(String dataId, String group) {

@@ -1,0 +1,24 @@
+eurynome:
+  environment:
+    redis-host: 127.0.0.1
+    redis-port: 6379
+    redis-password:
+    kafka-bootstrap-servers: 127.0.0.1:9092
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:postgresql://localhost:5432/luban_cloud_platform
+    username: itcraftsman
+    password: itcraftsman
+    show-sql: true
+    ddl-auto: update
+    gateway-server-addr: http://localhost:8847
+
+  platform:
+    gateway-server-addr: ${eurynome.environment.gateway-server-addr}
+    uaa-server-addr: ${eurynome.platform.gateway-server-addr}/eurynome-cloud-platform-uaa
+    upms-server-addr: ${eurynome.platform.gateway-server-addr}/eurynome-cloud-upms-rest
+    access-token-uri: ${eurynome.platform.uaa-server-addr}/oauth/token
+    user-authorization-uri: ${eurynome.platform.uaa-server-addr}/oauth/authorize
+    token-info-uri: ${eurynome.platform.uaa-server-addr}/oauth/check_token
+    user-info-uri: ${eurynome.platform.uaa-server-addr}/current/user

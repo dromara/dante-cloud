@@ -30,6 +30,9 @@ package cn.herodotus.eurynome.component.common.enums;
  */
 
 public enum AccountType {
+    /**
+     * enum
+     */
     PASSWORD(0, "密码"),
     MOBILE(1, "手机"),
     EMAIL(2, "邮箱"),
