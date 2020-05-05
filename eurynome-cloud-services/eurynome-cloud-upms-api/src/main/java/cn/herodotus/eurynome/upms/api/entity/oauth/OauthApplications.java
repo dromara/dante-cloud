@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.component.common.enums.ApplicationType;
 import cn.herodotus.eurynome.component.data.base.entity.BaseAppEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -22,10 +21,6 @@ import java.util.Set;
 @Entity
 @Table(name = "oauth_applications", indexes = {@Index(name = "oauth_applications_id_idx", columnList = "app_key")})
 public class OauthApplications extends BaseAppEntity {
-
-    public OauthApplications() {
-        super.setApplicationType(ApplicationType.WEB);
-    }
 
     @Id
     @GeneratedValue(generator = "system-uuid")

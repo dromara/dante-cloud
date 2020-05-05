@@ -43,7 +43,7 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
 
     @Override
     public BaseService<OauthClientDetails, String> getBaseService() {
-        return null;
+        return oauthClientDetailsService;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
             @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
     })
     @PostMapping("/oauth/client_details/config")
-    public Result<String> publishConfig(@RequestBody String clientId) {
+    public Result<String> publishConfig(@RequestParam(name = "clientId")  String clientId) {
         boolean isPublishOk = oauthClientDetailsService.publishOrUpdateConfig(clientId);
         Result<String> result = new Result<>();
         if (isPublishOk) {

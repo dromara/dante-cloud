@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.api.entity.microservice;
+package cn.herodotus.eurynome.upms.api.entity.development;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
@@ -13,8 +13,8 @@ import javax.persistence.*;
  * @date : 2020/4/29 11:13
  */
 @Entity
-@Table(name = "ms_supplier", uniqueConstraints = {@UniqueConstraint(columnNames = {"supplier_code"})},
-        indexes = {@Index(name = "ms_supplier_id_idx", columnList = "supplier_id"), @Index(name = "ms_supplier_code_idx", columnList = "supplier_code")})
+@Table(name = "dev_supplier", uniqueConstraints = {@UniqueConstraint(columnNames = {"supplier_code"})},
+        indexes = {@Index(name = "dev_supplier_id_idx", columnList = "supplier_id"), @Index(name = "dev_supplier_code_idx", columnList = "supplier_code")})
 public class Supplier extends BaseSysEntity {
 
     @Id

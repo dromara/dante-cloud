@@ -1,10 +1,10 @@
-package cn.herodotus.eurynome.upms.rest.controller.microservice;
+package cn.herodotus.eurynome.upms.rest.controller.development;
 
 import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
-import cn.herodotus.eurynome.upms.api.entity.microservice.Supplier;
-import cn.herodotus.eurynome.upms.logic.service.microservice.SupplierService;
+import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
+import cn.herodotus.eurynome.upms.logic.service.development.SupplierService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

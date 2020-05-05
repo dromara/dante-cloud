@@ -3,6 +3,7 @@ package cn.herodotus.eurynome.upms.api.constants;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
 import cn.herodotus.eurynome.component.security.oauth2.GrantType;
 import cn.herodotus.eurynome.component.common.enums.ApplicationType;
+import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class UpmsConstants {
 
     public static final String CACHE_NAME_WEAPP_USER = CACHE_AREA_PREFIX + "weapp:user:";
 
-    public static final String CACHE_NAME_MICROSERVICE_SUPPLIER = CACHE_AREA_PREFIX + "microservice:supplier:";
+    public static final String CACHE_NAME_DEVELOPMENT_SUPPLIER = CACHE_AREA_PREFIX + "development:supplier:";
 
     public static final String CACHE_NAME_SYS_AUTHORITY = CACHE_AREA_PREFIX + "sys:authority:";
     public static final String CACHE_NAME_SYS_ROLE = CACHE_AREA_PREFIX + "sys:role:";
@@ -45,6 +46,7 @@ public class UpmsConstants {
     private static final List<Map<String, Object>> APPLICATION_TYPE_ENUM = ApplicationType.getToJsonStruct();
     private static final List<Map<String, Object>> OAUTH2_GRANT_TYPE_ENUM = GrantType.getToJsonStruct();
     private static final List<Map<String, Object>> TECHNOLOGY_TYPE_ENUM = TechnologyType.getToJsonStruct();
+    private static final List<Map<String, Object>> SUPPLIER_TYPE_ENUM = SupplierType.getToJsonStruct();
 
 
     public static Map<String, Object> getAllEnums() {
@@ -53,6 +55,7 @@ public class UpmsConstants {
         map.put("applicationType", APPLICATION_TYPE_ENUM);
         map.put("grantType", OAUTH2_GRANT_TYPE_ENUM);
         map.put("technologyType", TECHNOLOGY_TYPE_ENUM);
+        map.put("supplierType", SUPPLIER_TYPE_ENUM);
         return map;
     }
 }

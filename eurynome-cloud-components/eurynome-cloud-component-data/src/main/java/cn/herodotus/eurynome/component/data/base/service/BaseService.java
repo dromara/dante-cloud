@@ -19,8 +19,6 @@ import java.util.List;
 @Slf4j
 public abstract class BaseService<E extends AbstractEntity, ID extends Serializable> extends AbstractCacheService<E, ID> {
 
-
-
     @Override
     public E findById(ID id) {
         E domain = getFromCache(String.valueOf(id));
@@ -63,7 +61,7 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
     @Override
     public List<E> findAll() {
         List<E> domains = getFindAllFromCache();
-        if (CollectionUtils.isNotEmpty(domains)) {
+        if (CollectionUtils.isEmpty(domains)) {
             domains = super.findAll();
             cacheFindAll(domains);
         }

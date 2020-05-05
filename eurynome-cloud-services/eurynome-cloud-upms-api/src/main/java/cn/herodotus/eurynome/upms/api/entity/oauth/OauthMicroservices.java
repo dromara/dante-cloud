@@ -1,8 +1,7 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.component.common.enums.ApplicationType;
 import cn.herodotus.eurynome.component.data.base.entity.BaseAppEntity;
-import cn.herodotus.eurynome.upms.api.entity.microservice.Supplier;
+import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,10 +15,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "oauth_microservices", indexes = {@Index(name = "oauth_microservices_id_idx", columnList = "service_id")})
 public class OauthMicroservices extends BaseAppEntity {
-
-    public OauthMicroservices() {
-        super.setApplicationType(ApplicationType.SERVICE);
-    }
 
     @Id
     @GeneratedValue(generator = "system-uuid")

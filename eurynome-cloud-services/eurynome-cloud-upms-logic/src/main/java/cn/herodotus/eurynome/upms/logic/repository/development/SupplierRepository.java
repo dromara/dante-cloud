@@ -1,7 +1,7 @@
-package cn.herodotus.eurynome.upms.logic.repository.microservice;
+package cn.herodotus.eurynome.upms.logic.repository.development;
 
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.microservice.Supplier;
+import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
 
 /**
  * <p> Description : SupplierRepository </p>

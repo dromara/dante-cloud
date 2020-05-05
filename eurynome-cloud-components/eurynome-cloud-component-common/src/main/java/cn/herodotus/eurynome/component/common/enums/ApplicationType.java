@@ -1,7 +1,6 @@
 package cn.herodotus.eurynome.component.common.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public enum ApplicationType {
      * 因此 使用@JsonValue @JsonDeserializer类里面要做相应的处理
      * @return
      */
-    @JsonValue
+
     public Integer getType() {
         return this.type;
     }

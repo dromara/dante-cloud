@@ -1,15 +1,19 @@
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
+import cn.herodotus.eurynome.component.common.enums.ApplicationType;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthMicroservicesRepository;
+import cn.hutool.core.util.IdUtil;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +61,12 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
 
     @Override
     public OauthMicroservices saveOrUpdate(OauthMicroservices domain) {
+        if(ObjectUtils.isNotEmpty(domain)) {
+            domain.setApplicationType(ApplicationType.SERVICE);
+            if (StringUtils.isBlank(domain.getAppSecret())) {
+                domain.setAppSecret(IdUtil.randomUUID());
+            }
+        }
         OauthMicroservices oauthMicroservices = super.saveOrUpdate(domain);
         oauthClientDetailsService.synchronize(oauthMicroservices);
         return oauthMicroservices;
