@@ -20,7 +20,7 @@ services:
     ports:
       - 7070:7070
     depends_on:
-      - monitor
+      - management
 
   gateway:
     image: eurynome-cloud-platform-gateway:latest
@@ -34,7 +34,7 @@ services:
     ports:
       - 8847:8847
     depends_on:
-      - monitor
+      - management
 
   uaa:
     image: eurynome-cloud-platform-uaa:latest
@@ -49,4 +49,4 @@ services:
       - 8846:8846
     depends_on:
       - upms
-      - monitor
+      - management
