@@ -10,3 +10,6 @@ spring:
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
+      config:
+        namespace: @config.namespace@
+        server-addr: @config.server-addr@

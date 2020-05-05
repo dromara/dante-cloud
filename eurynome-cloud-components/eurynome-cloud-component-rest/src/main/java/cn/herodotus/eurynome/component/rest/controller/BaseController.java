@@ -6,6 +6,7 @@ import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,5 +33,10 @@ public abstract class BaseController<E extends AbstractEntity, ID extends Serial
         Result<String> result = result(String.valueOf(id));
         getBaseService().deleteById(id);
         return result;
+    }
+
+    public Result<List<E>> findAll() {
+        List<E> domains = getBaseService().findAll();
+        return result(domains);
     }
 }

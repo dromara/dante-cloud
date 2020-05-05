@@ -1,13 +1,18 @@
 package cn.herodotus.eurynome.upms.rest.controller.microservice;
 
+import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.microservice.Supplier;
 import cn.herodotus.eurynome.upms.logic.service.microservice.SupplierService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p> Description : 微服务开发厂商及团队管理 </p>
@@ -30,5 +35,11 @@ public class SupplierController extends BaseRestController<Supplier, String> {
     @Override
     public BaseService<Supplier, String> getBaseService() {
         return this.supplierService;
+    }
+
+    @ApiOperation(value = "获取全部厂商数据", notes = "查询全部的厂商数据，用作列表选择根据目前观测该类数据不会太多，如果过多就需要修改查询方法和方式")
+    @GetMapping("/list")
+    public Result<List<Supplier>> findAll() {
+        return super.findAll();
     }
 }
