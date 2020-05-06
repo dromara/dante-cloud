@@ -37,13 +37,13 @@ public class OauthMicroservicesController extends BaseRestController<OauthMicros
         return this.oauthMicroservicesService;
     }
 
-    @ApiOperation(value = "发布或更新ClientDetails配置", notes = "如果ClientDetails中，存储数据的ApplicationType为Service，那么就可以进行配置信息的发布")
+    @ApiOperation(value = "发布或更新微服务配置", notes = "为接入平台的微服务创建OauthClientDetails相关的配置")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
+            @ApiImplicitParam(name = "serviceId", required = true, value = "serviceId", paramType = "JSON")
     })
     @PostMapping("/config")
-    public Result<String> publishConfig(@RequestParam(name = "clientId") String clientId) {
-        boolean isPublishOk = oauthMicroservicesService.publishOrUpdateConfig(clientId);
+    public Result<String> publishConfig(@RequestParam(name = "serviceId") String serviceId) {
+        boolean isPublishOk = oauthMicroservicesService.publishOrUpdateConfig(serviceId);
         Result<String> result = new Result<>();
         if (isPublishOk) {
             return result.ok().message("发布配置成功！");
@@ -52,13 +52,13 @@ public class OauthMicroservicesController extends BaseRestController<OauthMicros
         }
     }
 
-    @ApiOperation(value = "删除微服务配置", notes = "根据clientId删除ClientDetails对应Service的Nacos配置。")
+    @ApiOperation(value = "删除微服务配置", notes = "根据serviceId删除与该微服务对应的Oauth2的Nacos配置。")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
+            @ApiImplicitParam(name = "serviceId", required = true, value = "serviceId", paramType = "JSON")
     })
     @DeleteMapping("/config")
-    public Result<String> deleteConfig(@RequestBody String clientId) {
-        boolean isDeleteOk = oauthMicroservicesService.deleteConfig(clientId);
+    public Result<String> deleteConfig(@RequestBody String serviceId) {
+        boolean isDeleteOk = oauthMicroservicesService.deleteConfig(serviceId);
         Result<String> result = new Result<>();
         if (isDeleteOk) {
             return result.ok().message("删除配置成功！");
