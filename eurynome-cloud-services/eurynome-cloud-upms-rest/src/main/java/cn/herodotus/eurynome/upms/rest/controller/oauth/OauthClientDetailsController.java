@@ -87,21 +87,6 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
         return result(oauthClientDetails);
     }
 
-    @ApiOperation(value = "发布或更新ClientDetails配置", notes = "如果ClientDetails中，存储数据的ApplicationType为Service，那么就可以进行配置信息的发布")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
-    })
-    @PostMapping("/oauth/client_details/config")
-    public Result<String> publishConfig(@RequestParam(name = "clientId")  String clientId) {
-        boolean isPublishOk = oauthClientDetailsService.publishOrUpdateConfig(clientId);
-        Result<String> result = new Result<>();
-        if (isPublishOk) {
-            return result.ok().message("发布配置成功！");
-        } else {
-            return result.failed().message("发布配置失败！");
-        }
-    }
-
     @ApiOperation(value = "删除ClientDetails", notes = "根据clientId删除ClientDetails，以及相关联的关系数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
@@ -110,21 +95,5 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
     @Override
     public Result<String> delete(@RequestBody String clientId) {
         return super.delete(clientId);
-    }
-
-
-    @ApiOperation(value = "删除微服务配置", notes = "根据clientId删除ClientDetails对应Service的Nacos配置。")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
-    })
-    @DeleteMapping("/oauth/client_details/config")
-    public Result<String> deleteConfig(@RequestBody String clientId) {
-        boolean isDeleteOk = oauthClientDetailsService.deleteConfig(clientId);
-        Result<String> result = new Result<>();
-        if (isDeleteOk) {
-            return result.ok().message("删除配置成功！");
-        } else {
-            return result.failed().message("删除配置失败！");
-        }
     }
 }

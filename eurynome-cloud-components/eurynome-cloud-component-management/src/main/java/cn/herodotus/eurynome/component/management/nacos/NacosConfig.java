@@ -82,7 +82,7 @@ public class NacosConfig extends AbstractNacos {
         try {
             ConfigService configService = getConfigService();
             if (isValidConfigService(configService)) {
-                return configService.publishConfig(dataId, groupNameRegulate(group), content);
+                return configService.publishConfig(dataId, formatGroupName(group), content);
             } else {
                 return false;
             }
@@ -110,7 +110,7 @@ public class NacosConfig extends AbstractNacos {
         try {
             ConfigService configService = getConfigService();
             if (isValidConfigService(configService)) {
-                return configService.removeConfig(dataId, groupNameRegulate(group));
+                return configService.removeConfig(dataId, formatGroupName(group));
             } else {
                 return false;
             }
@@ -135,7 +135,7 @@ public class NacosConfig extends AbstractNacos {
         try {
             ConfigService configService = getConfigService();
             if (isValidConfigService(configService)) {
-                return configService.getConfig(dataId, groupNameRegulate(group), timeout);
+                return configService.getConfig(dataId, formatGroupName(group), timeout);
             } else {
                 return null;
             }
@@ -148,7 +148,7 @@ public class NacosConfig extends AbstractNacos {
         return null;
     }
 
-    private String groupNameRegulate(String group) {
+    private String formatGroupName(String group) {
         if (StringUtils.isNotBlank(group)) {
             String resource = StringUtils.upperCase(group) ;
             if (StringUtils.endsWith(resource, GROUP_SUFFIX)) {

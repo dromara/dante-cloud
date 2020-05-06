@@ -1,10 +1,14 @@
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
+import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.common.enums.ApplicationType;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.component.management.domain.Config;
+import cn.herodotus.eurynome.component.management.nacos.ConfigContentFactory;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthMicroservicesRepository;
 import cn.hutool.core.util.IdUtil;
@@ -16,6 +20,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -60,8 +65,9 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public OauthMicroservices saveOrUpdate(OauthMicroservices domain) {
-        if(ObjectUtils.isNotEmpty(domain)) {
+        if (ObjectUtils.isNotEmpty(domain)) {
             domain.setApplicationType(ApplicationType.SERVICE);
             if (StringUtils.isBlank(domain.getAppSecret())) {
                 domain.setAppSecret(IdUtil.randomUUID());
@@ -73,8 +79,44 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(String serviceId) {
+        deleteConfig(serviceId);
         super.deleteById(serviceId);
         oauthClientDetailsService.deleteById(serviceId);
+    }
+
+    private Config convertOauthMicroservicesToConfig(OauthMicroservices oauthMicroservices) {
+        if (ObjectUtils.isNotEmpty(oauthMicroservices) && ObjectUtils.isNotEmpty(oauthMicroservices.getSupplier())) {
+            Config config = new Config();
+            config.setDataId(oauthMicroservices.getAppCode() + SymbolConstants.SUFFIX_YML);
+            if (StringUtils.isNotBlank(oauthMicroservices.getSupplier().getSupplierCode())) {
+                config.setGroup(oauthMicroservices.getSupplier().getSupplierCode());
+            }
+            config.setContent(ConfigContentFactory.createOauthProperty(oauthMicroservices.getServiceId(), oauthMicroservices.getAppSecret()));
+            return config;
+        }
+
+        return null;
+    }
+
+    public boolean deleteConfig(String serviceId) {
+        OauthMicroservices oauthMicroservices = findById(serviceId);
+        return deleteConfig(oauthMicroservices);
+    }
+
+    private boolean deleteConfig(OauthMicroservices oauthMicroservices) {
+        Config config = convertOauthMicroservicesToConfig(oauthMicroservices);
+        return nacosConfig.removeConfig(config);
+    }
+
+    public boolean publishOrUpdateConfig(String clientId) {
+        OauthMicroservices oauthMicroservices = findById(clientId);
+        return publishOrUpdateConfig(oauthMicroservices);
+    }
+
+    private boolean publishOrUpdateConfig(OauthMicroservices oauthMicroservices) {
+        Config config = convertOauthMicroservicesToConfig(oauthMicroservices);
+        return nacosConfig.publishOrUpdateConfig(config);
     }
 }
