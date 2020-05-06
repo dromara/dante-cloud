@@ -31,11 +31,16 @@ spring:
       config:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
+        file-extension: yaml
         shared-configs:
-          - data-id: eurynome-cloud-@profile.name@-database-@database.type@.yml
-          - data-id: eurynome-cloud-@profile.name@-redis.yml
-          - data-id: eurynome-cloud-@profile.name@-rest.yml
-        file-extension: yml
+          - data-id: eurynome-cloud-environment.yaml
+            group: @profile.name@
+          - data-id: eurynome-cloud-database-@database.type@.yaml
+            group: common
+          - data-id: eurynome-cloud-redis.yaml
+            group: common
+          - data-id: eurynome-cloud-rest.yaml
+            group: common
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
@@ -43,6 +48,12 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
+# logback.xml和logback-spring.xml是SpringBoot默认为logback的配置文件
+# logback.xml加载早于application.yml 无法从配置中心的配置文件中读取
+# 解决方案：自定义logback配置文件的名称（不是SpringBoot默认的两种名称）并在配置中心指定logback配置文件的位置。
+# 这样SpringBoot就不会在获取配置中心的配置前加载日志配置了
+logging:
+  config: classpath:logback-config-center.xml
 
 herodotus:
   gateway:

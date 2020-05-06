@@ -2,7 +2,9 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     ​
+    <!--source指定的是application.yml配置文件中key,日志配置文件直接用${logstash-server-addr}引用这个值-->
     <springProperty scop="context" name="spring.application.name" source="spring.application.name" defaultValue="logs"/>
+    <springProperty scop="context" name="logstash-server-addr" source="herodotus.environment.logstash-server-addr" defaultValue="127.0.0.1:5044"/>
     <!-- Example for logging into the build folder of your project -->
     <property name="LOG_FILE" value="logs/${spring.application.name}"/>​
 
@@ -63,7 +65,7 @@
 
     <!-- 为logstash输出的JSON格式的Appender -->
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>192.168.101.10:5044</destination>
+        <destination>${logstash-server-addr}</destination>
         <!-- 日志输出编码 -->
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
