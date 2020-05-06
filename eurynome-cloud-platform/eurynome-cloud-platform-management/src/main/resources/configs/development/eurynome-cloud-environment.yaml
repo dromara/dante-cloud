@@ -1,0 +1,17 @@
+herodotus:
+  environment:
+    redis-host: 127.0.0.1
+    redis-port: 6379
+    redis-password:
+    kafka-bootstrap-servers: 127.0.0.1:9092
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:postgresql://localhost:5432/luban_cloud_platform
+    username: itcraftsman
+    password: itcraftsman
+    show-sql: false
+    logstash-server-addr: http://127.0.0.1:5044
+    gateway-server-addr: http://localhost:8847
+  initialization:
+    hibernate-ddl-auto: update

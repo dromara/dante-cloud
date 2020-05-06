@@ -23,7 +23,7 @@ public class InitializationListener implements ApplicationListener<ApplicationRe
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        if (managementProperties.getInitialization().isInitializeNacosConfig()) {
+        if (managementProperties.getConfigCenter().isInitialize()) {
             configService.initialize();
         }
     }

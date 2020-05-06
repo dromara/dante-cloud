@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: ${eurynome.environment.kafka-bootstrap-servers}
+    bootstrap-servers: ${herodotus.environment.kafka-bootstrap-servers}
     listener:
       missing-topics-fatal: false
 

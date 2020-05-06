@@ -1,13 +1,13 @@
 spring:
   jpa:
-    database: ${eurynome.environment.database}
+    database: ${herodotus.environment.database}
     # spring boot2.+后默认使用的是MyISAM引擎,增加如下配置修改为InnoDB模式，
     # 这样不会出现：Specified key was too long; max key length is 1000 bytes 问题
-    database-platform: ${eurynome.environment.database-platform}
+    database-platform: ${herodotus.environment.database-platform}
     open-in-view: true
-    show-sql: ${eurynome.environment.show-sql}
+    show-sql: ${herodotus.environment.show-sql}
     hibernate:
-      ddl-auto: ${eurynome.environment.ddl-auto}
+      ddl-auto: ${herodotus.initialization.hibernate-ddl-auto}
       #create 启动时删数据库中的表，然后创建，退出时不删除数据表
       #create-drop 启动时删数据库中的表，然后创建，退出时删除数据表 如果表不存在报错
       #update 如果启动时表格式不一致则更新表，原有数据保留
@@ -20,15 +20,15 @@ spring:
           use_jdbc_metadata_defaults: false
   datasource:
     continue-on-error: true
-    driver-class-name: ${eurynome.environment.driver-class-name}
-    url: ${eurynome.environment.url}
-    username: ${eurynome.environment.username}
-    password: ${eurynome.environment.password}
+    driver-class-name: ${herodotus.environment.driver-class-name}
+    url: ${herodotus.environment.url}
+    username: ${herodotus.environment.username}
+    password: ${herodotus.environment.password}
     initialization-mode: always
-    data-username: ${spring.datasource.username}
-    data-password: ${spring.datasource.password}
-    schema-username: ${spring.datasource.username}
-    schema-password: ${spring.datasource.password}
+    data-username: ${herodotus.environment.username}
+    data-password: ${herodotus.environment.password}
+    schema-username: ${herodotus.environment.username}
+    schema-password: ${herodotus.environment.password}
 
     # 第一种方式启动的时候 Jpa 会自动创建表，import.sql 只负责创建表单后的初始化数据。第二种方式启动的时候不会创建表，需要在初始化脚本中判断表是否存在，再初始化脚本的步骤
     # refer: https://www.cnblogs.com/ityouknow/p/7089170.html
