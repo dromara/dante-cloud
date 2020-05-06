@@ -1,5 +1,7 @@
 package cn.herodotus.eurynome.component.management.nacos;
 
+import cn.herodotus.eurynome.component.management.properties.ManagementProperties;
+
 /**
  * <p> Description : NacosDiscovery </p>
  *
@@ -8,7 +10,7 @@ package cn.herodotus.eurynome.component.management.nacos;
  */
 public class NacosDiscovery extends AbstractNacos{
 
-    public NacosDiscovery(String serverAddress) {
-        super(serverAddress);
+    public NacosDiscovery(ManagementProperties managementProperties) {
+        super(managementProperties);
     }
 }

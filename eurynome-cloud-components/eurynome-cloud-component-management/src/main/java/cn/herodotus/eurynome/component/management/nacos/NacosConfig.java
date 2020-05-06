@@ -2,6 +2,7 @@ package cn.herodotus.eurynome.component.management.nacos;
 
 import cn.herodotus.eurynome.component.common.exception.PlatformException;
 import cn.herodotus.eurynome.component.management.domain.Config;
+import cn.herodotus.eurynome.component.management.properties.ManagementProperties;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
@@ -28,8 +29,8 @@ public class NacosConfig extends AbstractNacos {
     public static final int MAX_CONFIG_CONTENT_SIZE = 102400;
     public static final String GROUP_SUFFIX = "_GROUP";
 
-    public NacosConfig(String serverAddress) {
-        super(serverAddress);
+    public NacosConfig(ManagementProperties managementProperties) {
+        super(managementProperties);
     }
 
     /**
@@ -150,12 +151,7 @@ public class NacosConfig extends AbstractNacos {
 
     private String formatGroupName(String group) {
         if (StringUtils.isNotBlank(group)) {
-            String resource = StringUtils.upperCase(group) ;
-            if (StringUtils.endsWith(resource, GROUP_SUFFIX)) {
-                return resource;
-            } else {
-                return resource + GROUP_SUFFIX;
-            }
+            return StringUtils.lowerCase(group) ;
         }
         return group;
     }

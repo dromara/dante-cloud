@@ -1,5 +1,6 @@
 package cn.herodotus.eurynome.component.management.service;
 
+import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.management.domain.Config;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : ConfigService </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/5/3 12:48
@@ -25,8 +26,7 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class ConfigService {
 
-    private static final String CONFIG_FILE_FOLDER = "configs";
-    private static final String CONFIG_FILE_RESOURCES = "classpath:" + CONFIG_FILE_FOLDER + "/**/*.yml";
+    private static final String CONFIG_RESOURCES_PATH_SUFFIX = "/**/*.yaml";
 
     @Autowired
     private NacosConfig nacosConfig;
@@ -37,7 +37,7 @@ public class ConfigService {
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
-            Resource[] resources = resolver.getResources(CONFIG_FILE_RESOURCES);
+            Resource[] resources = resolver.getResources(getConfigResourcesPath());
             for (Resource resource : resources) {
 
                 String configFileName = resource.getFile().getName();
@@ -62,13 +62,32 @@ public class ConfigService {
         log.debug("[Herodotus] |- Initialize Config Files Finished.");
     }
 
+    private String getPrefix() {
+        String prefix = nacosConfig.getManagementProperties().getConfigCenter().getPrefix();
+        return StringUtils.removeEnd(prefix, SymbolConstants.FORWARD_SLASH);
+    }
+
+    private String getConfigResourcesPath() {
+        String prefix = getPrefix();
+        return prefix + CONFIG_RESOURCES_PATH_SUFFIX;
+    }
+
+    private String getConfigResourcesRoot() {
+        String prefix = getPrefix();
+        if (StringUtils.contains(prefix, SymbolConstants.FORWARD_SLASH)) {
+            return StringUtils.substringAfterLast(prefix, SymbolConstants.FORWARD_SLASH);
+        } else {
+            return StringUtils.substringAfterLast(prefix, SymbolConstants.COLON);
+        }
+    }
+
     private String getGroupName(Resource resource) throws IOException {
         if (ObjectUtils.isEmpty(resource)) {
             return Config.DEFAULT_GROUP;
         }
 
         String group = resource.getFile().getParentFile().getName();
-        if (StringUtils.isNotBlank(group) && !StringUtils.equals(group, CONFIG_FILE_FOLDER)) {
+        if (StringUtils.isNotBlank(group) && !StringUtils.equals(group, getConfigResourcesRoot())) {
             return group;
         } else {
             return Config.DEFAULT_GROUP;
