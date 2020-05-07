@@ -3,6 +3,7 @@ package cn.herodotus.eurynome.component.management.service;
 import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.management.domain.Config;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
+import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -60,6 +61,7 @@ public class ConfigService {
         }
 
         log.debug("[Herodotus] |- Initialize Config Files Finished.");
+        LocalConfigInfoProcessor.cleanAllSnapshot();
     }
 
     private String getPrefix() {

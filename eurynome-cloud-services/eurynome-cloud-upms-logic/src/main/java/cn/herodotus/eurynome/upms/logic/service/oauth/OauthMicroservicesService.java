@@ -89,7 +89,7 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
     private Config convertOauthMicroservicesToConfig(OauthMicroservices oauthMicroservices) {
         if (ObjectUtils.isNotEmpty(oauthMicroservices) && ObjectUtils.isNotEmpty(oauthMicroservices.getSupplier())) {
             Config config = new Config();
-            config.setDataId(oauthMicroservices.getAppCode() + SymbolConstants.SUFFIX_YML);
+            config.setDataId(oauthMicroservices.getAppCode() + SymbolConstants.SUFFIX_YAML);
             if (StringUtils.isNotBlank(oauthMicroservices.getSupplier().getSupplierCode())) {
                 config.setGroup(oauthMicroservices.getSupplier().getSupplierCode());
             }

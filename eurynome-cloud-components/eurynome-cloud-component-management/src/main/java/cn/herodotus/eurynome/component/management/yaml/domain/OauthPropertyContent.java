@@ -75,8 +75,8 @@ public class OauthPropertyContent {
 
             public static class Resource implements Serializable {
 
-                private static final String TOKEN_INFO_URI= "${eurynome.platform.token-info-uri}";
-                private static final String USER_INFO_URI= "${eurynome.platform.user-info-uri}";
+                private static final String TOKEN_INFO_URI= "${herodotus.platform.token-info-uri}";
+                private static final String USER_INFO_URI= "${herodotus.platform.user-info-uri}";
 
                 private String tokenInfoUri = TOKEN_INFO_URI;
                 private String userInfoUri = USER_INFO_URI;

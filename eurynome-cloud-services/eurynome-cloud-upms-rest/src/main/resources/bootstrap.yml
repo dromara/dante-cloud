@@ -28,7 +28,6 @@ spring:
             group: common
           - data-id: eurynome-cloud-cache.yaml
             group: common
-        extension-configs:
           - data-id: ${spring.application.name}.yaml
             group: herodotus
       discovery:
@@ -49,16 +48,6 @@ spring:
 # 这样SpringBoot就不会在获取配置中心的配置前加载日志配置了
 logging:
   config: classpath:logback-config-center.xml
-
-#不同应用应是不同的配置，此处与hello_world相同，只为测试使用
-security:
-  oauth2:
-    client:
-      client-id: ${eurynome.platform.client-id}
-      client-secret: ${eurynome.platform.client-secret}
-    resource:
-      token-info-uri: ${eurynome.platform.token-info-uri}
-      user-info-uri: ${eurynome.platform.user-info-uri}
 
 herodotus:
   platform:
