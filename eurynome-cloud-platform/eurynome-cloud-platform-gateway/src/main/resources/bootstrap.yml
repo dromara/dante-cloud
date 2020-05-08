@@ -48,7 +48,7 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
-
+herodotus:
   gateway:
     white-list:
       - "/oauth/token"
