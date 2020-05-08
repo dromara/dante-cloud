@@ -45,7 +45,6 @@ spring:
       charset: UTF-8
       force: true
       enabled: true
-
 herodotus:
   platform:
     application:

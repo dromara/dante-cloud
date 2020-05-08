@@ -11,15 +11,17 @@ herodotus:
     username: itcraftsman
     password: itcraftsman
     show-sql: false
-    logstash-server-addr: http://127.0.0.1:5044
+    logstash-server-addr: 127.0.0.1:5044
     gateway-server-addr: http://localhost:8847
   initialization:
     hibernate-ddl-auto: update
 
-# logback.xml和logback-spring.xml是SpringBoot默认为logback的配置文件
-# logback.xml加载早于application.yml 无法从配置中心的配置文件中读取
-# 解决方案：自定义logback配置文件的名称（不是SpringBoot默认的两种名称）并在配置中心指定logback配置文件的位置。
-# 这样SpringBoot就不会在获取配置中心的配置前加载日志配置了
-# @refer: https://www.jianshu.com/p/3dee6b898eda
-logging:
-  config: classpath:logback-config-center.xml
+  platform:
+    management:
+      log-center:
+        server-addr: ${herodotus.environment.logstash-server-addr}
+        loggers:
+          cn.herodotus.eurynome: debug
+          org.springframework.security: debug
+          com.alibaba.nacos.client.naming: off
+          com.alibaba: debug
