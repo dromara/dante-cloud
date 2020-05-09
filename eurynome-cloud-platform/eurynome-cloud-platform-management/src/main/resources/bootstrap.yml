@@ -21,6 +21,6 @@ herodotus:
         server-addr: 192.168.101.10:5044
       config-center:
         server-addr: ${spring.cloud.nacos.config.server-addr}
-        initialize: true
+        initialize: false
 
 
