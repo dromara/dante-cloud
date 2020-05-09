@@ -7,7 +7,7 @@ herodotus:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:p6spy:postgresql://localhost:5432/herodotus
+    url: jdbc:p6spy:postgresql://192.168.101.10:5432/herodotus
     username: herodotus
     password: herodotus
     show-sql: false
