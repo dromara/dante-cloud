@@ -27,6 +27,7 @@ package cn.herodotus.eurynome.component.common.enums;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,11 +45,13 @@ public enum StatusEnum {
     LOCKING(2, "锁定"),
     EXPIRED(3, "过期");
 
-    private Integer status;
-    private String description;
+    @ApiModelProperty(value = "状态")
+    private final Integer status;
+    @ApiModelProperty(value = "说明")
+    private final String description;
 
-    private static Map<Integer, StatusEnum> indexMap = new HashMap<>();
-    private static List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+    private static final Map<Integer, StatusEnum> indexMap = new HashMap<>();
+    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
 
     static {
         for (StatusEnum statusEnum : StatusEnum.values()) {

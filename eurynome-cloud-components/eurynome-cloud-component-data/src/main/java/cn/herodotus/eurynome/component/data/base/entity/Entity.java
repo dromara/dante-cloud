@@ -24,6 +24,8 @@
 
 package cn.herodotus.eurynome.component.data.base.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -38,5 +40,6 @@ public interface Entity extends Serializable {
      * 根据该值作为缓存对象的Key
      * @return CacheKey
      */
+    @ApiModelProperty(hidden = true)
     public String getId();
 }

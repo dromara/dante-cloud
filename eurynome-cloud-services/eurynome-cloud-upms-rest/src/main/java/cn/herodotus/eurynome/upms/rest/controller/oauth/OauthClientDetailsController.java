@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * @author : gengwei.zheng
  * @date : 2020/3/20 11:48
  */
-@Api(value = "OauthClientDetails接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "Oauth客户端详情接口"})
 @RestController
 @Transactional(rollbackFor = Exception.class)
 public class OauthClientDetailsController extends BaseController<OauthClientDetails, String> implements OauthClientDetailsFeignService {

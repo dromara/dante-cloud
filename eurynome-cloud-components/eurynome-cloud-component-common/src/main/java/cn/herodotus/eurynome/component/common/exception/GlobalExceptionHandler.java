@@ -35,6 +35,7 @@ import java.util.Map;
 
 /**
  * 统一异常处理器
+ *
  * @author gengwei.zheng
  */
 @Slf4j
@@ -101,10 +102,17 @@ public class GlobalExceptionHandler {
      * 505	HTTP Version not supported	服务器不支持请求的HTTP协议的版本，无法完成处理
      */
     static {
-        exceptionDictionary.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
-        exceptionDictionary.put("InvalidGrantException", getUnauthorizedResult(ResultStatus.INVALID_GRANT));
+        // 1*.** 对应错误
+        exceptionDictionary.put("InvalidGrantException", getResult(ResultStatus.INVALID_GRANT, HttpStatus.SC_NOT_ACCEPTABLE));
         exceptionDictionary.put("InvalidTokenException", getResult(ResultStatus.INVALID_TOKEN, HttpStatus.SC_FORBIDDEN));
+        exceptionDictionary.put("InvalidScopeException", getResult(ResultStatus.INVALID_SCOPE, HttpStatus.SC_NOT_ACCEPTABLE));
+        exceptionDictionary.put("InvalidClientException", getResult(ResultStatus.INVALID_GRANT, HttpStatus.SC_FORBIDDEN));
+        exceptionDictionary.put("AccessDeniedException", getUnauthorizedResult(ResultStatus.ACCESS_DENIED));
+        // 4*.** 对应错误
         exceptionDictionary.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
+        // 6*.** 对应错误
+        exceptionDictionary.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
+        exceptionDictionary.put("DataIntegrityViolationException", getResult(ResultStatus.DATA_INTEGRITY_VIOLATION));
         // 以下是没有重新梳理过的错误。
         exceptionDictionary.put("UsernameNotFoundException", getUnauthorizedResult(ResultStatus.USERNAME_NOT_FOUND));
         exceptionDictionary.put("BadCredentialsException", getUnauthorizedResult(ResultStatus.BAD_CREDENTIALS));
@@ -112,10 +120,8 @@ public class GlobalExceptionHandler {
         exceptionDictionary.put("LockedException", getUnauthorizedResult(ResultStatus.ACCOUNT_LOCKED));
         exceptionDictionary.put("DisabledException", getUnauthorizedResult(ResultStatus.ACCOUNT_DISABLED));
         exceptionDictionary.put("CredentialsExpiredException", getUnauthorizedResult(ResultStatus.CREDENTIALS_EXPIRED));
-        exceptionDictionary.put("InvalidClientException", getUnauthorizedResult(ResultStatus.INVALID_CLIENT));
         exceptionDictionary.put("UnauthorizedClientException", getUnauthorizedResult(ResultStatus.UNAUTHORIZED_CLIENT));
         exceptionDictionary.put("InsufficientAuthenticationException", getUnauthorizedResult(ResultStatus.UNAUTHORIZED));
-        exceptionDictionary.put("InvalidScopeException", getUnauthorizedResult(ResultStatus.INVALID_SCOPE));
         exceptionDictionary.put("InvalidRequestException", getBadRequestResult(ResultStatus.INVALID_REQUEST));
         exceptionDictionary.put("IOException", getResult(ResultStatus.SERVICE_UNAVAILABLE, HttpStatus.SC_SERVICE_UNAVAILABLE));
         exceptionDictionary.put("RedirectMismatchException", getResult(ResultStatus.REDIRECT_URI_MISMATCH));
@@ -128,10 +134,10 @@ public class GlobalExceptionHandler {
         exceptionDictionary.put("NoHandlerFoundException", getResult(ResultStatus.NOT_FOUND, HttpStatus.SC_NOT_FOUND));
 
         exceptionDictionary.put("HttpMediaTypeNotAcceptableException", getBadRequestResult(ResultStatus.MEDIA_TYPE_NOT_ACCEPTABLE));
-        exceptionDictionary.put("IllegalArgumentException", getBadRequestResult(ResultStatus.ALERT));
+        exceptionDictionary.put("IllegalArgumentException", getBadRequestResult(ResultStatus.WARNING));
 
-        exceptionDictionary.put("AccessDeniedException", getResult(ResultStatus.ACCESS_DENIED, HttpStatus.SC_FORBIDDEN));
-        exceptionDictionary.put("MethodArgumentNotValidException", getResult(ResultStatus.ALERT));
+
+        exceptionDictionary.put("MethodArgumentNotValidException", getResult(ResultStatus.WARNING));
     }
 
 
@@ -148,7 +154,7 @@ public class GlobalExceptionHandler {
     }
 
     protected static Result<String> getResult(ResultStatus resultCode, int httpStatus) {
-        return new Result<String>().failed().code(resultCode.getCode()).data(resultCode.getMessage()).httpStatus(httpStatus);
+        return new Result<String>().failed().code(resultCode.getCode()).message(resultCode.getMessage()).httpStatus(httpStatus);
     }
 
     public static Result<String> resolveException(Exception ex, String path) {
@@ -168,6 +174,7 @@ public class GlobalExceptionHandler {
 
         result.path(path);
         result.error(ex);
+        result.data(ex.getMessage());
 
         log.error("[Herodotus] |- Global Exception Handler, Error is : {}", result);
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/weapp/user")
-@Api(value = "小程序用户接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "微信小程序用户接口"})
 public class WeappUserController extends BaseRestController<WeappUser, String> {
 
     private final WeappUserService weappUserService;

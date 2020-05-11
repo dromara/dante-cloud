@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/organization")
-@Api(value = "单位管理接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "单位管理接口"})
 public class SysOrganizationController extends BaseRestController<SysOrganization, String> {
 
     private final SysOrganizationService sysOrganizationService;

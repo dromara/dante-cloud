@@ -1,6 +1,8 @@
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,43 +13,55 @@ import javax.persistence.*;
  * @author : gengwei.zheng
  * @date : 2020/1/19 16:41
  */
-@javax.persistence.Entity
+@ApiModel(description = "单位")
+@Entity
 @Table(name = "sys_organization", indexes = {@Index(name = "sys_organization_id_idx", columnList = "organization_id")})
 public class SysOrganization extends BaseSysEntity {
 
+    @ApiModelProperty(value = "单位ID")
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "organization_id", length = 64)
     private String organizationId;
 
+    @ApiModelProperty(value = "单位名称")
     @Column(name = "organization_name", length = 1000)
     private String organizationName;
 
+    @ApiModelProperty(value = "4A标准单位ID")
     @Column(name = "a4_biz_org_id", length = 64)
     private String a4BizOrgId;
 
+    @ApiModelProperty(value = "标准单位代码")
     @Column(name = "biz_org_code", length = 60)
     private String bizOrgCode;
 
+    @ApiModelProperty(value = "标准单位说明")
     @Column(name = "biz_org_desc", length = 256)
     private String bizOrgDesc;
 
+    @ApiModelProperty(value = "标准单位ID")
     @Column(name = "biz_org_id", length = 64)
     private String bizOrgId;
 
+    @ApiModelProperty(value = "标准单位名称")
     @Column(name = "biz_org_name", length = 200)
     private String bizOrgName;
 
+    @ApiModelProperty(value = "标准单位类型")
     @Column(name = "biz_org_type", length = 30)
     private String bizOrgType;
 
+    @ApiModelProperty(value = "分区代码")
     @Column(name = "partition_code", length = 256)
     private String partitionCode;
 
+    @ApiModelProperty(value = "单位简称")
     @Column(name = "short_name", length = 200)
     private String shortName;
 
+    @ApiModelProperty(value = "上级单位ID")
     @Column(name = "parent_id", length = 64)
     private String parentId;
 

@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.component.data.base.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -21,16 +22,19 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity extends AbstractEntity {
 
+    @ApiModelProperty(value = "数据创建时间")
     @Column(name = "create_time", updatable = false)
     @CreatedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime = new Date();
 
+    @ApiModelProperty(value = "数据更新时间")
     @Column(name = "update_time")
     @LastModifiedDate
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime = new Date();
 
+    @ApiModelProperty(value = "排序值")
     @Column(name = "ranking")
     @OrderBy("ranking asc")
     private Integer ranking = 0;

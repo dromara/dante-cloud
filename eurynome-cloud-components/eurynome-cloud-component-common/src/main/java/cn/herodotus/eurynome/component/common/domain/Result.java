@@ -27,61 +27,42 @@ package cn.herodotus.eurynome.component.common.domain;
 
 import cn.herodotus.eurynome.component.common.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>Description: 自定义统一响应实体 </p>
+ * <p>Description: 统一响应实体 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/2/29 14:50
  */
-@ApiModel(value = "Result", description = "自定义统一响应实体")
+@ApiModel(description = "统一响应实体")
 public class Result<T> implements Serializable {
 
-    /**
-     * 响应编码
-     */
-    @ApiParam(name = "code", value = "自定义响应编码", defaultValue = "0")
+    @ApiModelProperty(value = "自定义响应编码")
     private int code = 0;
-    /**
-     * 提示消息
-     */
-    @ApiParam(name = "message", value = "响应提示信息")
+
+    @ApiModelProperty(value = "响应返回信息")
     private String message;
 
-    /**
-     * 请求路径
-     */
-    @ApiParam(name = "path", value = "请求路径")
+    @ApiModelProperty(value = "请求路径")
     private String path;
 
-    /**
-     * 响应数据
-     */
-    @ApiParam(name = "data", value = "响应数据")
+    @ApiModelProperty(value = "响应返回数据")
     private T data;
 
-    /**
-     * http状态码
-     */
-    @ApiParam(name = "httpStatus", value = "http状态码")
+    @ApiModelProperty(value = "http状态码")
     private int httpStatus;
 
-    /**
-     * 附加数据
-     */
-    @ApiParam(name = "error", value = "错误信息")
+    @ApiModelProperty(value = "错误堆栈信息")
     private Throwable error;
 
-    /**
-     * 响应时间
-     */
+    @ApiModelProperty(value = "响应时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp = new Date();
 
@@ -164,7 +145,6 @@ public class Result<T> implements Serializable {
 
     public Result<T> error(Throwable error) {
         this.error = error;
-        this.message = error.getMessage();
         return this;
     }
 

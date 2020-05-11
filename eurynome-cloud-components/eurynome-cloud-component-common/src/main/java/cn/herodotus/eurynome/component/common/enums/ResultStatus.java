@@ -26,27 +26,63 @@ package cn.herodotus.eurynome.component.common.enums;
 
 /**
  * 自定义返回码
+ * <p>
+ * 主要分类说明：
+ * 1*.**    认证授权，服务器收到请求，身份认证等安全性信息
+ * 2*.**    成功，操作被成功接收并处理
+ * 3*.**	需要后续操作，需要进一步的操作以完成请求
+ * 4*.**	Java常规错误，请求包含语法错误或无法完成请求，
+ * 40.**	HTTP请求错误，请求包含语法错误或无法完成请求，
+ * 5*.**    平台错误，平台相关组件运行及操作错误。
+ * 6*.**	关系数据库错误，服务器在处理请求的过程中发生了数据SQL操作等底层错误
+ * 60.**	JDBC错误，服务器在处理请求的过程中发生了JDBC底层错误。
+ * 61.**	JPA错误，服务器在处理请求的过程中发生了JPA错误。
+ * 62.**	Hibernate错误，服务器在处理请求的过程中发生了Hibernate操作错误。
+ * <p>
+ * 其它内容逐步补充
  *
  * @author gengwei.zheng
  */
 
 public enum ResultStatus {
-    /**
-     * 成功
-     */
-    OK(0, "Success"),
-    FAIL(1000, "Fail"),
-    ALERT(1001, "Alert"),
 
-    // TODO: 状态码和错误信息要重新梳理，重点要看对应的HttpStatus是否合适
+    /**
+     * 1*.**	认证授权
+     */
+    INVALID_TOKEN(1000, "无法解析的Token，也许Token已经失效"),
+    INVALID_GRANT(1001, "授权模式错误"),
+    INVALID_SCOPE(1002, "授权范围错误"),
+    INVALID_CLIENT(1003, "非法的客户端"),
+
+    ACCESS_DENIED(1100, "拒绝访问"),
+
+    /**
+     * 2*.** 成功
+     */
+    OK(2000, "成功"),
+
+    /**
+     * 4*.**	Java常规错误
+     */
+    FAIL(4000, "失败"),
+    WARNING(4001, "警告"),
+
+    METHOD_NOT_ALLOWED(4105, "请求方法不支持"),
+
+    /**
+     * 5*.* 为数据操作相关错误
+     */
+    BAD_SQL_GRAMMAR(6000, "低级SQL语法错误，检查SQL能否正常运行或者字段名称是否正确"),
+    DATA_INTEGRITY_VIOLATION(6200, "该数据正在被其它数据引用，请先删除引用关系，再进行数据删除操作"),
+
+
+    // TODO: 以下状态码和错误信息要重新梳理，重点要看自定义错误码以及对应的HttpStatus是否合适
     /**
      * oauth2返回码
      */
-    INVALID_TOKEN(2000, "无法解析的Token，也许Token已经失效"),
-    INVALID_SCOPE(2001, "Invalid Scope"),
+
+
     INVALID_REQUEST(2002, "Invalid Request"),
-    INVALID_CLIENT(2003, "Invalid Client"),
-    INVALID_GRANT(2004, "用户名或密码不正确"),
     REDIRECT_URI_MISMATCH(2005, "Redirect Uri Mismatch"),
     UNAUTHORIZED_CLIENT(2006, "Unauthorized Client"),
     EXPIRED_TOKEN(2007, "Expired Token"),
@@ -56,7 +92,7 @@ public enum ResultStatus {
     UNAUTHORIZED(2012, "Unauthorized"),
     SIGNATURE_DENIED(2013, "Signature Denied"),
 
-    ACCESS_DENIED(4030, "Access Denied"),
+
     ACCESS_DENIED_BLACK_IP_LIMITED(4031, "Access Denied Black Ip Limited"),
     ACCESS_DENIED_WHITE_IP_LIMITED(4032, "Access Denied White Ip Limited"),
     ACCESS_DENIED_AUTHORITY_EXPIRED(4033, "Access Denied Authority Expired"),
@@ -80,20 +116,16 @@ public enum ResultStatus {
      */
     BAD_REQUEST(4100, "Bad Request"),
     NOT_FOUND(4104, "Not Found"),
-    METHOD_NOT_ALLOWED(4105, "请求方法不支持！"),
+
     MEDIA_TYPE_NOT_ACCEPTABLE(4106, "Media Type Not Acceptable"),
     TOO_MANY_REQUESTS(4129, "Too Many Requests"),
     /**
      * 系统错误
      */
-    ERROR(5000, "Error"),
+    ERROR(5220, "Error"),
     GATEWAY_TIMEOUT(5004, "Gateway Timeout"),
-    SERVICE_UNAVAILABLE(5003, "Service Unavailable"),
+    SERVICE_UNAVAILABLE(5003, "Service Unavailable");
 
-    /**
-     * 数据操作错误
-     */
-    BAD_SQL_GRAMMAR(6001, "低级SQL语法错误，检查SQL能否正常运行或者字段名称是否正确！");
 
     private int code;
     private String message;

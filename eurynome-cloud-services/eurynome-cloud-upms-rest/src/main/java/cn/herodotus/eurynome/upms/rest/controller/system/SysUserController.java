@@ -46,7 +46,7 @@ import java.util.Map;
  * @date : 2019/11/25 10:55
  */
 @RestController
-@Api(value = "平台用户接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "系统用户接口"})
 public class SysUserController extends BaseController<SysUser, String> implements SysUserFeginService {
 
     private final SysUserService sysUserService;
@@ -61,7 +61,7 @@ public class SysUserController extends BaseController<SysUser, String> implement
         return this.sysUserService;
     }
 
-    @ApiOperation(value = "登录系统", notes = "登录系统")
+    @ApiOperation(value = "根据用户名查询用户", notes = "根据用户名查询用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "username", required = true, value = "用户名称")
     })
@@ -71,7 +71,7 @@ public class SysUserController extends BaseController<SysUser, String> implement
         return result(sysUser);
     }
 
-    @ApiOperation(value = "查询用户", notes = "根据用户ID查询用户信息")
+    @ApiOperation(value = "根据用户ID查询用户", notes = "根据用户ID查询用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", required = true, value = "用户ID")
     })
@@ -95,23 +95,23 @@ public class SysUserController extends BaseController<SysUser, String> implement
 
     @ApiOperation(value = "保存或更新用户", notes = "接收JSON数据，转换为SysUser实体，进行保存或更新")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "sysUser", required = true, value = "可转换为SysUser实体的json数据", paramType = "JSON")
+            @ApiImplicitParam(name = "sysUser", required = true, value = "可转换为SysUser实体的json数据")
     })
     @PostMapping("/user")
     public Result<SysUser> saveOrUpdate(@RequestBody SysUser sysUser) {
         return super.saveOrUpdate(sysUser);
     }
 
-    @ApiOperation(value = "删除用户", notes = "根据userId删除用户，以及相关联的关联关系数据")
+    @ApiOperation(value = "删除用户", notes = "根据userId删除用户，以及相关联的关联关系数据", produces = "application/json", consumes = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", required = true, value = "用户ID", paramType = "JSON")
+            @ApiImplicitParam(name = "userId", required = true, value = "用户ID")
     })
     @DeleteMapping("/user")
     public Result<String> delete(@RequestBody String userId) {
         return super.delete(userId);
     }
 
-    @ApiOperation(value = "给用户分配角色", notes = "给用户分配角色")
+    @ApiOperation(value = "给用户分配角色", notes = "给用户分配角色", produces = "application/x-www-form-urlencoded", consumes = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", required = true, value = "userId"),
             @ApiImplicitParam(name = "roles[]", required = true, value = "角色对象组成的数组")

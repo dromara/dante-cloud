@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
 
-@javax.persistence.Entity
+@Entity
 @Table(name = "social_weapp_user", indexes = {@Index(name = "weapp_user_id_idx", columnList = "openid")})
 public class WeappUser extends BaseSysEntity {
 

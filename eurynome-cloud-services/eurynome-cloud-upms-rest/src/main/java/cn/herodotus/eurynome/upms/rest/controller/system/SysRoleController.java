@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/role")
-@Api(value = "平台角色接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "系统角色接口"})
 public class SysRoleController extends BaseRestController<SysRole, String> {
 
     private final SysRoleService sysRoleService;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/employee")
-@Api(value = "人员管理接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "人员管理接口"})
 public class SysEmployeeController extends BaseRestController<SysEmployee, String> {
 
     private final SysEmployeeService sysEmployeeService;

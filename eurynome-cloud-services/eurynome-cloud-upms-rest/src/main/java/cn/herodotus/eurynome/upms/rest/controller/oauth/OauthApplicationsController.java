@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/oauth/applications")
-@Api(value = "Oauth应用接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "Oauth应用接口"})
 @Transactional(rollbackFor = Exception.class)
 public class OauthApplicationsController extends BaseRestController<OauthApplications, String> {
 

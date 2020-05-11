@@ -2,6 +2,7 @@ package cn.herodotus.eurynome.component.data.base.entity;
 
 
 import cn.herodotus.eurynome.component.data.base.service.AbstractCacheService;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p> Description : BaseCacheEntity </p>
@@ -23,5 +24,6 @@ public abstract class AbstractEntity implements Entity {
      *
      * @return LinkedProperty
      */
+    @ApiModelProperty(hidden = true)
     public abstract String getLinkedProperty();
 }

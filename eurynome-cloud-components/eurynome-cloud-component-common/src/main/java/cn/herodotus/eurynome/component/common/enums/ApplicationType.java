@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.component.common.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/5/4 12:01
  */
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ApplicationType {
 
     /**

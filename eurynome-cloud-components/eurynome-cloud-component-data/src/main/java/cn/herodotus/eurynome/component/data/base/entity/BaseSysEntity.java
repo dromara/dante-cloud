@@ -25,6 +25,7 @@
 package cn.herodotus.eurynome.component.data.base.entity;
 
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 
@@ -37,17 +38,16 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class BaseSysEntity extends BaseEntity {
 
+    @ApiModelProperty(value = "数据状态")
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status = StatusEnum.ENABLE;
 
-    /**
-     * 保留数据
-     * True 为不能删，False为可以删除
-     */
+    @ApiModelProperty(value = "是否为保留数据", notes = "True 为不能删，False为可以删除")
     @Column(name = "is_reserved")
     private Boolean reserved = Boolean.FALSE;
 
+    @ApiModelProperty(value = "版本号")
     @Column(name = "reversion")
     @OrderBy("reversion asc")
     private Integer reversion = 0;
@@ -55,6 +55,7 @@ public abstract class BaseSysEntity extends BaseEntity {
     /**
      * 角色描述,UI界面显示使用
      */
+    @ApiModelProperty(value = "备注")
     @Column(name = "description", length = 512)
     private String description;
 

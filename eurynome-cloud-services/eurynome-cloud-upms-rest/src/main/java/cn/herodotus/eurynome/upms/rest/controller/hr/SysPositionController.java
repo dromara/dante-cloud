@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/position")
-@Api(value = "岗位管理接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "岗位管理接口"})
 public class SysPositionController extends BaseRestController<SysPosition, String> {
 
     private final SysPositionService sysPositionService;

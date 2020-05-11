@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/microservice/supplier")
-@Api(value = "厂商管理接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "开发团队/厂商管理接口"})
 public class SupplierController extends BaseRestController<Supplier, String> {
 
     private final SupplierService supplierService;

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/oauth/microservices")
-@Api(value = "厂商管理接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "Oauth微服接口"})
 @Transactional(rollbackFor = Exception.class)
 public class OauthMicroservicesController extends BaseRestController<OauthMicroservices, String> {
 

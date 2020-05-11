@@ -9,6 +9,8 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,34 +20,41 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <p>Description: SysUser </p>
+ * <p>Description: 系统用户 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/4/10 11:06
  */
+@ApiModel(description = "系统用户")
 @Entity
 @Table(name = "sys_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})},
         indexes = {@Index(name = "sys_user_id_idx", columnList = "user_id"), @Index(name = "sys_user_unm_idx", columnList = "user_name")})
 public class SysUser extends BaseSysEntity {
 
+    @ApiModelProperty(value = "用户ID")
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "user_id", length = 64)
     private String userId;
 
+    @ApiModelProperty(value = "用户名")
     @Column(name = "user_name", length = 128, unique = true)
     private String userName;
 
+    @ApiModelProperty(value = "密码", notes = "BCryptPasswordEncoder")
     @Column(name = "password", length = 256)
     private String password;
 
+    @ApiModelProperty(value = "昵称")
     @Column(name = "nick_name", length = 64)
     private String nickName;
 
+    @ApiModelProperty(value = "人员ID")
     @Column(name = "employee_id", length = 256)
     private String employeeId;
 
+    @ApiModelProperty(value = "用户角色")
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "sys_user_role",

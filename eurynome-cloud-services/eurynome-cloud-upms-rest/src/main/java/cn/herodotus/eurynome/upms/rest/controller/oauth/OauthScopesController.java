@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/oauth/scopes")
-@Api(value = "Oauth Scopes 接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "Oauth权限范围接口"})
 public class OauthScopesController extends BaseRestController<OauthScopes, String> {
 
     private final OauthScopesService oauthScopesService;

@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/authority")
-@Api(value = "Upms权限接口", tags = "用户中心服务")
+@Api(tags = {"用户中心服务", "系统权限接口"})
 public class SysAuthorityController extends BaseRestController<SysAuthority, String> {
 
     private final SysAuthorityService sysAuthorityService;
