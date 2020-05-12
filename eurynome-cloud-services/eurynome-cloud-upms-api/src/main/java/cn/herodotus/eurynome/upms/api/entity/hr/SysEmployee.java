@@ -12,6 +12,8 @@ package cn.herodotus.eurynome.upms.api.entity.hr;
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
 import cn.herodotus.eurynome.upms.api.constants.enums.Identity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.GenericGenerator;
@@ -29,80 +31,74 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2020/1/19 16:41
  */
+@ApiModel(description = "人员")
 @Entity
 @Table(name = "sys_employee", indexes = {@Index(name = "sys_employee_id_idx", columnList = "employee_id")})
 public class SysEmployee extends BaseSysEntity {
 
+    @ApiModelProperty(value = "人员ID")
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "employee_id", length = 64)
     private String employeeId;
 
-    @Column(name = "employee_name", length = 512)
+    @ApiModelProperty(value = "姓名")
+    @Column(name = "employee_name", length = 50)
     private String employeeName;
 
-    @Column(name = "address", length = 512)
-    private String address;
+    @ApiModelProperty(value = "工号")
+    @Column(name = "employee_no", length = 50)
+    private String employeeNo;
 
+    @ApiModelProperty(value = "手机号码")
+    @Column(name = "mobile_phone_number", length = 50)
+    private String mobilePhoneNumber;
+
+    @ApiModelProperty(value = "办公电话")
+    @Column(name = "office_phone_number", length = 50)
+    private String officePhoneNumber;
+
+    @ApiModelProperty(value = "电子邮箱")
+    @Column(name = "email", length = 100)
+    private String email;
+
+    @ApiModelProperty(value = "PKI电子邮箱")
+    @Column(name = "pki_email", length = 100)
+    private String pkiEmail;
+
+    @ApiModelProperty(value = "所属单位")
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private SysOrganization organization;
+
+    @ApiModelProperty(value = "所属部门")
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private SysDepartment department;
+
+    @ApiModelProperty(value = "4A标准人员ID")
+    @Column(name = "a4_biz_emp_id", length = 256)
+    private String a4BizEmpId;
+
+    @ApiModelProperty(value = "头像")
     @Column(name = "avatar", length = 1000)
     private String avatar;
 
+    @ApiModelProperty(value = "生日")
     @Column(name = "birth_day")
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @Lob
-    @Column(name = "comments")
-    private String comments;
-
-    @Column(name = "degree_code", length = 30)
-    private String degreeCode;
-
-    @Column(name = "duty", length = 30)
-    private String duty;
-
-    @Column(name = "email", length = 40)
-    private String email;
-
-    @Column(name = "pki_email", length = 100)
-    private String pkiEmail;
-
-    @Column(name = "employee_no", length = 50)
-    private String employeeNo;
-
-    @Column(name = "a4_biz_emp_id", length = 256)
-    private String a4BizEmpId;
-
+    @ApiModelProperty(value = "性别")
     @Column(name = "gender")
     @Enumerated(EnumType.ORDINAL)
     private Gender gender;
 
+    @ApiModelProperty(value = "身份")
     @Column(name = "identity")
     @Enumerated(EnumType.ORDINAL)
     private Identity identity = Identity.STAFF;
-
-    @Column(name = "job", length = 80)
-    private String job;
-
-    @Column(name = "mobile_phone_number", length = 512)
-    private String mobilePhoneNumber;
-
-    @Column(name = "office_phone_number", length = 512)
-    private String officePhoneNumber;
-
-    @Column(name = "refresh_work_date")
-    @Temporal(TemporalType.DATE)
-    private Date refreshWorkDate;
-
-    @Column(name = "organization_id", length = 64)
-    private String organizationId;
-
-    @Column(name = "department_id", length = 64)
-    private String departmentId;
-
-    @Column(name = "sap_hr_user_id", length = 64)
-    private String sapHrUserId;
 
     /**
      * 一个员工有多个岗位
@@ -134,68 +130,12 @@ public class SysEmployee extends BaseSysEntity {
         this.employeeId = employeeId;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
-    public String getDegreeCode() {
-        return degreeCode;
-    }
-
-    public void setDegreeCode(String degreeCode) {
-        this.degreeCode = degreeCode;
-    }
-
-    public String getDuty() {
-        return duty;
-    }
-
-    public void setDuty(String duty) {
-        this.duty = duty;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPkiEmail() {
-        return pkiEmail;
-    }
-
-    public void setPkiEmail(String pkiEmail) {
-        this.pkiEmail = pkiEmail;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public String getEmployeeNo() {
@@ -204,30 +144,6 @@ public class SysEmployee extends BaseSysEntity {
 
     public void setEmployeeNo(String employeeNo) {
         this.employeeNo = employeeNo;
-    }
-
-    public String getA4BizEmpId() {
-        return a4BizEmpId;
-    }
-
-    public void setA4BizEmpId(String a4BizEmpId) {
-        this.a4BizEmpId = a4BizEmpId;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
     }
 
     public String getMobilePhoneNumber() {
@@ -246,52 +162,68 @@ public class SysEmployee extends BaseSysEntity {
         this.officePhoneNumber = officePhoneNumber;
     }
 
-    public Date getRefreshWorkDate() {
-        return refreshWorkDate;
+    public String getEmail() {
+        return email;
     }
 
-    public void setRefreshWorkDate(Date refreshWorkDate) {
-        this.refreshWorkDate = refreshWorkDate;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getOrganizationId() {
-        return organizationId;
+    public String getPkiEmail() {
+        return pkiEmail;
     }
 
-    public void setOrganizationId(String organizationId) {
-        this.organizationId = organizationId;
+    public void setPkiEmail(String pkiEmail) {
+        this.pkiEmail = pkiEmail;
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+    public SysOrganization getOrganization() {
+        return organization;
     }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
+    public void setOrganization(SysOrganization sysOrganization) {
+        this.organization = sysOrganization;
     }
 
-    public String getSapHrUserId() {
-        return sapHrUserId;
+    public SysDepartment getDepartment() {
+        return department;
     }
 
-    public void setSapHrUserId(String sapHrUserId) {
-        this.sapHrUserId = sapHrUserId;
+    public void setDepartment(SysDepartment sysDepartment) {
+        this.department = sysDepartment;
     }
 
-    public Set<SysPosition> getPositions() {
-        return positions;
+    public String getA4BizEmpId() {
+        return a4BizEmpId;
     }
 
-    public void setPositions(Set<SysPosition> positions) {
-        this.positions = positions;
+    public void setA4BizEmpId(String a4BizEmpId) {
+        this.a4BizEmpId = a4BizEmpId;
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public Identity getIdentity() {
@@ -300,6 +232,14 @@ public class SysEmployee extends BaseSysEntity {
 
     public void setIdentity(Identity identity) {
         this.identity = identity;
+    }
+
+    public Set<SysPosition> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(Set<SysPosition> positions) {
+        this.positions = positions;
     }
 
     @Override
@@ -331,26 +271,16 @@ public class SysEmployee extends BaseSysEntity {
         return "SysEmployee{" +
                 "employeeId='" + employeeId + '\'' +
                 ", employeeName='" + employeeName + '\'' +
-                ", address='" + address + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", birthday=" + birthday +
-                ", comments='" + comments + '\'' +
-                ", degreeCode='" + degreeCode + '\'' +
-                ", duty='" + duty + '\'' +
-                ", email='" + email + '\'' +
-                ", pkiEmail='" + pkiEmail + '\'' +
                 ", employeeNo='" + employeeNo + '\'' +
-                ", a4BizEmpId='" + a4BizEmpId + '\'' +
-                ", gender=" + gender +
-                ", identity=" + identity +
-                ", job='" + job + '\'' +
                 ", mobilePhoneNumber='" + mobilePhoneNumber + '\'' +
                 ", officePhoneNumber='" + officePhoneNumber + '\'' +
-                ", refreshWorkDate=" + refreshWorkDate +
-                ", organizationId='" + organizationId + '\'' +
-                ", departmentId='" + departmentId + '\'' +
-                ", sapHrUserId='" + sapHrUserId + '\'' +
-                ", positions=" + positions +
+                ", email='" + email + '\'' +
+                ", pkiEmail='" + pkiEmail + '\'' +
+                ", a4BizEmpId='" + a4BizEmpId + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", birthday=" + birthday +
+                ", gender=" + gender +
+                ", identity=" + identity +
                 '}';
     }
 }

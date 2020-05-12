@@ -18,14 +18,5 @@ import java.util.List;
  */
 public interface SysDepartmentRepository extends BaseRepository<SysDepartment, String> {
 
-    SysDepartment findByDepartmentId(String departmentId);
-
     List<SysDepartment> findAllByOrganizationId(String organizationId);
-
-    Page<SysDepartment> findAllByOrganizationId(String organizationId, Pageable pageable);
-
-    @Modifying
-    @Transactional
-    @Query("delete from SysDepartment sd where sd.departmentId = ?1")
-    void deleteByDepartmentId(String organizationId);
 }

@@ -1,13 +1,21 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
+import cn.herodotus.eurynome.component.common.domain.Result;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysEmployeeService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -24,5 +32,15 @@ public class SysEmployeeController extends BaseRestController<SysEmployee, Strin
     @Override
     public BaseService<SysEmployee, String> getBaseService() {
         return this.sysEmployeeService;
+    }
+
+    @ApiOperation(value = "获取部门人员", notes = "根据部门ID获取部门下的所有人员信息", consumes = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "departmentId", required = true, value = "单位ID"),
+    })
+    @GetMapping("/list")
+    public Result<List<SysEmployee>> findAllByDepartmentId(@RequestParam("organizationId") String departmentId) {
+        List<SysEmployee> sysEmployees = sysEmployeeService.findAllByDepartmentId(departmentId);
+        return result(sysEmployees);
     }
 }

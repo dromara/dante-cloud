@@ -19,34 +19,10 @@ import java.util.List;
 public interface SysEmployeeRepository extends BaseRepository<SysEmployee, String> {
 
     /**
-     * 根据ID查找
-     * @param employeeId
-     * @return
-     */
-    SysEmployee findByEmployeeId(String employeeId);
-
-    /**
-     * 根据手机号码查找
-     * @param mobilePhoneNumber
-     * @return
-     */
-    SysEmployee findByMobilePhoneNumber(String mobilePhoneNumber);
-
-    /**
      * 根据部门ID查找
      * @param departmentId
      * @return
      */
+    @Query("from SysEmployee se where se.department.departmentId = ?1")
     List<SysEmployee> findAllByDepartmentId(String departmentId);
-
-    Page<SysEmployee> findAllByDepartmentId(String departmentId, Pageable pageable);
-
-    /**
-     * 删除人员基本操作
-     * @param employeeId
-     */
-    @Modifying
-    @Transactional
-    @Query("delete from SysEmployee se where se.employeeId = ?1")
-    void deleteByEmployeeId(String employeeId);
 }

@@ -33,9 +33,11 @@ import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -76,5 +78,14 @@ public class SysDepartmentService extends BaseService<SysDepartment, String> {
     @Override
     public Cache<String, Set<String>> getIndexCache() {
         return indexCache;
+    }
+
+    public List<SysDepartment> findAllByOrganizationId(String organizationId) {
+        List<SysDepartment> sysDepartments = getConditionalFromCache(organizationId);
+        if (CollectionUtils.isEmpty(sysDepartments)) {
+            sysDepartments = sysDepartmentRepository.findAllByOrganizationId(organizationId);
+            cacheConditional(sysDepartments, organizationId);
+        }
+        return sysDepartments;
     }
 }

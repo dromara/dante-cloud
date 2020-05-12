@@ -27,15 +27,18 @@ package cn.herodotus.eurynome.upms.logic.service.hr;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysEmployeeRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -63,7 +66,6 @@ public class SysEmployeeService extends BaseService<SysEmployee, String> {
         this.sysEmployeeRepository = sysEmployeeRepository;
     }
 
-
     @Override
     public Cache<String, SysEmployee> getCache() {
         return dataCache;
@@ -77,5 +79,14 @@ public class SysEmployeeService extends BaseService<SysEmployee, String> {
     @Override
     public BaseRepository<SysEmployee, String> getRepository() {
         return sysEmployeeRepository;
+    }
+
+    public List<SysEmployee> findAllByDepartmentId(String departmentId) {
+        List<SysEmployee> sysEmployees = getConditionalFromCache(departmentId);
+        if (CollectionUtils.isEmpty(sysEmployees)) {
+            sysEmployees = sysEmployeeRepository.findAllByDepartmentId(departmentId);
+            cacheConditional(sysEmployees, departmentId);
+        }
+        return sysEmployees;
     }
 }
