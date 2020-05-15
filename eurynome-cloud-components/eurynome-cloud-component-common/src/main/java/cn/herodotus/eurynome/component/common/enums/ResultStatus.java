@@ -24,6 +24,9 @@
 
 package cn.herodotus.eurynome.component.common.enums;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 自定义返回码
  * <p>
@@ -43,7 +46,7 @@ package cn.herodotus.eurynome.component.common.enums;
  *
  * @author gengwei.zheng
  */
-
+@ApiModel(description = "响应结果状态")
 public enum ResultStatus {
 
     /**
@@ -126,14 +129,13 @@ public enum ResultStatus {
     GATEWAY_TIMEOUT(5004, "Gateway Timeout"),
     SERVICE_UNAVAILABLE(5003, "Service Unavailable");
 
+    @ApiModelProperty(value = "结果代码")
+    private final int code;
+    @ApiModelProperty(value = "结果信息")
+    private final String message;
 
-    private int code;
-    private String message;
 
-    ResultStatus() {
-    }
-
-    private ResultStatus(int code, String message) {
+    ResultStatus(int code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -164,6 +166,4 @@ public enum ResultStatus {
     public String getMessage() {
         return message;
     }
-
-
 }

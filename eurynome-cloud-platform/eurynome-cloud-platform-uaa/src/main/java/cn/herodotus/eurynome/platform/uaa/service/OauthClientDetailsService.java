@@ -5,6 +5,7 @@ import cn.herodotus.eurynome.component.security.oauth2.provider.HerodotusClientD
 import cn.herodotus.eurynome.upms.api.service.remote.RemoteOauthClientDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -36,16 +37,15 @@ public class OauthClientDetailsService implements ClientDetailsService {
     @Override
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
 
-        ClientDetails clientDetails = getRemoteOauthClientDetails(clientId);
-        if (clientDetails != null && clientDetails.getAdditionalInformation() != null) {
-            String status = clientDetails.getAdditionalInformation().getOrDefault("status", "1").toString();
-
-            if (String.valueOf(StatusEnum.FORBIDDEN.getStatus()).equals(status)) {
-                log.warn("[Herodotus] |- Client [{}] has been Forbidden! ", clientDetails.getClientId());
+        HerodotusClientDetails herodotusClientDetails = getRemoteOauthClientDetails(clientId);
+        if (herodotusClientDetails != null && herodotusClientDetails.getAdditionalInformation() != null) {
+            String status = herodotusClientDetails.getAdditionalInformation().getOrDefault("status", "1").toString();
+            if (String.valueOf(StatusEnum.FORBIDDEN.getIndex()).equals(status)) {
+                log.warn("[Herodotus] |- Client [{}] has been Forbidden! ", herodotusClientDetails.getClientId());
                 throw new ClientRegistrationException("客户端已被禁用");
             }
         }
-        return clientDetails;
+        return herodotusClientDetails;
     }
 
     /**

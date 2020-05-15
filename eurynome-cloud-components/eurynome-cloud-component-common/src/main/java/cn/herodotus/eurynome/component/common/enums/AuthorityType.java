@@ -24,12 +24,25 @@
 
 package cn.herodotus.eurynome.component.common.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.collect.ImmutableMap;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>Description: 权限资源类型 </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/25 15:10
  */
+@ApiModel(description = "权限类型")
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum AuthorityType {
 
     /**
@@ -40,27 +53,53 @@ public enum AuthorityType {
     PAGE(2, "Web Page"),
     MINI_PAGE(3, "小程序页面");
 
-    private final Integer type;
-    private final String description;
+    @ApiModelProperty(value = "索引")
+    private final Integer index;
+    @ApiModelProperty(value = "文字")
+    private final String text;
 
-    AuthorityType(Integer type, String description) {
-        this.type = type;
-        this.description = description;
+    private static final Map<Integer, AuthorityType> indexMap = new HashMap<>();
+    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+
+    static {
+        for (AuthorityType authorityType : AuthorityType.values()) {
+            indexMap.put(authorityType.getIndex(), authorityType);
+            toJsonStruct.add(authorityType.getIndex(),
+                    ImmutableMap.<String, Object>builder()
+                            .put("value", authorityType.getIndex())
+                            .put("key", authorityType.name())
+                            .put("text", authorityType.getText())
+                            .build());
+        }
     }
 
-    public Integer getType() {
-        return this.type;
+    AuthorityType(Integer index, String text) {
+        this.index = index;
+        this.text = text;
     }
 
-    public String getDescription() {
-        return this.description;
+    /**
+     * 不加@JsonValue，转换的时候转换出完整的对象。
+     * 加了@JsonValue，只会显示相应的属性的值
+     *
+     * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
+     *
+     * @return Enum索引
+     */
+    @JsonValue
+    public Integer getIndex() {
+        return index;
     }
 
-    @Override
-    public String toString() {
-        return "AuthorityType{" +
-                "type=" + type +
-                ", description='" + description + '\'' +
-                '}';
+    public String getText() {
+        return this.text;
+    }
+
+    public static AuthorityType getAuthorityType(Integer index) {
+        return indexMap.get(index);
+    }
+
+    public static List<Map<String, Object>> getToJsonStruct() {
+        return toJsonStruct;
     }
 }

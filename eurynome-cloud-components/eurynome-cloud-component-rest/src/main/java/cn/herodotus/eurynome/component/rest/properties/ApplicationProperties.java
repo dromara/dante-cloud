@@ -165,11 +165,11 @@ public class ApplicationProperties {
         /**
          * RestTemplate 读取超时5秒,默认无限限制,单位：毫秒
          */
-        private int readTimeout = 5000;
+        private int readTimeout = 15000;
         /**
-         * 连接超时10秒，默认无限制，单位：毫秒
+         * 连接超时15秒，默认无限制，单位：毫秒
          */
-        private int connectTimeout = 10000;
+        private int connectTimeout = 15000;
 
         public int getReadTimeout() {
             return readTimeout;

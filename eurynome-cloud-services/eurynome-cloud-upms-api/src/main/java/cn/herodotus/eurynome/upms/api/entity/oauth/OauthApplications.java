@@ -34,8 +34,8 @@ public class OauthApplications extends BaseAppEntity {
     @Column(name = "app_icon", length = 1024)
     private String appIcon;
 
-    @Column(name = "app_technology")
-    @Enumerated(EnumType.STRING)
+    @Column(name = "app_tech")
+    @Enumerated(EnumType.ORDINAL)
     private TechnologyType technologyType = TechnologyType.JAVA;
 
     @Column(name = "website", length = 1024)

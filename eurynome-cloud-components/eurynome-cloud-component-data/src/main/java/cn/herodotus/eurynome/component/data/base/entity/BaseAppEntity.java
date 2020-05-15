@@ -27,7 +27,7 @@ public abstract class BaseAppEntity extends BaseSysEntity{
     private String appCode;
 
     @Column(name = "app_type")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private ApplicationType applicationType = ApplicationType.WEB;
 
     public String getAppSecret() {

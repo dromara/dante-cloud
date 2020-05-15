@@ -27,6 +27,7 @@ package cn.herodotus.eurynome.component.common.enums;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import java.util.Map;
 /**
  * @author gengwei.zheng
  */
+@ApiModel(value = "数据状态")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum StatusEnum {
 
@@ -45,45 +47,46 @@ public enum StatusEnum {
     LOCKING(2, "锁定"),
     EXPIRED(3, "过期");
 
-    @ApiModelProperty(value = "状态")
-    private final Integer status;
-    @ApiModelProperty(value = "说明")
-    private final String description;
+    @ApiModelProperty(value = "索引")
+    private final Integer index;
+    @ApiModelProperty(value = "文字")
+    private final String text;
 
     private static final Map<Integer, StatusEnum> indexMap = new HashMap<>();
     private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
 
     static {
         for (StatusEnum statusEnum : StatusEnum.values()) {
-            indexMap.put(statusEnum.status, statusEnum);
-            toJsonStruct.add(statusEnum.status,
+            indexMap.put(statusEnum.getIndex(), statusEnum);
+            toJsonStruct.add(statusEnum.getIndex(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", statusEnum.getStatus())
+                            .put("value", statusEnum.getIndex())
                             .put("key", statusEnum.name())
-                            .put("text", statusEnum.description)
+                            .put("text", statusEnum.getText())
                             .build());
         }
     }
 
-
-    StatusEnum(Integer status, String description) {
-        this.status = status;
-        this.description = description;
+    StatusEnum(Integer index, String text) {
+        this.index = index;
+        this.text = text;
     }
 
     /**
      * 不加@JsonValue，转换的时候转换出完整的对象。
      * 加了@JsonValue，只会显示相应的属性的值
-     * 因此 使用@JsonValue @JsonDeserializer类里面要做相应的处理
-     * @return
+     *
+     * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
+     *
+     * @return Enum索引
      */
     @JsonValue
-    public Integer getStatus() {
-        return this.status;
+    public Integer getIndex() {
+        return index;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getText() {
+        return this.text;
     }
 
     public static StatusEnum getStatus(Integer status) {

@@ -24,11 +24,23 @@
 
 package cn.herodotus.eurynome.component.common.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.collect.ImmutableMap;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author gengwei.zheng
  * 登录类型:password-密码、mobile-手机号、email-邮箱、weixin-微信、weibo-微博、qq-等等
  */
-
+@ApiModel(description = "账号类型")
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum AccountType {
     /**
      * enum
@@ -39,19 +51,53 @@ public enum AccountType {
     WEIXIN(3, "微信"),
     QQ(4, "微信");
 
-    private Integer type;
-    private String name;
+    @ApiModelProperty(value = "索引")
+    private final Integer index;
+    @ApiModelProperty(value = "文字")
+    private final String text;
 
-    AccountType(Integer type, String name) {
-        this.type = type;
-        this.name = name;
+    private static final Map<Integer, AccountType> indexMap = new HashMap<>();
+    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+
+    static {
+        for (AccountType accountType : AccountType.values()) {
+            indexMap.put(accountType.getIndex(), accountType);
+            toJsonStruct.add(accountType.getIndex(),
+                    ImmutableMap.<String, Object>builder()
+                            .put("value", accountType.getIndex())
+                            .put("key", accountType.name())
+                            .put("text", accountType.getText())
+                            .build());
+        }
     }
 
-    public Integer getType() {
-        return this.type;
+    AccountType(Integer index, String text) {
+        this.index = index;
+        this.text = text;
     }
 
-    public String getName() {
-        return this.name;
+    /**
+     * 不加@JsonValue，转换的时候转换出完整的对象。
+     * 加了@JsonValue，只会显示相应的属性的值
+     *
+     * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
+     *
+     * @return Enum索引
+     */
+    @JsonValue
+    public Integer getIndex() {
+        return index;
+    }
+
+    public String getText() {
+        return this.text;
+    }
+
+    public static AccountType getAccountType(Integer index) {
+        return indexMap.get(index);
+    }
+
+    public static List<Map<String, Object>> getToJsonStruct() {
+        return toJsonStruct;
     }
 }
