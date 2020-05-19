@@ -38,9 +38,9 @@ public class SysOrganizationController extends BaseRestController<SysOrganizatio
 
     @ApiOperation(value = "获取全部单位", notes = "获取全部单位数据", consumes = "application/json")
     @GetMapping("/list")
+    @Override
     public Result<List<SysOrganization>> findAll() {
-        List<SysOrganization> sysOrganizations = sysOrganizationService.findAll();
-        return result(sysOrganizations);
+        return super.findAll();
     }
 
     @ApiOperation(value = "获取单位树", notes = "获取全部单位数据，转换为树形结构", consumes = "application/json")

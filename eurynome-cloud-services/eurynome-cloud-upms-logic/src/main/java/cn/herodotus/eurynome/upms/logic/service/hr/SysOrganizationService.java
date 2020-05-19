@@ -25,23 +25,17 @@
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.component.data.base.service.AbstractService;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysPosition;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysOrganizationRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 /**

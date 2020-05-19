@@ -21,10 +21,10 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
 
     @Override
     public E findById(ID id) {
-        E domain = getFromCache(String.valueOf(id));
+        E domain = readOneFromCache(String.valueOf(id));
         if (ObjectUtils.isEmpty(domain)) {
             domain = super.findById(id);
-            cache(domain);
+            writeToCache(domain);
         }
 
         log.debug("[Herodotus] |- AbstractCrudService Service findById.");
@@ -34,24 +34,24 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
     @Override
     public void deleteById(ID id) {
         super.deleteById(id);
-        remove(String.valueOf(id));
+        delete(String.valueOf(id));
         log.debug("[Herodotus] |- AbstractCrudService Service delete.");
     }
 
     @Override
     public E saveOrUpdate(E domain) {
         E savedDomain = super.saveAndFlush(domain);
-        cache(savedDomain);
+        writeToCache(savedDomain);
         log.debug("[Herodotus] |- AbstractCrudService Service saveOrUpdate.");
         return savedDomain;
     }
 
     @Override
     public Page<E> findByPage(int pageNumber, int pageSize, Sort.Direction direction, String... properties) {
-        Page<E> pages = getPageFromCache(pageNumber, pageSize);
+        Page<E> pages = readPageFromCache(pageNumber, pageSize);
         if (CollectionUtils.isEmpty(pages.getContent())) {
             pages = super.findByPage(pageNumber, pageSize, direction, properties);
-            cachePage(pages);
+            writeToCache(pages);
         }
 
         log.debug("[Herodotus] |- AbstractCrudService Service findByPage.");
@@ -60,10 +60,10 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
 
     @Override
     public List<E> findAll() {
-        List<E> domains = getFindAllFromCache();
+        List<E> domains = readFromCache();
         if (CollectionUtils.isEmpty(domains)) {
             domains = super.findAll();
-            cacheFindAll(domains);
+            writeToCache(domains);
         }
         log.debug("[Herodotus] |- AbstractCrudService Service findAll.");
         return domains;

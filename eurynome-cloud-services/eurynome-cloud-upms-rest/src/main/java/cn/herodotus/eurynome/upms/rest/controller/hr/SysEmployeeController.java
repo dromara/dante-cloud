@@ -10,13 +10,21 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
+/**
+ * <p>Description: SysEmployeeController </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/5/19 15:19
+ */
 @RestController
 @RequestMapping("/employee")
 @Api(tags = {"用户中心服务", "人员管理接口"})
@@ -39,8 +47,10 @@ public class SysEmployeeController extends BaseRestController<SysEmployee, Strin
             @ApiImplicitParam(name = "departmentId", required = true, value = "单位ID"),
     })
     @GetMapping("/list")
-    public Result<List<SysEmployee>> findAllByDepartmentId(@RequestParam("organizationId") String departmentId) {
-        List<SysEmployee> sysEmployees = sysEmployeeService.findAllByDepartmentId(departmentId);
-        return result(sysEmployees);
+    public Result<Map<String, Object>> findByPage(@RequestParam("pageNumber") Integer pageNumber,
+                                                  @RequestParam("pageSize") Integer pageSize,
+                                                  @RequestParam("departmentId") String departmentId) {
+        Page<SysEmployee> pages = sysEmployeeService.findAllByPageWithDepartmentId(pageNumber, pageSize, departmentId);
+        return result(pages);
     }
 }

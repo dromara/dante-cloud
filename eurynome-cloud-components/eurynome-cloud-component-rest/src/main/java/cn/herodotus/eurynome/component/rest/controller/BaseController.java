@@ -17,6 +17,10 @@ import java.util.Map;
  */
 public abstract class BaseController<E extends AbstractEntity, ID extends Serializable> extends AbstractController {
 
+    /**
+     * 获取Service
+     * @return Service
+     */
     public abstract BaseService<E, ID> getBaseService();
 
     public Result<Map<String, Object>> findByPage(Integer pageNumber, Integer pageSize) {

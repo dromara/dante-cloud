@@ -87,10 +87,10 @@ public class SysAuthorityService extends BaseService<SysAuthority, String> {
     }
 
     public List<SysAuthority> findAllByAuthorityType(AuthorityType authorityType) {
-        List<SysAuthority> sysAuthorities = getConditionalFromCache(authorityType);
+        List<SysAuthority> sysAuthorities = readFromCache(authorityType);
         if (CollectionUtils.isEmpty(sysAuthorities)) {
             sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
-            cacheConditional(sysAuthorities, authorityType);
+            writeToCache(sysAuthorities, authorityType);
         }
 
         return sysAuthorities;

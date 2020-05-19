@@ -87,6 +87,7 @@ public class SysUserController extends BaseController<SysUser, String> implement
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
     @GetMapping("/user")
+    @Override
     public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
@@ -98,6 +99,7 @@ public class SysUserController extends BaseController<SysUser, String> implement
             @ApiImplicitParam(name = "sysUser", required = true, value = "可转换为SysUser实体的json数据")
     })
     @PostMapping("/user")
+    @Override
     public Result<SysUser> saveOrUpdate(@RequestBody SysUser sysUser) {
         return super.saveOrUpdate(sysUser);
     }
@@ -107,6 +109,7 @@ public class SysUserController extends BaseController<SysUser, String> implement
             @ApiImplicitParam(name = "userId", required = true, value = "用户ID")
     })
     @DeleteMapping("/user")
+    @Override
     public Result<String> delete(@RequestBody String userId) {
         return super.delete(userId);
     }

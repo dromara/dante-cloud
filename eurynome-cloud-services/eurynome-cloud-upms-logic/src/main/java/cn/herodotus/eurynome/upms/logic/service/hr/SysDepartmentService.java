@@ -81,10 +81,10 @@ public class SysDepartmentService extends BaseService<SysDepartment, String> {
     }
 
     public List<SysDepartment> findAllByOrganizationId(String organizationId) {
-        List<SysDepartment> sysDepartments = getConditionalFromCache(organizationId);
+        List<SysDepartment> sysDepartments = readFromCache(organizationId);
         if (CollectionUtils.isEmpty(sysDepartments)) {
             sysDepartments = sysDepartmentRepository.findAllByOrganizationId(organizationId);
-            cacheConditional(sysDepartments, organizationId);
+            writeToCache(sysDepartments, organizationId);
         }
         return sysDepartments;
     }

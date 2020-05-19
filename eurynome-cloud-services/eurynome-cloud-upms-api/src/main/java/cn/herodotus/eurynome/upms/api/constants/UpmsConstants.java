@@ -3,6 +3,8 @@ package cn.herodotus.eurynome.upms.api.constants;
 import cn.herodotus.eurynome.component.common.enums.StatusEnum;
 import cn.herodotus.eurynome.component.security.oauth2.GrantType;
 import cn.herodotus.eurynome.component.common.enums.ApplicationType;
+import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
+import cn.herodotus.eurynome.upms.api.constants.enums.Identity;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
 
@@ -47,6 +49,8 @@ public class UpmsConstants {
     private static final List<Map<String, Object>> OAUTH2_GRANT_TYPE_ENUM = GrantType.getToJsonStruct();
     private static final List<Map<String, Object>> TECHNOLOGY_TYPE_ENUM = TechnologyType.getToJsonStruct();
     private static final List<Map<String, Object>> SUPPLIER_TYPE_ENUM = SupplierType.getToJsonStruct();
+    private static final List<Map<String, Object>> GENDER_ENUM = Gender.getToJsonStruct();
+    private static final List<Map<String, Object>> IDENTITY_ENUM = Identity.getToJsonStruct();
 
 
     public static Map<String, Object> getAllEnums() {
@@ -56,6 +60,8 @@ public class UpmsConstants {
         map.put("grantType", OAUTH2_GRANT_TYPE_ENUM);
         map.put("technologyType", TECHNOLOGY_TYPE_ENUM);
         map.put("supplierType", SUPPLIER_TYPE_ENUM);
+        map.put("gender", GENDER_ENUM);
+        map.put("identity", IDENTITY_ENUM);
         return map;
     }
 }

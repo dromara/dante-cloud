@@ -82,10 +82,10 @@ public class SysUserService extends BaseService<SysUser, String> {
     }
 
     public SysUser findSysUserByUserName(String userName) {
-        SysUser sysUser = getFromLinkedProperties(userName);
+        SysUser sysUser = readOneFromCacheByLink(userName);
         if (ObjectUtils.isEmpty(sysUser)) {
             sysUser = sysUserRepository.findByUserName(userName);
-            cache(sysUser);
+            writeToCache(sysUser);
         }
         log.debug("[Herodotus] |- SysUser Service findSysUserByUserName.");
         return sysUser;

@@ -39,6 +39,7 @@ public class SupplierController extends BaseRestController<Supplier, String> {
 
     @ApiOperation(value = "获取全部厂商数据", notes = "查询全部的厂商数据，用作列表选择根据目前观测该类数据不会太多，如果过多就需要修改查询方法和方式")
     @GetMapping("/list")
+    @Override
     public Result<List<Supplier>> findAll() {
         return super.findAll();
     }

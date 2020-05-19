@@ -1,10 +1,170 @@
 # Eurynome Cloud 部署说明
 
+主要版本说明：
+
+组件 | 版本 | 说明
+---|---|---
+Spring Boot | 2.2.7.RELEASE | 功能版本要与其它组件匹配
+Spring Cloud | Hoxton.SR4 | 
+Spring Cloud Alibaba | 2.2.0.RELEASE | 目前最新为2.2.1.RELEASE，但使用该版本会导致Oauth2 Token 中的active值被转换为String，出现验证不成功的错误。
+Spring Boot Admin | 2.2.1 | 
+Nacos | 1.2.1 |
+Sentinel | 1.7.1 |
+Skywalking | latest |
+Jetcache | 2.6.0 | 
+ELK | latest |
+logstash-logback-encoder | 6.3 | 使用该组件直接向ELK发送日志
+MySQL | 5.7.26 |
+PostgreSQL | 12.3-1 |
+Redis | 3.2.100 | 为了图省事，还是用的可以在Windows下直接安装版本老版本。使用最新版也可，只要支持lettuce就行。
+Docker Desktop for Window | latest
+
+Alibaba相关组件版本配关系，地址： [https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E][官网说明地址]
+
+**组件版本关系**
+
+Spring Cloud Alibaba Version | Sentinel Version | Nacos Version | RocketMQ Version | Dubbo Version | Seata Version
+---|---|---|---|---|---
+2.2.1.RELEASE | 1.7.1 | 1.2.1 | 4.4.0 | 2.7.6 | 1.1.0
+2.2.0.RELEASE | 1.7.1 | 1.1.4 | 4.4.0 | 2.7.4.1 | 1.0.0
+2.1.2.RELEASE or 2.0.2.RELEASE | 1.7.1 | 1.2.1 | 4.4.0 | 2.7.6 | 1.1.0
+2.1.1.RELEASE or 2.0.1.RELEASE or 1.5.1.RELEASE | 1.7.0 | 1.1.4 | 4.4.0 | 2.7.3 | 0.9.0
+2.1.0.RELEASE or 2.0.0.RELEASE or 1.5.0.RELEASE | 1.6.3 | 1.1.1 | 4.4.0 | 2.7.3 | 0.7.1
+
+**毕业版本依赖关系(推荐使用)**
+
+Spring Cloud Version | Spring Cloud Alibaba Version | Spring Boot Version
+---|---|---
+Spring Cloud Hoxton.SR3 | 2.2.1.RELEASE | 2.2.5.RELEASE
+Spring Cloud Hoxton.RELEASE | 2.2.0.RELEASE | 2.2.X.RELEASE
+Spring Cloud Greenwich | 2.1.2.RELEASE | 2.1.X.RELEASE
+Spring Cloud Finchley | 2.0.2.RELEASE | 2.0.X.RELEASE
+Spring Cloud Edgware | 1.5.1.RELEASE | 1.5.X.RELEASE
+
 ## （一）基础环境
 
 ### 1、MySQL安装
+
+> 目前Nacos还是依赖于Mysql数据，等Nacos不依赖于Mysql数据库以后，根据情况进行迁移，最好与现有存储一致，减少应用软件的使用减低复杂度
+（Nacos后续会解决对MySQL依赖问题， [https://nacos.io/zh-cn/docs/feature-list.html][官网说明] ）
+
+（1）、安装Mysql数据库
+
+正常安装即可，由于Mysql8和Mysql5版本的驱动差异比较大，建议安装Mysql5，可以减少不可预知的问题。
+
+（2）、创建Nacos使用的数据库
+
+即新建用户、创建数据库、分配权限等。不会的请Baidu。
+
+（3）、导入Nacos初始脚本。
+
+下载最新稳定版的Nacos压缩包，[https://github.com/alibaba/nacos/releases][下载地址]。解压后，在{NACOS_HOME}/conf目录下，找到nacos-mysql.sql导入到数据库中。
+
+> 在本工程的${project home}/eurynome-cloud/documents/scripts目录下也保存了一份，如果不是最新请重新下载。
+
+（4）、开放数据IP访问
+
+本地开发，安装的mysql服务，使用localhost可以连接就以足够。但是要使用Docker，必须通过ip地址才能访问。这就需要开放数据的IP访问。
+否则会出现Docker 容器发无法连接数据库的问题。
+
+进入mysql命令界面，输入：
+
+```mysql
+mysql> select host,user from mysql.user;
+```
+
+结果示例：
+
+host | user
+---|---
+localhost | root
+localhost | mysql.infoschema
+localhost | mysql.session
+localhost | mysql.sys
+
+> host字段的值是localhost，说明只允许本地访问
+
+设置允许任意IP访问，执行语句：
+
+```mysql
+mysql> update mysql.user set host = ‘%’ where user = ‘root’;
+
+mysql> flush privileges;
+```
+
 ### 2、PostgreSQL安装
+
+目前，主要服务都是采用PostgreSQL进行数据存储，所以需要安装PostgreSQL，如果你不是使用PostgreSQL可以跳过。
+
+（1）、安装PostgreSQL数据库
+
+正常安装即可。跟随安装的Wizard一步一步进行即可。
+
+> 注意：在window下面安装高版本的pg，注意在安装配置过程中，选择locale一项时，设置本地化语言，一般选择 C，而不要使用默认的Default Locale。否则试过几次都会失败。
+
+（2）、创建数据库
+
+主要脚本：
+
+```postgresql
+CREATE USER herodotus WITH PASSWORD 'herodotus';
+CREATE DATABASE herodotus OWNER herodotus;
+GRANT ALL PRIVILEGES ON DATABASE herodotus TO herodotus;
+```
+
+（3）、导入建表数据
+
+先导入Oauth2相关表即可，其它的表可以通过JPA自动创建。文件位置： ${project home}/eurynome-cloud/eurynome-cloud-platform/eurynome-cloud-platform-uaa/src/main/resources/sql/oauth2-schema-postgresql.sql
+
+（4）、开放IP访问
+
+如果想要使用Docker封装的服务，就需要开放PostgreSQL的IP访问。Windows环境，链接PostgreSQL是主机名填写“localhost”可以正常链接，使用IP地址不能进行链接
+
+在${PostgreSQL_HOME}/12/data目录下，找到postgresql.conf和pg_hba.conf。
+
+- 打开postgresql.conf，在59行，找到listen_addresses，修改为：
+
+```postgresql
+listen_addresses = '*'
+```
+
+> PostgreSQL 12 中，该项默认就为 ‘*’，所以可以不用修改
+
+- 打开pg_hba.conf，在最后增加：
+```postgresql
+host    all             all             192.168.0.0/16          trust
+```
+
+> 允许访问PostgreSQL服务器的客户端IP地址, 其中：192.168.0.0/16表示允许192.168.0.1-192.168.255.255网段访问。可根据实际情况调整
+
+- 重启数据服务
+
 ### 3、Redis安装
+
+（1）、安装Redis
+
+正常安装即可
+
+（2）、开放IP访问
+
+在redis安装目录下，找到redis.windows-service.conf
+
+- 将 56行 bind 127.0.0.1 注释掉，修改为
+
+```
+#bind 127.0.0.1
+```
+
+- 将 75 行 protected-mode参数改为no
+
+```
+protected-mode no
+```
+
+> 生产环境不建议这样，还是要指定具体IP安全一些
+
+- 重启服务
+
 ### 4、Nacos部署
 ### 5、Kafka安装
 ### 6、ELK部署
@@ -37,6 +197,10 @@ docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose
 ### 3、本地docker-compose部署
 
 > 注意：由于Skywalking采用elasticsearch进行数据存储，因此Skywalking运行之前，要保证elasticsearch已经正常运行。虽然docker-compose有depends_on属性，但是该属性只能解决容器启动的先后顺序问题，并不能实现某一个容器及容器内部所有应用启动成功之后再运行的问题。该问题目前还没有时间深入研究解决、
+
+如果是采用WSL2 的方式运行容器，那么在Linux中输入以下命令
+
+sudo sysctl vm.max_map_count=524288
 
 > 因此，这里将环境依赖的应用，拆分为两个docker-compose文件，先运行env.base.yml，待所有容器及内部服务成功运行之后，再运行env.skywalking.yml
 
@@ -145,3 +309,11 @@ docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose
 ```
 
 ### 3、Docker-compose部署
+
+[官网说明]: https://nacos.io/zh-cn/docs/feature-list.html）
+
+[]: https://nacos.io/zh-cn/docs/feature-list.html
+
+[下载地址]: https://github.com/alibaba/nacos/releases
+
+[]: https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E

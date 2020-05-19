@@ -6,13 +6,13 @@ INSERT INTO "dev_supplier"("supplier_id", "create_time", "ranking", "update_time
 -- ----------------------------
 -- Table data for oauth_microservices
 -- ----------------------------
-INSERT INTO "oauth_microservices"("service_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_code", "app_name", "app_secret", "app_type", "supplier_id") VALUES ('f8e3f156-2cf4-449c-926d-d1377fe82c86', '2020-05-05 17:14:49.183', 0, '2020-05-05 17:14:49.183', '', 't', 0, 1, 'eurynome-cloud-platform-uaa', '业务中台认证中心服务', '067e9d1c-12ed-4400-92ce-97281ddd71ff', 'SERVICE', '067fc1c8-f3e1-4f41-9c7c-0bd4f885bf9e');
-INSERT INTO "oauth_microservices"("service_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_code", "app_name", "app_secret", "app_type", "supplier_id") VALUES ('004b87d8-0a18-4e62-a35c-f2f123713349', '2020-05-06 11:24:06.377', 0, '2020-05-06 11:24:06.377', '', 't', 0, 1, 'eurynome-cloud-upms-rest', '业务中台用户中心服务', '2bda7d3a-dba1-45a4-b08e-cbd731a0418e', 'SERVICE', '067fc1c8-f3e1-4f41-9c7c-0bd4f885bf9e');
+INSERT INTO "oauth_microservices"("service_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_code", "app_name", "app_secret", "app_type", "supplier_id") VALUES ('f8e3f156-2cf4-449c-926d-d1377fe82c86', '2020-05-05 17:14:49.183', 0, '2020-05-05 17:14:49.183', '', 't', 0, 1, 'eurynome-cloud-platform-uaa', '业务中台认证中心服务', '067e9d1c-12ed-4400-92ce-97281ddd71ff', 1, '067fc1c8-f3e1-4f41-9c7c-0bd4f885bf9e');
+INSERT INTO "oauth_microservices"("service_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_code", "app_name", "app_secret", "app_type", "supplier_id") VALUES ('004b87d8-0a18-4e62-a35c-f2f123713349', '2020-05-06 11:24:06.377', 0, '2020-05-06 11:24:06.377', '', 't', 0, 1, 'eurynome-cloud-upms-rest', '业务中台用户中心服务', '2bda7d3a-dba1-45a4-b08e-cbd731a0418e', 1, '067fc1c8-f3e1-4f41-9c7c-0bd4f885bf9e');
 
 -- ----------------------------
 -- Table data for oauth_applications
 -- ----------------------------
-INSERT INTO "oauth_applications"("app_key", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_icon", "app_name", "app_name_en", "app_secret", "app_type", "app_technology", "website", "app_code") VALUES ('010e659a-4005-4610-98f6-00b822f4758e', '2020-04-21 19:00:19.197', 0, '2020-05-05 18:02:48.367', '', 't', 0, 1, NULL, '业务中台管理端', 'Eurynome', '04165a07-cffd-45cf-a20a-1c2a69f65fb1', 'WEB', 'NODE', 'http://localhost:8080', '');
+INSERT INTO "oauth_applications"("app_key", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_icon", "app_name", "app_name_en", "app_secret", "app_type", "app_tech", "website", "app_code") VALUES ('010e659a-4005-4610-98f6-00b822f4758e', '2020-04-21 19:00:19.197', 0, '2020-05-05 18:02:48.367', '', 't', 0, 1, NULL, '业务中台管理端', 'Eurynome', '04165a07-cffd-45cf-a20a-1c2a69f65fb1', 0, 3, 'http://localhost:8080', '');
 
 -- ----------------------------
 -- Table data for oauth_client_details

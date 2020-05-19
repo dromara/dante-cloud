@@ -27,7 +27,6 @@ package cn.herodotus.eurynome.upms.logic.service.hr;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysEmployeeRepository;
 import com.alicp.jetcache.Cache;
@@ -36,9 +35,12 @@ import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.persistence.criteria.*;
 import java.util.Set;
 
 /**
@@ -81,12 +83,21 @@ public class SysEmployeeService extends BaseService<SysEmployee, String> {
         return sysEmployeeRepository;
     }
 
-    public List<SysEmployee> findAllByDepartmentId(String departmentId) {
-        List<SysEmployee> sysEmployees = getConditionalFromCache(departmentId);
-        if (CollectionUtils.isEmpty(sysEmployees)) {
-            sysEmployees = sysEmployeeRepository.findAllByDepartmentId(departmentId);
-            cacheConditional(sysEmployees, departmentId);
+    public Page<SysEmployee> findAllByPageWithDepartmentId(int pageNumber, int pageSize, String departmentId) {
+        Page<SysEmployee> pages = readPageFromCache(pageNumber, pageSize, departmentId);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = findAllByPageAndParams(pageNumber, pageSize, departmentId);
+            writeToCache(pages, departmentId);
         }
-        return sysEmployees;
+        return pages;
+    }
+
+    private Page<SysEmployee> findAllByPageAndParams(int pageNumber, int pageSize, String departmentId) {
+        Specification<SysEmployee> specification = (Specification<SysEmployee>) (root, query, criteriaBuilder) -> {
+            Path<String> departmentIdPath = root.join("department").get("departmentId");
+            return criteriaBuilder.equal(departmentIdPath, departmentId);
+        };
+
+        return super.findAll(specification, PageRequest.of(pageNumber, pageSize));
     }
 }

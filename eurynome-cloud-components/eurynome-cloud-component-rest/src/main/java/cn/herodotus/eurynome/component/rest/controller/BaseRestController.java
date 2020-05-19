@@ -24,6 +24,7 @@ public abstract class BaseRestController<E extends AbstractEntity, ID extends Se
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
     @GetMapping
+    @Override
     public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("pageSize") Integer pageSize) {
@@ -35,9 +36,9 @@ public abstract class BaseRestController<E extends AbstractEntity, ID extends Se
             @ApiImplicitParam(name = "entity", required = true, value = "可转换为实体的json数据", paramType = "JSON")
     })
     @PostMapping
+    @Override
     public Result<E> saveOrUpdate(@RequestBody E domain) {
-        E entity = getBaseService().saveOrUpdate(domain);
-        return result(entity);
+        return super.saveOrUpdate(domain);
     }
 
     @ApiOperation(value = "删除数据", notes = "根据实体ID删除数据，以及相关联的关联数据", consumes = "application/json")
@@ -45,9 +46,8 @@ public abstract class BaseRestController<E extends AbstractEntity, ID extends Se
             @ApiImplicitParam(name = "id", required = true, value = "实体ID，@Id注解对应的实体属性")
     })
     @DeleteMapping
+    @Override
     public Result<String> delete(@RequestBody ID id) {
-        Result<String> result = result(id);
-        getBaseService().deleteById(id);
-        return result;
+        return super.delete(id);
     }
 }
