@@ -96,9 +96,6 @@
         <!-- 开发 -->
         <profile>
             <id>development</id>
-            <activation>
-                <!--默认激活配置-->
-            </activation>
             <properties>
                 <!--当前环境-->
                 <profile.name>development</profile.name>

@@ -34,7 +34,7 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
     @Override
     public void deleteById(ID id) {
         super.deleteById(id);
-        delete(String.valueOf(id));
+        deleteFromCache(String.valueOf(id));
         log.debug("[Herodotus] |- AbstractCrudService Service delete.");
     }
 
@@ -44,6 +44,18 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
         writeToCache(savedDomain);
         log.debug("[Herodotus] |- AbstractCrudService Service saveOrUpdate.");
         return savedDomain;
+    }
+
+    @Override
+    public Page<E> findByPage(int pageNumber, int pageSize) {
+        Page<E> pages = readPageFromCache(pageNumber, pageSize);
+        if (CollectionUtils.isEmpty(pages.getContent())) {
+            pages = super.findByPage(pageNumber, pageSize);
+            writeToCache(pages);
+        }
+
+        log.debug("[Herodotus] |- AbstractCrudService Service findByPage.");
+        return pages;
     }
 
     @Override

@@ -42,7 +42,6 @@ public abstract class AbstractCacheService<E extends AbstractEntity, ID extends 
 
     private static final String CACHE_NAME_ALL = "all";
     private static final String CACHE_NAME_DELETE_INDEX_LINK = "delete:link";
-    private static final String CACHE_NAME_DELETE_INDEX_REVERSE = "delete:reverse";
     private static final String CACHE_NAME_CLEAN_INDEX = "delete:clean";
     private static final String CACHE_NAME_PREFIX_PAGE = "page:";
     private static final String CACHE_NAME_PAGE_TOTAL = "total";
@@ -175,10 +174,12 @@ public abstract class AbstractCacheService<E extends AbstractEntity, ID extends 
         Assert.notNull(cacheName, "CacheName must not be null");
         if (isIndexCacheConfigured()) {
             Set<String> indexes = getIndexCache().get(cacheName);
-            return instanceIndexCacheValue(indexes);
-        } else {
-            return new LinkedHashSet<>();
+            if(CollectionUtils.isNotEmpty(indexes)) {
+                return instanceIndexCacheValue(indexes);
+            }
         }
+
+        return new LinkedHashSet<>();
     }
 
     /**
@@ -416,7 +417,10 @@ public abstract class AbstractCacheService<E extends AbstractEntity, ID extends 
      */
     public E readOneFromCacheByLink(String domainLinkProperty) {
         String link = getOneValueFromIndexCache(domainLinkProperty);
-        return readOneFromCache(link);
+        if(StringUtils.isNotBlank(link)) {
+            return readOneFromCache(link);
+        }
+        return null;
     }
 
     /**
@@ -488,7 +492,7 @@ public abstract class AbstractCacheService<E extends AbstractEntity, ID extends 
      * 删除一个实体
      * @param id 实体ID
      */
-    public void delete(String id) {
+    public void deleteFromCache(String id) {
         removeFromCache(id);
         clearIndexCache();
     }
