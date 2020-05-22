@@ -180,8 +180,8 @@
         <module>dependencies</module>
         <module>eurynome-cloud-components</module>
         <module>eurynome-cloud-platform</module>
-        <module>eurynome-cloud-services</module>
         <module>packages</module>
+        <module>services</module>
     </modules>
 
 </project>

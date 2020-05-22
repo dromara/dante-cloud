@@ -3,19 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>eurynome-cloud</artifactId>
+        <artifactId>services</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>eurynome-cloud-services</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>eurynome-cloud-upms-api</module>
-        <module>eurynome-cloud-upms-logic</module>
-        <module>eurynome-cloud-upms-rest</module>
-        <module>eurynome-cloud-bpmn-logic</module>
-        <module>eurynome-cloud-bpmn-starter</module>
-    </modules>
+    <artifactId>eurynome-cloud-bpmn-starter</artifactId>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-bpmn-logic</artifactId>
+        </dependency>
+    </dependencies>
 </project>
