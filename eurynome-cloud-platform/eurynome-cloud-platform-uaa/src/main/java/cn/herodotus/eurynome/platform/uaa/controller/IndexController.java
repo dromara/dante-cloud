@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.uaa.controller;
 
-import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
+import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.platform.uaa.service.OauthClientDetailsService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;

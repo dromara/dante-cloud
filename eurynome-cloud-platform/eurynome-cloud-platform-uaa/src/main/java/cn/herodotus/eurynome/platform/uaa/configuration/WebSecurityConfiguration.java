@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
-import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.platform.uaa.service.OauthUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

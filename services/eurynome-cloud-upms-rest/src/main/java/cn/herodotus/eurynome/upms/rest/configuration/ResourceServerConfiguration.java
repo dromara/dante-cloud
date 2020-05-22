@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.configuration;
 
-import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.component.security.web.access.HerodotusAccessDeniedHandler;
-import cn.herodotus.eurynome.component.security.web.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.web.access.HerodotusAccessDeniedHandler;
+import cn.herodotus.eurynome.security.web.HerodotusAuthenticationEntryPoint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;

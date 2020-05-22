@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>eurynome-cloud-platform-starter</module>
         <module>eurynome-cloud-platform-gateway</module>
         <module>eurynome-cloud-platform-uaa</module>
         <module>eurynome-cloud-platform-management</module>

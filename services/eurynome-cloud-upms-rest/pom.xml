@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-platform-starter</artifactId>
+            <artifactId>eurynome-cloud-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

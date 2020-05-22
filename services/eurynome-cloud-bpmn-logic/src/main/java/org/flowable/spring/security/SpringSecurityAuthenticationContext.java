@@ -1,6 +1,6 @@
 package org.flowable.spring.security;
 
-import cn.herodotus.eurynome.component.security.utils.SecurityUtils;
+import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.common.engine.api.identity.AuthenticationContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

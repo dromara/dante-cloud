@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.platform.uaa.service;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.component.security.core.userdetails.HerodotusUserDetails;
-import cn.herodotus.eurynome.component.security.utils.ThreadLocalContextUtils;
+import cn.herodotus.eurynome.security.core.userdetails.HerodotusUserDetails;
+import cn.herodotus.eurynome.security.utils.ThreadLocalContextUtils;
 import cn.herodotus.eurynome.upms.api.service.remote.RemoteSysUserService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;

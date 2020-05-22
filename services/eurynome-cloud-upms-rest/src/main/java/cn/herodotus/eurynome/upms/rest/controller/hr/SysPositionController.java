@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.eurynome.data.base.service.BaseService;
-import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
+import cn.herodotus.eurynome.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysPosition;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysPositionService;
 import io.swagger.annotations.Api;

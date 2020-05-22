@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-component-security</artifactId>
+            <artifactId>eurynome-cloud-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.flowable</groupId>

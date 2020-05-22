@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.platform.uaa.service;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
-import cn.herodotus.eurynome.component.security.oauth2.provider.HerodotusClientDetails;
+import cn.herodotus.eurynome.security.oauth2.provider.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.service.remote.RemoteOauthClientDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;

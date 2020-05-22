@@ -1,9 +1,9 @@
 package cn.herodotus.eurynome.platform.uaa.configuration;
 
-import cn.herodotus.eurynome.component.security.oauth2.provider.error.HerodotusWebResponseExceptionTranslator;
-import cn.herodotus.eurynome.component.security.oauth2.provider.token.HerodotusJwtTokenEnhancer;
-import cn.herodotus.eurynome.component.security.oauth2.provider.token.HerodotusUserAuthenticationConverter;
-import cn.herodotus.eurynome.component.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.oauth2.provider.error.HerodotusWebResponseExceptionTranslator;
+import cn.herodotus.eurynome.security.oauth2.provider.token.HerodotusJwtTokenEnhancer;
+import cn.herodotus.eurynome.security.oauth2.provider.token.HerodotusUserAuthenticationConverter;
+import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.platform.uaa.service.OauthClientDetailsService;
 import cn.herodotus.eurynome.platform.uaa.service.OauthUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
