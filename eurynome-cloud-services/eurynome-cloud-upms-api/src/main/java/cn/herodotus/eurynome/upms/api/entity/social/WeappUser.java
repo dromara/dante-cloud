@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.social;
 
-import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

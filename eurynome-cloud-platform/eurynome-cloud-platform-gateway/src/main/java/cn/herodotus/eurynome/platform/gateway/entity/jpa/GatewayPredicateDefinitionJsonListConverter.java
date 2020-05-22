@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.gateway.entity.jpa;
 
-import cn.herodotus.eurynome.component.data.jpa.BaseJpaListJsonConverter;
+import cn.herodotus.eurynome.data.jpa.BaseJpaListJsonConverter;
 import cn.herodotus.eurynome.platform.gateway.entity.GatewayPredicateDefinition;
 
 import javax.persistence.Converter;

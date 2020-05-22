@@ -2,8 +2,8 @@ package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.ApplicationType;
-import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.operation.domain.Config;
 import cn.herodotus.eurynome.operation.nacos.ConfigContentFactory;
 import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;

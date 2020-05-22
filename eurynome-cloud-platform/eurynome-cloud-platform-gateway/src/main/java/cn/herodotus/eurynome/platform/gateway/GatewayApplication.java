@@ -1,7 +1,6 @@
 package cn.herodotus.eurynome.platform.gateway;
 
-import cn.herodotus.eurynome.component.data.annotation.EnableHerodotusData;
-import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.upms.rest.controller.hr;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.common.domain.TreeNode;
 import cn.herodotus.eurynome.common.utils.TreeUtils;
-import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysDepartmentService;

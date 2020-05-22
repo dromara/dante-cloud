@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-component-data</artifactId>
+            <artifactId>eurynome-cloud-data</artifactId>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>

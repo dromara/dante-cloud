@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysEmployeeRepository;

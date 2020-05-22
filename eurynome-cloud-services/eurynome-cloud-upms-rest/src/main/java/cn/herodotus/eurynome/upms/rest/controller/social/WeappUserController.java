@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.rest.controller.social;
 
-import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.social.WeappUser;
 import cn.herodotus.eurynome.upms.logic.service.social.WeappUserService;

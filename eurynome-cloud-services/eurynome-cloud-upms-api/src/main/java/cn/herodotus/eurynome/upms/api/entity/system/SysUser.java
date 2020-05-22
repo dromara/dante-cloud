@@ -8,7 +8,7 @@
  */
 package cn.herodotus.eurynome.upms.api.entity.system;
 
-import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Fetch;

@@ -40,6 +40,7 @@
         <module>eurynome-cloud-common</module>
         <module>eurynome-cloud-operation</module>
         <module>eurynome-cloud-message</module>
+        <module>eurynome-cloud-data</module>
     </modules>
 
 

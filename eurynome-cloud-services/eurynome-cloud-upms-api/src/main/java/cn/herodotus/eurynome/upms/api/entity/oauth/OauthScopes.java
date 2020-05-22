@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

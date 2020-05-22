@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.platform.autoconfigure;
 
 import cn.herodotus.eurynome.common.definition.RequestMappingStore;
-import cn.herodotus.eurynome.component.data.annotation.EnableHerodotusData;
+import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.message.kafka.KafkaProducer;
 import cn.herodotus.eurynome.message.kafka.KafkaRequestMappingStore;
 import cn.herodotus.eurynome.component.rest.annotation.EnableHerodotusRest;

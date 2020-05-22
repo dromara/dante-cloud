@@ -28,7 +28,7 @@ import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.common.domain.TreeNode;
 import cn.herodotus.eurynome.common.enums.AuthorityType;
 import cn.herodotus.eurynome.common.utils.TreeUtils;
-import cn.herodotus.eurynome.component.data.base.service.BaseService;
+import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
