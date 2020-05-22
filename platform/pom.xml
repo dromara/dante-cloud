@@ -35,6 +35,9 @@
 
     <artifactId>platform</artifactId>
     <packaging>pom</packaging>
+
+    <name>eurynome-cloud-platform</name>
+
     <modules>
         <module>eurynome-cloud-gateway</module>
         <module>eurynome-cloud-uaa</module>

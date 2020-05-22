@@ -16,6 +16,8 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
+    <name>eurynome-cloud-dependencies</name>
+
     <properties>
         <!--Spring 家族-->
         <spring-cloud-dependencies.version>Hoxton.SR4</spring-cloud-dependencies.version>

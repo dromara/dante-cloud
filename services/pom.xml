@@ -36,6 +36,8 @@
     <artifactId>services</artifactId>
     <packaging>pom</packaging>
 
+    <name>eurynome-cloud-services</name>
+
     <modules>
         <module>eurynome-cloud-upms-api</module>
         <module>eurynome-cloud-upms-logic</module>
