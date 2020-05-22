@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.autoconfigure;
 
-import cn.herodotus.eurynome.component.common.utils.JacksonUtils;
+import cn.herodotus.eurynome.common.utils.JacksonUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;

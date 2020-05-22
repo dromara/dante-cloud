@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.service.fegin;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

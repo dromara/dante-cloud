@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.data.base.entity;
 
-import cn.herodotus.eurynome.component.common.enums.ApplicationType;
+import cn.herodotus.eurynome.common.enums.ApplicationType;
 import cn.hutool.core.util.IdUtil;
 
 import javax.persistence.Column;

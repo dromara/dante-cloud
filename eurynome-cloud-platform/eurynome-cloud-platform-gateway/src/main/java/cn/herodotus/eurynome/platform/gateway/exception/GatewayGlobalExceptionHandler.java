@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.platform.gateway.exception;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.common.enums.ResultStatus;
-import cn.herodotus.eurynome.component.common.exception.GlobalExceptionHandler;
+import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.common.enums.ResultStatus;
+import cn.herodotus.eurynome.common.exception.GlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.cloud.gateway.support.NotFoundException;

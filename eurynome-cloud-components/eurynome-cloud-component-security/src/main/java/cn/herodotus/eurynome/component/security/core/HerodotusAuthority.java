@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.core;
 
-import cn.herodotus.eurynome.component.common.enums.AuthorityType;
+import cn.herodotus.eurynome.common.enums.AuthorityType;
 import org.springframework.security.core.GrantedAuthority;
 
 /**

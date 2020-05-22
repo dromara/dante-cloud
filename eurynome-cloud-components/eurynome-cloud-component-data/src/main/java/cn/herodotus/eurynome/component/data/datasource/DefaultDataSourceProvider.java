@@ -61,7 +61,7 @@ public class DefaultDataSourceProvider implements DataSourceProvider {
                 poolName = item.getKey();
             }
             dataSourceProperty.setPoolName(poolName);
-            dataSourceMap.put(poolName, dataSourceCreator.createDataSource(dataSourceProperty));
+//            dataSourceMap.put(poolName, dataSourceCreator.createDataSource(dataSourceProperty));
         }
         return dataSourceMap;
     }

@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.oauth2;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.ArrayList;

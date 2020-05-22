@@ -1,11 +1,10 @@
 package cn.herodotus.eurynome.component.rest.feign;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.common.exception.GlobalExceptionHandler;
+import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.common.exception.GlobalExceptionHandler;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ClassUtils;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 

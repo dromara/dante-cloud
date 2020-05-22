@@ -24,10 +24,10 @@
 
 package cn.herodotus.eurynome.component.rest.annotation;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
-import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.common.definition.RequestMappingStore;
+import cn.herodotus.eurynome.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.component.rest.enums.Architecture;
 import cn.herodotus.eurynome.component.rest.properties.ApplicationProperties;
 import io.swagger.annotations.ApiOperation;

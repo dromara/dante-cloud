@@ -24,9 +24,9 @@
 
 package cn.herodotus.eurynome.component.security.utils;
 
-import cn.herodotus.eurynome.component.common.utils.BeanUtils;
+import cn.herodotus.eurynome.common.utils.BeanUtils;
 import cn.hutool.core.bean.BeanUtil;
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.security.core.HerodotusRole;
 import cn.herodotus.eurynome.component.security.core.userdetails.HerodotusUserDetails;
 import org.apache.commons.collections4.CollectionUtils;

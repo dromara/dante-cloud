@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.gateway.utils;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import com.alibaba.fastjson.JSON;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;

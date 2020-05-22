@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.management.nacos;
 
-import cn.herodotus.eurynome.component.common.utils.JacksonYamlUtils;
+import cn.herodotus.eurynome.common.utils.JacksonYamlUtils;
 import cn.herodotus.eurynome.component.management.yaml.domain.OauthPropertyContent;
 
 /**

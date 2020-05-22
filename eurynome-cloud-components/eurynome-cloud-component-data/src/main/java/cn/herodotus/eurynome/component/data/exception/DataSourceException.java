@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.data.exception;
 
-import cn.herodotus.eurynome.component.common.exception.PlatformException;
+import cn.herodotus.eurynome.common.exception.PlatformException;
 
 /**
  * <p>Project: eurynome-cloud </p>

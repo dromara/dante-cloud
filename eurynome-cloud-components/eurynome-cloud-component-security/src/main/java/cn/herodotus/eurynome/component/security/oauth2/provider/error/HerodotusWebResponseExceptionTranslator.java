@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.oauth2.provider.error;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.component.security.authentication.SecurityGlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

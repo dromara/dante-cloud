@@ -24,12 +24,10 @@
 
 package cn.herodotus.eurynome.component.security.authentication;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.common.enums.ResultStatus;
-import cn.herodotus.eurynome.component.common.exception.GlobalExceptionHandler;
-import cn.herodotus.eurynome.component.common.exception.PlatformException;
+import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.common.exception.GlobalExceptionHandler;
+import cn.herodotus.eurynome.common.exception.PlatformException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
@@ -40,7 +38,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 
 /**
  * <p>Description: 统一异常处理器 </p>

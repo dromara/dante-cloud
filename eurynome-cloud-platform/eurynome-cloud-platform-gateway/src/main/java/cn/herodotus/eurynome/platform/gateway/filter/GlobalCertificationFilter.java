@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.platform.gateway.filter;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.common.enums.ResultStatus;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.common.enums.ResultStatus;
 import cn.herodotus.eurynome.platform.gateway.properties.GatewaySecurityProperties;
 import cn.herodotus.eurynome.platform.gateway.utils.WebFluxUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;

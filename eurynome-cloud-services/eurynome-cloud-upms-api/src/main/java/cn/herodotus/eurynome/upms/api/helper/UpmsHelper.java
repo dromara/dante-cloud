@@ -1,9 +1,9 @@
 package cn.herodotus.eurynome.upms.api.helper;
 
 
-import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
-import cn.herodotus.eurynome.component.common.enums.StatusEnum;
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.common.enums.StatusEnum;
 import cn.herodotus.eurynome.component.security.core.HerodotusAuthority;
 import cn.herodotus.eurynome.component.security.oauth2.provider.HerodotusClientDetails;
 import cn.herodotus.eurynome.component.security.core.HerodotusRole;

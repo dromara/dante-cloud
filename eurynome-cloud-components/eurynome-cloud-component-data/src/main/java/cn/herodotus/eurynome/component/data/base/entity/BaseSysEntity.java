@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.data.base.entity;
 
-import cn.herodotus.eurynome.component.common.enums.StatusEnum;
+import cn.herodotus.eurynome.common.enums.StatusEnum;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;

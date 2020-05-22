@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.platform.gateway.filter;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.platform.gateway.properties.GatewaySecurityProperties;
 import cn.hutool.core.lang.UUID;
 import cn.hutool.crypto.SecureUtil;

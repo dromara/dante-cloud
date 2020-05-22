@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.data.base.service;
 
-import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
 import cn.herodotus.eurynome.component.data.base.entity.Entity;
 import com.alicp.jetcache.Cache;

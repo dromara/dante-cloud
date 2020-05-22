@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.bpmn.logic.service;
 
 import cn.herodotus.eurynome.bpmn.logic.constants.ProcessConstants;
-import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

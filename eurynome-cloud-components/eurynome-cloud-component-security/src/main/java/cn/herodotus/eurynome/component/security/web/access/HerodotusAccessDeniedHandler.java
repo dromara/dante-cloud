@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.component.security.web.access;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.component.security.authentication.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.component.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.component.common.enums.StatusEnum;
+import cn.herodotus.eurynome.common.enums.StatusEnum;
 import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
 import com.alibaba.fastjson.JSON;
 import org.hibernate.annotations.GenericGenerator;

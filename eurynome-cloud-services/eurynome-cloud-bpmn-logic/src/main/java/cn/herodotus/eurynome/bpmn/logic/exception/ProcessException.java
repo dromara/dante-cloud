@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.bpmn.logic.exception;
 
-import cn.herodotus.eurynome.component.common.exception.PlatformException;
+import cn.herodotus.eurynome.common.exception.PlatformException;
 
 /**
  * <p> Description : TODO </p>

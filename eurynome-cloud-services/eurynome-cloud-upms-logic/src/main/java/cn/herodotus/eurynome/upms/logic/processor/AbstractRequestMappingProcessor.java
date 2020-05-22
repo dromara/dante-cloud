@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.upms.logic.processor;
 
-import cn.herodotus.eurynome.component.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;

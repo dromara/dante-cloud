@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.management.nacos;
 
-import cn.herodotus.eurynome.component.common.exception.PlatformException;
+import cn.herodotus.eurynome.common.exception.PlatformException;
 import cn.herodotus.eurynome.component.management.domain.Config;
 import cn.herodotus.eurynome.component.management.properties.ManagementProperties;
 import cn.hutool.core.bean.BeanUtil;

@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**

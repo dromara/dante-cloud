@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.component.rest.interceptor;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.common.enums.ResultStatus;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.common.enums.ResultStatus;
 import cn.herodotus.eurynome.component.rest.security.ThroughGatewayTrace;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;

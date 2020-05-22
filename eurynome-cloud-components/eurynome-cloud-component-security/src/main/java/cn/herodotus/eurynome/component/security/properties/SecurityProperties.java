@@ -24,10 +24,10 @@
 
 package cn.herodotus.eurynome.component.security.properties;
 
-import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaFont;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaLetterType;
-import cn.herodotus.eurynome.component.common.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.common.enums.captcha.CaptchaFont;
+import cn.herodotus.eurynome.common.enums.captcha.CaptchaLetterType;
+import cn.herodotus.eurynome.common.enums.captcha.CaptchaType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

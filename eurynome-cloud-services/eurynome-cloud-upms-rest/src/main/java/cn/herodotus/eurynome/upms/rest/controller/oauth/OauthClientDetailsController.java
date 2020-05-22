@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseController;
 import cn.herodotus.eurynome.component.security.oauth2.provider.HerodotusClientDetails;

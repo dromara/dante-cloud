@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.rest.controller;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.component.data.base.entity.AbstractEntity;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

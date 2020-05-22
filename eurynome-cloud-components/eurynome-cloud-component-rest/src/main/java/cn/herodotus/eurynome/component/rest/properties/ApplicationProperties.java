@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.component.rest.properties;
 
 import cn.herodotus.eurynome.component.rest.enums.Architecture;
-import cn.herodotus.eurynome.component.common.utils.TreeUtils;
+import cn.herodotus.eurynome.common.utils.TreeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

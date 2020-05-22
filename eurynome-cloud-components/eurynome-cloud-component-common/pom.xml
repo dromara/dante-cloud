@@ -79,5 +79,9 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-common</artifactId>
+        </dependency>
     </dependencies>
 </project>

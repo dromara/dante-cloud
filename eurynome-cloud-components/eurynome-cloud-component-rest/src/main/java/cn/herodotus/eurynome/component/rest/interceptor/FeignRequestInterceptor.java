@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.rest.interceptor;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.rest.security.ThroughGatewayTrace;
 import cn.hutool.extra.servlet.ServletUtil;
 import feign.RequestInterceptor;
@@ -12,7 +12,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Iterator;
 import java.util.Map;
 
 /**

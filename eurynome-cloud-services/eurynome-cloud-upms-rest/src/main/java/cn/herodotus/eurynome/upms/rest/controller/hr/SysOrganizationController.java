@@ -1,12 +1,11 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
-import cn.herodotus.eurynome.component.common.domain.TreeNode;
-import cn.herodotus.eurynome.component.common.utils.TreeUtils;
+import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.TreeNode;
+import cn.herodotus.eurynome.common.utils.TreeUtils;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.component.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
-import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysOrganizationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

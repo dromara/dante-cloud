@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.component.management.configuration;
 
-import cn.herodotus.eurynome.component.common.definition.RequestMappingStore;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import cn.herodotus.eurynome.component.management.properties.ManagementProperties;
 import lombok.extern.slf4j.Slf4j;

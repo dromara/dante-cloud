@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.management.service;
 
-import cn.herodotus.eurynome.component.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.component.management.domain.Config;
 import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
 import com.alibaba.nacos.client.config.impl.LocalConfigInfoProcessor;

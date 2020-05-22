@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
-import cn.herodotus.eurynome.component.common.enums.AuthorityType;
+import cn.herodotus.eurynome.common.enums.AuthorityType;
 import cn.herodotus.eurynome.component.data.base.entity.BaseSysEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

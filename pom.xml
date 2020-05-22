@@ -13,9 +13,9 @@
 
     <parent>
         <groupId>cn.herodotus.eurynome</groupId>
-        <artifactId>eurynome-cloud-dependencies</artifactId>
+        <artifactId>dependencies</artifactId>
         <version>1.0.0</version>
-        <relativePath>eurynome-cloud-dependencies/pom.xml</relativePath>
+        <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <properties>
@@ -86,6 +86,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-bpmn-logic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
@@ -172,10 +177,11 @@
     </profiles>
 
     <modules>
-        <module>eurynome-cloud-dependencies</module>
+        <module>dependencies</module>
         <module>eurynome-cloud-components</module>
         <module>eurynome-cloud-platform</module>
         <module>eurynome-cloud-services</module>
+        <module>packages</module>
     </modules>
 
 </project>

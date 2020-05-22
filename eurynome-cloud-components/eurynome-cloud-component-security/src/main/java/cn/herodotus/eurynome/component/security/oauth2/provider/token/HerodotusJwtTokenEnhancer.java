@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.component.security.oauth2.provider.token;
 
-import cn.herodotus.eurynome.component.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.component.security.core.userdetails.HerodotusUserDetails;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;

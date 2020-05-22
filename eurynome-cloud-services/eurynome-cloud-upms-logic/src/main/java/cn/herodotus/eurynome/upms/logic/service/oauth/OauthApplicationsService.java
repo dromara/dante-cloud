@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
-import cn.herodotus.eurynome.component.common.enums.ApplicationType;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;

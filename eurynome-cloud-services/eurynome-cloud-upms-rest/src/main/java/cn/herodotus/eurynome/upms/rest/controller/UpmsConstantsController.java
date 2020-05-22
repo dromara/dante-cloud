@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.rest.controller;
 
-import cn.herodotus.eurynome.component.common.domain.Result;
+import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections4.MapUtils;
