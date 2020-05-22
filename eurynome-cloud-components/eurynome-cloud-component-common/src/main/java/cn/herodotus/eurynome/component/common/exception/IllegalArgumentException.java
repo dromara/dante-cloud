@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.component.common.exception;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 非法参数错误 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/2/17 11:17

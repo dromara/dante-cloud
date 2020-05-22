@@ -30,6 +30,9 @@ package cn.herodotus.eurynome.component.common.jackson;
  */
 public enum SerializerFeature {
 
+    /**
+     * SerializerFeature enum
+     */
     WriteNullListAsEmpty,
     WriteNullStringAsEmpty,
     WriteNullNumberAsZero,
