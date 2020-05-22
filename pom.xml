@@ -167,9 +167,9 @@
 
     <modules>
         <module>dependencies</module>
-        <module>eurynome-cloud-platform</module>
         <module>packages</module>
         <module>services</module>
+        <module>platform</module>
     </modules>
 
 </project>
