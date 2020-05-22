@@ -4,9 +4,9 @@ import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.ApplicationType;
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
-import cn.herodotus.eurynome.component.management.domain.Config;
-import cn.herodotus.eurynome.component.management.nacos.ConfigContentFactory;
-import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
+import cn.herodotus.eurynome.operation.domain.Config;
+import cn.herodotus.eurynome.operation.nacos.ConfigContentFactory;
+import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthMicroservicesRepository;
@@ -46,7 +46,7 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;
     @Autowired
-    private NacosConfig nacosConfig;
+    private HerodotusNacosConfig herodotusNacosConfig;
 
     @Override
     public Cache<String, OauthMicroservices> getCache() {
@@ -106,7 +106,7 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
 
     private boolean deleteConfig(OauthMicroservices oauthMicroservices) {
         Config config = convertOauthMicroservicesToConfig(oauthMicroservices);
-        return nacosConfig.removeConfig(config);
+        return herodotusNacosConfig.removeConfig(config);
     }
 
     public boolean publishOrUpdateConfig(String clientId) {
@@ -116,6 +116,6 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
 
     private boolean publishOrUpdateConfig(OauthMicroservices oauthMicroservices) {
         Config config = convertOauthMicroservicesToConfig(oauthMicroservices);
-        return nacosConfig.publishOrUpdateConfig(config);
+        return herodotusNacosConfig.publishOrUpdateConfig(config);
     }
 }

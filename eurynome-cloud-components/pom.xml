@@ -13,12 +13,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>eurynome-cloud-component-common</module>
         <module>eurynome-cloud-component-data</module>
         <module>eurynome-cloud-component-rest</module>
         <module>eurynome-cloud-component-security</module>
-        <module>eurynome-cloud-component-message</module>
-        <module>eurynome-cloud-component-management</module>
     </modules>
 
 

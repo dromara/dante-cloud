@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.upms.logic.configuration;
 
+import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
 import cn.herodotus.eurynome.upms.api.configuration.UpmsApiConfiguration;
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
@@ -96,6 +97,7 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.development"
 })
 @EnableCreateCacheAnnotation
+@EnableHerodotusManagement
 public class UpmsLogicConfiguration {
     @PostConstruct
     public void postConstruct() {

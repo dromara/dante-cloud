@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.component.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.component.data.base.service.BaseService;
-import cn.herodotus.eurynome.component.management.nacos.NacosConfig;
+import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
@@ -39,7 +39,7 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
     @Autowired
     private OauthClientDetailsRepository oauthClientDetailsRepository;
     @Autowired
-    private NacosConfig nacosConfig;
+    private HerodotusNacosConfig herodotusNacosConfig;
 
     @Override
     public Cache<String, OauthClientDetails> getCache() {

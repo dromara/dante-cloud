@@ -1,10 +1,9 @@
 package cn.herodotus.eurynome.component.data.configuration;
 
-import cn.herodotus.eurynome.component.management.annotation.EnableHerodotusManagement;
+import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 

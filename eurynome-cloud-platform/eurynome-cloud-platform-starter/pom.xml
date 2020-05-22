@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-component-message</artifactId>
+            <artifactId>eurynome-cloud-message</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
