@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.data.annotation;
 
-import cn.herodotus.eurynome.data.configuration.HerodotusDataConfiguration;
+import cn.herodotus.eurynome.data.configuration.DataConfiguration;
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -16,8 +16,11 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(HerodotusDataConfiguration.class)
 @EnableJpaAuditing
+@EnableRedisStorage
 @EnableCreateCacheAnnotation
+@EnableDynamicDataSource
+@EnableLogCollection
+@Import(DataConfiguration.class)
 public @interface EnableHerodotusData {
 }

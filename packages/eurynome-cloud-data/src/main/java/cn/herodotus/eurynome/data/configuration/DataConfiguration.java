@@ -1,8 +1,6 @@
 package cn.herodotus.eurynome.data.configuration;
 
-import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -33,11 +31,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.data.configuration"
-})
-@EnableHerodotusManagement
-public class HerodotusDataConfiguration {
+public class DataConfiguration {
 
     @PostConstruct
     public void postConstruct() {

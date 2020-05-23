@@ -62,10 +62,10 @@ import javax.annotation.PostConstruct;
  * @date : 2020/2/3 17:13
  */
 @Slf4j
+@Configuration
 @Import({
         UpmsApiConfiguration.class
 })
-@Configuration
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.upms.logic.configuration",
         "cn.herodotus.eurynome.upms.logic.processor",
@@ -96,7 +96,6 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.oauth",
         "cn.herodotus.eurynome.upms.logic.service.development"
 })
-@EnableCreateCacheAnnotation
 @EnableHerodotusManagement
 public class UpmsLogicConfiguration {
     @PostConstruct

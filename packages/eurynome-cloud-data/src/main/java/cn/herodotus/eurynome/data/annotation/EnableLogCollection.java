@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,35 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-operation
- * File Name: EnableHerodotusManagement.java
+ * Module Name: eurynome-cloud-data
+ * File Name: EnableLogCollection.java
  * Author: gengwei.zheng
- * Date: 2020/5/22 下午5:00
- * LastModified: 2020/5/19 下午3:31
+ * Date: 2020/5/23 上午10:04
+ * LastModified: 2020/5/23 上午10:04
  */
 
-package cn.herodotus.eurynome.operation.annotation;
+package cn.herodotus.eurynome.data.annotation;
 
-import cn.herodotus.eurynome.operation.configuration.OperationConfiguration;
+import cn.herodotus.eurynome.data.configuration.LogstashConfiguration;
+import cn.herodotus.eurynome.operation.properties.ManagementProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p> Description : Management Component 相关配置Enable注解 </p>
+ * <p>Project: eurynome-cloud </p>
+ * <p>File: EnableLogCollection </p>
+ *
+ * <p>Description: 开启日志收集 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/3 10:13
+ * @date : 2020/5/23 10:04
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(OperationConfiguration.class)
-public @interface EnableHerodotusManagement {
+@EnableConfigurationProperties(ManagementProperties.class)
+@Import(LogstashConfiguration.class)
+public @interface EnableLogCollection {
 }

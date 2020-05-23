@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,32 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-operation
- * File Name: EnableHerodotusManagement.java
+ * Module Name: eurynome-cloud-data
+ * File Name: EnableDynamicDataSource.java
  * Author: gengwei.zheng
- * Date: 2020/5/22 下午5:00
- * LastModified: 2020/5/19 下午3:31
+ * Date: 2020/5/23 上午10:08
+ * LastModified: 2020/5/23 上午10:08
  */
 
-package cn.herodotus.eurynome.operation.annotation;
+package cn.herodotus.eurynome.data.annotation;
 
-import cn.herodotus.eurynome.operation.configuration.OperationConfiguration;
+import cn.herodotus.eurynome.data.configuration.DynamicDataSourceConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p> Description : Management Component 相关配置Enable注解 </p>
+ * <p>Project: eurynome-cloud </p>
+ * <p>File: EnableDynamicDataSource </p>
+ *
+ * <p>Description: 开启动态数据源 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/3 10:13
+ * @date : 2020/5/23 10:08
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(OperationConfiguration.class)
-public @interface EnableHerodotusManagement {
+@Import(DynamicDataSourceConfiguration.class)
+public @interface EnableDynamicDataSource {
 }

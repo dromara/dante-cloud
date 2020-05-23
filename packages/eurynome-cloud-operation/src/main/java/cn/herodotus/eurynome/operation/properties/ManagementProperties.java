@@ -25,7 +25,6 @@
 package cn.herodotus.eurynome.operation.properties;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;

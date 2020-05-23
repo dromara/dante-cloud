@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.common.constants;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: 认证授权等安全相关常量值 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/18 8:37
