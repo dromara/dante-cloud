@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.rest.configuration;
 
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
@@ -28,11 +30,11 @@ public class RestTemplateConfiguration {
      */
     @Bean
     @LoadBalanced
-    public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
+    public RestTemplate getRestTemplate() {
 
         log.debug("[Herodotus] |- Bean [RestTemplate Configuration] Auto Configure.");
 
-        RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
+        RestTemplate restTemplate = new RestTemplate(new OkHttp3ClientHttpRequestFactory());
 
         /**
          * 默认的 RestTemplate 有个机制是请求状态码非200 就抛出异常，会中断接下来的操作。
@@ -52,6 +54,10 @@ public class RestTemplateConfiguration {
         };
 
         restTemplate.setErrorHandler(responseErrorHandler);
+
+        restTemplate.getMessageConverters().clear();
+        restTemplate.getMessageConverters().add(new FastJsonHttpMessageConverter());
+
         return restTemplate;
     }
 

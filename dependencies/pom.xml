@@ -21,7 +21,7 @@
     <properties>
         <!--Spring 家族-->
         <spring-cloud-dependencies.version>Hoxton.SR4</spring-cloud-dependencies.version>
-        <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.2.1.RELEASE</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
@@ -29,7 +29,6 @@
 
         <!--覆盖Spring Boot 默认依赖版本-->
         <mysql.verison>5.1.48</mysql.verison>
-        <nacos.client.version>1.2.1</nacos.client.version>
 
         <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
