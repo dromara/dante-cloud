@@ -34,6 +34,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>eurynome-cloud-management</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
