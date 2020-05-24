@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,28 +15,36 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-component-data
- * File Name: DataSourceType.java
+ * Module Name: eurynome-cloud-data
+ * File Name: DataSource.java
  * Author: gengwei.zheng
- * Date: 2020/5/21 上午10:40
- * LastModified: 2020/5/21 上午10:40
+ * Date: 2020/5/23 下午5:25
+ * LastModified: 2020/5/23 下午5:25
  */
 
-package cn.herodotus.eurynome.data.datasource.enums;
+package cn.herodotus.eurynome.data.datasource.annotation;
+
+import java.lang.annotation.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: DataSourceType </p>
+ * <p>File: DataSource </p>
  *
- * <p>Description: 数据源类型 </p>
+ * <p>Description: 数据源注解 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/21 10:38
+ * @date : 2020/5/23 17:25
  */
-public enum DataSourceType {
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface DataSource {
 
     /**
-     * enum
+     * 数据源名称
+     *
+     * @return 要切换的数据源名称
      */
-    DEFAULT, MASTER, SLAVE, READ, WRITE, LOCAL, REMOTE
+    String value();
+
 }

@@ -16,41 +16,41 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-component-data
- * File Name: DataSourceNotExistException.java
+ * File Name: DataSourceConfigureException.java
  * Author: gengwei.zheng
- * Date: 2020/5/22 下午2:22
- * LastModified: 2020/5/22 下午2:22
+ * Date: 2020/5/22 下午1:49
+ * LastModified: 2020/5/22 下午1:49
  */
 
-package cn.herodotus.eurynome.data.exception;
+package cn.herodotus.eurynome.data.datasource.exception;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: DataSourceNotExistException </p>
+ * <p>File: DataSourceConfigureException </p>
  *
- * <p>Description: 数据源不存在 </p>
+ * <p>Description: TODO </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/22 14:22
+ * @date : 2020/5/22 13:49
  */
-public class DataSourceNotExistException extends DataSourceException {
+public class DataSourceConfigureException extends DataSourceException{
 
-    public DataSourceNotExistException() {
+    public DataSourceConfigureException() {
     }
 
-    public DataSourceNotExistException(String message) {
+    public DataSourceConfigureException(String message) {
         super(message);
     }
 
-    public DataSourceNotExistException(String message, Throwable cause) {
+    public DataSourceConfigureException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public DataSourceNotExistException(Throwable cause) {
+    public DataSourceConfigureException(Throwable cause) {
         super(cause);
     }
 
-    public DataSourceNotExistException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public DataSourceConfigureException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

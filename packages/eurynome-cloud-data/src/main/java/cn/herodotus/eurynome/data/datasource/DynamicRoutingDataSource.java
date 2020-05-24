@@ -25,11 +25,10 @@
 package cn.herodotus.eurynome.data.datasource;
 
 import cn.herodotus.eurynome.data.datasource.definition.AbstractRoutingDataSource;
-import cn.herodotus.eurynome.data.datasource.definition.DataSourceProvider;
-import cn.herodotus.eurynome.data.exception.DataSourceException;
-import cn.herodotus.eurynome.data.exception.DataSourceNotExistException;
-import cn.herodotus.eurynome.data.exception.PrimaryConfigureErrorException;
-import cn.herodotus.eurynome.data.exception.RemovePrimaryDataSourceException;
+import cn.herodotus.eurynome.data.datasource.exception.DataSourceException;
+import cn.herodotus.eurynome.data.datasource.exception.DataSourceNotExistException;
+import cn.herodotus.eurynome.data.datasource.exception.PrimaryConfigureErrorException;
+import cn.herodotus.eurynome.data.datasource.exception.RemovePrimaryDataSourceException;
 import com.p6spy.engine.spy.P6DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -55,8 +54,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
     /**
      * 所有数据源
      */
-    private Map<String, DataSource> dataSources = new LinkedHashMap<>();
-    private DataSourceProvider dataSourceProvider;
+    private final Map<String, DataSource> wrappedDataSources = new LinkedHashMap<>();
+    private Map<String, DataSource> dataSources;
     private String primary;
     private boolean p6spy;
 
@@ -64,8 +63,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         this.primary = primary;
     }
 
-    public void setDataSourceProvider(DataSourceProvider dataSourceProvider) {
-        this.dataSourceProvider = dataSourceProvider;
+    public void setDataSources(Map<String, DataSource> dataSources) {
+        this.dataSources = dataSources;
     }
 
     public void setP6spy(boolean p6spy) {
@@ -82,8 +81,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         }
     }
 
-    public Map<String, DataSource> getDataSources() {
-        return dataSources;
+    public Map<String, DataSource> getWrappedDataSources() {
+        return wrappedDataSources;
     }
 
     /**
@@ -93,13 +92,18 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @param dataSource     数据源
      */
     public synchronized void addDataSource(String dataSourceName, DataSource dataSource) {
-        if (!dataSources.containsKey(dataSourceName)) {
+        if (!wrappedDataSources.containsKey(dataSourceName)) {
             dataSource = wrapDataSource(dataSourceName, dataSource);
-            dataSources.put(dataSourceName, dataSource);
+            wrappedDataSources.put(dataSourceName, dataSource);
             log.info("[Herodotus] |- load a datasource named [{}] success", dataSourceName);
         } else {
             log.warn("[Herodotus] |- load a datasource named [{}] failed, because it already exist", dataSourceName);
         }
+    }
+
+    private DataSource determinePrimaryDataSource() {
+        log.debug("[Herodotus] |- Switch to the primary datasource");
+        return wrappedDataSources.get(primary);
     }
 
     /**
@@ -109,8 +113,10 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @return 数据源
      */
     public DataSource getDataSource(String dataSourceName) {
-        if (StringUtils.isNotBlank(dataSourceName) && dataSources.containsKey(dataSourceName)) {
-            return dataSources.get(dataSourceName);
+        if (StringUtils.isBlank(dataSourceName)) {
+            return determinePrimaryDataSource();
+        } else if (wrappedDataSources.containsKey(dataSourceName)) {
+            return wrappedDataSources.get(dataSourceName);
         } else {
             throw new DataSourceNotExistException("Could not find a datasource named" + dataSourceName);
         }
@@ -128,14 +134,14 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         if (StringUtils.equals(dataSourceName, primary)) {
             throw new RemovePrimaryDataSourceException("could not remove primary datasource");
         }
-        if (dataSources.containsKey(dataSourceName)) {
-            DataSource dataSource = dataSources.get(dataSourceName);
+        if (wrappedDataSources.containsKey(dataSourceName)) {
+            DataSource dataSource = wrappedDataSources.get(dataSourceName);
             try {
                 closeDataSource(dataSourceName, dataSource);
             } catch (Exception e) {
                 throw new DataSourceException("remove the database named " + dataSourceName + " failed", e);
             }
-            dataSources.remove(dataSourceName);
+            wrappedDataSources.remove(dataSourceName);
 
             log.info("[Herodotus] |- Remove the database named [{}] success", dataSourceName);
         } else {
@@ -168,20 +174,20 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Map<String, DataSource> dataSources = this.dataSourceProvider.getDataSources();
+        Map<String, DataSource> dataSources = this.dataSources;
         dataSources.forEach(this::addDataSource);
 
         if (dataSources.containsKey(primary)) {
             log.info("[Herodotus] |- initial loaded [{}] datasource,primary datasource named [{}]", dataSources.size(), primary);
         } else {
-            throw new PrimaryConfigureErrorException("dynamic-datasource Please check the setting of primary");
+            throw new PrimaryConfigureErrorException("Please check the dynamic datasource setting of primary");
         }
     }
 
     @Override
     public void destroy() throws Exception {
         log.info("[Herodotus] |-  Start closing ....");
-        for (Map.Entry<String, DataSource> entry : dataSources.entrySet()) {
+        for (Map.Entry<String, DataSource> entry : wrappedDataSources.entrySet()) {
             String key = entry.getKey();
             DataSource value = entry.getValue();
             closeDataSource(key, value);

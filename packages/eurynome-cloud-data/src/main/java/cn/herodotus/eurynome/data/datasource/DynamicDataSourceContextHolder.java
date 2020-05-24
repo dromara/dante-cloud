@@ -43,7 +43,7 @@ import java.util.Deque;
  * @date : 2020/5/20 18:44
  */
 @Slf4j
-public class DynamicDataSourceContextHolder {
+public class DynamicDataSourceContextHolder implements AutoCloseable {
 
     /**
      * 为什么要用链表存储(准确的是栈)
@@ -105,6 +105,16 @@ public class DynamicDataSourceContextHolder {
      * </p>
      */
     public static void clear() {
+        LOOKUP_KEY_HOLDER.remove();
+    }
+
+    /**
+     * 实现AutoCloseable，放置内存泄露
+     *
+     * @throws Exception
+     */
+    @Override
+    public void close() throws Exception {
         LOOKUP_KEY_HOLDER.remove();
     }
 }

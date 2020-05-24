@@ -34,12 +34,12 @@ import java.util.Map;
  * <p>Project: eurynome-cloud </p>
  * <p>File: DynamicDataSourceProperties </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 动态数据源配置 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/5/21 14:18
  */
-@ConfigurationProperties(prefix = "spring.datasource.dynamic")
+@ConfigurationProperties(prefix = "herodotus.datasource.dynamic")
 public class DataSourceProperties {
 
     /**

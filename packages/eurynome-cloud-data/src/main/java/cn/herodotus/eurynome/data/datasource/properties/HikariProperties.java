@@ -27,6 +27,7 @@ package cn.herodotus.eurynome.data.datasource.properties;
 import com.zaxxer.hikari.HikariConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Properties;
 
@@ -37,13 +38,14 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  * <p>Project: eurynome-cloud </p>
  * <p>File: HikariProperties </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: hikari配置信息 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/5/21 14:04
  */
 
 @Slf4j
+@ConfigurationProperties(prefix = "herodotus.datasource.hikari")
 public class HikariProperties {
 
     /**

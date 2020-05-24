@@ -24,8 +24,6 @@
 
 package cn.herodotus.eurynome.data.datasource.definition;
 
-import org.springframework.lang.NonNull;
-
 import javax.sql.DataSource;
 import java.util.Map;
 
@@ -45,6 +43,17 @@ public interface DataSourceProvider {
      *
      * @return 所有数据源，key为数据源名称
      */
-    @NonNull
     Map<String, DataSource> getDataSources();
+
+    /**
+     * 获取主数据源名称
+     * @return {String}
+     */
+    String getPrimary();
+
+    /**
+     * 是否使用p6spy组件
+     * @return {Boolean}
+     */
+    Boolean getP6spy();
 }

@@ -26,6 +26,7 @@ package cn.herodotus.eurynome.data.datasource;
 
 import cn.herodotus.eurynome.data.datasource.definition.DataSourceProvider;
 import cn.herodotus.eurynome.data.datasource.domain.DataSourceMetadata;
+import cn.herodotus.eurynome.data.datasource.properties.DataSourceProperties;
 import cn.herodotus.eurynome.data.datasource.properties.HikariProperties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -39,34 +40,42 @@ import java.util.Map;
  * <p>Project: eurynome-cloud </p>
  * <p>File: DynamicDataSourceProvider </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 默认的数据源对象组装 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/5/22 14:12
  */
 public class DefaultDataSourceProvider implements DataSourceProvider {
 
-    private Map<String, DataSourceMetadata> dataSourceMetadatas;
+    private DataSourceProperties dataSourceProperties;
+    private final HikariProperties hikariProperties;
+    private final Map<String, DataSourceMetadata> dataSourceMetadatas;
+    private final String primary;
+    private final Boolean p6spy;
 
-    public DefaultDataSourceProvider(Map<String, DataSourceMetadata> dataSourceMetadatas) {
-        this.dataSourceMetadatas = dataSourceMetadatas;
+    public DefaultDataSourceProvider(DataSourceProperties dataSourceProperties, HikariProperties hikariProperties) {
+        this.dataSourceProperties = dataSourceProperties;
+        this.hikariProperties = hikariProperties;
+        this.dataSourceMetadatas = dataSourceProperties.getMetadatas();
+        this.primary = dataSourceProperties.getPrimary();
+        this.p6spy = dataSourceProperties.getP6spy();
     }
 
-    private Map<String, DataSource> createDataSources(Map<String, DataSourceMetadata> dataSourcePropertiesMap) {
-        Map<String, DataSource> dataSourceMap = new HashMap<>(dataSourcePropertiesMap.size());
-        for (Map.Entry<String, DataSourceMetadata> item : dataSourcePropertiesMap.entrySet()) {
-            DataSourceMetadata dataSourceProperty = item.getValue();
-            String poolName = dataSourceProperty.getPoolName();
+    private Map<String, DataSource> createDataSources() {
+        Map<String, DataSource> dataSources = new HashMap<>(dataSourceMetadatas.size());
+        for (Map.Entry<String, DataSourceMetadata> item : dataSourceMetadatas.entrySet()) {
+            DataSourceMetadata dataSourceMetadata = item.getValue();
+            String poolName = dataSourceMetadata.getPoolName();
             if (StringUtils.isBlank(poolName)) {
                 poolName = item.getKey();
             }
-            dataSourceProperty.setPoolName(poolName);
-//            dataSourceMap.put(poolName, dataSourceCreator.createDataSource(dataSourceProperty));
+            dataSourceMetadata.setPoolName(poolName);
+            dataSources.put(item.getKey(), createHikariDataSource(dataSourceMetadata));
         }
-        return dataSourceMap;
+        return dataSources;
     }
 
-    public DataSource createHikariDataSource(DataSourceMetadata dataSourceMetadata, HikariProperties hikariProperties) {
+    private DataSource createHikariDataSource(DataSourceMetadata dataSourceMetadata) {
         HikariConfig config = hikariProperties.getHikariConfig();
         config.setUsername(dataSourceMetadata.getUsername());
         config.setPassword(dataSourceMetadata.getPassword());
@@ -78,6 +87,16 @@ public class DefaultDataSourceProvider implements DataSourceProvider {
 
     @Override
     public Map<String, DataSource> getDataSources() {
-        return createDataSources(this.dataSourceMetadatas);
+        return createDataSources();
+    }
+
+    @Override
+    public String getPrimary() {
+        return this.primary;
+    }
+
+    @Override
+    public Boolean getP6spy() {
+        return this.p6spy;
     }
 }

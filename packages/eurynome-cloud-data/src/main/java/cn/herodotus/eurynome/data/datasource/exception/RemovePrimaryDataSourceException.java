@@ -16,41 +16,41 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-component-data
- * File Name: DataSourceConfigureException.java
+ * File Name: RemovePrimaryDataSourceException.java
  * Author: gengwei.zheng
- * Date: 2020/5/22 下午1:49
- * LastModified: 2020/5/22 下午1:49
+ * Date: 2020/5/22 下午3:21
+ * LastModified: 2020/5/22 下午3:21
  */
 
-package cn.herodotus.eurynome.data.exception;
+package cn.herodotus.eurynome.data.datasource.exception;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: DataSourceConfigureException </p>
+ * <p>File: RemovePrimaryDataSourceException </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 删除主数据源错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/22 13:49
+ * @date : 2020/5/22 15:21
  */
-public class DataSourceConfigureException extends DataSourceException{
+public class RemovePrimaryDataSourceException extends DataSourceException {
 
-    public DataSourceConfigureException() {
+    public RemovePrimaryDataSourceException() {
     }
 
-    public DataSourceConfigureException(String message) {
+    public RemovePrimaryDataSourceException(String message) {
         super(message);
     }
 
-    public DataSourceConfigureException(String message, Throwable cause) {
+    public RemovePrimaryDataSourceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public DataSourceConfigureException(Throwable cause) {
+    public RemovePrimaryDataSourceException(Throwable cause) {
         super(cause);
     }
 
-    public DataSourceConfigureException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public RemovePrimaryDataSourceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

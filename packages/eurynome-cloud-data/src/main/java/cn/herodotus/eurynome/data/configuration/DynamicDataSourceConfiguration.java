@@ -29,6 +29,7 @@ import cn.herodotus.eurynome.data.datasource.DynamicRoutingDataSource;
 import cn.herodotus.eurynome.data.datasource.definition.DataSourceProvider;
 import cn.herodotus.eurynome.data.datasource.domain.DataSourceMetadata;
 import cn.herodotus.eurynome.data.datasource.properties.DataSourceProperties;
+import cn.herodotus.eurynome.data.datasource.properties.HikariProperties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
@@ -52,23 +54,25 @@ import java.util.Map;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(DataSourceProperties.class)
+@EnableConfigurationProperties({DataSourceProperties.class, HikariProperties.class})
+@ComponentScan(basePackages = {
+        "cn.herodotus.eurynome.data.datasource.aop"
+})
 public class DynamicDataSourceConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(DataSourceProvider.class)
-    public DataSourceProvider dataSourceProvider(DataSourceProperties dataSourceProperties) {
-        Map<String, DataSourceMetadata> metadatas = dataSourceProperties.getMetadatas();
-        return new DefaultDataSourceProvider(metadatas);
+    public DataSourceProvider dataSourceProvider(DataSourceProperties dataSourceProperties, HikariProperties hikariProperties) {
+        return new DefaultDataSourceProvider(dataSourceProperties, hikariProperties);
     }
 
     @Bean
     @ConditionalOnBean(DataSourceProvider.class)
-    public DataSource dataSource(DataSourceProvider dataSourceProvider, DataSourceProperties dataSourceProperties) {
+    public DataSource dataSource(DataSourceProvider dataSourceProvider) {
         DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
-        dataSource.setPrimary(dataSourceProperties.getPrimary());
-        dataSource.setP6spy(dataSourceProperties.getP6spy());
-        dataSource.setDataSourceProvider(dataSourceProvider);
+        dataSource.setDataSources(dataSourceProvider.getDataSources());
+        dataSource.setPrimary(dataSourceProvider.getPrimary());
+        dataSource.setP6spy(dataSourceProvider.getP6spy());
         return dataSource;
     }
 }

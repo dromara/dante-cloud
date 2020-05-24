@@ -22,7 +22,7 @@
  * LastModified: 2020/5/22 下午1:37
  */
 
-package cn.herodotus.eurynome.data.exception;
+package cn.herodotus.eurynome.data.datasource.exception;
 
 import cn.herodotus.eurynome.common.exception.PlatformException;
 
