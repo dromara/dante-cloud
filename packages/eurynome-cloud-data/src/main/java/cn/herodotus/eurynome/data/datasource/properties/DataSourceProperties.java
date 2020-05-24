@@ -24,9 +24,6 @@
 
 package cn.herodotus.eurynome.data.datasource.properties;
 
-import cn.herodotus.eurynome.data.datasource.domain.DataSourceMetadata;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,7 +36,6 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/5/21 14:18
  */
-@ConfigurationProperties(prefix = "herodotus.datasource.dynamic")
 public class DataSourceProperties {
 
     /**

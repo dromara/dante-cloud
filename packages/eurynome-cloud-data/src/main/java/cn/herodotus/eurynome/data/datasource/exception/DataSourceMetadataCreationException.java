@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,42 +15,42 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-component-data
- * File Name: RemovePrimaryDataSourceException.java
+ * Module Name: eurynome-cloud-data
+ * File Name: DataSourceBeanCreationException.java
  * Author: gengwei.zheng
- * Date: 2020/5/22 下午3:21
- * LastModified: 2020/5/22 下午3:21
+ * Date: 2020/5/24 下午4:49
+ * LastModified: 2020/5/24 下午4:49
  */
 
 package cn.herodotus.eurynome.data.datasource.exception;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: RemovePrimaryDataSourceException </p>
+ * <p>File: DataSourceMetadataCreationException </p>
  *
- * <p>Description: 删除主数据源错误 </p>
+ * <p>Description: 数据源元数据配置错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/22 15:21
+ * @date : 2020/5/24 16:49
  */
-public class RemovePrimaryDataSourceException extends DataSourceException {
+public class DataSourceMetadataCreationException extends DataSourceConfigureException {
 
-    public RemovePrimaryDataSourceException() {
+    public DataSourceMetadataCreationException() {
     }
 
-    public RemovePrimaryDataSourceException(String message) {
+    public DataSourceMetadataCreationException(String message) {
         super(message);
     }
 
-    public RemovePrimaryDataSourceException(String message, Throwable cause) {
+    public DataSourceMetadataCreationException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public RemovePrimaryDataSourceException(Throwable cause) {
+    public DataSourceMetadataCreationException(Throwable cause) {
         super(cause);
     }
 
-    public RemovePrimaryDataSourceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public DataSourceMetadataCreationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

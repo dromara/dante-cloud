@@ -36,7 +36,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.6</commons-io.version>
         <google-guava.version>29.0-jre</google-guava.version>
-        <hutool.version>5.3.2</hutool.version>
+        <hutool.version>5.3.5</hutool.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.68</alibaba-fastjson.version>
@@ -55,7 +55,7 @@
         <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
         <shiro.version>1.4.1</shiro.version>
         <flowable.version>6.5.0</flowable.version>
-        <minio.version>7.0.1</minio.version>
+        <minio.version>7.0.2</minio.version>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
 
         <!--镜像前缀-->

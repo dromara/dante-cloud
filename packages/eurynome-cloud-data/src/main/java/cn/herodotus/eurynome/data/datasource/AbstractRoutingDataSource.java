@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-component-data
+ * Module Name: eurynome-cloud-data
  * File Name: AbstractRoutingDataSource.java
  * Author: gengwei.zheng
- * Date: 2020/5/22 下午2:53
- * LastModified: 2020/5/22 下午2:53
+ * Date: 2020/5/24 下午5:47
+ * LastModified: 2020/5/23 上午9:32
  */
 
-package cn.herodotus.eurynome.data.datasource.definition;
+package cn.herodotus.eurynome.data.datasource;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;

@@ -24,14 +24,18 @@
 
 package cn.herodotus.eurynome.data.datasource;
 
-import cn.herodotus.eurynome.data.datasource.definition.AbstractRoutingDataSource;
 import cn.herodotus.eurynome.data.datasource.exception.DataSourceException;
 import cn.herodotus.eurynome.data.datasource.exception.DataSourceNotExistException;
-import cn.herodotus.eurynome.data.datasource.exception.PrimaryConfigureErrorException;
-import cn.herodotus.eurynome.data.datasource.exception.RemovePrimaryDataSourceException;
+import cn.herodotus.eurynome.data.datasource.exception.RemoveDataSourceException;
+import cn.herodotus.eurynome.data.datasource.properties.DataSourceMetadata;
+import cn.herodotus.eurynome.data.datasource.properties.DataSourceProperties;
 import com.p6spy.engine.spy.P6DataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 
 import javax.sql.DataSource;
 import java.lang.reflect.InvocationTargetException;
@@ -51,20 +55,28 @@ import java.util.Map;
 @Slf4j
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
+    public static final String DEFAULT_DATASOURCE = "localStorage";
+
+    private final DataSourceProperties dataSourceProperties;
+    private final HikariConfig hikariConfig;
     /**
      * 所有数据源
      */
     private final Map<String, DataSource> wrappedDataSources = new LinkedHashMap<>();
-    private Map<String, DataSource> dataSources;
-    private String primary;
+    private String primary = DEFAULT_DATASOURCE;
     private boolean p6spy;
+
+    private Map<String, DataSource> dataSources;
+
+    public DynamicRoutingDataSource(DataSourceProperties dataSourceProperties, HikariConfig hikariConfig) {
+        this.dataSourceProperties = dataSourceProperties;
+        this.hikariConfig = hikariConfig;
+        this.setPrimary(dataSourceProperties.getPrimary());
+        this.setP6spy(dataSourceProperties.getP6spy());
+    }
 
     public void setPrimary(String primary) {
         this.primary = primary;
-    }
-
-    public void setDataSources(Map<String, DataSource> dataSources) {
-        this.dataSources = dataSources;
     }
 
     public void setP6spy(boolean p6spy) {
@@ -81,8 +93,36 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         }
     }
 
-    public Map<String, DataSource> getWrappedDataSources() {
-        return wrappedDataSources;
+    /**
+     * 使用H2作为本地默认存储
+     *
+     * @return {DataSourceMetadata}
+     */
+    private DataSourceMetadata createLocalStroageMetadata() {
+        DataSourceMetadata dataSourceMetadata = new DataSourceMetadata();
+        dataSourceMetadata.setDriverClassName(EmbeddedDatabaseConnection.H2.getDriverClassName());
+        dataSourceMetadata.setUrl(EmbeddedDatabaseConnection.H2.getUrl(DEFAULT_DATASOURCE));
+        dataSourceMetadata.setUsername("herodotus");
+        dataSourceMetadata.setPassword(DEFAULT_DATASOURCE);
+        dataSourceMetadata.setPoolName(DEFAULT_DATASOURCE);
+        return dataSourceMetadata;
+    }
+
+    private HikariDataSource createHikariDataSource(DataSourceMetadata dataSourceMetadata, HikariConfig hikariConfig) {
+        hikariConfig.setPoolName(dataSourceMetadata.getPoolName());
+        hikariConfig.setDriverClassName(dataSourceMetadata.determineDriverClassName());
+        hikariConfig.setJdbcUrl(dataSourceMetadata.determineUrl());
+        hikariConfig.setUsername(dataSourceMetadata.determineUsername());
+        hikariConfig.setPassword(dataSourceMetadata.determinePassword());
+        return new HikariDataSource(hikariConfig);
+    }
+
+    private DataSource wrapDataSource(String dataSourceName, DataSource dataSource) {
+        if (p6spy) {
+            dataSource = new P6DataSource(dataSource);
+            log.info("[Herodotus] |- [{}] wrap p6spy plugin", dataSourceName);
+        }
+        return dataSource;
     }
 
     /**
@@ -101,9 +141,23 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         }
     }
 
-    private DataSource determinePrimaryDataSource() {
-        log.debug("[Herodotus] |- Switch to the primary datasource");
-        return wrappedDataSources.get(primary);
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        addDataSource(DEFAULT_DATASOURCE, createHikariDataSource(createLocalStroageMetadata(), hikariConfig));
+
+        if (MapUtils.isNotEmpty(dataSourceProperties.getMetadatas())) {
+            for (Map.Entry<String, DataSourceMetadata> item : dataSourceProperties.getMetadatas().entrySet()) {
+                DataSourceMetadata dataSourceMetadata = item.getValue();
+                String poolName = dataSourceMetadata.getPoolName();
+                if (StringUtils.isBlank(poolName)) {
+                    poolName = item.getKey();
+                }
+                dataSourceMetadata.setPoolName(poolName);
+                addDataSource(item.getKey(), createHikariDataSource(dataSourceMetadata, hikariConfig));
+            }
+        }
+
+        log.info("[Herodotus] |- initial loaded [{}] datasource,primary datasource named [{}]", wrappedDataSources.size(), primary);
     }
 
     /**
@@ -114,7 +168,8 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      */
     public DataSource getDataSource(String dataSourceName) {
         if (StringUtils.isBlank(dataSourceName)) {
-            return determinePrimaryDataSource();
+            log.debug("[Herodotus] |- Switch to the primary datasource");
+            return wrappedDataSources.get(primary);
         } else if (wrappedDataSources.containsKey(dataSourceName)) {
             return wrappedDataSources.get(dataSourceName);
         } else {
@@ -132,7 +187,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
             throw new IllegalArgumentException("dataSourceName parameter could not be empty");
         }
         if (StringUtils.equals(dataSourceName, primary)) {
-            throw new RemovePrimaryDataSourceException("could not remove primary datasource");
+            throw new RemoveDataSourceException("could not remove primary datasource");
         }
         if (wrappedDataSources.containsKey(dataSourceName)) {
             DataSource dataSource = wrappedDataSources.get(dataSourceName);
@@ -149,39 +204,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         }
     }
 
-    private void closeDataSource(String name, DataSource dataSource) throws NoSuchFieldException, IllegalAccessException, InvocationTargetException {
-        Class<? extends DataSource> clazz = dataSource.getClass();
-        try {
-            Method closeMethod = clazz.getDeclaredMethod("close");
-            closeMethod.invoke(dataSource);
-        } catch (NoSuchMethodException e) {
-            log.warn("[Herodotus] |- Close the datasource named [{}] failed,", name);
-        }
-    }
-
-    private DataSource wrapDataSource(String dataSourceName, DataSource dataSource) {
-        if (p6spy) {
-            dataSource = new P6DataSource(dataSource);
-            log.info("[Herodotus] |- [{}] wrap p6spy plugin", dataSourceName);
-        }
-        return dataSource;
-    }
-
     @Override
     protected DataSource determineDataSource() {
         return getDataSource(DynamicDataSourceContextHolder.peek());
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        Map<String, DataSource> dataSources = this.dataSources;
-        dataSources.forEach(this::addDataSource);
-
-        if (dataSources.containsKey(primary)) {
-            log.info("[Herodotus] |- initial loaded [{}] datasource,primary datasource named [{}]", dataSources.size(), primary);
-        } else {
-            throw new PrimaryConfigureErrorException("Please check the dynamic datasource setting of primary");
-        }
     }
 
     @Override
@@ -193,5 +218,15 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
             closeDataSource(key, value);
         }
         log.info("[Herodotus] |- All closed success.");
+    }
+
+    private void closeDataSource(String name, DataSource dataSource) throws NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        Class<? extends DataSource> clazz = dataSource.getClass();
+        try {
+            Method closeMethod = clazz.getDeclaredMethod("close");
+            closeMethod.invoke(dataSource);
+        } catch (NoSuchMethodException e) {
+            log.warn("[Herodotus] |- Close the datasource named [{}] failed,", name);
+        }
     }
 }

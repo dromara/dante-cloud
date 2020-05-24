@@ -24,24 +24,18 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
-import cn.herodotus.eurynome.data.datasource.DefaultDataSourceProvider;
 import cn.herodotus.eurynome.data.datasource.DynamicRoutingDataSource;
-import cn.herodotus.eurynome.data.datasource.definition.DataSourceProvider;
-import cn.herodotus.eurynome.data.datasource.domain.DataSourceMetadata;
 import cn.herodotus.eurynome.data.datasource.properties.DataSourceProperties;
-import cn.herodotus.eurynome.data.datasource.properties.HikariProperties;
 import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
-import java.util.Map;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -54,25 +48,27 @@ import java.util.Map;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties({DataSourceProperties.class, HikariProperties.class})
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.data.datasource.aop"
 })
 public class DynamicDataSourceConfiguration {
 
     @Bean
-    @ConditionalOnMissingBean(DataSourceProvider.class)
-    public DataSourceProvider dataSourceProvider(DataSourceProperties dataSourceProperties, HikariProperties hikariProperties) {
-        return new DefaultDataSourceProvider(dataSourceProperties, hikariProperties);
+    @ConfigurationProperties(prefix = "herodotus.datasource.hikari")
+    public HikariConfig hikariConfig() {
+        return new HikariConfig();
     }
 
     @Bean
-    @ConditionalOnBean(DataSourceProvider.class)
-    public DataSource dataSource(DataSourceProvider dataSourceProvider) {
-        DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
-        dataSource.setDataSources(dataSourceProvider.getDataSources());
-        dataSource.setPrimary(dataSourceProvider.getPrimary());
-        dataSource.setP6spy(dataSourceProvider.getP6spy());
-        return dataSource;
+    @ConfigurationProperties(prefix = "herodotus.datasource.dynamic")
+    public DataSourceProperties dataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(DataSource.class)
+    @ConditionalOnBean({HikariConfig.class, DataSourceProperties.class} )
+    public DataSource dataSource(DataSourceProperties dataSourceProperties, HikariConfig hikariConfig) {
+        return new DynamicRoutingDataSource(dataSourceProperties, hikariConfig);
     }
 }

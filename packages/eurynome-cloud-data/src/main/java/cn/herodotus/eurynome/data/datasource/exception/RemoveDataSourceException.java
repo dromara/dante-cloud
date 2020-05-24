@@ -16,26 +16,41 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-component-data
- * File Name: DataSourceMetadataNotConfiguredException.java
+ * File Name: RemovePrimaryDataSourceException.java
  * Author: gengwei.zheng
- * Date: 2020/5/22 下午1:43
- * LastModified: 2020/5/22 下午1:43
+ * Date: 2020/5/22 下午3:21
+ * LastModified: 2020/5/22 下午3:21
  */
 
 package cn.herodotus.eurynome.data.datasource.exception;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: DataSourceMetadataNotConfiguredException </p>
+ * <p>File: RemovePrimaryDataSourceException </p>
  *
- * <p>Description: 数据源没有设置错误 </p>
+ * <p>Description: 删除主数据源错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/22 13:43
+ * @date : 2020/5/22 15:21
  */
-public class MetadataNotConfigureException extends DataSourceConfigureException {
+public class RemoveDataSourceException extends DataSourceException {
 
-    public MetadataNotConfigureException() {
-        super("Must config the dynamic data sources!");
+    public RemoveDataSourceException() {
+    }
+
+    public RemoveDataSourceException(String message) {
+        super(message);
+    }
+
+    public RemoveDataSourceException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public RemoveDataSourceException(Throwable cause) {
+        super(cause);
+    }
+
+    public RemoveDataSourceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

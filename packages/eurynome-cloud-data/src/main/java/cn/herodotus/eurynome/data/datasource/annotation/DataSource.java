@@ -24,6 +24,8 @@
 
 package cn.herodotus.eurynome.data.datasource.annotation;
 
+import cn.herodotus.eurynome.data.datasource.DynamicRoutingDataSource;
+
 import java.lang.annotation.*;
 
 /**
@@ -45,6 +47,6 @@ public @interface DataSource {
      *
      * @return 要切换的数据源名称
      */
-    String value();
+    String value() default DynamicRoutingDataSource.DEFAULT_DATASOURCE;
 
 }
