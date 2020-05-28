@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.data.logstash;
+package cn.herodotus.eurynome.message.logstash;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2020/5/9 12:48
  */
-public class LogstashJsonPattern implements Serializable {
+public class LogstashPattern implements Serializable {
 
     private String level = "%level";
     private String service = "";
@@ -103,7 +103,7 @@ public class LogstashJsonPattern implements Serializable {
 
     @Override
     public String toString() {
-        return "LogstashJsonPattern{" +
+        return "LogstashPattern{" +
                 "level='" + level + '\'' +
                 ", service='" + service + '\'' +
                 ", trace='" + trace + '\'' +

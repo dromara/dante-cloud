@@ -1,10 +1,34 @@
-package cn.herodotus.eurynome.data.configuration;
+/*
+ * Copyright (c) 2019-2020 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-message
+ * File Name: LogstashConfiguration.java
+ * Author: gengwei.zheng
+ * Date: 2020/5/25 下午3:08
+ * LastModified: 2020/5/25 下午3:08
+ */
+
+package cn.herodotus.eurynome.message.configuration;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import cn.herodotus.eurynome.data.logstash.LogstashJsonPattern;
+import cn.herodotus.eurynome.message.logstash.LogstashPattern;
 import cn.herodotus.eurynome.operation.properties.ManagementProperties;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +39,9 @@ import net.logstash.logback.composite.loggingevent.LoggingEventPatternJsonProvid
 import net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,16 +61,17 @@ import java.util.Map;
  */
 @Slf4j
 @Configuration
+@EnableConfigurationProperties({
+        ManagementProperties.class
+})
 @ConditionalOnProperty(name = "herodotus.platform.management.log-center.server-addr")
 public class LogstashConfiguration {
 
     @Value("${spring.application.name}")
     private String serviceName;
-    @Autowired
-    private ManagementProperties managementProperties;
 
     @PostConstruct
-    public void init() {
+    public void init(ManagementProperties managementProperties) {
         Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         LoggerContext loggerContext = rootLogger.getLoggerContext();
 
@@ -87,7 +112,7 @@ public class LogstashConfiguration {
     }
 
     private String getJsonPattern() {
-        LogstashJsonPattern pattern = new LogstashJsonPattern();
+        LogstashPattern pattern = new LogstashPattern();
         if (StringUtils.isNotBlank(serviceName)) {
             pattern.setService(serviceName);
         }
