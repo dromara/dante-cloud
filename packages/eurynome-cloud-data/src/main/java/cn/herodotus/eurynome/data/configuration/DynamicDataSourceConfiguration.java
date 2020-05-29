@@ -69,6 +69,8 @@ public class DynamicDataSourceConfiguration {
     @ConditionalOnMissingBean(DataSource.class)
     @ConditionalOnBean({HikariConfig.class, DataSourceProperties.class})
     public DataSource dataSource(DataSourceProperties dataSourceProperties, HikariConfig hikariConfig) {
-        return new DynamicRoutingDataSource(dataSourceProperties, hikariConfig);
+        DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource(dataSourceProperties, hikariConfig);
+        log.debug("[Herodotus] |- Bean [Dynamic Routing Data Source] Auto Configure.");
+        return dynamicRoutingDataSource;
     }
 }

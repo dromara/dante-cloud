@@ -7,10 +7,12 @@ spring:
     stream:
       default-binder: kafka
       bindings:
-        rest-interface-input:
-          destination: rest.interface.bus
-        rest-interface-output:
-          destination: rest.interface.bus
+        security-metadata-input:
+          destination: security.metadata
+          group: ${spring.application.name}
+        security-metadata-output:
+          destination: security.metadata
+          group: ${spring.application.name}
       kafka:
         binder:
           auto-add-partitions: true

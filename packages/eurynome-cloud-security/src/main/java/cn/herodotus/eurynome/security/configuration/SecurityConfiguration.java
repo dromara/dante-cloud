@@ -1,11 +1,24 @@
 package cn.herodotus.eurynome.security.configuration;
 
+import cn.herodotus.eurynome.localstorage.annotation.EnableHerodotusLocalStorage;
+import cn.herodotus.eurynome.localstorage.service.SecurityMetadataService;
+import cn.herodotus.eurynome.message.annotation.EnableHerodotusMessage;
+import cn.herodotus.eurynome.message.stream.service.SecurityMetadataMessage;
+import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
+import cn.herodotus.eurynome.rest.metadata.RequestMappingScan;
+import cn.herodotus.eurynome.rest.metadata.SecurityMetadataPersistence;
+import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.security.web.access.intercept.HerodotusSecurityMetadataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 /**
  * <p> Description : 模块辅助注册类 </p>
@@ -28,7 +41,6 @@ import javax.annotation.PostConstruct;
  * 1、如果一个模块中有需要扫描的内容，例如properties和configuration等。那么就新建一个@Component进行辅助。
  * 2、@ComponentScan尽可能定位到具体的包，尽量不要用通配符。
  *
- *
  * @author : gengwei.zheng
  * @date : 2020/3/2 16:00
  */
@@ -39,10 +51,44 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.security.configuration",
         "cn.herodotus.eurynome.security.authentication",
 })
-public class SecurityConfiguration {
+@EnableHerodotusLocalStorage
+@EnableHerodotusMessage
+@EnableHerodotusRest
+public class SecurityConfiguration  {
 
-    @PostConstruct
-    public void postConstruct() {
-        log.info("[Herodotus] |- Bean [Herodotus Security] Auto Configure.");
+    @Resource
+    private SecurityMetadataMessage securityMetadataMessage;
+    @Resource
+    private SecurityMetadataService securityMetadataService;
+
+    @Bean
+    @ConditionalOnMissingBean(SecurityMetadataPersistence.class)
+    @ConditionalOnBean({SecurityMetadataMessage.class, SecurityMetadataService.class})
+    public SecurityMetadataPersistence securityMetadataPersistence() {
+        SecurityMetadataPersistence securityMetadataPersistence = new SecurityMetadataPersistence(securityMetadataService, securityMetadataMessage);
+        log.debug("[Herodotus] |- Bean [Security Metadata Persistence] Auto Configure.");
+        return securityMetadataPersistence;
+    }
+
+    /**
+     * 自定义注解扫描
+     *
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean(RequestMappingScan.class)
+    @ConditionalOnBean(SecurityMetadataPersistence.class)
+    public RequestMappingScan requestMappingScan(SecurityMetadataPersistence securityMetadataPersistence, ApplicationProperties applicationProperties) {
+        RequestMappingScan requestMappingScan = new RequestMappingScan(securityMetadataPersistence, applicationProperties, EnableResourceServer.class);
+        log.debug("[Herodotus] |- Bean [Request Mapping Scan] Auto Configure.");
+        return requestMappingScan;
+    }
+
+    @Bean
+    @ConditionalOnBean(SecurityMetadataService.class)
+    public FilterInvocationSecurityMetadataSource filterInvocationSecurityMetadataSource() {
+        HerodotusSecurityMetadataSource herodotusSecurityMetadataSource = new HerodotusSecurityMetadataSource(securityMetadataService);
+        log.debug("[Herodotus] |- Bean [Security Metadata Source] Auto Configure.");
+        return herodotusSecurityMetadataSource;
     }
 }

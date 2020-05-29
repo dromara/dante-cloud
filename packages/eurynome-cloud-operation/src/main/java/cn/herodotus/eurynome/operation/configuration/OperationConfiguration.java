@@ -67,7 +67,6 @@ import org.springframework.context.annotation.Configuration;
         "cn.herodotus.eurynome.operation.configuration",
         "cn.herodotus.eurynome.operation.service"
 })
-
 public class OperationConfiguration {
 
     @Value("${spring.cloud.nacos.config.server-addr}")
@@ -77,7 +76,7 @@ public class OperationConfiguration {
     @ConditionalOnProperty(value = "spring.cloud.nacos.config.server-addr")
     public HerodotusNacosConfig nacosConfig(ManagementProperties managementProperties) {
         HerodotusNacosConfig herodotusNacosConfig = new HerodotusNacosConfig(managementProperties);
-        log.debug("[Herodotus] |- Bean [Nacos Config] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Nacos Config Management Operation] Auto Configure.");
         return herodotusNacosConfig;
     }
 

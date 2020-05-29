@@ -10,12 +10,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
+/**
+ * <p>Description: Rest Template Configuration </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/5/29 17:32
+ */
 @Slf4j
 @Configuration
 public class RestTemplateConfiguration {
@@ -30,11 +35,11 @@ public class RestTemplateConfiguration {
      */
     @Bean
     @LoadBalanced
-    public RestTemplate getRestTemplate() {
+    public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
 
         log.debug("[Herodotus] |- Bean [RestTemplate Configuration] Auto Configure.");
 
-        RestTemplate restTemplate = new RestTemplate(new OkHttp3ClientHttpRequestFactory());
+        RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
 
         /**
          * 默认的 RestTemplate 有个机制是请求状态码非200 就抛出异常，会中断接下来的操作。
@@ -62,8 +67,8 @@ public class RestTemplateConfiguration {
     }
 
     @Bean
-    public ClientHttpRequestFactory clientHttpRequestFactory(){
-        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+    public ClientHttpRequestFactory clientHttpRequestFactory() {
+        OkHttp3ClientHttpRequestFactory factory = new OkHttp3ClientHttpRequestFactory();
         //读取超时5秒,默认无限限制,单位：毫秒
         factory.setReadTimeout(applicationProperties.getRestTemplate().getReadTimeout());
         //连接超时10秒，默认无限制，单位：毫秒

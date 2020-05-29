@@ -24,8 +24,11 @@
 
 package cn.herodotus.eurynome.message.configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.bus.jackson.RemoteApplicationEventScan;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -38,9 +41,16 @@ import org.springframework.context.annotation.Configuration;
  * @author : gengwei.zheng
  * @date : 2020/5/28 12:13
  */
+@Slf4j
 @Configuration(proxyBeanMethods = false)
 @RemoteApplicationEventScan(basePackages = {
         "cn.herodotus.eurynome.message.bus.event"
 })
-public class BusConfiguration {
+public class MessageBusConfiguration {
+
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Bean [Message Bus] Auto Configure.");
+    }
 }

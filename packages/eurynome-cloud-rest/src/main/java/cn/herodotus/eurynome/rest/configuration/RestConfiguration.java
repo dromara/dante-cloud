@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.data.annotation.EnableRedisStorage;
 import cn.herodotus.eurynome.rest.interceptor.GlobalRequestInterceptor;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
@@ -46,7 +45,6 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.rest.configuration"
 })
-@EnableRedisStorage
 public class RestConfiguration {
 
     @PostConstruct

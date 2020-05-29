@@ -40,6 +40,7 @@ import javax.annotation.Resource;
 
 /**
  * Redis缓存配置
+ *
  * @author gengwei.zheng
  */
 @Slf4j

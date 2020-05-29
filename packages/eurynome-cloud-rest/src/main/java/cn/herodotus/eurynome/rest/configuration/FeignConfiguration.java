@@ -18,13 +18,14 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * <p> Description : 自定义通用的Feign Fallback处理工厂(基于Sentinel) </p>
- *
+ * <p>
  * {@see https://blog.csdn.net/ttzommed/article/details/90669320}
+ *
  * @author : gengwei.zheng
  * @date : 2020/3/1 18:35
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class FeignConfiguration {
 
     @Bean

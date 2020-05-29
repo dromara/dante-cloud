@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.message.annotation;
 
-import cn.herodotus.eurynome.message.configuration.BusConfiguration;
+import cn.herodotus.eurynome.message.configuration.MessageBusConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -41,6 +41,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(BusConfiguration.class)
+@Import(MessageBusConfiguration.class)
 public @interface EnableMessageBus {
 }

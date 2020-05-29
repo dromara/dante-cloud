@@ -1,12 +1,16 @@
 package cn.herodotus.eurynome.security.access;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /** 
  * <p>Description: AccessDecisionManager是访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 </p>
@@ -17,7 +21,7 @@ import java.util.Collection;
  * @author : gengwei.zheng
  * @date : 2020/5/20 12:27
  */
-
+@Slf4j
 public class HerodotusAccessDecisionManager implements AccessDecisionManager {
 
     /**
@@ -33,7 +37,22 @@ public class HerodotusAccessDecisionManager implements AccessDecisionManager {
      */
     @Override
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
-        
+
+        if(CollectionUtils.sizeIsEmpty(configAttributes)) {
+            log.debug("[Luban] |- ConfigAttributes is null!");
+            return;
+        }
+
+        for (ConfigAttribute configAttribute : configAttributes) {
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            Collection<? extends GrantedAuthority> result = authorities.stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(configAttribute.getAttribute())).collect(Collectors.toList());
+            if (CollectionUtils.isNotEmpty(result)) {
+                log.debug("[Luban] |- Permission [{}] is Matched!", configAttribute.getAttribute());
+                return;
+            }
+        }
+
+        throw new AccessDeniedException("Has No Right!");
     }
 
     @Override
