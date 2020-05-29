@@ -37,7 +37,8 @@ spring:
     sentinel:
       transport:
         port: 8719
-        dashboard: @sentinel.server-addr@
+        dashboard: @sentinel.server-addr
+
   thymeleaf:
     mode: HTML
     cache: false

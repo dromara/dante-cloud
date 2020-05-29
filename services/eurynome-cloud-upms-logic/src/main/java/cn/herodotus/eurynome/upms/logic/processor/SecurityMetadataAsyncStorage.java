@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.logic.processor;
 
-import cn.herodotus.eurynome.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -19,23 +19,23 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class RequestMappingProcessor extends AbstractRequestMappingProcessor{
+public class SecurityMetadataAsyncStorage extends AbstractSecurityMetadataStorage {
 
     private final SysAuthorityService sysAuthorityService;
 
     @Autowired
-    public RequestMappingProcessor(SysAuthorityService sysAuthorityService) {
+    public SecurityMetadataAsyncStorage(SysAuthorityService sysAuthorityService) {
         super(sysAuthorityService);
         this.sysAuthorityService = sysAuthorityService;
     }
 
     @Async
-    public void storeRequestMappings(String message) {
+    public void store(String message) {
         log.debug("[Herodotus] |- Received Service Resources Message: [{}]", message);
 
-        List<RequestMappingResource> requestMappingResources = JSON.parseArray(message, RequestMappingResource.class);
-        if (CollectionUtils.isNotEmpty(requestMappingResources)) {
-           store(requestMappingResources);
+        List<SecurityMetadata> securityMetadata = JSON.parseArray(message, SecurityMetadata.class);
+        if (CollectionUtils.isNotEmpty(securityMetadata)) {
+            store(securityMetadata);
         }
     }
 }

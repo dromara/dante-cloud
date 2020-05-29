@@ -43,7 +43,7 @@ import javax.annotation.Resource;
  * @author gengwei.zheng
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter({RedisAutoConfiguration.class})
 public class RedisConfiguration {
 

@@ -2,12 +2,12 @@ package cn.herodotus.eurynome.upms.api.helper;
 
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.common.domain.RequestMappingResource;
 import cn.herodotus.eurynome.common.enums.StatusEnum;
+import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
 import cn.herodotus.eurynome.security.core.HerodotusAuthority;
-import cn.herodotus.eurynome.security.oauth2.provider.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.core.HerodotusRole;
 import cn.herodotus.eurynome.security.core.userdetails.HerodotusUserDetails;
+import cn.herodotus.eurynome.security.oauth2.provider.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/** 
+/**
  * <p>Description: 实体转换帮助类 </p>
- * 
+ *
  * @author : gengwei.zheng
  * @date : 2019/11/18 11:38
  */
@@ -130,24 +130,24 @@ public class UpmsHelper {
         return herodotusUserDetails;
     }
 
-    public static List<SysAuthority> convertServiceResourceToSysAuthorities(Collection<RequestMappingResource> requestMappingResources) {
-        if (CollectionUtils.isNotEmpty(requestMappingResources)) {
-            return requestMappingResources.stream().map(UpmsHelper::convertServiceResourceToSysAuthority).collect(Collectors.toList());
+    public static List<SysAuthority> convertSecurityMetadatasToSysAuthorities(Collection<SecurityMetadata> securityMetadata) {
+        if (CollectionUtils.isNotEmpty(securityMetadata)) {
+            return securityMetadata.stream().map(UpmsHelper::convertSecurityMetadataToSysAuthority).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    private static SysAuthority convertServiceResourceToSysAuthority(RequestMappingResource requestMappingResource) {
+    private static SysAuthority convertSecurityMetadataToSysAuthority(SecurityMetadata securityMetadata) {
         SysAuthority sysAuthority = new SysAuthority();
-        sysAuthority.setAuthorityId(requestMappingResource.getId());
-        sysAuthority.setAuthorityName(requestMappingResource.getName());
-        sysAuthority.setAuthorityCode(requestMappingResource.getCode());
-        sysAuthority.setRequestMethod(requestMappingResource.getRequestMethod());
-        sysAuthority.setServiceId(requestMappingResource.getServiceId());
-        sysAuthority.setUrl(requestMappingResource.getUrl());
-        sysAuthority.setParentId(requestMappingResource.getParentId());
-        sysAuthority.setClassName(requestMappingResource.getClassName());
-        sysAuthority.setMethodName(requestMappingResource.getMethodName());
+        sysAuthority.setAuthorityId(securityMetadata.getMetadataId());
+        sysAuthority.setAuthorityName(securityMetadata.getMetadataName());
+        sysAuthority.setAuthorityCode(securityMetadata.getMetadataCode());
+        sysAuthority.setRequestMethod(securityMetadata.getRequestMethod());
+        sysAuthority.setServiceId(securityMetadata.getServiceId());
+        sysAuthority.setUrl(securityMetadata.getUrl());
+        sysAuthority.setParentId(securityMetadata.getParentId());
+        sysAuthority.setClassName(securityMetadata.getClassName());
+        sysAuthority.setMethodName(securityMetadata.getMethodName());
         return sysAuthority;
     }
 
@@ -159,7 +159,7 @@ public class UpmsHelper {
         oauthClientDetails.setClientId(oauthApplications.getAppKey());
         oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthApplications.getAppSecret()));
 
-        if (CollectionUtils.isNotEmpty( oauthApplications.getScopes())) {
+        if (CollectionUtils.isNotEmpty(oauthApplications.getScopes())) {
             String scope = oauthApplications.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
             oauthClientDetails.setScope(scope);
         }

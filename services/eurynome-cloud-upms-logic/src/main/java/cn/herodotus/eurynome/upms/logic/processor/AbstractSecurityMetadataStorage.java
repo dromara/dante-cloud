@@ -16,7 +16,7 @@
  *
  * Project Name: luban-cloud
  * Module Name: luban-cloud-upms-logic
- * File Name: AbstractRequestMappingProcessor.java
+ * File Name: AbstractSecurityMetadataStorage.java
  * Author: gengwei.zheng
  * Date: 2019/11/21 下午12:38
  * LastModified: 2019/11/21 下午12:38
@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.upms.logic.processor;
 
-import cn.herodotus.eurynome.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
@@ -40,26 +40,23 @@ import java.util.List;
  * @date : 2019/11/21 12:38
  */
 @Slf4j
-public abstract class AbstractRequestMappingProcessor {
+public abstract class AbstractSecurityMetadataStorage {
 
-    private SysAuthorityService sysAuthorityService;
+    private final SysAuthorityService sysAuthorityService;
 
-    public AbstractRequestMappingProcessor(SysAuthorityService sysAuthorityService) {
+    public AbstractSecurityMetadataStorage(SysAuthorityService sysAuthorityService) {
         this.sysAuthorityService = sysAuthorityService;
     }
 
-    protected boolean store(List<RequestMappingResource> requestMappingResources) {
+    protected void store(List<SecurityMetadata> securityMetadata) {
 
-        List<SysAuthority> sysAuthorities = UpmsHelper.convertServiceResourceToSysAuthorities(requestMappingResources);
+        List<SysAuthority> sysAuthorities = UpmsHelper.convertSecurityMetadatasToSysAuthorities(securityMetadata);
 
         List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
-
         if (CollectionUtils.isNotEmpty(result)) {
             log.info("[Herodotus] |- Store Service Resources Success!");
-            return true;
         } else {
             log.error("[Herodotus] |- Store Service Resources May Be Error, Please Check!");
-            return false;
         }
     }
 }

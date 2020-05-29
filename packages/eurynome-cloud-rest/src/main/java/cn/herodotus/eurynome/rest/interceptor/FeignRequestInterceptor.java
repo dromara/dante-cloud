@@ -1,13 +1,9 @@
 package cn.herodotus.eurynome.rest.interceptor;
 
-import cn.herodotus.eurynome.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.rest.security.ThroughGatewayTrace;
 import cn.hutool.extra.servlet.ServletUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -23,12 +19,6 @@ import java.util.Map;
 @Slf4j
 public class FeignRequestInterceptor implements RequestInterceptor {
 
-    private ThroughGatewayTrace throughGatewayTrace;
-
-    public FeignRequestInterceptor(ThroughGatewayTrace throughGatewayTrace) {
-        this.throughGatewayTrace = throughGatewayTrace;
-    }
-
     @Override
     public void apply(RequestTemplate requestTemplate) {
         HttpServletRequest httpServletRequest = getHttpServletRequest();
@@ -41,15 +31,6 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             }
 
             log.debug("[Herodotus] |- FeignRequestInterceptor copy all need transfer header!");
-        }
-
-        // 如果开启了gateway 的MustBeAccessed设置，才会在请求中设置参数
-        if (throughGatewayTrace.isAccessedThroughGateway()) {
-            String trace = throughGatewayTrace.get(SecurityConstants.GATEWAY_STORAGE_KEY);
-            if (ObjectUtils.isNotEmpty(requestTemplate) && StringUtils.isNotBlank(trace)) {
-                requestTemplate.header(SecurityConstants.GATEWAY_TRACE_HEADER, trace);
-                log.debug("[Herodotus] |- FeignRequestInterceptor set gateway track key [{}] to header!", trace);
-            }
         }
 
         log.trace("[Herodotus] |- Feign Request Interceptor [{}]", requestTemplate.toString());

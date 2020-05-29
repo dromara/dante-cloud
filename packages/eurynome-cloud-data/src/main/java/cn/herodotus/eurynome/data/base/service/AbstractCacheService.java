@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.data.base.service;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.data.base.entity.AbstractEntity;
-import cn.herodotus.eurynome.data.base.entity.Entity;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.definition.entity.Entity;
 import com.alicp.jetcache.Cache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;

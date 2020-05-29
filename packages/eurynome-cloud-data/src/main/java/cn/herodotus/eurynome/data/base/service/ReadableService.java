@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.data.base.service;
 
-import cn.herodotus.eurynome.data.base.entity.Entity;
+import cn.herodotus.eurynome.common.definition.entity.Entity;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

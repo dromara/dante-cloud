@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.data.base.repository;
 
-import cn.herodotus.eurynome.data.base.entity.Entity;
+import cn.herodotus.eurynome.common.definition.entity.Entity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;

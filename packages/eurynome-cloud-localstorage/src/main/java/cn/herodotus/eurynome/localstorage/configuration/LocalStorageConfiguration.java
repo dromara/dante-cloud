@@ -26,10 +26,13 @@ package cn.herodotus.eurynome.localstorage.configuration;
 
 import cn.herodotus.eurynome.data.annotation.EnableDynamicDataSource;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import javax.annotation.PostConstruct;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -40,7 +43,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @author : gengwei.zheng
  * @date : 2020/5/28 21:27
  */
-@Configuration
+@Slf4j
+@Configuration(proxyBeanMethods = false)
 @EnableDynamicDataSource
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.localstorage.service"
@@ -55,4 +59,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "cn.herodotus.eurynome.localstorage.service"
 })
 public class LocalStorageConfiguration {
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Bean [Local Storage] Auto Configure.");
+    }
 }

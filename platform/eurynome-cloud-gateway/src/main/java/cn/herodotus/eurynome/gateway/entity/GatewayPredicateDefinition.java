@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.gateway.entity;
 
-import cn.herodotus.eurynome.data.base.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 

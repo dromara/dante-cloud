@@ -1,6 +1,6 @@
-package cn.herodotus.eurynome.data.base.dto;
+package cn.herodotus.eurynome.common.definition.dto;
 
-import cn.herodotus.eurynome.data.base.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 
 public abstract class BaseDTO extends AbstractEntity {
 

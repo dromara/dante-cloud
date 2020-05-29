@@ -30,7 +30,7 @@ import javax.annotation.PostConstruct;
  * @date : 2020/3/4 10:49
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class DataConfiguration {
 
     @PostConstruct

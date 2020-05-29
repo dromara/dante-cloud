@@ -15,32 +15,29 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-localstorage
- * File Name: EnableLocalStorage.java
+ * Module Name: eurynome-cloud-data
+ * File Name: CacheConstants.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午9:34
- * LastModified: 2020/5/28 下午9:34
+ * Date: 2020/5/28 下午12:57
+ * LastModified: 2020/5/28 下午12:57
  */
 
-package cn.herodotus.eurynome.localstorage.annotation;
-
-import cn.herodotus.eurynome.localstorage.configuration.LocalStorageConfiguration;
-import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
+package cn.herodotus.eurynome.data.constants;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: EnableLocalStorage </p>
+ * <p>File: CacheConstants </p>
  *
- * <p>Description: 是否开启本地缓存注解 </p>
+ * <p>Description: CacheConstants </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 21:34
+ * @date : 2020/5/28 12:57
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Import(LocalStorageConfiguration.class)
-public @interface EnableLocalStorage {
+public class CacheConstants {
+
+    public static final int DEFAULT_UPMS_CACHE_EXPIRE = 86400;
+    public static final int DEFAULT_UPMS_LOCAL_LIMIT = 1000;
+
+
+    public static final String INDEX_CACHE_NAME = "index:";
 }

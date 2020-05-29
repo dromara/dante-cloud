@@ -19,7 +19,6 @@ import java.lang.annotation.*;
 @EnableJpaAuditing
 @EnableRedisStorage
 @EnableCreateCacheAnnotation
-@EnableLogCollection
 @Import(DataConfiguration.class)
 public @interface EnableHerodotusData {
 }

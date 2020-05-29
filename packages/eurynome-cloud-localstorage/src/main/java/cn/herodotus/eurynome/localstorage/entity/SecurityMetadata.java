@@ -25,6 +25,9 @@
 package cn.herodotus.eurynome.localstorage.entity;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.enums.AuthorityType;
+import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -41,17 +44,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "security_metadata", indexes = {@Index(name = "security_metadata_id_idx", columnList = "metadata_id")})
-public class SecurityMetadata extends AbstractEntity {
+public class SecurityMetadata extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "metadata-uuid")
     @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.eurynome.localstorage.generator.SecurityMetadataUUIDGenerator")
     @Column(name = "metadata_id", length = 64)
+    @JsonProperty("authorityId")
     private String metadataId;
 
+    @JsonProperty("authorityCode")
     @Column(name = "metadata_code", length = 128)
     private String metadataCode;
 
+    @JsonProperty("authorityName")
     @Column(name = "metadata_name", length = 1024)
     private String metadataName;
 
@@ -69,6 +75,14 @@ public class SecurityMetadata extends AbstractEntity {
 
     @Column(name = "url", length = 2048)
     private String url;
+
+    @Column(name = "parent_id", length = 64)
+    private String parentId;
+
+    @Column(name = "authority_type")
+    @Enumerated(EnumType.STRING)
+    @JsonProperty("authorityType")
+    private AuthorityType authorityType = AuthorityType.API;
 
     @Override
     public String getLinkedProperty() {
@@ -144,6 +158,22 @@ public class SecurityMetadata extends AbstractEntity {
         this.url = url;
     }
 
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public AuthorityType getAuthorityType() {
+        return authorityType;
+    }
+
+    public void setAuthorityType(AuthorityType authorityType) {
+        this.authorityType = authorityType;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -155,8 +185,8 @@ public class SecurityMetadata extends AbstractEntity {
                 .add("className", className)
                 .add("methodName", methodName)
                 .add("url", url)
+                .add("parentId", parentId)
+                .add("authorityType", authorityType)
                 .toString();
     }
-
-
 }

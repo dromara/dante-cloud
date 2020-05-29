@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.rest.controller;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.data.base.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;

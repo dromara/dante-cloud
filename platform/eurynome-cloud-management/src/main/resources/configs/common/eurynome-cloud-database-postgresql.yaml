@@ -55,3 +55,46 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         cachePrepStmts: true
+
+
+herodotus:
+  datasource:
+    dynamic:
+      primary: postgresql
+      p6spy: true
+      postgresql:
+        continue-on-error: true
+          driver-class-name: ${herodotus.environment.driver-class-name}
+          url: ${herodotus.environment.url}
+          username: ${herodotus.environment.username}
+          password: ${herodotus.environment.password}
+          initialization-mode: always
+          data-username: ${herodotus.environment.username}
+          data-password: ${herodotus.environment.password}
+          schema-username: ${herodotus.environment.username}
+          schema-password: ${herodotus.environment.password}
+    hikari:
+      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
+      connection-timeout: 5000
+      connection-test-query: SELECT 1
+      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
+      idle-timeout: 600000
+      minimum-idle: 5
+      maximum-pool-size: 50
+      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit.
+      # Default: 1800000 (30 minutes)
+      max-lifetime: 1800000
+      pool-name: Hikari
+      # Lowest acceptable validation timeout is 250 ms. Default: 5000
+      validation-timeout: 5000
+      data-source-properties:
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        cachePrepStmts: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatement: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false

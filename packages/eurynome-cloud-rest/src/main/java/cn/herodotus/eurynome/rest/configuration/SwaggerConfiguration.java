@@ -26,13 +26,12 @@ import javax.annotation.PostConstruct;
  * @date : 2020/3/31 11:54
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableSwagger2
 public class SwaggerConfiguration {
 
     @Autowired
     private SwaggerProperties swaggerProperties;
-
 
     @PostConstruct
     public void postConstruct() {

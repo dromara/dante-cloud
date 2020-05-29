@@ -1,17 +1,13 @@
 package cn.herodotus.eurynome.rest.configuration;
 
 import cn.herodotus.eurynome.rest.interceptor.FeignRequestInterceptor;
-import cn.herodotus.eurynome.rest.security.ThroughGatewayTrace;
 import com.alibaba.cloud.sentinel.feign.HerodotusSentinelFeign;
 import com.alibaba.csp.sentinel.SphU;
 import feign.Feign;
 import feign.Request;
 import feign.Retryer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,8 +38,8 @@ public class FeignConfiguration {
     }
 
     @Bean
-    public FeignRequestInterceptor feignRequestInterceptor(ThroughGatewayTrace throughGatewayTrace) {
-        FeignRequestInterceptor feignRequestInterceptor = new FeignRequestInterceptor(throughGatewayTrace);
+    public FeignRequestInterceptor feignRequestInterceptor() {
+        FeignRequestInterceptor feignRequestInterceptor = new FeignRequestInterceptor();
         log.debug("[Herodotus] |- Bean [Feign Request Interceptor] Auto Configure.");
         return feignRequestInterceptor;
     }

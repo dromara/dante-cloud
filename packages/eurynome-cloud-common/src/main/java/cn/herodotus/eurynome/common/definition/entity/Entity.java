@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2019 the original author or authors.
+ * Copyright (c) 2019-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
  * limitations under the License.
  *
  *
- * Project Name: luban-cloud
- * Module Name: luban-cloud-component-data
- * File Name: BaseEntity.java
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-common
+ * File Name: Entity.java
  * Author: gengwei.zheng
- * Date: 2019/11/8 下午5:51
- * LastModified: 2019/11/8 下午4:13
+ * Date: 2020/5/26 下午3:01
+ * LastModified: 2020/5/26 下午3:00
  */
 
-package cn.herodotus.eurynome.data.base.entity;
+package cn.herodotus.eurynome.common.definition.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 

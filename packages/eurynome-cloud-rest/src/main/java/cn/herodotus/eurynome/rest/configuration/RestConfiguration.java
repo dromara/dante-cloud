@@ -4,15 +4,12 @@ import cn.herodotus.eurynome.data.annotation.EnableRedisStorage;
 import cn.herodotus.eurynome.rest.interceptor.GlobalRequestInterceptor;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
-import cn.herodotus.eurynome.rest.security.ThroughGatewayTrace;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -58,19 +55,9 @@ public class RestConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(ThroughGatewayTrace.class)
-    @ConditionalOnBean(RedisTemplate.class)
-    public ThroughGatewayTrace throughGatewayTrace(RedisTemplate<Object, Object> redisTemplate, ApplicationProperties applicationProperties) {
-        ThroughGatewayTrace throughGatewayTrace = new ThroughGatewayTrace(redisTemplate, applicationProperties);
-        log.debug("[Herodotus] |- Bean [Through Gateway Trace] Auto Configure.");
-        return throughGatewayTrace;
-    }
-
-    @Bean
     @ConditionalOnMissingBean(GlobalRequestInterceptor.class)
-    @ConditionalOnBean(ThroughGatewayTrace.class)
-    public GlobalRequestInterceptor globalInterceptor(ThroughGatewayTrace throughGatewayTrace) {
-        GlobalRequestInterceptor globalRequestInterceptor = new GlobalRequestInterceptor(throughGatewayTrace);
+    public GlobalRequestInterceptor globalInterceptor() {
+        GlobalRequestInterceptor globalRequestInterceptor = new GlobalRequestInterceptor();
         log.debug("[Herodotus] |- Bean [Global Interceptor] Auto Configure.");
         return globalRequestInterceptor;
     }

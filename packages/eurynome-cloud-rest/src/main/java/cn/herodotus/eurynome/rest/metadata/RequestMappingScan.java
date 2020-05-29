@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2019 the original author or authors.
+ * Copyright (c) 2019-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,19 @@
  * limitations under the License.
  *
  *
- * Project Name: luban-cloud
- * Module Name: luban-cloud-component-security
- * File Name: ResourceAnnotationScan.java
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-rest
+ * File Name: RequestMappingScan.java
  * Author: gengwei.zheng
- * Date: 2019/11/21 上午11:43
- * LastModified: 2019/11/18 下午2:42
+ * Date: 2020/5/29 上午10:04
+ * LastModified: 2020/5/29 上午9:36
  */
 
-package cn.herodotus.eurynome.rest.annotation;
+package cn.herodotus.eurynome.rest.metadata;
 
 import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.common.definition.RequestMappingStore;
-import cn.herodotus.eurynome.common.domain.RequestMappingResource;
+import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
 import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import io.swagger.annotations.ApiOperation;
@@ -66,70 +65,67 @@ import java.util.stream.Collectors;
 public class RequestMappingScan implements ApplicationListener<ApplicationReadyEvent> {
 
     private final ApplicationProperties applicationProperties;
-    private final RequestMappingStore requestMappingStore;
+    private final SecurityMetadataPersistence securityMetadataPersistence;
     /**
      * 在外部动态指定扫描的注解，而不是在内部写死
      */
     private final Class<? extends Annotation> scanAnnotationClass;
 
-    public RequestMappingScan(RequestMappingStore requestMappingStore, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
+    public RequestMappingScan(SecurityMetadataPersistence securityMetadataPersistence, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
         this.applicationProperties = applicationProperties;
-        this.requestMappingStore = requestMappingStore;
+        this.securityMetadataPersistence = securityMetadataPersistence;
         this.scanAnnotationClass = scanAnnotationClass;
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
 
-        if (ObjectUtils.isNotEmpty(requestMappingStore) && applicationProperties.getRequestMapping().isRegisterRequestMapping()) {
 
-            ConfigurableApplicationContext applicationContext = applicationReadyEvent.getApplicationContext();
+        ConfigurableApplicationContext applicationContext = applicationReadyEvent.getApplicationContext();
 
-            // 1、获取服务ID：该服务ID对于微服务是必需的。
-            Environment environment = applicationContext.getEnvironment();
-            String serviceId = environment.getProperty("spring.application.name", "application");
+        // 1、获取服务ID：该服务ID对于微服务是必需的。
+        Environment environment = applicationContext.getEnvironment();
+        String serviceId = environment.getProperty("spring.application.name", "application");
 
-            // 2、只针对有EnableResourceServer注解的微服务进行扫描。如果变为单体架构目前不会用到EnableResourceServer所以增加的了一个Architecture判断
-            if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
-                Map<String, Object> resourceServer = applicationContext.getBeansWithAnnotation(scanAnnotationClass);
-                if (MapUtils.isEmpty(resourceServer)) {
-                    // 只扫描资源服务器
-                    return;
-                }
+        // 2、只针对有EnableResourceServer注解的微服务进行扫描。如果变为单体架构目前不会用到EnableResourceServer所以增加的了一个Architecture判断
+        if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
+            Map<String, Object> resourceServer = applicationContext.getBeansWithAnnotation(scanAnnotationClass);
+            if (MapUtils.isEmpty(resourceServer)) {
+                // 只扫描资源服务器
+                return;
             }
-
-            // 3、获取所有接口映射
-            RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
-            // 4、 获取url与类和方法的对应信息
-            Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
-            List<RequestMappingResource> resources = new ArrayList<>();
-            for (Map.Entry<RequestMappingInfo, HandlerMethod> entry : handlerMethods.entrySet()) {
-                RequestMappingInfo requestMappingInfo = entry.getKey();
-                HandlerMethod handlerMethod = entry.getValue();
-
-                // 4.1、如果是被排除的requestMapping，那么就进行不扫描
-                if (isExcludedRequestMapping(handlerMethod)) {
-                    continue;
-                }
-
-                // 4.2、拼装扫描信息
-                RequestMappingResource requestMappingResource = getRequestMappingResource(serviceId, requestMappingInfo, handlerMethod);
-                if (ObjectUtils.isEmpty(requestMappingResource)) {
-                    continue;
-                }
-
-                resources.add(requestMappingResource);
-            }
-
-            requestMappingStore.storeRequestMappings(resources);
-            log.info("[Herodotus] |- Platform Store the Resource For Service: [{}]", serviceId);
-        } else {
-            log.warn("[Herodotus] |- If you want to auto scan and store REST Api, please config the ResourceStore!");
         }
+
+        // 3、获取所有接口映射
+        RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
+        // 4、 获取url与类和方法的对应信息
+        Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
+        List<SecurityMetadata> resources = new ArrayList<>();
+        for (Map.Entry<RequestMappingInfo, HandlerMethod> entry : handlerMethods.entrySet()) {
+            RequestMappingInfo requestMappingInfo = entry.getKey();
+            HandlerMethod handlerMethod = entry.getValue();
+
+            // 4.1、如果是被排除的requestMapping，那么就进行不扫描
+            if (isExcludedRequestMapping(handlerMethod)) {
+                continue;
+            }
+
+            // 4.2、拼装扫描信息
+            SecurityMetadata securityMetadata = getRequestMappingResource(serviceId, requestMappingInfo, handlerMethod);
+            if (ObjectUtils.isEmpty(securityMetadata)) {
+                continue;
+            }
+
+            resources.add(securityMetadata);
+        }
+
+        securityMetadataPersistence.store(resources);
+        log.info("[Herodotus] |- Platform Store the Resource For Service: [{}]", serviceId);
     }
 
     /**
      * 检测RequestMapping是否需要被排除
+     *
      * @param handlerMethod HandlerMethod
      * @return boolean
      */
@@ -143,6 +139,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
     /**
      * 如果开启isJustScanRestController，那么就只扫描RestController
+     *
      * @param handlerMethod HandlerMethod
      * @return boolean
      */
@@ -156,7 +153,8 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
     /**
      * 有ApiIgnore注解的方法不扫描, 没有ApiOperation注解不扫描
-     * @param handlerMethod  HandlerMethod
+     *
+     * @param handlerMethod HandlerMethod
      * @return boolean
      */
     private boolean isSwaggerAnnotationMatched(HandlerMethod handlerMethod) {
@@ -169,6 +167,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
 
     /**
      * 如果当前class的groupId在GroupId列表中，那么就进行扫描，否则就排除
+     *
      * @param className 当前扫描的controller类名
      * @return Boolean
      */
@@ -182,7 +181,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
         }
     }
 
-    private RequestMappingResource getRequestMappingResource(String serviceId, RequestMappingInfo info, HandlerMethod method) {
+    private SecurityMetadata getRequestMappingResource(String serviceId, RequestMappingInfo info, HandlerMethod method) {
         // 4.2.1、获取类名
         // method.getMethod().getDeclaringClass().getName() 取到的是注解实际所在类的名字，比如注解在父类叫BaseController，那么拿到的就是BaseController
         // method.getBeanType().getName() 取到的是注解实际Bean的名字，比如注解在在父类叫BaseController，而实际类是SysUserController，那么拿到的就是SysUserController
@@ -220,24 +219,24 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
         String id = idGenerator(identifyingCode, urls, requestMethods);
 
         // 5.2.9、组装对象
-        RequestMappingResource requestMappingResource = new RequestMappingResource();
-        requestMappingResource.setId(id);
-        requestMappingResource.setCode(SecurityConstants.AUTHORITY_PREFIX + id);
+        SecurityMetadata securityMetadata = new SecurityMetadata();
+        securityMetadata.setMetadataId(id);
+        securityMetadata.setMetadataCode(SecurityConstants.AUTHORITY_PREFIX + id);
         // 微服务需要明确ServiceId，同时也知道ParentId，Hammer有办法，但是太繁琐，还是生成数据后，配置一把好点。
         if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
-            requestMappingResource.setServiceId(identifyingCode);
-            requestMappingResource.setParentId(identifyingCode);
+            securityMetadata.setServiceId(identifyingCode);
+            securityMetadata.setParentId(identifyingCode);
         }
         ApiOperation apiOperation = method.getMethodAnnotation(ApiOperation.class);
-        if(ObjectUtils.isNotEmpty(apiOperation)) {
-            requestMappingResource.setName(apiOperation.value());
-            requestMappingResource.setDescription(apiOperation.notes());
+        if (ObjectUtils.isNotEmpty(apiOperation)) {
+            securityMetadata.setMetadataName(apiOperation.value());
+            securityMetadata.setDescription(apiOperation.notes());
         }
-        requestMappingResource.setRequestMethod(requestMethods);
-        requestMappingResource.setUrl(urls);
-        requestMappingResource.setClassName(className);
-        requestMappingResource.setMethodName(methodName);
-        return requestMappingResource;
+        securityMetadata.setRequestMethod(requestMethods);
+        securityMetadata.setUrl(urls);
+        securityMetadata.setClassName(className);
+        securityMetadata.setMethodName(methodName);
+        return securityMetadata;
     }
 
     private String idGenerator(String serviceId, String urls, String requestMethods) {

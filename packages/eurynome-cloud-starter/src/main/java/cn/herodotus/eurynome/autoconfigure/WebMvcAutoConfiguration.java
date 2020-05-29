@@ -15,13 +15,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date : 2020/3/4 11:00
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
     /**
      * 多个WebSecurityConfigurerAdapter
      */
-    @Configuration
+    @Configuration(proxyBeanMethods = false)
     @Order(101)
     public static class ApiWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -31,9 +31,6 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
             web.ignoring().antMatchers(
                     "/error",
                     "/static/**",
-                    "/v2/api-docs/**",
-                    "/swagger-resources/**",
-                    "/webjars/**",
                     "/components/**",
                     "/features/**",
                     "/favicon.ico");

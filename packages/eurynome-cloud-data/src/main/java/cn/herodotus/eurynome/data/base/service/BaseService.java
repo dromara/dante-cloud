@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.data.base.service;
 
-import cn.herodotus.eurynome.data.base.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;

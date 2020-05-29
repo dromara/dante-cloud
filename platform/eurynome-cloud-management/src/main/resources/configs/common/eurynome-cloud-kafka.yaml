@@ -1,22 +1,43 @@
 spring:
+  cloud:
+    bus:
+      enabled: true
+      destination: event-bus
+      id: ${spring.application.name}
+    stream:
+      default-binder: kafka
+      bindings:
+        rest-interface-input:
+          destination: rest.interface.bus
+        rest-interface-output:
+          destination: rest.interface.bus
+      kafka:
+        binder:
+          auto-add-partitions: true
+          auto-create-topics: true
+          configuration:
+            commit.interval.ms: 1000
+            default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
   kafka:
     bootstrap-servers: ${herodotus.environment.kafka-bootstrap-servers}
     listener:
       missing-topics-fatal: false
-
     producer:
       retries: 0
       batch-size: 16384
       buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
       properties:
         linger.ms: 1
-
     consumer:
       enable-auto-commit: false
       auto-commit-interval: 100ms
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      client-id: ${spring.cloud.bus.id}
       properties:
         session.timeout.ms: 15000
+        max.poll.interval.ms: 500000
+        max.poll.records: 50

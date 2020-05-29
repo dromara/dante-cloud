@@ -60,7 +60,7 @@ import java.util.Map;
  * @date : 2020/5/7 15:17
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({
         ManagementProperties.class
 })

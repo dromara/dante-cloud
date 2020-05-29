@@ -25,7 +25,12 @@
 package cn.herodotus.eurynome.message.configuration;
 
 import cn.herodotus.eurynome.message.stream.channel.SecurityMetadataProcessor;
+import cn.herodotus.eurynome.message.stream.service.SecurityMetadataMessage;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -37,7 +42,20 @@ import org.springframework.context.annotation.Configuration;
  * @author : gengwei.zheng
  * @date : 2020/5/28 16:06
  */
-@Configuration
+@Slf4j
+@Configuration(proxyBeanMethods = false)
 @EnableBinding({SecurityMetadataProcessor.class})
+@ComponentScan(basePackages = {
+        "cn.herodotus.eurynome.message.stream.service"
+})
 public class StreamMessageConfiguration {
+
+    @Bean
+    @ConditionalOnBean(SecurityMetadataProcessor.class)
+    public SecurityMetadataMessage securityMetadataMessage(SecurityMetadataProcessor securityMetadataProcessor) {
+        SecurityMetadataMessage securityMetadataMessage = new SecurityMetadataMessage(securityMetadataProcessor);
+        log.debug("[Herodotus] |- Bean [Security Metadata Message] Auto Configure.");
+        return securityMetadataMessage;
+    }
+
 }

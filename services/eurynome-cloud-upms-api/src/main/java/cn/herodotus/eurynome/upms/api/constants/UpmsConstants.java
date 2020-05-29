@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.upms.api.constants;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
+import cn.herodotus.eurynome.data.constants.CacheConstants;
 import cn.herodotus.eurynome.security.oauth2.GrantType;
 import cn.herodotus.eurynome.common.enums.ApplicationType;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
@@ -18,13 +19,8 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/2/19 20:06
  */
-public class UpmsConstants {
+public class UpmsConstants extends CacheConstants {
 
-    public static final int DEFAULT_UPMS_CACHE_EXPIRE = 86400;
-    public static final int DEFAULT_UPMS_LOCAL_LIMIT = 1000;
-
-
-    public static final String INDEX_CACHE_NAME = "index:";
     public static final String CACHE_AREA_PREFIX = "data:upms:";
 
     public static final String CACHE_NAME_WEAPP_USER = CACHE_AREA_PREFIX + "weapp:user:";

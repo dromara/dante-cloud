@@ -67,7 +67,7 @@ public class DynamicDataSourceConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(DataSource.class)
-    @ConditionalOnBean({HikariConfig.class, DataSourceProperties.class} )
+    @ConditionalOnBean({HikariConfig.class, DataSourceProperties.class})
     public DataSource dataSource(DataSourceProperties dataSourceProperties, HikariConfig hikariConfig) {
         return new DynamicRoutingDataSource(dataSourceProperties, hikariConfig);
     }

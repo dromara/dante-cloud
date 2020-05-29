@@ -24,9 +24,10 @@
 
 package cn.herodotus.eurynome.data.base.service;
 
-import cn.herodotus.eurynome.data.base.entity.Entity;
+import cn.herodotus.eurynome.common.definition.entity.Entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface Service<E extends Entity, ID extends Serializable> extends ReadableService<E, ID> {
 
@@ -58,14 +59,29 @@ public interface Service<E extends Entity, ID extends Serializable> extends Read
         return getRepository().save(domain);
     }
 
-    default Iterable<E> saveAll(Iterable<E> entities) {
+    /**
+     * 批量保存
+     * @param entities 实体集合
+     * @return 已经保存的实体集合
+     */
+    default <S extends E> List<S> saveAll(Iterable<S> entities) {
         return getRepository().saveAll(entities);
     }
 
+    /**
+     * 保存并且刷新
+     * @param entity 实体
+     * @return 保存后实体
+     */
     default E saveAndFlush(E entity) {
         return getRepository().saveAndFlush(entity);
     }
 
+    /**
+     * 保存或者更新
+     * @param entity 实体
+     * @return 保存后实体
+     */
     default E saveOrUpdate(E entity) {
         return saveAndFlush(entity);
     }

@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.security.oauth2.provider;
 
-import cn.herodotus.eurynome.data.base.dto.BaseDTO;
+import cn.herodotus.eurynome.common.definition.dto.BaseDTO;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.core.GrantedAuthority;

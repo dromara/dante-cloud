@@ -16,31 +16,29 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-message
- * File Name: BusConfiguration.java
+ * File Name: EnableHerodotusMessage.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午12:13
- * LastModified: 2020/5/28 下午12:13
+ * Date: 2020/5/29 上午10:43
+ * LastModified: 2020/5/29 上午10:43
  */
 
-package cn.herodotus.eurynome.message.configuration;
+package cn.herodotus.eurynome.message.annotation;
 
-import org.springframework.cloud.bus.jackson.RemoteApplicationEventScan;
-import org.springframework.context.annotation.Configuration;
+import java.lang.annotation.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: BusConfiguration </p>
+ * <p>File: EnableHerodotusMessage </p>
  *
- * <p>Description: 消息总线配置 </p>
- * <p>
- * 思路变化，暂时用不到。代码先保留以备后用。
+ * <p>Description: EnableHerodotusMessage </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 12:13
+ * @date : 2020/5/29 10:43
  */
-@Configuration(proxyBeanMethods = false)
-@RemoteApplicationEventScan(basePackages = {
-        "cn.herodotus.eurynome.message.bus.event"
-})
-public class BusConfiguration {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@EnableLogCollection
+@EnableStreamMessage
+public @interface EnableHerodotusMessage {
 }
