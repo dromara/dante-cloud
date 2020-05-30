@@ -24,7 +24,6 @@
 
 package cn.herodotus.eurynome.localstorage.configuration;
 
-import cn.herodotus.eurynome.data.annotation.EnableDynamicDataSource;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -44,8 +43,7 @@ import javax.annotation.PostConstruct;
  * @date : 2020/5/28 21:27
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
-@EnableDynamicDataSource
+@Configuration
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.localstorage.service"
 })

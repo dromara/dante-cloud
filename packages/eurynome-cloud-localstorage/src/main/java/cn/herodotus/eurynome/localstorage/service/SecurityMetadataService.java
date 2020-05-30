@@ -24,20 +24,14 @@
 
 package cn.herodotus.eurynome.localstorage.service;
 
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.data.datasource.annotation.DataSource;
-import cn.herodotus.eurynome.localstorage.constants.LocalStorageConstants;
 import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
 import cn.herodotus.eurynome.localstorage.repository.SecurityMetadataRepository;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -51,31 +45,17 @@ import java.util.Set;
 @Slf4j
 @Service
 @DataSource
-public class SecurityMetadataService extends BaseService<SecurityMetadata, String> {
-
-    private static final String CACHE_NAME = LocalStorageConstants.CACHE_NAME_SECURITY_METADATA;
+public class SecurityMetadataService {
 
     @Autowired
     private SecurityMetadataRepository securityMetadataRepository;
 
-    @CreateCache(name = CACHE_NAME, expire = LocalStorageConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = LocalStorageConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, SecurityMetadata> dataCache;
-
-    @CreateCache(name = CACHE_NAME + LocalStorageConstants.INDEX_CACHE_NAME, expire = LocalStorageConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = LocalStorageConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
-
-    @Override
-    public Cache<String, SecurityMetadata> getCache() {
-        return dataCache;
+    public List<SecurityMetadata> findAll() {
+        return securityMetadataRepository.findAll();
     }
 
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return indexCache;
+    public List<SecurityMetadata> saveAll(List<SecurityMetadata> securityMetadata) {
+        return securityMetadataRepository.saveAll(securityMetadata);
     }
 
-    @Override
-    public BaseRepository<SecurityMetadata, String> getRepository() {
-        return securityMetadataRepository;
-    }
 }

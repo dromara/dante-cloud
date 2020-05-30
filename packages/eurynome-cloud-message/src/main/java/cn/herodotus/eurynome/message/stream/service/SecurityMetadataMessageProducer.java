@@ -24,10 +24,13 @@
 
 package cn.herodotus.eurynome.message.stream.service;
 
-import cn.herodotus.eurynome.message.stream.channel.SecurityMetadataProcessor;
+import cn.herodotus.eurynome.message.stream.channel.SecurityMetadataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -39,19 +42,18 @@ import org.springframework.messaging.support.MessageBuilder;
  * @date : 2020/5/28 15:50
  */
 @Slf4j
-public class SecurityMetadataMessage {
+@Component
+@EnableBinding(SecurityMetadataSource.class)
+public class SecurityMetadataMessageProducer {
 
-    private final SecurityMetadataProcessor securityMetadataProcessor;
-
-    public SecurityMetadataMessage(SecurityMetadataProcessor securityMetadataProcessor) {
-        this.securityMetadataProcessor = securityMetadataProcessor;
-    }
+    @Autowired
+    private SecurityMetadataSource securityMetadataSource;
 
     public boolean sendMessage(String message) {
         boolean status = false;
         if (StringUtils.isNotEmpty(message)) {
             log.debug("[Herodotus] |- Prepared the Security Metadata [{}]", message);
-            status = securityMetadataProcessor.output().send(MessageBuilder.withPayload(message).build());
+            status = securityMetadataSource.output().send(MessageBuilder.withPayload(message).build());
         }
 
         if (status) {

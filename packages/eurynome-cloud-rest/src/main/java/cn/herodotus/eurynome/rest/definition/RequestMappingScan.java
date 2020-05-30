@@ -18,11 +18,11 @@
  * Module Name: eurynome-cloud-rest
  * File Name: RequestMappingScan.java
  * Author: gengwei.zheng
- * Date: 2020/5/29 上午10:04
- * LastModified: 2020/5/29 上午9:36
+ * Date: 2020/5/29 下午8:27
+ * LastModified: 2020/5/29 上午10:38
  */
 
-package cn.herodotus.eurynome.rest.metadata;
+package cn.herodotus.eurynome.rest.definition;
 
 import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
@@ -65,21 +65,20 @@ import java.util.stream.Collectors;
 public class RequestMappingScan implements ApplicationListener<ApplicationReadyEvent> {
 
     private final ApplicationProperties applicationProperties;
-    private final SecurityMetadataPersistence securityMetadataPersistence;
+    private final RequestMappingPersistence requestMappingPersistence;
     /**
      * 在外部动态指定扫描的注解，而不是在内部写死
      */
     private final Class<? extends Annotation> scanAnnotationClass;
 
-    public RequestMappingScan(SecurityMetadataPersistence securityMetadataPersistence, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
+    public RequestMappingScan(RequestMappingPersistence requestMappingPersistence, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
         this.applicationProperties = applicationProperties;
-        this.securityMetadataPersistence = securityMetadataPersistence;
+        this.requestMappingPersistence = requestMappingPersistence;
         this.scanAnnotationClass = scanAnnotationClass;
     }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-
 
         ConfigurableApplicationContext applicationContext = applicationReadyEvent.getApplicationContext();
 
@@ -119,7 +118,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
             resources.add(securityMetadata);
         }
 
-        securityMetadataPersistence.store(resources);
+        requestMappingPersistence.store(resources);
         log.info("[Herodotus] |- Platform Store the Resource For Service: [{}]", serviceId);
     }
 

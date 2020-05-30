@@ -25,6 +25,7 @@
 package cn.herodotus.eurynome.data.configuration;
 
 import cn.herodotus.eurynome.data.datasource.DynamicRoutingDataSource;
+import cn.herodotus.eurynome.data.datasource.aop.DynamicDataSourceAspect;
 import cn.herodotus.eurynome.data.datasource.properties.DataSourceProperties;
 import com.zaxxer.hikari.HikariConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 
@@ -48,21 +50,23 @@ import javax.sql.DataSource;
  */
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.data.datasource.aop"
-})
+@Import(DynamicDataSourceAspect.class)
 public class DynamicDataSourceConfiguration {
 
     @Bean
     @ConfigurationProperties(prefix = "herodotus.datasource.hikari")
     public HikariConfig hikariConfig() {
-        return new HikariConfig();
+        HikariConfig hikariConfig = new HikariConfig();
+        log.info("[Herodotus] |- Properties [HikariConfig] is Enabled.");
+        return hikariConfig;
     }
 
     @Bean
     @ConfigurationProperties(prefix = "herodotus.datasource.dynamic")
     public DataSourceProperties dataSourceProperties() {
-        return new DataSourceProperties();
+        DataSourceProperties dataSourceProperties = new DataSourceProperties();
+        log.info("[Herodotus] |- Properties [DataSource] is Enabled.");
+        return dataSourceProperties;
     }
 
     @Bean

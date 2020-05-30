@@ -16,38 +16,34 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-message
- * File Name: StreamConfiguration.java
+ * File Name: SecurityMetadataSink.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午4:06
- * LastModified: 2020/5/28 下午4:06
+ * Date: 2020/5/30 上午11:20
+ * LastModified: 2020/5/30 上午11:20
  */
 
-package cn.herodotus.eurynome.message.configuration;
+package cn.herodotus.eurynome.message.stream.channel;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
+import org.springframework.cloud.stream.annotation.Input;
+import org.springframework.messaging.SubscribableChannel;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: StreamConfiguration </p>
+ * <p>File: SecurityMetadataSink </p>
  *
- * <p>Description: StreamMessageConfiguration </p>
+ * <p>Description: SecurityMetadata 输入通道 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 16:06
+ * @date : 2020/5/30 11:20
  */
-@Slf4j
-@Configuration(proxyBeanMethods = false)
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.message.stream.service"
-})
-public class StreamMessageConfiguration {
+public interface SecurityMetadataSink {
 
-    @PostConstruct
-    public void postConstruct() {
-        log.info("[Herodotus] |- Bean [Stream Message Auto Configure.");
-    }
+    String INPUT = "security-metadata-input";
+
+    /**
+     * 接收RequestMapping
+     * @return {@link SubscribableChannel}
+     */
+    @Input(INPUT)
+    SubscribableChannel input();
 }

@@ -38,7 +38,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableLogCollection
+@EnableMessageBus
 @EnableStreamMessage
 public @interface EnableHerodotusMessage {
 }

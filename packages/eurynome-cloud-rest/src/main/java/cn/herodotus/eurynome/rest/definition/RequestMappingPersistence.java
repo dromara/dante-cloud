@@ -15,34 +15,33 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
- * File Name: EnableDynamicDataSource.java
+ * Module Name: eurynome-cloud-rest
+ * File Name: RequestMappingPersistence.java
  * Author: gengwei.zheng
- * Date: 2020/5/23 上午10:08
- * LastModified: 2020/5/23 上午10:08
+ * Date: 2020/5/29 下午8:24
+ * LastModified: 2020/5/29 下午8:24
  */
 
-package cn.herodotus.eurynome.data.annotation;
+package cn.herodotus.eurynome.rest.definition;
 
-import cn.herodotus.eurynome.data.configuration.DynamicDataSourceConfiguration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 
-import java.lang.annotation.*;
+import java.util.List;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: EnableDynamicDataSource </p>
+ * <p>File: RequestMappingPersistence </p>
  *
- * <p>Description: 开启动态数据源 </p>
+ * <p>Description: RequestMappingPersistence </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/23 10:08
+ * @date : 2020/5/29 20:24
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@EnableAspectJAutoProxy
-@Import(DynamicDataSourceConfiguration.class)
-public @interface EnableDynamicDataSource {
+public interface RequestMappingPersistence<E extends AbstractEntity> {
+
+    /**
+     * RequestMapping 存储
+     * @param collection RequestMapping数据集合
+     */
+    void store(List<E> collection);
 }

@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.localstorage.annotation;
 
+import cn.herodotus.eurynome.data.annotation.EnableDynamicDataSource;
 import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.localstorage.configuration.LocalStorageConfiguration;
 import org.springframework.context.annotation.Import;
@@ -44,5 +45,6 @@ import java.lang.annotation.*;
 @Documented
 @Import(LocalStorageConfiguration.class)
 @EnableHerodotusData
+@EnableDynamicDataSource
 public @interface EnableHerodotusLocalStorage {
 }

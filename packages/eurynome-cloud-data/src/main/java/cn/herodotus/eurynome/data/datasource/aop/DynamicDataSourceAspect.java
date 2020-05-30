@@ -31,7 +31,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -48,21 +47,25 @@ import org.springframework.stereotype.Component;
  * @date : 2020/5/24 7:36
  */
 @Slf4j
+@Order(Integer.MAX_VALUE - 2000)
 @Aspect
 @Component
-@Order(-1)
 public class DynamicDataSourceAspect {
 
-    @Pointcut("@annotation(cn.herodotus.eurynome.data.datasource.annotation.DataSource)")
-    public void dataSourcePointCut() {
-
+    @Around(value = "@within(cn.herodotus.eurynome.data.datasource.annotation.DataSource)")
+    public Object classAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        return switchDataSource(joinPoint);
     }
 
-    @Around("dataSourcePointCut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around(value = "@annotation(cn.herodotus.eurynome.data.datasource.annotation.DataSource)")
+    public Object methodAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        return switchDataSource(joinPoint);
+    }
+
+    private Object switchDataSource(ProceedingJoinPoint joinPoint) throws Throwable {
         String dataSourceName = getDataSourceAnnotation(joinPoint).value();
         DynamicDataSourceContextHolder.push(dataSourceName);
-        log.debug("[Herodotus] |- @DataSource swith datasource to [{}]", dataSourceName);
+        log.debug("[Herodotus] |- @DataSource annotation switch datasource to [{}]", dataSourceName);
         try {
             return joinPoint.proceed();
         } finally {
@@ -74,15 +77,14 @@ public class DynamicDataSourceAspect {
      * 根据类或方法获取数据源注解
      */
     private DataSource getDataSourceAnnotation(ProceedingJoinPoint joinPoint) {
-        Class<?> targetClass = joinPoint.getTarget().getClass();
-        DataSource dataSourceAnnotation = targetClass.getAnnotation(DataSource.class);
-        // 先判断类的注解，再判断方法注解
-        if (ObjectUtils.isNotEmpty(dataSourceAnnotation)) {
-            return dataSourceAnnotation;
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        DataSource methodAnnotation =  methodSignature.getMethod().getAnnotation(DataSource.class);
+        // 先判断方法的注解，再判断类注解
+        if (ObjectUtils.isNotEmpty(methodAnnotation)) {
+            return methodAnnotation;
         } else {
-            MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-            return methodSignature.getMethod().getAnnotation(DataSource.class);
+            Class<?> targetClass = joinPoint.getTarget().getClass();
+           return targetClass.getAnnotation(DataSource.class);
         }
     }
-
 }

@@ -29,19 +29,21 @@ import cn.herodotus.eurynome.data.datasource.exception.DataSourceNotExistExcepti
 import cn.herodotus.eurynome.data.datasource.exception.RemoveDataSourceException;
 import cn.herodotus.eurynome.data.datasource.properties.DataSourceMetadata;
 import cn.herodotus.eurynome.data.datasource.properties.DataSourceProperties;
+import cn.herodotus.eurynome.data.datasource.utils.SqlScriptExecutor;
 import com.p6spy.engine.spy.P6DataSource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 
 import javax.sql.DataSource;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -55,18 +57,16 @@ import java.util.Map;
 @Slf4j
 public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
-    public static final String DEFAULT_DATASOURCE = "localStorage";
+    public static final String DEFAULT_DATASOURCE = "LOCAL_STORAGE";
 
     private final DataSourceProperties dataSourceProperties;
     private final HikariConfig hikariConfig;
     /**
      * 所有数据源
      */
-    private final Map<String, DataSource> wrappedDataSources = new LinkedHashMap<>();
+    private final Map<String, DataSource> dataSources = new LinkedHashMap<>();
     private String primary = DEFAULT_DATASOURCE;
     private boolean p6spy;
-
-    private Map<String, DataSource> dataSources;
 
     public DynamicRoutingDataSource(DataSourceProperties dataSourceProperties, HikariConfig hikariConfig) {
         this.dataSourceProperties = dataSourceProperties;
@@ -95,8 +95,10 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
 
     /**
      * 使用H2作为本地默认存储
+     * jpa动态数据源对动态数据源支持不好。jdbc和mybaites支持
      *
      * @return {DataSourceMetadata}
+     * @see :https://www.imooc.com/article/43065
      */
     private DataSourceMetadata createLocalStroageMetadata() {
         DataSourceMetadata dataSourceMetadata = new DataSourceMetadata();
@@ -105,6 +107,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         dataSourceMetadata.setUsername("herodotus");
         dataSourceMetadata.setPassword(DEFAULT_DATASOURCE);
         dataSourceMetadata.setPoolName(DEFAULT_DATASOURCE);
+        dataSourceMetadata.setSchema(Collections.singletonList("classpath:localstorage-schema-h2.sql"));
         return dataSourceMetadata;
     }
 
@@ -116,6 +119,33 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         hikariConfig.setPassword(dataSourceMetadata.determinePassword());
         return new HikariDataSource(hikariConfig);
     }
+
+    private void scriptRunner(DataSourceMetadata dataSourceMetadata, DataSource dataSource) {
+        List<String> schema = dataSourceMetadata.getSchema();
+        List<String> data = dataSourceMetadata.getData();
+
+        List<String> scripts = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(schema)) {
+            scripts.addAll(schema);
+        }
+        if (CollectionUtils.isNotEmpty(data)) {
+            scripts.addAll(data);
+        }
+
+        if (CollectionUtils.isNotEmpty(scripts)) {
+            SqlScriptExecutor executor = new SqlScriptExecutor(dataSourceMetadata.isContinueOnError(), dataSourceMetadata.getSeparator());
+            scripts.forEach(script -> executor.run(dataSource, script));
+        }
+    }
+
+    private DataSource createDataSource(DataSourceMetadata dataSourceMetadata, HikariConfig hikariConfig) {
+        HikariDataSource hikariDataSource = createHikariDataSource(dataSourceMetadata, hikariConfig);
+        if (ObjectUtils.isNotEmpty(hikariDataSource)) {
+            scriptRunner(dataSourceMetadata, hikariDataSource);
+        }
+        return hikariDataSource;
+    }
+
 
     private DataSource wrapDataSource(String dataSourceName, DataSource dataSource) {
         if (p6spy) {
@@ -132,32 +162,32 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
      * @param dataSource     数据源
      */
     public synchronized void addDataSource(String dataSourceName, DataSource dataSource) {
-        if (!wrappedDataSources.containsKey(dataSourceName)) {
+        if (!dataSources.containsKey(dataSourceName)) {
             dataSource = wrapDataSource(dataSourceName, dataSource);
-            wrappedDataSources.put(dataSourceName, dataSource);
-            log.info("[Herodotus] |- load a datasource named [{}] success", dataSourceName);
+            dataSources.put(dataSourceName, dataSource);
+            log.info("[Herodotus] |- Load a datasource named [{}] success", dataSourceName);
         } else {
-            log.warn("[Herodotus] |- load a datasource named [{}] failed, because it already exist", dataSourceName);
+            log.warn("[Herodotus] |- Load a datasource named [{}] failed, because it already exist", dataSourceName);
         }
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        addDataSource(DEFAULT_DATASOURCE, createHikariDataSource(createLocalStroageMetadata(), hikariConfig));
+        addDataSource(DEFAULT_DATASOURCE, createDataSource(createLocalStroageMetadata(), hikariConfig));
 
-        if (MapUtils.isNotEmpty(dataSourceProperties.getMetadatas())) {
-            for (Map.Entry<String, DataSourceMetadata> item : dataSourceProperties.getMetadatas().entrySet()) {
+        if (MapUtils.isNotEmpty(dataSourceProperties.getMetadata())) {
+            for (Map.Entry<String, DataSourceMetadata> item : dataSourceProperties.getMetadata().entrySet()) {
                 DataSourceMetadata dataSourceMetadata = item.getValue();
                 String poolName = dataSourceMetadata.getPoolName();
                 if (StringUtils.isBlank(poolName)) {
                     poolName = item.getKey();
                 }
                 dataSourceMetadata.setPoolName(poolName);
-                addDataSource(item.getKey(), createHikariDataSource(dataSourceMetadata, hikariConfig));
+                addDataSource(item.getKey(), createDataSource(dataSourceMetadata, hikariConfig));
             }
         }
 
-        log.info("[Herodotus] |- initial loaded [{}] datasource,primary datasource named [{}]", wrappedDataSources.size(), primary);
+        log.info("[Herodotus] |- initial loaded [{}] datasource,primary datasource named [{}]", dataSources.size(), primary);
     }
 
     /**
@@ -169,9 +199,9 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
     public DataSource getDataSource(String dataSourceName) {
         if (StringUtils.isBlank(dataSourceName)) {
             log.debug("[Herodotus] |- Switch to the primary datasource");
-            return wrappedDataSources.get(primary);
-        } else if (wrappedDataSources.containsKey(dataSourceName)) {
-            return wrappedDataSources.get(dataSourceName);
+            return dataSources.get(primary);
+        } else if (dataSources.containsKey(dataSourceName)) {
+            return dataSources.get(dataSourceName);
         } else {
             throw new DataSourceNotExistException("Could not find a datasource named" + dataSourceName);
         }
@@ -189,14 +219,14 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
         if (StringUtils.equals(dataSourceName, primary)) {
             throw new RemoveDataSourceException("could not remove primary datasource");
         }
-        if (wrappedDataSources.containsKey(dataSourceName)) {
-            DataSource dataSource = wrappedDataSources.get(dataSourceName);
+        if (dataSources.containsKey(dataSourceName)) {
+            DataSource dataSource = dataSources.get(dataSourceName);
             try {
                 closeDataSource(dataSourceName, dataSource);
             } catch (Exception e) {
                 throw new DataSourceException("remove the database named " + dataSourceName + " failed", e);
             }
-            wrappedDataSources.remove(dataSourceName);
+            dataSources.remove(dataSourceName);
 
             log.info("[Herodotus] |- Remove the database named [{}] success", dataSourceName);
         } else {
@@ -212,7 +242,7 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource {
     @Override
     public void destroy() throws Exception {
         log.info("[Herodotus] |-  Start closing ....");
-        for (Map.Entry<String, DataSource> entry : wrappedDataSources.entrySet()) {
+        for (Map.Entry<String, DataSource> entry : dataSources.entrySet()) {
             String key = entry.getKey();
             DataSource value = entry.getValue();
             closeDataSource(key, value);

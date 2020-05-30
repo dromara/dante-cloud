@@ -16,31 +16,31 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-message
- * File Name: SecurityMetadataProcessor.java
+ * File Name: SecurityMetadataSource.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午5:00
- * LastModified: 2020/5/28 下午4:18
+ * Date: 2020/5/30 上午11:21
+ * LastModified: 2020/5/30 上午11:21
  */
 
 package cn.herodotus.eurynome.message.stream.channel;
 
-import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.SubscribableChannel;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: RequestMappingCollection </p>
+ * <p>File: SecurityMetadataSource </p>
  *
- * <p>Description: RequestMapping接收和发送通道 </p>
+ * <p>Description: SecurityMetadata 输出通道 </p>
+ *
+ * 解决Dispatcher has no subscribers错误，所以输入和输出分开。
+ * @see :https://www.jianshu.com/p/bf992c23c381
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 15:30
+ * @date : 2020/5/30 11:21
  */
-public interface SecurityMetadataProcessor {
+public interface SecurityMetadataSource {
 
-    String INPUT = "security-metadata-input";
     String OUTPUT = "security-metadata-output";
 
     /**
@@ -49,11 +49,4 @@ public interface SecurityMetadataProcessor {
      */
     @Output(OUTPUT)
     MessageChannel output();
-
-    /**
-     * 接收RequestMapping
-     * @return {@link SubscribableChannel}
-     */
-    @Input(INPUT)
-    SubscribableChannel input();
 }

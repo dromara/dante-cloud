@@ -62,8 +62,9 @@ herodotus:
     dynamic:
       primary: postgresql
       p6spy: true
-      postgresql:
-        continue-on-error: true
+      metadata:
+        postgresql:
+          continue-on-error: true
           driver-class-name: ${herodotus.environment.driver-class-name}
           url: ${herodotus.environment.url}
           username: ${herodotus.environment.username}

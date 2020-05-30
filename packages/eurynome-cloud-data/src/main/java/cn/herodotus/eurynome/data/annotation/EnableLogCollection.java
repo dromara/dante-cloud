@@ -15,16 +15,16 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-message
+ * Module Name: eurynome-cloud-data
  * File Name: EnableLogCollection.java
  * Author: gengwei.zheng
- * Date: 2020/5/25 下午3:09
- * LastModified: 2020/5/23 上午10:13
+ * Date: 2020/5/29 下午8:18
+ * LastModified: 2020/5/28 下午9:42
  */
 
-package cn.herodotus.eurynome.message.annotation;
+package cn.herodotus.eurynome.data.annotation;
 
-import cn.herodotus.eurynome.message.configuration.LogstashConfiguration;
+import cn.herodotus.eurynome.data.configuration.LogstashConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

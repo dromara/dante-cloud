@@ -38,7 +38,6 @@ spring:
       auto-commit-interval: 100ms
       key-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
-      client-id: ${spring.cloud.bus.id}
       properties:
         session.timeout.ms: 15000
         max.poll.interval.ms: 500000

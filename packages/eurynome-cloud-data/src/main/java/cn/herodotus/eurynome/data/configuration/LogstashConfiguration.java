@@ -15,20 +15,20 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-message
+ * Module Name: eurynome-cloud-data
  * File Name: LogstashConfiguration.java
  * Author: gengwei.zheng
- * Date: 2020/5/25 下午3:08
- * LastModified: 2020/5/25 下午3:08
+ * Date: 2020/5/29 下午8:20
+ * LastModified: 2020/5/29 下午8:19
  */
 
-package cn.herodotus.eurynome.message.configuration;
+package cn.herodotus.eurynome.data.configuration;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import cn.herodotus.eurynome.message.logstash.LogstashPattern;
+import cn.herodotus.eurynome.data.logstash.LogstashPattern;
 import cn.herodotus.eurynome.operation.properties.ManagementProperties;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +39,7 @@ import net.logstash.logback.composite.loggingevent.LoggingEventPatternJsonProvid
 import net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -70,8 +71,11 @@ public class LogstashConfiguration {
     @Value("${spring.application.name}")
     private String serviceName;
 
+    @Autowired
+    private ManagementProperties managementProperties;
+
     @PostConstruct
-    public void init(ManagementProperties managementProperties) {
+    public void init() {
         Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
         LoggerContext loggerContext = rootLogger.getLoggerContext();
 

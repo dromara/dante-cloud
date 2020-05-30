@@ -6,6 +6,7 @@ import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -23,28 +24,14 @@ import java.util.*;
  * @date : 2020/5/20 12:24
  */
 @Slf4j
-public class HerodotusSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+public class HerodotusSecurityMetadataSource implements FilterInvocationSecurityMetadataSource, InitializingBean {
 
-    Map<RequestMatcher, Collection<ConfigAttribute>> requestMatchers;
+    private Map<RequestMatcher, Collection<ConfigAttribute>> requestMatchers = new LinkedHashMap<>();
 
     private SecurityMetadataService securityMetadataService;
 
-    public HerodotusSecurityMetadataSource(SecurityMetadataService securityMetadataService) {
+    public void setSecurityMetadataService(SecurityMetadataService securityMetadataService) {
         this.securityMetadataService = securityMetadataService;
-        initRequestMatchers();
-    }
-
-    private void initRequestMatchers() {
-        List<SecurityMetadata> securityMetadataCollection = securityMetadataService.findAll();
-        if (CollectionUtils.isNotEmpty(securityMetadataCollection)) {
-            securityMetadataCollection.forEach(securityMetadata -> {
-                if (StringUtils.isNotEmpty(securityMetadata.getUrl())) {
-                    RequestMatcher requestMatcher = new AntPathRequestMatcher(securityMetadata.getUrl(), securityMetadata.getRequestMethod());
-                    Collection<ConfigAttribute> attributes = Collections.singletonList(new SecurityConfig(securityMetadata.getMetadataCode()));
-                    requestMatchers.put(requestMatcher, attributes);
-                }
-            });
-        }
     }
 
     /**
@@ -111,5 +98,19 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
     @Override
     public boolean supports(Class<?> clazz) {
         return FilterInvocation.class.isAssignableFrom(clazz);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        List<SecurityMetadata> securityMetadataCollection = securityMetadataService.findAll();
+        if (CollectionUtils.isNotEmpty(securityMetadataCollection)) {
+            securityMetadataCollection.forEach(securityMetadata -> {
+                if (StringUtils.isNotEmpty(securityMetadata.getUrl())) {
+                    RequestMatcher requestMatcher = new AntPathRequestMatcher(securityMetadata.getUrl(), securityMetadata.getRequestMethod());
+                    Collection<ConfigAttribute> attributes = Collections.singletonList(new SecurityConfig(securityMetadata.getMetadataCode()));
+                    requestMatchers.put(requestMatcher, attributes);
+                }
+            });
+        }
     }
 }

@@ -62,7 +62,7 @@ public class DataSourceProperties {
     /**
      * 数据源定义
      */
-    private Map<String, DataSourceMetadata> metadatas = new LinkedHashMap<>();
+    private Map<String, DataSourceMetadata> metadata = new LinkedHashMap<>();
 
     public String getPrimary() {
         return primary;
@@ -104,11 +104,11 @@ public class DataSourceProperties {
         this.health = health;
     }
 
-    public Map<String, DataSourceMetadata> getMetadatas() {
-        return metadatas;
+    public Map<String, DataSourceMetadata> getMetadata() {
+        return metadata;
     }
 
-    public void setMetadatas(Map<String, DataSourceMetadata> metadatas) {
-        this.metadatas = metadatas;
+    public void setMetadata(Map<String, DataSourceMetadata> metadata) {
+        this.metadata = metadata;
     }
 }

@@ -48,7 +48,6 @@ import javax.annotation.PostConstruct;
 })
 public class MessageBusConfiguration {
 
-
     @PostConstruct
     public void postConstruct() {
         log.info("[Herodotus] |- Bean [Message Bus] Auto Configure.");
