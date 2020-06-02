@@ -15,84 +15,56 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-localstorage
- * File Name: SecurityMetadata.java
+ * Module Name: eurynome-cloud-rest
+ * File Name: RequestMapping.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午9:26
- * LastModified: 2020/5/28 下午5:33
+ * Date: 2020/6/2 下午7:52
+ * LastModified: 2020/6/2 下午7:52
  */
 
-package cn.herodotus.eurynome.localstorage.entity;
+package cn.herodotus.eurynome.rest.api;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.definition.dto.BaseDTO;
 import cn.herodotus.eurynome.common.enums.AuthorityType;
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: SecurityMetadata </p>
+ * <p>File: RequestMapping </p>
  *
- * <p>Description: Security Metadata Source 本地存储实体 </p>
+ * <p>Description: Controller 请求注解元数据封装实体 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 12:34
+ * @date : 2020/6/2 19:52
  */
-@Entity
-@Table(name = "security_metadata", indexes = {@Index(name = "security_metadata_id_idx", columnList = "metadata_id")})
-public class SecurityMetadata extends BaseSysEntity {
+public class RequestMapping extends BaseDTO {
 
-    @Id
-    @GeneratedValue(generator = "metadata-uuid")
-    @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.eurynome.localstorage.generator.SecurityMetadataUUIDGenerator")
-    @Column(name = "metadata_id", length = 64)
     @JsonProperty("authorityId")
     private String metadataId;
 
     @JsonProperty("authorityCode")
-    @Column(name = "metadata_code", length = 128)
     private String metadataCode;
 
     @JsonProperty("authorityName")
-    @Column(name = "metadata_name", length = 1024)
     private String metadataName;
 
-    @Column(name = "request_method", length = 20)
     private String requestMethod;
 
-    @Column(name = "service_id", length = 128)
     private String serviceId;
 
-    @Column(name = "class_name", length = 512)
     private String className;
 
-    @Column(name = "method_name", length = 128)
     private String methodName;
 
-    @Column(name = "url", length = 2048)
     private String url;
 
-    @Column(name = "parent_id", length = 64)
     private String parentId;
 
-    @Column(name = "authority_type")
-    @Enumerated(EnumType.STRING)
+    private String description;
+
     @JsonProperty("authorityType")
     private AuthorityType authorityType = AuthorityType.API;
-
-    @Override
-    public String getLinkedProperty() {
-        return getMetadataCode();
-    }
-
-    @Override
-    public String getId() {
-        return getMetadataId();
-    }
 
     public String getMetadataId() {
         return metadataId;
@@ -174,6 +146,14 @@ public class SecurityMetadata extends BaseSysEntity {
         this.authorityType = authorityType;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -186,6 +166,7 @@ public class SecurityMetadata extends BaseSysEntity {
                 .add("methodName", methodName)
                 .add("url", url)
                 .add("parentId", parentId)
+                .add("description", description)
                 .add("authorityType", authorityType)
                 .toString();
     }

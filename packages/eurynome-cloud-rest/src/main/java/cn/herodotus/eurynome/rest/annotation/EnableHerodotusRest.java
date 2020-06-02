@@ -1,6 +1,10 @@
 package cn.herodotus.eurynome.rest.annotation;
 
-import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
+import cn.herodotus.eurynome.rest.configuration.*;
+import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -14,6 +18,16 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(RestConfiguration.class)
+@EnableConfigurationProperties({
+        ApplicationProperties.class,
+        RestProperties.class,
+        SwaggerProperties.class
+})
+@Import({RestConfiguration.class,
+        RestTemplateConfiguration.class,
+        FeignConfiguration.class,
+        SwaggerConfiguration.class,
+        UndertowWebServerFactoryCustomizer.class
+})
 public @interface EnableHerodotusRest {
 }

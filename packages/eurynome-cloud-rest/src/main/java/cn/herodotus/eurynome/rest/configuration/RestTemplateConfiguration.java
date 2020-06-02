@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.rest.properties.RestProperties;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.io.IOException;
 public class RestTemplateConfiguration {
 
     @Autowired
-    private ApplicationProperties applicationProperties;
+    private RestProperties restProperties;
 
     /**
      * '@LoadBalanced'注解表示使用Ribbon实现客户端负载均衡
@@ -37,7 +37,7 @@ public class RestTemplateConfiguration {
     @LoadBalanced
     public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
 
-        log.debug("[Herodotus] |- Bean [RestTemplate Configuration] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Rest Template] Auto Configure.");
 
         RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
 
@@ -70,9 +70,9 @@ public class RestTemplateConfiguration {
     public ClientHttpRequestFactory clientHttpRequestFactory() {
         OkHttp3ClientHttpRequestFactory factory = new OkHttp3ClientHttpRequestFactory();
         //读取超时5秒,默认无限限制,单位：毫秒
-        factory.setReadTimeout(applicationProperties.getRestTemplate().getReadTimeout());
+        factory.setReadTimeout(restProperties.getRestTemplate().getReadTimeout());
         //连接超时10秒，默认无限制，单位：毫秒
-        factory.setConnectTimeout(applicationProperties.getRestTemplate().getConnectTimeout());
+        factory.setConnectTimeout(restProperties.getRestTemplate().getConnectTimeout());
         return factory;
     }
 }

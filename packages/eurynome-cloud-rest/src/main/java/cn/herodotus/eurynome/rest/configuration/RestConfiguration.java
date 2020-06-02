@@ -1,13 +1,9 @@
 package cn.herodotus.eurynome.rest.configuration;
 
 import cn.herodotus.eurynome.rest.interceptor.GlobalRequestInterceptor;
-import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
-import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -38,18 +34,11 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties({
-        ApplicationProperties.class,
-        SwaggerProperties.class
-})
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.rest.configuration"
-})
 public class RestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Bean [Herodotus Rest] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [HERODOTUS -- Rest] Auto Configure.");
     }
 
     @Bean

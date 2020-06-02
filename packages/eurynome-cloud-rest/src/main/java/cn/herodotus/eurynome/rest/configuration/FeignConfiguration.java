@@ -34,7 +34,7 @@ public class FeignConfiguration {
     @ConditionalOnProperty(name = "feign.sentinel.enabled")
     @Primary
     public Feign.Builder feignSentinelBuilder() {
-        log.debug("[Herodotus] |- Bean [Herodotus Sentinel Feign] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Sentinel Feign] Auto Configure.");
         return HerodotusSentinelFeign.builder();
     }
 

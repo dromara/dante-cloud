@@ -16,27 +16,25 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-rest
- * File Name: RequestMappingScan.java
+ * File Name: RequestMappingScanner.java
  * Author: gengwei.zheng
- * Date: 2020/5/29 下午8:27
- * LastModified: 2020/5/29 上午10:38
+ * Date: 2020/6/2 下午7:52
+ * LastModified: 2020/6/2 下午7:52
  */
 
-package cn.herodotus.eurynome.rest.definition;
+package cn.herodotus.eurynome.rest.api;
 
 import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
 import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.rest.properties.RestProperties;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.util.DigestUtils;
@@ -56,38 +54,46 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * 微服务Controller注解扫描，根据扫描结果生成权限信息，通过消息队列传递到用户中心
+ * <p>Project: eurynome-cloud </p>
+ * <p>File: RequestMappingScanner </p>
  *
- * @author gengwei.zheng
- * @date 2019.09
+ * <p>Description: RequestMapping扫描器 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/6/2 19:52
  */
 @Slf4j
-public class RequestMappingScan implements ApplicationListener<ApplicationReadyEvent> {
+public class RequestMappingScanner {
 
+    private final RestProperties restProperties;
     private final ApplicationProperties applicationProperties;
-    private final RequestMappingPersistence requestMappingPersistence;
+
+    private final ConfigurableApplicationContext applicationContext;
     /**
      * 在外部动态指定扫描的注解，而不是在内部写死
      */
     private final Class<? extends Annotation> scanAnnotationClass;
+    private final List<RequestMapping> resources = new ArrayList<>();
 
-    public RequestMappingScan(RequestMappingPersistence requestMappingPersistence, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
+    public RequestMappingScanner(ConfigurableApplicationContext applicationContext, RestProperties restProperties, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
+        this.restProperties = restProperties;
         this.applicationProperties = applicationProperties;
-        this.requestMappingPersistence = requestMappingPersistence;
+        this.applicationContext = applicationContext;
         this.scanAnnotationClass = scanAnnotationClass;
+        doScanAction();
     }
 
-    @Override
-    public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+    public List<RequestMapping> getResources() {
+        return resources;
+    }
 
-        ConfigurableApplicationContext applicationContext = applicationReadyEvent.getApplicationContext();
-
+    private void doScanAction() {
         // 1、获取服务ID：该服务ID对于微服务是必需的。
         Environment environment = applicationContext.getEnvironment();
         String serviceId = environment.getProperty("spring.application.name", "application");
 
         // 2、只针对有EnableResourceServer注解的微服务进行扫描。如果变为单体架构目前不会用到EnableResourceServer所以增加的了一个Architecture判断
-        if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
+        if (isMicroserviceArchitecture()) {
             Map<String, Object> resourceServer = applicationContext.getBeansWithAnnotation(scanAnnotationClass);
             if (MapUtils.isEmpty(resourceServer)) {
                 // 只扫描资源服务器
@@ -99,7 +105,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
         RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         // 4、 获取url与类和方法的对应信息
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
-        List<SecurityMetadata> resources = new ArrayList<>();
+        List<RequestMapping> resources = new ArrayList<>();
         for (Map.Entry<RequestMappingInfo, HandlerMethod> entry : handlerMethods.entrySet()) {
             RequestMappingInfo requestMappingInfo = entry.getKey();
             HandlerMethod handlerMethod = entry.getValue();
@@ -110,16 +116,15 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
             }
 
             // 4.2、拼装扫描信息
-            SecurityMetadata securityMetadata = getRequestMappingResource(serviceId, requestMappingInfo, handlerMethod);
-            if (ObjectUtils.isEmpty(securityMetadata)) {
+            RequestMapping requestMapping = createRequestMapping(serviceId, requestMappingInfo, handlerMethod);
+            if (ObjectUtils.isEmpty(requestMapping)) {
                 continue;
             }
 
-            resources.add(securityMetadata);
+            resources.add(requestMapping);
         }
 
-        requestMappingPersistence.store(resources);
-        log.info("[Herodotus] |- Platform Store the Resource For Service: [{}]", serviceId);
+        log.info("[Herodotus] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
     }
 
     /**
@@ -143,7 +148,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
      * @return boolean
      */
     private boolean isSpringAnnotationMatched(HandlerMethod handlerMethod) {
-        if (applicationProperties.getRequestMapping().isJustScanRestController()) {
+        if (restProperties.getRequestMapping().isJustScanRestController()) {
             return handlerMethod.getMethod().getDeclaringClass().getAnnotation(RestController.class) != null;
         }
 
@@ -172,7 +177,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
      */
     private boolean isLegalGroup(String className) {
         if (StringUtils.isNotEmpty(className)) {
-            List<String> groupIds = applicationProperties.getRequestMapping().getScanGroupIds();
+            List<String> groupIds = restProperties.getRequestMapping().getScanGroupIds();
             List<String> result = groupIds.stream().filter(groupId -> StringUtils.contains(className, groupId)).collect(Collectors.toList());
             return !CollectionUtils.sizeIsEmpty(result);
         } else {
@@ -180,7 +185,7 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
         }
     }
 
-    private SecurityMetadata getRequestMappingResource(String serviceId, RequestMappingInfo info, HandlerMethod method) {
+    private RequestMapping createRequestMapping(String serviceId, RequestMappingInfo info, HandlerMethod method) {
         // 4.2.1、获取类名
         // method.getMethod().getDeclaringClass().getName() 取到的是注解实际所在类的名字，比如注解在父类叫BaseController，那么拿到的就是BaseController
         // method.getBeanType().getName() 取到的是注解实际Bean的名字，比如注解在在父类叫BaseController，而实际类是SysUserController，那么拿到的就是SysUserController
@@ -205,24 +210,24 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
         PatternsRequestCondition patternsRequestCondition = info.getPatternsCondition();
         String urls = StringUtils.join(patternsRequestCondition.getPatterns(), SymbolConstants.COMMA);
         // 对于单体架构路径一般都是menu，还是手动设置吧。
-        if (applicationProperties.getArchitecture() == Architecture.MONOMER) {
+        if (!isMicroserviceArchitecture()) {
             if (StringUtils.contains(urls, "index")) {
                 return null;
             }
         }
 
         // 5.2.7、微服务范围更加粗放， 单体架构应用通过classSimpleName进行细化
-        String identifyingCode = applicationProperties.getArchitecture() == Architecture.MICROSERVICE ? serviceId : classSimpleName;
+        String identifyingCode = isMicroserviceArchitecture() ? serviceId : classSimpleName;
 
         // 5.2.8、根据serviceId, requestMethods, urls生成的MD5值，作为自定义主键
         String id = idGenerator(identifyingCode, urls, requestMethods);
 
         // 5.2.9、组装对象
-        SecurityMetadata securityMetadata = new SecurityMetadata();
+        RequestMapping securityMetadata = new RequestMapping();
         securityMetadata.setMetadataId(id);
         securityMetadata.setMetadataCode(SecurityConstants.AUTHORITY_PREFIX + id);
         // 微服务需要明确ServiceId，同时也知道ParentId，Hammer有办法，但是太繁琐，还是生成数据后，配置一把好点。
-        if (applicationProperties.getArchitecture() == Architecture.MICROSERVICE) {
+        if (isMicroserviceArchitecture()) {
             securityMetadata.setServiceId(identifyingCode);
             securityMetadata.setParentId(identifyingCode);
         }
@@ -236,6 +241,10 @@ public class RequestMappingScan implements ApplicationListener<ApplicationReadyE
         securityMetadata.setClassName(className);
         securityMetadata.setMethodName(methodName);
         return securityMetadata;
+    }
+
+    private boolean isMicroserviceArchitecture() {
+        return applicationProperties.getArchitecture() == Architecture.MICROSERVICE;
     }
 
     private String idGenerator(String serviceId, String urls, String requestMethods) {
