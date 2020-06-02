@@ -112,7 +112,7 @@ public class LogstashConfiguration {
             logger.setLevel(Level.toLevel(value.name()));
         });
 
-        log.info("[Herodotus] |- Bean [LogstashTcpSocketAppender] Auto Configure.");
+        log.info("[Herodotus] |- Bean [Logstash Tcp Socket Appender] Auto Configure.");
     }
 
     private String getJsonPattern() {
