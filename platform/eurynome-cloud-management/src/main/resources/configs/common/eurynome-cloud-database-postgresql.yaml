@@ -18,6 +18,7 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
+
   datasource:
     continue-on-error: true
     driver-class-name: ${herodotus.environment.driver-class-name}

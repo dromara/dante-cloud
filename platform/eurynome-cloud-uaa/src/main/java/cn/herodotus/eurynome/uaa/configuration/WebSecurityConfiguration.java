@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -26,8 +27,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * {@link :https://www.cnblogs.com/white-knight/p/9711515.html}
  * <p>
  * <p>
- * WebSecurityConfigurerAdapter默认情况下是springsecurity的http配置
- * ResourceServerConfigurerAdapter默认情况下是spring security oauth2的http配置
+ * WebSecurityConfigurerAdapter默认情况下是spring security的http配置。默认情况下为：@Order（100）{@link WebSecurityConfigurerAdapter}
+ * ResourceServerConfigurerAdapter默认情况下是spring security oauth2的http配置。默认情况下为：@Order（3）{@link ResourceServerConfiguration}
  * <p>
  * 因此二者是分工协作的
  * · 在WebSecurityConfigurerAdapter不拦截oauth要开放的资源
@@ -39,6 +40,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Slf4j
 @Configuration
 @EnableWebSecurity
+@Order(2)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -98,7 +100,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        log.info("[Herodotus] |- UAA WebSecurityConfigurerAdapter configuration!");
+        log.info("[Herodotus] |- Bean [Web Security Configurer Adapter] Auto Configure.");
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 

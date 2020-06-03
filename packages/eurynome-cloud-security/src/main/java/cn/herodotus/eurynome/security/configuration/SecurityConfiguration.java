@@ -34,12 +34,11 @@ import javax.annotation.PostConstruct;
 @Configuration
 @ComponentScan(basePackages = {
         "cn.hutool.extra.spring",
-        "cn.herodotus.eurynome.security.authentication",
+        "cn.herodotus.eurynome.security.authentication"
 })
 public class SecurityConfiguration  {
-
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Bean [Herodotus Security] Auto Configure.");
+        log.info("[Herodotus] |- Bean [HERODOTUS -- Security] Auto Configure.");
     }
 }

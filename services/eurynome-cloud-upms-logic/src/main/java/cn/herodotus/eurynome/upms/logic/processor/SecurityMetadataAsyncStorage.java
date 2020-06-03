@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.logic.processor;
 
-import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
+import cn.herodotus.eurynome.security.metadata.RequestMapping;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +33,9 @@ public class SecurityMetadataAsyncStorage extends AbstractSecurityMetadataStorag
     public void store(String message) {
         log.debug("[Herodotus] |- Received Service Resources Message: [{}]", message);
 
-        List<SecurityMetadata> securityMetadata = JSON.parseArray(message, SecurityMetadata.class);
-        if (CollectionUtils.isNotEmpty(securityMetadata)) {
-            store(securityMetadata);
+        List<RequestMapping> requestMappings = JSON.parseArray(message, RequestMapping.class);
+        if (CollectionUtils.isNotEmpty(requestMappings)) {
+            store(requestMappings);
         }
     }
 }

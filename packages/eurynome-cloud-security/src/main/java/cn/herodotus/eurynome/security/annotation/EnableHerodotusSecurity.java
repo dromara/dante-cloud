@@ -1,5 +1,6 @@
 package cn.herodotus.eurynome.security.annotation;
 
+import cn.herodotus.eurynome.security.configuration.ResourceServerConfiguration;
 import cn.herodotus.eurynome.security.configuration.SecurityConfiguration;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,9 +17,9 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(SecurityConfiguration.class)
 @EnableConfigurationProperties({
         SecurityProperties.class
 })
+@Import({SecurityConfiguration.class, ResourceServerConfiguration.class})
 public @interface EnableHerodotusSecurity {
 }

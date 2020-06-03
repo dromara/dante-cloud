@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.upms.api.helper;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.StatusEnum;
-import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
+import cn.herodotus.eurynome.security.metadata.RequestMapping;
 import cn.herodotus.eurynome.security.core.HerodotusAuthority;
 import cn.herodotus.eurynome.security.core.HerodotusRole;
 import cn.herodotus.eurynome.security.core.userdetails.HerodotusUserDetails;
@@ -130,24 +130,24 @@ public class UpmsHelper {
         return herodotusUserDetails;
     }
 
-    public static List<SysAuthority> convertSecurityMetadatasToSysAuthorities(Collection<SecurityMetadata> securityMetadata) {
-        if (CollectionUtils.isNotEmpty(securityMetadata)) {
-            return securityMetadata.stream().map(UpmsHelper::convertSecurityMetadataToSysAuthority).collect(Collectors.toList());
+    public static List<SysAuthority> convertRequestMappingsToSysAuthorities(Collection<RequestMapping> requestMappings) {
+        if (CollectionUtils.isNotEmpty(requestMappings)) {
+            return requestMappings.stream().map(UpmsHelper::convertRequestMappingToSysAuthority).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    private static SysAuthority convertSecurityMetadataToSysAuthority(SecurityMetadata securityMetadata) {
+    private static SysAuthority convertRequestMappingToSysAuthority(RequestMapping requestMapping) {
         SysAuthority sysAuthority = new SysAuthority();
-        sysAuthority.setAuthorityId(securityMetadata.getMetadataId());
-        sysAuthority.setAuthorityName(securityMetadata.getMetadataName());
-        sysAuthority.setAuthorityCode(securityMetadata.getMetadataCode());
-        sysAuthority.setRequestMethod(securityMetadata.getRequestMethod());
-        sysAuthority.setServiceId(securityMetadata.getServiceId());
-        sysAuthority.setUrl(securityMetadata.getUrl());
-        sysAuthority.setParentId(securityMetadata.getParentId());
-        sysAuthority.setClassName(securityMetadata.getClassName());
-        sysAuthority.setMethodName(securityMetadata.getMethodName());
+        sysAuthority.setAuthorityId(requestMapping.getMetadataId());
+        sysAuthority.setAuthorityName(requestMapping.getMetadataName());
+        sysAuthority.setAuthorityCode(requestMapping.getMetadataCode());
+        sysAuthority.setRequestMethod(requestMapping.getRequestMethod());
+        sysAuthority.setServiceId(requestMapping.getServiceId());
+        sysAuthority.setUrl(requestMapping.getUrl());
+        sysAuthority.setParentId(requestMapping.getParentId());
+        sysAuthority.setClassName(requestMapping.getClassName());
+        sysAuthority.setMethodName(requestMapping.getMethodName());
         return sysAuthority;
     }
 

@@ -16,38 +16,34 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-message
- * File Name: StreamConfiguration.java
+ * File Name: MessageConfiguration.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午4:06
- * LastModified: 2020/5/28 下午4:06
+ * Date: 2020/5/31 下午4:08
+ * LastModified: 2020/5/31 下午4:08
  */
 
 package cn.herodotus.eurynome.message.configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: StreamConfiguration </p>
+ * <p>File: MessageConfiguration </p>
  *
- * <p>Description: StreamMessageConfiguration </p>
+ * <p>Description: MessageConfiguration </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 16:06
+ * @date : 2020/5/31 16:08
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.message.stream.service"
-})
-public class StreamMessageConfiguration {
+@Configuration
+public class MessageConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Bean [Stream Message Auto Configure.");
+        log.info("[Herodotus] |- Bean [HERODOTUS -- Message] Auto Configure.");
     }
 }

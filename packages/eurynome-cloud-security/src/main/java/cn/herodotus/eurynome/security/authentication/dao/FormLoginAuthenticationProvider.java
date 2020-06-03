@@ -1,9 +1,9 @@
 package cn.herodotus.eurynome.security.authentication.dao;
 
 import cn.herodotus.eurynome.security.web.authentication.FormLoginWebAuthenticationDetails;
-import cn.herodotus.eurynome.security.authentication.VerificationCodeIsEmptyException;
-import cn.herodotus.eurynome.security.authentication.VerificationCodeIsNotExistException;
-import cn.herodotus.eurynome.security.authentication.VerificationCodeIsNotRightException;
+import cn.herodotus.eurynome.security.authentication.exception.VerificationCodeIsEmptyException;
+import cn.herodotus.eurynome.security.authentication.exception.VerificationCodeIsNotExistException;
+import cn.herodotus.eurynome.security.authentication.exception.VerificationCodeIsNotRightException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;

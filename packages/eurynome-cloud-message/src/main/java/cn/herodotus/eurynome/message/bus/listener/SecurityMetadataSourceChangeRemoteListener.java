@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
  * <p>Project: eurynome-cloud </p>
  * <p>File: SecurityMetadataSourceChangeRemoteListener </p>
  *
- * <p>Description: 消息总线本地 SecurityMetadataSource 变更监听</p>
+ * <p>Description: 消息总线本地 SecurityMetadataPublisher 变更监听</p>
  * <p>
  * 思路变化，暂时用不到。代码先保留以备后用。
  *

@@ -1,29 +1,24 @@
 package cn.herodotus.eurynome.autoconfigure;
 
-import cn.herodotus.eurynome.localstorage.annotation.EnableHerodotusLocalStorage;
-import cn.herodotus.eurynome.localstorage.service.SecurityMetadataService;
-import cn.herodotus.eurynome.message.annotation.EnableHerodotusMessage;
+import cn.herodotus.eurynome.autoconfigure.components.SecurityMetadataProducer;
+import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
-import cn.herodotus.eurynome.message.stream.service.SecurityMetadataMessageProducer;
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
-import cn.herodotus.eurynome.rest.definition.RequestMappingScan;
-import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.security.annotation.EnableHerodotusSecurity;
+import cn.herodotus.eurynome.security.authentication.SecurityMetadataLocalStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
  * @author gengwei.zheng
  */
 @Slf4j
 @Configuration
-@EnableHerodotusLocalStorage
-@EnableHerodotusMessage
+@EnableHerodotusData
 @EnableHerodotusRest
 @EnableHerodotusSecurity
 public class AutoConfiguration {
@@ -37,25 +32,13 @@ public class AutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(SecurityMetadataPersistence.class)
-    @ConditionalOnBean({SecurityMetadataMessageProducer.class, SecurityMetadataService.class})
-    public SecurityMetadataPersistence securityMetadataPersistence(SecurityMetadataMessageProducer securityMetadataMessageProducer, SecurityMetadataService securityMetadataService) {
-        SecurityMetadataPersistence securityMetadataPersistence = new SecurityMetadataPersistence(securityMetadataService, securityMetadataMessageProducer);
+    @ConditionalOnMissingBean(SecurityMetadataProducer.class)
+    @ConditionalOnBean(SecurityMetadataLocalStorage.class)
+    public SecurityMetadataProducer securityMetadataPersistence(KafkaProducer kafkaProducer, SecurityMetadataLocalStorage securityMetadataLocalStorage) {
+        SecurityMetadataProducer securityMetadataProducer = new SecurityMetadataProducer();
+        securityMetadataProducer.setKafkaProducer(kafkaProducer);
+        securityMetadataProducer.setSecurityMetadataLocalStorage(securityMetadataLocalStorage);
         log.debug("[Herodotus] |- Bean [Security Metadata Persistence] Auto Configure.");
-        return securityMetadataPersistence;
-    }
-
-    /**
-     * 自定义注解扫描
-     *
-     * @return
-     */
-    @Bean
-    @ConditionalOnMissingBean(RequestMappingScan.class)
-    @ConditionalOnBean(SecurityMetadataPersistence.class)
-    public RequestMappingScan requestMappingScan(SecurityMetadataPersistence securityMetadataPersistence, ApplicationProperties applicationProperties) {
-        RequestMappingScan requestMappingScan = new RequestMappingScan(securityMetadataPersistence, applicationProperties, EnableResourceServer.class);
-        log.debug("[Herodotus] |- Bean [Request Mapping Scan] Auto Configure.");
-        return requestMappingScan;
+        return securityMetadataProducer;
     }
 }

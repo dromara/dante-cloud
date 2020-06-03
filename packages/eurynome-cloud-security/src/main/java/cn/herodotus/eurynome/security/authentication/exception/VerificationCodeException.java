@@ -15,35 +15,26 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-message
- * File Name: SecurityMetadataSink.java
+ * Module Name: eurynome-cloud-security
+ * File Name: VerificationCodeException.java
  * Author: gengwei.zheng
- * Date: 2020/5/30 上午11:20
- * LastModified: 2020/5/30 上午11:20
+ * Date: 2020/6/3 上午9:56
+ * LastModified: 2020/5/23 上午9:32
  */
 
-package cn.herodotus.eurynome.message.stream.channel;
+package cn.herodotus.eurynome.security.authentication.exception;
 
-import org.springframework.cloud.stream.annotation.Input;
-import org.springframework.messaging.SubscribableChannel;
+import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: SecurityMetadataSink </p>
- *
- * <p>Description: SecurityMetadata 输入通道 </p>
+ * <p> Description : TODO </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/30 11:20
+ * @date : 2019/11/29 13:46
  */
-public interface SecurityMetadataSink {
+public class VerificationCodeException extends AuthenticationException {
 
-    String INPUT = "security-metadata-input";
-
-    /**
-     * 接收RequestMapping
-     * @return {@link SubscribableChannel}
-     */
-    @Input(INPUT)
-    SubscribableChannel input();
+    public VerificationCodeException(String message) {
+        super(message);
+    }
 }

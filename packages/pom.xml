@@ -41,12 +41,11 @@
     <modules>
         <module>eurynome-cloud-common</module>
         <module>eurynome-cloud-operation</module>
-        <module>eurynome-cloud-message</module>
         <module>eurynome-cloud-data</module>
-        <module>eurynome-cloud-localstorage</module>
-        <module>eurynome-cloud-starter</module>
         <module>eurynome-cloud-rest</module>
         <module>eurynome-cloud-security</module>
+        <module>eurynome-cloud-message</module>
+        <module>eurynome-cloud-starter</module>
     </modules>
 
 </project>

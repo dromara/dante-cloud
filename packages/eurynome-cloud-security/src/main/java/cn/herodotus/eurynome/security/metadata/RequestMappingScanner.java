@@ -26,12 +26,10 @@ package cn.herodotus.eurynome.security.metadata;
 
 import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.message.stream.service.SecurityMetadataMessageProducer;
 import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.authentication.SecurityMetadataLocalStorage;
-import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,8 +39,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RestController;
@@ -75,7 +71,6 @@ public class RequestMappingScanner implements ApplicationContextAware {
     private final RestProperties restProperties;
     private final ApplicationProperties applicationProperties;
     private final SecurityMetadataLocalStorage securityMetadataLocalStorage;
-    private final SecurityMetadataMessageProducer securityMetadataMessageProducer;
 
     private ApplicationContext applicationContext;
 
@@ -84,11 +79,10 @@ public class RequestMappingScanner implements ApplicationContextAware {
      */
     private final Class<? extends Annotation> scanAnnotationClass;
 
-    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataLocalStorage securityMetadataLocalStorage, SecurityMetadataMessageProducer securityMetadataMessageProducer, Class<? extends Annotation> scanAnnotationClass) {
+    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataLocalStorage securityMetadataLocalStorage, Class<? extends Annotation> scanAnnotationClass) {
         this.restProperties = restProperties;
         this.applicationProperties = applicationProperties;
         this.securityMetadataLocalStorage = securityMetadataLocalStorage;
-        this.securityMetadataMessageProducer = securityMetadataMessageProducer;
         this.scanAnnotationClass = scanAnnotationClass;
     }
 

@@ -88,6 +88,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * 配置令牌端点(Token Endpoint)的安全约束
      * {@link org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerSecurityConfiguration}
      *
+     * 权限添加的位置：
+     * {@link org.springframework.security.web.access.expression.ExpressionBasedFilterInvocationSecurityMetadataSource}
+     *
      * @param security security
      * @throws Exception security
      */

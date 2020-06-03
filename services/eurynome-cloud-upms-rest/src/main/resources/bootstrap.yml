@@ -38,7 +38,6 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
-
   thymeleaf:
     mode: HTML
     cache: false
@@ -46,14 +45,9 @@ spring:
 
 herodotus:
   platform:
-    application:
-      service-display-name: "用户中心"
-      accessed-through-gateway: false
-      request-mapping:
-        register-request-mapping: false
     security:
       interceptor:
-        white-list:
+        whitelist:
           - "/v2/**"
           - "/oauth/client_details"
           - "/login/token"
@@ -62,3 +56,9 @@ herodotus:
           - "/user/findByUserId"
           - "/captcha/getVerifiCode"
           - "/captcha/checkVerifiCode"
+logging:
+  level:
+    cn.herodotus.eurynome: debug
+    org.springframework.security: debug
+    org.apache.kafka: WARN
+    com.alibaba.nacos.client: off

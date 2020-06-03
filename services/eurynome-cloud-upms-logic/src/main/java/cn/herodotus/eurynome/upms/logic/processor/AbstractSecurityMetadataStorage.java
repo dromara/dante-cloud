@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.upms.logic.processor;
 
-import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
+import cn.herodotus.eurynome.security.metadata.RequestMapping;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
@@ -48,9 +48,9 @@ public abstract class AbstractSecurityMetadataStorage {
         this.sysAuthorityService = sysAuthorityService;
     }
 
-    protected void store(List<SecurityMetadata> securityMetadata) {
+    protected void store(List<RequestMapping> securityMetadata) {
 
-        List<SysAuthority> sysAuthorities = UpmsHelper.convertSecurityMetadatasToSysAuthorities(securityMetadata);
+        List<SysAuthority> sysAuthorities = UpmsHelper.convertRequestMappingsToSysAuthorities(securityMetadata);
 
         List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
         if (CollectionUtils.isNotEmpty(result)) {

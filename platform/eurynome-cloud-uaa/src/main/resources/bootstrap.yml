@@ -36,6 +36,15 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
+    bus:
+      enabled: true
+      destination: event-bus
+      id: ${spring.application.name}
+    stream:
+      default-binder: kafka
+      bindings:
+        security-metadata-output:
+          destination: security.metadata
   thymeleaf:
     mode: HTML
     cache: false
@@ -45,7 +54,11 @@ spring:
       charset: UTF-8
       force: true
       enabled: true
-herodotus:
-  platform:
-    application:
-      accessed-through-gateway: false
+
+
+logging:
+  level:
+    cn.herodotus.eurynome: debug
+    org.springframework.security: debug
+    org.apache.kafka: WARN
+    com.alibaba.nacos.client: off

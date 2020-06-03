@@ -15,26 +15,24 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-localstorage
- * File Name: SecurityMetadataRepository.java
+ * Module Name: eurynome-cloud-security
+ * File Name: VerificationCodeIsEmptyException.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午9:26
- * LastModified: 2020/5/28 下午5:01
+ * Date: 2020/6/3 上午9:56
+ * LastModified: 2020/5/23 上午9:32
  */
 
-package cn.herodotus.eurynome.localstorage.repository;
-
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.localstorage.entity.SecurityMetadata;
+package cn.herodotus.eurynome.security.authentication.exception;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: SecurityMetadataRepository </p>
- *
- * <p>Description: SecurityMetadataRepository </p>
+ * <p> Description : TODO </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 12:54
+ * @date : 2020/1/26 18:11
  */
-public interface SecurityMetadataRepository extends BaseRepository<SecurityMetadata, String> {
+public class VerificationCodeIsEmptyException extends VerificationCodeException {
+
+    public VerificationCodeIsEmptyException(String message) {
+        super(message);
+    }
 }

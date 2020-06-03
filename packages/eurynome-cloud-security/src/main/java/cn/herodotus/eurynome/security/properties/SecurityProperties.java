@@ -32,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p> Description : 多出都需要使用Security的配置信息，所以放到data组件中 </p>
@@ -288,7 +290,10 @@ public class SecurityProperties implements Serializable {
     public static class Interceptor implements Serializable {
         private boolean rejectPublicInvocations = false;
 
-        private String[] whiteList;
+        /**
+         * 白名单，服务接口
+         */
+        private List<String> whitelist = new ArrayList<>();
 
         public boolean isRejectPublicInvocations() {
             return rejectPublicInvocations;
@@ -298,12 +303,12 @@ public class SecurityProperties implements Serializable {
             this.rejectPublicInvocations = rejectPublicInvocations;
         }
 
-        public String[] getWhiteList() {
-            return whiteList;
+        public List<String> getWhitelist() {
+            return whitelist;
         }
 
-        public void setWhiteList(String[] whiteList) {
-            this.whiteList = whiteList;
+        public void setWhitelist(List<String> whitelist) {
+            this.whitelist = whitelist;
         }
     }
 }

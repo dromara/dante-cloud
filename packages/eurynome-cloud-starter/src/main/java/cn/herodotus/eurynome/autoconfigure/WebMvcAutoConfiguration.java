@@ -23,11 +23,11 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
      */
     @Configuration(proxyBeanMethods = false)
     @Order(101)
-    public static class ApiWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    public static class StaticResourceSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-            log.debug("[Herodotus] |- Bean [Api Web Security Configuration] Auto Configure.");
+            log.debug("[Herodotus] |- Bean [Static Resource Web Security Configurer Adapter] Auto Configure.");
             web.ignoring().antMatchers(
                     "/error",
                     "/static/**",

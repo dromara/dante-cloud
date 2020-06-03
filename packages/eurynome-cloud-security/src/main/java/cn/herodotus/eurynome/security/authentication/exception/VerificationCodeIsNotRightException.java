@@ -15,32 +15,24 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-message
- * File Name: EnableStreamMessage.java
+ * Module Name: eurynome-cloud-security
+ * File Name: VerificationCodeIsNotRightException.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午11:30
- * LastModified: 2020/5/28 下午11:30
+ * Date: 2020/6/3 上午9:56
+ * LastModified: 2020/5/23 上午9:32
  */
 
-package cn.herodotus.eurynome.message.annotation;
-
-import cn.herodotus.eurynome.message.configuration.StreamMessageConfiguration;
-import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
+package cn.herodotus.eurynome.security.authentication.exception;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: EnableStreamMessage </p>
- *
- * <p>Description: 是否开启Stream消息 </p>
+ * <p> Description : TODO </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 23:30
+ * @date : 2020/1/26 18:11
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Import(StreamMessageConfiguration.class)
-public @interface EnableStreamMessage {
+public class VerificationCodeIsNotRightException extends VerificationCodeException{
+
+    public VerificationCodeIsNotRightException(String message) {
+        super(message);
+    }
 }

@@ -202,6 +202,13 @@ docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose
 
 sudo sysctl vm.max_map_count=524288
 
+另一种解决办法：
+- open powershell
+- wsl -d docker-desktop
+- echo "vm.max_map_count = 262144" > /etc/sysctl.d/99-docker-desktop.conf
+
+@See : https://github.com/docker/for-win/issues/5202
+
 > 因此，这里将环境依赖的应用，拆分为两个docker-compose文件，先运行env.base.yml，待所有容器及内部服务成功运行之后，再运行env.skywalking.yml
 
 通过docker-compose方式进行部署，执行以下命令即可：

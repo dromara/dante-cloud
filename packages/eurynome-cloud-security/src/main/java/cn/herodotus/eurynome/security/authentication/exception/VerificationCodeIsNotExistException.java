@@ -15,33 +15,24 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-message
- * File Name: EnableHerodotusMessage.java
+ * Module Name: eurynome-cloud-security
+ * File Name: VerificationCodeIsNotExistException.java
  * Author: gengwei.zheng
- * Date: 2020/5/29 上午10:43
- * LastModified: 2020/5/29 上午10:43
+ * Date: 2020/6/3 上午9:56
+ * LastModified: 2020/5/23 上午9:32
  */
 
-package cn.herodotus.eurynome.message.annotation;
-
-import cn.herodotus.eurynome.message.configuration.MessageConfiguration;
-import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
+package cn.herodotus.eurynome.security.authentication.exception;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: EnableHerodotusMessage </p>
- *
- * <p>Description: EnableHerodotusMessage </p>
+ * <p> Description : TODO </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/29 10:43
+ * @date : 2020/1/26 18:11
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Import(MessageConfiguration.class)
-@EnableMessageBus
-public @interface EnableHerodotusMessage {
+public class VerificationCodeIsNotExistException extends VerificationCodeException {
+
+    public VerificationCodeIsNotExistException(String message) {
+        super(message);
+    }
 }

@@ -15,29 +15,24 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-message
- * File Name: LocalStorageConstants.java
+ * Module Name: eurynome-cloud-security
+ * File Name: IllegalSymmetricKeyException.java
  * Author: gengwei.zheng
- * Date: 2020/5/28 下午4:23
- * LastModified: 2020/5/28 下午4:18
+ * Date: 2020/6/3 上午9:56
+ * LastModified: 2020/5/23 上午9:32
  */
 
-package cn.herodotus.eurynome.localstorage.constants;
-
-import cn.herodotus.eurynome.data.constants.CacheConstants;
+package cn.herodotus.eurynome.security.authentication.exception;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: LocalStorageConstants </p>
- *
- * <p>Description: LocalStorageConstants </p>
+ * <p> Description : TODO </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/28 12:59
+ * @date : 2020/1/28 17:32
  */
-public class LocalStorageConstants extends CacheConstants {
+public class IllegalSymmetricKeyException extends VerificationCodeException {
 
-    public static final String CACHE_AREA_PREFIX = "data:localstorage:";
-
-    public static final String CACHE_NAME_SECURITY_METADATA = CACHE_AREA_PREFIX + "security:metadata:";
+    public IllegalSymmetricKeyException(String message) {
+        super(message);
+    }
 }
