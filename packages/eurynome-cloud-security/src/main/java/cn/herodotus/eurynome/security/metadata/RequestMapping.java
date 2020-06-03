@@ -18,13 +18,13 @@
  * Module Name: eurynome-cloud-rest
  * File Name: RequestMapping.java
  * Author: gengwei.zheng
- * Date: 2020/6/2 下午7:52
- * LastModified: 2020/6/2 下午7:52
+ * Date: 2020/6/3 下午2:09
+ * LastModified: 2020/6/3 上午10:02
  */
 
-package cn.herodotus.eurynome.rest.api;
+package cn.herodotus.eurynome.security.metadata;
 
-import cn.herodotus.eurynome.common.definition.dto.BaseDTO;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.enums.AuthorityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -38,7 +38,7 @@ import com.google.common.base.MoreObjects;
  * @author : gengwei.zheng
  * @date : 2020/6/2 19:52
  */
-public class RequestMapping extends BaseDTO {
+public class RequestMapping extends AbstractEntity {
 
     @JsonProperty("authorityId")
     private String metadataId;
@@ -65,6 +65,16 @@ public class RequestMapping extends BaseDTO {
 
     @JsonProperty("authorityType")
     private AuthorityType authorityType = AuthorityType.API;
+
+    @Override
+    public String getLinkedProperty() {
+        return getMetadataCode();
+    }
+
+    @Override
+    public String getId() {
+        return getMetadataId();
+    }
 
     public String getMetadataId() {
         return metadataId;
@@ -153,6 +163,7 @@ public class RequestMapping extends BaseDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     @Override
     public String toString() {

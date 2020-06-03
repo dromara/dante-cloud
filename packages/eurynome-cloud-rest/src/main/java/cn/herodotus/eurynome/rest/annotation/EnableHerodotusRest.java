@@ -4,6 +4,7 @@ import cn.herodotus.eurynome.rest.configuration.*;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 
@@ -23,6 +24,7 @@ import java.lang.annotation.*;
         RestProperties.class,
         SwaggerProperties.class
 })
+@EnableCreateCacheAnnotation
 @Import({RestConfiguration.class,
         RestTemplateConfiguration.class,
         FeignConfiguration.class,

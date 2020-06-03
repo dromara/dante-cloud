@@ -18,24 +18,31 @@
  * Module Name: eurynome-cloud-rest
  * File Name: RequestMappingScanner.java
  * Author: gengwei.zheng
- * Date: 2020/6/2 下午7:52
- * LastModified: 2020/6/2 下午7:52
+ * Date: 2020/6/3 下午2:23
+ * LastModified: 2020/6/3 下午2:23
  */
 
-package cn.herodotus.eurynome.rest.api;
+package cn.herodotus.eurynome.security.metadata;
 
 import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.message.stream.service.SecurityMetadataMessageProducer;
 import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.security.authentication.SecurityMetadataLocalStorage;
+import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.env.Environment;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,31 +70,35 @@ import java.util.stream.Collectors;
  * @date : 2020/6/2 19:52
  */
 @Slf4j
-public class RequestMappingScanner {
+public class RequestMappingScanner implements ApplicationContextAware {
 
     private final RestProperties restProperties;
     private final ApplicationProperties applicationProperties;
+    private final SecurityMetadataLocalStorage securityMetadataLocalStorage;
+    private final SecurityMetadataMessageProducer securityMetadataMessageProducer;
 
-    private final ConfigurableApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
+
     /**
      * 在外部动态指定扫描的注解，而不是在内部写死
      */
     private final Class<? extends Annotation> scanAnnotationClass;
-    private final List<RequestMapping> resources = new ArrayList<>();
 
-    public RequestMappingScanner(ConfigurableApplicationContext applicationContext, RestProperties restProperties, ApplicationProperties applicationProperties, Class<? extends Annotation> scanAnnotationClass) {
+    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataLocalStorage securityMetadataLocalStorage, SecurityMetadataMessageProducer securityMetadataMessageProducer, Class<? extends Annotation> scanAnnotationClass) {
         this.restProperties = restProperties;
         this.applicationProperties = applicationProperties;
-        this.applicationContext = applicationContext;
+        this.securityMetadataLocalStorage = securityMetadataLocalStorage;
+        this.securityMetadataMessageProducer = securityMetadataMessageProducer;
         this.scanAnnotationClass = scanAnnotationClass;
-        doScanAction();
     }
 
-    public List<RequestMapping> getResources() {
-        return resources;
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+        onApplicationEvent(applicationContext);
     }
 
-    private void doScanAction() {
+    public void onApplicationEvent(ApplicationContext applicationContext) {
         // 1、获取服务ID：该服务ID对于微服务是必需的。
         Environment environment = applicationContext.getEnvironment();
         String serviceId = environment.getProperty("spring.application.name", "application");
@@ -104,8 +115,8 @@ public class RequestMappingScanner {
         // 3、获取所有接口映射
         RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         // 4、 获取url与类和方法的对应信息
-        Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
         List<RequestMapping> resources = new ArrayList<>();
+        Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
         for (Map.Entry<RequestMappingInfo, HandlerMethod> entry : handlerMethods.entrySet()) {
             RequestMappingInfo requestMappingInfo = entry.getKey();
             HandlerMethod handlerMethod = entry.getValue();
@@ -122,6 +133,10 @@ public class RequestMappingScanner {
             }
 
             resources.add(requestMapping);
+        }
+
+        if (CollectionUtils.isNotEmpty(resources)) {
+            securityMetadataLocalStorage.save(resources);
         }
 
         log.info("[Herodotus] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
