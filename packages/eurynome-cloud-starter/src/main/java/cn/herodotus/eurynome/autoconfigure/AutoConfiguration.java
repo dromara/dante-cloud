@@ -5,13 +5,15 @@ import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.security.annotation.EnableHerodotusSecurity;
-import cn.herodotus.eurynome.security.authentication.SecurityMetadataLocalStorage;
+import cn.herodotus.eurynome.security.metadata.SecurityMetadataLocalStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author gengwei.zheng
@@ -22,6 +24,11 @@ import org.springframework.kafka.core.KafkaTemplate;
 @EnableHerodotusRest
 @EnableHerodotusSecurity
 public class AutoConfiguration {
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Components [Herodotus Starter] Auto Configure.");
+    }
 
     @Bean
     @ConditionalOnMissingBean(KafkaProducer.class)

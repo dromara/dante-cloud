@@ -39,12 +39,11 @@ import java.util.Objects;
  * @author gengwei.zheng
  */
 
-@SuppressWarnings("rawtypes")
 @Slf4j
-public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
+public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator<Result<String>> {
 
     @Override
-    public ResponseEntity translate(Exception e) throws Exception {
+    public ResponseEntity<Result<String>> translate(Exception e) throws Exception {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Result<String> result = SecurityGlobalExceptionHandler.resolveOauthException(e, request.getRequestURI());
         return ResponseEntity.status(result.getHttpStatus()).body(result);

@@ -15,64 +15,82 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
- * File Name: ResourceServerAutoConfiguration.java
+ * Module Name: eurynome-cloud-starter
+ * File Name: ResourceServerConfiguration.java
  * Author: gengwei.zheng
- * Date: 2020/6/3 下午3:40
- * LastModified: 2020/6/3 下午3:22
+ * Date: 2020/6/6 下午12:51
+ * LastModified: 2020/6/6 下午12:50
  */
 
-package cn.herodotus.eurynome.security.configuration;
+package cn.herodotus.eurynome.autoconfigure;
 
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
-import cn.herodotus.eurynome.security.access.HerodotusAccessDecisionManager;
-import cn.herodotus.eurynome.security.authentication.SecurityMetadataLocalStorage;
 import cn.herodotus.eurynome.security.metadata.RequestMappingScanner;
+import cn.herodotus.eurynome.security.metadata.SecurityMetadataLocalStorage;
+import cn.herodotus.eurynome.security.web.access.HerodotusAccessDecisionManager;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.web.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.security.web.access.HerodotusAccessDeniedHandler;
 import cn.herodotus.eurynome.security.web.access.intercept.HerodotusSecurityMetadataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 import java.util.List;
-
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: ResourceServerAutoConfiguration </p>
- *
- * <p>Description: 通用的ResourceServerConfigurerAdapter </p>
+ * <p>Description: 通用的ResourceService配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/29 19:58
+ * @date : 2020/6/6 10:49
  */
 @Slf4j
 @Configuration
+@ConditionalOnExpression("#{!'${spring.application.name}'.equals('eurynome-cloud-uaa')}")
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAdapter {
 
     @Autowired
     private SecurityProperties securityProperties;
     @Autowired
-    private ApplicationProperties applicationProperties;
+    private ResourceServerProperties resourceServerProperties;
     @Autowired
-    private RestProperties restProperties;
-    @Autowired
-    private SecurityMetadataLocalStorage securityMetadataLocalStorage;
+    private DefaultAccessTokenConverter defaultAccessTokenConverter;
+
+    @Bean
+    public ResourceServerTokenServices tokenServices() {
+        RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
+        remoteTokenServices.setCheckTokenEndpointUrl(resourceServerProperties.getTokenInfoUri());
+        remoteTokenServices.setClientId(resourceServerProperties.getClientId());
+        remoteTokenServices.setClientSecret(resourceServerProperties.getClientSecret());
+        remoteTokenServices.setAccessTokenConverter(defaultAccessTokenConverter);
+        return remoteTokenServices;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(SecurityMetadataLocalStorage.class)
+    public SecurityMetadataLocalStorage securityMetadataLocalStorage() {
+        SecurityMetadataLocalStorage securityMetadataLocalStorage = new SecurityMetadataLocalStorage();
+        log.debug("[Herodotus] |- Bean [Security Metadata Local Storage] Auto Configure.");
+        return securityMetadataLocalStorage;
+    }
 
     /**
      * 自定义注解扫描
@@ -81,18 +99,20 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
      */
     @Bean
     @ConditionalOnMissingBean(RequestMappingScanner.class)
-    @ConditionalOnBean(SecurityMetadataLocalStorage.class)
-    public RequestMappingScanner requestMappingScanner() {
+    @ConditionalOnClass(SecurityMetadataLocalStorage.class)
+    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataLocalStorage securityMetadataLocalStorage) {
         RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, applicationProperties, securityMetadataLocalStorage, EnableResourceServer.class);
         log.debug("[Herodotus] |- Bean [Request Mapping Scan] Auto Configure.");
         return requestMappingScan;
     }
 
     @Bean
-    @ConditionalOnBean(RequestMappingScanner.class)
+    @ConditionalOnMissingBean(HerodotusSecurityMetadataSource.class)
+    @ConditionalOnClass(RequestMappingScanner.class)
     public HerodotusSecurityMetadataSource herodotusSecurityMetadataSource() {
         HerodotusSecurityMetadataSource herodotusSecurityMetadataSource = new HerodotusSecurityMetadataSource();
-        herodotusSecurityMetadataSource.setSecurityMetadataLocalStorage(securityMetadataLocalStorage);
+        herodotusSecurityMetadataSource.setSecurityMetadataLocalStorage(securityMetadataLocalStorage());
+        herodotusSecurityMetadataSource.setSecurityProperties(securityProperties);
         log.debug("[Herodotus] |- Bean [Security Metadata Source] Auto Configure.");
         return herodotusSecurityMetadataSource;
     }
@@ -104,17 +124,19 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         return herodotusAccessDecisionManager;
     }
 
-
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
+
+        log.debug("[Herodotus] |- Bean [Core Resource Server] Auto Configure.");
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
+        // @formatter:off
         http.authorizeRequests()
-                .antMatchers(getWhiteList()).permitAll()
-                .anyRequest().authenticated();
-
-        http.authorizeRequests()
+                .antMatchers(getWhitelist()).permitAll()
+                // 指定监控访问权限
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                .anyRequest().authenticated()
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
@@ -123,20 +145,18 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                         return fsi;
                     }
                 })
-                .and()
+                .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
                 .exceptionHandling()
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
 
         // 关闭csrf 跨站（域）攻击防控
         http.csrf().disable();
-
-        log.info("[Herodotus] |- Bean [Resource Server ConfigurerAdapter] Auto Configure.");
-
+        // @formatter:on
     }
 
-    private String[] getWhiteList() {
-        if (securityProperties != null) {
+    private String[] getWhitelist() {
+        if (ObjectUtils.isNotEmpty(securityProperties)) {
             List<String> whitelist = securityProperties.getInterceptor().getWhitelist();
             if (CollectionUtils.isNotEmpty(whitelist)) {
                 log.info("[Herodotus] |- OAuth2 Fetch The Resource White List.");

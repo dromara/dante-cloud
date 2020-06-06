@@ -20,8 +20,8 @@
 
     <properties>
         <!--Spring 家族-->
-        <spring-cloud-dependencies.version>Hoxton.SR4</spring-cloud-dependencies.version>
-        <spring-cloud-alibaba-dependencies.version>2.2.1.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-dependencies.version>Hoxton.SR5</spring-cloud-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
@@ -39,7 +39,7 @@
         <hutool.version>5.3.5</hutool.version>
 
         <!--Alibaba开源的工具包-->
-        <alibaba-fastjson.version>1.2.68</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.70</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->

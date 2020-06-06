@@ -38,7 +38,7 @@ public class RestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Bean [HERODOTUS -- Rest] Auto Configure.");
+        log.info("[Herodotus] |- Components [Herodotus Rest] Auto Configure.");
     }
 
     @Bean

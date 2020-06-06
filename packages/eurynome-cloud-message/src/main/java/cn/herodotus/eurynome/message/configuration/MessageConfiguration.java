@@ -44,6 +44,6 @@ public class MessageConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Bean [HERODOTUS -- Message] Auto Configure.");
+        log.info("[Herodotus] |- Components [Herodotus Message] Auto Configure.");
     }
 }

@@ -41,7 +41,7 @@ import java.util.Map;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private static Map<String, Result<String>> exceptionDictionary = new HashMap<>();
+    private static final Map<String, Result<String>> EXCEPTION_DICTIONARY = new HashMap<>();
 
     /**
      * 1**	信息，服务器收到请求，需要请求者继续执行操作
@@ -103,41 +103,42 @@ public class GlobalExceptionHandler {
      */
     static {
         // 1*.** 对应错误
-        exceptionDictionary.put("InvalidGrantException", getResult(ResultStatus.INVALID_GRANT, HttpStatus.SC_NOT_ACCEPTABLE));
-        exceptionDictionary.put("InvalidTokenException", getResult(ResultStatus.INVALID_TOKEN, HttpStatus.SC_FORBIDDEN));
-        exceptionDictionary.put("InvalidScopeException", getResult(ResultStatus.INVALID_SCOPE, HttpStatus.SC_NOT_ACCEPTABLE));
-        exceptionDictionary.put("InvalidClientException", getResult(ResultStatus.INVALID_GRANT, HttpStatus.SC_FORBIDDEN));
-        exceptionDictionary.put("AccessDeniedException", getUnauthorizedResult(ResultStatus.ACCESS_DENIED));
+        EXCEPTION_DICTIONARY.put("InvalidGrantException", getResult(ResultStatus.INVALID_GRANT, HttpStatus.SC_NOT_ACCEPTABLE));
+        EXCEPTION_DICTIONARY.put("InvalidTokenException", getResult(ResultStatus.INVALID_TOKEN, HttpStatus.SC_FORBIDDEN));
+        EXCEPTION_DICTIONARY.put("InvalidScopeException", getResult(ResultStatus.INVALID_SCOPE, HttpStatus.SC_NOT_ACCEPTABLE));
+        EXCEPTION_DICTIONARY.put("InvalidClientException", getResult(ResultStatus.INVALID_GRANT, HttpStatus.SC_FORBIDDEN));
+        EXCEPTION_DICTIONARY.put("AccessDeniedException", getUnauthorizedResult(ResultStatus.ACCESS_DENIED));
+        EXCEPTION_DICTIONARY.put("AccessDeniedAuthorityLimitedException", getUnauthorizedResult(ResultStatus.ACCESS_DENIED_AUTHORITY_LIMITED));
         // 4*.** 对应错误
-        exceptionDictionary.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
+        EXCEPTION_DICTIONARY.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
         // 6*.** 对应错误
-        exceptionDictionary.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
-        exceptionDictionary.put("DataIntegrityViolationException", getResult(ResultStatus.DATA_INTEGRITY_VIOLATION));
+        EXCEPTION_DICTIONARY.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
+        EXCEPTION_DICTIONARY.put("DataIntegrityViolationException", getResult(ResultStatus.DATA_INTEGRITY_VIOLATION));
         // 以下是没有重新梳理过的错误。
-        exceptionDictionary.put("UsernameNotFoundException", getUnauthorizedResult(ResultStatus.USERNAME_NOT_FOUND));
-        exceptionDictionary.put("BadCredentialsException", getUnauthorizedResult(ResultStatus.BAD_CREDENTIALS));
-        exceptionDictionary.put("AccountExpiredException", getUnauthorizedResult(ResultStatus.ACCOUNT_EXPIRED));
-        exceptionDictionary.put("LockedException", getUnauthorizedResult(ResultStatus.ACCOUNT_LOCKED));
-        exceptionDictionary.put("DisabledException", getUnauthorizedResult(ResultStatus.ACCOUNT_DISABLED));
-        exceptionDictionary.put("CredentialsExpiredException", getUnauthorizedResult(ResultStatus.CREDENTIALS_EXPIRED));
-        exceptionDictionary.put("UnauthorizedClientException", getUnauthorizedResult(ResultStatus.UNAUTHORIZED_CLIENT));
-        exceptionDictionary.put("InsufficientAuthenticationException", getUnauthorizedResult(ResultStatus.UNAUTHORIZED));
-        exceptionDictionary.put("InvalidRequestException", getBadRequestResult(ResultStatus.INVALID_REQUEST));
-        exceptionDictionary.put("IOException", getResult(ResultStatus.SERVICE_UNAVAILABLE, HttpStatus.SC_SERVICE_UNAVAILABLE));
-        exceptionDictionary.put("RedirectMismatchException", getResult(ResultStatus.REDIRECT_URI_MISMATCH));
-        exceptionDictionary.put("UnsupportedGrantTypeException", getResult(ResultStatus.UNSUPPORTED_GRANT_TYPE));
-        exceptionDictionary.put("UnsupportedResponseTypeException", getResult(ResultStatus.UNSUPPORTED_RESPONSE_TYPE));
-        exceptionDictionary.put("UserDeniedAuthorizationException", getResult(ResultStatus.ACCESS_DENIED));
-        exceptionDictionary.put("HttpMessageNotReadableException", getBadRequestResult(ResultStatus.BAD_REQUEST));
-        exceptionDictionary.put("TypeMismatchException", getBadRequestResult(ResultStatus.BAD_REQUEST));
-        exceptionDictionary.put("MissingServletRequestParameterException", getBadRequestResult(ResultStatus.BAD_REQUEST));
-        exceptionDictionary.put("NoHandlerFoundException", getResult(ResultStatus.NOT_FOUND, HttpStatus.SC_NOT_FOUND));
+        EXCEPTION_DICTIONARY.put("UsernameNotFoundException", getUnauthorizedResult(ResultStatus.USERNAME_NOT_FOUND));
+        EXCEPTION_DICTIONARY.put("BadCredentialsException", getUnauthorizedResult(ResultStatus.BAD_CREDENTIALS));
+        EXCEPTION_DICTIONARY.put("AccountExpiredException", getUnauthorizedResult(ResultStatus.ACCOUNT_EXPIRED));
+        EXCEPTION_DICTIONARY.put("LockedException", getUnauthorizedResult(ResultStatus.ACCOUNT_LOCKED));
+        EXCEPTION_DICTIONARY.put("DisabledException", getUnauthorizedResult(ResultStatus.ACCOUNT_DISABLED));
+        EXCEPTION_DICTIONARY.put("CredentialsExpiredException", getUnauthorizedResult(ResultStatus.CREDENTIALS_EXPIRED));
+        EXCEPTION_DICTIONARY.put("UnauthorizedClientException", getUnauthorizedResult(ResultStatus.UNAUTHORIZED_CLIENT));
+        EXCEPTION_DICTIONARY.put("InsufficientAuthenticationException", getUnauthorizedResult(ResultStatus.UNAUTHORIZED));
+        EXCEPTION_DICTIONARY.put("InvalidRequestException", getBadRequestResult(ResultStatus.INVALID_REQUEST));
+        EXCEPTION_DICTIONARY.put("IOException", getResult(ResultStatus.SERVICE_UNAVAILABLE, HttpStatus.SC_SERVICE_UNAVAILABLE));
+        EXCEPTION_DICTIONARY.put("RedirectMismatchException", getResult(ResultStatus.REDIRECT_URI_MISMATCH));
+        EXCEPTION_DICTIONARY.put("UnsupportedGrantTypeException", getResult(ResultStatus.UNSUPPORTED_GRANT_TYPE));
+        EXCEPTION_DICTIONARY.put("UnsupportedResponseTypeException", getResult(ResultStatus.UNSUPPORTED_RESPONSE_TYPE));
+        EXCEPTION_DICTIONARY.put("UserDeniedAuthorizationException", getResult(ResultStatus.ACCESS_DENIED));
+        EXCEPTION_DICTIONARY.put("HttpMessageNotReadableException", getBadRequestResult(ResultStatus.BAD_REQUEST));
+        EXCEPTION_DICTIONARY.put("TypeMismatchException", getBadRequestResult(ResultStatus.BAD_REQUEST));
+        EXCEPTION_DICTIONARY.put("MissingServletRequestParameterException", getBadRequestResult(ResultStatus.BAD_REQUEST));
+        EXCEPTION_DICTIONARY.put("NoHandlerFoundException", getResult(ResultStatus.NOT_FOUND, HttpStatus.SC_NOT_FOUND));
 
-        exceptionDictionary.put("HttpMediaTypeNotAcceptableException", getBadRequestResult(ResultStatus.MEDIA_TYPE_NOT_ACCEPTABLE));
-        exceptionDictionary.put("IllegalArgumentException", getBadRequestResult(ResultStatus.WARNING));
+        EXCEPTION_DICTIONARY.put("HttpMediaTypeNotAcceptableException", getBadRequestResult(ResultStatus.MEDIA_TYPE_NOT_ACCEPTABLE));
+        EXCEPTION_DICTIONARY.put("IllegalArgumentException", getBadRequestResult(ResultStatus.WARNING));
 
 
-        exceptionDictionary.put("MethodArgumentNotValidException", getResult(ResultStatus.WARNING));
+        EXCEPTION_DICTIONARY.put("MethodArgumentNotValidException", getResult(ResultStatus.WARNING));
     }
 
 
@@ -165,8 +166,8 @@ public class GlobalExceptionHandler {
 
         String exceptionName = ex.getClass().getSimpleName();
         if (StringUtils.isNotEmpty(exceptionName)) {
-            if (exceptionDictionary.containsKey(exceptionName)) {
-                result = exceptionDictionary.get(exceptionName);
+            if (EXCEPTION_DICTIONARY.containsKey(exceptionName)) {
+                result = EXCEPTION_DICTIONARY.get(exceptionName);
             } else {
                 log.warn("[Herodotus] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
             }

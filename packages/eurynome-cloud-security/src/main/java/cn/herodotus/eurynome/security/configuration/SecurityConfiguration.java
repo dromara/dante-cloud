@@ -1,8 +1,11 @@
 package cn.herodotus.eurynome.security.configuration;
 
+import cn.herodotus.eurynome.security.oauth2.provider.token.HerodotusUserAuthenticationConverter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 
 import javax.annotation.PostConstruct;
 
@@ -36,9 +39,23 @@ import javax.annotation.PostConstruct;
         "cn.hutool.extra.spring",
         "cn.herodotus.eurynome.security.authentication"
 })
-public class SecurityConfiguration  {
+public class SecurityConfiguration {
+
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Bean [HERODOTUS -- Security] Auto Configure.");
+        log.info("[Herodotus] |- Components [Herodotus Security] Auto Configure.");
+    }
+
+    /**
+     * 将所有授权信息都返回到资源服务器
+     * 调用自定义用户转换器
+     * 用于token解析转换
+     */
+    @Bean
+    public DefaultAccessTokenConverter createDefaultAccessTokenConverter() {
+        HerodotusUserAuthenticationConverter herodotusUserAuthenticationConverter = new HerodotusUserAuthenticationConverter();
+        DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
+        defaultAccessTokenConverter.setUserTokenConverter(herodotusUserAuthenticationConverter);
+        return defaultAccessTokenConverter;
     }
 }

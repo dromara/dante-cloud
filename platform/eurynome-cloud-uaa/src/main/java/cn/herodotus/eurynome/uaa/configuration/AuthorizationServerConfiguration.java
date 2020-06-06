@@ -2,7 +2,6 @@ package cn.herodotus.eurynome.uaa.configuration;
 
 import cn.herodotus.eurynome.security.oauth2.provider.error.HerodotusWebResponseExceptionTranslator;
 import cn.herodotus.eurynome.security.oauth2.provider.token.HerodotusJwtTokenEnhancer;
-import cn.herodotus.eurynome.security.oauth2.provider.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.uaa.service.OauthClientDetailsService;
 import cn.herodotus.eurynome.uaa.service.OauthUserDetailsService;
@@ -83,8 +82,37 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private OauthUserDetailsService oauthUserDetailsService;
     @Autowired
     private SecurityProperties securityProperties;
+    @Autowired
+    private DefaultAccessTokenConverter defaultAccessTokenConverter;
 
     /**
+     * 以下三个方法的配置是Oauth2 Authorization Server Configuration 的核心内容
+     * @see :https://projects.spring.io/spring-security-oauth/docs/oauth2.html
+     */
+
+    /**
+     * 配置客户端详情信息(Client Details)
+     * clientId：（必须的）用来标识客户的Id。
+     * secret：（需要值得信任的客户端）客户端安全码，如果有的话。
+     * scope：用来限制客户端的访问范围，如果为空（默认）的话，那么客户端拥有全部的访问范围。
+     * authorizedGrantTypes：此客户端可以使用的授权类型，默认为空。
+     * authorities：此客户端可以使用的权限（基于Spring Security authorities）。
+     * <p>
+     * 配置客户端详情服务（ClientDetailsService）
+     * 客户端详情信息在这里进行初始化
+     */
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.withClientDetails(oauthClientDetailsService);
+    }
+
+    /**
+     *
+     * As with the Authorization Server, you can often use the DefaultTokenServices and the choices are mostly expressed through the TokenStore (backend storage or local encoding).
+     * An alternative is the RemoteTokenServices which is a Spring OAuth features (not part of the spec) allowing Resource Servers to decode tokens through an HTTP resource on the Authorization Server (/oauth/check_token).
+     * RemoteTokenServices are convenient if there is not a huge volume of traffic in the Resource Servers (every request has to be verified with the Authorization Server), or if you can afford to cache the results.
+     * To use the /oauth/check_token endpoint you need to expose it by changing its access rule (default is "denyAll()") in the AuthorizationServerSecurityConfigurer
+     *
      * 配置令牌端点(Token Endpoint)的安全约束
      * {@link org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerSecurityConfiguration}
      *
@@ -116,23 +144,53 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     /**
-     * 配置客户端详情信息(Client Details)
-     * clientId：（必须的）用来标识客户的Id。
-     * secret：（需要值得信任的客户端）客户端安全码，如果有的话。
-     * scope：用来限制客户端的访问范围，如果为空（默认）的话，那么客户端拥有全部的访问范围。
-     * authorizedGrantTypes：此客户端可以使用的授权类型，默认为空。
-     * authorities：此客户端可以使用的权限（基于Spring Security authorities）。
-     * <p>
-     * 配置客户端详情服务（ClientDetailsService）
-     * 客户端详情信息在这里进行初始化
+     * 之前是采用自己定一个DefaultTokenServices的方式对Token的一些内容进行设置。
+     * 但是这样就存在一个问题，这会让人混淆有些属性，例如tokenStore，到底是应该设置在endpoints还是DefaultTokenServices中。
+     *
+     * 后来查阅的oauth的源代码{@link AuthorizationServerEndpointsConfigurer#getDefaultAuthorizationServerTokenServices()}，发现：
+     * 这个类会判断是否已经设置了DefaultTokenServices，如果没有就帮助创建一个。
+     * 通过对比发现oauth源代码创建DefaultTokenServices内容，和自己创建的没有多大区别，因此考虑没有比较自己创建，还引起了不必要的混乱。
+     *
+     * setAccessTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 access_token_validity
+     * setRefreshTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 refresh_token_validity
+     *
+     * @param endpoints AuthorizationServerEndpointsConfigurer
      */
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(oauthClientDetailsService);
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+                .authenticationManager(authenticationManager)
+                // 授权允许存储方式
+                .approvalStore(createApprovalStore())
+                // 授权码模式code存储方式
+                .authorizationCodeServices(createAuthorizationCodeServices())
+                // token存储方式
+                .tokenStore(createTokenStore())
+                .userDetailsService(oauthUserDetailsService)
+                .tokenEnhancer(createAccessTokenEnhancerChain())
+                .accessTokenConverter(defaultAccessTokenConverter);
+
+        // 自定义确认授权页面
+        endpoints.pathMapping("/oauth/confirm_access", "/oauth/confirm_access");
+        // 自定义错误页
+        endpoints.pathMapping("/oauth/error", "/oauth/error");
+        // 自定义异常转换类
+        endpoints.exceptionTranslator(new HerodotusWebResponseExceptionTranslator());
     }
 
     /**
-     * 授权store
+     * 声明 TokenStore 管理方式实现
+     *
+     * @return TokenStore
+     */
+    @Bean
+    public TokenStore createTokenStore() {
+        return new RedisTokenStore(lettuceConnectionFactory);
+    }
+
+    /**
+     * 授权store。主要用于Authorization Code模式中，确认授权范围页面。
      *
      * @return ApprovalStore
      */
@@ -168,66 +226,5 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Bean
     public TokenEnhancer createJwtTokenEnhancer() {
         return new HerodotusJwtTokenEnhancer();
-    }
-
-    /**
-     * 将所有授权信息都返回到资源服务器
-     * 调用自定义用户转换器
-     * 用于token解析转换
-     */
-    @Bean
-    public DefaultAccessTokenConverter createDefaultAccessTokenConverter() {
-        HerodotusUserAuthenticationConverter herodotusUserAuthenticationConverter = new HerodotusUserAuthenticationConverter();
-
-        DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
-        defaultAccessTokenConverter.setUserTokenConverter(herodotusUserAuthenticationConverter);
-        return defaultAccessTokenConverter;
-    }
-
-    /**
-     * 声明 TokenStore 管理方式实现
-     *
-     * @return TokenStore
-     */
-    @Bean
-    public TokenStore createTokenStore() {
-        return new RedisTokenStore(lettuceConnectionFactory);
-//        return new JdbcTokenStore(dataSource);
-    }
-
-    /**
-     * 之前是采用自己定一个DefaultTokenServices的方式对Token的一些内容进行设置。
-     * 但是这样就存在一个问题，这会让人混淆有些属性，例如tokenStore，到底是应该设置在endpoints还是DefaultTokenServices中。
-     *
-     * 后来查阅的oauth的源代码{@link AuthorizationServerEndpointsConfigurer#getDefaultAuthorizationServerTokenServices()}，发现：
-     * 这个类会判断是否已经设置了DefaultTokenServices，如果没有就帮助创建一个。
-     * 通过对比发现oauth源代码创建DefaultTokenServices内容，和自己创建的没有多大区别，因此考虑没有比较自己创建，还引起了不必要的混乱。
-     *
-     * setAccessTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 access_token_validity
-     * setRefreshTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 refresh_token_validity
-     *
-     * @param endpoints AuthorizationServerEndpointsConfigurer
-     */
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-                .authenticationManager(authenticationManager)
-                // 授权允许存储方式
-                .approvalStore(createApprovalStore())
-                // 授权码模式code存储方式
-                .authorizationCodeServices(createAuthorizationCodeServices())
-                // token存储方式
-                .tokenStore(createTokenStore())
-                .userDetailsService(oauthUserDetailsService)
-                .tokenEnhancer(createAccessTokenEnhancerChain())
-                .accessTokenConverter(createDefaultAccessTokenConverter());
-
-        // 自定义确认授权页面
-        endpoints.pathMapping("/oauth/confirm_access", "/oauth/confirm_access");
-        // 自定义错误页
-        endpoints.pathMapping("/oauth/error", "/oauth/error");
-        // 自定义异常转换类
-        endpoints.exceptionTranslator(new HerodotusWebResponseExceptionTranslator());
     }
 }

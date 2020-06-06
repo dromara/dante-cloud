@@ -18,11 +18,11 @@
  * Module Name: eurynome-cloud-security
  * File Name: SecurityMetadataLocalStorage.java
  * Author: gengwei.zheng
- * Date: 2020/6/3 下午2:58
- * LastModified: 2020/6/3 下午2:33
+ * Date: 2020/6/6 上午11:45
+ * LastModified: 2020/6/6 上午11:39
  */
 
-package cn.herodotus.eurynome.security.authentication;
+package cn.herodotus.eurynome.security.metadata;
 
 import cn.herodotus.eurynome.data.cache.CacheTemplate;
 import cn.herodotus.eurynome.security.metadata.RequestMapping;
@@ -31,12 +31,13 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
-import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -50,7 +51,6 @@ import java.util.Set;
  * @date : 2020/6/3 9:57
  */
 @Slf4j
-@Component
 public class SecurityMetadataLocalStorage {
 
     private static final String ALL = "all";
@@ -83,4 +83,21 @@ public class SecurityMetadataLocalStorage {
         log.warn("[Herodotus] |- Cannot Get the request mappings from local storage, or the result is empty!");
         return new ArrayList<>();
     }
+
+    public Map<RequestMatcher, Collection<ConfigAttribute>> getRequestMatchers() {
+        Map<RequestMatcher, Collection<ConfigAttribute>> requestMatchers = new LinkedHashMap<>();
+        List<RequestMapping> requestMappings = findAll();
+        if (CollectionUtils.isNotEmpty(requestMappings)) {
+            requestMappings.forEach(securityMetadata -> {
+                if (StringUtils.isNotEmpty(securityMetadata.getUrl())) {
+                    RequestMatcher requestMatcher = new AntPathRequestMatcher(securityMetadata.getUrl(), securityMetadata.getRequestMethod());
+                    Collection<ConfigAttribute> attributes = Collections.singletonList(new SecurityConfig(securityMetadata.getMetadataCode()));
+                    requestMatchers.put(requestMatcher, attributes);
+                }
+            });
+        }
+
+        return requestMatchers;
+    }
+
 }

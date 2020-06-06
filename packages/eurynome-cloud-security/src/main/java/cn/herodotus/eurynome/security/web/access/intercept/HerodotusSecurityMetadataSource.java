@@ -1,12 +1,13 @@
 package cn.herodotus.eurynome.security.web.access.intercept;
 
+import cn.herodotus.eurynome.security.metadata.SecurityMetadataLocalStorage;
 import cn.herodotus.eurynome.security.metadata.RequestMapping;
-import cn.herodotus.eurynome.security.authentication.SecurityMetadataLocalStorage;
+import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -24,14 +25,19 @@ import java.util.*;
  * @date : 2020/5/20 12:24
  */
 @Slf4j
-public class HerodotusSecurityMetadataSource implements FilterInvocationSecurityMetadataSource, InitializingBean {
+public class HerodotusSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMatchers = new LinkedHashMap<>();
 
     private SecurityMetadataLocalStorage securityMetadataLocalStorage;
+    private SecurityProperties securityProperties;
 
     public void setSecurityMetadataLocalStorage(SecurityMetadataLocalStorage securityMetadataLocalStorage) {
         this.securityMetadataLocalStorage = securityMetadataLocalStorage;
+    }
+
+    public void setSecurityProperties(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
     }
 
     /**
@@ -45,7 +51,7 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
      * @param object 当前请求
      * @return 根据当前请求匹配的配置信息，此处为权限信息
      * @throws IllegalArgumentException 参数错误
-     * @see：https://blog.csdn.net/u012373815/article/details/54633046
+     * @see :https://blog.csdn.net/u012373815/article/details/54633046
      */
 
     @Override
@@ -62,12 +68,12 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
             return null;
         }
 
-//        if (WebUtils.isPathMatch(securityProperities.getInterceptor().getWhiteList(), url)) {
-//            log.debug("[Luban] |- Is White List Resource : [{}], Passed!", url);
-//            return null;
-//        }
+        if (WebUtils.isPathMatch(securityProperties.getInterceptor().getWhitelist(), url)) {
+            log.debug("[Luban] |- Is White List Resource : [{}], Passed!", url);
+            return null;
+        }
 
-        for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : requestMatchers
+        for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : getRequestMatchers()
                 .entrySet()) {
             if (entry.getKey().matches(request)) {
                 log.debug("[Luban] |- Current Request is : [{}] - [{}]", url, method);
@@ -81,7 +87,7 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
     public Collection<ConfigAttribute> getAllConfigAttributes() {
         Set<ConfigAttribute> allAttributes = new HashSet<>();
 
-        for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : requestMatchers
+        for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : getRequestMatchers()
                 .entrySet()) {
             allAttributes.addAll(entry.getValue());
         }
@@ -100,17 +106,20 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
         return FilterInvocation.class.isAssignableFrom(clazz);
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        List<RequestMapping> securityMetadataCollection = securityMetadataLocalStorage.findAll();
-        if (CollectionUtils.isNotEmpty(securityMetadataCollection)) {
-            securityMetadataCollection.forEach(securityMetadata -> {
-                if (StringUtils.isNotEmpty(securityMetadata.getUrl())) {
-                    RequestMatcher requestMatcher = new AntPathRequestMatcher(securityMetadata.getUrl(), securityMetadata.getRequestMethod());
-                    Collection<ConfigAttribute> attributes = Collections.singletonList(new SecurityConfig(securityMetadata.getMetadataCode()));
-                    requestMatchers.put(requestMatcher, attributes);
-                }
-            });
+    public Map<RequestMatcher, Collection<ConfigAttribute>> getRequestMatchers(){
+        if (MapUtils.isEmpty(requestMatchers)) {
+            List<RequestMapping> requestMappings = securityMetadataLocalStorage.findAll();
+            if (CollectionUtils.isNotEmpty(requestMappings)) {
+                requestMappings.forEach(securityMetadata -> {
+                    if (StringUtils.isNotEmpty(securityMetadata.getUrl())) {
+                        RequestMatcher requestMatcher = new AntPathRequestMatcher(securityMetadata.getUrl(), securityMetadata.getRequestMethod());
+                        Collection<ConfigAttribute> attributes = Collections.singletonList(new SecurityConfig(securityMetadata.getMetadataCode()));
+                        requestMatchers.put(requestMatcher, attributes);
+                    }
+                });
+            }
         }
+
+        return requestMatchers;
     }
 }

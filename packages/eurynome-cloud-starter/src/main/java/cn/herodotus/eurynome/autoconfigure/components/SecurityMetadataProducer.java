@@ -25,12 +25,11 @@
 package cn.herodotus.eurynome.autoconfigure.components;
 
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
-import cn.herodotus.eurynome.security.authentication.SecurityMetadataLocalStorage;
 import cn.herodotus.eurynome.security.metadata.RequestMapping;
+import cn.herodotus.eurynome.security.metadata.SecurityMetadataLocalStorage;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 
@@ -43,7 +42,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/6/3 17:04
  */
-public class SecurityMetadataProducer implements ApplicationListener<ContextRefreshedEvent> {
+public class SecurityMetadataProducer implements InitializingBean {
 
     private SecurityMetadataLocalStorage securityMetadataLocalStorage;
 
@@ -58,7 +57,7 @@ public class SecurityMetadataProducer implements ApplicationListener<ContextRefr
     }
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void afterPropertiesSet() throws Exception {
         List<RequestMapping> requestMappings = securityMetadataLocalStorage.findAll();
         if (CollectionUtils.isNotEmpty(requestMappings)) {
             String message = JSON.toJSONString(requestMappings);

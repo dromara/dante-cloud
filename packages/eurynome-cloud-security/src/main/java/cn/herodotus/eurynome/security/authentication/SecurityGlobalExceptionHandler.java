@@ -29,11 +29,13 @@ import cn.herodotus.eurynome.common.exception.GlobalExceptionHandler;
 import cn.herodotus.eurynome.common.exception.PlatformException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
+import org.springframework.security.oauth2.common.exceptions.ClientAuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +67,22 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
     }
 
     /**
+     * Rest Template 错误处理
+     * @see :https://www.baeldung.com/spring-rest-template-error-handling
+     * @param ex
+     * @param request
+     * @param response
+     * @return
+     */
+    @ExceptionHandler({HttpClientErrorException.class, HttpServerErrorException.class})
+    @ResponseBody
+    public static Result<String> restTemplateException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result<String> result = resolveException(ex, request.getRequestURI());
+        response.setStatus(result.getHttpStatus());
+        return result;
+    }
+
+    /**
      * 统一异常处理
      * AuthenticationException
      *
@@ -89,7 +107,7 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
      * @param response
      * @return
      */
-    @ExceptionHandler({OAuth2Exception.class, InvalidTokenException.class})
+    @ExceptionHandler({OAuth2Exception.class, ClientAuthenticationException.class})
     @ResponseBody
     public static Result<String> oauth2Exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());

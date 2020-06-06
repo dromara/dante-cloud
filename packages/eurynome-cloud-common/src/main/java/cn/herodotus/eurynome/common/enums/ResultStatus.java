@@ -58,6 +58,7 @@ public enum ResultStatus {
     INVALID_CLIENT(1003, "非法的客户端"),
 
     ACCESS_DENIED(1100, "拒绝访问"),
+    ACCESS_DENIED_AUTHORITY_LIMITED(1101, "权限不足，拒绝访问"),
 
     /**
      * 2*.** 成功
@@ -98,7 +99,6 @@ public enum ResultStatus {
 
     ACCESS_DENIED_BLACK_IP_LIMITED(4031, "Access Denied Black Ip Limited"),
     ACCESS_DENIED_WHITE_IP_LIMITED(4032, "Access Denied White Ip Limited"),
-    ACCESS_DENIED_AUTHORITY_EXPIRED(4033, "Access Denied Authority Expired"),
     ACCESS_DENIED_UPDATING(4034, "Access Denied Updating"),
     ACCESS_DENIED_DISABLED(4035, "Access Denied Disabled"),
     ACCESS_DENIED_NOT_OPEN(4036, "Access Denied Not Open"),
