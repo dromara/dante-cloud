@@ -52,7 +52,7 @@ import java.util.*;
 @Slf4j
 public abstract class AbstractCache<E extends AbstractEntity> extends CacheConstants {
 
-    private static final String CACHE_NAME_ALL = "all";
+    private static final String CACHE_NAME_ENTIRE = "entire";
     private static final String CACHE_NAME_DELETE_INDEX_LINK = "delete:link";
     private static final String CACHE_NAME_CLEAN_INDEX = "delete:clean";
 
@@ -138,8 +138,8 @@ public abstract class AbstractCache<E extends AbstractEntity> extends CacheConst
             log.debug("[Herodotus] |- Generate dynamic cache name={}", dynamicKey);
             return dynamicKey;
         } else {
-            log.debug("[Herodotus] |- Using default cache name={}", CACHE_NAME_ALL);
-            return CACHE_NAME_ALL;
+            log.debug("[Herodotus] |- Using default cache name={}", CACHE_NAME_ENTIRE);
+            return CACHE_NAME_ENTIRE;
         }
     }
 
@@ -284,9 +284,6 @@ public abstract class AbstractCache<E extends AbstractEntity> extends CacheConst
                 cachedIndexes.addAll(indexes);
                 putIntoIndexCache(cacheName, cachedIndexes);
             } else {
-                // 如果cachedIndexes为空，意味着这个cacheName没有添加过。
-                // 那么就把它添加进Clean Index，方便清空。
-                putIntoIndexCache(CACHE_NAME_CLEAN_INDEX, cacheName);
                 putIntoIndexCache(cacheName, instanceIndexCacheValue(indexes));
             }
         }
@@ -336,6 +333,7 @@ public abstract class AbstractCache<E extends AbstractEntity> extends CacheConst
         // 如果有反向关联，则添加
         if (cacheTemplate.hasPropertyLink()) {
             appendToIndexCache(CACHE_NAME_DELETE_INDEX_LINK, cacheTemplate.getDeleteIndexes());
+            appendToIndexCache(CACHE_NAME_CLEAN_INDEX, CACHE_NAME_DELETE_INDEX_LINK);
             putIntoIndexCache(cacheTemplate.getPropertyLinks());
         }
     }
@@ -383,6 +381,7 @@ public abstract class AbstractCache<E extends AbstractEntity> extends CacheConst
             putIntoCache(cacheTemplate.getDomains());
             // 添加数据查询索引
             appendToIndexCache(cacheName, cacheTemplate.getQueryIndexes());
+            appendToIndexCache(CACHE_NAME_CLEAN_INDEX, cacheName);
             // 如果有反向关联，则添加
             createPropertyLink(cacheTemplate);
         }

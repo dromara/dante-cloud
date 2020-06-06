@@ -40,7 +40,7 @@ import java.util.Objects;
  */
 
 @Slf4j
-public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator<Result<String>> {
+public class HerodotusWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
 
     @Override
     public ResponseEntity<Result<String>> translate(Exception e) throws Exception {

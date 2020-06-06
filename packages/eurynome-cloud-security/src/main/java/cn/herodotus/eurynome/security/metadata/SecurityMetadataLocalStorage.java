@@ -25,19 +25,16 @@
 package cn.herodotus.eurynome.security.metadata;
 
 import cn.herodotus.eurynome.data.cache.CacheTemplate;
-import cn.herodotus.eurynome.security.metadata.RequestMapping;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.access.ConfigAttribute;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -83,21 +80,4 @@ public class SecurityMetadataLocalStorage {
         log.warn("[Herodotus] |- Cannot Get the request mappings from local storage, or the result is empty!");
         return new ArrayList<>();
     }
-
-    public Map<RequestMatcher, Collection<ConfigAttribute>> getRequestMatchers() {
-        Map<RequestMatcher, Collection<ConfigAttribute>> requestMatchers = new LinkedHashMap<>();
-        List<RequestMapping> requestMappings = findAll();
-        if (CollectionUtils.isNotEmpty(requestMappings)) {
-            requestMappings.forEach(securityMetadata -> {
-                if (StringUtils.isNotEmpty(securityMetadata.getUrl())) {
-                    RequestMatcher requestMatcher = new AntPathRequestMatcher(securityMetadata.getUrl(), securityMetadata.getRequestMethod());
-                    Collection<ConfigAttribute> attributes = Collections.singletonList(new SecurityConfig(securityMetadata.getMetadataCode()));
-                    requestMatchers.put(requestMatcher, attributes);
-                }
-            });
-        }
-
-        return requestMatchers;
-    }
-
 }

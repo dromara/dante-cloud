@@ -1,7 +1,8 @@
 package cn.herodotus.eurynome.security.web.access.intercept;
 
-import cn.herodotus.eurynome.security.metadata.SecurityMetadataLocalStorage;
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.security.metadata.RequestMapping;
+import cn.herodotus.eurynome.security.metadata.SecurityMetadataLocalStorage;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,9 @@ import java.util.*;
 @Slf4j
 public class HerodotusSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
-    private final Map<RequestMatcher, Collection<ConfigAttribute>> requestMatchers = new LinkedHashMap<>();
+    private final Map<RequestMatcher, Collection<ConfigAttribute>> matchers = new LinkedHashMap<>();
+    private final Map<String, Map<String, Collection<ConfigAttribute>>> indexes = new LinkedHashMap<>();
+    private final Set<ConfigAttribute> allConfigAttributes = new LinkedHashSet<>();
 
     private SecurityMetadataLocalStorage securityMetadataLocalStorage;
     private SecurityProperties securityProperties;
@@ -64,35 +67,22 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
         String method = request.getMethod();
 
         if (WebUtils.isStaticResources(url)) {
-            log.debug("[Luban] |- Is Static Resource : [{}], Passed!", url);
+            log.debug("[Herodotus] |- Is Static Resource : [{}], Passed!", url);
             return null;
         }
 
         if (WebUtils.isPathMatch(securityProperties.getInterceptor().getWhitelist(), url)) {
-            log.debug("[Luban] |- Is White List Resource : [{}], Passed!", url);
+            log.debug("[Herodotus] |- Is White List Resource : [{}], Passed!", url);
             return null;
         }
 
-        for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : getRequestMatchers()
-                .entrySet()) {
-            if (entry.getKey().matches(request)) {
-                log.debug("[Luban] |- Current Request is : [{}] - [{}]", url, method);
-                return entry.getValue();
-            }
-        }
-        return null;
+        return findConfigAttribute(url, method, request);
     }
 
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
-        Set<ConfigAttribute> allAttributes = new HashSet<>();
-
-        for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : getRequestMatchers()
-                .entrySet()) {
-            allAttributes.addAll(entry.getValue());
-        }
-
-        return allAttributes;
+        initRequestMappings();
+        return allConfigAttributes;
     }
 
     /**
@@ -106,20 +96,80 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
         return FilterInvocation.class.isAssignableFrom(clazz);
     }
 
-    public Map<RequestMatcher, Collection<ConfigAttribute>> getRequestMatchers(){
-        if (MapUtils.isEmpty(requestMatchers)) {
-            List<RequestMapping> requestMappings = securityMetadataLocalStorage.findAll();
-            if (CollectionUtils.isNotEmpty(requestMappings)) {
-                requestMappings.forEach(securityMetadata -> {
-                    if (StringUtils.isNotEmpty(securityMetadata.getUrl())) {
-                        RequestMatcher requestMatcher = new AntPathRequestMatcher(securityMetadata.getUrl(), securityMetadata.getRequestMethod());
-                        Collection<ConfigAttribute> attributes = Collections.singletonList(new SecurityConfig(securityMetadata.getMetadataCode()));
-                        requestMatchers.put(requestMatcher, attributes);
-                    }
-                });
+    private Collection<ConfigAttribute> findConfigAttribute(String url, String method, HttpServletRequest request) {
+        initRequestMappings();
+
+        log.debug("[Herodotus] |- Current Request is : [{}] - [{}]", url, method);
+
+        Collection<ConfigAttribute> configAttributes = getFromIndex(url, method);
+        if (CollectionUtils.isNotEmpty(configAttributes)) {
+            return configAttributes;
+        } else {
+            for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : matchers.entrySet()) {
+                if (entry.getKey().matches(request)) {
+                    return entry.getValue();
+                }
             }
         }
 
-        return requestMatchers;
+        return null;
+    }
+
+    private void addRequestMapping(RequestMapping requestMapping) {
+        String url = requestMapping.getUrl();
+        String method = requestMapping.getMethodName();
+        String code = requestMapping.getMetadataCode();
+        if (StringUtils.isNotEmpty(url)) {
+            SecurityConfig securityConfig = new SecurityConfig(code);
+            if (StringUtils.contains(requestMapping.getUrl(), SymbolConstants.STAR)) {
+                addMatcher(url, method, securityConfig);
+            } else {
+                addIndex(url, method, securityConfig);
+            }
+
+            allConfigAttributes.add(securityConfig);
+        }
+    }
+
+    private Collection<ConfigAttribute> getFromIndex(String url, String method) {
+        if (indexes.containsKey(url)) {
+            Map<String, Collection<ConfigAttribute>> index = indexes.get(url);
+            return index.get(method);
+        }
+        return null;
+    }
+
+    private void addIndex(String url, String methodName, SecurityConfig securityConfig) {
+        Map<String, Collection<ConfigAttribute>> index = new LinkedHashMap<>();
+
+        if (indexes.containsKey(url)) {
+            index = indexes.get(url);
+        }
+
+        if (StringUtils.contains(methodName, SymbolConstants.COMMA)) {
+            String[] methods = StringUtils.split(methodName, SymbolConstants.COMMA);
+            Collection<ConfigAttribute> configAttributes = Collections.singletonList(securityConfig);
+            for (String method : methods) {
+                index.put(method, configAttributes);
+            }
+        } else {
+            index.put(methodName, Collections.singletonList(securityConfig));
+        }
+
+        indexes.put(url, index);
+    }
+
+    private void addMatcher(String url, String methodName, SecurityConfig securityConfig) {
+        RequestMatcher requestMatcher = new AntPathRequestMatcher(url, methodName);
+        matchers.put(requestMatcher, Collections.singletonList(securityConfig));
+    }
+
+    private void initRequestMappings() {
+        if (MapUtils.isEmpty(matchers) && MapUtils.isEmpty(indexes)) {
+            List<RequestMapping> requestMappings = securityMetadataLocalStorage.findAll();
+            if (CollectionUtils.isNotEmpty(requestMappings)) {
+                requestMappings.forEach(this::addRequestMapping);
+            }
+        }
     }
 }
