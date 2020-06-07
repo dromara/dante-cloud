@@ -2,9 +2,14 @@ package cn.herodotus.eurynome.upms.api.entity.oauth;
 
 import cn.herodotus.eurynome.data.base.entity.BaseAppEntity;
 import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
+import com.google.common.base.MoreObjects;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p> Description : 微服务管理 </p>
@@ -25,6 +30,15 @@ public class OauthMicroservices extends BaseAppEntity {
     @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinTable(name = "oauth_microservices_scopes",
+            joinColumns = {@JoinColumn(name = "service_id")},
+            inverseJoinColumns = {@JoinColumn(name = "scope_id")},
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"service_id", "scope_id"})},
+            indexes = {@Index(name = "oauth_microservices_scopes_mid_idx", columnList = "service_id"), @Index(name = "oauth_microservices_scopes_sid_idx", columnList = "scope_id")})
+    private Set<OauthScopes> scopes = new HashSet<>();
 
     @Override
     public String getId() {
@@ -52,11 +66,19 @@ public class OauthMicroservices extends BaseAppEntity {
         this.supplier = supplier;
     }
 
+    public Set<OauthScopes> getScopes() {
+        return scopes;
+    }
+
+    public void setScopes(Set<OauthScopes> scopes) {
+        this.scopes = scopes;
+    }
+
     @Override
     public String toString() {
-        return "OauthMicroservices{" +
-                "serviceId='" + serviceId + '\'' +
-                ", supplier=" + supplier +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("serviceId", serviceId)
+                .add("supplier", supplier)
+                .toString();
     }
 }

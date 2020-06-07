@@ -8,20 +8,25 @@ import cn.herodotus.eurynome.operation.domain.Config;
 import cn.herodotus.eurynome.operation.nacos.ConfigContentFactory;
 import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthMicroservicesRepository;
 import cn.hutool.core.util.IdUtil;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <p> Description : OauthMicroservicesService </p>
@@ -85,6 +90,23 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
         oauthClientDetailsService.deleteById(serviceId);
     }
 
+    public OauthMicroservices assign(String serviceId, String[] scopeIds) {
+
+        log.debug("[Herodotus] |- OauthMicroservices Service authorize.");
+
+        Set<OauthScopes> oauthScopesSet = new HashSet<>();
+        for (String scopeId : scopeIds) {
+            OauthScopes oauthScopes = new OauthScopes();
+            oauthScopes.setScopeId(scopeId);
+            oauthScopesSet.add(oauthScopes);
+        }
+
+        OauthMicroservices oauthMicroservices = findById(serviceId);
+        oauthMicroservices.setScopes(oauthScopesSet);
+
+        return saveOrUpdate(oauthMicroservices);
+    }
+
     private Config convertOauthMicroservicesToConfig(OauthMicroservices oauthMicroservices) {
         if (ObjectUtils.isNotEmpty(oauthMicroservices) && ObjectUtils.isNotEmpty(oauthMicroservices.getSupplier())) {
             Config config = new Config();
@@ -92,7 +114,13 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
             if (StringUtils.isNotBlank(oauthMicroservices.getSupplier().getSupplierCode())) {
                 config.setGroup(oauthMicroservices.getSupplier().getSupplierCode());
             }
-            config.setContent(ConfigContentFactory.createOauthProperty(oauthMicroservices.getServiceId(), oauthMicroservices.getAppSecret()));
+
+            String scopes = null;
+            if (CollectionUtils.isNotEmpty(oauthMicroservices.getScopes())) {
+                scopes = oauthMicroservices.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
+            }
+
+            config.setContent(ConfigContentFactory.createOauthProperty(oauthMicroservices.getServiceId(), oauthMicroservices.getAppSecret(), scopes));
             return config;
         }
 

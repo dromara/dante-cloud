@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.common.utils;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -20,6 +21,7 @@ public class JacksonYamlUtils {
 
     static {
         objectMapper = new ObjectMapper(new YAMLFactory());
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     private static ObjectMapper getObjectMapper() {

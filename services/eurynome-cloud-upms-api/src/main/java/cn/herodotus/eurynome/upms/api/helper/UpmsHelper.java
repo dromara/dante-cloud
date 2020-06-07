@@ -175,6 +175,12 @@ public class UpmsHelper {
 
         oauthClientDetails.setClientId(oauthMicroservices.getServiceId());
         oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthMicroservices.getAppSecret()));
+
+        if (CollectionUtils.isNotEmpty(oauthMicroservices.getScopes())) {
+            String scope = oauthMicroservices.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
+            oauthClientDetails.setScope(scope);
+        }
+
         oauthClientDetails.setAdditionalInformation(JSON.toJSONString(oauthMicroservices));
         return oauthClientDetails;
     }

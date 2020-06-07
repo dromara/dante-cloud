@@ -79,6 +79,7 @@ public class OauthPropertyContent {
             public static class Client implements Serializable {
                 private String clientId;
                 private String clientSecret;
+                private String scope;
 
                 public String getClientId() {
                     return clientId;
@@ -94,6 +95,14 @@ public class OauthPropertyContent {
 
                 public void setClientSecret(String clientSecret) {
                     this.clientSecret = clientSecret;
+                }
+
+                public String getScope() {
+                    return scope;
+                }
+
+                public void setScope(String scope) {
+                    this.scope = scope;
                 }
             }
 

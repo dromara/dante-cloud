@@ -3,6 +3,7 @@ package cn.herodotus.eurynome.upms.rest.controller.oauth;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.rest.controller.BaseRestController;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthMicroservicesService;
 import io.swagger.annotations.Api;
@@ -65,5 +66,16 @@ public class OauthMicroservicesController extends BaseRestController<OauthMicros
         } else {
             return result.failed().message("删除配置失败！");
         }
+    }
+
+    @ApiOperation(value = "给服务分配Scope", notes = "给服务分配Scope")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "serviceId", required = true, value = "appKey"),
+            @ApiImplicitParam(name = "scopes[]", required = true, value = "Scope对象组成的数组")
+    })
+    @PutMapping
+    public Result<OauthMicroservices> assign(@RequestParam(name = "serviceId") String serviceId, @RequestParam(name = "scopes[]") String[] scopes) {
+        OauthMicroservices oauthMicroservices = oauthMicroservicesService.assign(serviceId, scopes);
+        return result(oauthMicroservices);
     }
 }

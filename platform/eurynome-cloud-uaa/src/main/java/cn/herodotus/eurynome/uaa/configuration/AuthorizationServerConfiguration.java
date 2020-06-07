@@ -43,15 +43,13 @@ import java.util.Map;
  * ·UserDetailsService: 通过String username返回一个UserDetails
  * ·SecurityContextHolder: 提供访问 SecurityContext。
  * ·SecurityContext: 保存Authentication，和一些其它的信息
- * <p>
- * '@EnableAuthorizationServer' 提供/oauth/authorize,/oauth/token,/oauth/check_token,/oauth/confirm_access,/oauth/error
- * <p>
- * 为了实现OAuth 2.0授权服务器，Spring Security过滤器链中需要以下端点：
- * ·AuthorizationEndpoint用于为授权请求提供服务。默认网址：/oauth/authorize。
- * ·TokenEndpoint用于服务访问令牌的请求。默认网址：/oauth/token
+ *
  * <p>
  * 以下过滤器是实现OAuth 2.0资源服务器所必需的：
  * ·将OAuth2AuthenticationProcessingFilter用于加载给定的认证访问令牌请求的认证。
+ * <p>
+ * 配置授权端点的URL
+ * '@EnableAuthorizationServer' 提供/oauth/authorize,/oauth/token,/oauth/check_token,/oauth/confirm_access,/oauth/error
  * <p>
  * [/oauth/authorize] {@link org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint#authorize(Map, Map, SessionStatus, Principal)}
  * [/oauth/token] {@link org.springframework.security.oauth2.provider.endpoint.TokenEndpoint#getAccessToken(Principal, Map)}
@@ -59,6 +57,10 @@ import java.util.Map;
  * [/oauth/confirm_access]
  * [/oauth/token_key]
  * [/oauth/error]
+ * <p>
+ * Oauth Client Details
+ * ·Scope 用来限制客户端的访问范围，如果为空（默认）的话，那么客户端拥有全部的访问范围 scope中文翻译就是作用域，用来限制客户端权限访问的范围，可以用来设置角色或者权限，也可以不设置
+ * [scope] {@link org.springframework.security.oauth2.provider.endpoint.TokenEndpoint#postAccessToken(Principal, Map)}
  *
  * @author gengwei.zheng
  */
@@ -107,15 +109,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
     /**
-     *
      * As with the Authorization Server, you can often use the DefaultTokenServices and the choices are mostly expressed through the TokenStore (backend storage or local encoding).
      * An alternative is the RemoteTokenServices which is a Spring OAuth features (not part of the spec) allowing Resource Servers to decode tokens through an HTTP resource on the Authorization Server (/oauth/check_token).
      * RemoteTokenServices are convenient if there is not a huge volume of traffic in the Resource Servers (every request has to be verified with the Authorization Server), or if you can afford to cache the results.
      * To use the /oauth/check_token endpoint you need to expose it by changing its access rule (default is "denyAll()") in the AuthorizationServerSecurityConfigurer
-     *
+     * <p>
      * 配置令牌端点(Token Endpoint)的安全约束
      * {@link org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerSecurityConfiguration}
-     *
+     * <p>
      * 权限添加的位置：
      * {@link org.springframework.security.web.access.expression.ExpressionBasedFilterInvocationSecurityMetadataSource}
      *
@@ -146,11 +147,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     /**
      * 之前是采用自己定一个DefaultTokenServices的方式对Token的一些内容进行设置。
      * 但是这样就存在一个问题，这会让人混淆有些属性，例如tokenStore，到底是应该设置在endpoints还是DefaultTokenServices中。
-     *
+     * <p>
      * 后来查阅的oauth的源代码{@link AuthorizationServerEndpointsConfigurer#getDefaultAuthorizationServerTokenServices()}，发现：
      * 这个类会判断是否已经设置了DefaultTokenServices，如果没有就帮助创建一个。
      * 通过对比发现oauth源代码创建DefaultTokenServices内容，和自己创建的没有多大区别，因此考虑没有比较自己创建，还引起了不必要的混乱。
-     *
+     * <p>
      * setAccessTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 access_token_validity
      * setRefreshTokenValiditySeconds 由于我们在数据库中设置了表oauth_client_details字段 refresh_token_validity
      *
