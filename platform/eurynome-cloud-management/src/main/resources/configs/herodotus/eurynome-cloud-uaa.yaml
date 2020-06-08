@@ -3,6 +3,11 @@ security:
     client:
       client-id: 004b87d8-0a18-4e62-a35c-f2f123713349
       client-secret: 2bda7d3a-dba1-45a4-b08e-cbd731a0418e
+      access-token-uri: ${herodotus.platform.uaa-server-addr}/oauth/token
+      grant-type: client_credentials
+      scope:
+        - read_client_detail
+        - read_user_detail
     resource:
       token-info-uri: ${herodotus.platform.token-info-uri}
       user-info-uri: ${herodotus.platform.user-info-uri}

@@ -25,8 +25,8 @@
 package cn.herodotus.eurynome.autoconfigure.components;
 
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
-import cn.herodotus.eurynome.security.metadata.RequestMapping;
-import cn.herodotus.eurynome.security.metadata.SecurityMetadataLocalStorage;
+import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.authentication.access.SecurityMetadataLocalStorage;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.InitializingBean;

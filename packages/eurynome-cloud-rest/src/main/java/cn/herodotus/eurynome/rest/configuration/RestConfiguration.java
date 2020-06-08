@@ -1,9 +1,6 @@
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.rest.interceptor.GlobalRequestInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -39,13 +36,5 @@ public class RestConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.info("[Herodotus] |- Components [Herodotus Rest] Auto Configure.");
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(GlobalRequestInterceptor.class)
-    public GlobalRequestInterceptor globalInterceptor() {
-        GlobalRequestInterceptor globalRequestInterceptor = new GlobalRequestInterceptor();
-        log.debug("[Herodotus] |- Bean [Global Interceptor] Auto Configure.");
-        return globalRequestInterceptor;
     }
 }

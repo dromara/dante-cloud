@@ -1,6 +1,9 @@
 package cn.herodotus.eurynome.rest.annotation;
 
-import cn.herodotus.eurynome.rest.configuration.*;
+import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
+import cn.herodotus.eurynome.rest.configuration.RestTemplateConfiguration;
+import cn.herodotus.eurynome.rest.configuration.SwaggerConfiguration;
+import cn.herodotus.eurynome.rest.configuration.UndertowWebServerFactoryCustomizer;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
@@ -27,7 +30,6 @@ import java.lang.annotation.*;
 @EnableCreateCacheAnnotation
 @Import({RestConfiguration.class,
         RestTemplateConfiguration.class,
-        FeignConfiguration.class,
         SwaggerConfiguration.class,
         UndertowWebServerFactoryCustomizer.class
 })

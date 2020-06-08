@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Import;
 import java.lang.annotation.*;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 开启Upms远程调用服务 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/3/2 11:23

@@ -3,10 +3,9 @@ package cn.herodotus.eurynome.upms.rest.controller.oauth;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.rest.controller.BaseController;
-import cn.herodotus.eurynome.security.oauth2.provider.HerodotusClientDetails;
+import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
-import cn.herodotus.eurynome.upms.api.service.fegin.OauthClientDetailsFeignService;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -31,8 +30,9 @@ import java.util.stream.Collectors;
  */
 @Api(tags = {"用户中心服务", "Oauth客户端详情接口"})
 @RestController
+@RequestMapping("/oauth/client_details")
 @Transactional(rollbackFor = Exception.class)
-public class OauthClientDetailsController extends BaseController<OauthClientDetails, String> implements OauthClientDetailsFeignService {
+public class OauthClientDetailsController extends BaseController<OauthClientDetails, String>{
 
     private final OauthClientDetailsService oauthClientDetailsService;
 
@@ -46,23 +46,12 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
         return oauthClientDetailsService;
     }
 
-    @Override
-    @ApiOperation(value = "获取终端信息", notes = "通过clientId获取封装后的终端信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "终端ID")
-    })
-    public Result<HerodotusClientDetails> findByClientId(String clientId) {
-        OauthClientDetails oauthClientDetails = oauthClientDetailsService.findById(clientId);
-        HerodotusClientDetails herodotusClientDetails = UpmsHelper.convertOauthClientDetailsToHerodotusClientDetails(oauthClientDetails);
-        return result(herodotusClientDetails);
-    }
-
     @ApiOperation(value = "获取ClientDetails分页数据", notes = "通过pageNumber和pageSize获取分页数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数"),
             @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
     })
-    @GetMapping("/oauth/herodotus_client_details")
+    @GetMapping
     @Override
     public Result<Map<String, Object>> findByPage(
             @RequestParam("pageNumber") Integer pageNumber,
@@ -81,7 +70,7 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
     @ApiImplicitParams({
             @ApiImplicitParam(name = "oauthClientDetails", required = true, value = "可转换为OauthClientDetails实体的json数据", paramType = "JSON")
     })
-    @PostMapping("/oauth/client_details")
+    @PostMapping
     public Result<OauthClientDetails> saveOrUpdate(@RequestBody HerodotusClientDetails domain) {
         OauthClientDetails oauthClientDetails = oauthClientDetailsService.saveOrUpdate(UpmsHelper.convertHerodotusClientDetailsToOauthClientDetails(domain));
         return result(oauthClientDetails);
@@ -91,7 +80,7 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
     })
-    @DeleteMapping("/oauth/client_details")
+    @DeleteMapping
     @Override
     public Result<String> delete(@RequestBody String clientId) {
         return super.delete(clientId);

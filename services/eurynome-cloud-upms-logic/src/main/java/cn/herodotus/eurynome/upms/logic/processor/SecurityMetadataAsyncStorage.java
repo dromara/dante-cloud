@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.logic.processor;
 
-import cn.herodotus.eurynome.security.metadata.RequestMapping;
+import cn.herodotus.eurynome.security.definition.RequestMapping;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;

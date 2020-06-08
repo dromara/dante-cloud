@@ -8,7 +8,7 @@ import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
-import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthClientDetailsRepository;
+import cn.herodotus.eurynome.upms.api.repository.oauth.OauthClientDetailsRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;

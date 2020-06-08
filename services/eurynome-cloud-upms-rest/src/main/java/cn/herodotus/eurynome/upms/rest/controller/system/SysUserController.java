@@ -26,18 +26,18 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.data.base.service.BaseService;
-import cn.herodotus.eurynome.rest.controller.BaseController;
+import cn.herodotus.eurynome.rest.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
-import cn.herodotus.eurynome.upms.api.service.fegin.SysUserFeginService;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>Description: SysUserController </p>
@@ -46,8 +46,9 @@ import java.util.Map;
  * @date : 2019/11/25 10:55
  */
 @RestController
+@RequestMapping("/user")
 @Api(tags = {"用户中心服务", "系统用户接口"})
-public class SysUserController extends BaseController<SysUser, String> implements SysUserFeginService {
+public class SysUserController extends BaseRestController<SysUser, String> {
 
     private final SysUserService sysUserService;
 
@@ -61,65 +62,12 @@ public class SysUserController extends BaseController<SysUser, String> implement
         return this.sysUserService;
     }
 
-    @ApiOperation(value = "根据用户名查询用户", notes = "根据用户名查询用户信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", required = true, value = "用户名称")
-    })
-    @Override
-    public Result<SysUser> findByUsername(String username) {
-        SysUser sysUser = sysUserService.findSysUserByUserName(username);
-        return result(sysUser);
-    }
-
-    @ApiOperation(value = "根据用户ID查询用户", notes = "根据用户ID查询用户信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", required = true, value = "用户ID")
-    })
-    @Override
-    public Result<SysUser> findById(String userId) {
-        SysUser sysUser = sysUserService.findById(userId);
-        return result(sysUser);
-    }
-
-    @ApiOperation(value = "获取用户分页数据", notes = "通过pageNumber和pageSize获取分页数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
-    })
-    @GetMapping("/user")
-    @Override
-    public Result<Map<String, Object>> findByPage(
-            @RequestParam("pageNumber") Integer pageNumber,
-            @RequestParam("pageSize") Integer pageSize) {
-        return super.findByPage(pageNumber, pageSize);
-    }
-
-    @ApiOperation(value = "保存或更新用户", notes = "接收JSON数据，转换为SysUser实体，进行保存或更新")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "sysUser", required = true, value = "可转换为SysUser实体的json数据")
-    })
-    @PostMapping("/user")
-    @Override
-    public Result<SysUser> saveOrUpdate(@RequestBody SysUser sysUser) {
-        return super.saveOrUpdate(sysUser);
-    }
-
-    @ApiOperation(value = "删除用户", notes = "根据userId删除用户，以及相关联的关联关系数据", produces = "application/json", consumes = "application/json")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", required = true, value = "用户ID")
-    })
-    @DeleteMapping("/user")
-    @Override
-    public Result<String> delete(@RequestBody String userId) {
-        return super.delete(userId);
-    }
-
     @ApiOperation(value = "给用户分配角色", notes = "给用户分配角色", produces = "application/x-www-form-urlencoded", consumes = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", required = true, value = "userId"),
             @ApiImplicitParam(name = "roles[]", required = true, value = "角色对象组成的数组")
     })
-    @PutMapping("/user")
+    @PutMapping
     public Result<SysUser> assign(@RequestParam(name = "userId") String userId, @RequestParam(name = "roles[]") String[] roles) {
         SysUser sysUser = sysUserService.assign(userId, roles);
         return result(sysUser);

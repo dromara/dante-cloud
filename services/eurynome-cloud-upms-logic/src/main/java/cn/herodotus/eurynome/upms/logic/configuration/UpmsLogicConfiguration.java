@@ -25,11 +25,10 @@
 package cn.herodotus.eurynome.upms.logic.configuration;
 
 import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
+import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.api.configuration.UpmsApiConfiguration;
-import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -63,9 +62,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@Import({
-        UpmsApiConfiguration.class
-})
+@EnableUpmsInterface
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.upms.logic.configuration",
         "cn.herodotus.eurynome.upms.logic.processor",
@@ -81,13 +78,6 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.repository.hr",
         "cn.herodotus.eurynome.upms.logic.repository.oauth",
         "cn.herodotus.eurynome.upms.logic.repository.development",
-})
-@EntityScan(basePackages = {
-        "cn.herodotus.eurynome.upms.api.entity.system",
-        "cn.herodotus.eurynome.upms.api.entity.social",
-        "cn.herodotus.eurynome.upms.api.entity.hr",
-        "cn.herodotus.eurynome.upms.api.entity.oauth",
-        "cn.herodotus.eurynome.upms.api.entity.development"
 })
 @EnableMethodCache(basePackages = {
         "cn.herodotus.eurynome.upms.logic.service.system",

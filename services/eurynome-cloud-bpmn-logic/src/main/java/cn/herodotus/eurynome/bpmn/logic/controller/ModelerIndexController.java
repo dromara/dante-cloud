@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.bpmn.logic.controller;
 
 import cn.herodotus.eurynome.bpmn.logic.helper.FlowableUserHelper;
-import cn.herodotus.eurynome.security.core.userdetails.HerodotusUserDetails;
+import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;

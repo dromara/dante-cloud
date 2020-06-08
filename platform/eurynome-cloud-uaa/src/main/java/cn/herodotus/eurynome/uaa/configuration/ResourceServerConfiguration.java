@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.uaa.configuration;
 
-import cn.herodotus.eurynome.security.web.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.eurynome.security.web.access.HerodotusAccessDeniedHandler;
+import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDeniedHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

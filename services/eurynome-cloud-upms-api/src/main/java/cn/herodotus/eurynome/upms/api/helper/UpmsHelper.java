@@ -3,11 +3,11 @@ package cn.herodotus.eurynome.upms.api.helper;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.StatusEnum;
-import cn.herodotus.eurynome.security.metadata.RequestMapping;
-import cn.herodotus.eurynome.security.core.HerodotusAuthority;
-import cn.herodotus.eurynome.security.core.HerodotusRole;
-import cn.herodotus.eurynome.security.core.userdetails.HerodotusUserDetails;
-import cn.herodotus.eurynome.security.oauth2.provider.HerodotusClientDetails;
+import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.definition.core.HerodotusAuthority;
+import cn.herodotus.eurynome.security.definition.core.HerodotusRole;
+import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
+import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;

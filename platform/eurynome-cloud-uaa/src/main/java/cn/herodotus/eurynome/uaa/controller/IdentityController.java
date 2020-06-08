@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.uaa.controller;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.security.core.userdetails.HerodotusUserDetails;
+import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

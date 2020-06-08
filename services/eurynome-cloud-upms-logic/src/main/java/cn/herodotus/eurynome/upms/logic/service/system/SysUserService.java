@@ -29,7 +29,7 @@ import cn.herodotus.eurynome.data.base.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
-import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
+import cn.herodotus.eurynome.upms.api.repository.system.SysUserRepository;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;

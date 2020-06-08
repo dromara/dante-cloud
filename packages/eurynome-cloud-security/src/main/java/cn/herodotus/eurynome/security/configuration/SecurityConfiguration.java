@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.security.configuration;
 
-import cn.herodotus.eurynome.security.oauth2.provider.token.HerodotusUserAuthenticationConverter;
+import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -37,7 +37,7 @@ import javax.annotation.PostConstruct;
 @Configuration
 @ComponentScan(basePackages = {
         "cn.hutool.extra.spring",
-        "cn.herodotus.eurynome.security.authentication"
+        "cn.herodotus.eurynome.security.authentication.form"
 })
 public class SecurityConfiguration {
 

@@ -26,8 +26,8 @@ package cn.herodotus.eurynome.upms.api.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.annotation.PostConstruct;
 
@@ -57,6 +57,17 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
+@EnableJpaRepositories(basePackages = {
+        "cn.herodotus.eurynome.upms.api.repository.system",
+        "cn.herodotus.eurynome.upms.api.repository.oauth"
+})
+@EntityScan(basePackages = {
+        "cn.herodotus.eurynome.upms.api.entity.system",
+        "cn.herodotus.eurynome.upms.api.entity.social",
+        "cn.herodotus.eurynome.upms.api.entity.hr",
+        "cn.herodotus.eurynome.upms.api.entity.oauth",
+        "cn.herodotus.eurynome.upms.api.entity.development"
+})
 public class UpmsApiConfiguration {
 
     @PostConstruct

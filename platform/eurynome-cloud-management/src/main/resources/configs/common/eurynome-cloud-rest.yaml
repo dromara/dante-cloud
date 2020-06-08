@@ -36,4 +36,3 @@ ribbon:
     enabled: true # 用OkHttp代替HttpClient
   eager-load:
     enabled: true
-    clients: eurynome-cloud-upms-rest

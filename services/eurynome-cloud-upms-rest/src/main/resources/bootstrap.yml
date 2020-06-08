@@ -22,12 +22,13 @@ spring:
             group: common
           - data-id: eurynome-cloud-redis.yaml
             group: common
+          - data-id: eurynome-cloud-cache.yaml
+            group: common
           - data-id: eurynome-cloud-rest.yaml
             group: common
           - data-id: eurynome-cloud-kafka.yaml
             group: common
-          - data-id: eurynome-cloud-cache.yaml
-            group: common
+
         extension-configs:
           - data-id: ${spring.application.name}.yaml
             group: herodotus
@@ -43,19 +44,6 @@ spring:
     cache: false
     prefix: classpath:/templates
 
-herodotus:
-  platform:
-    security:
-      interceptor:
-        whitelist:
-          - "/v2/**"
-          - "/oauth/client_details"
-          - "/login/token"
-          - "/application/clientdetails"
-          - "/user/findByUsername"
-          - "/user/findByUserId"
-          - "/captcha/getVerifiCode"
-          - "/captcha/checkVerifiCode"
 logging:
   level:
     cn.herodotus.eurynome: debug

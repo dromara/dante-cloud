@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.uaa.configuration;
 
-import cn.herodotus.eurynome.security.oauth2.provider.error.HerodotusWebResponseExceptionTranslator;
-import cn.herodotus.eurynome.security.oauth2.provider.token.HerodotusJwtTokenEnhancer;
+import cn.herodotus.eurynome.security.response.HerodotusWebResponseExceptionTranslator;
+import cn.herodotus.eurynome.security.authentication.token.HerodotusJwtTokenEnhancer;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.uaa.service.OauthClientDetailsService;
 import cn.herodotus.eurynome.uaa.service.OauthUserDetailsService;

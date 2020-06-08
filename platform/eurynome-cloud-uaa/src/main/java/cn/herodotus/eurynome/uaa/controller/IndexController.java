@@ -79,7 +79,7 @@ public class IndexController {
         if (auth != null) {
             AuthorizationRequest authorizationRequest = (AuthorizationRequest) auth;
             // TODO 这里后面需要完善一下。Client Details 信息不够完整
-            ClientDetails clientDetails = oauthClientDetailsService.getRemoteOauthClientDetails(authorizationRequest.getClientId());
+            ClientDetails clientDetails = oauthClientDetailsService.getOauthClientDetails(authorizationRequest.getClientId());
             model.put("app", clientDetails.getAdditionalInformation());
             model.put("user", SecurityUtils.getPrincipal());
         }
