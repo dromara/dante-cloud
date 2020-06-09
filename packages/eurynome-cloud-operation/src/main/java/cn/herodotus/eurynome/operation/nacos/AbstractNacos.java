@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.operation.nacos;
 
 import cn.herodotus.eurynome.operation.domain.Config;
-import cn.herodotus.eurynome.operation.properties.ManagementProperties;
+import cn.herodotus.eurynome.kernel.properties.ManagementProperties;
 
 /**
  * <p> Description : AbstractNacos </p>

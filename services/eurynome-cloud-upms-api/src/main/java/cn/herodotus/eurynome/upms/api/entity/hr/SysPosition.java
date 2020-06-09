@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.crud.entity.BaseSysEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

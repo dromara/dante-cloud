@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.operation.annotation;
 
+import cn.herodotus.eurynome.kernel.annotaion.EnableHerodotusKernel;
 import cn.herodotus.eurynome.operation.configuration.OperationConfiguration;
 import org.springframework.context.annotation.Import;
 
@@ -31,6 +32,9 @@ import java.lang.annotation.*;
 
 /**
  * <p> Description : Management Component 相关配置Enable注解 </p>
+ *
+ * 目前主要功能：
+ * 1.开启Nacos远程管理服务
  *
  * @author : gengwei.zheng
  * @date : 2020/5/3 10:13

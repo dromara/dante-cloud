@@ -22,7 +22,7 @@
         <!--Spring 家族-->
         <spring-cloud-dependencies.version>Hoxton.SR5</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
+        <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>

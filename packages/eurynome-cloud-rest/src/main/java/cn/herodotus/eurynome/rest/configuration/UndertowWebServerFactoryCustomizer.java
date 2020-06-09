@@ -34,7 +34,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: Undertow 配置解决 启动的一个WARN问题 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/17 16:07

@@ -18,6 +18,10 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-operation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>eurynome-cloud-upms-api</artifactId>
         </dependency>
 

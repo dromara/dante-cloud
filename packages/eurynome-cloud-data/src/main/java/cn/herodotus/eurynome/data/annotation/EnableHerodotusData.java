@@ -8,7 +8,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import java.lang.annotation.*;
 
 /**
- * <p> Description : Data Component 相关配置Enable注解</p>
+ * <p>Project: eurynome-cloud </p>
+ * <p>File: EnableRedisStorage </p>
+ *
+ * <p>Description: 开启平台数据存储 </p>
+ * <p>
+ * 目前主要功能：
+ * 1.开启JpaAuditing
+ * 2.开启Redis存储
+ * 3.开启JetCache缓存
  *
  * @author : gengwei.zheng
  * @date : 2020/2/3 17:13
@@ -19,7 +27,6 @@ import java.lang.annotation.*;
 @Import(DataConfiguration.class)
 @EnableJpaAuditing
 @EnableRedisStorage
-@EnableLogCollection
 @EnableCreateCacheAnnotation
 public @interface EnableHerodotusData {
 }

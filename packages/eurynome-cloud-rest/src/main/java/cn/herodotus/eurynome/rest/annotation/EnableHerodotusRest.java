@@ -7,14 +7,19 @@ import cn.herodotus.eurynome.rest.configuration.UndertowWebServerFactoryCustomiz
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
-import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p> Description : Rest Component 相关配置Enable注解 </p>
+ * <p>Description: 开启Herodotus REST核心注解 </p>
+ *
+ * 目前主要功能：
+ * 1.开启ApplicationProperties， RestProperties， SwaggerProperties
+ * 2.启用RestTemplate配置
+ * 3.启用Swagger配置
+ * 4.解决Undertow启动警告问题
  *
  * @author : gengwei.zheng
  * @date : 2020/3/2 11:01
@@ -27,7 +32,6 @@ import java.lang.annotation.*;
         RestProperties.class,
         SwaggerProperties.class
 })
-@EnableCreateCacheAnnotation
 @Import({RestConfiguration.class,
         RestTemplateConfiguration.class,
         SwaggerConfiguration.class,

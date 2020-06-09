@@ -24,8 +24,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.data.base.service.BaseService;
+import cn.herodotus.eurynome.crud.repository.BaseRepository;
+import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysEmployeeRepository;
@@ -40,7 +40,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.Path;
 import java.util.Set;
 
 /**

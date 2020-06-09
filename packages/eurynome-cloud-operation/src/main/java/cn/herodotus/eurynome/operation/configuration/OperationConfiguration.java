@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.operation.configuration;
 
 import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;
-import cn.herodotus.eurynome.operation.properties.ManagementProperties;
+import cn.herodotus.eurynome.kernel.properties.ManagementProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

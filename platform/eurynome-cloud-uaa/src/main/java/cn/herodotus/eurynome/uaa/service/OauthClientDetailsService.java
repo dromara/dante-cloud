@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.uaa.service;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.data.base.service.BaseService;
+import cn.herodotus.eurynome.crud.repository.BaseRepository;
+import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;

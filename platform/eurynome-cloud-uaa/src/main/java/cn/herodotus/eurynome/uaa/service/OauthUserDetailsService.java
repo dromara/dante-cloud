@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.uaa.service;
 
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.data.base.service.BaseService;
+import cn.herodotus.eurynome.crud.repository.BaseRepository;
+import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;

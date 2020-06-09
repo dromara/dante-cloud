@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.management.listener;
 
-import cn.herodotus.eurynome.operation.properties.ManagementProperties;
+import cn.herodotus.eurynome.kernel.properties.ManagementProperties;
 import cn.herodotus.eurynome.operation.service.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;

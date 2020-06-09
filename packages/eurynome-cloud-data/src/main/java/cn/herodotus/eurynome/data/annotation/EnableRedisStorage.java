@@ -34,6 +34,9 @@ import java.lang.annotation.*;
  * <p>File: EnableRedisStorage </p>
  *
  * <p>Description: 开启平台Redis存储 </p>
+ * <p>
+ * 目前主要功能：
+ * 1.开启Redis配置
  *
  * @author : gengwei.zheng
  * @date : 2020/5/23 10:01

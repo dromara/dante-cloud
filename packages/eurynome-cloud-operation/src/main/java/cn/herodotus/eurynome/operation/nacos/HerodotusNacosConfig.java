@@ -26,7 +26,7 @@ package cn.herodotus.eurynome.operation.nacos;
 
 import cn.herodotus.eurynome.common.exception.PlatformException;
 import cn.herodotus.eurynome.operation.domain.Config;
-import cn.herodotus.eurynome.operation.properties.ManagementProperties;
+import cn.herodotus.eurynome.kernel.properties.ManagementProperties;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;

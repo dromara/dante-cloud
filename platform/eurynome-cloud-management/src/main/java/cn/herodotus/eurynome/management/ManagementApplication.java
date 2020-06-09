@@ -1,5 +1,6 @@
 package cn.herodotus.eurynome.management;
 
+import cn.herodotus.eurynome.kernel.annotaion.EnableLogCenter;
 import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
@@ -11,9 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author : gengwei.zheng
  * @date : 2020/5/3 16:08
  */
-@SpringBootApplication
 @EnableAdminServer
+@EnableLogCenter
 @EnableHerodotusManagement
+@SpringBootApplication
 public class ManagementApplication {
 
     public static void main(String[] args) {

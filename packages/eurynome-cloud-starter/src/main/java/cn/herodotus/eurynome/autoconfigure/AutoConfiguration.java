@@ -1,7 +1,9 @@
 package cn.herodotus.eurynome.autoconfigure;
 
 import cn.herodotus.eurynome.autoconfigure.components.SecurityMetadataProducer;
+import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
+import cn.herodotus.eurynome.kernel.annotaion.EnableLogCenter;
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.security.annotation.EnableHerodotusSecurity;
@@ -20,9 +22,9 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableHerodotusData
-@EnableHerodotusRest
+@EnableHerodotusCrud
 @EnableHerodotusSecurity
+@EnableLogCenter
 public class AutoConfiguration {
 
     @PostConstruct

@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.crud.entity.BaseSysEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;

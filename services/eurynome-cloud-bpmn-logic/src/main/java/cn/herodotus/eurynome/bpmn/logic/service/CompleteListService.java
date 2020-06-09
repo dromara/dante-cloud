@@ -2,7 +2,6 @@ package cn.herodotus.eurynome.bpmn.logic.service;
 
 import cn.herodotus.eurynome.bpmn.logic.entity.CompleteList;
 import cn.herodotus.eurynome.bpmn.logic.repository.CompleteListRepository;
-import cn.herodotus.eurynome.data.base.service.ReadableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

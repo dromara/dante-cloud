@@ -41,6 +41,10 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-crud</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>eurynome-cloud-message</artifactId>
         </dependency>
         <dependency>

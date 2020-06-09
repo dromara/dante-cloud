@@ -56,7 +56,7 @@ public class SecurityMetadataLocalStorage {
     private final Cache<String, RequestMapping> dataCache = Caffeine.newBuilder().maximumSize(10_000).build();
 
     private final Cache<String, Set<String>> indexCache = Caffeine.newBuilder().maximumSize(10_000).build();
-    ;
+
 
     public void save(List<RequestMapping> requestMappings) {
         if (CollectionUtils.isNotEmpty(requestMappings)) {

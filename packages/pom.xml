@@ -46,6 +46,8 @@
         <module>eurynome-cloud-security</module>
         <module>eurynome-cloud-message</module>
         <module>eurynome-cloud-starter</module>
+        <module>eurynome-cloud-crud</module>
+        <module>eurynome-cloud-kernel</module>
     </modules>
 
 </project>

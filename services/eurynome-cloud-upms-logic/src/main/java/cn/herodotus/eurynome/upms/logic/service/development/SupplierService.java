@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.logic.service.development;
 
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.data.base.service.BaseService;
+import cn.herodotus.eurynome.crud.repository.BaseRepository;
+import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
 import cn.herodotus.eurynome.upms.logic.repository.development.SupplierRepository;
@@ -46,6 +46,7 @@ public class SupplierService extends BaseService<Supplier, String> {
     }
 
     @Override
+
     public BaseRepository<Supplier, String> getRepository() {
         return supplierRepository;
     }

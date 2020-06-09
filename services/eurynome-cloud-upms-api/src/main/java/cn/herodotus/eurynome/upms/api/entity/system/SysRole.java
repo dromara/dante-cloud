@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.crud.entity.BaseSysEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.Fetch;
