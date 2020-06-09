@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.crud.entity;
+package cn.herodotus.eurynome.data.base.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 

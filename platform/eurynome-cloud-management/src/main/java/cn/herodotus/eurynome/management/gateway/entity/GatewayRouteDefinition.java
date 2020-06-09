@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.management.gateway.entity;
 
-import cn.herodotus.eurynome.crud.entity.BaseSysEntity;
+import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.management.gateway.entity.jpa.GatewayFilterDefinitionJsonListConverter;
 import cn.herodotus.eurynome.management.gateway.entity.jpa.GatewayPredicateDefinitionJsonListConverter;
 import org.apache.commons.lang3.builder.EqualsBuilder;

@@ -22,7 +22,7 @@
  * LastModified: 2020/5/26 下午3:02
  */
 
-package cn.herodotus.eurynome.crud.repository;
+package cn.herodotus.eurynome.data.base.repository;
 
 import cn.herodotus.eurynome.common.definition.entity.Entity;
 import org.springframework.data.jpa.repository.JpaRepository;

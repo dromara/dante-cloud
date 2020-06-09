@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.development;
 
-import cn.herodotus.eurynome.crud.entity.BaseSysEntity;
+import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
 import org.hibernate.annotations.GenericGenerator;
 

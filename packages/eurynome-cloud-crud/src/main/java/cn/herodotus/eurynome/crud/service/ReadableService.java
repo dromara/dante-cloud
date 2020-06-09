@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.crud.service;
 
 import cn.herodotus.eurynome.common.definition.entity.Entity;
-import cn.herodotus.eurynome.crud.repository.BaseRepository;
+import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

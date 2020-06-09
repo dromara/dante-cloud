@@ -81,7 +81,6 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.oauth",
         "cn.herodotus.eurynome.upms.logic.service.development"
 })
-
 public class UpmsLogicConfiguration {
     @PostConstruct
     public void postConstruct() {

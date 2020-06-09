@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.crud.entity;
+package cn.herodotus.eurynome.data.base.entity;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;

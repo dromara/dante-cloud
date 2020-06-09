@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.system;
 
 import cn.herodotus.eurynome.common.enums.AuthorityType;
-import cn.herodotus.eurynome.crud.repository.BaseRepository;
+import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 
 import java.util.List;

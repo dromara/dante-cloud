@@ -24,9 +24,9 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(DataConfiguration.class)
 @EnableJpaAuditing
 @EnableRedisStorage
 @EnableCreateCacheAnnotation
+@Import(DataConfiguration.class)
 public @interface EnableHerodotusData {
 }

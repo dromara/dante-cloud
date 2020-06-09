@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.crud.entity.BaseAppEntity;
+import cn.herodotus.eurynome.data.base.entity.BaseAppEntity;
 import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
 import com.google.common.base.MoreObjects;
 import org.hibernate.annotations.Fetch;

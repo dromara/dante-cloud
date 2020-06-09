@@ -35,8 +35,6 @@ spring:
         shared-configs:
           - data-id: eurynome-cloud-environment.yaml
             group: @profile.name@
-          - data-id: eurynome-cloud-database-@database.type@.yaml
-            group: common
           - data-id: eurynome-cloud-redis.yaml
             group: common
           - data-id: eurynome-cloud-rest.yaml

@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
 
 /**
  * <p> Description : 基础缓存服务 </p>
@@ -31,8 +31,6 @@ import java.util.*;
  */
 @Slf4j
 public abstract class AbstractCacheService<E extends AbstractEntity, ID extends Serializable> extends AbstractCache<E> implements Service<E, ID> {
-
-
 
     private static final String CACHE_NAME_PREFIX_PAGE = "page:";
     private static final String CACHE_NAME_PAGE_TOTAL = "total";
