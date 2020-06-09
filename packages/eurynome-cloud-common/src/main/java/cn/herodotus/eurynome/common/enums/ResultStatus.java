@@ -53,7 +53,7 @@ public enum ResultStatus {
      * 1*.**	认证授权
      */
     INVALID_TOKEN(1000, "无法解析的Token，也许Token已经失效"),
-    INVALID_GRANT(1001, "授权模式错误"),
+    INVALID_GRANT(1001, "该账号被禁用，请联系管理员"),
     INVALID_SCOPE(1002, "授权范围错误"),
     INVALID_CLIENT(1003, "非法的客户端"),
 
