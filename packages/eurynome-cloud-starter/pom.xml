@@ -45,12 +45,13 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-message</artifactId>
+            <artifactId>eurynome-cloud-security</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-security</artifactId>
+            <artifactId>eurynome-cloud-message</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
