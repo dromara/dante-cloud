@@ -2,9 +2,11 @@ package cn.herodotus.eurynome.management;
 
 import cn.herodotus.eurynome.kernel.annotaion.EnableLogCenter;
 import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
+import com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * <p>Description: 平台管理服务 </p>
@@ -15,7 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableAdminServer
 @EnableLogCenter
 @EnableHerodotusManagement
-@SpringBootApplication
+@SpringBootApplication(exclude = {JetCacheAutoConfiguration.class})
 public class ManagementApplication {
 
     public static void main(String[] args) {

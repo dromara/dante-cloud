@@ -7,12 +7,21 @@ spring:
     active: @profile.name@
   cloud:
     nacos:
-      discovery:
-        namespace: @config.namespace@
-        server-addr: @discovery.server-addr@
       config:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
+        file-extension: yaml
+        shared-configs:
+          - data-id: eurynome-cloud-environment.yaml
+            group: @profile.name@
+          - data-id: eurynome-cloud-platform.yaml
+            group: common
+        extension-configs:
+          - data-id: eurynome-cloud-uaa.yaml
+            group: herodotus
+      discovery:
+        namespace: @config.namespace@
+        server-addr: @discovery.server-addr@
 
 herodotus:
   platform:
