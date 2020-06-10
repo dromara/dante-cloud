@@ -43,7 +43,7 @@
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
-        <starter-jasypt.version>3.0.2</starter-jasypt.version>
+        <starter-jasypt.version>3.0.3</starter-jasypt.version>
         <starter-mybatis.version>2.1.2</starter-mybatis.version>
 
         <!--Spring Boot Dependencies中没有的依赖组件-->

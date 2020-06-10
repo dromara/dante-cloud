@@ -8,8 +8,8 @@ herodotus:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     url: jdbc:p6spy:postgresql://localhost:5432/herodotus
-    username: herodotus
-    password: herodotus
+    username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+    password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
     show-sql: false
     logstash-server-addr: 127.0.0.1:5044
     gateway-server-addr: http://localhost:8847
@@ -25,3 +25,7 @@ herodotus:
           org.springframework.security: debug
           com.alibaba.nacos.client.naming: off
           com.alibaba: debug
+
+jasypt:
+  encryptor:
+    password: ${JASPYT_HOME:2bda7d3a-dba1-45a4-b08e-cbd731a0418e}

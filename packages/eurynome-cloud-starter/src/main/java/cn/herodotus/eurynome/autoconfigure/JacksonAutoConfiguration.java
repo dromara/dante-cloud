@@ -4,6 +4,7 @@ import cn.herodotus.eurynome.common.utils.JacksonUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -21,6 +22,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 public class JacksonAutoConfiguration {
 
     @Bean(name = "jacksonObjectMapper")
+    @ConditionalOnMissingBean(ObjectMapper.class)
     @Primary
     public ObjectMapper jacksonObjectMapper() {
         log.debug("[Herodotus] |- Bean [Jackson Object Mapper] Auto Configure.");

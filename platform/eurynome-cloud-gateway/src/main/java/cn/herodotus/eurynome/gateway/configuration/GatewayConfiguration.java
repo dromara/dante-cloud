@@ -4,7 +4,7 @@ import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -47,8 +47,8 @@ public class GatewayConfiguration {
     }
 
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public GlobalFilter sentinelGatewayFilter() {
+    @ConditionalOnMissingBean(SentinelGatewayFilter.class)
+    public SentinelGatewayFilter sentinelGatewayFilter() {
         return new SentinelGatewayFilter();
     }
 

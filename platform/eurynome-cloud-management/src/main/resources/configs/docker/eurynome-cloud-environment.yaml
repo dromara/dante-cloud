@@ -8,8 +8,8 @@ herodotus:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://192.168.101.10:15432/herodotus
-    username: herodotus
-    password: herodotus
+    username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+    password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
     show-sql: false
     logstash-server-addr: 192.168.101.10:5044
     gateway-server-addr: http://192.168.101.10:8847
@@ -25,3 +25,7 @@ herodotus:
           org.springframework.security: debug
           com.alibaba.nacos.client.naming: off
           com.alibaba: debug
+
+jasypt:
+  encryptor:
+    password: ${JASPYT_HOME:2bda7d3a-dba1-45a4-b08e-cbd731a0418e}
