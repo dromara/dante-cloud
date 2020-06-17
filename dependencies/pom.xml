@@ -45,6 +45,7 @@
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.3</starter-jasypt.version>
         <starter-mybatis.version>2.1.2</starter-mybatis.version>
+        <starter-camunda.version>7.13.0</starter-camunda.version>
 
         <!--Spring Boot Dependencies中没有的依赖组件-->
         <swagger.version>2.9.2</swagger.version>
@@ -55,6 +56,7 @@
         <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
         <shiro.version>1.4.1</shiro.version>
         <flowable.version>6.5.0</flowable.version>
+
         <minio.version>7.0.2</minio.version>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
 
@@ -251,7 +253,11 @@
                 <artifactId>jackson-dataformat-yaml</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.camunda.bpm.springboot</groupId>
+                <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+                <version>${starter-camunda.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
