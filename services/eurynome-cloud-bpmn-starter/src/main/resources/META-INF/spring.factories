@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.herodotus.eurynome.bpmn.autoconfigure.AutoConfiguration,\
-  cn.herodotus.eurynome.bpmn.autoconfigure.BpmnLogicAutoConfiguration

@@ -42,8 +42,6 @@
         <module>eurynome-cloud-upms-api</module>
         <module>eurynome-cloud-upms-logic</module>
         <module>eurynome-cloud-upms-rest</module>
-        <module>eurynome-cloud-bpmn-logic</module>
-        <module>eurynome-cloud-bpmn-starter</module>
     </modules>
 
 </project>
