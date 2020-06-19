@@ -27,7 +27,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-            log.debug("[Herodotus] |- Bean [Static Resource Web Security Configurer Adapter] Auto Configure.");
+            log.debug("[Eurynome] |- Bean [Static Resource Web Security Configurer Adapter] Auto Configure.");
             web.ignoring().antMatchers(
                     "/error",
                     "/static/**",

@@ -160,7 +160,7 @@ public class GlobalExceptionHandler {
 
     public static Result<String> resolveException(Exception ex, String path) {
 
-        log.debug("[Herodotus] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
+        log.debug("[Eurynome] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
 
         Result<String> result = new Result<String>().failed();
 
@@ -169,7 +169,7 @@ public class GlobalExceptionHandler {
             if (EXCEPTION_DICTIONARY.containsKey(exceptionName)) {
                 result = EXCEPTION_DICTIONARY.get(exceptionName);
             } else {
-                log.warn("[Herodotus] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
+                log.warn("[Eurynome] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
             }
         }
 
@@ -177,7 +177,7 @@ public class GlobalExceptionHandler {
         result.error(ex);
         result.data(ex.getMessage());
 
-        log.error("[Herodotus] |- Global Exception Handler, Error is : {}", result);
+        log.error("[Eurynome] |- Global Exception Handler, Error is : {}", result);
 
         return result;
     }

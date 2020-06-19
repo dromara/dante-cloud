@@ -36,7 +36,7 @@ public class IdentityController {
         HerodotusUserDetails userDetails = SecurityUtils.getPrincipal();
         Result<HerodotusUserDetails> result = new Result<>();
 
-        log.debug("[Herodotus] |- Get oauth profile！");
+        log.debug("[Eurynome] |- Get oauth profile！");
         return result.ok().data(userDetails);
     }
 

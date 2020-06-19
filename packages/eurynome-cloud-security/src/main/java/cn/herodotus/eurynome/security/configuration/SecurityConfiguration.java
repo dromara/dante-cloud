@@ -43,7 +43,7 @@ public class SecurityConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Components [Herodotus Security] Auto Configure.");
+        log.info("[Eurynome] |- Components [Herodotus Security] Auto Configure.");
     }
 
     /**

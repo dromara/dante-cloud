@@ -44,7 +44,7 @@ import java.util.Map;
 public class ManagementProperties {
 
     public ManagementProperties() {
-        log.info("[Herodotus] |- Properties [Management] is Enabled.");
+        log.info("[Eurynome] |- Properties [Management] is Enabled.");
     }
 
     private LogCenter logCenter = new LogCenter();

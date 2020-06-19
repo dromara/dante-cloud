@@ -44,6 +44,6 @@ public class CrudConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Components [Herodotus Crud] Auto Configure.");
+        log.info("[Eurynome] |- Components [Herodotus Crud] Auto Configure.");
     }
 }

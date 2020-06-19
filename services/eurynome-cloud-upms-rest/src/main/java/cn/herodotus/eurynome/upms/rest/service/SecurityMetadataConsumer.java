@@ -25,7 +25,7 @@ public class SecurityMetadataConsumer {
         if (StringUtils.isNotBlank(message)) {
             securityMetadataAsyncStorage.store(message);
         } else {
-            log.error("[Herodotus] |- Message from Security Metadata Producer is null!");
+            log.error("[Eurynome] |- Message from Security Metadata Producer is null!");
         };
     }
 }

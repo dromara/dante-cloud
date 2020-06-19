@@ -35,7 +35,7 @@ public class SwaggerConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Bean [Swagger] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Swagger] Auto Configure.");
     }
 
     private ApiInfo apiInfo() {

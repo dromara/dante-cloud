@@ -60,7 +60,7 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
         OauthClientDetails oauthClientDetails = findById(oauthApplications.getAppKey());
         oauthClientDetails = UpmsHelper.convertOauthApplicationsToOauthClientDetails(oauthApplications, oauthClientDetails);
 
-        log.debug("[Herodotus] |- OauthClientDetails Service synchronize.");
+        log.debug("[Eurynome] |- OauthClientDetails Service synchronize.");
         return saveOrUpdate(oauthClientDetails);
     }
 
@@ -68,7 +68,7 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
         OauthClientDetails oauthClientDetails = findById(oauthMicroservices.getServiceId());
         oauthClientDetails = UpmsHelper.convertOauthMicroserviceToOauthClientDetails(oauthMicroservices, oauthClientDetails);
 
-        log.debug("[Herodotus] |- OauthClientDetails Service synchronize.");
+        log.debug("[Eurynome] |- OauthClientDetails Service synchronize.");
         return saveOrUpdate(oauthClientDetails);
     }
 }

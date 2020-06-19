@@ -100,7 +100,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        log.info("[Herodotus] |- Bean [Web Security Configurer Adapter] Auto Configure.");
+        log.info("[Eurynome] |- Bean [Web Security Configurer Adapter] Auto Configure.");
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 

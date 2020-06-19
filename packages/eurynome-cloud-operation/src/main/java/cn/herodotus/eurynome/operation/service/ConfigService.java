@@ -58,7 +58,7 @@ public class ConfigService {
 
     @Async
     public void initialize() {
-        log.debug("[Herodotus] |- Begin initialize Config Files.");
+        log.debug("[Eurynome] |- Begin initialize Config Files.");
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
@@ -66,10 +66,10 @@ public class ConfigService {
             for (Resource resource : resources) {
 
                 String configFileName = resource.getFile().getName();
-                log.debug("[Herodotus] |- Found Config File: [{}]", configFileName);
+                log.debug("[Eurynome] |- Found Config File: [{}]", configFileName);
 
                 if (!isValidFileSize(resource)) {
-                    log.error("[Herodotus] |- Config File: [{}] is too large, exceed Nacos config max limitation！", configFileName);
+                    log.error("[Eurynome] |- Config File: [{}] is too large, exceed Nacos config max limitation！", configFileName);
                     continue;
                 }
 
@@ -78,13 +78,13 @@ public class ConfigService {
 
                 boolean isPublishOk  = herodotusNacosConfig.publishOrUpdateConfig(configFileName, groupName, content);
 
-                log.debug("[Herodotus] |- Config File: [{}] is publish {}！", configFileName, isPublishOk ? "success" : "failed");
+                log.debug("[Eurynome] |- Config File: [{}] is publish {}！", configFileName, isPublishOk ? "success" : "failed");
             }
         } catch (IOException e) {
-            log.error("[Herodotus] |- ConfigService read file failed", e);
+            log.error("[Eurynome] |- ConfigService read file failed", e);
         }
 
-        log.debug("[Herodotus] |- Initialize Config Files Finished.");
+        log.debug("[Eurynome] |- Initialize Config Files Finished.");
         LocalConfigInfoProcessor.cleanAllSnapshot();
     }
 

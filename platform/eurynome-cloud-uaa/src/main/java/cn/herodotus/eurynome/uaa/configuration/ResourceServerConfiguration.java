@@ -62,7 +62,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        log.info("[Herodotus] |- Bean [Resource Server Configurer Adapter] Auto Configure.");
+        log.info("[Eurynome] |- Bean [Resource Server Configurer Adapter] Auto Configure.");
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 

@@ -64,7 +64,7 @@ public class FeignConfiguration {
     @ConditionalOnProperty(name = "feign.sentinel.enabled")
     @Primary
     public Feign.Builder feignSentinelBuilder() {
-        log.debug("[Herodotus] |- Bean [Sentinel Feign] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Sentinel Feign] Auto Configure.");
         return HerodotusSentinelFeign.builder();
     }
 
@@ -77,7 +77,7 @@ public class FeignConfiguration {
     @Bean
     public RequestInterceptor feignRequestInterceptor() {
         OAuth2FeignRequestInterceptor oAuth2FeignRequestInterceptor = new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
-        log.debug("[Herodotus] |- Bean [Feign Request Interceptor] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Feign Request Interceptor] Auto Configure.");
         return oAuth2FeignRequestInterceptor;
     }
 

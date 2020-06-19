@@ -31,7 +31,7 @@ public class SecurityMetadataAsyncStorage extends AbstractSecurityMetadataStorag
 
     @Async
     public void store(String message) {
-        log.debug("[Herodotus] |- Received Service Resources Message: [{}]", message);
+        log.debug("[Eurynome] |- Received Service Resources Message: [{}]", message);
 
         List<RequestMapping> requestMappings = JSON.parseArray(message, RequestMapping.class);
         if (CollectionUtils.isNotEmpty(requestMappings)) {

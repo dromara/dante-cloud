@@ -27,7 +27,7 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
             writeToCache(domain);
         }
 
-        log.debug("[Herodotus] |- AbstractCrudService Service findById.");
+        log.debug("[Eurynome] |- AbstractCrudService Service findById.");
         return domain;
     }
 
@@ -35,14 +35,14 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
     public void deleteById(ID id) {
         super.deleteById(id);
         deleteFromCache(String.valueOf(id));
-        log.debug("[Herodotus] |- AbstractCrudService Service delete.");
+        log.debug("[Eurynome] |- AbstractCrudService Service delete.");
     }
 
     @Override
     public E saveOrUpdate(E domain) {
         E savedDomain = super.saveAndFlush(domain);
         writeToCache(savedDomain);
-        log.debug("[Herodotus] |- AbstractCrudService Service saveOrUpdate.");
+        log.debug("[Eurynome] |- AbstractCrudService Service saveOrUpdate.");
         return savedDomain;
     }
 
@@ -54,7 +54,7 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
             writeToCache(pages);
         }
 
-        log.debug("[Herodotus] |- AbstractCrudService Service findByPage.");
+        log.debug("[Eurynome] |- AbstractCrudService Service findByPage.");
         return pages;
     }
 
@@ -66,7 +66,7 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
             writeToCache(pages);
         }
 
-        log.debug("[Herodotus] |- AbstractCrudService Service findByPage.");
+        log.debug("[Eurynome] |- AbstractCrudService Service findByPage.");
         return pages;
     }
 
@@ -77,7 +77,7 @@ public abstract class BaseService<E extends AbstractEntity, ID extends Serializa
             domains = super.findAll();
             writeToCache(domains);
         }
-        log.debug("[Herodotus] |- AbstractCrudService Service findAll.");
+        log.debug("[Eurynome] |- AbstractCrudService Service findAll.");
         return domains;
     }
 }

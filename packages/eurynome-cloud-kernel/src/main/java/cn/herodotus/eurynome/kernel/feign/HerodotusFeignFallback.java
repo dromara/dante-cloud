@@ -31,7 +31,7 @@ public class HerodotusFeignFallback<T> implements MethodInterceptor {
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         String errorMessage = cause.getMessage();
 
-        log.error("[Herodotus] |- Feign Fallback:[{}.{}] serviceId:[{}] message:[{}]", targetType.getName(), method.getName(), targetName, errorMessage);
+        log.error("[Eurynome] |- Feign Fallback:[{}.{}] serviceId:[{}] message:[{}]", targetType.getName(), method.getName(), targetName, errorMessage);
 
         if (method.getReturnType() == Result.class) {
             Result<String> result = new Result<>();
@@ -47,7 +47,7 @@ public class HerodotusFeignFallback<T> implements MethodInterceptor {
 
             return result;
         } else {
-            log.warn("[Herodotus] |- Suggest use Result Entity as fegin interface return type, OR customize your own Feign fallBackFactory!");
+            log.warn("[Eurynome] |- Suggest use Result Entity as fegin interface return type, OR customize your own Feign fallBackFactory!");
             return null;
         }
     }

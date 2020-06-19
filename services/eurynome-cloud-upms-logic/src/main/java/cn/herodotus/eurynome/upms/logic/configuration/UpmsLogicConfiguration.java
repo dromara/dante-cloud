@@ -84,6 +84,6 @@ import javax.annotation.PostConstruct;
 public class UpmsLogicConfiguration {
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Bean [Upms Logic] Auto Configure.");
+        log.info("[Eurynome] |- Bean [Upms Logic] Auto Configure.");
     }
 }

@@ -73,7 +73,7 @@ public class OauthUserDetailsService extends BaseService<SysUser, String> implem
             throw new UsernameNotFoundException("系统用户 " + username + " 不存在!");
         }
 
-        log.debug("[Herodotus] |- UserDetailsService loaded user : [{}]", username);
+        log.debug("[Eurynome] |- UserDetailsService loaded user : [{}]", username);
 
         return UpmsHelper.convertSysUserToHerodotusUserDetails(sysUser);
     }
@@ -84,7 +84,7 @@ public class OauthUserDetailsService extends BaseService<SysUser, String> implem
             sysUser = sysUserRepository.findByUserName(userName);
             writeToCache(sysUser);
         }
-        log.debug("[Herodotus] |- SysUser Service findSysUserByUserName.");
+        log.debug("[Eurynome] |- SysUser Service findSysUserByUserName.");
         return sysUser;
     }
 }

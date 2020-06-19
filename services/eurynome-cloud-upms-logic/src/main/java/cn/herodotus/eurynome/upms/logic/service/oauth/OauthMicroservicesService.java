@@ -91,7 +91,7 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
 
     public OauthMicroservices assign(String serviceId, String[] scopeIds) {
 
-        log.debug("[Herodotus] |- OauthMicroservices Service authorize.");
+        log.debug("[Eurynome] |- OauthMicroservices Service authorize.");
 
         Set<OauthScopes> oauthScopesSet = new HashSet<>();
         for (String scopeId : scopeIds) {

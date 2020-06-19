@@ -112,9 +112,9 @@ public class HerodotusNacosConfig extends AbstractNacos {
                 return false;
             }
         } catch (NacosException e) {
-            log.error("[Herodotus] |- NacosConfig Publish Or Update Config FAILED!", e);
+            log.error("[Eurynome] |- NacosConfig Publish Or Update Config FAILED!", e);
         } catch (PlatformException e) {
-            log.error("[Herodotus] |- Nacos Server Address is not correct!", e);
+            log.error("[Eurynome] |- Nacos Server Address is not correct!", e);
         }
 
         return false;
@@ -140,9 +140,9 @@ public class HerodotusNacosConfig extends AbstractNacos {
                 return false;
             }
         } catch (NacosException e) {
-            log.error("[Herodotus] |- NacosConfig Remove Config FAILED!", e);
+            log.error("[Eurynome] |- NacosConfig Remove Config FAILED!", e);
         } catch (PlatformException e) {
-            log.error("[Herodotus] |- Nacos Server Address is not correct!", e);
+            log.error("[Eurynome] |- Nacos Server Address is not correct!", e);
         }
 
         return false;
@@ -165,9 +165,9 @@ public class HerodotusNacosConfig extends AbstractNacos {
                 return null;
             }
         } catch (NacosException e) {
-            log.error("[Herodotus] |- NacosConfig Get Config FAILED!", e);
+            log.error("[Eurynome] |- NacosConfig Get Config FAILED!", e);
         } catch (PlatformException e) {
-            log.error("[Herodotus] |- Nacos Server Address is not correct!", e);
+            log.error("[Eurynome] |- Nacos Server Address is not correct!", e);
         }
 
         return null;

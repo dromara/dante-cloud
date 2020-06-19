@@ -35,6 +35,6 @@ public class RestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Components [Herodotus Rest] Auto Configure.");
+        log.info("[Eurynome] |- Components [Herodotus Rest] Auto Configure.");
     }
 }

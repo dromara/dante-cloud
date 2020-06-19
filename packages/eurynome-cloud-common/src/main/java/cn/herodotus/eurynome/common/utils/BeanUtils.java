@@ -30,7 +30,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils {
             populate(instance, map);
             return instance;
         } catch (Exception e) {
-            log.error("[Herodotus] |- BeanUtils mapToBean error！", e);
+            log.error("[Eurynome] |- BeanUtils mapToBean error！", e);
             return null;
         }
     }

@@ -37,7 +37,7 @@ public class RestTemplateConfiguration {
     @LoadBalanced
     public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
 
-        log.debug("[Herodotus] |- Bean [Rest Template] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Rest Template] Auto Configure.");
 
         RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
 

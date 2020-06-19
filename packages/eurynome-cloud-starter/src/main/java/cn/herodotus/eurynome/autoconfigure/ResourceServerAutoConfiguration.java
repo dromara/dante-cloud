@@ -88,7 +88,7 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @ConditionalOnMissingBean(SecurityMetadataLocalStorage.class)
     public SecurityMetadataLocalStorage securityMetadataLocalStorage() {
         SecurityMetadataLocalStorage securityMetadataLocalStorage = new SecurityMetadataLocalStorage();
-        log.debug("[Herodotus] |- Bean [Security Metadata Local Storage] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Security Metadata Local Storage] Auto Configure.");
         return securityMetadataLocalStorage;
     }
 
@@ -102,7 +102,7 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @ConditionalOnClass(SecurityMetadataLocalStorage.class)
     public RequestMappingScanner requestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataLocalStorage securityMetadataLocalStorage) {
         RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, applicationProperties, securityMetadataLocalStorage, EnableResourceServer.class);
-        log.debug("[Herodotus] |- Bean [Request Mapping Scan] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Request Mapping Scan] Auto Configure.");
         return requestMappingScan;
     }
 
@@ -113,21 +113,21 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
         HerodotusSecurityMetadataSource herodotusSecurityMetadataSource = new HerodotusSecurityMetadataSource();
         herodotusSecurityMetadataSource.setSecurityMetadataLocalStorage(securityMetadataLocalStorage());
         herodotusSecurityMetadataSource.setSecurityProperties(securityProperties);
-        log.debug("[Herodotus] |- Bean [Security Metadata Source] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Security Metadata Source] Auto Configure.");
         return herodotusSecurityMetadataSource;
     }
 
     @Bean
     public HerodotusAccessDecisionManager herodotusAccessDecisionManager() {
         HerodotusAccessDecisionManager herodotusAccessDecisionManager = new HerodotusAccessDecisionManager();
-        log.debug("[Herodotus] |- Bean [Access Decision Manager] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Access Decision Manager] Auto Configure.");
         return herodotusAccessDecisionManager;
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        log.debug("[Herodotus] |- Bean [Core Resource Server] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Core Resource Server] Auto Configure.");
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
@@ -159,12 +159,12 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
         if (ObjectUtils.isNotEmpty(securityProperties)) {
             List<String> whitelist = securityProperties.getInterceptor().getWhitelist();
             if (CollectionUtils.isNotEmpty(whitelist)) {
-                log.info("[Herodotus] |- OAuth2 Fetch The Resource White List.");
+                log.info("[Eurynome] |- OAuth2 Fetch The Resource White List.");
                 return whitelist.toArray(new String[]{});
             }
         }
 
-        log.warn("[Herodotus] |- OAuth2 Can not Fetch The Resource White List Configurations.");
+        log.warn("[Eurynome] |- OAuth2 Can not Fetch The Resource White List Configurations.");
         return new String[]{};
     }
 }

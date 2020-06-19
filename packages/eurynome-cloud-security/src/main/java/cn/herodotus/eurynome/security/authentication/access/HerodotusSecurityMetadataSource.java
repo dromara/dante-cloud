@@ -89,13 +89,18 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
         String url = request.getRequestURI();
         String method = request.getMethod();
 
+        if(!securityProperties.getInterceptor().isOpenAuthorizationCheck()) {
+            log.debug("[Eurynome] |- Properties OpenAuthorizationCheck is false, Passed!");
+            return null;
+        }
+
         if (WebUtils.isStaticResources(url)) {
-            log.debug("[Herodotus] |- Is Static Resource : [{}], Passed!", url);
+            log.debug("[Eurynome] |- Is Static Resource : [{}], Passed!", url);
             return null;
         }
 
         if (WebUtils.isPathMatch(securityProperties.getInterceptor().getWhitelist(), url)) {
-            log.debug("[Herodotus] |- Is White List Resource : [{}], Passed!", url);
+            log.debug("[Eurynome] |- Is White List Resource : [{}], Passed!", url);
             return null;
         }
 
@@ -122,7 +127,7 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
     private Collection<ConfigAttribute> findConfigAttribute(String url, String method, HttpServletRequest request) {
         initRequestMappings();
 
-        log.debug("[Herodotus] |- Current Request is : [{}] - [{}]", url, method);
+        log.debug("[Eurynome] |- Current Request is : [{}] - [{}]", url, method);
 
         Collection<ConfigAttribute> configAttributes = getFromIndex(url, method);
         if (CollectionUtils.isNotEmpty(configAttributes)) {

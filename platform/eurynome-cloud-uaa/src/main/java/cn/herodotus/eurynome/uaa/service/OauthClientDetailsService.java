@@ -84,7 +84,7 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
         if (herodotusClientDetails != null && herodotusClientDetails.getAdditionalInformation() != null) {
             String status = herodotusClientDetails.getAdditionalInformation().getOrDefault("status", "1").toString();
             if (String.valueOf(StatusEnum.FORBIDDEN.getIndex()).equals(status)) {
-                log.warn("[Herodotus] |- Client [{}] has been Forbidden! ", herodotusClientDetails.getClientId());
+                log.warn("[Eurynome] |- Client [{}] has been Forbidden! ", herodotusClientDetails.getClientId());
                 throw new ClientRegistrationException("客户端已被禁用");
             }
         }
@@ -110,11 +110,11 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
         OauthClientDetails oauthClientDetails = findById(clientId);
 
         if (ObjectUtils.isEmpty(oauthClientDetails)) {
-            log.error("[Herodotus] |- Can not Fetch the Remote Client Details!");
+            log.error("[Eurynome] |- Can not Fetch the Remote Client Details!");
             return null;
         } else {
             HerodotusClientDetails herodotusClientDetails = UpmsHelper.convertOauthClientDetailsToHerodotusClientDetails(oauthClientDetails);
-            log.debug("[Herodotus] |- Fetch Remote Client Details Successfully! [{}]", herodotusClientDetails.getClientId());
+            log.debug("[Eurynome] |- Fetch Remote Client Details Successfully! [{}]", herodotusClientDetails.getClientId());
             return herodotusClientDetails;
         }
     }

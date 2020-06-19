@@ -54,7 +54,7 @@ public class OauthScopesService extends BaseService<OauthScopes, String> {
 
     public OauthScopes authorize(String scopeId, String[] authorities) {
 
-        log.debug("[Herodotus] |- OauthScopes Service authorize.");
+        log.debug("[Eurynome] |- OauthScopes Service authorize.");
 
         Set<SysAuthority> sysAuthorities = new HashSet<>();
         for (String authority : authorities) {

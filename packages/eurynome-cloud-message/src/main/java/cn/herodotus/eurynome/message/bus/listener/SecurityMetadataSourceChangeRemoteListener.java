@@ -47,6 +47,6 @@ public class SecurityMetadataSourceChangeRemoteListener implements ApplicationLi
     @Override
     public void onApplicationEvent(SecurityMetadataSourceChangeRemoteEvent event) {
 
-        log.debug("[Herodotus] |- Receive SecurityMetadataSourceChangeRemoteEvent from [{}] for operation [{}]", event.getOriginService(), event.getAction());
+        log.debug("[Eurynome] |- Receive SecurityMetadataSourceChangeRemoteEvent from [{}] for operation [{}]", event.getOriginService(), event.getAction());
     }
 }

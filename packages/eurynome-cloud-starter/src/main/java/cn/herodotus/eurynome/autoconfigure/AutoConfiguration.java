@@ -29,14 +29,14 @@ public class AutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Components [Herodotus Starter] Auto Configure.");
+        log.info("[Eurynome] |- Components [Herodotus Starter] Auto Configure.");
     }
 
     @Bean
     @ConditionalOnMissingBean(KafkaProducer.class)
     public KafkaProducer kafkaProducer(KafkaTemplate kafkaTemplate) {
         KafkaProducer kafkaProducer = new KafkaProducer(kafkaTemplate);
-        log.debug("[Herodotus] |- Bean [Kafka Producer] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Kafka Producer] Auto Configure.");
         return kafkaProducer;
     }
 
@@ -47,7 +47,7 @@ public class AutoConfiguration {
         SecurityMetadataProducer securityMetadataProducer = new SecurityMetadataProducer();
         securityMetadataProducer.setKafkaProducer(kafkaProducer);
         securityMetadataProducer.setSecurityMetadataLocalStorage(securityMetadataLocalStorage);
-        log.debug("[Herodotus] |- Bean [Security Metadata Persistence] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Security Metadata Persistence] Auto Configure.");
         return securityMetadataProducer;
     }
 }

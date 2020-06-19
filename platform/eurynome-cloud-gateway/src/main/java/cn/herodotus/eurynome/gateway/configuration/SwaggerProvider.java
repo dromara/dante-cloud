@@ -57,7 +57,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
 
     private SwaggerResource createSwaggerResource(String name, String location) {
 
-        log.debug("[Herodotus] |- Create Swagger Resource - Name: {}, Location {}.", name, location);
+        log.debug("[Eurynome] |- Create Swagger Resource - Name: {}, Location {}.", name, location);
 
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);

@@ -87,13 +87,13 @@ public class SysUserService extends BaseService<SysUser, String> {
             sysUser = sysUserRepository.findByUserName(userName);
             writeToCache(sysUser);
         }
-        log.debug("[Herodotus] |- SysUser Service findSysUserByUserName.");
+        log.debug("[Eurynome] |- SysUser Service findSysUserByUserName.");
         return sysUser;
     }
 
     public SysUser assign(String userId, String[] roleIds) {
 
-        log.debug("[Herodotus] |- SysUser Service assign.");
+        log.debug("[Eurynome] |- SysUser Service assign.");
 
         Set<SysRole> sysRoleSet = new HashSet<>();
         for (String roleId : roleIds) {

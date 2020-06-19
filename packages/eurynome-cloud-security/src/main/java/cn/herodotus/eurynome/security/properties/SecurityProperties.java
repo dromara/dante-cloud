@@ -63,7 +63,7 @@ public class SecurityProperties implements Serializable {
     private Interceptor interceptor = new Interceptor();
 
     public SecurityProperties() {
-        log.info("[Herodotus] |- Properties [Security] is Enabled.");
+        log.info("[Eurynome] |- Properties [Security] is Enabled.");
     }
 
     public String getSigningKey() {
@@ -288,19 +288,22 @@ public class SecurityProperties implements Serializable {
     }
 
     public static class Interceptor implements Serializable {
-        private boolean rejectPublicInvocations = false;
+        /**
+         * 开启授权检查
+         */
+        private boolean openAuthorizationCheck = true;
 
         /**
          * 白名单，服务接口
          */
         private List<String> whitelist = new ArrayList<>();
 
-        public boolean isRejectPublicInvocations() {
-            return rejectPublicInvocations;
+        public boolean isOpenAuthorizationCheck() {
+            return openAuthorizationCheck;
         }
 
-        public void setRejectPublicInvocations(boolean rejectPublicInvocations) {
-            this.rejectPublicInvocations = rejectPublicInvocations;
+        public void setOpenAuthorizationCheck(boolean openAuthorizationCheck) {
+            this.openAuthorizationCheck = openAuthorizationCheck;
         }
 
         public List<String> getWhitelist() {

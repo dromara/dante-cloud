@@ -38,7 +38,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     public Flux<RouteDefinition> getRouteDefinitions() {
         List<RouteDefinition> routeDefinitions = new ArrayList<>();
         redisTemplate.opsForHash().entries(GATEWAY_ROUTES).values().forEach(routeDefinition -> routeDefinitions.add(JSON.parseObject(routeDefinition.toString(), RouteDefinition.class)));
-        log.trace("[Herodotus] |- Get all gateway route definition from redis!");
+        log.trace("[Eurynome] |- Get all gateway route definition from redis!");
         return Flux.fromIterable(routeDefinitions);
     }
 
@@ -46,7 +46,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     public Mono<Void> save(Mono<RouteDefinition> routeDefinition) {
         return routeDefinition.flatMap(route -> {
             redisTemplate.opsForHash().put(GATEWAY_ROUTES, route.getId(), JSON.toJSONString(route));
-            log.debug("[Herodotus] |- Redis cache the new gateway route definition.");
+            log.debug("[Eurynome] |- Redis cache the new gateway route definition.");
             return Mono.empty();
         });
     }
@@ -55,7 +55,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     public Mono<Void> delete(Mono<String> routeId) {
         routeId.subscribe(id -> {
             redisTemplate.opsForHash().delete(GATEWAY_ROUTES, id);
-            log.info("[Herodotus] |- Redis cache remove route definition for {}", id);
+            log.info("[Eurynome] |- Redis cache remove route definition for {}", id);
         });
 
         return Mono.empty();

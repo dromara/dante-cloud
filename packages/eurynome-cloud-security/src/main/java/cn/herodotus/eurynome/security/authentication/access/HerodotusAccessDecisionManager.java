@@ -63,7 +63,7 @@ public class HerodotusAccessDecisionManager implements AccessDecisionManager {
     public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes) throws AccessDeniedException, InsufficientAuthenticationException {
 
         if (CollectionUtils.sizeIsEmpty(configAttributes)) {
-            log.debug("[Herodotus] |- ConfigAttributes is null!");
+            log.debug("[Eurynome] |- ConfigAttributes is null!");
             return;
         }
 
@@ -71,7 +71,7 @@ public class HerodotusAccessDecisionManager implements AccessDecisionManager {
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             Collection<? extends GrantedAuthority> result = authorities.stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(configAttribute.getAttribute())).collect(Collectors.toList());
             if (CollectionUtils.isNotEmpty(result)) {
-                log.debug("[Herodotus] |- Permission [{}] is Matched!", configAttribute.getAttribute());
+                log.debug("[Eurynome] |- Permission [{}] is Matched!", configAttribute.getAttribute());
                 return;
             }
         }

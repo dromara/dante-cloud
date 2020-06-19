@@ -46,21 +46,21 @@ public class KafkaProducer {
     }
 
     public void sendMessage(String topic, String data) {
-        log.debug("[Herodotus] |- Kafka Send Message Start!");
+        log.debug("[Eurynome] |- Kafka Send Message Start!");
 
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, data);
         future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
             @Override
             public void onFailure(Throwable ex) {
-                log.error("[Herodotus] |- Kafka Send Message Error! => ex = {}, topic = {}, data = {}", ex, topic, data);
+                log.error("[Eurynome] |- Kafka Send Message Error! => ex = {}, topic = {}, data = {}", ex, topic, data);
             }
 
             @Override
             public void onSuccess(SendResult<String, String> result) {
-                log.debug("[Herodotus] |- Kafka Send Message Success! => topic = {}, data = {}", topic, data);
+                log.debug("[Eurynome] |- Kafka Send Message Success! => topic = {}, data = {}", topic, data);
             }
         });
 
-        log.debug("[Herodotus] |- Kafka Send Message Finished!");
+        log.debug("[Eurynome] |- Kafka Send Message Finished!");
     }
 }

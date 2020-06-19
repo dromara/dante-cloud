@@ -133,7 +133,7 @@ public class RequestMappingScanner implements ApplicationContextAware {
             securityMetadataLocalStorage.save(resources);
         }
 
-        log.info("[Herodotus] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
+        log.info("[Eurynome] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
     }
 
     /**

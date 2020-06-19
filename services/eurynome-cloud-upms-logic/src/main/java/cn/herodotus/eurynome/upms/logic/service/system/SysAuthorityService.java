@@ -82,7 +82,7 @@ public class SysAuthorityService extends BaseService<SysAuthority, String> {
     }
 
     public List<SysAuthority> batchSaveOrUpdate(List<SysAuthority> sysAuthorities) {
-        log.debug("[Herodotus] |- SysAuthority Service batchSaveOrUpdate.");
+        log.debug("[Eurynome] |- SysAuthority Service batchSaveOrUpdate.");
         return sysAuthorityRepository.saveAll(sysAuthorities);
     }
 

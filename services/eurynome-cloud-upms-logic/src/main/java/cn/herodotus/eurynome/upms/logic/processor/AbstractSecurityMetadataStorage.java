@@ -54,9 +54,9 @@ public abstract class AbstractSecurityMetadataStorage {
 
         List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
         if (CollectionUtils.isNotEmpty(result)) {
-            log.info("[Herodotus] |- Store Service Resources Success!");
+            log.info("[Eurynome] |- Store Service Resources Success!");
         } else {
-            log.error("[Herodotus] |- Store Service Resources May Be Error, Please Check!");
+            log.error("[Eurynome] |- Store Service Resources May Be Error, Please Check!");
         }
     }
 }

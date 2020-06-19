@@ -25,7 +25,7 @@ public class JacksonAutoConfiguration {
     @ConditionalOnMissingBean(ObjectMapper.class)
     @Primary
     public ObjectMapper jacksonObjectMapper() {
-        log.debug("[Herodotus] |- Bean [Jackson Object Mapper] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Jackson Object Mapper] Auto Configure.");
         return JacksonUtils.getObjectMapper();
     }
 

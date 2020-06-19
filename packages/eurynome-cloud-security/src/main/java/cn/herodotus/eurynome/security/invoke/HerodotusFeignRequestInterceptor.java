@@ -67,10 +67,10 @@ public class HerodotusFeignRequestInterceptor extends OAuth2FeignRequestIntercep
                 requestTemplate.header(entry.getKey(), entry.getValue());
             }
 
-            log.debug("[Herodotus] |- FeignRequestInterceptor copy all need transfer header!");
+            log.debug("[Eurynome] |- FeignRequestInterceptor copy all need transfer header!");
         }
 
-        log.trace("[Herodotus] |- Feign Request Interceptor [{}]", requestTemplate.toString());
+        log.trace("[Eurynome] |- Feign Request Interceptor [{}]", requestTemplate.toString());
 
         super.apply(requestTemplate);
     }
@@ -79,7 +79,7 @@ public class HerodotusFeignRequestInterceptor extends OAuth2FeignRequestIntercep
         try {
             return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         } catch (Exception e) {
-            log.error("[Herodotus] |- Feign Request Interceptor can not get Request.");
+            log.error("[Eurynome] |- Feign Request Interceptor can not get Request.");
             return null;
         }
     }

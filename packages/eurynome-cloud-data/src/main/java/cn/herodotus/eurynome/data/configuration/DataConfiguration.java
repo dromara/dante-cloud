@@ -35,6 +35,6 @@ public class DataConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Components [Herodotus Data] Auto Configure.");
+        log.info("[Eurynome] |- Components [Herodotus Data] Auto Configure.");
     }
 }
