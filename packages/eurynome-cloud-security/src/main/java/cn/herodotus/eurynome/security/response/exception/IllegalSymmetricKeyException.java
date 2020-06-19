@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.security.response.exception;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 非法加密Key Exception </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/1/28 17:32

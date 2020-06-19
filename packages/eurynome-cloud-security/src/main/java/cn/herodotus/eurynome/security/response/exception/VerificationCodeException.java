@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.security.response.exception;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 验证码Exception </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/29 13:46

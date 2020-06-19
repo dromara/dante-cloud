@@ -34,7 +34,7 @@ import java.lang.annotation.*;
  * <p>Project: eurynome-cloud </p>
  * <p>File: EnableUpmsInterface </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 开启Upms接口注解 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/6/8 16:48

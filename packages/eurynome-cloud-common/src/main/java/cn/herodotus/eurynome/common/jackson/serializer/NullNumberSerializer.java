@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 /** 
- * <p>Description: TODO </p>
+ * <p>Description: 空数字Json序列化器 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/8 16:54

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : ThreadLocal工具类 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/3/5 17:22

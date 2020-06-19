@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 自定义AuthenticationDetailsSource </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/29 15:49

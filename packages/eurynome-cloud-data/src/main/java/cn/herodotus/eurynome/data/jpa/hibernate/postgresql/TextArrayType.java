@@ -31,7 +31,7 @@ import org.springframework.util.ObjectUtils;
 import java.io.Serializable;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: 自定义文本数组类型 </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:34

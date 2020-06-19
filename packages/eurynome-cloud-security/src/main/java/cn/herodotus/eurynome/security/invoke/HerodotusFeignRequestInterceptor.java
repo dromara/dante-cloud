@@ -40,7 +40,7 @@ import java.util.Map;
  * <p>Project: eurynome-cloud </p>
  * <p>File: HerodotusFeignRequestInterceptor </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 自定义FeignRequestInterceptor </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/6/8 12:01

@@ -29,7 +29,7 @@ import org.hibernate.dialect.PostgreSQL9Dialect;
 import java.sql.Types;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: 自定义PostgreSQLDialect，增加JSONB等类型支持 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:31

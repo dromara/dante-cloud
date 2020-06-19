@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.common.enums.captcha;
 import com.wf.captcha.base.Captcha;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : HappyCaptcha字幕类型Enum </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/2/25 14:53

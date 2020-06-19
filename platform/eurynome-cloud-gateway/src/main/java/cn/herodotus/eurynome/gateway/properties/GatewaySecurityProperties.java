@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : Gateway配置 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/3/6 15:31

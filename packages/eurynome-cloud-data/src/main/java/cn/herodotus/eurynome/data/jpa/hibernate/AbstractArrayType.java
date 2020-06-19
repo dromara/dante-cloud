@@ -31,7 +31,7 @@ import java.io.Serializable;
 import java.sql.*;
 
 /** 
- * <p>Description: TODO </p>
+ * <p>Description: 抽象数组类型 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:34

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: Jackson配置 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/8 17:15

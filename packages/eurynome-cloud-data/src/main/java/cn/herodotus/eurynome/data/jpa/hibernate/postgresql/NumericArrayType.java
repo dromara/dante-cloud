@@ -33,7 +33,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /** 
- * <p>Description: TODO </p>
+ * <p>Description: 自定义数字数组类型 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:33

@@ -37,7 +37,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 /** 
- * <p>Description: TODO </p>
+ * <p>Description: 自定义JsonB类型 </p>
  * 
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:33

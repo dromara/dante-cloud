@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : 自定义WebAuthenticationDetails，用于提供Login额外参数检测 </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/29 14:29

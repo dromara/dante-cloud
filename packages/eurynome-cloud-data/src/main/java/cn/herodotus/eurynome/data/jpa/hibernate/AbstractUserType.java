@@ -31,7 +31,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: 抽象用户定义类型 </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/15 10:32
