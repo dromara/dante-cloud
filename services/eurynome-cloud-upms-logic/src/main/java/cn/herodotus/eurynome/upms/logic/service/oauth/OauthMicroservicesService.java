@@ -114,12 +114,7 @@ public class OauthMicroservicesService extends BaseService<OauthMicroservices, S
                 config.setGroup(oauthMicroservices.getSupplier().getSupplierCode());
             }
 
-            String scopes = null;
-            if (CollectionUtils.isNotEmpty(oauthMicroservices.getScopes())) {
-                scopes = oauthMicroservices.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
-            }
-
-            config.setContent(ConfigContentFactory.createOauthProperty(oauthMicroservices.getServiceId(), oauthMicroservices.getAppSecret(), scopes));
+            config.setContent(ConfigContentFactory.createOauthProperty(oauthMicroservices.getServiceId(), oauthMicroservices.getAppSecret()));
             return config;
         }
 

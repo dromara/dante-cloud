@@ -36,13 +36,10 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ConfigContentFactory {
 
-    public static String createOauthProperty(String clientId, String clientSecret, String scopes) {
+    public static String createOauthProperty(String clientId, String clientSecret) {
         OauthPropertyContent oauthPropertyContent = new OauthPropertyContent();
         oauthPropertyContent.getSecurity().getOauth2().getClient().setClientId(clientId);
         oauthPropertyContent.getSecurity().getOauth2().getClient().setClientSecret(clientSecret);
-        if (StringUtils.isNotBlank(scopes)) {
-            oauthPropertyContent.getSecurity().getOauth2().getClient().setScope(scopes);
-        }
 
         return JacksonYamlUtils.writeAsString(oauthPropertyContent);
     }

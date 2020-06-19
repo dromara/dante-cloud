@@ -50,3 +50,17 @@ logging:
     org.springframework.security: debug
     org.apache.kafka: WARN
     com.alibaba.nacos.client: off
+
+herodotus:
+  platform:
+    security:
+      interceptor:
+        open-authorization-check: false
+
+camunda:
+  bpm:
+    database:
+      type: postgres
+      schema-update: true
+    jpa:
+      enabled: true

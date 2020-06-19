@@ -50,15 +50,20 @@ import io.swagger.annotations.ApiModelProperty;
 public enum ResultStatus {
 
     /**
-     * 1*.**	认证授权
+     * 1*.**  认证授权
+     * 10.**  认证操作相关错误
+     * 11.**  认证错误，配置及Token相关信息错误
+     * 12.**  授权错误。权限配置相关错误
      */
-    INVALID_TOKEN(1000, "无法解析的Token，也许Token已经失效"),
-    INVALID_GRANT(1001, "该账号被禁用，请联系管理员"),
-    INVALID_SCOPE(1002, "授权范围错误"),
-    INVALID_CLIENT(1003, "非法的客户端"),
+    UNAUTHORIZED(1000, "未经授权，无法访问"),
 
-    ACCESS_DENIED(1100, "拒绝访问"),
-    ACCESS_DENIED_AUTHORITY_LIMITED(1101, "权限不足，拒绝访问"),
+    INVALID_TOKEN(1101, "无法解析的Token，也许Token已经失效"),
+    INVALID_GRANT(1102, "该账号被禁用，请联系管理员"),
+    INVALID_SCOPE(1103, "授权范围错误"),
+    INVALID_CLIENT(1104, "非法的客户端"),
+
+    ACCESS_DENIED(1201, "拒绝访问"),
+    ACCESS_DENIED_AUTHORITY_LIMITED(1202, "权限不足，拒绝访问"),
 
     /**
      * 2*.** 成功
@@ -66,7 +71,7 @@ public enum ResultStatus {
     OK(2000, "成功"),
 
     /**
-     * 4*.**	Java常规错误
+     * 4*.** Java常规错误
      */
     FAIL(4000, "失败"),
     WARNING(4001, "警告"),
@@ -80,7 +85,7 @@ public enum ResultStatus {
     DATA_INTEGRITY_VIOLATION(6200, "该数据正在被其它数据引用，请先删除引用关系，再进行数据删除操作"),
 
 
-    // TODO: 以下状态码和错误信息要重新梳理，重点要看自定义错误码以及对应的HttpStatus是否合适
+    // TODO: 以下状态码和错误信息要重新梳理，重点要看自定义错误码以及对应的HttpStatus是否合适。如果发现新的没有定义的错误，增加到上面。
     /**
      * oauth2返回码
      */
@@ -93,7 +98,6 @@ public enum ResultStatus {
     UNSUPPORTED_GRANT_TYPE(2008, "Unsupported Grant Type"),
     UNSUPPORTED_RESPONSE_TYPE(2009, "Unsupported Response Type"),
     UNSUPPORTED_MEDIA_TYPE(2010, "Unsupported Media Type"),
-    UNAUTHORIZED(2012, "Unauthorized"),
     SIGNATURE_DENIED(2013, "Signature Denied"),
 
 
