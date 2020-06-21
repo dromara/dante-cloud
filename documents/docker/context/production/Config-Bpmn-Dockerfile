@@ -22,7 +22,7 @@ ADD ./target/eurynome-cloud-bpmn-rest-1.0.0.jar app.jar
 ADD skywalking-agent.jar skywalking-agent.jar
 
 # 声明运行时端口
-EXPOSE 7070
+EXPOSE 7071
 
 # 启动容器时的进程
 ENTRYPOINT java -javaagent:/skywalking-agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar /app.jar
