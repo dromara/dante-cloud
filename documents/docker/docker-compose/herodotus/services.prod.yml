@@ -50,3 +50,12 @@ services:
     depends_on:
       - upms
       - management
+
+  bpmn:
+    image: eurynome-cloud-bpmn-rest:latest
+    build:
+      context: ../../context
+      dockerfile: ./production/Config-Bpmn-Dockerfile
+    container_name: bpmn
+    ports:
+      - 7071:7071
