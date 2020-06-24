@@ -46,7 +46,7 @@ public class HerodotusAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException {
         Result<String> result = SecurityGlobalExceptionHandler.resolveException(exception, request.getRequestURI());
-        response.setStatus(result.getHttpStatus());
+        response.setStatus(result.getStatus());
         WebUtils.renderJson(response, result);
     }
 }

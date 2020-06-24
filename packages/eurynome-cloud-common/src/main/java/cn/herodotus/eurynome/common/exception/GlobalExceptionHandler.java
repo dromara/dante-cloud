@@ -155,7 +155,7 @@ public class GlobalExceptionHandler {
     }
 
     protected static Result<String> getResult(ResultStatus resultCode, int httpStatus) {
-        return new Result<String>().failed().code(resultCode.getCode()).message(resultCode.getMessage()).httpStatus(httpStatus);
+        return new Result<String>().failed().code(resultCode.getCode()).message(resultCode.getMessage()).status(httpStatus);
     }
 
     public static Result<String> resolveException(Exception ex, String path) {

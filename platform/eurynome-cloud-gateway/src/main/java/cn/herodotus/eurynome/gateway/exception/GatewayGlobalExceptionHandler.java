@@ -93,12 +93,12 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
 
         Result<String> result = new Result<String>().path(path);
         if (ex instanceof NotFoundException) {
-            result.type(ResultStatus.SERVICE_UNAVAILABLE).httpStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+            result.type(ResultStatus.SERVICE_UNAVAILABLE).status(HttpStatus.SERVICE_UNAVAILABLE.value());
             log.error("[Eurynome] |- ERROR ==> Service Unavailable : {}", result);
         } else if (ex instanceof ResponseStatusException) {
             ResponseStatusException responseStatusException = (ResponseStatusException) ex;
             HttpStatus httpStatus = responseStatusException.getStatus();
-            result.httpStatus(responseStatusException.getStatus().value());
+            result.status(responseStatusException.getStatus().value());
 
             ResultStatus resultType = ResultStatus.valueOf(httpStatus.name());
 
@@ -132,13 +132,13 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
 
     protected Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
         Result<String> result = exceptionHandlerResult.get();
-        return ServerResponse.status(result.getHttpStatus())
+        return ServerResponse.status(result.getStatus())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(result));
     }
 
     public static Mono<ServerResponse> renderErrorResponse(Result result) {
-        return ServerResponse.status(result.getHttpStatus())
+        return ServerResponse.status(result.getStatus())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(result));
     }

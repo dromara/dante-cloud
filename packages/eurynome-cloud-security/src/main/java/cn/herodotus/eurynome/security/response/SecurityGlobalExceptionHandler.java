@@ -62,7 +62,7 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
     @ResponseBody
     public static Result<String> exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
-        response.setStatus(result.getHttpStatus());
+        response.setStatus(result.getStatus());
         return result;
     }
 
@@ -78,7 +78,7 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
     @ResponseBody
     public static Result<String> restTemplateException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
-        response.setStatus(result.getHttpStatus());
+        response.setStatus(result.getStatus());
         return result;
     }
 
@@ -95,7 +95,7 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
     @ResponseBody
     public static Result<String> authenticationException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
-        response.setStatus(result.getHttpStatus());
+        response.setStatus(result.getStatus());
         return result;
     }
 
@@ -111,7 +111,7 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
     @ResponseBody
     public static Result<String> oauth2Exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
-        response.setStatus(result.getHttpStatus());
+        response.setStatus(result.getStatus());
         return result;
     }
 

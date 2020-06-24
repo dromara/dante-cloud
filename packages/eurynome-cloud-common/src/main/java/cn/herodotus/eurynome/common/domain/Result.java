@@ -27,6 +27,7 @@ package cn.herodotus.eurynome.common.domain;
 
 import cn.herodotus.eurynome.common.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.http.HttpStatus;
@@ -56,7 +57,7 @@ public class Result<T> implements Serializable {
     private T data;
 
     @ApiModelProperty(value = "http状态码")
-    private int httpStatus;
+    private int status;
 
     @ApiModelProperty(value = "错误堆栈信息")
     private Throwable error;
@@ -85,8 +86,8 @@ public class Result<T> implements Serializable {
         return data;
     }
 
-    public int getHttpStatus() {
-        return httpStatus;
+    public int getStatus() {
+        return status;
     }
 
     public Date getTimestamp() {
@@ -100,14 +101,14 @@ public class Result<T> implements Serializable {
     public Result<T> ok() {
         this.code = ResultStatus.OK.getCode();
         this.message = ResultStatus.OK.getMessage();
-        this.httpStatus = HttpStatus.SC_OK;
+        this.status = HttpStatus.SC_OK;
         return this;
     }
 
     public Result<T> failed() {
         this.code = ResultStatus.FAIL.getCode();
         this.message = ResultStatus.FAIL.getMessage();
-        this.httpStatus = HttpStatus.SC_INTERNAL_SERVER_ERROR;
+        this.status = HttpStatus.SC_INTERNAL_SERVER_ERROR;
         return this;
     }
 
@@ -137,8 +138,8 @@ public class Result<T> implements Serializable {
         return this;
     }
 
-    public Result<T> httpStatus(int httpStatus) {
-        this.httpStatus = httpStatus;
+    public Result<T> status(int httpStatus) {
+        this.status = httpStatus;
         return this;
     }
 
@@ -149,14 +150,14 @@ public class Result<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "Result{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", path='" + path + '\'' +
-                ", data=" + data +
-                ", httpStatus=" + httpStatus +
-                ", error=" + error +
-                ", timestamp=" + timestamp +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("code", code)
+                .add("message", message)
+                .add("path", path)
+                .add("data", data)
+                .add("status", status)
+                .add("error", error)
+                .add("timestamp", timestamp)
+                .toString();
     }
 }

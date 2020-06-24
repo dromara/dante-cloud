@@ -25,7 +25,6 @@
 package cn.herodotus.eurynome.security.response;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
@@ -46,6 +45,6 @@ public class HerodotusWebResponseExceptionTranslator implements WebResponseExcep
     public ResponseEntity<Result<String>> translate(Exception e) throws Exception {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Result<String> result = SecurityGlobalExceptionHandler.resolveOauthException(e, request.getRequestURI());
-        return ResponseEntity.status(result.getHttpStatus()).body(result);
+        return ResponseEntity.status(result.getStatus()).body(result);
     }
 }

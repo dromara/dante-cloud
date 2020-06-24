@@ -76,7 +76,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (!isTokenWellFormed(token)) {
             log.debug("[Eurynome] |- Token is not Well Formed!");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).httpStatus(HttpStatus.SC_UNAUTHORIZED));
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).status(HttpStatus.SC_UNAUTHORIZED));
         }
 
         // 3. 非免登陆接口，同时也有格式正确的Token，那么就验证Token是否过期
@@ -84,7 +84,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         String redisTokenKey = StringUtils.replace(token, SecurityConstants.BEARER_TOKEN, "access:");
         if (!redisTemplate.hasKey(redisTokenKey)) {
             log.debug("[Eurynome] |- Token is Expired！");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).httpStatus(HttpStatus.SC_FORBIDDEN));
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).status(HttpStatus.SC_FORBIDDEN));
         } else {
             log.debug("[Eurynome] |- Token is OK！");
             return chain.filter(exchange);

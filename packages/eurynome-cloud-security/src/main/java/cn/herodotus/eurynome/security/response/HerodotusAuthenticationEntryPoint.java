@@ -25,7 +25,6 @@
 package cn.herodotus.eurynome.security.response;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
@@ -48,7 +47,7 @@ public class HerodotusAuthenticationEntryPoint implements AuthenticationEntryPoi
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException exception) throws IOException, ServletException {
         Result<String> result = SecurityGlobalExceptionHandler.resolveException(exception, request.getRequestURI());
-        response.setStatus(result.getHttpStatus());
+        response.setStatus(result.getStatus());
         WebUtils.renderJson(response, result);
     }
 }

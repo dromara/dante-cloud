@@ -38,7 +38,7 @@ public class HerodotusFeignFallback<T> implements MethodInterceptor {
             if (cause instanceof FeignException) {
                 FeignException exception = (FeignException) cause;
                 result.failed()
-                        .httpStatus(exception.status())
+                        .status(exception.status())
                         .message(exception.getMessage())
                         .error(cause);
             } else {
