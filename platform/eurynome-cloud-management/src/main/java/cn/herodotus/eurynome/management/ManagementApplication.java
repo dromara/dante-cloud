@@ -17,7 +17,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @EnableAdminServer
 @EnableLogCenter
 @EnableHerodotusManagement
-@SpringBootApplication(exclude = {JetCacheAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JetCacheAutoConfiguration.class})
 public class ManagementApplication {
 
     public static void main(String[] args) {

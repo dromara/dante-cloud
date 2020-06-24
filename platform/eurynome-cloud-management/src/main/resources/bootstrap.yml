@@ -16,9 +16,6 @@ spring:
             group: @profile.name@
           - data-id: eurynome-cloud-platform.yaml
             group: common
-        extension-configs:
-          - data-id: eurynome-cloud-uaa.yaml
-            group: herodotus
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
