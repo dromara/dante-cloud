@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.8.RELEASE</version>
+        <version>2.2.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -20,9 +20,9 @@
 
     <properties>
         <!--Spring 家族-->
-        <spring-cloud-dependencies.version>Hoxton.SR5</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>Hoxton.SR6</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.2.0.RELEASE</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
+        <spring-boot-admin.version>2.2.4</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
@@ -36,10 +36,10 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.6</commons-io.version>
         <google-guava.version>29.0-jre</google-guava.version>
-        <hutool.version>5.3.5</hutool.version>
+        <hutool.version>5.3.10</hutool.version>
 
         <!--Alibaba开源的工具包-->
-        <alibaba-fastjson.version>1.2.70</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.73</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
@@ -49,16 +49,12 @@
 
         <!--Spring Boot Dependencies中没有的依赖组件-->
         <swagger.version>2.9.2</swagger.version>
-        <knife4j.version>2.0.2</knife4j.version>
-        <p6spy.version>3.9.0</p6spy.version>
+        <knife4j.version>2.0.4</knife4j.version>
+        <p6spy.version>3.9.1</p6spy.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
-        <oltu.oauth2.version>1.0.2</oltu.oauth2.version>
-        <shiro.version>1.4.1</shiro.version>
-        <flowable.version>6.5.0</flowable.version>
 
-        <minio.version>7.0.2</minio.version>
-        <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
+        <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
 
         <!--镜像前缀-->
         <docker.image.prefix>eurynome.cloud</docker.image.prefix>
@@ -152,59 +148,11 @@
                 <artifactId>p6spy</artifactId>
                 <version>${p6spy.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.client -->
-            <dependency>
-                <groupId>org.apache.oltu.oauth2</groupId>
-                <artifactId>org.apache.oltu.oauth2.client</artifactId>
-                <version>${oltu.oauth2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.oltu.oauth2</groupId>
-                <artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
-                <version>${oltu.oauth2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.oltu.oauth2</groupId>
-                <artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
-                <version>${oltu.oauth2.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-all -->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-all</artifactId>
-                <version>${shiro.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-spring-boot-starter</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-ui-modeler-rest</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-rest</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flowable</groupId>
-                <artifactId>flowable-app-engine-rest</artifactId>
-                <version>${flowable.version}</version>
-            </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter -->
             <dependency>
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>${starter-jasypt.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/io.minio/minio -->
-            <dependency>
-                <groupId>io.minio</groupId>
-                <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
             <dependency>
