@@ -4,16 +4,16 @@
 
 组件 | 版本 | 说明
 ---|---|---
-Spring Boot | 2.2.7.RELEASE | 功能版本要与其它组件匹配
-Spring Cloud | Hoxton.SR4 | 
-Spring Cloud Alibaba | 2.2.0.RELEASE | 目前最新为2.2.1.RELEASE，但使用该版本会导致Oauth2 Token 中的active值被转换为String，出现验证不成功的错误。
-Spring Boot Admin | 2.2.1 | 
-Nacos | 1.2.1 |
-Sentinel | 1.7.1 |
+Spring Boot | 2.3.4.RELEASE | 功能版本要与其它组件匹配
+Spring Cloud | Hoxton.SR8 | 
+Spring Cloud Alibaba | 2.2.3.RELEASE 
+Spring Boot Admin | 2.3.0 | 
+Nacos | 1.3.2 |
+Sentinel | 1.8.0 |
 Skywalking | latest |
 Jetcache | 2.6.0 | 
 ELK | latest |
-logstash-logback-encoder | 6.3 | 使用该组件直接向ELK发送日志
+logstash-logback-encoder | 6.4 | 使用该组件直接向ELK发送日志
 MySQL | 5.7.26 |
 PostgreSQL | 12.3-1 |
 Redis | 3.2.100 | 为了图省事，还是用的可以在Windows下直接安装版本老版本。使用最新版也可，只要支持lettuce就行。
@@ -52,6 +52,16 @@ Spring Cloud Edgware | 1.5.1.RELEASE | 1.5.X.RELEASE
 
 正常安装即可，由于Mysql8和Mysql5版本的驱动差异比较大，建议安装Mysql5，可以减少不可预知的问题。
 
+> nacos 1.3.2 已经将存储升级为MySQL 8 refer：https://github.com/nacos-group/nacos-docker/blob/master/README_ZH.md
+> 这个版本的nacos docker，想要连接到外部的MySQL，需要修改容器中的数据库连接，否则无法连接上数据库会出错。
+
+```
+vim conf/application.properties
+
+// 在数据库连接中增加
+allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+```
+
 （2）、创建Nacos使用的数据库
 
 即新建用户、创建数据库、分配权限等。不会的请Baidu。
@@ -87,7 +97,7 @@ localhost | mysql.sys
 设置允许任意IP访问，执行语句：
 
 ```mysql
-mysql> update mysql.user set host = ‘%’ where user = ‘root’;
+mysql> update mysql.user set host = '%' where user = 'root';
 
 mysql> flush privileges;
 ```
