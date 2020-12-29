@@ -7,55 +7,54 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>2.3.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
 
     <properties>
         <!--Spring 家族-->
-        <spring-cloud-dependencies.version>Hoxton.SR8</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>Hoxton.SR9</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.2.3.RELEASE</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.3.0</spring-boot-admin.version>
+        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
 
         <!--覆盖Spring Boot 默认依赖版本-->
-        <mysql.verison>5.1.48</mysql.verison>
 
         <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-text.version>1.9</commons-text.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.8.0</commons-io.version>
-        <google-guava.version>30.0-jre</google-guava.version>
-        <hutool.version>5.4.5</hutool.version>
-        <jackson.version>2.11.3</jackson.version>
+        <google-guava.version>30.1-jre</google-guava.version>
+        <hutool.version>5.5.5</hutool.version>
+        <jackson.version>2.12.0</jackson.version>
 
         <!--Alibaba开源的工具包-->
-        <alibaba-fastjson.version>1.2.74</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.3</starter-jasypt.version>
-        <starter-mybatis.version>2.1.2</starter-mybatis.version>
+        <starter-mybatis.version>2.1.4</starter-mybatis.version>
         <starter-camunda.version>7.14.0</starter-camunda.version>
 
         <!--Spring Boot Dependencies中没有的依赖组件-->
         <swagger.version>2.9.2</swagger.version>
-        <knife4j.version>2.0.5</knife4j.version>
+        <knife4j.version>3.0.2</knife4j.version>
         <p6spy.version>3.9.1</p6spy.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
 
-        <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
+        <logstash-logback-encoder.version>6.5</logstash-logback-encoder.version>
 
         <!--镜像前缀-->
         <docker.image.prefix>eurynome.cloud</docker.image.prefix>
@@ -160,11 +159,6 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.verison}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
             <dependency>

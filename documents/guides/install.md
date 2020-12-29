@@ -115,6 +115,7 @@ mysql> flush privileges;
 正常安装即可。跟随安装的Wizard一步一步进行即可。
 
 > 注意：在window下面安装高版本的pg，注意在安装配置过程中，选择locale一项时，设置本地化语言，一般选择 C，而不要使用默认的Default Locale。否则试过几次都会失败。
+> 最新的postgre12，加上最新的windows，直接Default_locale可以，反倒是C不行。
 
 （2）、创建数据库
 
@@ -141,6 +142,8 @@ GRANT ALL PRIVILEGES ON DATABASE herodotus TO herodotus;
 ```postgresql
 listen_addresses = '*'
 ```
+
+- 修改端口号打开postgresql.conf，在63行，找到port
 
 > PostgreSQL 12 中，该项默认就为 ‘*’，所以可以不用修改
 
