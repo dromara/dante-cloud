@@ -7,11 +7,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>1.0.0</version>
+        <version>1.0.2</version>
     </parent>
 
     <artifactId>eurynome-cloud-upms-logic</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 
     <dependencies>
         <dependency>
