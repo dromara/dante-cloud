@@ -24,20 +24,24 @@
 
 package cn.herodotus.eurynome.autoconfigure;
 
+import cn.herodotus.eurynome.autoconfigure.components.SecurityMetadataProducer;
+import cn.herodotus.eurynome.message.queue.KafkaProducer;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
-import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
-import cn.herodotus.eurynome.security.authentication.access.SecurityMetadataLocalStorage;
 import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDecisionManager;
-import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDeniedHandler;
 import cn.herodotus.eurynome.security.authentication.access.HerodotusSecurityMetadataSource;
+import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
+import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.eurynome.security.strategy.LocalCacheSecurityMetadata;
+import cn.herodotus.eurynome.security.strategy.SecurityMetadataStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -85,11 +89,22 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     }
 
     @Bean
-    @ConditionalOnMissingBean(SecurityMetadataLocalStorage.class)
-    public SecurityMetadataLocalStorage securityMetadataLocalStorage() {
-        SecurityMetadataLocalStorage securityMetadataLocalStorage = new SecurityMetadataLocalStorage();
+    @ConditionalOnMissingBean(LocalCacheSecurityMetadata.class)
+    public SecurityMetadataStorage securityMetadataStorage() {
+        LocalCacheSecurityMetadata localCacheSecurityMetadata = new LocalCacheSecurityMetadata();
         log.debug("[Eurynome] |- Bean [Security Metadata Local Storage] Auto Configure.");
-        return securityMetadataLocalStorage;
+        return localCacheSecurityMetadata;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(SecurityMetadataProducer.class)
+    @ConditionalOnBean(SecurityMetadataStorage.class)
+    public SecurityMetadataProducer securityMetadataPersistence(KafkaProducer kafkaProducer, SecurityMetadataStorage securityMetadataStorage) {
+        SecurityMetadataProducer securityMetadataProducer = new SecurityMetadataProducer();
+        securityMetadataProducer.setKafkaProducer(kafkaProducer);
+        securityMetadataProducer.setSecurityMetadataStorage(securityMetadataStorage);
+        log.debug("[Eurynome] |- Bean [Security Metadata Persistence] Auto Configure.");
+        return securityMetadataProducer;
     }
 
     /**
@@ -99,9 +114,9 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
      */
     @Bean
     @ConditionalOnMissingBean(RequestMappingScanner.class)
-    @ConditionalOnClass(SecurityMetadataLocalStorage.class)
-    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataLocalStorage securityMetadataLocalStorage) {
-        RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, applicationProperties, securityMetadataLocalStorage, EnableResourceServer.class);
+    @ConditionalOnClass(SecurityMetadataStorage.class)
+    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage) {
+        RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, applicationProperties, securityMetadataStorage, EnableResourceServer.class);
         log.debug("[Eurynome] |- Bean [Request Mapping Scan] Auto Configure.");
         return requestMappingScan;
     }
@@ -111,7 +126,7 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @ConditionalOnClass(RequestMappingScanner.class)
     public HerodotusSecurityMetadataSource herodotusSecurityMetadataSource() {
         HerodotusSecurityMetadataSource herodotusSecurityMetadataSource = new HerodotusSecurityMetadataSource();
-        herodotusSecurityMetadataSource.setSecurityMetadataLocalStorage(securityMetadataLocalStorage());
+        herodotusSecurityMetadataSource.setSecurityMetadataStorage(securityMetadataStorage());
         herodotusSecurityMetadataSource.setSecurityProperties(securityProperties);
         log.debug("[Eurynome] |- Bean [Security Metadata Source] Auto Configure.");
         return herodotusSecurityMetadataSource;

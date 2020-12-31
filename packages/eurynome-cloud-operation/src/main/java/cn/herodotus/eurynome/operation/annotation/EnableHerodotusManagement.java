@@ -24,7 +24,6 @@
 
 package cn.herodotus.eurynome.operation.annotation;
 
-import cn.herodotus.eurynome.kernel.annotaion.EnableHerodotusKernel;
 import cn.herodotus.eurynome.operation.configuration.OperationConfiguration;
 import org.springframework.context.annotation.Import;
 

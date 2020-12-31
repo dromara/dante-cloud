@@ -30,7 +30,6 @@ public class HerodotusSentinelFeign {
         return new HerodotusSentinelFeign.Builder();
     }
 
-    @SuppressWarnings("unchecked")
     public static final class Builder extends Feign.Builder
             implements ApplicationContextAware {
 
@@ -55,7 +54,6 @@ public class HerodotusSentinelFeign {
         @Override
         public Feign build() {
             super.invocationHandlerFactory(new InvocationHandlerFactory() {
-                @SuppressWarnings("rawtypes")
                 @Override
                 public InvocationHandler create(Target target,
                                                 Map<Method, MethodHandler> dispatch) {
@@ -91,11 +89,11 @@ public class HerodotusSentinelFeign {
                         return new SentinelInvocationHandler(target, dispatch,
                                 fallbackFactoryInstance);
                     }
+                    // 默认的 fallbackFactory
                     HerodotusFallbackFactory herodotusFallbackFactory = new HerodotusFallbackFactory(target);
                     return new SentinelInvocationHandler(target, dispatch, herodotusFallbackFactory);
                 }
 
-                @SuppressWarnings("rawtypes")
                 private Object getFromContext(String name, String type,
                                               Class fallbackType, Class targetType) {
                     Object fallbackInstance = feignContext.getInstance(name,

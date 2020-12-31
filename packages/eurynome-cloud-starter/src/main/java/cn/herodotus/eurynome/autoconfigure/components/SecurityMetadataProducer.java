@@ -26,7 +26,7 @@ package cn.herodotus.eurynome.autoconfigure.components;
 
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
 import cn.herodotus.eurynome.security.definition.RequestMapping;
-import cn.herodotus.eurynome.security.authentication.access.SecurityMetadataLocalStorage;
+import cn.herodotus.eurynome.security.strategy.SecurityMetadataStorage;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -44,12 +44,12 @@ import java.util.List;
  */
 public class SecurityMetadataProducer implements InitializingBean {
 
-    private SecurityMetadataLocalStorage securityMetadataLocalStorage;
+    private SecurityMetadataStorage securityMetadataStorage;
 
     private KafkaProducer kafkaProducer;
 
-    public void setSecurityMetadataLocalStorage(SecurityMetadataLocalStorage securityMetadataLocalStorage) {
-        this.securityMetadataLocalStorage = securityMetadataLocalStorage;
+    public void setSecurityMetadataStorage(SecurityMetadataStorage securityMetadataStorage) {
+        this.securityMetadataStorage = securityMetadataStorage;
     }
 
     public void setKafkaProducer(KafkaProducer kafkaProducer) {
@@ -58,7 +58,7 @@ public class SecurityMetadataProducer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        List<RequestMapping> requestMappings = securityMetadataLocalStorage.findAll();
+        List<RequestMapping> requestMappings = securityMetadataStorage.findAll();
         if (CollectionUtils.isNotEmpty(requestMappings)) {
             String message = JSON.toJSONString(requestMappings);
             kafkaProducer.sendMessage("security.metadata", message);

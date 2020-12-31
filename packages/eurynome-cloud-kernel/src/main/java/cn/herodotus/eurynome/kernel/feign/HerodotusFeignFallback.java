@@ -7,12 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
+import org.springframework.lang.Nullable;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- * <p> Description : 自定义通用的Feign Fallback处理工厂 </p>
+ * <p> Description : 自定义通用的Feign Fallback处理器 </p>
  * <p>
  * {@see: https://blog.csdn.net/ttzommed/article/details/90669320}
  *
@@ -27,6 +28,7 @@ public class HerodotusFeignFallback<T> implements MethodInterceptor {
     private final String targetName;
     private final Throwable cause;
 
+    @Nullable
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         String errorMessage = cause.getMessage();

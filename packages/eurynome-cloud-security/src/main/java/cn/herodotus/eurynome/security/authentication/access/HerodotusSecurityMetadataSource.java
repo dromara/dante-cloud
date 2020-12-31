@@ -27,6 +27,7 @@ package cn.herodotus.eurynome.security.authentication.access;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.security.definition.RequestMapping;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.strategy.SecurityMetadataStorage;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -55,11 +56,11 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
     private final Map<String, Map<String, Collection<ConfigAttribute>>> indexes = new LinkedHashMap<>();
     private final Set<ConfigAttribute> allConfigAttributes = new LinkedHashSet<>();
 
-    private SecurityMetadataLocalStorage securityMetadataLocalStorage;
+    private SecurityMetadataStorage securityMetadataStorage;
     private SecurityProperties securityProperties;
 
-    public void setSecurityMetadataLocalStorage(SecurityMetadataLocalStorage securityMetadataLocalStorage) {
-        this.securityMetadataLocalStorage = securityMetadataLocalStorage;
+    public void setSecurityMetadataStorage(SecurityMetadataStorage securityMetadataStorage) {
+        this.securityMetadataStorage = securityMetadataStorage;
     }
 
     public void setSecurityProperties(SecurityProperties securityProperties) {
@@ -194,7 +195,7 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
 
     private void initRequestMappings() {
         if (MapUtils.isEmpty(matchers) && MapUtils.isEmpty(indexes)) {
-            List<RequestMapping> requestMappings = securityMetadataLocalStorage.findAll();
+            List<RequestMapping> requestMappings = securityMetadataStorage.findAll();
             if (CollectionUtils.isNotEmpty(requestMappings)) {
                 requestMappings.forEach(this::addRequestMapping);
             }

@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.security.annotation;
 
-import cn.herodotus.eurynome.security.configuration.FeignConfiguration;
 import cn.herodotus.eurynome.security.configuration.SecurityConfiguration;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -20,6 +19,6 @@ import java.lang.annotation.*;
 @EnableConfigurationProperties({
         SecurityProperties.class
 })
-@Import({SecurityConfiguration.class, FeignConfiguration.class})
+@Import({SecurityConfiguration.class})
 public @interface EnableHerodotusSecurity {
 }

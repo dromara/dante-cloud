@@ -16,38 +16,34 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-kernel
- * File Name: EnableHerodotusKernel.java
+ * File Name: EnableLogCenter.java
  * Author: gengwei.zheng
  * Date: 2020/6/9 下午1:06
- * LastModified: 2020/6/9 下午1:06
+ * LastModified: 2020/5/29 下午8:25
  */
 
 package cn.herodotus.eurynome.kernel.annotaion;
 
-import cn.herodotus.eurynome.kernel.properties.ManagementProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import cn.herodotus.eurynome.kernel.configuration.FeignConfiguration;
+import cn.herodotus.eurynome.kernel.configuration.LogstashConfiguration;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: EnableHerodotusKernel </p>
+ * <p>File: EnableHerodotusFeign </p>
  *
- * <p>Description: 开启Herodotus核心注解 </p>
- *
+ * <p>Description: 开启自定义Feign </p>
  * 目前主要功能：
- * 1.开启ManagementProperties
- * 2.启用日志收集
+ * 1.启用日志收集
  *
  * @author : gengwei.zheng
- * @date : 2020/6/9 13:06
+ * @date : 2020/5/23 10:04
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableConfigurationProperties({
-        ManagementProperties.class
-})
-@EnableLogCenter
-public @interface EnableHerodotusKernel {
+@Import(FeignConfiguration.class)
+public @interface EnableHerodotusFeign {
 }

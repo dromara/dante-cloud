@@ -4,8 +4,8 @@
 
 组件 | 版本 | 说明
 ---|---|---
-Spring Boot | 2.3.4.RELEASE | 功能版本要与其它组件匹配
-Spring Cloud | Hoxton.SR8 | 
+Spring Boot | 2.3.7.RELEASE | 功能版本要与其它组件匹配
+Spring Cloud | Hoxton.SR9 | 
 Spring Cloud Alibaba | 2.2.3.RELEASE 
 Spring Boot Admin | 2.3.0 | 
 Nacos | 1.3.2 |

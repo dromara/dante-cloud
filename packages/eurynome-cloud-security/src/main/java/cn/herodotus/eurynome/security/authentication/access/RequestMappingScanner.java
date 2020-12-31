@@ -30,6 +30,7 @@ import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.strategy.SecurityMetadataStorage;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -70,7 +71,7 @@ public class RequestMappingScanner implements ApplicationContextAware {
 
     private final RestProperties restProperties;
     private final ApplicationProperties applicationProperties;
-    private final SecurityMetadataLocalStorage securityMetadataLocalStorage;
+    private final SecurityMetadataStorage securityMetadataStorage;
 
     private ApplicationContext applicationContext;
 
@@ -79,10 +80,10 @@ public class RequestMappingScanner implements ApplicationContextAware {
      */
     private final Class<? extends Annotation> scanAnnotationClass;
 
-    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataLocalStorage securityMetadataLocalStorage, Class<? extends Annotation> scanAnnotationClass) {
+    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage, Class<? extends Annotation> scanAnnotationClass) {
         this.restProperties = restProperties;
         this.applicationProperties = applicationProperties;
-        this.securityMetadataLocalStorage = securityMetadataLocalStorage;
+        this.securityMetadataStorage = securityMetadataStorage;
         this.scanAnnotationClass = scanAnnotationClass;
     }
 
@@ -130,7 +131,7 @@ public class RequestMappingScanner implements ApplicationContextAware {
         }
 
         if (CollectionUtils.isNotEmpty(resources)) {
-            securityMetadataLocalStorage.save(resources);
+            securityMetadataStorage.save(resources);
         }
 
         log.info("[Eurynome] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);

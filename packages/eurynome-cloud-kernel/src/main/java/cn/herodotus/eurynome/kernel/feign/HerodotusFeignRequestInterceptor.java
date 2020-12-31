@@ -15,21 +15,21 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
+ * Module Name: eurynome-cloud-kernel
  * File Name: HerodotusFeignRequestInterceptor.java
  * Author: gengwei.zheng
- * Date: 2020/6/8 下午12:01
- * LastModified: 2020/6/8 下午12:01
+ * Date: 2020/12/30 下午3:27
+ * LastModified: 2020/6/19 下午3:45
  */
 
-package cn.herodotus.eurynome.security.invoke;
+package cn.herodotus.eurynome.kernel.feign;
 
 import cn.hutool.extra.servlet.ServletUtil;
+import com.google.common.net.HttpHeaders;
+import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.slf4j.MDC;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -46,15 +46,7 @@ import java.util.Map;
  * @date : 2020/6/8 12:01
  */
 @Slf4j
-public class HerodotusFeignRequestInterceptor extends OAuth2FeignRequestInterceptor {
-
-    public HerodotusFeignRequestInterceptor(OAuth2ClientContext oAuth2ClientContext, OAuth2ProtectedResourceDetails resource) {
-        super(oAuth2ClientContext, resource);
-    }
-
-    public HerodotusFeignRequestInterceptor(OAuth2ClientContext oAuth2ClientContext, OAuth2ProtectedResourceDetails resource, String tokenType, String header) {
-        super(oAuth2ClientContext, resource, tokenType, header);
-    }
+public class HerodotusFeignRequestInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
@@ -68,11 +60,16 @@ public class HerodotusFeignRequestInterceptor extends OAuth2FeignRequestIntercep
             }
 
             log.debug("[Eurynome] |- FeignRequestInterceptor copy all need transfer header!");
+
+            // 微服务之间传递的唯一标识,区分大小写所以通过httpServletRequest查询
+            if (headers.containsKey(HttpHeaders.X_REQUEST_ID)) {
+                String traceId = headers.get(HttpHeaders.X_REQUEST_ID);
+                MDC.put("traceId", traceId);
+                log.info("[Eurynome] |- Feign Request Interceptor Trace: {}", traceId);
+            }
         }
 
         log.trace("[Eurynome] |- Feign Request Interceptor [{}]", requestTemplate.toString());
-
-        super.apply(requestTemplate);
     }
 
     private HttpServletRequest getHttpServletRequest() {
