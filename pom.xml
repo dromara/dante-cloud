@@ -4,19 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>eurynome-cloud</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.0</version>
-
-    <name>eurynome-cloud</name>
-    <description>Top Eurynome project pom.xml file</description>
-
     <parent>
         <groupId>cn.herodotus.eurynome</groupId>
         <artifactId>dependencies</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.0</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
+
+    <artifactId>eurynome-cloud</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>eurynome-cloud</name>
+    <description>Top Eurynome project pom.xml file</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -98,6 +98,13 @@
         </dependencies>
     </dependencyManagement>
 
+    <modules>
+        <module>dependencies</module>
+        <module>packages</module>
+        <module>services</module>
+        <module>platform</module>
+    </modules>
+
     <!-- 环境 -->
     <profiles>
         <!-- 开发 -->
@@ -177,12 +184,4 @@
             </properties>
         </profile>
     </profiles>
-
-    <modules>
-        <module>dependencies</module>
-        <module>packages</module>
-        <module>services</module>
-        <module>platform</module>
-    </modules>
-
 </project>
