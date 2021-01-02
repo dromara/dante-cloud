@@ -4,32 +4,32 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>cn.herodotus.eurynome</groupId>
+        <artifactId>dependencies</artifactId>
+        <version>1.1.1</version>
+        <relativePath>dependencies/pom.xml</relativePath>
+    </parent>
+
     <artifactId>eurynome-cloud</artifactId>
+    <version>1.1.1</version>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
 
     <name>eurynome-cloud</name>
     <description>Top Eurynome project pom.xml file</description>
 
-    <parent>
-        <groupId>cn.herodotus.eurynome</groupId>
-        <artifactId>eurynome-cloud-dependencies</artifactId>
-        <version>1.0.0</version>
-        <relativePath>eurynome-cloud-dependencies/pom.xml</relativePath>
-    </parent>
-
     <properties>
+        <java.version>1.8</java.version>
+        <resource.delimiter>@</resource.delimiter>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
     </properties>
 
     <!-- 所有的子项目默认依赖 -->
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+
     </dependencies>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
@@ -37,21 +37,79 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-component-common</artifactId>
+                <artifactId>eurynome-cloud-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-kernel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-crud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-operation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-message</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-upms-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-upms-logic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <modules>
+        <module>dependencies</module>
+        <module>packages</module>
+        <module>services</module>
+        <module>platform</module>
+    </modules>
 
     <!-- 环境 -->
     <profiles>
         <!-- 开发 -->
         <profile>
             <id>development</id>
-            <activation>
-                <!--默认激活配置-->
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <!--当前环境-->
                 <profile.name>development</profile.name>
@@ -62,12 +120,18 @@
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
-                <sentinel.server-addr>127.0.0.1:8849</sentinel.server-addr>
+                <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
+                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
+                <docker.build.directory>../../documents/docker/context/target</docker.build.directory>
             </properties>
         </profile>
         <!-- Docker -->
         <profile>
             <id>docker</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <!--当前环境-->
                 <profile.name>docker</profile.name>
@@ -78,7 +142,9 @@
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
-                <sentinel.server-addr>192.168.101.10:8849</sentinel.server-addr>
+                <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
+                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
+                <docker.build.directory>../../documents/docker/context/target</docker.build.directory>
             </properties>
         </profile>
         <!-- 测试 -->
@@ -94,7 +160,9 @@
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>10.180.80.80:8848</discovery.server-addr>
-                <sentinel.server-addr>127.0.0.1:8849</sentinel.server-addr>
+                <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
+                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
+                <docker.build.directory>../../documents/docker/context/target</docker.build.directory>
             </properties>
         </profile>
         <!-- 生产 -->
@@ -110,17 +178,10 @@
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>172.17.207.82:8848</discovery.server-addr>
-                <sentinel.server-addr>127.0.0.1:8849</sentinel.server-addr>
+                <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
+                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
+                <docker.build.directory>../../documents/docker/context/target</docker.build.directory>
             </properties>
         </profile>
     </profiles>
-
-    <modules>
-        <module>eurynome-cloud-dependencies</module>
-        <module>eurynome-cloud-components</module>
-        <module>eurynome-cloud-platform</module>
-        <module>eurynome-cloud-services</module>
-    </modules>
-
-
 </project>

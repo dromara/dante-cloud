@@ -1,0 +1,52 @@
+version: "3"
+services:
+  management:
+    image: eurynome-cloud-platform-management:latest
+    build:
+      context: ../../context
+      dockerfile: ./development/Config-Management-Dockerfile
+    container_name: management
+    ports:
+      - 8845:8845
+  upms:
+    image: eurynome-cloud-upms-rest:latest
+    build:
+      context: ../../context
+      dockerfile: ./development/Config-Upms-Dockerfile
+    container_name: upms
+    ports:
+      - 7070:7070
+    depends_on:
+      - management
+
+  gateway:
+    image: eurynome-cloud-platform-gateway:latest
+    build:
+      context: ../../context
+      dockerfile: ./development/Config-Gateway-Dockerfile
+    container_name: gateway
+    ports:
+      - 8847:8847
+    depends_on:
+      - management
+
+  uaa:
+    image: eurynome-cloud-platform-uaa:latest
+    build:
+      context: ../../context
+      dockerfile: ./development/Config-Uaa-Dockerfile
+    container_name: uaa
+    ports:
+      - 8846:8846
+    depends_on:
+      - upms
+      - management
+
+  bpmn:
+    image: eurynome-cloud-bpmn-rest:latest
+    build:
+      context: ../../context
+      dockerfile: ./development/Config-Bpmn-Dockerfile
+    container_name: bpmn
+    ports:
+      - 7071:7071
