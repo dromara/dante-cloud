@@ -58,8 +58,8 @@ public class SysRoleController extends BaseRestController<SysRole, String> {
 
     @ApiOperation(value = "给角色授权", notes = "为角色赋予权限")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleId", required = true, value = "角色ID"),
-            @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组")
+            @ApiImplicitParam(name = "roleId", required = true, value = "角色ID", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+            @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
     })
     @PutMapping
     public Result<SysRole> authorize(@RequestParam(name = "roleId") String roleId, @RequestParam(name = "authorities[]") String[] authorities) {

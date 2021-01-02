@@ -48,8 +48,8 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
 
     @ApiOperation(value = "获取ClientDetails分页数据", notes = "通过pageNumber和pageSize获取分页数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目")
+            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数", dataType = "Integer", dataTypeClass = Integer.class, paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目", dataType = "Integer", dataTypeClass = Integer.class, paramType = "query")
     })
     @GetMapping
     @Override
@@ -68,7 +68,7 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
 
     @ApiOperation(value = "更新ClientDetails", notes = "接收JSON数据，转换为OauthClientDetails实体，进行更新")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "oauthClientDetails", required = true, value = "可转换为OauthClientDetails实体的json数据", paramType = "JSON")
+            @ApiImplicitParam(name = "oauthClientDetails", required = true, value = "可转换为OauthClientDetails实体的json数据", dataType = "HerodotusClientDetails", dataTypeClass = HerodotusClientDetails.class, paramType = "body")
     })
     @PostMapping
     public Result<OauthClientDetails> saveOrUpdate(@RequestBody HerodotusClientDetails domain) {
@@ -78,7 +78,7 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
 
     @ApiOperation(value = "删除ClientDetails", notes = "根据clientId删除ClientDetails，以及相关联的关系数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", paramType = "JSON")
+            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", dataType = "String", dataTypeClass = String.class, paramType = "body")
     })
     @DeleteMapping
     @Override

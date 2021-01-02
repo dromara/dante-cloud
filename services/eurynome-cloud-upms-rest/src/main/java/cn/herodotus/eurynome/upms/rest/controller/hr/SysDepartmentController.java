@@ -40,7 +40,7 @@ public class SysDepartmentController extends BaseRestController<SysDepartment, S
 
     @ApiOperation(value = "获取部门列表", notes = "根据单位ID获取部门信息列表", consumes = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "organizationId", required = true, value = "单位ID"),
+            @ApiImplicitParam(name = "organizationId", required = true, value = "单位ID", dataType = "String", dataTypeClass = String.class, paramType = "query"),
     })
     @GetMapping("/list")
     public Result<List<SysDepartment>> findAllByOrganizationId(@RequestParam("organizationId") String organizationId) {
@@ -50,7 +50,7 @@ public class SysDepartmentController extends BaseRestController<SysDepartment, S
 
     @ApiOperation(value = "获取部门树", notes = "根据单位ID获取部门数据，转换为树形结构", consumes = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "organizationId", required = true, value = "单位ID"),
+            @ApiImplicitParam(name = "organizationId", required = true, value = "单位ID", dataType = "String", dataTypeClass = String.class, paramType = "query"),
     })
     @GetMapping("/tree")
     public Result<List<TreeNode>> findTree(@RequestParam("organizationId") String organizationId) {

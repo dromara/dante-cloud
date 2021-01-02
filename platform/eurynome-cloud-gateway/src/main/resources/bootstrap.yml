@@ -52,4 +52,4 @@ herodotus:
       - "/oauth/token"
       - "/oauth/check_token"
       - "/oauth/authorize"
-      - "/v2/api-docs/**"
+      - "/v3/api-docs/**"

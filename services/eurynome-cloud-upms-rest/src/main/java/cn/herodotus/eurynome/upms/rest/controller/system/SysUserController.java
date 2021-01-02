@@ -64,8 +64,8 @@ public class SysUserController extends BaseRestController<SysUser, String> {
 
     @ApiOperation(value = "给用户分配角色", notes = "给用户分配角色", produces = "application/x-www-form-urlencoded", consumes = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", required = true, value = "userId"),
-            @ApiImplicitParam(name = "roles[]", required = true, value = "角色对象组成的数组")
+            @ApiImplicitParam(name = "userId", required = true, value = "userId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+            @ApiImplicitParam(name = "roles[]", required = true, value = "角色对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
     })
     @PutMapping
     public Result<SysUser> assign(@RequestParam(name = "userId") String userId, @RequestParam(name = "roles[]") String[] roles) {

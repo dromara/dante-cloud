@@ -49,7 +49,7 @@
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
+            <artifactId>springfox-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>

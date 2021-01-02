@@ -40,8 +40,8 @@ public class OauthScopesController extends BaseRestController<OauthScopes, Strin
 
     @ApiOperation(value = "给OauthScopes授权", notes = "为OauthScopes分配接口权限")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "scopeId", required = true, value = "ScopeID"),
-            @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组")
+            @ApiImplicitParam(name = "scopeId", required = true, value = "ScopeID", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+            @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
     })
     @PutMapping
     public Result<OauthScopes> authorize(@RequestParam(name = "scopeId") String scopeId, @RequestParam(name = "authorities[]") String[] authorities) {

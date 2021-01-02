@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.SecurityScheme;
@@ -21,13 +22,15 @@ import javax.annotation.PostConstruct;
 
 /**
  * <p> Description : SwaggerConfiguration </p>
+ * <p>
+ * 原来的@EnableSwagger2去掉
  *
  * @author : gengwei.zheng
  * @date : 2020/3/31 11:54
  */
 @Slf4j
+@EnableOpenApi
 @Configuration(proxyBeanMethods = false)
-@EnableSwagger2
 public class SwaggerConfiguration {
 
     @Autowired
@@ -38,21 +41,23 @@ public class SwaggerConfiguration {
         log.debug("[Eurynome] |- Bean [Swagger] Auto Configure.");
     }
 
+    @Bean
+    public Docket createRestApi() {
+        // 注意此处改动，需要将SWAGGER_2改成OAS_30
+        return new Docket(DocumentationType.OAS_30)
+                .apiInfo(apiInfo())
+                .select()
+                // 扫描所有有注解的api，用这种方式更灵活
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(swaggerProperties.getTitle())
                 .description(swaggerProperties.getDescription())
                 .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .paths(PathSelectors.any())
                 .build();
     }
 

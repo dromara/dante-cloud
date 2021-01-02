@@ -37,9 +37,20 @@ public class OauthMicroservicesController extends BaseRestController<OauthMicros
         return this.oauthMicroservicesService;
     }
 
+    /**
+     * paramType：表示参数放在哪个地方
+     * header-->请求参数的获取：@RequestHeader(代码中接收注解)
+     * query-->请求参数的获取：@RequestParam(代码中接收注解)
+     * path（用于restful接口）-->请求参数的获取：@PathVariable(代码中接收注解)
+     * body-->请求参数的获取：@RequestBody(代码中接收注解)
+     * form（不常用）
+     *
+     * @param serviceId
+     * @return
+     */
     @ApiOperation(value = "发布或更新微服务配置", notes = "为接入平台的微服务创建OauthClientDetails相关的配置")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serviceId", required = true, value = "serviceId", paramType = "JSON")
+            @ApiImplicitParam(name = "serviceId", required = true, value = "serviceId", dataType = "String", dataTypeClass = String.class, paramType = "query")
     })
     @PostMapping("/config")
     public Result<String> publishConfig(@RequestParam(name = "serviceId") String serviceId) {
@@ -54,7 +65,7 @@ public class OauthMicroservicesController extends BaseRestController<OauthMicros
 
     @ApiOperation(value = "删除微服务配置", notes = "根据serviceId删除与该微服务对应的Oauth2的Nacos配置。")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serviceId", required = true, value = "serviceId", paramType = "JSON")
+            @ApiImplicitParam(name = "serviceId", required = true, value = "serviceId", dataType = "String", dataTypeClass = String.class, paramType = "body")
     })
     @DeleteMapping("/config")
     public Result<String> deleteConfig(@RequestBody String serviceId) {
@@ -69,8 +80,8 @@ public class OauthMicroservicesController extends BaseRestController<OauthMicros
 
     @ApiOperation(value = "给服务分配Scope", notes = "给服务分配Scope")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "serviceId", required = true, value = "appKey"),
-            @ApiImplicitParam(name = "scopes[]", required = true, value = "Scope对象组成的数组")
+            @ApiImplicitParam(name = "serviceId", required = true, value = "appKey", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+            @ApiImplicitParam(name = "scopes[]", required = true, value = "Scope对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
     })
     @PutMapping
     public Result<OauthMicroservices> assign(@RequestParam(name = "serviceId") String serviceId, @RequestParam(name = "scopes[]") String[] scopes) {

@@ -43,7 +43,9 @@ public class SysEmployeeController extends BaseRestController<SysEmployee, Strin
 
     @ApiOperation(value = "获取部门人员", notes = "根据部门ID获取部门下的所有人员信息", consumes = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "departmentId", required = true, value = "单位ID"),
+            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页码", dataType = "Integer", dataTypeClass = Integer.class, paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数量", dataType = "Integer", dataTypeClass = Integer.class, paramType = "query"),
+            @ApiImplicitParam(name = "departmentId", required = true, value = "单位ID", dataType = "String", dataTypeClass = String.class, paramType = "query"),
     })
     @GetMapping("/list")
     public Result<Map<String, Object>> findByPage(@RequestParam("pageNumber") Integer pageNumber,

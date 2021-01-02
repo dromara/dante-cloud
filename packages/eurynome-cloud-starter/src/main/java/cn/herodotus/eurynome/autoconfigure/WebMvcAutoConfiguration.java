@@ -31,6 +31,10 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
             web.ignoring().antMatchers(
                     "/error",
                     "/static/**",
+                    "/swagger-ui/*",
+                    "/swagger-resources/**",
+                    "/v3/api-docs",
+                    "/webjars/**",
                     "/components/**",
                     "/features/**",
                     "/favicon.ico");
@@ -46,8 +50,6 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("swagger-ui.html", "doc.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }

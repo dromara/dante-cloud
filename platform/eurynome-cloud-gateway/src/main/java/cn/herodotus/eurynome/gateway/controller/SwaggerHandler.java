@@ -17,13 +17,13 @@ import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/swagger-resources")
 public class SwaggerHandler {
 
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
     @Autowired(required = false)
     private UiConfiguration uiConfiguration;
+
     private final SwaggerProvider swaggerProvider;
 
     @Autowired
@@ -31,19 +31,19 @@ public class SwaggerHandler {
         this.swaggerProvider = swaggerProvider;
     }
 
-    @GetMapping("/configuration/security")
+    @GetMapping("/swagger-resources/configuration/security")
     public Mono<ResponseEntity<SecurityConfiguration>> securityConfiguration() {
         return Mono.just(new ResponseEntity<>(
                 Optional.ofNullable(securityConfiguration).orElse(SecurityConfigurationBuilder.builder().build()), HttpStatus.OK));
     }
 
-    @GetMapping("/configuration/ui")
+    @GetMapping("/swagger-resources/configuration/ui")
     public Mono<ResponseEntity<UiConfiguration>> uiConfiguration() {
         return Mono.just(new ResponseEntity<>(
                 Optional.ofNullable(uiConfiguration).orElse(UiConfigurationBuilder.builder().build()), HttpStatus.OK));
     }
 
-    @GetMapping("")
+    @GetMapping("/swagger-resources")
     public Mono<ResponseEntity> swaggerResources() {
         return Mono.just((new ResponseEntity<>(swaggerProvider.get(), HttpStatus.OK)));
     }

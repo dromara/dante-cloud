@@ -42,8 +42,8 @@ public class OauthApplicationsController extends BaseRestController<OauthApplica
 
     @ApiOperation(value = "给应用分配Scope", notes = "给应用分配Scope")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "appKey", required = true, value = "appKey"),
-            @ApiImplicitParam(name = "scopes[]", required = true, value = "Scope对象组成的数组")
+            @ApiImplicitParam(name = "appKey", required = true, value = "appKey", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+            @ApiImplicitParam(name = "scopes[]", required = true, value = "Scope对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
     })
     @PutMapping
     public Result<OauthApplications> assign(@RequestParam(name = "appKey") String scopeId, @RequestParam(name = "scopes[]") String[] scopes) {
