@@ -22,7 +22,7 @@
  * LastModified: 2019/11/25 上午10:55
  */
 
-package cn.herodotus.eurynome.upms.rest.controller.system;
+package cn.herodotus.eurynome.upms.logic.controller.system;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.crud.service.BaseService;

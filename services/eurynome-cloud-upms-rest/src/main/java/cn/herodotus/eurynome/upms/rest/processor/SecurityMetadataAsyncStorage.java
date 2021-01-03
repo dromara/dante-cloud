@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.logic.processor;
+package cn.herodotus.eurynome.upms.rest.processor;
 
 import cn.herodotus.eurynome.security.definition.RequestMapping;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;

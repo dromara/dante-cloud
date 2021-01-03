@@ -4,7 +4,7 @@ import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.crud.controller.BaseRestController;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
-import cn.herodotus.eurynome.upms.logic.service.oauth.OauthScopesService;
+import cn.herodotus.eurynome.upms.rest.service.oauth.OauthScopesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

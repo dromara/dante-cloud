@@ -22,7 +22,7 @@
  * LastModified: 2019/11/21 下午12:38
  */
 
-package cn.herodotus.eurynome.upms.logic.processor;
+package cn.herodotus.eurynome.upms.rest.processor;
 
 import cn.herodotus.eurynome.security.definition.RequestMapping;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;

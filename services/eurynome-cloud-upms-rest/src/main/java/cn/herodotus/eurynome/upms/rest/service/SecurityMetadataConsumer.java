@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.upms.rest.service;
 
-import cn.herodotus.eurynome.upms.logic.processor.SecurityMetadataAsyncStorage;
+import cn.herodotus.eurynome.upms.rest.processor.SecurityMetadataAsyncStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,7 +13,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>

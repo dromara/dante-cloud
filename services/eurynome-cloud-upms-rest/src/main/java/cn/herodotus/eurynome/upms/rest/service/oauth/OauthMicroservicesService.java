@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.logic.service.oauth;
+package cn.herodotus.eurynome.upms.rest.service.oauth;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.ApplicationType;
@@ -10,13 +10,12 @@ import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
-import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthMicroservicesRepository;
+import cn.herodotus.eurynome.upms.rest.repository.oauth.OauthMicroservicesRepository;
 import cn.hutool.core.util.IdUtil;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * <p> Description : OauthMicroservicesService </p>

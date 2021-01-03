@@ -6,7 +6,7 @@ import cn.herodotus.eurynome.crud.controller.BaseController;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
-import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
+import cn.herodotus.eurynome.upms.rest.service.oauth.OauthClientDetailsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

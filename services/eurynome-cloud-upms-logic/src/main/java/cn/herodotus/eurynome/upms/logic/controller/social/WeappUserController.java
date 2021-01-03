@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.rest.controller.social;
+package cn.herodotus.eurynome.upms.logic.controller.social;
 
 import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.crud.controller.BaseRestController;

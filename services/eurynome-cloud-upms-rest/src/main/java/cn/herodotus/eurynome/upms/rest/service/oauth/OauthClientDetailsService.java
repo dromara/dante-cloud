@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.logic.service.oauth;
+package cn.herodotus.eurynome.upms.rest.service.oauth;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.crud.service.BaseService;

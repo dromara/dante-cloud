@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.upms.rest.controller.development;
+package cn.herodotus.eurynome.upms.logic.controller.development;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.crud.service.BaseService;
