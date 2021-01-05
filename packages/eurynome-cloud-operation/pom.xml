@@ -31,11 +31,11 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>1.1.2</version>
+        <version>1.1.4</version>
     </parent>
 
     <artifactId>eurynome-cloud-operation</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.4</version>
     <packaging>jar</packaging>
 
     <name>eurynome-cloud-operation</name>

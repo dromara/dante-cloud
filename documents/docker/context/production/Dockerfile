@@ -8,6 +8,14 @@ FROM openjdk:8-jdk-alpine
 # 作者
 MAINTAINER genwei.zheng <pointer_v@qq.com>
 
+# 外部传递参数
+ARG VERSION
+ARG SERVICE_NAME
+ARG SERVICE_PORT
+ENV VERSION ${VERSION}
+ENV SERVICE_NAME ${SERVICE_NAME}
+ENV SERVICE_PORT ${SERVICE_PORT}
+
 # 系统编码
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 # 运行参数
@@ -18,11 +26,11 @@ ENV SW_AGENT_SERVICE_NAME="default" SW_COLLECTOR_BACKEND_SERVICE="127.0.0.1:1180
 VOLUME /tmp
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
-ADD ./target/eurynome-cloud-gateway-1.0.0.jar app.jar
+ADD ./target/${SERVICE_NAME}-${VERSION}.jar app.jar
 ADD skywalking-agent.jar skywalking-agent.jar
 
 # 声明运行时端口
-EXPOSE 8847
+EXPOSE ${SERVICE_PORT}
 
 # 启动容器时的进程
 ENTRYPOINT java -javaagent:/skywalking-agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar /app.jar

@@ -191,6 +191,12 @@ protected-mode no
 
 - 运行容器
 
+> 已经将Dockerfile以及docker-compose修改为参数运行。
+> 因此运行一下命令时，请确保.env 文件在执行命令的目录下。
+> 例如：如果在C:\Users\Administrator\Desktop执行命令，那么.env文件，就需要在C:\Users\gengwei.zheng\Desktop目录下
+
+
+
 ```docker
 docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/env.base.yml  up -d
 ```
