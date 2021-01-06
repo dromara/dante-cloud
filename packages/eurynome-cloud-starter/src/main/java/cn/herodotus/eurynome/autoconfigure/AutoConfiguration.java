@@ -1,8 +1,7 @@
 package cn.herodotus.eurynome.autoconfigure;
 
 import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
-import cn.herodotus.eurynome.kernel.annotaion.EnableHerodotusFeign;
-import cn.herodotus.eurynome.kernel.annotaion.EnableLogCenter;
+import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
 import cn.herodotus.eurynome.security.annotation.EnableHerodotusSecurity;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +19,7 @@ import javax.annotation.PostConstruct;
 @Configuration
 @EnableHerodotusCrud
 @EnableHerodotusSecurity
-@EnableLogCenter
-@EnableHerodotusFeign
+@EnableHerodotusKernel
 public class AutoConfiguration {
 
     @PostConstruct

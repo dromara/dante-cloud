@@ -22,7 +22,7 @@
  * LastModified: 2020/5/29 下午8:25
  */
 
-package cn.herodotus.eurynome.kernel.annotaion;
+package cn.herodotus.eurynome.kernel.annotation;
 
 import cn.herodotus.eurynome.kernel.configuration.LogstashConfiguration;
 import org.springframework.context.annotation.Import;

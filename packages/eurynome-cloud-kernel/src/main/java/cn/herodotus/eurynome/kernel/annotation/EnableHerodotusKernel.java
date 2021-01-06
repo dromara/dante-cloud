@@ -15,34 +15,32 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-upms-logic
- * File Name: EnableUpmsLogic.java
+ * Module Name: eurynome-cloud-kernel
+ * File Name: EnableLogCenter.java
  * Author: gengwei.zheng
- * Date: 2020/6/9 下午1:55
- * LastModified: 2020/6/9 下午1:55
+ * Date: 2020/6/9 下午1:06
+ * LastModified: 2020/5/29 下午8:25
  */
 
-package cn.herodotus.eurynome.upms.logic.annotation;
-
-import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
-import cn.herodotus.eurynome.upms.logic.configuration.UpmsLogicConfiguration;
-import org.springframework.context.annotation.Import;
+package cn.herodotus.eurynome.kernel.annotation;
 
 import java.lang.annotation.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: EnableUpmsLogic </p>
+ * <p>File: EnableHerodotusFeign </p>
  *
- * <p>Description: EnableUpmsLogic </p>
+ * <p>Description: 开启Kernel </p>
+ * 目前主要功能：
+ * 1.启用日志收集
  *
  * @author : gengwei.zheng
- * @date : 2020/6/9 13:55
+ * @date : 2020/5/23 10:04
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableUpmsInterface
-@Import(UpmsLogicConfiguration.class)
-public @interface EnableUpmsLogic {
+@EnableLogCenter
+@EnableHerodotusFeign
+public @interface EnableHerodotusKernel {
 }

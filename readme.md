@@ -1,7 +1,5 @@
 # Eurynome Cloud
 
-[TOC]
-
 - 基于 **Spring Cloud** 和 **Spring Cloud Alibaba** 的微服务架构
 - 
 
