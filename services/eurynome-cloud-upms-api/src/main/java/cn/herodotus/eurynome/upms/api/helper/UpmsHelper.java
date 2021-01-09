@@ -1,4 +1,5 @@
 package cn.herodotus.eurynome.upms.api.helper;
+import cn.herodotus.eurynome.common.enums.AuthorityType;
 
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
@@ -149,6 +150,27 @@ public class UpmsHelper {
         sysAuthority.setClassName(requestMapping.getClassName());
         sysAuthority.setMethodName(requestMapping.getMethodName());
         return sysAuthority;
+    }
+
+    public static List<RequestMapping> convertSysAuthoritiesToRequestMappings(Collection<SysAuthority> sysAuthorities) {
+        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
+            return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToRequestMapping).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    private static RequestMapping convertSysAuthorityToRequestMapping(SysAuthority sysAuthority) {
+        RequestMapping requestMapping = new RequestMapping();
+        requestMapping.setMetadataId(sysAuthority.getAuthorityId());
+        requestMapping.setMetadataCode(sysAuthority.getAuthorityCode());
+        requestMapping.setMetadataName(sysAuthority.getAuthorityName());
+        requestMapping.setRequestMethod(sysAuthority.getRequestMethod());
+        requestMapping.setServiceId(sysAuthority.getServiceId());
+        requestMapping.setClassName(sysAuthority.getClassName());
+        requestMapping.setMethodName(sysAuthority.getMethodName());
+        requestMapping.setUrl(sysAuthority.getUrl());
+        requestMapping.setParentId(sysAuthority.getParentId());
+        return requestMapping;
     }
 
     public static OauthClientDetails convertOauthApplicationsToOauthClientDetails(OauthApplications oauthApplications, OauthClientDetails oauthClientDetails) {

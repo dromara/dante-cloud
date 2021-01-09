@@ -1,7 +1,10 @@
 package cn.herodotus.eurynome.data.configuration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
 
@@ -31,6 +34,8 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
+@EnableJpaAuditing
+@AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
 public class DataConfiguration {
 
     @PostConstruct

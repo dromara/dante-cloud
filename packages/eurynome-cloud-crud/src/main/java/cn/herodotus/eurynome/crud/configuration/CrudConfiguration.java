@@ -39,7 +39,7 @@ import javax.annotation.PostConstruct;
  * @date : 2020/6/9 13:30
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class CrudConfiguration {
 
     @PostConstruct

@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -29,8 +30,9 @@ import javax.annotation.PostConstruct;
  * @date : 2020/3/31 11:54
  */
 @Slf4j
+@Configuration
+@EnableConfigurationProperties(SwaggerProperties.class)
 @EnableOpenApi
-@Configuration(proxyBeanMethods = false)
 public class SwaggerConfiguration {
 
     @Autowired

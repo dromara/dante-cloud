@@ -1,6 +1,8 @@
 package cn.herodotus.eurynome.rest.configuration;
 
+import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -30,7 +32,8 @@ import javax.annotation.PostConstruct;
  * @date : 2020/3/2 14:54
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(ApplicationProperties.class)
 public class RestConfiguration {
 
     @PostConstruct

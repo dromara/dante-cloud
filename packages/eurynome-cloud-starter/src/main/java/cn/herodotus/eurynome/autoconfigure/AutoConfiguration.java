@@ -24,7 +24,7 @@ public class AutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Components [Herodotus Starter] Auto Configure.");
+        log.info("[Eurynome] |- Starter [Herodotus Starter] Auto Configure.");
     }
 
     @Bean

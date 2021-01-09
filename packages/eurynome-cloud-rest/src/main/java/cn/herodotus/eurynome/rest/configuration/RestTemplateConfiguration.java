@@ -4,6 +4,7 @@ import cn.herodotus.eurynome.rest.properties.RestProperties;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 /**
@@ -23,10 +25,16 @@ import java.io.IOException;
  */
 @Slf4j
 @Configuration
+@EnableConfigurationProperties(RestProperties.class)
 public class RestTemplateConfiguration {
 
     @Autowired
     private RestProperties restProperties;
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Bean [Rest Template] Auto Configure.");
+    }
 
     /**
      * '@LoadBalanced'注解表示使用Ribbon实现客户端负载均衡
@@ -36,8 +44,6 @@ public class RestTemplateConfiguration {
     @Bean
     @LoadBalanced
     public RestTemplate getRestTemplate(ClientHttpRequestFactory clientHttpRequestFactory) {
-
-        log.debug("[Eurynome] |- Bean [Rest Template] Auto Configure.");
 
         RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
 
