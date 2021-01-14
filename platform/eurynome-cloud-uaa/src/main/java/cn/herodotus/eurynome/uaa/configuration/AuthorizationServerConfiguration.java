@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
+import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
@@ -193,11 +194,16 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     /**
      * 授权store。主要用于Authorization Code模式中，确认授权范围页面。
      *
+     * JdbcApprovalStore不是特别友好，针对Postgresql数据库，会出现大小写问题。
+     * @see: https://github.com/spring-projects/spring-security-oauth/issues/1419
+     *
      * @return ApprovalStore
      */
     @Bean
     public ApprovalStore createApprovalStore() {
-        return new JdbcApprovalStore(dataSource);
+        TokenApprovalStore tokenApprovalStore = new TokenApprovalStore();
+        tokenApprovalStore.setTokenStore(createTokenStore());
+        return tokenApprovalStore;
     }
 
     /**

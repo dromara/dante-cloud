@@ -177,7 +177,7 @@ public class GlobalExceptionHandler {
         result.error(ex);
         result.data(ex.getMessage());
 
-        log.error("[Eurynome] |- Global Exception Handler, Error is : {}", result);
+        log.debug("[Eurynome] |- Global Exception Handler, Error is : {}", result);
 
         return result;
     }
