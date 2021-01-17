@@ -18,7 +18,7 @@
         }
     </script>
 
-    <link th:href="@{/components/error/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/plugins/error/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,6 +42,7 @@
 
         <h2 th:text="${status} + '     错误!'"></h2>
         <hr/>
+        <h3 th:text="'错误代码： '+ ${code}"></h3>
         <h3 th:text="'错误信息： '+ ${message}"></h3>
         <h3 th:text="'请求地址： '+ ${path}"></h3>
         <h3 th:text="'请求时间： '+ ${timestamp}"></h3>

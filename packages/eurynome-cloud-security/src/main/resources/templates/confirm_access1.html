@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>开放平台-第三方授权</title>
     <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
-    <script type="text/javascript" th:src="@{/plugins/jquery/jquery-2.1.4.min.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
-
+    <script type="text/javascript" th:src="@{/plugins/jquery/jquery-2.1.4.min.js}"></script>
 </head>
 
 <body>
@@ -28,24 +26,20 @@
     </div>
 </nav>
 <div style="padding-top: 30px;width: 300px; color: #555; margin:0px auto;">
-    <form id='confirmationForm' name='confirmationForm' action="/oauth/authorize" method='post'>
-        <input type="hidden" name="user_oauth_approval" value="true"/>
-        <input type="hidden" name="authorize" value="Authorize"/>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <form id='confirmationForm' name='confirmationForm' th:action="@{/oauth/authorize}" method='post'>
+        <input name='user_oauth_approval' value='true' type='hidden'/>
         <p><a th:href="${app.website}" target="_blank" th:text="${app.appName}">应用</a> 将获得以下权限：</p>
         <ul class="list-group">
             <li class="list-group-item">
                 <span>
-                    <input type="hidden" th:name="'scope.' + ${scope}" value="true" th:each="scope:${scopes}"/>
-                    <input type="checkbox" disabled checked="checked" th:each="scope:${scopes}"/>
-                    <label th:text="'scope.' + ${scope}" th:each="scope:${scopes}"></label>
+                    <input type="hidden" th:name="${s.key}" value="true" th:each="s:${scopes}"/>
+                    <input type="checkbox" disabled checked="checked" th:each="s:${scopes}"/>
+                    <label th:text="${s.key}" th:each="s:${scopes}"></label>
                 </span>
             </li>
         </ul>
         <p class="help-block">授权后表明你已同意 服务协议</p>
-
         <button class="btn btn-success pull-right" type="submit" id="write-email-btn">授权</button>
-        </p>
     </form>
 </div>
 </body>

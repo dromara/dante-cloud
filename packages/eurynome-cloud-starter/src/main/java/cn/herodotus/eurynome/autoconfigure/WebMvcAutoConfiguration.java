@@ -30,13 +30,14 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
             log.debug("[Eurynome] |- Bean [Static Resource Web Security Configurer Adapter] Auto Configure.");
             web.ignoring().antMatchers(
                     "/error",
+                    "/oauth/error",
                     "/static/**",
                     "/swagger-ui/*",
                     "/swagger-resources/**",
                     "/v3/api-docs",
                     "/webjars/**",
-                    "/components/**",
                     "/features/**",
+                    "/plugins/**",
                     "/favicon.ico");
         }
     }

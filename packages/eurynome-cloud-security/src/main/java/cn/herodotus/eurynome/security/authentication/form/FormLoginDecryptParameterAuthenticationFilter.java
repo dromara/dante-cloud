@@ -72,23 +72,6 @@ public class FormLoginDecryptParameterAuthenticationFilter extends UsernamePassw
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 
-    /**
-     * 重写该方法，避免在日志Debug级别会输出错误信息的问题。
-     * @param request
-     * @param response
-     * @param failed
-     * @throws IOException
-     * @throws ServletException
-     */
-    @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        SecurityContextHolder.clearContext();
-
-        getRememberMeServices().loginFail(request, response);
-
-        getFailureHandler().onAuthenticationFailure(request, response, failed);
-    }
-
     private UsernamePasswordAuthenticationToken getAuthenticationToken(
             HttpServletRequest request) {
 

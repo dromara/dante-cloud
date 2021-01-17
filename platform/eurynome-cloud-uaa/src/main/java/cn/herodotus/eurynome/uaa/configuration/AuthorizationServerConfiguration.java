@@ -29,6 +29,10 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.security.Principal;
 import java.util.Arrays;
@@ -52,10 +56,11 @@ import java.util.Map;
  * 配置授权端点的URL
  * '@EnableAuthorizationServer' 提供/oauth/authorize,/oauth/token,/oauth/check_token,/oauth/confirm_access,/oauth/error
  * <p>
+ * [Default Security: /login] {@link org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter#doFilter(ServletRequest, ServletResponse, FilterChain)}
  * [/oauth/authorize] {@link org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint#authorize(Map, Map, SessionStatus, Principal)}
  * [/oauth/token] {@link org.springframework.security.oauth2.provider.endpoint.TokenEndpoint#getAccessToken(Principal, Map)}
  * [/oauth/check_token] {@link org.springframework.security.oauth2.provider.endpoint.CheckTokenEndpoint#checkToken(String)}
- * [/oauth/confirm_access]
+ * [/oauth/confirm_access]{@link org.springframework.security.oauth2.provider.endpoint.WhitelabelApprovalEndpoint#getAccessConfirmation(Map, HttpServletRequest)}
  * [/oauth/token_key]
  * [/oauth/error]
  * <p>
@@ -193,11 +198,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     /**
      * 授权store。主要用于Authorization Code模式中，确认授权范围页面。
-     *
+     * <p>
      * JdbcApprovalStore不是特别友好，针对Postgresql数据库，会出现大小写问题。
-     * @see: https://github.com/spring-projects/spring-security-oauth/issues/1419
      *
      * @return ApprovalStore
+     * @see: https://github.com/spring-projects/spring-security-oauth/issues/1419
      */
     @Bean
     public ApprovalStore createApprovalStore() {

@@ -13,17 +13,17 @@
     <script th:src="@{http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js}"></script>
     <![endif]-->
 
-    <link rel="stylesheet" type="text/css" th:href="@{/static/components/cloudadmin/dist/css/cloud-admin.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/cloudadmin/css/cloud-admin.css}" >
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" th:href="@{/static/plugins/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.css}">
     <!-- Font Awesome -->
-    <link th:href="@{/static/plugins/font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{/plugins/font-awesome/css/font-awesome.css}" rel="stylesheet">
     <!--&lt;!&ndash; DATE RANGE PICKER &ndash;&gt;-->
     <!--<link rel="stylesheet" type="text/css" th:href="@{/components/bootstrap-daterangepicker/daterangepicker.css}" />-->
     <!-- UNIFORM -->
-    <link rel="stylesheet" type="text/css" th:href="@{/static/components/cloudadmin/jquery-uniform/css/uniform.default.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/jquery-uniform/css/uniform.default.min.css}" />
     <!-- ANIMATE -->
-    <link rel="stylesheet" type="text/css" th:href="@{/static/plugins/animate-css/animate.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/animate-css/animate.min.css}" />
 
     <style>
         #vrifyCodeImg {
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-4 col-md-offset-4">
                             <div id="logo">
-                                <a href="index.html"><img th:src="@{../static/components/cloudadmin/dist/img/logo/logo.png}" height="40" alt="logo name" /></a>
+                                <a href="index.html"><img th:src="@{/plugins/cloudadmin/img/logo/logo.png}" height="40" alt="logo name" /></a>
                             </div>
                         </div>
                     </div>
@@ -229,26 +229,26 @@
 
         <!-- Placed at the end of the document so the pages load faster -->
         <!-- JQUERY -->
-        <script th:src="@{/static/components/cloudadmin/jquery/jquery-2.1.4.min.js}"></script>
+        <script th:src="@{/plugins/jquery/jquery-2.1.4.min.js}"></script>
         <!-- JQUERY UI-->
-        <script th:src="@{/static/components/cloudadmin/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js}"></script>
+        <script th:src="@{/plugins/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js}"></script>
         <!-- BOOTSTRAP -->
-        <script th:src="@{/static/plugins/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
         <!-- Bootstrap Notify Plugin Js -->
-        <script th:src="@{/static/plugins/bootstrap-notify/bootstrap-notify.js}"></script>
+        <script th:src="@{/plugins/bootstrap-notify/bootstrap-notify.js}"></script>
         <!-- BACKSTRETCH -->
-        <script type="text/javascript" th:src="@{/static/components/cloudadmin/jquery-backstretch/jquery.backstretch.min.js}"></script>
+        <script type="text/javascript" th:src="@{/plugins/jquery-backstretch/jquery.backstretch.min.js}"></script>
         <!-- UNIFORM -->
-        <script type="text/javascript" th:src="@{/static/components/cloudadmin/jquery-uniform/jquery.uniform.min.js}"></script>
-        <script type="text/javascript" th:src="@{/static/plugins/jquery-base64/jquery.base64.js}"></script>
+        <script type="text/javascript" th:src="@{/plugins/jquery-uniform/jquery.uniform.min.js}"></script>
+        <script type="text/javascript" th:src="@{/plugins/jquery-base64/jquery.base64.js}"></script>
         <!-- CUSTOM SCRIPT -->
-        <script th:src="@{/static/components/cloudadmin/dist/js/script.js}"></script>
+        <script th:src="@{/plugins/cloudadmin/js/script.js}"></script>
         <!-- CUSTOM SCRIPT -->
-        <script th:src="@{/static/features/common.js}"></script>
+        <script th:src="@{/features/common.js}"></script>
 
-        <script th:src="@{/static/plugins/crypto-js/rollups/aes.js}"></script>
-        <script th:src="@{/static/plugins/crypto-js/components/mode-ecb-min.js}"></script>
-        <script th:src="@{/static/features/security/system-security.js}"></script>
+        <script th:src="@{/plugins/crypto-js/rollups/aes.js}"></script>
+        <script th:src="@{/plugins/crypto-js/components/mode-ecb-min.js}"></script>
+        <script th:src="@{/features/security/system-security.js}"></script>
 
         <script type="text/javascript">
 
@@ -293,10 +293,10 @@
             jQuery(document).ready(function() {
 
                 $.backstretch([
-                    "[[${#request.getContextPath()}]]/components/cloudadmin/dist/img/login/1.jpg"
-                    , "[[${#request.getContextPath()}]]/components/cloudadmin/dist/img/login/2.jpg"
-                    , "[[${#request.getContextPath()}]]/components/cloudadmin/dist/img/login/3.jpg"
-                    , "[[${#request.getContextPath()}]]/components/cloudadmin/dist/img/login/4.jpg"
+                    "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/1.jpg"
+                    , "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/2.jpg"
+                    , "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/3.jpg"
+                    , "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/4.jpg"
                 ], {duration: 3000, fade: 750});
 
                 App.setPage("login_bg");  //Set current page
