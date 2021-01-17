@@ -6,11 +6,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>1.1.4</version>
+        <version>1.2.0</version>
     </parent>
 
     <artifactId>eurynome-cloud-bpmn-rest</artifactId>
-    <version>1.1.4</version>
+    <version>1.2.0</version>
 
     <name>eurynome-cloud-bpmn-rest</name>
     <description>基于Camunda工作流的服务</description>

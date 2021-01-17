@@ -2,7 +2,7 @@ herodotus:
   platform:
     gateway-server-addr: ${herodotus.environment.gateway-server-addr}
     uaa-server-addr: ${herodotus.platform.gateway-server-addr}/eurynome-cloud-uaa
-    upms-server-addr: ${herodotus.platform.gateway-server-addr}/eurynome-cloud-upms-rest
+    upms-server-addr: ${herodotus.platform.gateway-server-addr}/eurynome-cloud-upms-ability
     access-token-uri: ${herodotus.platform.uaa-server-addr}/oauth/token
     user-authorization-uri: ${herodotus.platform.uaa-server-addr}/oauth/authorize
     token-info-uri: ${herodotus.platform.uaa-server-addr}/oauth/check_token

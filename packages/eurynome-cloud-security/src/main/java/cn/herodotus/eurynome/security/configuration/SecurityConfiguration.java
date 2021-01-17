@@ -1,8 +1,17 @@
 package cn.herodotus.eurynome.security.configuration;
 
+import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDecisionManager;
+import cn.herodotus.eurynome.security.authentication.access.HerodotusSecurityMetadataSource;
+import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -42,9 +51,11 @@ import javax.annotation.PostConstruct;
 })
 @ComponentScan(basePackages = {
         "cn.hutool.extra.spring",
-        "cn.herodotus.eurynome.security.authentication.form"
 })
 public class SecurityConfiguration {
+
+    @Autowired
+    private SecurityMetadataStorage securityMetadataStorage;
 
     @PostConstruct
     public void postConstruct() {
@@ -63,4 +74,48 @@ public class SecurityConfiguration {
         defaultAccessTokenConverter.setUserTokenConverter(herodotusUserAuthenticationConverter);
         return defaultAccessTokenConverter;
     }
+
+    /**
+     * 自定义注解扫描器
+     *
+     * 服务权限验证逻辑
+     * 2、根据配置扫描服务注解，并存入服务本地Security Metadata存储
+     */
+    @Bean
+    @ConditionalOnMissingBean(RequestMappingScanner.class)
+    @ConditionalOnBean(SecurityMetadataStorage.class)
+    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage) {
+        RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, applicationProperties, securityMetadataStorage);
+        log.debug("[Eurynome] |- Bean [Request Mapping Scan] Auto Configure.");
+        return requestMappingScan;
+    }
+
+    /**
+     * 权限信息存储器
+     */
+    @Bean
+    @ConditionalOnMissingBean(HerodotusSecurityMetadataSource.class)
+    @ConditionalOnBean(RequestMappingScanner.class)
+    public HerodotusSecurityMetadataSource herodotusSecurityMetadataSource(SecurityProperties securityProperties, SecurityMetadataStorage securityMetadataStorage) {
+        HerodotusSecurityMetadataSource herodotusSecurityMetadataSource = new HerodotusSecurityMetadataSource();
+        herodotusSecurityMetadataSource.setSecurityMetadataStorage(securityMetadataStorage);
+        herodotusSecurityMetadataSource.setSecurityProperties(securityProperties);
+        log.debug("[Eurynome] |- Bean [Security Metadata Source] Auto Configure.");
+        return herodotusSecurityMetadataSource;
+    }
+
+    /**
+     * 权限信息判断器
+     *
+     * 服务权限验证逻辑：
+     * 5、捕获用户访问的请求信息，从权限存储其中查找是否有对应的Security Metadata信息。如果有，就说明是权限管控请求；如果没有，就说明是非权限管控请求。
+     * 6、权限控制主要针对权限管控请求，把这个请求对应的配置信息，与用户Token中带的权限信息进行比较。如果用户Token中没有这个权限信息，说明该用户就没有被授权。
+     */
+    @Bean
+    public HerodotusAccessDecisionManager herodotusAccessDecisionManager() {
+        HerodotusAccessDecisionManager herodotusAccessDecisionManager = new HerodotusAccessDecisionManager();
+        log.debug("[Eurynome] |- Bean [Access Decision Manager] Auto Configure.");
+        return herodotusAccessDecisionManager;
+    }
+
 }

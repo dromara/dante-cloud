@@ -21,6 +21,11 @@ import java.util.Map;
  */
 public class UpmsConstants extends CacheConstants {
 
+    /**
+     * 服务名称
+     */
+    public static final String SERVICE_NAME = "eurynome-cloud-upms-ability";
+
     public static final String CACHE_AREA_PREFIX = "data:upms:";
 
     public static final String CACHE_NAME_WEAPP_USER = CACHE_AREA_PREFIX + "weapp:user:";

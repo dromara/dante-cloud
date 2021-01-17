@@ -113,7 +113,7 @@ public class SecurityProperties implements Serializable {
         private String loginProcessingUrl = loginUrl;
         private String defaultSuccessUrl = SymbolConstants.FORWARD_SLASH;
         private String successForwardUrl;
-        private String failureUrl;
+        private String failureUrl = loginUrl;
         private String failureForwardUrl;
 
         public String getUsernameParameter() {
@@ -298,6 +298,11 @@ public class SecurityProperties implements Serializable {
          */
         private List<String> whitelist = new ArrayList<>();
 
+        /**
+         * Web Mvc 过滤的静态资源
+         */
+        private List<String> staticResource = new ArrayList<>();
+
         public boolean isOpenAuthorizationCheck() {
             return openAuthorizationCheck;
         }
@@ -312,6 +317,14 @@ public class SecurityProperties implements Serializable {
 
         public void setWhitelist(List<String> whitelist) {
             this.whitelist = whitelist;
+        }
+
+        public List<String> getStaticResource() {
+            return staticResource;
+        }
+
+        public void setStaticResource(List<String> staticResource) {
+            this.staticResource = staticResource;
         }
     }
 }

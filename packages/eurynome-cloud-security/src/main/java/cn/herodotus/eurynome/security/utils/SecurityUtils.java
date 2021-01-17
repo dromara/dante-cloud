@@ -29,6 +29,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.security.definition.core.HerodotusRole;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -50,6 +51,7 @@ import java.util.stream.Collectors;
  * @author LIQIU
  * @date 2018-3-8
  **/
+@Slf4j
 public class SecurityUtils {
 
     public static SecurityContext getSecurityContext() {
@@ -208,6 +210,17 @@ public class SecurityUtils {
     public static String encrypt(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);
+    }
+
+    public static String[] whitelistToAntMatchers(List<String> list) {
+        if (CollectionUtils.isNotEmpty(list)) {
+            String[] array = new String[list.size()];
+            log.debug("[Eurynome] |- Fetch The REST White List.");
+            return list.toArray(array);
+        }
+
+        log.warn("[Eurynome] |- Can not Fetch The REST White List Configurations.");
+        return new String[]{};
     }
 
 }

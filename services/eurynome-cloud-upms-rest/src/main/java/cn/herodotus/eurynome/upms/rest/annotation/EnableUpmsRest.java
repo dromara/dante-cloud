@@ -34,7 +34,7 @@ import java.lang.annotation.*;
  * <p>Project: eurynome-cloud </p>
  * <p>File: EnableUpmsRest </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: EnableUpmsRest </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/1/5 11:57

@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.uaa.controller;
 
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
-import cn.herodotus.eurynome.security.utils.SymmetricUtils;
+import cn.herodotus.eurynome.oauth.utils.SymmetricUtils;
 import cn.herodotus.eurynome.uaa.service.OauthClientDetailsService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;

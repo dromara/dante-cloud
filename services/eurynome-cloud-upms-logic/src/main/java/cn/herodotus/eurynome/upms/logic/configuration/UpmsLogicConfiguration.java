@@ -64,15 +64,12 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.social",
         "cn.herodotus.eurynome.upms.logic.service.hr",
         "cn.herodotus.eurynome.upms.logic.service.development",
-        "cn.herodotus.eurynome.upms.logic.controller.system",
-        "cn.herodotus.eurynome.upms.logic.controller.social",
-        "cn.herodotus.eurynome.upms.logic.controller.hr",
-        "cn.herodotus.eurynome.upms.logic.controller.development"
 })
 @EnableJpaRepositories(basePackages = {
         "cn.herodotus.eurynome.upms.logic.repository.system",
         "cn.herodotus.eurynome.upms.logic.repository.social",
         "cn.herodotus.eurynome.upms.logic.repository.hr",
+        "cn.herodotus.eurynome.upms.logic.repository.oauth",
         "cn.herodotus.eurynome.upms.logic.repository.development",
 })
 @EnableMethodCache(basePackages = {
@@ -83,8 +80,9 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.development"
 })
 public class UpmsLogicConfiguration {
+
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Bean [Upms Logic] Auto Configure.");
+        log.info("[Eurynome] |- Component [Upms Logic] Auto Configure.");
     }
 }

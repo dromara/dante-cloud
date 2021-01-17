@@ -57,10 +57,6 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableJpaRepositories(basePackages = {
-        "cn.herodotus.eurynome.upms.api.repository.system",
-        "cn.herodotus.eurynome.upms.api.repository.oauth"
-})
 @EntityScan(basePackages = {
         "cn.herodotus.eurynome.upms.api.entity.system",
         "cn.herodotus.eurynome.upms.api.entity.social",
