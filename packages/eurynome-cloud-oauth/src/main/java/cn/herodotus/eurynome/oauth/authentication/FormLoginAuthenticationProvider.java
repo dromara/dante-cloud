@@ -27,6 +27,7 @@ package cn.herodotus.eurynome.oauth.authentication;
 import cn.herodotus.eurynome.oauth.exception.VerificationCodeIsEmptyException;
 import cn.herodotus.eurynome.oauth.exception.VerificationCodeIsNotExistException;
 import cn.herodotus.eurynome.oauth.exception.VerificationCodeIsNotRightException;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -42,20 +43,25 @@ public class FormLoginAuthenticationProvider extends DaoAuthenticationProvider {
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        FormLoginWebAuthenticationDetails details = (FormLoginWebAuthenticationDetails) authentication.getDetails();
 
-        if (!details.isClose()) {
+        Object details = authentication.getDetails();
 
-            if (details.isCodeEmpty()) {
-                throw new VerificationCodeIsEmptyException("Please Input Verification Code");
-            }
+        if (ObjectUtils.isNotEmpty(details) && details instanceof FormLoginWebAuthenticationDetails) {
+            FormLoginWebAuthenticationDetails formLoginWebAuthenticationDetails = (FormLoginWebAuthenticationDetails) authentication.getDetails();
 
-            if (details.isCodeNotExist()) {
-                throw new VerificationCodeIsNotExistException("Verification Code is Not Exist, Please Check The Session Storage Operation");
-            }
+            if (!formLoginWebAuthenticationDetails.isClose()) {
 
-            if (!details.isCodeRight()) {
-                throw new VerificationCodeIsNotRightException("Verification Code is Not Right, Please Retry!");
+                if (formLoginWebAuthenticationDetails.isCodeEmpty()) {
+                    throw new VerificationCodeIsEmptyException("Please Input Verification Code");
+                }
+
+                if (formLoginWebAuthenticationDetails.isCodeNotExist()) {
+                    throw new VerificationCodeIsNotExistException("Verification Code is Not Exist, Please Check The Session Storage Operation");
+                }
+
+                if (!formLoginWebAuthenticationDetails.isCodeRight()) {
+                    throw new VerificationCodeIsNotRightException("Verification Code is Not Right, Please Retry!");
+                }
             }
         }
 

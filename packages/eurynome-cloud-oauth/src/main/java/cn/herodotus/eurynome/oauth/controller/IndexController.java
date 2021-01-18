@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.oauth.controller;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.oauth.utils.SymmetricUtils;
-import cn.herodotus.eurynome.security.configuration.SecurityGlobalExceptionHandler;
+import cn.herodotus.eurynome.security.response.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;

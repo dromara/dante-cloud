@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.security.response;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.security.configuration.SecurityGlobalExceptionHandler;
+import cn.herodotus.eurynome.security.response.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;

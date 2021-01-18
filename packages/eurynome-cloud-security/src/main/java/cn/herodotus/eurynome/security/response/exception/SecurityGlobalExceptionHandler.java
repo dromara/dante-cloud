@@ -18,11 +18,11 @@
  * Module Name: eurynome-cloud-security
  * File Name: SecurityGlobalExceptionHandler.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 上午10:38
- * LastModified: 2020/6/24 下午3:46
+ * Date: 2021/1/18 下午5:08
+ * LastModified: 2021/1/18 下午4:47
  */
 
-package cn.herodotus.eurynome.security.configuration;
+package cn.herodotus.eurynome.security.response.exception;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.common.exception.GlobalExceptionHandler;
@@ -47,8 +47,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author : gengwei.zheng
  * @date : 2019/11/18 8:12
  */
-
-
 @Slf4j
 @ControllerAdvice
 public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
