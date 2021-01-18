@@ -32,10 +32,13 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * <p> Description : 自定义表单登录参数加密filter </p>
@@ -90,5 +93,20 @@ public class FormLoginDecryptParameterAuthenticationFilter extends UsernamePassw
         }
 
         return new UsernamePasswordAuthenticationToken(username, password);
+    }
+
+    /**
+     * 重写该方法，避免在日志Debug级别会输出错误信息的问题。
+     * @param request 请求
+     * @param response 响应
+     * @param failed 失败内容
+     * @throws IOException IOException
+     * @throws ServletException ServletException
+     */
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        SecurityContextHolder.clearContext();
+        getRememberMeServices().loginFail(request, response);
+        getFailureHandler().onAuthenticationFailure(request, response, failed);
     }
 }
