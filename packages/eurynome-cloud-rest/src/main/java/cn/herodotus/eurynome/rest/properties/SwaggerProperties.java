@@ -54,7 +54,7 @@ public class SwaggerProperties {
     private String version;
 
     public SwaggerProperties() {
-        log.info("[Eurynome] |- Properties [Swagger] is Enabled.");
+        log.debug("[Eurynome] |- Properties [Swagger] is Enabled.");
     }
 
     public boolean isEnabled() {

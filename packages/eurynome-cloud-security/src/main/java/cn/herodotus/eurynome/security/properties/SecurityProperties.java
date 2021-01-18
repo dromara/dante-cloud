@@ -63,7 +63,7 @@ public class SecurityProperties implements Serializable {
     private Interceptor interceptor = new Interceptor();
 
     public SecurityProperties() {
-        log.info("[Eurynome] |- Properties [Security] is Enabled.");
+        log.debug("[Eurynome] |- Properties [Security] is Enabled.");
     }
 
     public String getSigningKey() {

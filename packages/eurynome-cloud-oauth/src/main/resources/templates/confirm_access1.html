@@ -5,42 +5,82 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title>开放平台-第三方授权</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
-    <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/plugins/jquery/jquery-2.1.4.min.js}"></script>
+    <link th:href="@{/plugins/roboto-fontface/css/roboto/roboto-fontface.css}" rel="stylesheet">
+    <link th:href="@{/plugins/mdi/font/css/materialdesignicons.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/vuetify/vuetify.min.css}" rel="stylesheet">
 </head>
 
 <body>
-<nav class="navbar navbar-default container-fluid">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">开放平台第三方授权</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
-            <p class="navbar-text navbar-right">
-                <a href="#" th:href="@{/login}">登陆</a>
-                <a href="#">授权管理</a>
-                <a href="#">申请接入</a>
-            </p>
-        </div>
-    </div>
-</nav>
-<div style="padding-top: 30px;width: 300px; color: #555; margin:0px auto;">
-    <form id='confirmationForm' name='confirmationForm' th:action="@{/oauth/authorize}" method='post'>
-        <input name='user_oauth_approval' value='true' type='hidden'/>
-        <p><a th:href="${app.website}" target="_blank" th:text="${app.appName}">应用</a> 将获得以下权限：</p>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <span>
-                    <input type="hidden" th:name="${s.key}" value="true" th:each="s:${scopes}"/>
-                    <input type="checkbox" disabled checked="checked" th:each="s:${scopes}"/>
-                    <label th:text="${s.key}" th:each="s:${scopes}"></label>
-                </span>
-            </li>
-        </ul>
-        <p class="help-block">授权后表明你已同意 服务协议</p>
-        <button class="btn btn-success pull-right" type="submit" id="write-email-btn">授权</button>
-    </form>
+<div id="app">
+    <v-app>
+        <v-app-bar app color="blue darken-3" dark>
+            <v-toolbar-title class="mx-auto font-weight-bold text-h5">开放平台 第三方授权</v-toolbar-title>
+        </v-app-bar>
+        <v-main class="grey lighten-3">
+            <v-container>
+                <v-row>
+                    <v-col cols="12" sm="3"></v-col>
+                    <v-col cols="12" sm="6">
+                        <form id="approval" action="/oauth/authorize" method="post">
+                            <v-sheet min-height="60vh" rounded="lg">
+                                <v-toolbar flat height="30"> </v-toolbar>
+                                <v-card flat>
+                                    <v-card-title>
+                                        <span class="mx-auto font-weight-bold text-h5">服务授权</span>
+                                    </v-card-title>
+                                    <v-card-text>
+                                        <v-img src="../approval/static/confirm/logo.svg" class="mb-5 mt-3" contain height="100" />
+                                    </v-card-text>
+                                    <v-card class="d-flex align-center justify-center mx-auto" flat>
+                                        <div class="font-weight-bold text-h5">应用，申请获取授权</div>
+                                    </v-card>
+                                    <v-divider class="mt-3"></v-divider>
+                                    <v-card-text>
+                                        <v-card flat>
+                                            <v-card-title class="headline text-subtitle-1">授权后，该应用将获得以下权限</v-card-title>
+                                            <v-card-text class="pb-0">
+                                                <v-badge color="grey lighten-1" dot inline left>
+                                                    <input type="hidden" />
+                                                    Listen to your favorite artists and albums whenever and
+                                                    wherever, online and offline.
+                                                </v-badge>
+
+                                            </v-card-text>
+                                            <v-card-actions>
+                                                <v-checkbox class="ml-1" v-model="checked" disabled dense hide-details><template v-slot:label>
+                                                    <div>
+                                                        已阅读和同意
+                                                        <a target="_blank" href="http://vuetifyjs.com" @click.stop>
+                                                            《服务条款》
+                                                        </a>
+                                                    </div>
+                                                </template>
+                                                </v-checkbox>
+                                            </v-card-actions>
+                                        </v-card>
+                                    </v-card-text>
+                                </v-card>
+                            </v-sheet>
+                        </form>
+                    </v-col>
+                    <v-col cols="12" sm="3"></v-col>
+                </v-row>
+            </v-container>
+        </v-main>
+    </v-app>
 </div>
+
+<script th:src="@{/plugins/vue/vue.min.js}"></script>
+<script th:src="@{/plugins/vuetify/vuetify.js}"></script>
+<script>
+    new Vue({
+        el: '#app',
+        vuetify: new Vuetify(),
+        data: () => ({
+            checked: true,
+            approval: false
+        }),
+    })
+</script>
 </body>
 </html>

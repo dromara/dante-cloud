@@ -68,6 +68,6 @@ public class UpmsApiConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Bean [Upms Api] Auto Configure.");
+        log.info("[Eurynome] |- Components [Upms Api] Auto Configure.");
     }
 }

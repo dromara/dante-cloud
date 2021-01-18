@@ -49,6 +49,10 @@ public class RestProperties {
     private RequestMapping requestMapping = new RequestMapping();
     private RestTemplate restTemplate = new RestTemplate();
 
+    public RestProperties() {
+        log.debug("[Eurynome] |- Properties [Rest] is Enabled.");
+    }
+
     public RequestMapping getRequestMapping() {
         return requestMapping;
     }

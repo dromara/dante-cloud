@@ -28,6 +28,7 @@ import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationFailure
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationProvider;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginDecryptParameterAuthenticationFilter;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginWebAuthenticationDetailsSource;
+import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -43,13 +44,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 /**
@@ -80,9 +81,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private HerodotusUserDetailsService herodotusUserDetailsService;
     @Autowired
     private SecurityProperties securityProperties;
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Adapter [Web Server Configurer Adapter] Auto Configure.");
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -119,7 +125,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         FormLoginAuthenticationProvider provider = new FormLoginAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(herodotusUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         provider.setHideUserNotFoundExceptions(false);
         return provider;
@@ -155,8 +161,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-
-        log.info("[Eurynome] |- Bean [Web Security Configurer Adapter] Auto Configure.");
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 

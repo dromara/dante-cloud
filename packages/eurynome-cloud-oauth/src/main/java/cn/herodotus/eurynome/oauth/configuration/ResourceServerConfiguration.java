@@ -41,6 +41,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+import javax.annotation.PostConstruct;
+
 /**
  * <p>Description: 通用的ResourceService配置 </p>
  *
@@ -59,10 +61,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Autowired
     private HerodotusAccessDecisionManager herodotusAccessDecisionManager;
 
-     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Adapter [Resource Server Configurer Adapter] Auto Configure.");
+    }
 
-        log.debug("[Eurynome] |- Bean [Core Resource Server] Auto Configure.");
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 

@@ -2,9 +2,9 @@ package cn.herodotus.eurynome.autoconfigure;
 
 import cn.herodotus.eurynome.autoconfigure.logic.LocalCacheSecurityMetadata;
 import cn.herodotus.eurynome.autoconfigure.logic.SecurityMetadataProducer;
+import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
-import cn.herodotus.eurynome.security.annotation.EnableHerodotusSecurity;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -20,7 +20,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableHerodotusSecurity
+@EnableHerodotusCrud
 @EnableHerodotusKernel
 public class AutoConfiguration {
 

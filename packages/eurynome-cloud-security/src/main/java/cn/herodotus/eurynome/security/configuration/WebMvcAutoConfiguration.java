@@ -36,6 +36,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -46,7 +47,12 @@ import java.util.List;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-public class WebMvcConfiguration implements WebMvcConfigurer {
+public class WebMvcAutoConfiguration implements WebMvcConfigurer {
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Adapter [Web Mvc Configurer Adapter] Auto Configure.");
+    }
 
 
     /**
@@ -61,9 +67,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
         @Override
         public void configure(WebSecurity web) throws Exception {
-
-            log.debug("[Eurynome] |- Bean [Static Resource Web Security Configurer Adapter] Auto Configure.");
-
             web.ignoring().antMatchers(getIgnoredStaticResources());
         }
 

@@ -29,6 +29,7 @@ import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsS
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.response.HerodotusWebResponseExceptionTranslator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
@@ -55,6 +56,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.security.Principal;
@@ -92,6 +94,7 @@ import java.util.Map;
  *
  * @author gengwei.zheng
  */
+@Slf4j
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
@@ -114,6 +117,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private SecurityProperties securityProperties;
     @Autowired
     private DefaultAccessTokenConverter defaultAccessTokenConverter;
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Adapter [Authorization Server Configurer Adapter] Auto Configure.");
+    }
 
     /**
      * 以下三个方法的配置是Oauth2 Authorization Server Configuration 的核心内容

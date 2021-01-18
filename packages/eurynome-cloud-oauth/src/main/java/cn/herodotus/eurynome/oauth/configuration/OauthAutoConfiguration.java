@@ -34,7 +34,9 @@ import javax.annotation.PostConstruct;
  * <p>Project: eurynome-cloud </p>
  * <p>File: OauthConfiguration </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: Oauth 包的启动配置 </p>
+ * <p>
+ * 注意：这里没有使用@Enable的形式，主要是考虑到启动顺序问题。OauthAutoConfiguration应该在SecurityAutoConfiguration之后配置
  *
  * @author : gengwei.zheng
  * @date : 2021/1/17 11:11
@@ -45,7 +47,7 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.oauth.configuration",
         "cn.herodotus.eurynome.oauth.controller"
 })
-public class OauthConfiguration {
+public class OauthAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
