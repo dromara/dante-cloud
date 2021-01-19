@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.management;
 
-import cn.herodotus.eurynome.kernel.annotaion.EnableLogCenter;
+import cn.herodotus.eurynome.kernel.annotation.EnableLogCenter;
 import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
 import com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;

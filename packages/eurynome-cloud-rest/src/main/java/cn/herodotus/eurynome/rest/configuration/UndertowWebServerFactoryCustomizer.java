@@ -45,7 +45,7 @@ public class UndertowWebServerFactoryCustomizer implements WebServerFactoryCusto
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Bean [Undertow Websockets] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Undertow WebServer Factory Customizer] Auto Configure.");
     }
 
     @Override

@@ -44,7 +44,7 @@ public class UpmsHelper {
         return herodotusRole;
     }
 
-    public static List<HerodotusAuthority> convertSysAuthoritiesToArtisanAuthorities(Collection<SysAuthority> sysAuthorities) {
+    public static List<HerodotusAuthority> convertSysAuthoritiesToHerodotusAuthorities(Collection<SysAuthority> sysAuthorities) {
         if (CollectionUtils.isNotEmpty(sysAuthorities)) {
             return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToArtisanAuthority).collect(Collectors.toList());
         }
@@ -117,15 +117,15 @@ public class UpmsHelper {
         herodotusUserDetails.setEnabled(sysUser.getStatus() == StatusEnum.ENABLE);
 
         List<HerodotusRole> herodotusRoles = new ArrayList<>();
-        List<HerodotusAuthority> artisanAuthorities = new ArrayList<>();
+        List<HerodotusAuthority> herodotusAuthorities = new ArrayList<>();
 
         for (SysRole sysRole : sysUser.getRoles()) {
             herodotusRoles.add(convertSysRoleToArtisanRole(sysRole));
-            artisanAuthorities.addAll(convertSysAuthoritiesToArtisanAuthorities(sysRole.getAuthorities()));
+            herodotusAuthorities.addAll(convertSysAuthoritiesToHerodotusAuthorities(sysRole.getAuthorities()));
         }
 
         herodotusUserDetails.setRoles(herodotusRoles);
-        herodotusUserDetails.setAuthorities(artisanAuthorities);
+        herodotusUserDetails.setAuthorities(herodotusAuthorities);
 
         return herodotusUserDetails;
     }
@@ -149,6 +149,27 @@ public class UpmsHelper {
         sysAuthority.setClassName(requestMapping.getClassName());
         sysAuthority.setMethodName(requestMapping.getMethodName());
         return sysAuthority;
+    }
+
+    public static List<RequestMapping> convertSysAuthoritiesToRequestMappings(Collection<SysAuthority> sysAuthorities) {
+        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
+            return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToRequestMapping).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    private static RequestMapping convertSysAuthorityToRequestMapping(SysAuthority sysAuthority) {
+        RequestMapping requestMapping = new RequestMapping();
+        requestMapping.setMetadataId(sysAuthority.getAuthorityId());
+        requestMapping.setMetadataCode(sysAuthority.getAuthorityCode());
+        requestMapping.setMetadataName(sysAuthority.getAuthorityName());
+        requestMapping.setRequestMethod(sysAuthority.getRequestMethod());
+        requestMapping.setServiceId(sysAuthority.getServiceId());
+        requestMapping.setClassName(sysAuthority.getClassName());
+        requestMapping.setMethodName(sysAuthority.getMethodName());
+        requestMapping.setUrl(sysAuthority.getUrl());
+        requestMapping.setParentId(sysAuthority.getParentId());
+        return requestMapping;
     }
 
     public static OauthClientDetails convertOauthApplicationsToOauthClientDetails(OauthApplications oauthApplications, OauthClientDetails oauthClientDetails) {

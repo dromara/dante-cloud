@@ -160,7 +160,7 @@ public class GlobalExceptionHandler {
 
     public static Result<String> resolveException(Exception ex, String path) {
 
-        log.debug("[Eurynome] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
+        log.trace("[Eurynome] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
 
         Result<String> result = new Result<String>().failed();
 
@@ -177,7 +177,7 @@ public class GlobalExceptionHandler {
         result.error(ex);
         result.data(ex.getMessage());
 
-        log.error("[Eurynome] |- Global Exception Handler, Error is : {}", result);
+        log.debug("[Eurynome] |- Global Exception Handler, Error is : {}", result);
 
         return result;
     }

@@ -60,12 +60,11 @@ import javax.annotation.PostConstruct;
 @Configuration
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.upms.logic.configuration",
-        "cn.herodotus.eurynome.upms.logic.processor",
         "cn.herodotus.eurynome.upms.logic.service.system",
         "cn.herodotus.eurynome.upms.logic.service.social",
         "cn.herodotus.eurynome.upms.logic.service.hr",
         "cn.herodotus.eurynome.upms.logic.service.oauth",
-        "cn.herodotus.eurynome.upms.logic.service.development"
+        "cn.herodotus.eurynome.upms.logic.service.development",
 })
 @EnableJpaRepositories(basePackages = {
         "cn.herodotus.eurynome.upms.logic.repository.system",
@@ -82,8 +81,9 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.development"
 })
 public class UpmsLogicConfiguration {
+
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Bean [Upms Logic] Auto Configure.");
+        log.info("[Eurynome] |- Components [Upms Logic] Auto Configure.");
     }
 }

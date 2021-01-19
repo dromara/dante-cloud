@@ -34,6 +34,8 @@ import org.apache.http.HttpStatus;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>Description: 统一响应实体 </p>
@@ -159,5 +161,17 @@ public class Result<T> implements Serializable {
                 .add("error", error)
                 .add("timestamp", timestamp)
                 .toString();
+    }
+
+    public Map<String, Object> toModel() {
+        Map<String, Object> result = new HashMap<>(8);
+        result.put("code", code);
+        result.put("message", message);
+        result.put("path", path);
+        result.put("data", data);
+        result.put("status", status);
+        result.put("error", error);
+        result.put("timestamp", timestamp);
+        return result;
     }
 }

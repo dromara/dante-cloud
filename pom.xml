@@ -7,12 +7,12 @@
     <parent>
         <groupId>cn.herodotus.eurynome</groupId>
         <artifactId>dependencies</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.4</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>eurynome-cloud</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud</name>
@@ -42,11 +42,6 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-kernel</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-data</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -63,6 +58,21 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-oauth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-oauth-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-kernel</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -88,6 +98,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-upms-logic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-upms-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

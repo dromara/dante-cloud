@@ -12,7 +12,7 @@
 ```docker
 docker run -d --name gateway -p 8847:8847 eurynome.cloud/eurynome-cloud-platform-gateway:1.0.0
 docker run -d --name oauth -p 8846:8846 eurynome.cloud/eurynome-cloud-platform-uaa:1.0.0
-docker run -d --name upms -p 7070:7070 eurynome.cloud/eurynome-cloud-upms-rest:1.0.0
+docker run -d --name upms -p 7070:7070 eurynome.cloud/eurynome-cloud-upms-ability:1.0.0
 ```
 # 二、zookeeper 和 kafka
 ## 1、zookeeper

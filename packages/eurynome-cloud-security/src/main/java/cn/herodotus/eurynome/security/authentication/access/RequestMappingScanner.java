@@ -30,7 +30,7 @@ import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.RequestMapping;
-import cn.herodotus.eurynome.security.strategy.SecurityMetadataStorage;
+import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,6 +41,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.env.Environment;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
@@ -78,12 +79,15 @@ public class RequestMappingScanner implements ApplicationContextAware {
     /**
      * 在外部动态指定扫描的注解，而不是在内部写死
      */
-    private final Class<? extends Annotation> scanAnnotationClass;
+    private Class<? extends Annotation> scanAnnotationClass = EnableResourceServer.class;
 
-    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage, Class<? extends Annotation> scanAnnotationClass) {
+    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage) {
         this.restProperties = restProperties;
         this.applicationProperties = applicationProperties;
         this.securityMetadataStorage = securityMetadataStorage;
+    }
+
+    public void setScanAnnotationClass(Class<? extends Annotation> scanAnnotationClass) {
         this.scanAnnotationClass = scanAnnotationClass;
     }
 

@@ -1,61 +1,82 @@
 version: "3"
 services:
   management:
-    image: eurynome-cloud-platform-management:latest
+    image: ${MANAGEMENT_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ./development/Config-Management-Dockerfile
+      dockerfile: ./production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${MANAGEMENT_SERVICE_NAME}
+        - SERVICE_PORT=${MANAGEMENT_SERVICE_PORT}
     container_name: management
     ports:
-      - 8845:8845
+      - ${MANAGEMENT_SERVICE_PORT}:${MANAGEMENT_SERVICE_PORT}
+
   upms:
-    image: eurynome-cloud-upms-rest:latest
+    image: ${UPMS_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ./production/Config-Upms-Dockerfile
+      dockerfile: ./production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${UPMS_SERVICE_NAME}
+        - SERVICE_PORT=${UPMS_SERVICE_PORT}
     container_name: upms
     environment:
-      SW_AGENT_SERVICE_NAME: eurynome-cloud-upms-rest
+      SW_AGENT_SERVICE_NAME: ${UPMS_SERVICE_NAME}
       SW_COLLECTOR_BACKEND_SERVICE: oap:11800
     ports:
-      - 7070:7070
+      - ${UPMS_SERVICE_PORT}:${UPMS_SERVICE_PORT}
     depends_on:
       - management
 
   gateway:
-    image: eurynome-cloud-platform-gateway:latest
+    image: ${GATEWAY_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ./production/Config-Gateway-Dockerfile
+      dockerfile: ./production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${GATEWAY_SERVICE_NAME}
+        - SERVICE_PORT=${GATEWAY_SERVICE_PORT}
     container_name: gateway
     environment:
-      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-gateway
+      SW_AGENT_SERVICE_NAME: ${GATEWAY_SERVICE_NAME}
       SW_COLLECTOR_BACKEND_SERVICE: oap:11800
     ports:
-      - 8847:8847
+      - ${GATEWAY_SERVICE_PORT}:${GATEWAY_SERVICE_PORT}
     depends_on:
       - management
 
   uaa:
-    image: eurynome-cloud-platform-uaa:latest
+    image: ${UAA_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ./production/Config-Uaa-Dockerfile
+      dockerfile: ./production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${UAA_SERVICE_NAME}
+        - SERVICE_PORT=${UAA_SERVICE_PORT}
     container_name: uaa
     environment:
-      SW_AGENT_SERVICE_NAME: eurynome-cloud-platform-uaa
+      SW_AGENT_SERVICE_NAME: {UAA_SERVICE_NAME}
       SW_COLLECTOR_BACKEND_SERVICE: oap:11800
     ports:
-      - 8846:8846
+      - ${UAA_SERVICE_PORT}:${UAA_SERVICE_PORT}
     depends_on:
       - upms
       - management
 
   bpmn:
-    image: eurynome-cloud-bpmn-rest:latest
+    image: ${BPMN_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ./production/Config-Bpmn-Dockerfile
+      dockerfile: ./production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${BPMN_SERVICE_NAME}
+        - SERVICE_PORT=${BPMN_SERVICE_PORT}
     container_name: bpmn
     ports:
-      - 7071:7071
+      - ${BPMN_SERVICE_PORT}:${BPMN_SERVICE_PORT}

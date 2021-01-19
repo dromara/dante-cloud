@@ -39,7 +39,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ApplicationProperties {
 
     public ApplicationProperties() {
-        log.info("[Eurynome] |- Properties [Application] is Enabled.");
+        log.debug("[Eurynome] |- Properties [Application] is Enabled.");
     }
 
     private Architecture architecture = Architecture.MICROSERVICE;

@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.security.authentication.access;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.security.definition.RequestMapping;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.security.strategy.SecurityMetadataStorage;
+import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -134,6 +134,7 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
         if (CollectionUtils.isNotEmpty(configAttributes)) {
             return configAttributes;
         } else {
+            // 支持含有**通配符的路径搜索
             for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : matchers.entrySet()) {
                 if (entry.getKey().matches(request)) {
                     return entry.getValue();
@@ -142,22 +143,6 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
         }
 
         return null;
-    }
-
-    private void addRequestMapping(RequestMapping requestMapping) {
-        String url = requestMapping.getUrl();
-        String method = requestMapping.getRequestMethod();
-        String code = requestMapping.getMetadataCode();
-        if (StringUtils.isNotEmpty(url)) {
-            SecurityConfig securityConfig = new SecurityConfig(code);
-            if (StringUtils.contains(url, SymbolConstants.STAR)) {
-                addMatcher(url, method, securityConfig);
-            } else {
-                addIndex(url, method, securityConfig);
-            }
-
-            allConfigAttributes.add(securityConfig);
-        }
     }
 
     private Collection<ConfigAttribute> getFromIndex(String url, String method) {
@@ -191,6 +176,22 @@ public class HerodotusSecurityMetadataSource implements FilterInvocationSecurity
     private void addMatcher(String url, String methodName, SecurityConfig securityConfig) {
         RequestMatcher requestMatcher = new AntPathRequestMatcher(url, methodName);
         matchers.put(requestMatcher, Collections.singletonList(securityConfig));
+    }
+
+    private void addRequestMapping(RequestMapping requestMapping) {
+        String url = requestMapping.getUrl();
+        String method = requestMapping.getRequestMethod();
+        String code = requestMapping.getMetadataCode();
+        if (StringUtils.isNotEmpty(url)) {
+            SecurityConfig securityConfig = new SecurityConfig(code);
+            if (StringUtils.contains(url, SymbolConstants.STAR)) {
+                addMatcher(url, method, securityConfig);
+            } else {
+                addIndex(url, method, securityConfig);
+            }
+
+            allConfigAttributes.add(securityConfig);
+        }
     }
 
     private void initRequestMappings() {

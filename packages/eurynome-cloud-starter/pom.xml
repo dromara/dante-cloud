@@ -31,20 +31,16 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>1.1.1</version>
+        <version>1.2.0</version>
     </parent>
 
     <artifactId>eurynome-cloud-starter</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
 
     <description>通用配置starter,此包的定位是统一未来接入的微服务使用</description>
     <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-crud</artifactId>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>eurynome-cloud-security</artifactId>
