@@ -31,11 +31,11 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>1.2.0</version>
+        <version>1.2.8</version>
     </parent>
 
     <artifactId>eurynome-cloud-kernel</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.8</version>
     <description>平台通用的基础依赖，以及接入及管理等通用代码，上中台必需的基础代码。增加这层包，主要目的是抽取webflux和web依赖的通用性，降低其它包之间的耦合性，比如之前data要依赖logstash，logstash要依赖managementproperties</description>
 
     <dependencies>
