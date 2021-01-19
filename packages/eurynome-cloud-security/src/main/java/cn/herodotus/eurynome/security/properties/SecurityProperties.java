@@ -53,6 +53,7 @@ import java.util.List;
 public class SecurityProperties implements Serializable {
 
     private String signingKey = "eurynome-cloud";
+    private String verifierKey = "eurynome-cloud";
 
     private Login login = new Login();
 
@@ -63,7 +64,7 @@ public class SecurityProperties implements Serializable {
     private Interceptor interceptor = new Interceptor();
 
     public SecurityProperties() {
-        log.info("[Eurynome] |- Properties [Security] is Enabled.");
+        log.debug("[Eurynome] |- Properties [Security] is Enabled.");
     }
 
     public String getSigningKey() {
@@ -72,6 +73,14 @@ public class SecurityProperties implements Serializable {
 
     public void setSigningKey(String signingKey) {
         this.signingKey = signingKey;
+    }
+
+    public String getVerifierKey() {
+        return verifierKey;
+    }
+
+    public void setVerifierKey(String verifierKey) {
+        this.verifierKey = verifierKey;
     }
 
     public Login getLogin() {
@@ -113,7 +122,7 @@ public class SecurityProperties implements Serializable {
         private String loginProcessingUrl = loginUrl;
         private String defaultSuccessUrl = SymbolConstants.FORWARD_SLASH;
         private String successForwardUrl;
-        private String failureUrl;
+        private String failureUrl = loginUrl;
         private String failureForwardUrl;
 
         public String getUsernameParameter() {
@@ -298,6 +307,11 @@ public class SecurityProperties implements Serializable {
          */
         private List<String> whitelist = new ArrayList<>();
 
+        /**
+         * Web Mvc 过滤的静态资源
+         */
+        private List<String> staticResource = new ArrayList<>();
+
         public boolean isOpenAuthorizationCheck() {
             return openAuthorizationCheck;
         }
@@ -312,6 +326,14 @@ public class SecurityProperties implements Serializable {
 
         public void setWhitelist(List<String> whitelist) {
             this.whitelist = whitelist;
+        }
+
+        public List<String> getStaticResource() {
+            return staticResource;
+        }
+
+        public void setStaticResource(List<String> staticResource) {
+            this.staticResource = staticResource;
         }
     }
 }

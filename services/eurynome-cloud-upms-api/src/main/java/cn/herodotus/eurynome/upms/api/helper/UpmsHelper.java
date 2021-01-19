@@ -1,5 +1,4 @@
 package cn.herodotus.eurynome.upms.api.helper;
-import cn.herodotus.eurynome.common.enums.AuthorityType;
 
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
@@ -45,7 +44,7 @@ public class UpmsHelper {
         return herodotusRole;
     }
 
-    public static List<HerodotusAuthority> convertSysAuthoritiesToArtisanAuthorities(Collection<SysAuthority> sysAuthorities) {
+    public static List<HerodotusAuthority> convertSysAuthoritiesToHerodotusAuthorities(Collection<SysAuthority> sysAuthorities) {
         if (CollectionUtils.isNotEmpty(sysAuthorities)) {
             return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToArtisanAuthority).collect(Collectors.toList());
         }
@@ -118,15 +117,15 @@ public class UpmsHelper {
         herodotusUserDetails.setEnabled(sysUser.getStatus() == StatusEnum.ENABLE);
 
         List<HerodotusRole> herodotusRoles = new ArrayList<>();
-        List<HerodotusAuthority> artisanAuthorities = new ArrayList<>();
+        List<HerodotusAuthority> herodotusAuthorities = new ArrayList<>();
 
         for (SysRole sysRole : sysUser.getRoles()) {
             herodotusRoles.add(convertSysRoleToArtisanRole(sysRole));
-            artisanAuthorities.addAll(convertSysAuthoritiesToArtisanAuthorities(sysRole.getAuthorities()));
+            herodotusAuthorities.addAll(convertSysAuthoritiesToHerodotusAuthorities(sysRole.getAuthorities()));
         }
 
         herodotusUserDetails.setRoles(herodotusRoles);
-        herodotusUserDetails.setAuthorities(artisanAuthorities);
+        herodotusUserDetails.setAuthorities(herodotusAuthorities);
 
         return herodotusUserDetails;
     }

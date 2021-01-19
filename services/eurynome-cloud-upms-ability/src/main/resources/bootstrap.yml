@@ -1,0 +1,52 @@
+server:
+  port: 7070
+spring:
+  application:
+    name:  @artifactId@ #拿到POM文件中的值
+  profiles:
+    active: @profile.name@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        namespace: @config.namespace@
+        server-addr: @config.server-addr@
+        file-extension: yaml
+        shared-configs:
+          - data-id: eurynome-cloud-environment.yaml
+            group: @profile.name@
+          - data-id: eurynome-cloud-platform.yaml
+            group: common
+          - data-id: eurynome-cloud-database-@database.type@.yaml
+            group: common
+          - data-id: eurynome-cloud-redis.yaml
+            group: common
+          - data-id: eurynome-cloud-cache.yaml
+            group: common
+          - data-id: eurynome-cloud-rest.yaml
+            group: common
+          - data-id: eurynome-cloud-kafka.yaml
+            group: common
+
+        extension-configs:
+          - data-id: ${spring.application.name}.yaml
+            group: herodotus
+      discovery:
+        namespace: @config.namespace@
+        server-addr: @discovery.server-addr@
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: @sentinel.server-addr@
+  thymeleaf:
+    mode: HTML
+    cache: false
+    prefix: classpath:/templates
+
+logging:
+  level:
+    cn.herodotus.eurynome: DEBUG
+    org.springframework.security: INFO
+    org.apache.kafka: WARN
+    com.alibaba.nacos.client: off

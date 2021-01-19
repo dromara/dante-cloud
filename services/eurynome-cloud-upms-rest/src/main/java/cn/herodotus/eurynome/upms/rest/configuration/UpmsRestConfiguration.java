@@ -24,11 +24,9 @@
 
 package cn.herodotus.eurynome.upms.rest.configuration;
 
-import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.annotation.PostConstruct;
 
@@ -36,7 +34,7 @@ import javax.annotation.PostConstruct;
  * <p>Project: eurynome-cloud </p>
  * <p>File: UpmsConfiguration </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: UpmsRest配置类 </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/1/5 11:58
@@ -44,22 +42,17 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Configuration
 @ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.upms.rest.configuration",
-        "cn.herodotus.eurynome.upms.rest.service",
-        "cn.herodotus.eurynome.upms.rest.service.oauth",
         "cn.herodotus.eurynome.upms.rest.controller",
-        "cn.herodotus.eurynome.upms.rest.controller.oauth"
-})
-@EnableJpaRepositories(basePackages = {
-        "cn.herodotus.eurynome.upms.rest.repository.oauth",
-})
-@EnableMethodCache(basePackages = {
-        "cn.herodotus.eurynome.upms.rest.service.oauth",
+        "cn.herodotus.eurynome.upms.rest.controller.development",
+        "cn.herodotus.eurynome.upms.rest.controller.hr",
+        "cn.herodotus.eurynome.upms.rest.controller.oauth",
+        "cn.herodotus.eurynome.upms.rest.controller.social",
+        "cn.herodotus.eurynome.upms.rest.controller.system",
 })
 public class UpmsRestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Bean [Upms Rest] Auto Configure.");
+        log.info("[Eurynome] |- Componnent [Upms Rest] Auto Configure.");
     }
 }

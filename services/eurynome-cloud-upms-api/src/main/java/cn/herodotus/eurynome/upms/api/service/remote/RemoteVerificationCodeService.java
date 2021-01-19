@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.upms.api.service.remote;
 
-import cn.herodotus.eurynome.upms.api.constants.ServiceNameConstants;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
@@ -33,6 +33,6 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author : gengwei.zheng
  * @date : 2020/3/3 16:01
  */
-@FeignClient(value = ServiceNameConstants.UPMS_SERVICE)
+@FeignClient(value = UpmsConstants.SERVICE_NAME)
 public interface RemoteVerificationCodeService {
 }

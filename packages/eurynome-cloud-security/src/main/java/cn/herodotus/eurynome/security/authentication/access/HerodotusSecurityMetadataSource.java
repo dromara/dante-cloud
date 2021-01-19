@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.security.authentication.access;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.security.definition.RequestMapping;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.security.strategy.SecurityMetadataStorage;
+import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
