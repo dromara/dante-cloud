@@ -266,6 +266,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(securityProperties.getSigningKey());
         // 解决"Unable to create an RSA verifier from verifierKey (ignoreable if using MAC)"问题
+        // For MAC signing you do not need to specify the verifier key separately, and if you do it must match the signing key
         jwtAccessTokenConverter.setVerifierKey(securityProperties.getVerifierKey());
         return jwtAccessTokenConverter;
     }

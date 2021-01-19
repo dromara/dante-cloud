@@ -18,8 +18,8 @@
  * Module Name: eurynome-cloud-upms-ability
  * File Name: OauthMicroservicesController.java
  * Author: gengwei.zheng
- * Date: 2021/1/18 下午7:03
- * LastModified: 2021/1/17 下午7:20
+ * Date: 2021/1/19 下午3:25
+ * LastModified: 2021/1/19 下午3:21
  */
 
 package cn.herodotus.eurynome.upms.ability.controller.oauth;
@@ -49,12 +49,8 @@ import org.springframework.web.bind.annotation.*;
 @Transactional(rollbackFor = Exception.class)
 public class OauthMicroservicesController extends BaseRestController<OauthMicroservices, String> {
 
-    private final OauthMicroservicesService oauthMicroservicesService;
-
     @Autowired
-    public OauthMicroservicesController(OauthMicroservicesService oauthMicroservicesService) {
-        this.oauthMicroservicesService = oauthMicroservicesService;
-    }
+    private OauthMicroservicesService oauthMicroservicesService;
 
     @Override
     public BaseService<OauthMicroservices, String> getBaseService() {

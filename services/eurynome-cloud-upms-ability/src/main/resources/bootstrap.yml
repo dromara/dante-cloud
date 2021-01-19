@@ -46,7 +46,7 @@ spring:
 
 logging:
   level:
-    cn.herodotus.eurynome: debug
-    org.springframework.security: debug
+    cn.herodotus.eurynome: DEBUG
+    org.springframework.security: INFO
     org.apache.kafka: WARN
     com.alibaba.nacos.client: off

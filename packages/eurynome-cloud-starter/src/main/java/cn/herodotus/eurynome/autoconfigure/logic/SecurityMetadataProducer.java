@@ -30,6 +30,8 @@ import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 
 import java.util.List;
 
@@ -42,7 +44,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/6/3 17:04
  */
-public class SecurityMetadataProducer implements InitializingBean {
+public class SecurityMetadataProducer{
 
     private SecurityMetadataStorage securityMetadataStorage;
 
@@ -56,8 +58,8 @@ public class SecurityMetadataProducer implements InitializingBean {
         this.kafkaProducer = kafkaProducer;
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    @EventListener
+    public void sendRequestMapping(ApplicationReadyEvent applicationReadyEvent) throws Exception {
         List<RequestMapping> requestMappings = securityMetadataStorage.findAll();
         if (CollectionUtils.isNotEmpty(requestMappings)) {
             String message = JSON.toJSONString(requestMappings);

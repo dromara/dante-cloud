@@ -86,7 +86,7 @@ public class SecurityAutoConfiguration {
     @ConditionalOnMissingBean(RequestMappingScanner.class)
     public RequestMappingScanner requestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage) {
         RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, applicationProperties, securityMetadataStorage);
-        log.debug("[Eurynome] |- Bean [Request Mapping Scan] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
         return requestMappingScan;
     }
 

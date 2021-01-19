@@ -5,12 +5,15 @@ import cn.herodotus.eurynome.autoconfigure.logic.SecurityMetadataProducer;
 import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
+import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import javax.annotation.PostConstruct;
@@ -47,7 +50,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(SecurityMetadataStorage.class)
     public SecurityMetadataStorage securityMetadataStorage() {
         LocalCacheSecurityMetadata localCacheSecurityMetadata = new LocalCacheSecurityMetadata();
-        log.debug("[Eurynome] |- Bean [Security Metadata Local Storage] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Local Cache Security Metadata] Auto Configure.");
         return localCacheSecurityMetadata;
     }
 
@@ -60,12 +63,12 @@ public class AutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(SecurityMetadataProducer.class)
-    @ConditionalOnBean(SecurityMetadataStorage.class)
+    @DependsOn(value = "requestMappingScanner")
     public SecurityMetadataProducer securityMetadataProducer(KafkaProducer kafkaProducer, SecurityMetadataStorage securityMetadataStorage) {
         SecurityMetadataProducer securityMetadataProducer = new SecurityMetadataProducer();
         securityMetadataProducer.setKafkaProducer(kafkaProducer);
         securityMetadataProducer.setSecurityMetadataStorage(securityMetadataStorage);
-        log.debug("[Eurynome] |- Bean [Security Metadata Persistence] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Security Metadata Producer] Auto Configure.");
         return securityMetadataProducer;
     }
 }

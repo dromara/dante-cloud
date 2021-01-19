@@ -25,15 +25,18 @@
 package cn.herodotus.eurynome.upms.ability;
 
 import cn.herodotus.eurynome.operation.annotation.EnableHerodotusManagement;
+import cn.herodotus.eurynome.upms.ability.configuration.UpmsAbilityConfiguration;
 import cn.herodotus.eurynome.upms.rest.annotation.EnableUpmsRest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.Import;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableUpmsRest
 @EnableHerodotusManagement
+@EnableUpmsRest
+@Import(UpmsAbilityConfiguration.class)
 public class UpmsApplication {
 
     public static void main(String[] args) {

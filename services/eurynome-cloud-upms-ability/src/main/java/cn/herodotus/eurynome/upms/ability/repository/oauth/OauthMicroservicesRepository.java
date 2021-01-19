@@ -18,8 +18,8 @@
  * Module Name: eurynome-cloud-upms-ability
  * File Name: OauthMicroservicesRepository.java
  * Author: gengwei.zheng
- * Date: 2021/1/18 下午7:05
- * LastModified: 2021/1/17 下午5:20
+ * Date: 2021/1/19 下午3:27
+ * LastModified: 2021/1/19 下午3:16
  */
 
 package cn.herodotus.eurynome.upms.ability.repository.oauth;
