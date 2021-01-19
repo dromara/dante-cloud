@@ -43,8 +43,8 @@
         <module>eurynome-cloud-upms-api</module>
         <module>eurynome-cloud-upms-logic</module>
         <module>eurynome-cloud-upms-rest</module>
-        <module>eurynome-cloud-bpmn-rest</module>
         <module>eurynome-cloud-upms-ability</module>
+        <module>eurynome-cloud-bpmn-ability</module>
     </modules>
 
 </project>

@@ -53,6 +53,7 @@ import java.util.List;
 public class SecurityProperties implements Serializable {
 
     private String signingKey = "eurynome-cloud";
+    private String verifierKey = "alibaba-cloud";
 
     private Login login = new Login();
 
@@ -72,6 +73,14 @@ public class SecurityProperties implements Serializable {
 
     public void setSigningKey(String signingKey) {
         this.signingKey = signingKey;
+    }
+
+    public String getVerifierKey() {
+        return verifierKey;
+    }
+
+    public void setVerifierKey(String verifierKey) {
+        this.verifierKey = verifierKey;
     }
 
     public Login getLogin() {

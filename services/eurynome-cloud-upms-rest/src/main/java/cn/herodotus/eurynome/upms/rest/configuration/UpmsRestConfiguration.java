@@ -42,7 +42,6 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Configuration
 @ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.upms.rest.service.oauth",
         "cn.herodotus.eurynome.upms.rest.controller",
         "cn.herodotus.eurynome.upms.rest.controller.development",
         "cn.herodotus.eurynome.upms.rest.controller.hr",

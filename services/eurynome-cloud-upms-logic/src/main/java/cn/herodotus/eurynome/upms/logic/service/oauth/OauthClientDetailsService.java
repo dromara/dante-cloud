@@ -15,18 +15,17 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-upms-rest
+ * Module Name: eurynome-cloud-upms-logic
  * File Name: OauthClientDetailsService.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 下午7:19
- * LastModified: 2021/1/17 下午5:20
+ * Date: 2021/1/18 下午6:20
+ * LastModified: 2021/1/17 下午7:20
  */
 
-package cn.herodotus.eurynome.upms.rest.service.oauth;
+package cn.herodotus.eurynome.upms.logic.service.oauth;
 
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;
+import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
@@ -62,8 +61,6 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
 
     @Autowired
     private OauthClientDetailsRepository oauthClientDetailsRepository;
-    @Autowired
-    private HerodotusNacosConfig herodotusNacosConfig;
 
     @Override
     public Cache<String, OauthClientDetails> getCache() {

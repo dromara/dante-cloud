@@ -26,9 +26,8 @@ package cn.herodotus.eurynome.oauth.autoconfigure;
 
 import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.oauth.autoconfigure.logic.DataSourceSecurityMetadata;
-import cn.herodotus.eurynome.oauth.autoconfigure.service.OauthClientDetailsService;
-import cn.herodotus.eurynome.oauth.autoconfigure.service.OauthUserDetailsService;
-import cn.herodotus.eurynome.oauth.configuration.OauthAutoConfiguration;
+import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthClientDetailsService;
+import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthUserDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
@@ -39,7 +38,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 
@@ -113,17 +111,17 @@ public class AutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(HerodotusUserDetailsService.class)
     public HerodotusUserDetailsService herodotusUserDetailsService() {
-        OauthUserDetailsService oauthUserDetailsService = new OauthUserDetailsService();
+        HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService();
         log.debug("[Eurynome] |- Bean [Herodotus User Details Service] Auto Configure.");
-        return oauthUserDetailsService;
+        return herodotusOauthUserDetailsService;
     }
 
     @Bean
     @ConditionalOnMissingBean(HerodotusClientDetailsService.class)
     public HerodotusClientDetailsService herodotusClientDetailsService() {
-        OauthClientDetailsService oauthClientDetailsService = new OauthClientDetailsService();
+        HerodotusOauthClientDetailsService herodotusOauthClientDetailsService = new HerodotusOauthClientDetailsService();
         log.debug("[Eurynome] |- Bean [Herodotus Client Details Service] Auto Configure.");
-        return oauthClientDetailsService;
+        return herodotusOauthClientDetailsService;
     }
 
     @Bean

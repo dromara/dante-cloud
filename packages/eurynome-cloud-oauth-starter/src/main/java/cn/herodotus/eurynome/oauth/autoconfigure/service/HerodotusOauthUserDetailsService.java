@@ -16,7 +16,7 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-oauth-starter
- * File Name: OauthUserDetailsService.java
+ * File Name: HerodotusOauthUserDetailsService.java
  * Author: gengwei.zheng
  * Date: 2021/1/17 下午5:52
  * LastModified: 2021/1/17 下午5:20
@@ -58,7 +58,7 @@ import java.util.Set;
  * @date : 2019/11/25 11:02
  */
 @Slf4j
-public class OauthUserDetailsService extends BaseService<SysUser, String> implements HerodotusUserDetailsService {
+public class HerodotusOauthUserDetailsService extends BaseService<SysUser, String> implements HerodotusUserDetailsService {
 
     private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_USER;
 

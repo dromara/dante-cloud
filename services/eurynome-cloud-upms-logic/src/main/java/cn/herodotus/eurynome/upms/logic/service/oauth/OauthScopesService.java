@@ -15,14 +15,14 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-upms-rest
+ * Module Name: eurynome-cloud-upms-logic
  * File Name: OauthScopesService.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 下午7:25
- * LastModified: 2021/1/17 下午5:20
+ * Date: 2021/1/18 下午6:20
+ * LastModified: 2021/1/17 下午7:25
  */
 
-package cn.herodotus.eurynome.upms.rest.service.oauth;
+package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.crud.service.BaseService;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,23 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-bpmn-rest
- * File Name: data-process.sql
+ * Module Name: eurynome-cloud-bpmn-ability
+ * File Name: BpmnApplication.java
  * Author: gengwei.zheng
- * Date: 2020/6/21 上午11:36
- * LastModified: 2020/6/21 上午11:36
+ * Date: 2021/1/18 下午7:11
+ * LastModified: 2020/6/17 下午5:00
  */
 
--- ----------------------------
--- 系统用户导入camunda
--- ----------------------------
-INSERT INTO act_id_user (id_, first_, pwd_)
-SELECT su.user_id    AS id_,
-       su.user_name  AS first_,
-       su."password" AS pwd_
-FROM "sys_user" su
+package cn.herodotus.eurynome.bpmn.ability;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class BpmnApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(BpmnApplication.class, args);
+    }
+
+}

@@ -15,14 +15,14 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-upms-rest
+ * Module Name: eurynome-cloud-upms-ability
  * File Name: OauthMicroservicesService.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 下午7:19
- * LastModified: 2021/1/17 下午5:20
+ * Date: 2021/1/18 下午7:04
+ * LastModified: 2021/1/18 下午6:21
  */
 
-package cn.herodotus.eurynome.upms.rest.service.oauth;
+package cn.herodotus.eurynome.upms.ability.service.oauth;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.ApplicationType;
@@ -34,7 +34,8 @@ import cn.herodotus.eurynome.operation.nacos.HerodotusNacosConfig;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
-import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthMicroservicesRepository;
+import cn.herodotus.eurynome.upms.ability.repository.oauth.OauthMicroservicesRepository;
+import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
 import cn.hutool.core.util.IdUtil;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;

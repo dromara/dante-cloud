@@ -255,10 +255,18 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return tokenEnhancerChain;
     }
 
+    /**
+     * 解决"Unable to create an RSA verifier from verifierKey (ignoreable if using MAC)"问题
+     * {@link :https://www.jianshu.com/p/af955c2df0be}
+     *
+     * @return JwtAccessTokenConverter
+     */
     @Bean
     public JwtAccessTokenConverter createJwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(securityProperties.getSigningKey());
+        // 解决"Unable to create an RSA verifier from verifierKey (ignoreable if using MAC)"问题
+        jwtAccessTokenConverter.setVerifierKey(securityProperties.getVerifierKey());
         return jwtAccessTokenConverter;
     }
 

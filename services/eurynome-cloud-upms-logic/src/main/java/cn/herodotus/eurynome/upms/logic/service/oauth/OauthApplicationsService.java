@@ -15,14 +15,14 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-upms-rest
+ * Module Name: eurynome-cloud-upms-logic
  * File Name: OauthApplicationsService.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 下午7:25
- * LastModified: 2021/1/17 下午5:20
+ * Date: 2021/1/18 下午6:20
+ * LastModified: 2021/1/17 下午7:25
  */
 
-package cn.herodotus.eurynome.upms.rest.service.oauth;
+package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.crud.service.BaseService;
@@ -30,6 +30,7 @@ import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthApplicationsRepository;
+import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
 import cn.hutool.core.util.IdUtil;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;

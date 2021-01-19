@@ -15,14 +15,14 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-upms-logic
+ * Module Name: eurynome-cloud-upms-ability
  * File Name: OauthMicroservicesRepository.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 下午5:18
- * LastModified: 2021/1/3 上午8:46
+ * Date: 2021/1/18 下午7:05
+ * LastModified: 2021/1/17 下午5:20
  */
 
-package cn.herodotus.eurynome.upms.logic.repository.oauth;
+package cn.herodotus.eurynome.upms.ability.repository.oauth;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
