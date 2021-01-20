@@ -24,7 +24,6 @@
 
 package cn.herodotus.eurynome.upms.rest.annotation;
 
-import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
 import cn.herodotus.eurynome.upms.rest.configuration.UpmsRestConfiguration;
 import org.springframework.context.annotation.Import;
 
@@ -42,7 +41,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableUpmsLogic
 @Import(UpmsRestConfiguration.class)
 public @interface EnableUpmsRest {
 }
