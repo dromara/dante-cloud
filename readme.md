@@ -1,23 +1,30 @@
 # Eurynome Cloud
 
 - 基于 **Spring Cloud** 和 **Spring Cloud Alibaba** 的微服务架构
-- 
+
+# 版本号说明
+
+本系统版本号，分为四段。
+
+- 第一段和第二段，与Spring Boot 版本对应，根据采用的Spring Boot版本变更。例如，当前采用Spring Boot 2.4.2版本，那么就以2.4.X.X开头
+- 第三段，表示系统功能的变化
+- 第四段，表示系统功能维护及优化情况
 
 # 主要技术栈说明：
 
 组件 | 版本 | 说明
 ---|---|---
-Spring Boot | 2.3.7.RELEASE | 功能版本要与其它组件匹配
-Spring Cloud | Hoxton.SR9 |
+Spring Boot | 2.4.2 | 功能版本要与其它组件匹配
+Spring Cloud | 2020.0.0 |
 Spring Cloud Alibaba | 2.2.3.RELEASE
-Spring Boot Admin | 2.3.0 |
+Spring Boot Admin | 2.3.1 |
 Nacos | 1.4.0 |
 Sentinel | 1.8.0 |
 Skywalking | latest |
 Jetcache | 2.6.0 |
 ELK | latest |
-logstash-logback-encoder | 6.4 | 使用该组件直接向ELK发送日志
-MySQL | 5.7.26 |
+logstash-logback-encoder | 6.6 | 使用该组件直接向ELK发送日志
+MySQL | 8.0.22 |
 PostgreSQL | 12.3-1 |
 Redis | 3.2.100 | 为了图省事，还是用的可以在Windows下直接安装版本老版本。使用最新版也可，只要支持lettuce就行。
 Docker Desktop for Window | latest
