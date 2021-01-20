@@ -31,6 +31,7 @@ import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthUserDetai
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
+import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
@@ -97,6 +98,7 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Configuration
 @EnableHerodotusCrud
+@EnableUpmsInterface
 @EnableUpmsLogic
 @EnableMethodCache(basePackages = {
         "cn.herodotus.eurynome.oauth.autoconfigure.service",
