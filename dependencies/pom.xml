@@ -23,6 +23,7 @@
         <spring-cloud-dependencies.version>2020.0.0</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.2.3.RELEASE</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+        <spring-cloud-starter-oauth2>2.2.4.RELEASE</spring-cloud-starter-oauth2>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
@@ -38,6 +39,7 @@
         <commons-io.version>2.8.0</commons-io.version>
         <google-guava.version>30.1-jre</google-guava.version>
         <hutool.version>5.5.7</hutool.version>
+        <jackson.version>2.12.1</jackson.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
@@ -208,6 +210,13 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${starter-mybatis.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-oauth2 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${spring-cloud-starter-oauth2}</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
