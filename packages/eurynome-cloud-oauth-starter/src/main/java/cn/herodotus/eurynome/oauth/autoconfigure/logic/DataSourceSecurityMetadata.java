@@ -30,6 +30,7 @@ import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ import java.util.List;
  * <p>Project: eurynome-cloud-athena </p>
  * <p>File: DataSourceSecurityMetadata </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 直连数据源的SecurityMetadata存储 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/12/30 14:54
@@ -54,14 +55,14 @@ public class DataSourceSecurityMetadata extends SecurityMetadataStorage {
     @Override
     public void save(List<RequestMapping> requestMappings) {
 
-//        List<SysAuthority> sysAuthorities = UpmsHelper.convertRequestMappingsToSysAuthorities(requestMappings);
-//
-//        List<SysAuthority> result = sysAuthorityRepository.batchSaveOrUpdate(sysAuthorities);
-//        if (CollectionUtils.isNotEmpty(result)) {
-//            log.info("[Eurynome] |- Store Service Resources Success!");
-//        } else {
-//            log.error("[Eurynome] |- Store Service Resources May Be Error, Please Check!");
-//        }
+        List<SysAuthority> sysAuthorities = UpmsHelper.convertRequestMappingsToSysAuthorities(requestMappings);
+
+        List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
+        if (CollectionUtils.isNotEmpty(result)) {
+            log.info("[Eurynome] |- Store Service Resources Success!");
+        } else {
+            log.error("[Eurynome] |- Store Service Resources May Be Error, Please Check!");
+        }
 
         log.info("[Eurynome] |- Store Service Resources Success!");
     }
