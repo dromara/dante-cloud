@@ -52,7 +52,7 @@ public class DataSourceSecurityMetadata extends SecurityMetadataStorage {
 
     private SysAuthorityService sysAuthorityService;
 
-    @Value("${spring.jpa.ddl-auto}")
+    @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlAuto;
 
     public DataSourceSecurityMetadata(SysAuthorityService sysAuthorityService) {
