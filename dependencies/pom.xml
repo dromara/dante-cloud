@@ -21,7 +21,7 @@
     <properties>
         <!--Spring 家族-->
         <spring-cloud-dependencies.version>Hoxton.SR9</spring-cloud-dependencies.version>
-        <spring-cloud-alibaba-dependencies.version>2.2.3.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.2.5.RELEASE</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->

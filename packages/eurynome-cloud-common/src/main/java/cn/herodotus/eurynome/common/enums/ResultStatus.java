@@ -58,7 +58,7 @@ public enum ResultStatus {
     UNAUTHORIZED(1000, "未经授权，无法访问"),
 
     INVALID_TOKEN(1101, "无法解析的Token，也许Token已经失效"),
-    INVALID_GRANT(1102, "该账号被禁用，请联系管理员"),
+    INVALID_GRANT(1102, "账号或者密码错误！"),
     INVALID_SCOPE(1103, "授权范围错误"),
     INVALID_CLIENT(1104, "非法的客户端"),
 
