@@ -7,38 +7,35 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.8.RELEASE</version>
+        <version>2.4.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.3.0.0</version>
+    <version>2.4.0.0</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
 
     <properties>
         <!--Spring 家族-->
-        <spring-cloud-dependencies.version>Hoxton.SR9</spring-cloud-dependencies.version>
-        <spring-cloud-alibaba-dependencies.version>2.2.3.RELEASE</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+        <spring-cloud-dependencies.version>2020.0.2</spring-cloud-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2.2.5.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-boot-admin.version>2.4.0</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
         <maven-versions-plugin.version>2.8.1</maven-versions-plugin.version>
-
-        <!--覆盖Spring Boot 默认依赖版本-->
-        <nacos.client.version>1.4.0</nacos.client.version>
 
         <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-text.version>1.9</commons-text.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.8.0</commons-io.version>
-        <google-guava.version>30.1-jre</google-guava.version>
-        <hutool.version>5.5.7</hutool.version>
-        <jackson.version>2.12.1</jackson.version>
+        <google-guava.version>30.1.1-jre</google-guava.version>
+        <hutool.version>5.6.1</hutool.version>
+        <jackson.version>2.12.2</jackson.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>

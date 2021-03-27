@@ -30,6 +30,9 @@ import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
@@ -37,7 +40,7 @@ import java.util.List;
  * <p>Project: eurynome-cloud-athena </p>
  * <p>File: DataSourceSecurityMetadata </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 直连数据源的SecurityMetadata存储 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/12/30 14:54
@@ -45,7 +48,12 @@ import java.util.List;
 @Slf4j
 public class DataSourceSecurityMetadata extends SecurityMetadataStorage {
 
+    private static final String DDL_AUTO_TYPE_NONE = "none";
+
     private SysAuthorityService sysAuthorityService;
+
+    @Value("${spring.jpa.hibernate.ddl-auto}")
+    private String ddlAuto;
 
     public DataSourceSecurityMetadata(SysAuthorityService sysAuthorityService) {
         this.sysAuthorityService = sysAuthorityService;
@@ -54,16 +62,21 @@ public class DataSourceSecurityMetadata extends SecurityMetadataStorage {
     @Override
     public void save(List<RequestMapping> requestMappings) {
 
-//        List<SysAuthority> sysAuthorities = UpmsHelper.convertRequestMappingsToSysAuthorities(requestMappings);
-//
-//        List<SysAuthority> result = sysAuthorityRepository.batchSaveOrUpdate(sysAuthorities);
-//        if (CollectionUtils.isNotEmpty(result)) {
-//            log.info("[Eurynome] |- Store Service Resources Success!");
-//        } else {
-//            log.error("[Eurynome] |- Store Service Resources May Be Error, Please Check!");
-//        }
+        log.debug("[Eurynome] |- spring.jpa.ddl-auto value is : {}", ddlAuto);
 
-        log.info("[Eurynome] |- Store Service Resources Success!");
+        if (StringUtils.isNotEmpty(ddlAuto) && !StringUtils.equalsIgnoreCase(ddlAuto, DDL_AUTO_TYPE_NONE)) {
+
+            List<SysAuthority> sysAuthorities = UpmsHelper.convertRequestMappingsToSysAuthorities(requestMappings);
+
+            List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
+            if (CollectionUtils.isNotEmpty(result)) {
+                log.info("[Eurynome] |- Store Service Resources Success!");
+            } else {
+                log.error("[Eurynome] |- Store Service Resources May Be Error, Please Check!");
+            }
+
+            log.info("[Eurynome] |- Store Service Resources Success!");
+        }
     }
 
     @Override
