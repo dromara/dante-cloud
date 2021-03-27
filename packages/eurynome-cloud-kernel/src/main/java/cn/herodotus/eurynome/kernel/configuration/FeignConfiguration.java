@@ -25,20 +25,13 @@
 package cn.herodotus.eurynome.kernel.configuration;
 
 import cn.herodotus.eurynome.kernel.feign.HerodotusFeignRequestInterceptor;
-import com.alibaba.cloud.sentinel.feign.HerodotusSentinelFeign;
-import com.alibaba.csp.sentinel.SphU;
-import feign.Feign;
 import feign.Request;
 import feign.RequestInterceptor;
 import feign.Retryer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,19 +46,6 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Configuration
 public class FeignConfiguration {
-
-    /**
-     * 记得使用sentinel的时候，需要在配置文件中配置feign.sentinel.enabled=true，注释掉feign.hystrix.enabled=true
-     */
-    @Bean
-    @Scope("prototype")
-    @ConditionalOnClass({SphU.class, Feign.class})
-    @ConditionalOnProperty(name = "feign.sentinel.enabled")
-    @Primary
-    public Feign.Builder feignSentinelBuilder() {
-        log.debug("[Eurynome] |- Bean [Sentinel Feign] Auto Configure.");
-        return HerodotusSentinelFeign.builder();
-    }
 
     @Bean
     @ConditionalOnMissingBean(HerodotusFeignRequestInterceptor.class)
