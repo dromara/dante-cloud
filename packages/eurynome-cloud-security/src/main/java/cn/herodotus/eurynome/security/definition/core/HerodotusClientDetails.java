@@ -62,7 +62,7 @@ public class HerodotusClientDetails extends BaseDTO implements ClientDetails {
     @JsonDeserialize(using = Jackson2ArrayOrStringDeserializer.class)
     private Set<String> authorizedGrantTypes = Collections.emptySet();
 
-    @JsonProperty("redirect_uri")
+    @JsonProperty("web_server_redirect_uri")
     @JsonDeserialize(using = Jackson2ArrayOrStringDeserializer.class)
     private Set<String> registeredRedirectUris;
 
