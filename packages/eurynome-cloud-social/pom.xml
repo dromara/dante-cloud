@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2019-2020 the original author or authors.
+  ~ Copyright (c) 2019-2021 the original author or authors.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,42 +16,36 @@
   ~
   ~
   ~ Project Name: eurynome-cloud
-  ~ Module Name: eurynome-cloud
+  ~ Module Name: packages
   ~ File Name: pom.xml
   ~ Author: gengwei.zheng
-  ~ Date: 2020/5/22 下午4:22
-  ~ LastModified: 2020/5/22 下午4:22
+  ~ Date: 2021/3/28 下午3:23
+  ~ LastModified: 2021/3/28 下午3:23
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <artifactId>eurynome-cloud</artifactId>
+        <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>2.4.0.0</version>
     </parent>
 
-    <artifactId>packages</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>eurynome-cloud-social</artifactId>
+    <version>2.4.0.0</version>
+    <packaging>jar</packaging>
 
-    <name>eurynome-cloud-packages</name>
-
-    <modules>
-        <module>eurynome-cloud-common</module>
-        <module>eurynome-cloud-operation</module>
-        <module>eurynome-cloud-data</module>
-        <module>eurynome-cloud-rest</module>
-        <module>eurynome-cloud-security</module>
-        <module>eurynome-cloud-message</module>
-        <module>eurynome-cloud-starter</module>
-        <module>eurynome-cloud-crud</module>
-        <module>eurynome-cloud-kernel</module>
-        <module>eurynome-cloud-oauth</module>
-        <module>eurynome-cloud-oauth-starter</module>
-        <module>eurynome-cloud-social</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
