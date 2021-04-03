@@ -49,6 +49,9 @@ public class SecurityConstants {
     public static final String BEARER_TYPE = "Bearer";
     public static final String BEARER_TOKEN = BEARER_TYPE + SymbolConstants.SPACE;
 
+    public static final String BASIC_TYPE = "Basic";
+    public static final String BASIC_TOKEN = BASIC_TYPE + SymbolConstants.SPACE;
+
     public static final String ROLE_PREFIX = "ROLE_";
     public static final String AUTHORITY_PREFIX = "OP_";
     public static final String AUTHORITY_PREFIX_API = "API_";

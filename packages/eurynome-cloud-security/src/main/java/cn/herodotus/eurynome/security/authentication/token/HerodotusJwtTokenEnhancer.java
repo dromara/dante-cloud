@@ -31,7 +31,7 @@ public class HerodotusJwtTokenEnhancer implements TokenEnhancer {
      */
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-        DefaultOAuth2AccessToken defaultOAuth2AccessToken = new DefaultOAuth2AccessToken(accessToken);
+        DefaultOAuth2AccessToken defaultOauth2AccessToken = new DefaultOAuth2AccessToken(accessToken);
         if (authentication.getPrincipal() != null && authentication.getPrincipal() instanceof HerodotusUserDetails) {
             // 设置额外用户信息
             // 与登录时候放进去的UserDetail实现类一直查看link{SecurityConfiguration}
@@ -39,9 +39,9 @@ public class HerodotusJwtTokenEnhancer implements TokenEnhancer {
             final Map<String, Object> additionalInfo = new HashMap<>(8);
             additionalInfo.put(SecurityConstants.OPEN_ID, herodotusUserDetails.getUserId());
             additionalInfo.put(SecurityConstants.LICENSE, "herodotus-cloud");
-            defaultOAuth2AccessToken.setAdditionalInformation(additionalInfo);
+            defaultOauth2AccessToken.setAdditionalInformation(additionalInfo);
         }
 
-        return defaultOAuth2AccessToken;
+        return defaultOauth2AccessToken;
     }
 }

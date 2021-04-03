@@ -15,28 +15,33 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-social
- * File Name: EnableHerodotusSocial.java
+ * Module Name: eurynome-cloud-security
+ * File Name: SocialProvider.java
  * Author: gengwei.zheng
- * Date: 2021/3/28 下午3:27
- * LastModified: 2021/3/28 下午3:27
+ * Date: 2021/4/3 下午4:06
+ * LastModified: 2021/4/3 下午3:56
  */
 
-package cn.herodotus.eurynome.social.annotation;
-
-import java.lang.annotation.*;
+package cn.herodotus.eurynome.security.definition.social;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: EnableHerodotusSocial </p>
+ * <p>File: SocialProvider </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 社交登录提供商 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/3/28 15:27
+ * @date : 2021/4/3 15:56
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-public @interface EnableHerodotusSocial {
+public enum SocialProvider {
+
+    /**
+     * 手机验证码登录
+     */
+    SMS,
+
+    /**
+     * 微信小程序登录
+     */
+    WXAPP;
 }

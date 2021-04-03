@@ -15,14 +15,14 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-social
+ * Module Name: eurynome-cloud-integration
  * File Name: WxappProperties.java
  * Author: gengwei.zheng
- * Date: 2021/3/28 下午3:54
- * LastModified: 2021/3/28 下午3:54
+ * Date: 2021/4/3 下午7:40
+ * LastModified: 2021/4/3 下午2:41
  */
 
-package cn.herodotus.eurynome.social.properties;
+package cn.herodotus.eurynome.integration.properties;
 
 import com.google.common.base.MoreObjects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -39,10 +39,26 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/3/28 15:54
  */
-@ConfigurationProperties(prefix = "herodotus.social.wx.miniapp")
+@ConfigurationProperties(prefix = "herodotus.social.wx.wxapp")
 public class WxappProperties implements Serializable {
 
+    /**
+     * 默认App Id
+     */
+    private String defaultAppId;
+
+    /**
+     * 小程序配置列表
+     */
     private List<Config> configs;
+
+    public String getDefaultAppId() {
+        return defaultAppId;
+    }
+
+    public void setDefaultAppId(String defaultAppId) {
+        this.defaultAppId = defaultAppId;
+    }
 
     public List<Config> getConfigs() {
         return configs;

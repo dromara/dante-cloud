@@ -15,14 +15,14 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-social
+ * Module Name: eurynome-cloud-integration
  * File Name: WxappRequest.java
  * Author: gengwei.zheng
- * Date: 2021/3/28 下午3:32
- * LastModified: 2021/3/28 下午3:32
+ * Date: 2021/4/3 下午7:39
+ * LastModified: 2021/4/3 下午3:33
  */
 
-package cn.herodotus.eurynome.social.domain.wxapp;
+package cn.herodotus.eurynome.integration.domain.wxapp;
 
 import com.google.common.base.MoreObjects;
 

@@ -15,26 +15,27 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-social
+ * Module Name: eurynome-cloud-integration
  * File Name: WxappConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/3/28 下午3:48
- * LastModified: 2021/3/28 下午3:48
+ * Date: 2021/4/3 下午7:42
+ * LastModified: 2021/3/28 下午5:00
  */
 
-package cn.herodotus.eurynome.social.configuration;
+package cn.herodotus.eurynome.integration.configuration;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
 import cn.binarywang.wx.miniapp.config.impl.WxMaDefaultConfigImpl;
 import cn.binarywang.wx.miniapp.message.WxMaMessageRouter;
-import cn.herodotus.eurynome.social.properties.WxappProperties;
+import cn.herodotus.eurynome.integration.properties.WxappProperties;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxRuntimeException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -54,6 +55,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties(WxappProperties.class)
+@ComponentScan(basePackages = {
+        "cn.herodotus.eurynome.integration.service.wxapp",
+        "cn.herodotus.eurynome.integration.controller.wxapp"
+})
 public class WxappConfiguration {
 
     private final WxappProperties wxappProperties;

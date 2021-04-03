@@ -15,28 +15,32 @@
  *
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-social
- * File Name: HerodotusSocialConfiguration.java
+ * Module Name: eurynome-cloud-integration
+ * File Name: EnableWxapp.java
  * Author: gengwei.zheng
- * Date: 2021/3/28 下午3:27
- * LastModified: 2021/3/28 下午3:27
+ * Date: 2021/4/3 下午7:43
+ * LastModified: 2021/4/3 下午3:37
  */
 
-package cn.herodotus.eurynome.social.configuration;
+package cn.herodotus.eurynome.integration.annotation;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
+import cn.herodotus.eurynome.integration.configuration.WxappConfiguration;
+import org.springframework.context.annotation.Import;
+
+import java.lang.annotation.*;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: HerodotusSocialConfiguration </p>
+ * <p>File: EnableWxapp </p>
  *
- * <p>Description: TODO </p>
+ * <p>Description: 开启微信小程序相关配置 </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/3/28 15:27
  */
-@Slf4j
-@Configuration(proxyBeanMethods = false)
-public class HerodotusSocialConfiguration {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Import(WxappConfiguration.class)
+public @interface EnableWxapp {
 }

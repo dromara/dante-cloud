@@ -16,15 +16,16 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: SmsCodeAuthenticationProvider.java
+ * File Name: SocialAuthenticationProvider.java
  * Author: gengwei.zheng
  * Date: 2021/3/28 下午7:22
  * LastModified: 2021/3/28 下午7:22
  */
 
-package cn.herodotus.eurynome.security.social;
+package cn.herodotus.eurynome.security.authentication.social;
 
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -33,41 +34,40 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <p>Project: eurynome-cloud </p>
- * <p>File: SmsCodeAuthenticationProvider </p>
+ * <p>File: SocialAuthenticationProvider </p>
  *
- * <p>Description: 短信验证码认证Provider </p>
+ * <p>Description: 短信验证码， 社交登录认证Provider </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/3/28 19:22
  */
-public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
+@Slf4j
+public class SocialAuthenticationProvider implements AuthenticationProvider {
 
     private HerodotusUserDetailsService herodotusUserDetailsService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
+        SocialAuthenticationToken socialAuthenticationToken = (SocialAuthenticationToken) authentication;
 
-        UserDetails userDetails = herodotusUserDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
+        UserDetails userDetails = herodotusUserDetailsService.loadUserBySocial((String) socialAuthenticationToken.getPrincipal(), socialAuthenticationToken.getProviderType());
 
         if (userDetails == null) {
-            throw new InternalAuthenticationServiceException("无法获取用户信息");
+            log.debug("[Eurynome] |- Authentication failed: no credentials provided");
+
+            throw new InternalAuthenticationServiceException(
+                    "UserDetailsService returned null, which is an interface contract violation");
         }
 
-        // TODO 在这里校验验证码是否正确，验证码一般存放到redis中
-        SmsCodeAuthenticationToken authenticationResult = new SmsCodeAuthenticationToken(userDetails, userDetails.getAuthorities());
-        authenticationResult.setDetails(authenticationToken.getDetails());
+        SocialAuthenticationToken authenticateResult = new SocialAuthenticationToken(userDetails, userDetails.getAuthorities());
+        authenticateResult.setDetails(socialAuthenticationToken.getDetails());
 
-        return authenticationResult;
+        return authenticateResult;
     }
 
     @Override
-    public boolean supports(Class<?> aClass) {
-        return false;
-    }
-
-    public HerodotusUserDetailsService getHerodotusUserDetailsService() {
-        return herodotusUserDetailsService;
+    public boolean supports(Class<?> authentication) {
+        return SocialAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
     public void setHerodotusUserDetailsService(HerodotusUserDetailsService herodotusUserDetailsService) {
