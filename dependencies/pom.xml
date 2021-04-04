@@ -54,6 +54,7 @@
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <okhttps.version>3.0.1</okhttps.version>
+        <just-auth.verison>1.15.9</just-auth.verison>
 
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
 
@@ -230,6 +231,13 @@
                 <artifactId>okhttps-jackson</artifactId>
                 <version>${okhttps.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/me.zhyd.oauth/JustAuth -->
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${just-auth.verison}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
