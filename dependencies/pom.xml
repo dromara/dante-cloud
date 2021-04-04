@@ -41,6 +41,7 @@
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
+        <alibaba-nacos.version>2.0.0</alibaba-nacos.version>
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.3</starter-jasypt.version>
@@ -83,6 +84,12 @@
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-starter-server</artifactId>
                 <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${alibaba-nacos.version}</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
