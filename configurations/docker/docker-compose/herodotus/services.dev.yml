@@ -1,0 +1,73 @@
+version: "3.9"
+services:
+  management:
+    image: ${MANAGEMENT_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../context
+      dockerfile: ../../context/development/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${MANAGEMENT_SERVICE_NAME}
+        - SERVICE_PORT=${MANAGEMENT_SERVICE_PORT}
+    container_name: management
+    ports:
+      - ${MANAGEMENT_SERVICE_PORT}:${MANAGEMENT_SERVICE_PORT}
+
+  upms:
+    image: ${UPMS_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../context
+      dockerfile: ../../context/development/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${UPMS_SERVICE_NAME}
+        - SERVICE_PORT=${UPMS_SERVICE_PORT}
+    container_name: upms
+    ports:
+      - ${UPMS_SERVICE_PORT}:${UPMS_SERVICE_PORT}
+    depends_on:
+      - management
+
+  gateway:
+    image: ${GATEWAY_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../context
+      dockerfile: ../../context/development/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${GATEWAY_SERVICE_NAME}
+        - SERVICE_PORT=${GATEWAY_SERVICE_PORT}
+    container_name: gateway
+    ports:
+      - ${GATEWAY_SERVICE_PORT}:${GATEWAY_SERVICE_PORT}
+    depends_on:
+      - management
+
+  uaa:
+    image: ${UAA_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../context
+      dockerfile: ../../context/development/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${UAA_SERVICE_NAME}
+        - SERVICE_PORT=${UAA_SERVICE_PORT}
+    container_name: uaa
+    ports:
+      - ${UAA_SERVICE_PORT}:${UAA_SERVICE_PORT}
+    depends_on:
+      - upms
+      - management
+
+  bpmn:
+    image: ${BPMN_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../context
+      dockerfile: ../../context/development/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${BPMN_SERVICE_NAME}
+        - SERVICE_PORT=${BPMN_SERVICE_PORT}
+    container_name: bpmn
+    ports:
+      - ${BPMN_SERVICE_PORT}:${BPMN_SERVICE_PORT}

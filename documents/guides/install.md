@@ -76,7 +76,7 @@ allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
 
 下载最新稳定版的Nacos压缩包，[https://github.com/alibaba/nacos/releases][下载地址]。解压后，在{NACOS_HOME}/conf目录下，找到nacos-mysql.sql导入到数据库中。
 
-> 在本工程的${project home}/eurynome-cloud/documents/scripts目录下也保存了一份，如果不是最新请重新下载。
+> 在本工程的${project home}/eurynome-cloud/configurations/scripts目录下也保存了一份，如果不是最新请重新下载。
 
 （4）、开放数据IP访问
 
@@ -200,20 +200,20 @@ protected-mode no
 
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/env.base.yml  up -d
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/env.base.yml  up -d
 ```
 > 该命令会查看本地是否已经有了相关镜像，如果没有会首先下载镜像，然后再运行，请先保证网络畅通
 
 - 停止容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/env.base.yml stop
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/env.base.yml stop
 ```
 
 - 停止并删除容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/env.base.yml down
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/env.base.yml down
 ```
 
 ## （二）运行监控管理工具
@@ -241,20 +241,20 @@ sudo sysctl vm.max_map_count=524288
 - 运行容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/env.skywalking.yml  up -d
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/env.skywalking.yml  up -d
 ```
 > 该命令会查看本地是否已经有了相关镜像，如果没有会首先下载镜像，然后再运行，请先保证网络畅通
 
 - 停止容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/env.skywalking.yml stop
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/env.skywalking.yml stop
 ```
 
 - 停止并删除容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/env.skywalking.yml down
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/env.skywalking.yml down
 ```
 
 ## （三）服务打包部署
@@ -323,7 +323,7 @@ SW_COLLECTOR_BACKEND_SERVICE: oap:11800
 - 运行容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/services.yml  up -d
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/services.yml  up -d
 ```
 
 > 该命令会查看本地是否已经有了相关镜像，如果没有会首先构建镜像，然后再运行，请先保证网络畅通
@@ -331,13 +331,13 @@ docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose
 - 停止容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/services.yml stop
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/services.yml stop
 ```
 
 - 停止并删除容器
 
 ```docker
-docker-compose -f ${project home}/eurynome-cloud/documents/docker/docker-compose/herodotus/services.yml down
+docker-compose -f ${project home}/eurynome-cloud/configurations/docker/docker-compose/herodotus/services.yml down
 ```
 
 ### 3、Docker-compose部署
