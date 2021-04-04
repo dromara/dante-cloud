@@ -24,6 +24,17 @@
 
 package cn.herodotus.eurynome.security.definition.social;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.collect.ImmutableMap;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>Project: eurynome-cloud </p>
  * <p>File: SocialProvider </p>
@@ -33,15 +44,67 @@ package cn.herodotus.eurynome.security.definition.social;
  * @author : gengwei.zheng
  * @date : 2021/4/3 15:56
  */
+@ApiModel(value = "社交登录提供商")
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum SocialProvider {
 
     /**
      * 手机验证码登录
      */
-    SMS,
+    SMS("SMS", "手机短信验证码登录"),
 
     /**
      * 微信小程序登录
      */
-    WXAPP;
+    WXAPP("WXAPP", "微信小程序登录");
+
+    @ApiModelProperty(value = "索引")
+    private final String type;
+    @ApiModelProperty(value = "文字")
+    private final String description;
+
+    private static final Map<String, SocialProvider> INDEX_MAP = new HashMap<>();
+    private static final List<Map<String, Object>> TO_JSON_STRUCT = new ArrayList<>();
+
+    static {
+        for (SocialProvider socialProvider : SocialProvider.values()) {
+            INDEX_MAP.put(socialProvider.name(), socialProvider);
+            TO_JSON_STRUCT.add(socialProvider.ordinal(),
+                    ImmutableMap.<String, Object>builder()
+                            .put("value", socialProvider.ordinal())
+                            .put("key", socialProvider.name())
+                            .put("text", socialProvider.getDescription())
+                            .build());
+        }
+    }
+
+    SocialProvider(String type, String description) {
+        this.type = type;
+        this.description = description;
+    }
+
+    /**
+     * 不加@JsonValue，转换的时候转换出完整的对象。
+     * 加了@JsonValue，只会显示相应的属性的值
+     *
+     * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
+     *
+     * @return Enum索引
+     */
+    @JsonValue
+    public String getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public static SocialProvider getProvider(String type) {
+        return INDEX_MAP.get(type);
+    }
+
+    public static List<Map<String, Object>> getToJsonStruct() {
+        return TO_JSON_STRUCT;
+    }
 }
