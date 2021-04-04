@@ -24,7 +24,10 @@
 
 package cn.herodotus.eurynome.security.definition.service;
 
+import cn.herodotus.eurynome.security.definition.social.SocialProvider;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -36,4 +39,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @date : 2021/1/17 12:49
  */
 public interface HerodotusUserDetailsService extends UserDetailsService {
+
+    /**
+     * 通过社交集成的唯一id，获取用户信息
+     *
+     * 如果是短信验证码，openId就是手机号码
+     *
+     * @param openId 社交集成唯一Id
+     * @param socialProvider 社交集成提供商
+     * @return {@link UserDetails}
+     * @throws UsernameNotFoundException 用户不存在
+     */
+    UserDetails loadUserBySocial(String openId, SocialProvider socialProvider) throws UsernameNotFoundException;
 }
