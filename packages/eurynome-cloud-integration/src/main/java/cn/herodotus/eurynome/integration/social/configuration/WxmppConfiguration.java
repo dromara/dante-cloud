@@ -64,7 +64,7 @@ public class WxmppConfiguration {
 					return configStorage;
 				}).collect(Collectors.toMap(WxMpDefaultConfigImpl::getAppId, a -> a, (o, n) -> o)));
 
-		log.info("[Herodotus] |- Bean [Weixin Micro Message Public Platform] Auto Configure.");
+		log.info("[Eurynome] |- Bean [Weixin Micro Message Public Platform] Auto Configure.");
 
 		return service;
 	}

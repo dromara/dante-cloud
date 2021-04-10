@@ -36,7 +36,7 @@ public class ApnsConfiguration {
 
     @PostConstruct
     public void init() {
-        log.info("[Herodotus] |- Bean [IOS Apns] Auto Configure.");
+        log.info("[Eurynome] |- Bean [IOS Apns] Auto Configure.");
     }
 
     @Bean
@@ -52,7 +52,7 @@ public class ApnsConfiguration {
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             p12File = resolver.getResource(apnsProperties.getFilePath()).getFile();
         } catch (IOException e) {
-            log.error("[Herodotus] |- Can not find the p12 file!");
+            log.error("[Eurynome] |- Can not find the p12 file!");
             return null;
         }
 
@@ -65,7 +65,7 @@ public class ApnsConfiguration {
                     .setEventLoopGroup(eventLoopGroup)
                     .build();
         } catch (Exception e) {
-            log.error("[Herodotus] |- ios get pushy apns client failed!");
+            log.error("[Eurynome] |- ios get pushy apns client failed!");
         }
 
         return apnsClient;

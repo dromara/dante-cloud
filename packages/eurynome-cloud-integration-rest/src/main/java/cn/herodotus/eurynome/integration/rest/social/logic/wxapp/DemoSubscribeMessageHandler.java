@@ -20,9 +20,9 @@ import java.util.List;
 public class DemoSubscribeMessageHandler extends SubscribeMessageHandler {
 
 	@Override
-	public WxMaSubscribeMessage getSubscribeMessage(String toUserOpenId, String messageId) {
+	public WxMaSubscribeMessage getSubscribeMessage(String toUser, String subscribeId) {
 
-		WxappProperties.Subscribe properties = this.getSubscribeConfig(messageId);
+		WxappProperties.Subscribe properties = this.getSubscribeConfig(subscribeId);
 
 		WxMaSubscribeMessage wxMaSubscribeMessage = new WxMaSubscribeMessage();
 
@@ -31,7 +31,7 @@ public class DemoSubscribeMessageHandler extends SubscribeMessageHandler {
 		//模板消息id
 		wxMaSubscribeMessage.setTemplateId(properties.getTemplateId());
 		//给谁推送 用户的openid （可以调用根据code换openid接口)
-		wxMaSubscribeMessage.setToUser(toUserOpenId);
+		wxMaSubscribeMessage.setToUser(toUser);
 
 
 		List<WxMaSubscribeMessage.MsgData> wxMaSubscribeData = new ArrayList<>();

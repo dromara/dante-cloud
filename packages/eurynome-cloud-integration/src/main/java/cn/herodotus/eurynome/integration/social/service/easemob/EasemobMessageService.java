@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @date : 2021/4/6 11:44
  */
 @Service
-public class EasemobMessageService extends AbstractBaseService {
+public class EasemobMessageService extends AbstractEasemobService {
 
     public Response postMessage(Request request) {
         return http().sync("/messages")

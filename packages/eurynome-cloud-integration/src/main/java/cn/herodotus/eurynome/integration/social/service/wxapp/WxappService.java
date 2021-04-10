@@ -8,6 +8,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.herodotus.eurynome.integration.social.configuration.WxappConfiguration;
 import cn.herodotus.eurynome.integration.social.domain.wxapp.WxappRequest;
 import cn.herodotus.eurynome.integration.social.properties.WxappProperties;
+import cn.hutool.core.bean.BeanUtil;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.lang3.ObjectUtils;
@@ -43,7 +44,7 @@ public class WxappService {
 			if (StringUtils.isNotBlank(wxappProperties.getDefaultAppId())) {
 				return getWxMaService(wxappProperties.getDefaultAppId());
 			} else {
-				log.error("[Herodotus] |- Must set [herodotus.social.wx.wxapp.default-app-id] property, or use getWxMaService(String appid)!");
+				log.error("[Eurynome] |- Must set [herodotus.social.wx.wxapp.default-app-id] property, or use getWxMaService(String appid)!");
 				return null;
 			}
 		} else {
@@ -61,10 +62,10 @@ public class WxappService {
 	private WxMaJscode2SessionResult getSessionInfo(String code, WxMaService wxMaService) {
 		try {
 			WxMaJscode2SessionResult sessionResult = wxMaService.getUserService().getSessionInfo(code);
-			log.debug("[Herodotus] |- Weixin Mini App login successfully!");
+			log.debug("[Eurynome] |- Weixin Mini App login successfully!");
 			return sessionResult;
 		} catch (WxErrorException e) {
-			log.error("[Herodotus] |- Weixin Mini App login failed! For reason: {}", e.getMessage());
+			log.error("[Eurynome] |- Weixin Mini App login failed! For reason: {}", e.getMessage());
 			return null;
 		}
 	}
@@ -80,10 +81,10 @@ public class WxappService {
 	 */
 	private boolean checkUserInfo(String sessionKey, String rawData, String signature, WxMaService wxMaService) {
 		if (wxMaService.getUserService().checkUserInfo(sessionKey, rawData, signature)) {
-			log.debug("[Herodotus] |- Weixin Mini App user info is valid!");
+			log.debug("[Eurynome] |- Weixin Mini App user info is valid!");
 			return true;
 		} else {
-			log.warn("[Herodotus] |- Weixin Mini App user check failed!");
+			log.warn("[Eurynome] |- Weixin Mini App user check failed!");
 			return false;
 		}
 	}
@@ -99,7 +100,7 @@ public class WxappService {
 	 */
 	private WxMaUserInfo getUserInfo(String sessionKey, String encryptedData, String iv, WxMaService wxMaService) {
 		WxMaUserInfo wxMaUserInfo = wxMaService.getUserService().getUserInfo(sessionKey, encryptedData, iv);
-		log.debug("[Herodotus] |- Weixin Mini App get user info successfully!");
+		log.debug("[Eurynome] |- Weixin Mini App get user info successfully!");
 		return wxMaUserInfo;
 	}
 
@@ -117,16 +118,16 @@ public class WxappService {
 	 * @return {@link WxMaPhoneNumberInfo}
 	 */
 	private WxMaPhoneNumberInfo getPhoneNumberInfo(String sessionKey, String encryptedData, String iv, WxMaService wxMaService) {
-		log.info("[Herodotus] |- Weixin Mini App get encryptedData： {}", encryptedData);
+		log.info("[Eurynome] |- Weixin Mini App get encryptedData： {}", encryptedData);
 
 		WxMaPhoneNumberInfo wxMaPhoneNumberInfo;
 		try {
 			wxMaPhoneNumberInfo = wxMaService.getUserService().getPhoneNoInfo(sessionKey, encryptedData, iv);
-			log.debug("[Herodotus] |- Weixin Mini App get phone number successfully!");
-			log.debug("[Herodotus] |- WxMaPhoneNumberInfo : {}", wxMaPhoneNumberInfo.toString());
+			log.debug("[Eurynome] |- Weixin Mini App get phone number successfully!");
+			log.debug("[Eurynome] |- WxMaPhoneNumberInfo : {}", wxMaPhoneNumberInfo.toString());
 			return wxMaPhoneNumberInfo;
 		} catch (Exception e) {
-			log.error("[Herodotus] |- Weixin Mini App get phone number failed!");
+			log.error("[Eurynome] |- Weixin Mini App get phone number failed!");
 			return null;
 		}
 	}
@@ -144,7 +145,7 @@ public class WxappService {
 		if (StringUtils.isNotBlank(code) && ObjectUtils.isNotEmpty(wxMaService)) {
 			return this.getSessionInfo(code, wxMaService);
 		} else {
-			log.error("[Herodotus] |- Weixin Mini App login failed, please check code param!");
+			log.error("[Eurynome] |- Weixin Mini App login failed, please check code param!");
 			return null;
 		}
 	}
@@ -163,7 +164,7 @@ public class WxappService {
 
 			return this.getUserInfo(wxappRequest.getSessionKey(), wxappRequest.getEncryptedData(), wxappRequest.getIv(), wxMaService);
 		} else {
-			log.error("[Herodotus] |- Weixin Mini App get user info failed!");
+			log.error("[Eurynome] |- Weixin Mini App get user info failed!");
 			return null;
 		}
 	}
@@ -182,17 +183,25 @@ public class WxappService {
 
 			return this.getPhoneNumberInfo(wxappRequest.getSessionKey(), wxappRequest.getEncryptedData(), wxappRequest.getIv(), wxMaService);
 		} else {
-			log.error("[Herodotus] |- Weixin Mini App get phone number info failed!");
+			log.error("[Eurynome] |- Weixin Mini App get phone number info failed!");
 			return null;
 		}
 	}
 
-	public boolean sendSubscribeMessage(String appId, String toUserOpenId, String messageType) {
-		try {
-			WxMaSubscribeMessage wxMaSubscribeMessage = subscribeMessageFactory.getSubscribeMessage(toUserOpenId, messageType);
+	/**
+	 * 发送微信小程序订阅消息
+	 *
+	 * @param appId 小程序appId
+	 * @param toUser 发送订阅消息的目标用户OpenId
+	 * @param subscribeId WxappProperties 中 配置的subscribeId值，这个值需要配置到具体的SubscribeMessageHandler实现类注解上
+	 * @return true 发送成功，false 发送失败，或者参数subscribeId配置不对，无法获取相应的WxMaSubscribeMessage
+	 */
+	public boolean sendSubscribeMessage(String appId, String toUser, String subscribeId) {
+		WxMaSubscribeMessage wxMaSubscribeMessage = subscribeMessageFactory.getSubscribeMessage(toUser, subscribeId);
+		if (BeanUtil.isNotEmpty(wxMaSubscribeMessage)) {
 			return this.sendSubscribeMessage(appId, wxMaSubscribeMessage);
-		} catch (Exception e) {
-			log.error("[Herodotus] |- Weixin Mini App send subscribe message error: {}", e.getMessage());
+		} else {
+			log.error("[Eurynome] |- Generate WxMaSubscribeMessage error");
 			return false;
 		}
 	}
@@ -201,10 +210,10 @@ public class WxappService {
 		WxMaService wxMaService = getWxMaService(appId);
 		try {
 			wxMaService.getMsgService().sendSubscribeMsg(subscribeMessage);
-			log.debug("[Herodotus] |- Send Subscribe Message Successfully!");
+			log.debug("[Eurynome] |- Send Subscribe Message Successfully!");
 			return true;
 		} catch (WxErrorException e) {
-			log.debug("[Herodotus] |- Send Subscribe Message Failed!", e);
+			log.debug("[Eurynome] |- Send Subscribe Message Failed!", e);
 			return false;
 		}
 	}

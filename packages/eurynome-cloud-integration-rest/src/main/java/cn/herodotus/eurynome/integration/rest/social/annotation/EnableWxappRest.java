@@ -24,6 +24,10 @@
 
 package cn.herodotus.eurynome.integration.rest.social.annotation;
 
+import cn.herodotus.eurynome.integration.rest.social.configuration.WxappRestConfiguration;
+import cn.herodotus.eurynome.integration.social.annotation.EnableWxapp;
+import org.springframework.context.annotation.Import;
+
 import java.lang.annotation.*;
 
 /**
@@ -37,5 +41,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableWxapp
+@Import(WxappRestConfiguration.class)
 public @interface EnableWxappRest {
 }

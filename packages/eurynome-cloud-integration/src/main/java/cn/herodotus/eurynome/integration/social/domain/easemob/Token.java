@@ -15,14 +15,23 @@ import java.math.BigInteger;
  */
 public class Token implements Serializable {
 
+	/**
+	 * 有效的token字符串
+	 */
 	@JsonProperty("access_token")
 	@JSONField(name = "access_token")
 	private String accessToken;
 
+	/**
+	 * token 有效时间，以秒为单位，在有效期内不需要重复获取
+	 */
 	@JsonProperty("expires_in")
 	@JSONField(name = "expires_in")
 	private BigInteger expiresIn;
 
+	/**
+	 * 当前 App 的 UUID 值
+	 */
 	private String application;
 
 	public String getAccessToken() {

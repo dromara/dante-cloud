@@ -14,18 +14,20 @@ import java.util.List;
  */
 public abstract class SubscribeMessageHandler {
 
-	@Autowired
-	private WxappProperties wxappProperties;
+    @Autowired
+    private WxappProperties wxappProperties;
 
-	/**
-	 * 组装模版信息并获取WxJava定义的WxMaSubscribeMessage
-	 * @param toUserOpenId 发送目标用户的OpenId
-	 * @return {@link WxMaSubscribeMessage}
-	 */
-	public abstract WxMaSubscribeMessage getSubscribeMessage(String toUserOpenId, String messageId);
+    /**
+     * 组装模版信息并获取WxJava定义的WxMaSubscribeMessage
+     *
+     * @param toUser      发送订阅消息的目标用户OpenId
+     * @param subscribeId WxappProperties中配置的subscribeId值，这个值需要配置到具体SubscribeMessageHandler实现类的注解上
+     * @return {@link WxMaSubscribeMessage}
+     */
+    public abstract WxMaSubscribeMessage getSubscribeMessage(String toUser, String subscribeId);
 
-	protected WxappProperties.Subscribe getSubscribeConfig(String messageId) {
-		List<WxappProperties.Subscribe> subscribes = this.wxappProperties.getSubscribes();
-		return subscribes.stream().filter(a -> a.getMessageType().equals(messageId)).findFirst().orElse(new WxappProperties.Subscribe());
-	}
+    protected WxappProperties.Subscribe getSubscribeConfig(String messageId) {
+        List<WxappProperties.Subscribe> subscribes = this.wxappProperties.getSubscribes();
+        return subscribes.stream().filter(a -> a.getSubscribeId().equals(messageId)).findFirst().orElse(new WxappProperties.Subscribe());
+    }
 }

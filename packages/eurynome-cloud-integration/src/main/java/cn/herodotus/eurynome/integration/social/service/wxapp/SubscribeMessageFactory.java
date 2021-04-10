@@ -3,6 +3,7 @@ package cn.herodotus.eurynome.integration.social.service.wxapp;
 import cn.binarywang.wx.miniapp.bean.WxMaSubscribeMessage;
 import cn.herodotus.eurynome.integration.social.definition.wxapp.SubscribeMessageHandler;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -17,14 +18,15 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class SubscribeMessageFactory {
 
-	Map<String, SubscribeMessageHandler> handlers = new ConcurrentHashMap<>();
+	@Autowired
+	private final Map<String, SubscribeMessageHandler> handlers = new ConcurrentHashMap<>();
 
-	public WxMaSubscribeMessage getSubscribeMessage(String toUser, String messageType) throws Exception {
-		SubscribeMessageHandler handler = handlers.get(messageType);
+	public WxMaSubscribeMessage getSubscribeMessage(String toUser, String subscribeId) {
+		SubscribeMessageHandler handler = handlers.get(subscribeId);
 		if (ObjectUtils.isNotEmpty(handler)) {
-			return handler.getSubscribeMessage(toUser, messageType);
+			return handler.getSubscribeMessage(toUser, subscribeId);
 		} else {
-			throw new RuntimeException("No SubscribeMessageHandler defined");
+			return null;
 		}
 	}
 }

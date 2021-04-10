@@ -147,7 +147,7 @@ public class WxappProperties implements Serializable {
 		/**
 		 * 自定义Message区分ID，用于获取不同的SubscribeMessageHandler
 		 */
-		private String messageType;
+		private String subscribeId;
 
 		private MiniProgramState miniProgramState = MiniProgramState.formal;
 
@@ -175,20 +175,20 @@ public class WxappProperties implements Serializable {
 			this.miniProgramState = miniProgramState;
 		}
 
-		public String getMessageType() {
-			return messageType;
+		public String getSubscribeId() {
+			return subscribeId;
 		}
 
-		public void setMessageType(String messageType) {
-			this.messageType = messageType;
+		public void setSubscribeId(String subscribeId) {
+			this.subscribeId = subscribeId;
 		}
 
 		@Override
 		public String toString() {
 			return MoreObjects.toStringHelper(this)
-					.add("page", redirectPage)
+					.add("redirectPage", redirectPage)
 					.add("templateId", templateId)
-					.add("messageType", messageType)
+					.add("subscribeId", subscribeId)
 					.add("miniProgramState", miniProgramState)
 					.toString();
 		}

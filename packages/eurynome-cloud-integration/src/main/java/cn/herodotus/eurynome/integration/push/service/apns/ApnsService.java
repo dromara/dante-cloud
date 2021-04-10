@@ -65,7 +65,7 @@ public class ApnsService {
     private SimpleApnsPushNotification createNotification(String deviceToken, String bundleId, String payload) {
         final String token = TokenUtil.sanitizeTokenString(deviceToken);
         SimpleApnsPushNotification pushNotification = new SimpleApnsPushNotification(token, bundleId, payload);
-        log.debug("[Herodotus] |- Create Apns Push Notification for device: {}", deviceToken);
+        log.debug("[Eurynome] |- Create Apns Push Notification for device: {}", deviceToken);
         return pushNotification;
     }
 
@@ -94,7 +94,7 @@ public class ApnsService {
             sendNotificationFuture.addListener(future -> semaphore.release());
             return sendNotificationFuture;
         } catch (InterruptedException e) {
-            log.error("[Herodotus] |- Failed to  acquire semaphore.");
+            log.error("[Eurynome] |- Failed to  acquire semaphore.");
             return null;
         }
     }

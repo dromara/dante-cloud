@@ -68,7 +68,7 @@ public class WxappConfiguration {
                     return service;
                 }).collect(Collectors.toMap(s -> s.getWxMaConfig().getAppid(), a -> a));
 
-        log.info("[Herodotus] |- Bean [Weixin Mini App] Auto Configure.");
+        log.info("[Eurynome] |- Bean [Weixin Mini App] Auto Configure.");
     }
 
     public static WxMaService getWxMaService(String appid) {

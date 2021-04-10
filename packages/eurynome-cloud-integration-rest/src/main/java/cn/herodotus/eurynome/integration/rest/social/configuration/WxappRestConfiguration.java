@@ -46,6 +46,6 @@ public class WxappRestConfiguration {
 
     @PostConstruct
     public void init() {
-        log.info("[Herodotus] |- Bean [Wexin Mini App REST] Auto Configure.");
+        log.info("[Eurynome] |- Bean [Wexin Mini App REST] Auto Configure.");
     }
 }

@@ -27,10 +27,11 @@ public class WxappController {
 	@Autowired
 	private WxappService wxappService;
 
-	@ApiOperation(value = "发送订阅消息", notes = "微信小程序发送订阅消息", consumes = "application/json")
+	@ApiOperation(value = "发送订阅消息", notes = "微信小程序发送订阅消息")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "openId", required = true, value = "发送给指定用户的微信小程序openId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
 			@ApiImplicitParam(name = "appId", required = true, value = "微信小程序appId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+			@ApiImplicitParam(name = "toUser", required = true, value = "发送给指定用户的微信小程序openId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+			@ApiImplicitParam(name = "subscribeId", required = true, value = "微信小程序Subscribe配置中的subscribeId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
 	})
 	@PostMapping("/sendSubscribeMessage")
 	public Result<String> sendSubscribeMessage(String appId, String toUser, String messageType) {
