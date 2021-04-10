@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Description: 环信基础Service </p>
@@ -60,7 +61,7 @@ public abstract class AbstractEasemobService extends AbstractRestApiService {
                 .toBean(Token.class);
 
         if (BeanUtil.isNotEmpty(token)) {
-            redisTemplate.opsForValue().set(IntegrationConstants.EASEMOB_TOKEN, token, token.getExpiresIn().longValue());
+            redisTemplate.opsForValue().set(IntegrationConstants.EASEMOB_TOKEN, token, token.getExpiresIn().longValue(), TimeUnit.SECONDS);
             log.debug("[Eurynome] |- Fetch the easemob token and save to redis : {}", token);
         }
 
