@@ -36,7 +36,7 @@
         <google-guava.version>30.1.1-jre</google-guava.version>
         <hutool.version>5.6.2</hutool.version>
         <jackson.version>2.12.2</jackson.version>
-        <weixin-java-miniapp.version>4.0.6.B</weixin-java-miniapp.version>
+        <weixin-java.version>4.0.7.B</weixin-java.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
@@ -55,6 +55,7 @@
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <okhttps.version>3.0.1</okhttps.version>
+        <pushy.version>0.13.10</pushy.version>
         <just-auth.verison>1.15.9</just-auth.verison>
 
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
@@ -220,7 +221,12 @@
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-miniapp</artifactId>
-                <version>${weixin-java-miniapp.version}</version>
+                <version>${weixin-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-mp</artifactId>
+                <version>${weixin-java.version}</version>
             </dependency>
 
             <dependency>
@@ -244,7 +250,12 @@
                 <artifactId>JustAuth</artifactId>
                 <version>${just-auth.verison}</version>
             </dependency>
-
+            <!-- https://mvnrepository.com/artifact/com.turo/pushy -->
+            <dependency>
+                <groupId>com.turo</groupId>
+                <artifactId>pushy</artifactId>
+                <version>${pushy.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

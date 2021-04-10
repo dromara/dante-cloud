@@ -77,7 +77,7 @@ public class FeignConfiguration {
      * 1、不要采用Ribbon配置而要直接配置FeignClient，即配置feign.client.xx
      * 2、配置文件配置全体FeignClient的超时设置，同时对特定服务有特殊设置的，也在配置文件里配置
      *
-     * @see: https://blog.csdn.net/weixin_36244726/article/details/103953852
+     * {@see :https://blog.csdn.net/weixin_36244726/article/details/103953852}
      */
     @Bean
     public Request.Options options() {

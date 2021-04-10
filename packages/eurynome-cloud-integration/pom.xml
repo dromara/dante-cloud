@@ -40,11 +40,26 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-rest</artifactId>
+            <artifactId>eurynome-cloud-data</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-miniapp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ejlchina</groupId>
+            <artifactId>okhttps-fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.turo</groupId>
+            <artifactId>pushy</artifactId>
         </dependency>
     </dependencies>
 

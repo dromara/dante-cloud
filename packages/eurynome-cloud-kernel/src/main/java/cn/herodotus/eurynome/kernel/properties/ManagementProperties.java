@@ -47,8 +47,8 @@ public class ManagementProperties {
         log.info("[Eurynome] |- Properties [Management] is Enabled.");
     }
 
-    private LogCenter logCenter = new LogCenter();
-    private ConfigCenter configCenter = new ConfigCenter();
+    private final LogCenter logCenter = new LogCenter();
+    private final ConfigCenter configCenter = new ConfigCenter();
 
     public LogCenter getLogCenter() {
         return logCenter;

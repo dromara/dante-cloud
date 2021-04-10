@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2019-2020 the original author or authors.
+  ~ Copyright (c) 2019-2021 the original author or authors.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
   ~
   ~
   ~ Project Name: eurynome-cloud
-  ~ Module Name: eurynome-cloud
+  ~ Module Name: packages
   ~ File Name: pom.xml
   ~ Author: gengwei.zheng
-  ~ Date: 2020/5/22 下午4:22
-  ~ LastModified: 2020/5/22 下午4:22
+  ~ Date: 2021/4/10 下午2:08
+  ~ LastModified: 2021/4/10 下午2:08
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -29,30 +29,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>eurynome-cloud</artifactId>
+        <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>2.4.0.0</version>
     </parent>
 
-    <artifactId>packages</artifactId>
-    <packaging>pom</packaging>
 
-    <name>eurynome-cloud-packages</name>
+    <artifactId>eurynome-cloud-integration-rest</artifactId>
+    <version>2.4.0.0</version>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>eurynome-cloud-common</module>
-        <module>eurynome-cloud-operation</module>
-        <module>eurynome-cloud-data</module>
-        <module>eurynome-cloud-rest</module>
-        <module>eurynome-cloud-security</module>
-        <module>eurynome-cloud-message</module>
-        <module>eurynome-cloud-starter</module>
-        <module>eurynome-cloud-crud</module>
-        <module>eurynome-cloud-kernel</module>
-        <module>eurynome-cloud-oauth</module>
-        <module>eurynome-cloud-oauth-starter</module>
-        <module>eurynome-cloud-integration</module>
-        <module>eurynome-cloud-integration-rest</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-integration</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-rest</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

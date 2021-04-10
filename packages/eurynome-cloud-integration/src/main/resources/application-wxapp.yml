@@ -1,0 +1,20 @@
+herodotus:
+  integration:
+    social:
+      wxapp:
+        default-app-id: wxff1142afea12b9b8
+        configs:
+          - app-id: wxff1142afea12b9b8
+            secret: d3fa3ea106413dce613cdc480453271e
+            token: #微信小程序消息服务器配置的token
+            aes-key: #微信小程序消息服务器配置的EncodingAESKey
+            messageDataFormat: JSON
+          - app-id: wxb677abefc40a9943
+            secret: a514258114f67380ffc56589309cc7e9
+            token: #微信小程序消息服务器配置的token
+            aes-key: #微信小程序消息服务器配置的EncodingAESKey
+            message-data-format: JSON
+        subscribes:
+          - message-type: SC_DEMO
+            template-id: sdfsdfsdfsd
+            redirect-page: /page/index/index
