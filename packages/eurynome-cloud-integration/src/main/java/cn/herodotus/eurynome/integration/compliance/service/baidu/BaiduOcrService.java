@@ -1,15 +1,21 @@
 package cn.herodotus.eurynome.integration.compliance.service.baidu;
 
-import cn.herodotus.eurynome.common.utils.Base64ImageUtils;
-import cn.herodotus.eurynome.common.utils.JacksonUtils;
 import cn.herodotus.eurynome.integration.compliance.domain.baidu.OcrResult;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.util.URLUtil;
+import com.alibaba.fastjson.JSON;
 import com.baidu.aip.ocr.AipOcr;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 
 /**
@@ -25,12 +31,34 @@ public class BaiduOcrService {
 	@Autowired
 	private AipOcr aipOcr;
 
+	/**
+	 * 将org.json.jsonObject的返回结果，转换为定义的实体
+	 *
+	 * @param jsonObject Baidu接口返回的对象
+	 * @return {@link OcrResult}
+	 */
 	private OcrResult jsonObjectToBean(JSONObject jsonObject) {
 		if (ObjectUtils.isNotEmpty(jsonObject)) {
-			return JacksonUtils.toObject(jsonObject.toString(), OcrResult.class);
+			return JSON.parseObject(jsonObject.toString(), OcrResult.class);
 		} else {
-			log.error("[Braineex] |- JSONObject convert to Bean error!");
+			log.error("[Eurynome] |- JSONObject convert to Bean error!");
 			return null;
+		}
+	}
+
+	/**
+	 * 将路径对应的文件转成二进制数据
+	 *
+	 * @param route 可以是文件路径也可以是URL
+	 * @return byte[]
+	 */
+	private byte[] readBytes(String route) {
+		URL url = URLUtil.url(route);
+		boolean isFile = URLUtil.isFileURL(url);
+		if (isFile) {
+			return FileUtil.readBytes(url.getFile());
+		} else {
+			return IoUtil.readBytes(URLUtil.getStream(url), true);
 		}
 	}
 
@@ -46,7 +74,7 @@ public class BaiduOcrService {
 		// org.json.JSONObject jsonObject = client.basicGeneral(bytesBs64, options);
 		// 高精度版 500次/天免费
 		JSONObject jsonObject = aipOcr.basicAccurateGeneral(image, options);
-		log.debug("[Braineex] |- Picture recognition result is: {}", jsonObject.toString());
+		log.debug("[Eurynome] |- Picture recognition result is: {}", jsonObject.toString());
 		return this.jsonObjectToBean(jsonObject);
 	}
 
@@ -58,8 +86,7 @@ public class BaiduOcrService {
 	 */
 	public OcrResult pictureRecognition(String url) {
 		HashMap<String, String> options = new HashMap<>();
-		byte[] base64Image = Base64ImageUtils.onlineImageToBase64(url);
-
+		byte[] base64Image = this.readBytes(url);
 		return this.pictureRecognition(base64Image, options);
 	}
 
@@ -72,7 +99,7 @@ public class BaiduOcrService {
 	 */
 	public OcrResult businessLicense(byte[] image, HashMap<String, String> options) {
 		JSONObject jsonObject = aipOcr.businessLicense(image, options);
-		log.debug("[Braineex] |- Business License result is: {}", jsonObject.toString());
+		log.debug("[Eurynome] |- Business License result is: {}", jsonObject.toString());
 		return this.jsonObjectToBean(jsonObject);
 	}
 
@@ -84,7 +111,7 @@ public class BaiduOcrService {
 	 */
 	public OcrResult businessLicense(String url) {
 		HashMap<String, String> options = new HashMap<>();
-		byte[] base64Image = Base64ImageUtils.localImageToBase64(url);
+		byte[] base64Image = this.readBytes(url);
 		return this.businessLicense(base64Image, options);
 	}
 
@@ -98,7 +125,7 @@ public class BaiduOcrService {
 	 */
 	public OcrResult idCard(byte[] image, String idCardSide, HashMap<String, String> options) {
 		JSONObject jsonObject = aipOcr.idcard(image, idCardSide, options);
-		log.debug("[Braineex] |- IDCard result is: {}", jsonObject.toString());
+		log.debug("[Eurynome] |- IDCard result is: {}", jsonObject.toString());
 		return this.jsonObjectToBean(jsonObject);
 	}
 
@@ -107,14 +134,14 @@ public class BaiduOcrService {
 	 *
 	 * @param url        图片URL
 	 * @param idCardSide front：身份证含照片的一面；back：身份证带国徽的一面
-	 * @return
+	 * @return {@link OcrResult}
 	 */
 	public OcrResult idCard(String url, String idCardSide) {
 		// 传入可选参数调用接口
 		HashMap<String, String> options = new HashMap<>();
 		//保护隐私，身份证号码不显示
 		options.put("detect_risk", "true");
-		byte[] base64Image = Base64ImageUtils.onlineImageToBase64(url);
+		byte[] base64Image = this.readBytes(url);
 		return this.idCard(base64Image, idCardSide, options);
 	}
 }

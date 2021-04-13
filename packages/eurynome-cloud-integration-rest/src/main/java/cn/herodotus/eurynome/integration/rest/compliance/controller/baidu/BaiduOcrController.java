@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,10 +38,10 @@ public class BaiduOcrController {
     @PostMapping("/pictureRecognition")
     public Result<OcrResult> pictureRecognition(@RequestParam("picUrl") String picUrl) {
         OcrResult result = baiduOCRService.pictureRecognition(picUrl);
-        if (ObjectUtils.isNotEmpty(result)) {
+        if (ObjectUtils.isNotEmpty(result) && StringUtils.isEmpty(result.getErrorMessage())) {
             return new Result<OcrResult>().ok().data(result);
         } else {
-            return new Result<OcrResult>().failed().message("图片识别出错");
+            return new Result<OcrResult>().failed().message("图片识别出错").data(result);
         }
     }
 
@@ -51,10 +52,10 @@ public class BaiduOcrController {
     @PostMapping("/businessLicense")
     public Result<OcrResult> businessLicense(@RequestParam("picUrl") String picUrl) {
         OcrResult result = baiduOCRService.businessLicense(picUrl);
-        if (ObjectUtils.isNotEmpty(result)) {
+        if (ObjectUtils.isNotEmpty(result) && StringUtils.isEmpty(result.getErrorMessage())) {
             return new Result<OcrResult>().ok().data(result);
         } else {
-            return new Result<OcrResult>().failed().message("营业执照识别出错");
+            return new Result<OcrResult>().failed().message("营业执照识别出错").data(result);
         }
     }
 
@@ -63,47 +64,13 @@ public class BaiduOcrController {
             @ApiImplicitParam(name = "picUrl", required = true, value = "待审核图片url", dataType = "String", dataTypeClass = String.class, paramType = "query"),
             @ApiImplicitParam(name = "side", required = true, value = "身份证照片面标签：front：身份证含照片的一面；back：身份证带国徽的一面", dataType = "String", dataTypeClass = String.class, paramType = "query")
     })
-    @PostMapping("/IDCard")
+    @PostMapping("/idCard")
     public Result<OcrResult> IDCard(@RequestParam("picUrl") String picUrl, @RequestParam("side") String side) {
         OcrResult result = baiduOCRService.idCard(picUrl, side);
-        if (ObjectUtils.isNotEmpty(result)) {
+        if (ObjectUtils.isNotEmpty(result) && StringUtils.isEmpty(result.getErrorMessage())){
             return new Result<OcrResult>().ok().data(result);
         } else {
-            return new Result<OcrResult>().failed().message("身份证识别出错");
+            return new Result<OcrResult>().failed().message("身份证识别出错").data(result);
         }
-    }
-
-
-    @ApiOperation(value = "远程调用识别图片文字", notes = "远程调用识别图片文字")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "picUrl", required = true, value = "待审核图片url", dataType = "String", dataTypeClass = String.class, paramType = "query")
-    })
-
-    @PostMapping("/pictureRecognitionRemote")
-    public Result<OcrResult> pictureRecognitionRemote(@RequestParam("picUrl") String picUrl) {
-        return this.pictureRecognition(picUrl);
-    }
-
-
-    @ApiOperation(value = "远程调用识别营业执照", notes = "营业执照识别，照片必须是正的，否则无法识别")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "picUrl", required = true, value = "待审核图片url", dataType = "String", dataTypeClass = String.class, paramType = "query")
-    })
-
-    @PostMapping("/businessLicenseRemote")
-    public Result<OcrResult> businessLicenseRemote(@RequestParam("picUrl") String picUrl) {
-        return this.businessLicense(picUrl);
-    }
-
-
-    @ApiOperation(value = "远程调用识别身份证照", notes = "远程调用识别身份证照")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "picUrl", required = true, value = "待审核图片url", dataType = "String", dataTypeClass = String.class, paramType = "query"),
-            @ApiImplicitParam(name = "side", required = true, value = "身份证照片面标签：front：身份证含照片的一面；back：身份证带国徽的一面", dataType = "String", dataTypeClass = String.class, paramType = "query")
-    })
-
-    @PostMapping("/IDCardRemote")
-    public Result<OcrResult> IDCardRemote(@RequestParam("picUrl") String picUrl, @RequestParam("side") String side) {
-        return this.IDCard(picUrl, side);
     }
 }
