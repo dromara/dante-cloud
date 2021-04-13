@@ -37,6 +37,7 @@
         <hutool.version>5.6.2</hutool.version>
         <jackson.version>2.12.2</jackson.version>
         <weixin-java.version>4.0.7.B</weixin-java.version>
+        <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
@@ -228,6 +229,12 @@
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
                 <version>${weixin-java.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
+            <dependency>
+                <groupId>com.baidu.aip</groupId>
+                <artifactId>java-sdk</artifactId>
+                <version>${baidu-java-sdk.version}</version>
             </dependency>
 
             <dependency>
