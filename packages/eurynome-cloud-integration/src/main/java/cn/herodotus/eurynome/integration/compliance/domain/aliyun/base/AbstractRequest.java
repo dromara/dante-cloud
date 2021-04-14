@@ -2,7 +2,6 @@ package cn.herodotus.eurynome.integration.compliance.domain.aliyun.base;
 
 import com.google.common.base.MoreObjects;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +10,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/4/14 13:00
  */
-public class AbstractRequest<T extends AbstractTask> implements Serializable {
+public abstract class AbstractRequest<T extends AbstractTask> extends CoreRequest {
     /**
      * 该字段用于标识您的业务场景。您可以通过内容安全控制台创建业务场景（具体操作，请参见自定义机审标准），或者提交工单联系我们帮助您创建业务场景。
      */

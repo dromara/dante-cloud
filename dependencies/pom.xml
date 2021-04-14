@@ -36,8 +36,10 @@
         <google-guava.version>30.1.1-jre</google-guava.version>
         <hutool.version>5.6.2</hutool.version>
         <jackson.version>2.12.2</jackson.version>
-        <weixin-java.version>4.0.7.B</weixin-java.version>
+        <weixin-java-sdk.version>4.0.7.B</weixin-java-sdk.version>
         <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
+        <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
+        <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
@@ -223,18 +225,30 @@
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-miniapp</artifactId>
-                <version>${weixin-java.version}</version>
+                <version>${weixin-java-sdk.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
-                <version>${weixin-java.version}</version>
+                <version>${weixin-java-sdk.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
             <dependency>
                 <groupId>com.baidu.aip</groupId>
                 <artifactId>java-sdk</artifactId>
                 <version>${baidu-java-sdk.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-green -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-green</artifactId>
+                <version>${aliyun-java-sdk-green.version}</version>
             </dependency>
 
             <dependency>

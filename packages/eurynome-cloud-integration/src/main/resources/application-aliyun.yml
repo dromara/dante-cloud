@@ -1,0 +1,19 @@
+herodotus:
+  integration:
+    compliance:
+      aliyun:
+        region-id: cn-shanghai
+        access-key-id: LTAIbpBuZTocddot
+        access-key-secret: qqTHQOJRlc7BSqPJMjHnftGH4vmW2W
+        image:
+          connect-timeout: 3000
+          read-timeout: 10000
+        video:
+          connect-timeout: 3000
+          read-timeout: 10000
+        text:
+          connect-timeout: 3000
+          read-timeout: 6000
+        voice:
+          connect-timeout: 3000
+          read-timeout: 6000
