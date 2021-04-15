@@ -40,6 +40,7 @@
         <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
         <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
         <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
+        <aliyun-java-sdk-oss.version>3.12.0</aliyun-java-sdk-oss.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
@@ -249,6 +250,12 @@
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-green</artifactId>
                 <version>${aliyun-java-sdk-green.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-java-sdk-oss.version}</version>
             </dependency>
 
             <dependency>

@@ -1,19 +1,29 @@
 herodotus:
   integration:
-    compliance:
+    content:
       aliyun:
-        region-id: cn-shanghai
         access-key-id: LTAIbpBuZTocddot
         access-key-secret: qqTHQOJRlc7BSqPJMjHnftGH4vmW2W
-        image:
-          connect-timeout: 3000
-          read-timeout: 10000
-        video:
-          connect-timeout: 3000
-          read-timeout: 10000
-        text:
-          connect-timeout: 3000
-          read-timeout: 6000
-        voice:
-          connect-timeout: 3000
-          read-timeout: 6000
+        scan:
+          region-id: cn-shanghai
+          image:
+            connect-timeout: 3000
+            read-timeout: 10000
+          video:
+            connect-timeout: 3000
+            read-timeout: 10000
+          text:
+            connect-timeout: 3000
+            read-timeout: 6000
+          voice:
+            connect-timeout: 3000
+            read-timeout: 6000
+        oss:
+          endpoint: oss-cn-shenzhen.aliyuncs.com
+          bucket-name: braineex
+          base-url: http://braineex.oss-cn-shenzhen.aliyuncs.com
+          picture-types: .GIF,.JPEG,.JPG,.PNG,.TGA,.TIF,.EXIF,.Webp,.BMP,.PCX,.FPX,.SVG,.PSD,.CDR,.PCD,.DXF,.UFO,.EPS,.AI,.HDRI,.RAW,.WMF,.FLIC,.EMF,.ICO,.FLA
+          video-types: .AVI,.WMV,.MPEG,.MP4,.MOV,.MKV,.FLV,.F4V,.M4V,.RMVB,.RM,.3GP,.DAT,.TS,.MTS,.VOB,.SWF
+          voice-types: .MP3,.OGG,.WAV,.APE,.CDA,.AU,.MIDI,.MAC,.AAC,.FLAC
+          app-types: .APK,.IPA,.EXE
+          doc-types: .PDF,.DOC,.DOCX,.XLS,.XLSX,.PPT,.PPTX,.WPS,.RAR,.ZIP,.TXT,.DDB,.DWG

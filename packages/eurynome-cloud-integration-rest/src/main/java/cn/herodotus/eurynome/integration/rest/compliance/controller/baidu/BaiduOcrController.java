@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.integration.rest.compliance.controller.baidu;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.integration.compliance.domain.baidu.OcrResult;
-import cn.herodotus.eurynome.integration.compliance.service.baidu.BaiduOcrService;
+import cn.herodotus.eurynome.integration.content.domain.baidu.OcrResult;
+import cn.herodotus.eurynome.integration.content.service.baidu.BaiduOcrService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

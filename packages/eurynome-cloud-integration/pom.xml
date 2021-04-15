@@ -73,6 +73,10 @@
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-green</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.ejlchina</groupId>

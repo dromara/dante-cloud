@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.integration.rest.compliance.annotation;
 
-import cn.herodotus.eurynome.integration.compliance.annotation.EnableBaiduOcr;
+import cn.herodotus.eurynome.integration.content.annotation.EnableBaiduOcr;
 import cn.herodotus.eurynome.integration.rest.compliance.configuration.BaiduOcrRestConfiguration;
 import org.springframework.context.annotation.Import;
 

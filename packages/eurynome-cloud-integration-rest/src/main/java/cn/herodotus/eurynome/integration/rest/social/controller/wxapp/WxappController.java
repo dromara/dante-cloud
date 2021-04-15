@@ -43,4 +43,36 @@ public class WxappController {
 			return new Result<String>().failed().message("订阅消息发送失败");
 		}
 	}
+
+	@ApiOperation(value = "检查文本内容合规性", notes = "基于微信小程序提供的接口检查文本内容的合规性")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "appId", required = true, value = "微信小程序appId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+			@ApiImplicitParam(name = "message", required = true, value = "需要检测的文本内容", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+	})
+	@PostMapping("/checkMessage")
+	public Result<String> checkMessage(String appId, String message) {
+		boolean result = wxappService.checkMessage(appId, message);
+		if (result) {
+			return new Result<String>().ok().message("消息合规");
+		} else {
+
+			return new Result<String>().failed().message("消息不合规");
+		}
+	}
+
+	@ApiOperation(value = "检查图片内容合规性", notes = "基于微信小程序提供的接口检查图片内容的合规性")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "appId", required = true, value = "微信小程序appId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+			@ApiImplicitParam(name = "fileUrl", required = true, value = "文件网络地址", dataType = "String", dataTypeClass = String.class, paramType = "query"),
+	})
+	@PostMapping("/checkImage")
+	public Result<String> checkImage(String appId, String fileUrl) {
+		boolean result = wxappService.checkImage(appId, fileUrl);
+		if (result) {
+			return new Result<String>().ok().message("消息合规");
+		} else {
+
+			return new Result<String>().failed().message("消息不合规");
+		}
+	}
 }
