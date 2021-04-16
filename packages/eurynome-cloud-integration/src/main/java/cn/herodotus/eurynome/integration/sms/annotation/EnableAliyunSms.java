@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.integration.sms.annotation;
 
-import cn.herodotus.eurynome.integration.sms.configuration.SmsConfiguration;
+import cn.herodotus.eurynome.integration.sms.configuration.AliyunSmsConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -14,6 +14,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(SmsConfiguration.class)
+@Import(AliyunSmsConfiguration.class)
 public @interface EnableAliyunSms {
 }

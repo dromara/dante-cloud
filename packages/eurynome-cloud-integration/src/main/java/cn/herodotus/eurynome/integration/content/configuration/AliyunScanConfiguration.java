@@ -34,7 +34,7 @@ public class AliyunScanConfiguration {
 
 	@PostConstruct
 	public void init() {
-		log.info("[Braineex] |- Bean [Aliyun Scan] Auto Configure.");
+		log.info("[Eurynome] |- Bean [Aliyun Scan] Auto Configure.");
 	}
 
 	@Autowired
@@ -45,7 +45,7 @@ public class AliyunScanConfiguration {
 	public IAcsClient iAcsClient() {
 		IClientProfile iClientProfile = DefaultProfile.getProfile(aliyunProperties.getRegionId(), aliyunProperties.getAccessKeyId(), aliyunProperties.getAccessKeySecret());
 		IAcsClient iAcsClient = new DefaultAcsClient(iClientProfile);
-		log.debug("[Braineex] |- Bean [iAcsClient] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [iAcsClient] Auto Configure.");
 		return iAcsClient;
 	}
 
@@ -69,7 +69,7 @@ public class AliyunScanConfiguration {
 		textScanRequest.setSysConnectTimeout(aliyunProperties.getScan().getText().getConnectTimeout());
 		textScanRequest.setSysReadTimeout(aliyunProperties.getScan().getText().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Text Scan Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Text Scan Request] Auto Configure.");
 		return textScanRequest;
 	}
 
@@ -93,7 +93,7 @@ public class AliyunScanConfiguration {
 		textFeedbackRequest.setSysConnectTimeout(aliyunProperties.getScan().getText().getConnectTimeout());
 		textFeedbackRequest.setSysReadTimeout(aliyunProperties.getScan().getText().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Text Feedback Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Text Feedback Request] Auto Configure.");
 		return textFeedbackRequest;
 	}
 
@@ -120,7 +120,7 @@ public class AliyunScanConfiguration {
 		imageSyncScanRequest.setSysConnectTimeout(aliyunProperties.getScan().getImage().getConnectTimeout());
 		imageSyncScanRequest.setSysReadTimeout(aliyunProperties.getScan().getImage().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Image Sync Scan Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Image Sync Scan Request] Auto Configure.");
 		return imageSyncScanRequest;
 	}
 
@@ -147,7 +147,7 @@ public class AliyunScanConfiguration {
 		imageAsyncScanRequest.setSysConnectTimeout(aliyunProperties.getScan().getImage().getConnectTimeout());
 		imageAsyncScanRequest.setSysReadTimeout(aliyunProperties.getScan().getImage().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Image Async Scan Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Image Async Scan Request] Auto Configure.");
 		return imageAsyncScanRequest;
 	}
 
@@ -175,7 +175,7 @@ public class AliyunScanConfiguration {
 		imageAsyncScanResultsRequest.setSysConnectTimeout(aliyunProperties.getScan().getImage().getConnectTimeout());
 		imageAsyncScanResultsRequest.setSysReadTimeout(aliyunProperties.getScan().getImage().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Image Async Scan Results Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Image Async Scan Results Request] Auto Configure.");
 		return imageAsyncScanResultsRequest;
 	}
 
@@ -198,7 +198,7 @@ public class AliyunScanConfiguration {
 		videoSyncScanRequest.setSysConnectTimeout(aliyunProperties.getScan().getVideo().getConnectTimeout());
 		videoSyncScanRequest.setSysReadTimeout(aliyunProperties.getScan().getVideo().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Video Sync Scan Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Video Sync Scan Request] Auto Configure.");
 		return videoSyncScanRequest;
 	}
 
@@ -221,7 +221,7 @@ public class AliyunScanConfiguration {
 		videoAsyncScanRequest.setSysConnectTimeout(aliyunProperties.getScan().getVideo().getConnectTimeout());
 		videoAsyncScanRequest.setSysReadTimeout(aliyunProperties.getScan().getVideo().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Video Async Scan Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Video Async Scan Request] Auto Configure.");
 		return videoAsyncScanRequest;
 	}
 
@@ -241,7 +241,7 @@ public class AliyunScanConfiguration {
 		videoAsyncResultRequest.setSysConnectTimeout(aliyunProperties.getScan().getVideo().getConnectTimeout());
 		videoAsyncResultRequest.setSysReadTimeout(aliyunProperties.getScan().getVideo().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Video Async Scan Results Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Video Async Scan Results Request] Auto Configure.");
 		return videoAsyncResultRequest;
 	}
 
@@ -261,7 +261,7 @@ public class AliyunScanConfiguration {
 		voiceSyncScanRequest.setSysConnectTimeout(aliyunProperties.getScan().getVoice().getConnectTimeout());
 		voiceSyncScanRequest.setSysReadTimeout(aliyunProperties.getScan().getVoice().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Voice Sync Scan Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Voice Sync Scan Request] Auto Configure.");
 		return voiceSyncScanRequest;
 	}
 
@@ -281,7 +281,7 @@ public class AliyunScanConfiguration {
 		voiceAsyncScanRequest.setSysConnectTimeout(aliyunProperties.getScan().getVoice().getConnectTimeout());
 		voiceAsyncScanRequest.setSysReadTimeout(aliyunProperties.getScan().getVoice().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Voice Async Scan Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Voice Async Scan Request] Auto Configure.");
 		return voiceAsyncScanRequest;
 	}
 
@@ -306,7 +306,7 @@ public class AliyunScanConfiguration {
 		voiceAsyncScanResultsRequest.setSysConnectTimeout(aliyunProperties.getScan().getVoice().getConnectTimeout());
 		voiceAsyncScanResultsRequest.setSysReadTimeout(aliyunProperties.getScan().getVoice().getReadTimeout());
 
-		log.debug("[Braineex] |- Bean [Voice Async Scan Results Request] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Voice Async Scan Results Request] Auto Configure.");
 		return voiceAsyncScanResultsRequest;
 	}
 }

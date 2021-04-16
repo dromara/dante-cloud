@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Slf4j
 @Service
-public class SendSmsService {
+public class AliyunSendSmsService {
 
 	@Autowired
 	private AliyunProperties aliyunProperties;
@@ -35,11 +35,15 @@ public class SendSmsService {
 
 	public SmsResponse send(List<String> phoneNumbers, Map<String, Object> templateParam) {
 		String phoneNumberString = StringUtils.join(phoneNumbers, ",");
-		String templateParamString = JSON.toJSONString(templateParam);
-		return this.send(phoneNumberString, templateParamString);
+		return this.send(phoneNumberString, templateParam);
 	}
 
-	public SmsResponse send(String phoneNumbers, String templateParam) {
+	public SmsResponse send(String phoneNumbers, Map<String, Object> templateParam) {
+		String templateParamString = JSON.toJSONString(templateParam);
+		return  this.send(phoneNumbers, templateParamString);
+	}
+
+	private SmsResponse send(String phoneNumbers, String templateParam) {
 		SendSmsRequest sendSmsRequest = new SendSmsRequest();
 		sendSmsRequest.setPhoneNumbers(phoneNumbers);
 		sendSmsRequest.setSignName(aliyunProperties.getSms().getSignName());
@@ -49,7 +53,7 @@ public class SendSmsService {
 	}
 
 
-	public SmsResponse send(SendSmsRequest sendSmsRequest) {
+	private SmsResponse send(SendSmsRequest sendSmsRequest) {
 		CommonRequest commonRequest = new CommonRequest();
 		commonRequest.setSysMethod(MethodType.POST);
 		commonRequest.setSysDomain(aliyunProperties.getSms().getDomain());

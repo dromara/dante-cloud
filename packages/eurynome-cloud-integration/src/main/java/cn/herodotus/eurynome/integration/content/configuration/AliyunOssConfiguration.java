@@ -22,6 +22,6 @@ public class AliyunOssConfiguration {
 
     @PostConstruct
     public void init() {
-        log.info("[Braineex] |- Bean [Aliyun Oss] Auto Configure.");
+        log.info("[Eurynome] |- Bean [Aliyun Oss] Auto Configure.");
     }
 }

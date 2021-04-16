@@ -25,11 +25,11 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = {
 		"cn.herodotus.eurynome.integration.sms.service.aliyun"
 })
-public class SmsConfiguration {
+public class AliyunSmsConfiguration {
 
 	@PostConstruct
 	public void init() {
-		log.info("[Braineex] |- Bean [Aliyun Sms] Auto Configure.");
+		log.info("[Eurynome] |- Bean [Aliyun Sms] Auto Configure.");
 	}
 
 	@Autowired
