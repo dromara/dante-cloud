@@ -23,7 +23,7 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @EnableConfigurationProperties(AliyunProperties.class)
 @ComponentScan(basePackages = {
-		"com.braineex.integration.aliyun.service.sms"
+		"cn.herodotus.eurynome.integration.sms.service.aliyun"
 })
 public class SmsConfiguration {
 
@@ -40,7 +40,7 @@ public class SmsConfiguration {
 	public IAcsClient iAcsClient() {
 		IClientProfile iClientProfile = DefaultProfile.getProfile(aliyunProperties.getRegionId(), aliyunProperties.getAccessKeyId(), aliyunProperties.getAccessKeySecret());
 		IAcsClient iAcsClient = new DefaultAcsClient(iClientProfile);
-		log.debug("[Braineex] |- Bean [iAcsClient] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [iAcsClient] Auto Configure.");
 		return iAcsClient;
 	}
 }

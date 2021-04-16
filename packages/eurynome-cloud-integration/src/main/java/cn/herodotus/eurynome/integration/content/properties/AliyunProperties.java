@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author : gengwei.zheng
  * @date : 2021/4/15 11:37
  */
-@ConfigurationProperties(prefix = "eurynome.integration.aliyun")
+@ConfigurationProperties(prefix = "herodotus.integration.aliyun")
 public class AliyunProperties {
 
     private String accessKeyId;

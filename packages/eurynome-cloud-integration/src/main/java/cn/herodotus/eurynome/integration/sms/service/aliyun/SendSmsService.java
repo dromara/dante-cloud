@@ -42,8 +42,8 @@ public class SendSmsService {
 	public SmsResponse send(String phoneNumbers, String templateParam) {
 		SendSmsRequest sendSmsRequest = new SendSmsRequest();
 		sendSmsRequest.setPhoneNumbers(phoneNumbers);
-		sendSmsRequest.setSignName(sendSmsRequest.getSignName());
-		sendSmsRequest.setTemplateCode(sendSmsRequest.getTemplateCode());
+		sendSmsRequest.setSignName(aliyunProperties.getSms().getSignName());
+		sendSmsRequest.setTemplateCode(aliyunProperties.getSms().getTemplateCode());
 		sendSmsRequest.setTemplateParam(templateParam);
 		return this.send(sendSmsRequest);
 	}
@@ -60,12 +60,15 @@ public class SendSmsService {
 		try {
 			CommonResponse commonResponse = iAcsClient.getCommonResponse(commonRequest);
 			if (ObjectUtils.isNotEmpty(commonResponse) && commonResponse.getHttpStatus() == 200) {
-				return JSON.parseObject(commonResponse.getData(), SmsResponse.class);
+				SmsResponse smsResponse = JSON.parseObject(commonResponse.getData(), SmsResponse.class);
+				log.debug("[Eurynome] |- Aliyun send message result success. result is: {}", smsResponse.toString());
+				return smsResponse;
 			} else {
+				log.error("[Eurynome] |- Aliyun send message result convert to entity error!");
 				return null;
 			}
 		} catch (ClientException e) {
-			e.printStackTrace();
+			log.error("[Eurynome] |- Aliyun send message catch ClientException: {}", e.getMessage());
 			return null;
 		}
 	}
