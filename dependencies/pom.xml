@@ -41,6 +41,7 @@
         <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
         <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
         <aliyun-java-sdk-oss.version>3.12.0</aliyun-java-sdk-oss.version>
+        <tencentcloud-sdk-java.version>4.0.11</tencentcloud-sdk-java.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
@@ -257,6 +258,13 @@
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>${aliyun-java-sdk-oss.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-sdk-java -->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>${tencentcloud-sdk-java.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.ejlchina</groupId>

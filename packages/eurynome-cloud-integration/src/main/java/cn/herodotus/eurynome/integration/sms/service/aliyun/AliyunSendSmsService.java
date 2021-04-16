@@ -35,19 +35,40 @@ public class AliyunSendSmsService {
 
 	public SmsResponse send(List<String> phoneNumbers, Map<String, Object> templateParam) {
 		String phoneNumberString = StringUtils.join(phoneNumbers, ",");
+		String defaultTemplateId = aliyunProperties.getSms().getDefaultTemplateId();
+		if (StringUtils.isBlank(defaultTemplateId)) {
+			log.error("[Eurynome] |- Can not found default templateId in Aliyun sms property, please check!");
+		}
 		return this.send(phoneNumberString, templateParam);
 	}
 
 	public SmsResponse send(String phoneNumbers, Map<String, Object> templateParam) {
-		String templateParamString = JSON.toJSONString(templateParam);
-		return  this.send(phoneNumbers, templateParamString);
+		String defaultTemplateId = aliyunProperties.getSms().getDefaultTemplateId();
+		if (StringUtils.isBlank(defaultTemplateId)) {
+			log.error("[Eurynome] |- Can not found default templateId in Aliyun sms property, please check!");
+		}
+		return this.send(phoneNumbers, defaultTemplateId, templateParam);
 	}
 
-	private SmsResponse send(String phoneNumbers, String templateParam) {
+	public SmsResponse send(List<String> phoneNumbers, String templateId, Map<String, Object> templateParam) {
+		String phoneNumberString = StringUtils.join(phoneNumbers, ",");
+		return this.send(phoneNumberString, templateId, templateParam);
+	}
+
+	public SmsResponse send(String phoneNumbers, String templateId, Map<String, Object> templateParam) {
+		String templateParamString = JSON.toJSONString(templateParam);
+		String templateCode = aliyunProperties.getSms().getTemplates().get(templateId);
+		if (StringUtils.isBlank(templateCode)) {
+			log.error("[Eurynome] |- Can not found templateId in Aliyun sms templates property, please check!");
+		}
+		return  this.send(phoneNumbers, templateCode, templateParamString);
+	}
+
+	private SmsResponse send(String phoneNumbers, String templateCode, String templateParam) {
 		SendSmsRequest sendSmsRequest = new SendSmsRequest();
 		sendSmsRequest.setPhoneNumbers(phoneNumbers);
 		sendSmsRequest.setSignName(aliyunProperties.getSms().getSignName());
-		sendSmsRequest.setTemplateCode(aliyunProperties.getSms().getTemplateCode());
+		sendSmsRequest.setTemplateCode(templateCode);
 		sendSmsRequest.setTemplateParam(templateParam);
 		return this.send(sendSmsRequest);
 	}

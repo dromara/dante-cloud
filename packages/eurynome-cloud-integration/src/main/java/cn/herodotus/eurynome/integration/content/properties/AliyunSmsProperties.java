@@ -2,6 +2,8 @@ package cn.herodotus.eurynome.integration.content.properties;
 
 import com.google.common.base.MoreObjects;
 
+import java.util.Map;
+
 /**
  * <p>Description: 短信配置参数 </p>
  *
@@ -21,7 +23,9 @@ public class AliyunSmsProperties {
 
 	private String version;
 
-	private String templateCode;
+	private String defaultTemplateId;
+
+	private Map<String, String> templates;
 
 	public String getDomain() {
 		return domain;
@@ -47,12 +51,20 @@ public class AliyunSmsProperties {
 		this.version = version;
 	}
 
-	public String getTemplateCode() {
-		return templateCode;
+	public String getDefaultTemplateId() {
+		return defaultTemplateId;
 	}
 
-	public void setTemplateCode(String templateCode) {
-		this.templateCode = templateCode;
+	public void setDefaultTemplateId(String defaultTemplateId) {
+		this.defaultTemplateId = defaultTemplateId;
+	}
+
+	public Map<String, String> getTemplates() {
+		return templates;
+	}
+
+	public void setTemplates(Map<String, String> templates) {
+		this.templates = templates;
 	}
 
 	@Override
@@ -61,7 +73,7 @@ public class AliyunSmsProperties {
 				.add("domain", domain)
 				.add("signName", signName)
 				.add("version", version)
-				.add("templateCode", templateCode)
+				.add("defaultTemplateKey", defaultTemplateId)
 				.toString();
 	}
 }

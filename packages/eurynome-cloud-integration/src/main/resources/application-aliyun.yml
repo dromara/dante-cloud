@@ -29,4 +29,5 @@ herodotus:
       sms:
         sign-name: braineex
         version: 2017-05-25
-        template-code: SMS_180052229
+        default-template-id: VERIFICATION_CODE
+        templates: { "VERIFICATION_CODE": "SMS_180052229" }
