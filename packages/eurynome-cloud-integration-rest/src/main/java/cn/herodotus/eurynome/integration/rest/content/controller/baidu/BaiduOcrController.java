@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.rest.compliance.controller.baidu;
+package cn.herodotus.eurynome.integration.rest.content.controller.baidu;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.integration.content.domain.baidu.OcrResult;

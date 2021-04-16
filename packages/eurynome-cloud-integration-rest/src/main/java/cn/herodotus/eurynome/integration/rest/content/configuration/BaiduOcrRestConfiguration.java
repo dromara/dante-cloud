@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.rest.compliance.configuration;
+package cn.herodotus.eurynome.integration.rest.content.configuration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @ComponentScan(basePackages = {
-		"cn.herodotus.eurynome.integration.rest.compliance.controller.baidu"
+        "cn.herodotus.eurynome.integration.rest.content.controller.baidu"
 })
 public class BaiduOcrRestConfiguration {
 

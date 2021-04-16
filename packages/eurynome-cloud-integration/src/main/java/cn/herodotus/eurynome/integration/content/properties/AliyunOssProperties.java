@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date : 2021/4/15 11:23
  */
 @ConfigurationProperties(prefix = "herodotus.integration.content.aliyun.oss")
-public class AliyunOssProperties extends AliyunProperties{
+public class AliyunOssProperties {
 
     private String endpoint;
     private String bucketName;
