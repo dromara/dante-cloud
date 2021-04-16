@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.content.service.aliyun;
+package cn.herodotus.eurynome.integration.content.service.aliyun.scan;
 
 import cn.herodotus.eurynome.integration.content.domain.aliyun.base.Response;
 import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextFeedbackRequest;

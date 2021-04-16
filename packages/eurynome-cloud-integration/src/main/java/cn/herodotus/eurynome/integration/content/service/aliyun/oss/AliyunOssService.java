@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.content.service.aliyun;
+package cn.herodotus.eurynome.integration.content.service.aliyun.oss;
 
 import cn.herodotus.eurynome.integration.content.properties.AliyunOssProperties;
 import cn.herodotus.eurynome.integration.content.properties.AliyunProperties;

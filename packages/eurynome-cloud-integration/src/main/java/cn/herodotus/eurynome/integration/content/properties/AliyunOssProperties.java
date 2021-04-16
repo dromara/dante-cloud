@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.integration.content.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import com.google.common.base.MoreObjects;
 
 /**
  * <p>Description: 阿里云OSS配置 </p>
@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author : gengwei.zheng
  * @date : 2021/4/15 11:23
  */
-@ConfigurationProperties(prefix = "herodotus.integration.content.aliyun.oss")
 public class AliyunOssProperties {
 
     private String endpoint;
@@ -84,4 +83,18 @@ public class AliyunOssProperties {
     public void setBucketName(String bucketName) {
         this.bucketName = bucketName;
     }
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+				.add("endpoint", endpoint)
+				.add("bucketName", bucketName)
+				.add("baseUrl", baseUrl)
+				.add("pictureTypes", pictureTypes)
+				.add("videoTypes", videoTypes)
+				.add("voiceTypes", voiceTypes)
+				.add("appTypes", appTypes)
+				.add("docTypes", docTypes)
+				.toString();
+	}
 }

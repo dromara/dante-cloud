@@ -1,7 +1,6 @@
 package cn.herodotus.eurynome.integration.content.properties;
 
 import com.google.common.base.MoreObjects;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * <p>Description: 阿里云内容管理配置 </p>
@@ -9,82 +8,52 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author : gengwei.zheng
  * @date : 2021/4/12 10:29
  */
-@ConfigurationProperties(prefix = "herodotus.integration.content.aliyun.scan")
-public class AliyunScanProperties{
+public class AliyunScanProperties {
 
-	private String regionId;
+	private AliyunTimeoutProperties image = new AliyunTimeoutProperties();
+	private AliyunTimeoutProperties video = new AliyunTimeoutProperties();
+	private AliyunTimeoutProperties text = new AliyunTimeoutProperties();
+	private AliyunTimeoutProperties voice = new AliyunTimeoutProperties();
 
-	private Request image = new Request();
-	private Request video = new Request();
-	private Request text = new Request();
-	private Request voice = new Request();
-
-	public String getRegionId() {
-		return regionId;
-	}
-
-	public void setRegionId(String regionId) {
-		this.regionId = regionId;
-	}
-
-	public Request getImage() {
+	public AliyunTimeoutProperties getImage() {
 		return image;
 	}
 
-	public void setImage(Request image) {
+	public void setImage(AliyunTimeoutProperties image) {
 		this.image = image;
 	}
 
-	public Request getVideo() {
+	public AliyunTimeoutProperties getVideo() {
 		return video;
 	}
 
-	public void setVideo(Request video) {
+	public void setVideo(AliyunTimeoutProperties video) {
 		this.video = video;
 	}
 
-	public Request getText() {
+	public AliyunTimeoutProperties getText() {
 		return text;
 	}
 
-	public void setText(Request text) {
+	public void setText(AliyunTimeoutProperties text) {
 		this.text = text;
 	}
 
-	public Request getVoice() {
+	public AliyunTimeoutProperties getVoice() {
 		return voice;
 	}
 
-	public void setVoice(Request voice) {
+	public void setVoice(AliyunTimeoutProperties voice) {
 		this.voice = voice;
 	}
 
-	public static class Request {
-		private Integer connectTimeout = 3000;
-		private Integer readTimeout = 6000;
-
-		public Integer getConnectTimeout() {
-			return connectTimeout;
-		}
-
-		public void setConnectTimeout(Integer connectTimeout) {
-			this.connectTimeout = connectTimeout;
-		}
-
-		public Integer getReadTimeout() {
-			return readTimeout;
-		}
-
-		public void setReadTimeout(Integer readTimeout) {
-			this.readTimeout = readTimeout;
-		}
-
-		@Override
-		public String toString() {
-			return MoreObjects.toStringHelper(this)
-					.add("connectTimeout", connectTimeout)
-					.add("readTimeout", readTimeout)
-					.toString();
-		}
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+				.add("image", image)
+				.add("video", video)
+				.add("text", text)
+				.add("voice", voice)
+				.toString();
 	}
 }

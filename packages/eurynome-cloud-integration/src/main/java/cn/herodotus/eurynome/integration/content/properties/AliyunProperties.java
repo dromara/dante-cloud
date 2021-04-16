@@ -1,5 +1,6 @@
 package cn.herodotus.eurynome.integration.content.properties;
 
+import com.google.common.base.MoreObjects;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -8,13 +9,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author : gengwei.zheng
  * @date : 2021/4/15 11:37
  */
-@ConfigurationProperties(prefix = "herodotus.integration.content.aliyun")
+@ConfigurationProperties(prefix = "eurynome.integration.aliyun")
 public class AliyunProperties {
 
     private String accessKeyId;
     private String accessKeySecret;
+	private String regionId;
 
-    public String getAccessKeyId() {
+    private AliyunOssProperties oss = new AliyunOssProperties();
+    private AliyunScanProperties scan = new AliyunScanProperties();
+    private AliyunSmsProperties sms = new AliyunSmsProperties();
+
+	public String getRegionId() {
+		return regionId;
+	}
+
+	public void setRegionId(String regionId) {
+		this.regionId = regionId;
+	}
+
+	public String getAccessKeyId() {
         return accessKeyId;
     }
 
@@ -29,4 +43,39 @@ public class AliyunProperties {
     public void setAccessKeySecret(String accessKeySecret) {
         this.accessKeySecret = accessKeySecret;
     }
+
+	public AliyunOssProperties getOss() {
+		return oss;
+	}
+
+	public void setOss(AliyunOssProperties oss) {
+		this.oss = oss;
+	}
+
+	public AliyunScanProperties getScan() {
+		return scan;
+	}
+
+	public void setScan(AliyunScanProperties scan) {
+		this.scan = scan;
+	}
+
+	public AliyunSmsProperties getSms() {
+		return sms;
+	}
+
+	public void setSms(AliyunSmsProperties sms) {
+		this.sms = sms;
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+				.add("accessKeyId", accessKeyId)
+				.add("accessKeySecret", accessKeySecret)
+				.add("oss", oss)
+				.add("scan", scan)
+				.add("sms", sms)
+				.toString();
+	}
 }
