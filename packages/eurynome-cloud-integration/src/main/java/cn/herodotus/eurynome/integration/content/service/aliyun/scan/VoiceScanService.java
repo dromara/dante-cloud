@@ -35,9 +35,9 @@ public class VoiceScanService extends AbstractScanService {
         return entity;
     }
 
-    public Response<VoiceAsyncResponse> asyncScan(VoiceAsyncRequest voiceAsyncRequest) {
+    public Response<List<VoiceAsyncResponse>> asyncScan(VoiceAsyncRequest voiceAsyncRequest) {
         String jsonString = this.scan(voiceAsyncRequest, voiceAsyncScanRequest);
-        Response<VoiceAsyncResponse> entity = this.parseResult(jsonString, VoiceAsyncResponse.class);
+        Response<List<VoiceAsyncResponse>> entity = this.parseListResult(jsonString, VoiceAsyncResponse.class);
         log.debug("[Eurynome] |- Aliyun Voice Async Scan result is: {}", entity.toString());
         return entity;
     }

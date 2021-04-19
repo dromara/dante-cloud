@@ -11,6 +11,7 @@ import java.util.List;
  * @date : 2021/4/12 16:49
  */
 public abstract class AbstractSyncResponse<T extends AbstractResult> extends BaseResponse {
+
     private List<T> results;
 
     public List<T> getResults() {

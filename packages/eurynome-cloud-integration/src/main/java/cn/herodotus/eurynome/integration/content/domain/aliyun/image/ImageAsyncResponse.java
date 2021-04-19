@@ -10,6 +10,9 @@ import cn.herodotus.eurynome.integration.content.domain.aliyun.base.BaseResponse
  */
 public class ImageAsyncResponse extends BaseResponse {
 
+    /**
+     * 检测对象的URL。
+     */
     private String url;
 
     public String getUrl() {

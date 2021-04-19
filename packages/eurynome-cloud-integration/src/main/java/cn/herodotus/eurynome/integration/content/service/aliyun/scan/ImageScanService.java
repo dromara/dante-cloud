@@ -35,9 +35,9 @@ public class ImageScanService extends AbstractScanService{
         return entity;
     }
 
-    public Response<ImageAsyncResponse> asyncScan(ImageAsyncRequest imageAsyncRequest) {
+    public Response<List<ImageAsyncResponse>> asyncScan(ImageAsyncRequest imageAsyncRequest) {
         String jsonString = this.scan(imageAsyncRequest, imageAsyncScanRequest);
-        Response<ImageAsyncResponse> entity = this.parseResult(jsonString, ImageAsyncResponse.class);
+        Response<List<ImageAsyncResponse>> entity = this.parseListResult(jsonString, ImageAsyncResponse.class);
         log.debug("[Eurynome] |- Aliyun Image Async Scan result is: {}", entity.toString());
         return entity;
     }

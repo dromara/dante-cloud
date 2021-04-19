@@ -9,7 +9,7 @@ import com.google.common.base.MoreObjects;
  * @author : gengwei.zheng
  * @date : 2021/4/12 17:00
  */
-public class QrodeLocation extends Coordinate {
+public class QrcodeLocation extends Coordinate {
 
 	/**
 	 * 识别到的二维码链接。

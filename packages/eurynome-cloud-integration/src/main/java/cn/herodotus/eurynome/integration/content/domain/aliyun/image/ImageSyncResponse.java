@@ -19,6 +19,12 @@ public class ImageSyncResponse extends AbstractSyncResponse<ImageResult> {
      * 如果用户开启了证据转存到OSS存储空间的功能，并且检测任务符合配置的规则，则会把图片转存到用户的OSS存储空间，并返回对应的HTTP URL。
      */
     private String storeUrl;
+    /**
+     * 额外附加信息。
+     * 图文违规（ad）场景中，该参数可能返回以下内容。
+     * <p>
+     * hitLibInfo：如果图片中的文字命中了自定义文本库，则返回命中的文本库信息。格式为数组，具体结构描述请参见hitLibInfo。
+     */
     private HitLibInfo extras;
 
     public String getUrl() {

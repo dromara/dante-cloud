@@ -1,6 +1,7 @@
 package cn.herodotus.eurynome.integration.content.domain.aliyun.base;
 
 import com.google.common.base.MoreObjects;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p>Description: AbstractAsyncRequest </p>
@@ -18,6 +19,7 @@ public abstract class AbstractAsyncRequest<T extends AbstractTask> extends SyncR
      * content：JSON字符串格式，请自行解析反转成JSON对象。关于content结果的示例，请参见查询检测结果的返回示例。
      * 说明 您的服务端callback接口收到内容安全推送的结果后，如果返回的HTTP状态码为200，则表示接收成功，其他的HTTP状态码均视为接收失败。接收失败时，内容安全将最多重复推送16次检测结果，直到接收成功。重复推送16次后仍未接收成功，则不再推送，建议您检查callback接口的状态。
      */
+    @ApiModelProperty(name = "检测结果回调通知您的URL", notes = "支持使用HTTP和HTTPS协议的地址。该字段为空时，您必须定时轮询检测结果。")
     private String callback;
     /**
      * 随机字符串，该值用于回调通知请求中的签名。
@@ -25,6 +27,7 @@ public abstract class AbstractAsyncRequest<T extends AbstractTask> extends SyncR
      *
      * 说明 当使用callback时，该字段必须提供。
      */
+    @ApiModelProperty(name = "随机字符串,该值用于回调通知请求中的签名", notes = "由英文字母、数字、下划线（_）组成，不超过64个字符。由您自定义，用于在接收到内容安全的回调通知时校验请求由阿里云内容安全服务发起。")
     private String seed;
     /**
      * 使用回调通知时（callback），设置对回调通知内容进行加密的算法。内容安全会将返回结果（由用户uid + seed + content拼接的字符串）按照您设置的加密算法加密后，再发送到您的回调通知地址。取值：
@@ -32,6 +35,7 @@ public abstract class AbstractAsyncRequest<T extends AbstractTask> extends SyncR
      * SM3：使用国密HMAC-SM3加密算法，返回十六进制的字符串，且字符串由小写字母和数字组成。
      * 例如，abc经国密SM3加密后返回66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0。
      */
+    @ApiModelProperty(name = "使用回调通知时（callback），设置对回调通知内容进行加密的算法", notes = "内容安全会将返回结果（由用户uid + seed + content拼接的字符串）按照您设置的加密算法加密后，再发送到您的回调通知地址")
     private String cryptType;
 
     public String getCallback() {

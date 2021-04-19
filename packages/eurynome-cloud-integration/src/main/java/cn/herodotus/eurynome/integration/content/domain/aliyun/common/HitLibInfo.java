@@ -1,6 +1,8 @@
 package cn.herodotus.eurynome.integration.content.domain.aliyun.common;
 
 import com.google.common.base.MoreObjects;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
@@ -10,51 +12,55 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/4/12 17:19
  */
+@ApiModel(value = "阿里云内容检测通用同步检测请求额外信息实体")
 public class HitLibInfo implements Serializable {
 
-	/**
-	 * 文字命中的自定义文本内容。
-	 */
-	private String context;
-	/**
-	 * 文字命中的自定义文本内容对应的库code。
-	 */
-	private String libCode;
-	/**
-	 * 文字命中的自定义文本内容对应的库名称。
-	 */
-	private String libName;
+    /**
+     * 文字命中的自定义文本内容。
+     */
+    @ApiModelProperty(name = "文字命中的自定义文本内容")
+    private String context;
+    /**
+     * 文字命中的自定义文本内容对应的库code。
+     */
+    @ApiModelProperty(name = "文字命中的自定义文本内容对应的库code")
+    private String libCode;
+    /**
+     * 文字命中的自定义文本内容对应的库名称。
+     */
+    @ApiModelProperty(name = "文字命中的自定义文本内容对应的库名称")
+    private String libName;
 
-	public String getContext() {
-		return context;
-	}
+    public String getContext() {
+        return context;
+    }
 
-	public void setContext(String context) {
-		this.context = context;
-	}
+    public void setContext(String context) {
+        this.context = context;
+    }
 
-	public String getLibCode() {
-		return libCode;
-	}
+    public String getLibCode() {
+        return libCode;
+    }
 
-	public void setLibCode(String libCode) {
-		this.libCode = libCode;
-	}
+    public void setLibCode(String libCode) {
+        this.libCode = libCode;
+    }
 
-	public String getLibName() {
-		return libName;
-	}
+    public String getLibName() {
+        return libName;
+    }
 
-	public void setLibName(String libName) {
-		this.libName = libName;
-	}
+    public void setLibName(String libName) {
+        this.libName = libName;
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-				.add("context", context)
-				.add("libCode", libCode)
-				.add("libName", libName)
-				.toString();
-	}
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("context", context)
+                .add("libCode", libCode)
+                .add("libName", libName)
+                .toString();
+    }
 }
