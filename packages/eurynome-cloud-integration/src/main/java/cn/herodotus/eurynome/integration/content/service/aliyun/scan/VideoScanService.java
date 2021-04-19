@@ -45,7 +45,7 @@ public class VideoScanService extends AbstractScanService{
     public Response<List<VideoQueryResponse>> queryResult(List<String> taskIds) {
         String jsonString = this.query(taskIds, videoAsyncScanResultsRequest);
         Response<List<VideoQueryResponse>> entity = this.parseListResult(jsonString, VideoQueryResponse.class);
-        log.debug("[Eurynome] |- Aliyun Video Async Scan Feedback is: {}", entity.toString());
+        log.debug("[Eurynome] |- Aliyun Video Async Scan Query Result is: {}", entity.toString());
         return entity;
     }
 }
