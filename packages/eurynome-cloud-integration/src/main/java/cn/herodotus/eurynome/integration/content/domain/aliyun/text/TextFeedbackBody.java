@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.integration.content.domain.aliyun.text;
 
-import cn.herodotus.eurynome.integration.content.domain.aliyun.base.BodyRequest;
+import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractFeedbackBody;
 import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @date : 2021/4/14 11:07
  */
 @ApiModel(value = "阿里文本检测内容反馈请求参数实体")
-public class TextFeedbackRequest extends BodyRequest<TextFeedbackBody> {
+public class TextFeedbackBody extends AbstractFeedbackBody {
 
     /**
      * 被检测的内容，最长10,000个字符。

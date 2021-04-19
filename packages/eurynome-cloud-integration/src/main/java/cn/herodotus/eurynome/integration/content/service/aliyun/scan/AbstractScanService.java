@@ -36,6 +36,11 @@ public abstract class AbstractScanService {
         return this.scan(data, roaAcsRequest);
     }
 
+    protected <R extends AcsResponse> String query(List<String> taskIds, RoaAcsRequest<R> roaAcsRequest) {
+        String data = JSON.toJSONString(taskIds);
+        return this.scan(data, roaAcsRequest);
+    }
+
     protected <R extends AcsResponse> String scan(String data, RoaAcsRequest<R> roaAcsRequest) {
         try {
             roaAcsRequest.setHttpContent(data.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8.name(), FormatType.JSON);
@@ -63,5 +68,10 @@ public abstract class AbstractScanService {
         ParameterizedTypeImpl inner = new ParameterizedTypeImpl(new Type[]{clazz}, null, List.class);
         ParameterizedTypeImpl outer = new ParameterizedTypeImpl(new Type[]{inner}, null, Response.class);
         return JSON.parseObject(json, outer);
+    }
+
+    protected <P> List<P> parseList(String json, Class<P> clazz) {
+        return JSON.parseObject(json, new TypeReference<List<P>>(clazz) {
+        });
     }
 }

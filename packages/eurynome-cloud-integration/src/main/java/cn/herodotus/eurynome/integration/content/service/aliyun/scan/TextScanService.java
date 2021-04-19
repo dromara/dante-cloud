@@ -34,8 +34,8 @@ public class TextScanService extends AbstractScanService {
         return entity;
     }
 
-    public Response<String> feedback(TextFeedbackRequest textFeedbackRequest) {
-        String data = JSON.toJSONString(textFeedbackRequest);
+    public Response<String> feedback(List<TextFeedbackRequest> textFeedbackRequests) {
+        String data = JSON.toJSONString(textFeedbackRequests);
         String response = this.scan(data, this.textFeedbackRequest);
         Response<String> feedback = this.parseResult(response, String.class);
         log.debug("[Eurynome] |- Aliyun Text Feedback result is: {}", feedback.toString());

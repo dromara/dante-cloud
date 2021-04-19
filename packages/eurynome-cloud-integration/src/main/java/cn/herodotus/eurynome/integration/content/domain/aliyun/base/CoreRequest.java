@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/4/14 15:28
  */
-public class CoreRequest implements Serializable {
+public interface CoreRequest extends Serializable {
 }

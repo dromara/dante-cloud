@@ -1,11 +1,9 @@
 package cn.herodotus.eurynome.integration.content.service.aliyun.scan;
 
 import cn.herodotus.eurynome.integration.content.domain.aliyun.base.Response;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.image.ImageAsyncRequest;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.image.ImageAsyncResponse;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.image.ImageSyncRequest;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.image.ImageSyncResponse;
+import cn.herodotus.eurynome.integration.content.domain.aliyun.image.*;
 import com.aliyuncs.green.model.v20180509.ImageAsyncScanRequest;
+import com.aliyuncs.green.model.v20180509.ImageAsyncScanResultsRequest;
 import com.aliyuncs.green.model.v20180509.ImageSyncScanRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,8 @@ public class ImageScanService extends AbstractScanService{
     private ImageSyncScanRequest imageSyncScanRequest;
     @Autowired
     private ImageAsyncScanRequest imageAsyncScanRequest;
+    @Autowired
+    private ImageAsyncScanResultsRequest imageAsyncScanResultsRequest;
 
     public Response<List<ImageSyncResponse>> syncScan(ImageSyncRequest imageSyncRequest) {
         String jsonString = this.scan(imageSyncRequest, imageSyncScanRequest);
@@ -39,6 +39,13 @@ public class ImageScanService extends AbstractScanService{
         String jsonString = this.scan(imageAsyncRequest, imageAsyncScanRequest);
         Response<List<ImageAsyncResponse>> entity = this.parseListResult(jsonString, ImageAsyncResponse.class);
         log.debug("[Eurynome] |- Aliyun Image Async Scan result is: {}", entity.toString());
+        return entity;
+    }
+
+    public Response<List<ImageQueryResponse>> queryResult(List<String> taskIds) {
+        String jsonString = this.query(taskIds, imageAsyncScanResultsRequest);
+        Response<List<ImageQueryResponse>> entity = this.parseListResult(jsonString, ImageQueryResponse.class);
+        log.debug("[Eurynome] |- Aliyun Image Async Scan Feedback is: {}", entity.toString());
         return entity;
     }
 }

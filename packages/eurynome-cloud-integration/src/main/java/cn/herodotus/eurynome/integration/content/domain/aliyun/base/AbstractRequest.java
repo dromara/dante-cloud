@@ -11,7 +11,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/4/14 13:00
  */
-public abstract class AbstractRequest<T extends AbstractTask> extends CoreRequest {
+public abstract class AbstractRequest<T extends AbstractTask> implements CoreRequest {
     /**
      * 该字段用于标识您的业务场景。您可以通过内容安全控制台创建业务场景（具体操作，请参见自定义机审标准），或者提交工单联系我们帮助您创建业务场景。
      */
