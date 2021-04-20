@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.annotation.PostConstruct;
@@ -24,7 +23,6 @@ import java.io.IOException;
  * @date : 2021/4/5 14:59
  */
 @Slf4j
-@Configuration
 @EnableConfigurationProperties(ApnsProperties.class)
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.integration.push.service.apns"

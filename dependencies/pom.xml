@@ -36,17 +36,22 @@
         <google-guava.version>30.1.1-jre</google-guava.version>
         <hutool.version>5.6.2</hutool.version>
         <jackson.version>2.12.2</jackson.version>
-        <weixin-java-sdk.version>4.0.7.B</weixin-java-sdk.version>
-        <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
-        <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
-        <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
-        <aliyun-java-sdk-oss.version>3.12.0</aliyun-java-sdk-oss.version>
-        <tencentcloud-sdk-java.version>4.0.11</tencentcloud-sdk-java.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
         <alibaba-nacos.version>2.0.0</alibaba-nacos.version>
+
+        <!--第三方应用集成SDK-->
+        <weixin-java-sdk.version>4.0.7.B</weixin-java-sdk.version>
+        <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
+        <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
+        <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
+        <aliyun-java-sdk-oss.version>3.12.0</aliyun-java-sdk-oss.version>
+        <tencentcloud-java-sdk.version>4.0.11</tencentcloud-java-sdk.version>
+        <jpush-java-sdk.version>3.4.8</jpush-java-sdk.version>
+        <jpush-common.verison>1.1.10</jpush-common.verison>
+
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.3</starter-jasypt.version>
@@ -262,7 +267,19 @@
             <dependency>
                 <groupId>com.tencentcloudapi</groupId>
                 <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>${tencentcloud-sdk-java.version}</version>
+                <version>${tencentcloud-java-sdk.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jpush-client -->
+            <dependency>
+                <groupId>cn.jpush.api</groupId>
+                <artifactId>jpush-client</artifactId>
+                <version>${jpush-java-sdk.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jiguang-common -->
+            <dependency>
+                <groupId>cn.jpush.api</groupId>
+                <artifactId>jiguang-common</artifactId>
+                <version>${jpush-common.verison}</version>
             </dependency>
 
 
