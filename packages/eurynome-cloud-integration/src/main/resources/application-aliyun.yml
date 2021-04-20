@@ -4,6 +4,7 @@ herodotus:
       access-key-id: LTAIbpBuZTocddot
       access-key-secret: qqTHQOJRlc7BSqPJMjHnftGH4vmW2W
       region-id: cn-shanghai
+      uid: 1680216538418745
       scan:
         image:
           connect-timeout: 3000

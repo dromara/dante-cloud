@@ -15,10 +15,23 @@ public class AliyunProperties {
     private String accessKeyId;
     private String accessKeySecret;
 	private String regionId;
+	/**
+	 * 用户UID必须是阿里云账号的UID，而不是RAM用户的UID
+	 * 使用内容检测异步callback方式会用到
+	 */
+	private String uid;
 
     private AliyunOssProperties oss = new AliyunOssProperties();
     private AliyunScanProperties scan = new AliyunScanProperties();
     private AliyunSmsProperties sms = new AliyunSmsProperties();
+
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
 
 	public String getRegionId() {
 		return regionId;
@@ -73,6 +86,8 @@ public class AliyunProperties {
 		return MoreObjects.toStringHelper(this)
 				.add("accessKeyId", accessKeyId)
 				.add("accessKeySecret", accessKeySecret)
+				.add("regionId", regionId)
+				.add("uid", uid)
 				.add("oss", oss)
 				.add("scan", scan)
 				.add("sms", sms)
