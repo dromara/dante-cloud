@@ -230,55 +230,6 @@ public class AliyunOssService {
         return destinationfile.getPath();
     }
 
-    private String renameFile(String fileName, String directory) {
-
-        if (fileName.length() > METHOD_LONG) {
-            fileName = fileName.substring(fileName.length() - METHOD_LONG);
-        }
-        String newName = UUID.randomUUID().toString().replace("-", "");
-        newName = directory + "/" + newName + "_" + fileName;
-        return newName;
-    }
-
-//    private String getFilePath(MultipartFile multipartFile) {
-//        if (ObjectUtils.isNotEmpty(multipartFile) && StringUtils.isNotEmpty(multipartFile.getOriginalFilename())) {
-//            try {
-//                String fileName = this.renameFile(multipartFile.getOriginalFilename(), "");
-//                return this.uploadFile(fileName, multipartFile.getInputStream());
-//            } catch (IOException e) {
-//                log.error("[Eurynome] |- UploadFiles get multipartFile error！");
-//                return null;
-//            }
-//        }
-//
-//        return null;
-//    }
-//
-//    /**
-//     * 上传文件
-//     *
-//     * @param files MultipartFile
-//     * @return 文件Map
-//     */
-//    public Map<String, Object> uploadFiles(MultipartFile[] files) {
-//        Map<String, Object> result = new HashMap<>();
-//
-//        if (ArrayUtils.isNotEmpty(files)) {
-//            List<String> filePaths = new ArrayList<>();
-//            Arrays.stream(files).forEach((file) -> {
-//                String filePath = this.getFilePath(file);
-//                if (StringUtils.isNotEmpty(filePath)) {
-//                    filePaths.add(filePath);
-//                }
-//            });
-//
-//            result.put("bucketName", "braineex");
-//            result.put("files", filePaths);
-//        }
-//
-//        return result;
-//    }
-
     private String getFileListItem(OSSObjectSummary objectSummary) {
         return objectSummary.getKey() + "  " + "(size = " + objectSummary.getSize() + ")";
     }

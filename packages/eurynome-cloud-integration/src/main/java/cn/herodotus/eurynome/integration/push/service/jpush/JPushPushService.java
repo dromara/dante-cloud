@@ -76,6 +76,7 @@ public class JPushPushService {
                                         .setAlert(iosAlert)
                                         .setSound("default")
                                         .setBadge(jPushMessage.getBadge())
+                                        .setMutableContent(true)
                                         .addExtras(jPushMessage.getExtras()).build())
                         .addPlatformNotification(
                                 AndroidNotification.newBuilder()
