@@ -34,8 +34,8 @@ public class WxappController {
 			@ApiImplicitParam(name = "subscribeId", required = true, value = "微信小程序Subscribe配置中的subscribeId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
 	})
 	@PostMapping("/sendSubscribeMessage")
-	public Result<String> sendSubscribeMessage(String appId, String toUser, String messageType) {
-		boolean result = wxappService.sendSubscribeMessage(appId, toUser, messageType);
+	public Result<String> sendSubscribeMessage(String appId, String toUser, String subscribeId) {
+		boolean result = wxappService.sendSubscribeMessage(appId, toUser, subscribeId);
 		if (result) {
 			return new Result<String>().ok().message("订阅消息发送成功");
 		} else {

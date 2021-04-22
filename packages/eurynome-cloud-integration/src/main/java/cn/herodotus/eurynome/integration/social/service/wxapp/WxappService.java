@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.Map;
 
 /**
  * <p>Description: 微信小程序相关服务 </p>
@@ -196,7 +197,20 @@ public class WxappService {
      * @return true 发送成功，false 发送失败，或者参数subscribeId配置不对，无法获取相应的WxMaSubscribeMessage
      */
     public boolean sendSubscribeMessage(String appId, String toUser, String subscribeId) {
-        WxMaSubscribeMessage wxMaSubscribeMessage = subscribeMessageFactory.getSubscribeMessage(toUser, subscribeId);
+        return this.sendSubscribeMessage(appId, toUser, subscribeId, null);
+    }
+
+    /**
+     * 发送微信小程序订阅消息
+     *
+     * @param appId          小程序appId
+     * @param toUser         发送订阅消息的目标用户OpenId
+     * @param subscribeId    WxappProperties 中 配置的subscribeId值，这个值需要配置到具体的SubscribeMessageHandler实现类注解上
+     * @param templateParams 与订阅消息模版参数对应的属性值
+     * @return true 发送成功，false 发送失败，或者参数subscribeId配置不对，无法获取相应的WxMaSubscribeMessage
+     */
+    public boolean sendSubscribeMessage(String appId, String toUser, String subscribeId, Map<String, Object> templateParams) {
+        WxMaSubscribeMessage wxMaSubscribeMessage = subscribeMessageFactory.getSubscribeMessage(toUser, subscribeId, templateParams);
         if (BeanUtil.isNotEmpty(wxMaSubscribeMessage)) {
             return this.sendSubscribeMessage(appId, wxMaSubscribeMessage);
         } else {
@@ -205,6 +219,13 @@ public class WxappService {
         }
     }
 
+    /**
+     * 根据直接创建的WxMaSubscribeMessage发送订阅消息
+     *
+     * @param appId            小程序appId
+     * @param subscribeMessage 参见 {@link WxMaSubscribeMessage}
+     * @return true 发送成功，false 发送失败，或者参数subscribeId配置不对，无法获取相应的WxMaSubscribeMessage
+     */
     public boolean sendSubscribeMessage(String appId, WxMaSubscribeMessage subscribeMessage) {
         WxMaService wxMaService = getWxMaService(appId);
         try {
@@ -255,7 +276,7 @@ public class WxappService {
             log.debug("[Eurynome] |- Check Image Successfully!");
             return true;
         } catch (WxErrorException e) {
-            log.debug("[Eurynome] |- Check Image Failed! Detail is ：{}",  e.getMessage());
+            log.debug("[Eurynome] |- Check Image Failed! Detail is ：{}", e.getMessage());
             return false;
         }
     }
@@ -279,7 +300,7 @@ public class WxappService {
             log.debug("[Eurynome] |- Check Image Successfully!");
             return true;
         } catch (WxErrorException e) {
-            log.debug("[Eurynome] |- Check Image Failed! Detail is ：{}",  e.getMessage());
+            log.debug("[Eurynome] |- Check Image Failed! Detail is ：{}", e.getMessage());
             return false;
         }
     }
@@ -295,9 +316,9 @@ public class WxappService {
      * 详情请见:
      * https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.mediaCheckAsync.html
      *
-     * @param appId 小程序appId
-     * @param mediaUrl 要检测的多媒体url
-     * @param mediaType  媒体类型 {@link cn.binarywang.wx.miniapp.constant.WxMaConstants.SecCheckMediaType}
+     * @param appId     小程序appId
+     * @param mediaUrl  要检测的多媒体url
+     * @param mediaType 媒体类型 {@link cn.binarywang.wx.miniapp.constant.WxMaConstants.SecCheckMediaType}
      * @return 微信检测结果 WxMaMediaAsyncCheckResult {@link WxMaMediaAsyncCheckResult}
      */
     public WxMaMediaAsyncCheckResult mediaAsyncCheck(String appId, String mediaUrl, int mediaType) {
@@ -308,7 +329,7 @@ public class WxappService {
             wxMaMediaAsyncCheckResult = wxMaService.getSecCheckService().mediaCheckAsync(mediaUrl, mediaType);
             log.debug("[Eurynome] |- Media Async Check Successfully!");
         } catch (WxErrorException e) {
-            log.debug("[Eurynome] |- Media Async Check Failed! Detail is ：{}",  e.getMessage());
+            log.debug("[Eurynome] |- Media Async Check Failed! Detail is ：{}", e.getMessage());
         }
 
         return wxMaMediaAsyncCheckResult;
