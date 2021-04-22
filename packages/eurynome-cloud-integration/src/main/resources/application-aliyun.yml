@@ -5,6 +5,7 @@ herodotus:
       access-key-secret: qqTHQOJRlc7BSqPJMjHnftGH4vmW2W
       region-id: cn-shanghai
       uid: 1680216538418745
+      seed: 9b73200d8b30ad89dba7cb7e37282c29
       scan:
         image:
           connect-timeout: 3000

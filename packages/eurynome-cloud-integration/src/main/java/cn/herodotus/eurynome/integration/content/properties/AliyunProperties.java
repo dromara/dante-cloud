@@ -20,6 +20,12 @@ public class AliyunProperties {
 	 * 使用内容检测异步callback方式会用到
 	 */
 	private String uid;
+	/**
+	 * 阿里内容异步检测操作，如果使用callback方式，必须有seed值。
+	 *
+	 * 这里配置seed是图方面，最好根据不同的检测任务生成不同的seed，可以放在Redis缓存中。
+	 */
+	private String seed;
 
     private AliyunOssProperties oss = new AliyunOssProperties();
     private AliyunScanProperties scan = new AliyunScanProperties();
@@ -79,6 +85,14 @@ public class AliyunProperties {
 
 	public void setSms(AliyunSmsProperties sms) {
 		this.sms = sms;
+	}
+
+	public String getSeed() {
+		return seed;
+	}
+
+	public void setSeed(String seed) {
+		this.seed = seed;
 	}
 
 	@Override

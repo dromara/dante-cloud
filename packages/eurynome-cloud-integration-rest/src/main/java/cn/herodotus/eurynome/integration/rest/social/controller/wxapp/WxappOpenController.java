@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/integration/open/wxapp")
-@Api(tags = {"第三方集成开放接口", "微信小程序开放接口", "微信小程序", })
+@Api(tags = {"第三方集成开放接口", "微信小程序开放接口", "微信小程序"})
 public class WxappOpenController {
 
     @Autowired

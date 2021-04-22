@@ -1,16 +1,20 @@
 package cn.herodotus.eurynome.integration.content.service.aliyun.scan;
 
+import cn.herodotus.eurynome.integration.content.domain.aliyun.AliyunConstants;
 import cn.herodotus.eurynome.integration.content.domain.aliyun.base.Response;
 import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextFeedbackRequest;
 import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextSyncRequest;
 import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextSyncResponse;
+import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextTask;
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.green.model.v20180509.TextScanRequest;
+import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>Description: 阿里文本审核服务类 </p>
@@ -40,5 +44,25 @@ public class TextScanService extends AbstractScanService {
         Response<String> feedback = this.parseResult(response, String.class);
         log.debug("[Eurynome] |- Aliyun Text Feedback result is: {}", feedback.toString());
         return feedback;
+    }
+
+    public TextSyncRequest buildSyncRequest(List<TextTask> tasks, List<String> scenes, String bizType) {
+        TextSyncRequest textSyncRequest = new TextSyncRequest();
+        textSyncRequest.setBizType(bizType);
+        textSyncRequest.setScenes(scenes);
+        textSyncRequest.setTasks(tasks);
+        return textSyncRequest;
+    }
+
+    public TextSyncRequest buildDefaultAsyncRequest(List<String> contents) {
+        List<TextTask> tasks = contents.stream().map(content -> {
+            TextTask textTask = new TextTask();
+            textTask.setContent(content);
+            return textTask;
+        }).collect(Collectors.toList());
+
+        List<String> scenes = ImmutableList.of(AliyunConstants.SCENE_ANTISPAM);
+
+        return buildSyncRequest(tasks, scenes, null);
     }
 }
