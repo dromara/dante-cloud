@@ -31,7 +31,7 @@ public class NacosConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Bean [Nacos Configuration] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Nacos Configuration] Auto Configure.");
     }
 
     @Bean("nacosApi")

@@ -47,6 +47,6 @@ public class TxcloudSmsConfiguration {
 
     @PostConstruct
     public void init() {
-        log.info("[Eurynome] |- Bean [Tencent Cloud Sms] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Tencent Cloud Sms] Auto Configure.");
     }
 }

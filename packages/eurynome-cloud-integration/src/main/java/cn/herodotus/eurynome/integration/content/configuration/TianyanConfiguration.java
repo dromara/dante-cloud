@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 
+import javax.annotation.PostConstruct;
+
 /**
  * <p>Description: 天眼查配置类 </p>
  *
@@ -17,4 +19,9 @@ import org.springframework.context.annotation.ComponentScan;
 		"cn.herodotus.eurynome.integration.content.service.tianyan"
 })
 public class TianyanConfiguration {
+
+	@PostConstruct
+	public void init() {
+		log.debug("[Eurynome] |- Bean [Tian yan cha] Auto Configure.");
+	}
 }

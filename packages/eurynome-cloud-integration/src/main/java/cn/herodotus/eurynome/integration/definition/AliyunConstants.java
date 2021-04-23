@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.content.domain.aliyun;
+package cn.herodotus.eurynome.integration.definition;
 
 /**
  * <p>Description: 阿里第三方内容涉及常量 </p>

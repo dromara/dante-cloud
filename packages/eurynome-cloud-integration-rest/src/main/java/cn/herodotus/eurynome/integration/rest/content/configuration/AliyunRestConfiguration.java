@@ -6,19 +6,19 @@ import org.springframework.context.annotation.ComponentScan;
 import javax.annotation.PostConstruct;
 
 /**
- * <p>Description: 天眼查REST配置 </p>
+ * <p>Description: 阿里云REST配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/4/16 10:32
+ * @date : 2021/4/23 11:21
  */
 @Slf4j
 @ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.integration.rest.content.controller.tianyan"
+        "cn.herodotus.eurynome.integration.rest.content.controller.aliyun"
 })
-public class TianyanRestConfiguration {
+public class AliyunRestConfiguration {
 
     @PostConstruct
     public void init() {
-        log.debug("[Eurynome] |- Bean [Tianyan Rest] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Baidu OCR Rest] Auto Configure.");
     }
 }

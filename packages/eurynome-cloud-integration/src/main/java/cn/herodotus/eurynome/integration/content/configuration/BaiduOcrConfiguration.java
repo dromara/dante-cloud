@@ -28,7 +28,7 @@ public class BaiduOcrConfiguration {
 
 	@PostConstruct
 	public void init() {
-		log.info("[Eurynome] |- Bean [Baidu OCR] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Baidu OCR] Auto Configure.");
 	}
 
 	@Bean

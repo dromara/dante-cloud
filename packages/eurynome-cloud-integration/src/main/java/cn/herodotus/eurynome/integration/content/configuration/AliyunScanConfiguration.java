@@ -34,7 +34,7 @@ public class AliyunScanConfiguration {
 
     @PostConstruct
     public void init() {
-        log.info("[Eurynome] |- Bean [Aliyun Scan] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Aliyun Scan] Auto Configure.");
     }
 
     @Autowired

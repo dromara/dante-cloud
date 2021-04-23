@@ -1,6 +1,5 @@
 package cn.herodotus.eurynome.integration.content.service.aliyun.oss;
 
-import cn.herodotus.eurynome.integration.content.properties.AliyunOssProperties;
 import cn.herodotus.eurynome.integration.content.properties.AliyunProperties;
 import cn.hutool.core.io.FileUtil;
 import com.aliyun.oss.OSS;
@@ -49,19 +48,17 @@ public class AliyunOssService {
 
     @Autowired
     private AliyunProperties aliyunProperties;
-    @Autowired
-    private AliyunOssProperties aliyunOssProperties;
 
     private String bucketName;
 
     @PostConstruct
     public void init() {
-        this.setFileTypeIndex(aliyunOssProperties.getPictureTypes(), OSS_DIR_IMAGE);
-        this.setFileTypeIndex(aliyunOssProperties.getVideoTypes(), OSS_DIR_VIDEO);
-        this.setFileTypeIndex(aliyunOssProperties.getVoiceTypes(), OSS_DIR_VOICE);
-        this.setFileTypeIndex(aliyunOssProperties.getAppTypes(), OSS_DIR_APP);
-        this.setFileTypeIndex(aliyunOssProperties.getDocTypes(), OSS_DIR_DOC);
-        this.bucketName = aliyunOssProperties.getBucketName();
+        this.setFileTypeIndex(aliyunProperties.getOss().getPictureTypes(), OSS_DIR_IMAGE);
+        this.setFileTypeIndex(aliyunProperties.getOss().getVideoTypes(), OSS_DIR_VIDEO);
+        this.setFileTypeIndex(aliyunProperties.getOss().getVoiceTypes(), OSS_DIR_VOICE);
+        this.setFileTypeIndex(aliyunProperties.getOss().getAppTypes(), OSS_DIR_APP);
+        this.setFileTypeIndex(aliyunProperties.getOss().getDocTypes(), OSS_DIR_DOC);
+        this.bucketName = aliyunProperties.getOss().getBucketName();
     }
 
     private void setFileTypeIndex(String[] types, String value) {
@@ -71,7 +68,7 @@ public class AliyunOssService {
     }
 
     private OSS getOssClient() {
-        return new OSSClientBuilder().build(aliyunOssProperties.getEndpoint(), aliyunProperties.getAccessKeyId(), aliyunProperties.getAccessKeySecret());
+        return new OSSClientBuilder().build(aliyunProperties.getOss().getEndpoint(), aliyunProperties.getAccessKeyId(), aliyunProperties.getAccessKeySecret());
     }
 
     public String getFileClassify(String fileName) {
@@ -137,7 +134,7 @@ public class AliyunOssService {
         ossClient.shutdown();
 
         log.debug("[Eurynome] |- Upload object successful！");
-        return aliyunOssProperties.getBaseUrl() + objectName;
+        return aliyunProperties.getOss().getBaseUrl() + objectName;
     }
 
     /**

@@ -1,15 +1,14 @@
 package cn.herodotus.eurynome.integration.content.service.aliyun.scan;
 
-import cn.herodotus.eurynome.integration.content.domain.aliyun.AliyunConstants;
 import cn.herodotus.eurynome.integration.content.domain.aliyun.base.Response;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextFeedbackRequest;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextSyncRequest;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextSyncResponse;
-import cn.herodotus.eurynome.integration.content.domain.aliyun.text.TextTask;
+import cn.herodotus.eurynome.integration.content.domain.aliyun.text.*;
+import cn.herodotus.eurynome.integration.definition.AliyunConstants;
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.green.model.v20180509.TextScanRequest;
 import com.google.common.collect.ImmutableList;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +62,32 @@ public class TextScanService extends AbstractScanService {
 
         List<String> scenes = ImmutableList.of(AliyunConstants.SCENE_ANTISPAM);
 
-        return buildSyncRequest(tasks, scenes, null);
+        return buildSyncRequest(tasks, scenes, AliyunConstants.BIZ_TYPE);
+    }
+
+    public boolean asyncAnalyse(List<TextSyncResponse> responses) {
+        for (TextSyncResponse textSyncResponse : responses) {
+            List<TextResult> textResults = textSyncResponse.getResults();
+            for (TextResult textResult : textResults) {
+                if (textResult.getSuggestion().equals("block")) {
+                    log.warn("[Eurynome] |- Catch the block content: {}", textResult);
+                    return false;
+                }
+            }
+        }
+
+        log.debug("[Eurynome] |- Content check result is ok!");
+        return true;
+    }
+
+    public boolean executeScan(List<String> contents) {
+        TextSyncRequest textSyncRequest = this.buildDefaultAsyncRequest(contents);
+        Response<List<TextSyncResponse>> response = this.scan(textSyncRequest);
+        if (ObjectUtils.isNotEmpty(response) && response.getCode().equals(HttpStatus.SC_OK)) {
+            return this.asyncAnalyse(response.getData());
+        } else {
+            log.error("[Eurynome] |- Aliyun Text Scan catch error! result: {}", response);
+            return false;
+        }
     }
 }

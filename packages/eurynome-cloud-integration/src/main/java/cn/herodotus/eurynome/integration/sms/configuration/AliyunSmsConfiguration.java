@@ -29,7 +29,7 @@ public class AliyunSmsConfiguration {
 
 	@PostConstruct
 	public void init() {
-		log.info("[Eurynome] |- Bean [Aliyun Sms] Auto Configure.");
+		log.debug("[Eurynome] |- Bean [Aliyun Sms] Auto Configure.");
 	}
 
 	@Autowired

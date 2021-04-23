@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/integration/open/aliyun")
 @Api(tags = {"第三方集成开放接口", "阿里云开放接口", "阿里云内容检测开放接口"})
-public class AliyunOpenController {
+public class AliyunCallbackController {
 
     @Autowired
     private AliyunProperties aliyunProperties;
