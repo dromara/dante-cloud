@@ -3,6 +3,7 @@ package cn.herodotus.eurynome.integration.rest.content.annotation;
 import cn.herodotus.eurynome.integration.content.annotation.EnableAliyunOss;
 import cn.herodotus.eurynome.integration.rest.content.configuration.AliyunRestConfiguration;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.lang.annotation.*;
 
@@ -15,6 +16,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableAsync
 @EnableAliyunOss
 @Import(AliyunRestConfiguration.class)
 public @interface EnableAliyunRest {

@@ -77,7 +77,7 @@ public class AliyunOssService {
             suffix = "." + suffix;
         }
 
-        String classify = FILE_TYPE_INDEX.get(suffix);
+        String classify = FILE_TYPE_INDEX.get(suffix.toUpperCase());
         if (StringUtils.isNotEmpty(classify)) {
             return classify;
         } else {

@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.integration.content.domain.aliyun.webpage;
 
-import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractResultResponse;
+import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractSyncResponse;
 import com.google.common.base.MoreObjects;
 
 /**
@@ -9,7 +9,7 @@ import com.google.common.base.MoreObjects;
  * @author : gengwei.zheng
  * @date : 2021/4/14 14:46
  */
-public class ImageResult extends AbstractResultResponse<ImageResultInfo> {
+public class ImageResult extends AbstractSyncResponse<ImageResultInfo> {
 
     private String url;
 

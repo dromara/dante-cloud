@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.integration.content.domain.aliyun.callback;
 
-import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractResultResponse;
+import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractSyncResponse;
 import cn.herodotus.eurynome.integration.content.domain.aliyun.common.HitLibInfo;
 import com.google.common.base.MoreObjects;
 
@@ -10,7 +10,7 @@ import com.google.common.base.MoreObjects;
  * @author : gengwei.zheng
  * @date : 2021/4/20 15:46
  */
-public class CallbackResponse extends AbstractResultResponse<CallbackResult> {
+public class CallbackResponse extends AbstractSyncResponse<CallbackResult> {
 
     private HitLibInfo extras;
 

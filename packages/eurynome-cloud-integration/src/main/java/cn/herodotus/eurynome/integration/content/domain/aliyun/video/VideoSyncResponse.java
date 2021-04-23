@@ -1,6 +1,6 @@
 package cn.herodotus.eurynome.integration.content.domain.aliyun.video;
 
-import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractResultResponse;
+import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractSyncResponse;
 
 /**
  * <p>Description: 阿里视频审核同步返回值对应实体 </p>
@@ -8,5 +8,5 @@ import cn.herodotus.eurynome.integration.content.domain.aliyun.base.AbstractResu
  * @author : gengwei.zheng
  * @date : 2021/4/14 14:26
  */
-public class VideoSyncResponse extends AbstractResultResponse<VideoResult> {
+public class VideoSyncResponse extends AbstractSyncResponse<VideoResult> {
 }

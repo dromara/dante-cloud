@@ -1,8 +1,10 @@
 package cn.herodotus.eurynome.integration.rest.content.controller.aliyun;
 
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.integration.content.properties.AliyunProperties;
 import cn.herodotus.eurynome.integration.content.service.aliyun.oss.AliyunOssService;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -41,7 +43,7 @@ public class AliyunOssController {
 
     private String createName(String fileName, String directory) {
         String name = IdUtil.fastSimpleUUID();
-        return directory + "/" + name;
+        return directory + SymbolConstants.FORWARD_SLASH + name + SymbolConstants.PERIOD + FileUtil.getSuffix(fileName);
     }
 
     private String uploadFileOperation(MultipartFile file) {

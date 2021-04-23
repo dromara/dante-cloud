@@ -13,12 +13,13 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.integration.rest.content.controller.aliyun"
+        "cn.herodotus.eurynome.integration.rest.content.controller.aliyun",
+        "cn.herodotus.eurynome.integration.rest.content.logic.aliyun"
 })
 public class AliyunRestConfiguration {
 
     @PostConstruct
     public void init() {
-        log.debug("[Eurynome] |- Bean [Baidu OCR Rest] Auto Configure.");
+        log.debug("[Eurynome] |- Bean [Aliyun Rest] Auto Configure.");
     }
 }
