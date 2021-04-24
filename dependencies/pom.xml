@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.4</version>
+        <version>2.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -21,12 +21,11 @@
     <properties>
         <!--Spring 家族-->
         <spring-cloud-dependencies.version>2020.0.2</spring-cloud-dependencies.version>
-        <spring-cloud-alibaba-dependencies.version>2.2.5.RELEASE</spring-cloud-alibaba-dependencies.version>
+        <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.4.0</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
-        <maven-dockerfile-plugin.version>1.4.13</maven-dockerfile-plugin.version>
-        <maven-versions-plugin.version>2.8.1</maven-versions-plugin.version>
+        <maven-docker-plugin.version>0.35.0</maven-docker-plugin.version>
 
         <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -34,13 +33,24 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.8.0</commons-io.version>
         <google-guava.version>30.1.1-jre</google-guava.version>
-        <hutool.version>5.6.2</hutool.version>
+        <hutool.version>5.6.3</hutool.version>
         <jackson.version>2.12.2</jackson.version>
-        <weixin-java-miniapp.version>4.0.6.B</weixin-java-miniapp.version>
 
         <!--Alibaba开源的工具包-->
-        <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.76</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
+        <alibaba-nacos.version>2.0.0</alibaba-nacos.version>
+
+        <!--第三方应用集成SDK-->
+        <weixin-java-sdk.version>4.0.8.B</weixin-java-sdk.version>
+        <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
+        <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
+        <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
+        <aliyun-java-sdk-oss.version>3.12.0</aliyun-java-sdk-oss.version>
+        <tencentcloud-java-sdk.version>4.0.11</tencentcloud-java-sdk.version>
+        <jpush-java-sdk.version>3.4.8</jpush-java-sdk.version>
+        <jpush-common.verison>1.1.10</jpush-common.verison>
+
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.3</starter-jasypt.version>
@@ -54,17 +64,17 @@
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <okhttps.version>3.0.1</okhttps.version>
+        <pushy.version>0.13.10</pushy.version>
         <just-auth.verison>1.15.9</just-auth.verison>
+        <lombok.version>1.18.20</lombok.version>
 
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
-
-        <!--镜像前缀-->
-        <docker.image.prefix>eurynome.cloud</docker.image.prefix>
     </properties>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
     <dependencyManagement>
         <dependencies>
+            <!-- Spring 家族 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -84,14 +94,101 @@
                 <artifactId>spring-boot-admin-starter-server</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>
-
-            <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+            <!-- Eurynome Cloud -->
             <dependency>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${maven-dockerfile-plugin.version}</version>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-crud</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-oauth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-oauth-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-kernel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-operation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-message</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-upms-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-upms-logic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-upms-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-bpmn-logic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-integration</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-integration-rest</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
+            <!-- 通用工具组件 -->
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
@@ -115,18 +212,39 @@
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
             </dependency>
-
-            <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${alibaba-fastjson.version}</version>
-            </dependency>
             <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${google-guava.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ejlchina</groupId>
+                <artifactId>okhttps-fastjson</artifactId>
+                <version>${okhttps.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ejlchina</groupId>
+                <artifactId>okhttps-gson</artifactId>
+                <version>${okhttps.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ejlchina</groupId>
+                <artifactId>okhttps-jackson</artifactId>
+                <version>${okhttps.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -143,42 +261,11 @@
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-ui</artifactId>
-                <version>${knife4j.version}</version>
-            </dependency>
             <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
             <dependency>
                 <groupId>p6spy</groupId>
                 <artifactId>p6spy</artifactId>
                 <version>${p6spy.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
-            <dependency>
-                <groupId>com.github.penggle</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-starter-redis -->
-            <dependency>
-                <groupId>com.alicp.jetcache</groupId>
-                <artifactId>jetcache-starter-redis-lettuce</artifactId>
-                <version>${alibaba-jetcache.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
-            <dependency>
-                <groupId>com.github.whvcse</groupId>
-                <artifactId>easy-captcha</artifactId>
-                <version>${easy-captcha.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder -->
             <dependency>
@@ -186,12 +273,45 @@
                 <artifactId>logstash-logback-encoder</artifactId>
                 <version>${logstash-logback-encoder.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
             <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
-                <version>${jackson.version}</version>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+
+            <!-- 阿里巴巴依赖 -->
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${alibaba-nacos.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${alibaba-fastjson.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-starter-redis -->
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-starter-redis-lettuce</artifactId>
+                <version>${alibaba-jetcache.version}</version>
+            </dependency>
+
+            <!-- 第三方Starter -->
             <dependency>
                 <groupId>org.camunda.bpm.springboot</groupId>
                 <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
@@ -209,27 +329,60 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${starter-mybatis.version}</version>
             </dependency>
+
+            <!-- 第三方应用集成 -->
             <!-- https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-miniapp -->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-miniapp</artifactId>
-                <version>${weixin-java-miniapp.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-fastjson</artifactId>
-                <version>${okhttps.version}</version>
+                <version>${weixin-java-sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-gson</artifactId>
-                <version>${okhttps.version}</version>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-mp</artifactId>
+                <version>${weixin-java-sdk.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
             <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-jackson</artifactId>
-                <version>${okhttps.version}</version>
+                <groupId>com.baidu.aip</groupId>
+                <artifactId>java-sdk</artifactId>
+                <version>${baidu-java-sdk.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-green -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-green</artifactId>
+                <version>${aliyun-java-sdk-green.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-java-sdk-oss.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-sdk-java -->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>${tencentcloud-java-sdk.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jpush-client -->
+            <dependency>
+                <groupId>cn.jpush.api</groupId>
+                <artifactId>jpush-client</artifactId>
+                <version>${jpush-java-sdk.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jiguang-common -->
+            <dependency>
+                <groupId>cn.jpush.api</groupId>
+                <artifactId>jiguang-common</artifactId>
+                <version>${jpush-common.verison}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/me.zhyd.oauth/JustAuth -->
             <dependency>
@@ -237,54 +390,12 @@
                 <artifactId>JustAuth</artifactId>
                 <version>${just-auth.verison}</version>
             </dependency>
-
+            <!-- https://mvnrepository.com/artifact/com.turo/pushy -->
+            <dependency>
+                <groupId>com.turo</groupId>
+                <artifactId>pushy</artifactId>
+                <version>${pushy.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <resources>
-            <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
-            </plugin>
-            <plugin>
-                <!--打包跳过测试-->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>${maven-versions-plugin.version}</version>
-                <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
