@@ -74,8 +74,12 @@
         </dependency>
     </dependencies>
 
+    <!-- 需要以服务方式运行的包，按照以下进行build plugin的配置，以便支持docker打包；-->
+    <!-- 而仅作为依赖的工具型代码包，类似于eurynome-cloud-common之类的包，则不需要这样配置，甚至不需要<build>部分内容 -->
+    <!-- 如果当前包中包含，例如：字体、证书等资源，需要配置maven-resources-plugin，以防止重要静态资源文件被spring boot重新编码 -->
     <build>
         <plugins>
+            <!-- spring boot 默认插件 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -83,53 +87,14 @@
 
             <!-- docker打包插件 -->
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${maven-dockerfile-plugin.version}</version>
-                <configuration>
-                    <repository>${project.artifactId}</repository>
-                    <tag>${project.version}</tag>
-                    <dockerfile>Dockerfile</dockerfile>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
             </plugin>
 
             <!-- 拷贝插件 -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-jar-file</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <!--jar包保存位置 -->
-                                <copy todir="${docker.build.directory}">
-                                    <fileset dir="${project.basedir}/target">
-                                        <include name="*.jar" />
-                                    </fileset>
-                                </copy>
-                            </target>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>delete-jar-file</id>
-                        <phase>pre-clean</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <delete file="${docker.build.directory}/${project.artifactId}-${project.version}.jar" />
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

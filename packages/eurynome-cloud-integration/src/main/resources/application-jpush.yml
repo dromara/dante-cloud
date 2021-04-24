@@ -1,0 +1,6 @@
+herodotus:
+  integration:
+    push:
+      jpush:
+        app-key: 730642aa1b34ecb626a58213
+        master-secret: 01b5e08a9c3b55d6f2b49c7a

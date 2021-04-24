@@ -25,91 +25,24 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!--通用配置参数-->
+        <docker.resource.name>${project.artifactId}-${project.version}.jar</docker.resource.name>
+        <docker.namespace>eurynome.cloud</docker.namespace>
     </properties>
 
     <!-- 所有的子项目默认依赖 -->
     <dependencies>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-data</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-rest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-crud</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-security</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-oauth</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-oauth-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-kernel</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-operation</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-message</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-upms-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-upms-logic</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-upms-rest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-bpmn-logic</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -160,6 +93,12 @@
                 <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
                 <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
                 <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
+                <!--配置参数-->
+                <docker.host>http://192.168.101.10:2375</docker.host>
+                <docker.registry>192.168.101.10</docker.registry>
+                <docker.namespace>eurynome.cloud</docker.namespace>
+                <docker.username>username</docker.username>
+                <docker.password>password</docker.password>
             </properties>
         </profile>
         <!-- 测试 -->
@@ -199,4 +138,161 @@
             </properties>
         </profile>
     </profiles>
+
+    <build>
+        <resources>
+            <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <!-- docker打包插件 -->
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${maven-docker-plugin.version}</version>
+                    <!--全局配置-->
+                    <configuration>
+                        <!--这一部分是为了实现对远程docker容器的控制-->
+                        <!--docker主机地址,用于完成docker各项功能,注意是tcp不是http!-->
+                        <dockerHost>${docker.host}</dockerHost>
+                        <!--docker远程访问所需证书地址,如果docker远程主机没有启用TLS验证则不需要配证书-->
+                        <!--                     <certPath>${project.basedir}/docker/ssh</certPath>-->
+
+                        <!--这一部分是为了实现docker镜像的构建和推送-->
+                        <!--registry地址,用于推送,拉取镜像,我这里用的是阿里的registry-->
+                        <registry>${docker.registry}</registry>
+                        <!-- 认证信息-->
+                        <authConfig>
+                            <push>
+                                <username>${docker.username}</username>
+                                <password>${docker.password}</password>
+                            </push>
+                        </authConfig>
+                        <!--镜像相关配置,支持多镜像-->
+                        <images>
+                            <!-- 单个镜像配置 -->
+                            <image>
+                                <!--镜像名(含版本号) 命名空间/仓库名称:镜像版本号-->
+                                <name>命名空间/仓库名称:镜像版本号</name>
+                                <name>${docker.registry}/${docker.namespace}/${project.name}:${project.version}</name>
+                                <!--别名:用于容器命名和在docker-compose.yml文件只能找到对应名字的配置-->
+                                <alias>${project.name}</alias>
+                                <!--镜像build相关配置-->
+                                <build>
+                                    <!--使用dockerFile文件-->
+                                    <dockerFile>${project.basedir}/Dockerfile</dockerFile>
+                                </build>
+                            </image>
+                        </images>
+                    </configuration>
+                </plugin>
+
+                <!-- 拷贝插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>delete-jar-file</id>
+                            <phase>pre-clean</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <target>
+                                    <delete file="${docker.build.directory}/${docker.resource.name}"/>
+                                </target>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>prepare-docker-resource</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                            <configuration>
+                                <target>
+                                    <!--jar包保存位置 -->
+                                    <copy todir="${docker.build.directory}">
+                                        <fileset dir="${project.basedir}/target">
+                                            <include name="${docker.resource.name}"/>
+                                        </fileset>
+                                    </copy>
+                                </target>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!--打包跳过测试-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>aliyun-repos</id>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-plugin</id>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

@@ -277,7 +277,7 @@
             }
 
             function refresh() {
-                let src = '[[${#request.getContextPath()}]]/defaultKaptcha?d='+new Date()*1;
+                let src = '[[${#syncRequest.getContextPath()}]]/defaultKaptcha?d='+new Date()*1;
                 $('#vrifyCodeImg').attr('src', src);
             }
 
@@ -293,10 +293,10 @@
             jQuery(document).ready(function() {
 
                 $.backstretch([
-                    "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/1.jpg"
-                    , "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/2.jpg"
-                    , "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/3.jpg"
-                    , "[[${#request.getContextPath()}]]/plugins/cloudadmin/img/login/4.jpg"
+                    "[[${#syncRequest.getContextPath()}]]/plugins/cloudadmin/img/login/1.jpg"
+                    , "[[${#syncRequest.getContextPath()}]]/plugins/cloudadmin/img/login/2.jpg"
+                    , "[[${#syncRequest.getContextPath()}]]/plugins/cloudadmin/img/login/3.jpg"
+                    , "[[${#syncRequest.getContextPath()}]]/plugins/cloudadmin/img/login/4.jpg"
                 ], {duration: 3000, fade: 750});
 
                 App.setPage("login_bg");  //Set current page

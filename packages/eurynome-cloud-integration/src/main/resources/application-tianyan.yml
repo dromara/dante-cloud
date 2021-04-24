@@ -1,0 +1,6 @@
+herodotus:
+  integration:
+    content:
+      tianyan:
+        token: 4836348a-c348-4232-86b7-cd2da3d22215
+        base-url: http://open.api.tianyancha.com/services/open
