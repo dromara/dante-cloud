@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.social.domain.easemob;
+package cn.herodotus.eurynome.integration.social.domain.easemob.common;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -7,7 +7,7 @@ import com.google.common.base.MoreObjects;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 /**
  * <p>Description: Easemob响应返回对象 </p>
@@ -17,26 +17,32 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2021/4/6 13:05
  */
-public class Response implements Serializable {
-
-	private String action;
-
-	private String application;
+public class Response<E extends Serializable, D extends Serializable> implements Serializable {
 
 	private String path;
 
 	private String uri;
 
-	private Map<String, String> data;
-
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date timestamp = new Date();
 
-	private Integer duration;
-
 	private String organization;
 
+	private String application;
+
+	private List<E> entities;
+
+	private String action;
+
+	private List<D> data;
+
+	private Integer duration;
+
 	private String applicationName;
+
+	private String cursor;
+
+	private Integer count;
 
 	private String error;
 
@@ -45,22 +51,6 @@ public class Response implements Serializable {
 	@JsonProperty("error_description")
 	@JSONField(name = "error_description")
 	private String errorDescription;
-
-	public String getAction() {
-		return action;
-	}
-
-	public void setAction(String action) {
-		this.action = action;
-	}
-
-	public String getApplication() {
-		return application;
-	}
-
-	public void setApplication(String application) {
-		this.application = application;
-	}
 
 	public String getPath() {
 		return path;
@@ -78,14 +68,6 @@ public class Response implements Serializable {
 		this.uri = uri;
 	}
 
-	public Map<String, String> getData() {
-		return data;
-	}
-
-	public void setData(Map<String, String> data) {
-		this.data = data;
-	}
-
 	public Date getTimestamp() {
 		return timestamp;
 	}
@@ -94,20 +76,52 @@ public class Response implements Serializable {
 		this.timestamp = timestamp;
 	}
 
-	public Integer getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Integer duration) {
-		this.duration = duration;
-	}
-
 	public String getOrganization() {
 		return organization;
 	}
 
 	public void setOrganization(String organization) {
 		this.organization = organization;
+	}
+
+	public String getApplication() {
+		return application;
+	}
+
+	public void setApplication(String application) {
+		this.application = application;
+	}
+
+	public List<E> getEntities() {
+		return entities;
+	}
+
+	public void setEntities(List<E> entities) {
+		this.entities = entities;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public List<D> getData() {
+		return data;
+	}
+
+	public void setData(List<D> data) {
+		this.data = data;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
 	}
 
 	public String getApplicationName() {
@@ -142,18 +156,37 @@ public class Response implements Serializable {
 		this.errorDescription = errorDescription;
 	}
 
+	public String getCursor() {
+		return cursor;
+	}
+
+	public void setCursor(String cursor) {
+		this.cursor = cursor;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(this)
-				.add("action", action)
-				.add("application", application)
 				.add("path", path)
 				.add("uri", uri)
-				.add("data", data)
 				.add("timestamp", timestamp)
-				.add("duration", duration)
 				.add("organization", organization)
+				.add("application", application)
+				.add("entities", entities)
+				.add("action", action)
+				.add("data", data)
+				.add("duration", duration)
 				.add("applicationName", applicationName)
+				.add("cursor", cursor)
+				.add("count", count)
 				.add("error", error)
 				.add("exception", exception)
 				.add("errorDescription", errorDescription)

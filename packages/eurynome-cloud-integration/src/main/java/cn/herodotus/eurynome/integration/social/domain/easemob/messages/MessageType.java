@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.social.domain.easemob;
+package cn.herodotus.eurynome.integration.social.domain.easemob.messages;
 
 /**
  * <p>Description: 环信消息类型 </p>

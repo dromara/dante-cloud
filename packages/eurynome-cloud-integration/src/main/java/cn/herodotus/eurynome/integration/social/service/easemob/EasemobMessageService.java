@@ -1,7 +1,7 @@
 package cn.herodotus.eurynome.integration.social.service.easemob;
 
-import cn.herodotus.eurynome.integration.social.domain.easemob.Request;
-import cn.herodotus.eurynome.integration.social.domain.easemob.Response;
+import cn.herodotus.eurynome.integration.social.domain.easemob.messages.Request;
+import cn.herodotus.eurynome.integration.social.domain.easemob.common.Response;
 import com.ejlchina.okhttps.OkHttps;
 import org.springframework.stereotype.Service;
 

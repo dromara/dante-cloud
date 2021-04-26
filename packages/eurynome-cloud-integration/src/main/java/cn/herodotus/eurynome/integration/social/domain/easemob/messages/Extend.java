@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.social.domain.easemob;
+package cn.herodotus.eurynome.integration.social.domain.easemob.messages;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;

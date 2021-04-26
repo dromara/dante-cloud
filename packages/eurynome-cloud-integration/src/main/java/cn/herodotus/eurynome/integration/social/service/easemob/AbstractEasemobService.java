@@ -2,17 +2,22 @@ package cn.herodotus.eurynome.integration.social.service.easemob;
 
 import cn.herodotus.eurynome.integration.definition.AbstractRestApiService;
 import cn.herodotus.eurynome.integration.definition.IntegrationConstants;
-import cn.herodotus.eurynome.integration.social.domain.easemob.Token;
+import cn.herodotus.eurynome.integration.social.domain.easemob.common.Token;
 import cn.herodotus.eurynome.integration.social.properties.EasemobProperties;
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.ejlchina.okhttps.OkHttps;
+import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -28,8 +33,8 @@ public abstract class AbstractEasemobService extends AbstractRestApiService {
 
     @Autowired
     private EasemobProperties easemobProperties;
-    @Autowired
-    private RedisTemplate<String, Token> redisTemplate;
+    @Resource
+    private RedisTemplate<String, String> redisTemplate;
 
     private static final int BUFFER_TIME = 10;
 
@@ -61,7 +66,7 @@ public abstract class AbstractEasemobService extends AbstractRestApiService {
                 .toBean(Token.class);
 
         if (BeanUtil.isNotEmpty(token)) {
-            redisTemplate.opsForValue().set(IntegrationConstants.EASEMOB_TOKEN, token, token.getExpiresIn().longValue(), TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(IntegrationConstants.EASEMOB_TOKEN, JSON.toJSONString(token), token.getExpiresIn().longValue(), TimeUnit.SECONDS);
             log.debug("[Eurynome] |- Fetch the easemob token and save to redis : {}", token);
         }
 
@@ -69,9 +74,9 @@ public abstract class AbstractEasemobService extends AbstractRestApiService {
     }
 
     protected Token getToken() {
-        Token redisStoreToken = redisTemplate.opsForValue().get(IntegrationConstants.EASEMOB_TOKEN);
-        if (ObjectUtils.isNotEmpty(redisStoreToken)) {
-            return redisStoreToken;
+        String redisStoreToken = redisTemplate.opsForValue().get(IntegrationConstants.EASEMOB_TOKEN);
+        if (StringUtils.isNotBlank(redisStoreToken)) {
+            return JSON.parseObject(redisStoreToken, Token.class);
         } else {
             return this.token();
         }
@@ -82,5 +87,14 @@ public abstract class AbstractEasemobService extends AbstractRestApiService {
         header.put(HttpHeaders.AUTHORIZATION, "Bearer " + getToken().getAccessToken());
         return header;
     }
+
+    protected String getUserUrl(String username) {
+        String url = "/users/{username}";
+        Map<String, String> formatter = ImmutableMap.of("username", username);
+        return StrUtil.format(url, formatter);
+    }
+
+
+
 
 }

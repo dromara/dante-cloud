@@ -37,7 +37,7 @@
         <jackson.version>2.12.2</jackson.version>
 
         <!--Alibaba开源的工具包-->
-        <alibaba-fastjson.version>1.2.76</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
         <alibaba-nacos.version>2.0.0</alibaba-nacos.version>
 

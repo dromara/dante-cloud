@@ -1,4 +1,4 @@
-package cn.herodotus.eurynome.integration.social.domain.easemob;
+package cn.herodotus.eurynome.integration.social.domain.easemob.messages;
 
 import com.google.common.base.MoreObjects;
 
