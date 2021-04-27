@@ -1,7 +1,9 @@
 package cn.herodotus.eurynome.integration.social.service.easemob;
 
-import cn.herodotus.eurynome.integration.social.domain.easemob.messages.Request;
 import cn.herodotus.eurynome.integration.social.domain.easemob.common.Response;
+import cn.herodotus.eurynome.integration.social.domain.easemob.messages.MessageResult;
+import cn.herodotus.eurynome.integration.social.domain.easemob.messages.MessageDTO;
+import com.ejlchina.data.TypeRef;
 import com.ejlchina.okhttps.OkHttps;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +16,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class EasemobMessageService extends AbstractEasemobService {
 
-    public Response postMessage(Request request) {
+    public Response<String, MessageResult> sendMessage(MessageDTO messageDTO) {
         return http().sync("/messages")
                 .bodyType(OkHttps.JSON)
                 .addHeader(getTokenHeader())
-                .setBodyPara(request)
+                .setBodyPara(messageDTO)
                 .post()
                 .getBody()
-                .toBean(Response.class);
+                .toBean(new TypeRef<Response<String, MessageResult>>() {
+                });
     }
 }

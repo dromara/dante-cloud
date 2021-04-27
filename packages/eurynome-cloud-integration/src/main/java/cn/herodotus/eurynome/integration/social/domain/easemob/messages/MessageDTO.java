@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/4/2 11:31
  */
-public class Request implements Serializable {
+public class MessageDTO implements Serializable {
 
 	/**
 	 * 发送的目标类型；users：给用户发消息，chatgroups：给群发消息，chatrooms：给聊天室发消息

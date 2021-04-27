@@ -30,6 +30,8 @@ public class GroupResult implements Serializable {
 
     private String type;
 
+    private Boolean success;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastModified = new Date();
 
@@ -92,6 +94,14 @@ public class GroupResult implements Serializable {
         this.created = created;
     }
 
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -100,6 +110,7 @@ public class GroupResult implements Serializable {
                 .add("owner", owner)
                 .add("affiliations", affiliations)
                 .add("type", type)
+                .add("success", success)
                 .add("lastModified", lastModified)
                 .add("created", created)
                 .toString();

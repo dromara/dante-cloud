@@ -95,6 +95,21 @@ public abstract class AbstractEasemobService extends AbstractRestApiService {
     }
 
 
+    protected String getGroupUrl(String groupId) {
+        String url = "/chatgroups/{group_id}";
+        Map<String, String> formatter = ImmutableMap.of("group_id", groupId);
+        return StrUtil.format(url, formatter);
+    }
 
+    protected String getGroupMemberUrl(String groupId, String username) {
+        String url = "/chatgroups/{group_id}/users/{username}";
+        Map<String, String> formatter = ImmutableMap.of("group_id", groupId, "username", username);
+        return StrUtil.format(url, formatter);
+    }
 
+    protected String getGroupBlockUrl(String groupId, String username) {
+        String url = "/chatgroups/{group_id}/blocks/users/{username}";
+        Map<String, String> formatter = ImmutableMap.of("group_id", groupId, "username", username);
+        return StrUtil.format(url, formatter);
+    }
 }
