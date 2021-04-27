@@ -17,7 +17,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/4/6 13:05
  */
-public class Response<E extends Serializable, D extends Serializable> implements Serializable {
+public class Response<E extends Serializable, D> implements Serializable {
 
 	private String path;
 
@@ -34,7 +34,7 @@ public class Response<E extends Serializable, D extends Serializable> implements
 
 	private String action;
 
-	private List<D> data;
+	private D data;
 
 	private Integer duration;
 
@@ -108,14 +108,6 @@ public class Response<E extends Serializable, D extends Serializable> implements
 		this.action = action;
 	}
 
-	public List<D> getData() {
-		return data;
-	}
-
-	public void setData(List<D> data) {
-		this.data = data;
-	}
-
 	public Integer getDuration() {
 		return duration;
 	}
@@ -170,6 +162,14 @@ public class Response<E extends Serializable, D extends Serializable> implements
 
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+
+	public D getData() {
+		return data;
+	}
+
+	public void setData(D data) {
+		this.data = data;
 	}
 
 	@Override

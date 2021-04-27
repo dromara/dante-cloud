@@ -2,44 +2,43 @@ package cn.herodotus.eurynome.integration.social.service.easemob;
 
 import cn.herodotus.eurynome.integration.social.domain.easemob.common.Response;
 import cn.herodotus.eurynome.integration.social.domain.easemob.users.UserEntity;
-import cn.herodotus.eurynome.integration.social.domain.easemob.users.UserRegisterRequest;
-import cn.hutool.core.util.StrUtil;
+import cn.herodotus.eurynome.integration.social.domain.easemob.users.UserRegisterDTO;
 import com.ejlchina.data.TypeRef;
-import com.ejlchina.okhttps.HttpResult;
 import com.ejlchina.okhttps.OkHttps;
 import com.google.common.collect.ImmutableMap;
-import com.sun.javafx.binding.StringFormatter;
-import javafx.beans.binding.StringExpression;
-import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: 环信用户管理Service </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/4/25 14:59
  */
 @Service
-public class EasemobUserService extends AbstractEasemobService{
+public class EasemobUserService extends AbstractEasemobService {
 
-    public Response<UserEntity, String> createUser(UserRegisterRequest user) {
+    public Response<UserEntity, String> createUser(UserRegisterDTO userRegisterDTO) {
         return http().sync("/users")
                 .bodyType(OkHttps.JSON)
                 .addHeader(getTokenHeader())
-                .setBodyPara(user)
-                .post().getBody().toBean(new TypeRef<Response<UserEntity, String>>() {
+                .setBodyPara(userRegisterDTO)
+                .post()
+                .getBody()
+                .toBean(new TypeRef<Response<UserEntity, String>>() {
                 });
     }
 
-    public Response<UserEntity, String> createUser(List<UserRegisterRequest> users) {
+    public Response<UserEntity, String> createUser(List<UserRegisterDTO> users) {
         return http().sync("/users")
                 .bodyType(OkHttps.JSON)
                 .addHeader(getTokenHeader())
                 .setBodyPara(users)
-                .post().getBody().toBean(new TypeRef<Response<UserEntity, String>>() {
+                .post()
+                .getBody()
+                .toBean(new TypeRef<Response<UserEntity, String>>() {
                 });
     }
 
@@ -103,17 +102,6 @@ public class EasemobUserService extends AbstractEasemobService{
                 });
     }
 
-    private String getContactUrl(String owner) {
-        String url = "/users/{owner_username}/contacts/users";
-        Map<String, String> formatter = ImmutableMap.of("owner_username", owner);
-        return StrUtil.format(url, formatter);
-    }
-
-    private String getContactUrl(String owner, String friend) {
-        String url = "/users/{owner_username}/contacts/users/{friend_username}";
-        Map<String, String> formatter = ImmutableMap.of("owner_username", owner, "friend_username", friend);
-        return StrUtil.format(url, formatter);
-    }
 
     public Response<UserEntity, String> addContact(String owner, String friend) {
         String url = getContactUrl(owner, friend);

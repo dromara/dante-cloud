@@ -6,7 +6,7 @@ package cn.herodotus.eurynome.integration.social.domain.easemob.groups;
  * @author : gengwei.zheng
  * @date : 2021/4/27 8:53
  */
-public class GroupActionResult extends AbstractGroupResult{
+public class GroupActionResult extends GroupCreateResult{
 
     /**
      * 执行的操作

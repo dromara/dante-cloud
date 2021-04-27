@@ -15,7 +15,7 @@ public class Message {
 	/**
 	 * 消息类型；txt:文本消息，img：图片消息，loc：位置消息，audio：语音消息，video：视频消息，file：文件消息，cmd：透传消息
 	 */
-	private MessageType type;
+	private String type;
 	/**
 	 * 消息内容
 	 */
@@ -65,12 +65,12 @@ public class Message {
 	public Message() {
 	}
 
-	public Message(MessageType type, String msg) {
+	public Message(String type, String msg) {
 		this.type = type;
 		this.msg = msg;
 	}
 
-	public Message(MessageType type, String msg, Size size, String url, String filename, String secret, Integer length, Integer fileLength, String thumbSecret, String lat, String lng, String addr) {
+	public Message(String type, String msg, Size size, String url, String filename, String secret, Integer length, Integer fileLength, String thumbSecret, String lat, String lng, String addr) {
 		this.type = type;
 		this.msg = msg;
 		this.size = size;
@@ -85,11 +85,11 @@ public class Message {
 		this.addr = addr;
 	}
 
-	public MessageType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(MessageType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

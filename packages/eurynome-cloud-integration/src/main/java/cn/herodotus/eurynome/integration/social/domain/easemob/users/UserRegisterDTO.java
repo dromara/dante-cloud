@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/4/25 14:57
  */
-public class UserRegisterRequest implements Serializable {
+public class UserRegisterDTO implements Serializable {
 
     private String username;
     private String password;

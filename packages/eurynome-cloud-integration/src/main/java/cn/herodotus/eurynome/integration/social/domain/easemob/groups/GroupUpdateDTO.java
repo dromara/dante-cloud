@@ -5,11 +5,15 @@ package cn.herodotus.eurynome.integration.social.domain.easemob.groups;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
- * @author baogs
+ * <p>Description: 环信跟新群组信息请求参数对应实体 </p>
  *
+ * @author : gengwei.zheng
+ * @date : 2021/4/27 11:09
  */
-public class GroupUpdateDTO {
+public class GroupUpdateDTO implements Serializable {
 	/**
 	 * 群组名称，修改时值不能包含斜杠
 	 */

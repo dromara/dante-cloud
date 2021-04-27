@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: 注册单个用户返回实体对象中entities对应实体 </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/4/25 16:43

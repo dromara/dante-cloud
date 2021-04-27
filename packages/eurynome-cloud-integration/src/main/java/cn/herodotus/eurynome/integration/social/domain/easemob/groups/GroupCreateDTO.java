@@ -8,6 +8,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/4/27 8:44
  */
-public class GroupCreateDTO {
+public class GroupCreateDTO implements Serializable {
 
 	/**
 	 * 是否是公开群，此属性为必须的
