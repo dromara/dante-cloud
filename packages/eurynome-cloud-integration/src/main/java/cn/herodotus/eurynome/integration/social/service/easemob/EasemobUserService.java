@@ -55,7 +55,7 @@ public class EasemobUserService extends AbstractEasemobService {
                 });
     }
 
-    public Response<UserEntity, String> resetPassword(String username, String password) {
+    public Response<String, String> resetPassword(String username, String password) {
         String url = this.getUserUrl(username) + "/password";
         Map<String, String> body = ImmutableMap.of("newpassword", password);
         return http().sync(url)
@@ -64,7 +64,7 @@ public class EasemobUserService extends AbstractEasemobService {
                 .setBodyPara(body)
                 .put()
                 .getBody()
-                .toBean(new TypeRef<Response<UserEntity, String>>() {
+                .toBean(new TypeRef<Response<String, String>>() {
                 });
     }
 
