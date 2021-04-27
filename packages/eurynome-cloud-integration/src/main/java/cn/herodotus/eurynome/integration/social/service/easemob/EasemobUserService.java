@@ -125,14 +125,14 @@ public class EasemobUserService extends AbstractEasemobService {
                 });
     }
 
-    public Response<UserEntity, String> findFriends(String owner) {
+    public Response<String, List<String>> findFriends(String owner) {
         String url = getContactUrl(owner);
         return http().sync(url)
                 .bodyType(OkHttps.JSON)
                 .addHeader(getTokenHeader())
                 .get()
                 .getBody()
-                .toBean(new TypeRef<Response<UserEntity, String>>() {
+                .toBean(new TypeRef<Response<String, List<String>>>() {
                 });
     }
 
