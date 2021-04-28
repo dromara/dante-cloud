@@ -62,6 +62,10 @@
                 <!--当前环境-->
                 <profile.name>development</profile.name>
                 <database.type>postgresql</database.type>
+                <!--构建源代码包-->
+                <build.source>false</build.source>
+                <!--copy代码包到docker构建目录-->
+                <build.docker.resource>false</build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -83,7 +87,12 @@
             <properties>
                 <!--当前环境-->
                 <profile.name>docker</profile.name>
+                <!--数据库类型-->
                 <database.type>postgresql</database.type>
+                <!--构建源代码包-->
+                <build.source>false</build.source>
+                <!--copy代码包到docker构建目录-->
+                <build.docker.resource>true</build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>192.168.101.10:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -108,6 +117,10 @@
                 <!--当前环境-->
                 <profile.name>testing</profile.name>
                 <database.type>postgresql</database.type>
+                <!--构建源代码包-->
+                <build.source>false</build.source>
+                <!--copy代码包到docker构建目录-->
+                <build.docker.resource>false</build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>10.180.80.80:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -126,6 +139,10 @@
                 <!--当前环境,生产环境为空-->
                 <profile.name>production</profile.name>
                 <database.type>postgresql</database.type>
+                <!--构建源代码包-->
+                <build.source>true</build.source>
+                <!--copy代码包到docker构建目录-->
+                <build.docker.resource>false</build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>172.17.207.82:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -218,6 +235,7 @@
                                 <goal>run</goal>
                             </goals>
                             <configuration>
+                                <skip>${build.docker.resource}</skip>
                                 <target>
                                     <!--jar包保存位置 -->
                                     <copy todir="${docker.build.directory}">
@@ -257,6 +275,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <skipSource>${build.source}</skipSource>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
