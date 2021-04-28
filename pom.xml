@@ -18,6 +18,13 @@
     <name>eurynome-cloud</name>
     <description>Top Eurynome project pom.xml file</description>
 
+    <!-- ${basedir} 项目根目录 -->
+    <!-- ${project.build.directory} 构建目录，缺省为target -->
+    <!-- ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes -->
+    <!-- ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version} -->
+    <!-- ${project.packaging} 打包类型，缺省为jar -->
+    <!-- ${project.xxx} 当前pom文件的任意节点的内容 如project.artifactId -->
+
     <properties>
         <java.version>1.8</java.version>
         <resource.delimiter>@</resource.delimiter>
@@ -26,9 +33,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!--通用配置参数-->
-        <docker.resource.name>${project.artifactId}-${project.version}.jar</docker.resource.name>
+        <!--配置参数-->
+        <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
+        <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
         <docker.namespace>eurynome.cloud</docker.namespace>
+        <docker.host>http://192.168.101.10:2375</docker.host>
+        <docker.registry>192.168.101.10</docker.registry>
+        <docker.namespace>eurynome.cloud</docker.namespace>
+        <docker.username>username</docker.username>
+        <docker.password>password</docker.password>
     </properties>
 
     <!-- 所有的子项目默认依赖 -->
@@ -62,10 +75,10 @@
                 <!--当前环境-->
                 <profile.name>development</profile.name>
                 <database.type>postgresql</database.type>
-                <!--构建源代码包-->
-                <build.source>false</build.source>
-                <!--copy代码包到docker构建目录-->
-                <build.docker.resource>false</build.docker.resource>
+                <!--不构建源代码包-->
+                <skip.build.source>false</skip.build.source>
+                <!--不copy代码包到docker构建目录-->
+                <skip.build.docker.resource>false</skip.build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -73,8 +86,6 @@
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
             </properties>
         </profile>
         <!-- Docker -->
@@ -89,10 +100,10 @@
                 <profile.name>docker</profile.name>
                 <!--数据库类型-->
                 <database.type>postgresql</database.type>
-                <!--构建源代码包-->
-                <build.source>false</build.source>
-                <!--copy代码包到docker构建目录-->
-                <build.docker.resource>true</build.docker.resource>
+                <!--不构建源代码包-->
+                <skip.build.source>true</skip.build.source>
+                <!--不copy代码包到docker构建目录-->
+                <skip.build.docker.resource>false</skip.build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>192.168.101.10:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -100,14 +111,6 @@
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
                 <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
-                <!--配置参数-->
-                <docker.host>http://192.168.101.10:2375</docker.host>
-                <docker.registry>192.168.101.10</docker.registry>
-                <docker.namespace>eurynome.cloud</docker.namespace>
-                <docker.username>username</docker.username>
-                <docker.password>password</docker.password>
             </properties>
         </profile>
         <!-- 测试 -->
@@ -117,10 +120,10 @@
                 <!--当前环境-->
                 <profile.name>testing</profile.name>
                 <database.type>postgresql</database.type>
-                <!--构建源代码包-->
-                <build.source>false</build.source>
-                <!--copy代码包到docker构建目录-->
-                <build.docker.resource>false</build.docker.resource>
+                <!--不构建源代码包-->
+                <skip.build.source>false</skip.build.source>
+                <!--不copy代码包到docker构建目录-->
+                <skip.build.docker.resource>false</skip.build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>10.180.80.80:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -128,8 +131,6 @@
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>10.180.80.80:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
             </properties>
         </profile>
         <!-- 生产 -->
@@ -139,10 +140,10 @@
                 <!--当前环境,生产环境为空-->
                 <profile.name>production</profile.name>
                 <database.type>postgresql</database.type>
-                <!--构建源代码包-->
-                <build.source>true</build.source>
-                <!--copy代码包到docker构建目录-->
-                <build.docker.resource>false</build.docker.resource>
+                <!--不构建源代码包-->
+                <skip.build.source>true</skip.build.source>
+                <!--不copy代码包到docker构建目录-->
+                <skip.build.docker.resource>false</skip.build.docker.resource>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>172.17.207.82:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -150,8 +151,6 @@
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>172.17.207.82:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
             </properties>
         </profile>
     </profiles>
@@ -224,7 +223,7 @@
                             </goals>
                             <configuration>
                                 <target>
-                                    <delete file="${docker.build.directory}/${docker.resource.name}"/>
+                                    <delete file="${docker.build.directory}/${project.build.finalName}.jar"/>
                                 </target>
                             </configuration>
                         </execution>
@@ -235,12 +234,12 @@
                                 <goal>run</goal>
                             </goals>
                             <configuration>
-                                <skip>${build.docker.resource}</skip>
+                                <skip>${skip.build.docker.resource}</skip>
                                 <target>
                                     <!--jar包保存位置 -->
                                     <copy todir="${docker.build.directory}">
-                                        <fileset dir="${project.basedir}/target">
-                                            <include name="${docker.resource.name}"/>
+                                        <fileset dir="${project.build.directory}">
+                                            <include name="${project.build.finalName}.jar"/>
                                         </fileset>
                                     </copy>
                                 </target>
@@ -276,13 +275,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <configuration>
-                    <skipSource>${build.source}</skipSource>
+                    <skipSource>${skip.build.source}</skipSource>
+                    <attach>true</attach>
                 </configuration>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
