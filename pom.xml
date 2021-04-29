@@ -172,7 +172,7 @@
                 <plugin>
                     <groupId>io.fabric8</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
-                    <version>${maven-docker-plugin.version}</version>
+                    <version>${docker-maven-plugin.version}</version>
                     <!--全局配置-->
                     <configuration>
                         <!--这一部分是为了实现对远程docker容器的控制-->
