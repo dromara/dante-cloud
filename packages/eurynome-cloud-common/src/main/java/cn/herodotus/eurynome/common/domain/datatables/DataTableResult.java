@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.common.domain.datatables;
 
-import lombok.Data;
+import com.google.common.base.MoreObjects;
 
 import java.io.Serializable;
 
@@ -34,7 +34,6 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2019/11/24 15:48
  */
-@Data
 public class DataTableResult implements Serializable {
 
     private int pageNumber;
@@ -54,4 +53,72 @@ public class DataTableResult implements Serializable {
         this.jsonString = jsonString;
     }
 
+    public int getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getsEcho() {
+        return sEcho;
+    }
+
+    public void setsEcho(String sEcho) {
+        this.sEcho = sEcho;
+    }
+
+    public int getiDisplayStart() {
+        return iDisplayStart;
+    }
+
+    public void setiDisplayStart(int iDisplayStart) {
+        this.iDisplayStart = iDisplayStart;
+    }
+
+    public int getiDisplayLength() {
+        return iDisplayLength;
+    }
+
+    public void setiDisplayLength(int iDisplayLength) {
+        this.iDisplayLength = iDisplayLength;
+    }
+
+    public String getJsonString() {
+        return jsonString;
+    }
+
+    public void setJsonString(String jsonString) {
+        this.jsonString = jsonString;
+    }
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("pageNumber", pageNumber)
+                .add("pageSize", pageSize)
+                .add("sEcho", sEcho)
+                .add("iDisplayStart", iDisplayStart)
+                .add("iDisplayLength", iDisplayLength)
+                .add("jsonString", jsonString)
+                .add("total", total)
+                .toString();
+    }
 }
