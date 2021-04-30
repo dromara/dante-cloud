@@ -77,12 +77,15 @@
                 <!--当前环境-->
                 <profile.name>development</profile.name>
                 <database.type>postgresql</database.type>
-                <!--不构建源代码包-->
-                <skip.build.source>false</skip.build.source>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
                 <!--不copy代码包到docker构建目录-->
-                <skip.build.docker.resource>false</skip.build.docker.resource>
-                <!--代码包混淆-->
-                <package.obfuscate>true</package.obfuscate>
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--不执行代码包混淆-->
+                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -104,12 +107,15 @@
                 <profile.name>docker</profile.name>
                 <!--数据库类型-->
                 <database.type>postgresql</database.type>
-                <!--不构建源代码包-->
-                <skip.build.source>true</skip.build.source>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
                 <!--不copy代码包到docker构建目录-->
-                <skip.build.docker.resource>false</skip.build.docker.resource>
-                <!--代码包混淆-->
-                <package.obfuscate>true</package.obfuscate>
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--不执行代码包混淆-->
+                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>192.168.101.10:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -126,12 +132,15 @@
                 <!--当前环境-->
                 <profile.name>testing</profile.name>
                 <database.type>postgresql</database.type>
-                <!--不构建源代码包-->
-                <skip.build.source>false</skip.build.source>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
                 <!--不copy代码包到docker构建目录-->
-                <skip.build.docker.resource>false</skip.build.docker.resource>
-                <!--代码包混淆-->
-                <package.obfuscate>true</package.obfuscate>
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--不执行代码包混淆-->
+                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>10.180.80.80:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -148,12 +157,15 @@
                 <!--当前环境,生产环境为空-->
                 <profile.name>production</profile.name>
                 <database.type>postgresql</database.type>
-                <!--不构建源代码包-->
-                <skip.build.source>true</skip.build.source>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
                 <!--不copy代码包到docker构建目录-->
-                <skip.build.docker.resource>false</skip.build.docker.resource>
-                <!--代码包混淆-->
-                <package.obfuscate>true</package.obfuscate>
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--不执行代码包混淆-->
+                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>172.17.207.82:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -222,7 +234,7 @@
                 <plugin>
                     <groupId>com.github.wvengen</groupId>
                     <artifactId>proguard-maven-plugin</artifactId>
-                    <version>${proguard-maven-plugin.verison}</version>
+                    <version>${proguard-maven-plugin.version}</version>
                     <executions>
                         <execution>
                             <!-- 打包的时候开始混淆-->
@@ -233,11 +245,12 @@
                         </execution>
                     </executions>
                     <configuration>
+                        <skip>${skip.execute.package.obfuscate}</skip>
                         <injar>${project.build.finalName}.jar</injar>
                         <!--输出的jar-->
                         <outjar>${project.build.finalName}.jar</outjar>
                         <!-- 是否混淆-->
-                        <obfuscate>${package.obfuscate}</obfuscate>
+                        <obfuscate>true</obfuscate>
                         <proguardInclude>${basedir}/proguard.conf</proguardInclude>
                         <options>
                             <!--指定java版本号-->
@@ -316,7 +329,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <configuration>
-                    <skipSource>${skip.build.source}</skipSource>
+                    <skipSource>${skip.build.source.package}</skipSource>
                     <attach>true</attach>
                 </configuration>
                 <executions>
@@ -333,6 +346,43 @@
                 <artifactId>versions-maven-plugin</artifactId>
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git-commit-id-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <!-- 默认绑定阶段initialize -->
+                        <phase>initialize</phase>
+                        <goals>
+                            <!-- 目标：revision -->
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>${skip.build.git.commit.info}</skip>
+                    <!-- 检查的仓库根目录，${project.basedir}：项目根目录，即包含pom.xml文件的目录 -->
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <!-- git属性文件中各属性前缀，默认值git，可以不配置 -->
+                    <prefix>git</prefix>
+                    <!-- false：扫描路径时不打印更多信息，默认值false，可以不配置 -->
+                    <verbose>false</verbose>
+                    <!-- 生成git属性文件，默认false：不生成 -->
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!-- 生成git属性文件路径及文件名，默认${project.build.outputDirectory}/git.properties -->
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <!-- 生成git属性文件格式，默认值properties -->
+                    <format>json</format>
+                    <!-- 配置git-describe命令 -->
+                    <gitDescribe>
+                        <skip>false</skip>
+                        <always>false</always>
+                        <dirty>-dirty</dirty>
+                    </gitDescribe>
                 </configuration>
             </plugin>
         </plugins>
