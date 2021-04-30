@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.security.definition.service;
 
-import cn.herodotus.eurynome.security.definition.social.SocialProvider;
+import cn.herodotus.eurynome.security.definition.domain.SocialProvider;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

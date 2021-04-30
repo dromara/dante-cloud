@@ -16,28 +16,31 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: SocialHandler.java
+ * File Name: SocialHandlerNotFoundException.java
  * Author: gengwei.zheng
- * Date: 2021/4/4 下午5:34
- * LastModified: 2021/4/4 下午5:34
+ * Date: 2021/4/30 下午1:24
+ * LastModified: 2021/4/30 下午1:24
  */
 
-package cn.herodotus.eurynome.security.definition.social;
+package cn.herodotus.eurynome.security.response.exception;
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: SocialHandler </p>
+ * <p>File: SocialHandlerNotFoundException </p>
  *
- * <p>Description: 社交登录处理 </p>
+ * <p>Description: 社交登录处理器未找到错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/4/4 17:34
+ * @date : 2021/4/30 13:24
  */
-public interface SocialHandler {
+public class SocialHandlerNotFoundException extends AuthenticationException {
 
-    HerodotusSocialDetails parseSocialDetails(String providerId, HttpServletRequest request);
+    public SocialHandlerNotFoundException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 
-    String identify(HerodotusSocialDetails herodotusSocialDetails);
+    public SocialHandlerNotFoundException(String msg) {
+        super(msg);
+    }
 }

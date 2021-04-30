@@ -24,10 +24,11 @@
 
 package cn.herodotus.eurynome.security.authentication.social;
 
-import cn.herodotus.eurynome.security.definition.social.SocialProvider;
+import cn.herodotus.eurynome.security.definition.social.HerodotusSocialDetails;
+import cn.herodotus.eurynome.security.definition.social.AbstractSocialHandlerFactory;
+import cn.herodotus.eurynome.security.definition.social.SocialHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpMethod;
-import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -52,6 +53,8 @@ public class SocialAuthenticationProcessingFilter extends AbstractAuthentication
 
     private boolean postOnly = true;
 
+    private AbstractSocialHandlerFactory abstractSocialHandlerFactory;
+
     protected SocialAuthenticationProcessingFilter(String defaultFilterProcessesUrl) {
         super(new AntPathRequestMatcher(defaultFilterProcessesUrl, HttpMethod.POST.name()));
     }
@@ -64,10 +67,11 @@ public class SocialAuthenticationProcessingFilter extends AbstractAuthentication
         }
 
         // 封装OpenIdAuthenticationToken
-        String openId = obtainOpenId(httpServletRequest);
-        String providerId = obtainProviderId(httpServletRequest);
+        String providerId = this.obtain(httpServletRequest, "providerId");
+        SocialHandler socialHandler = this.abstractSocialHandlerFactory.getSocialHandler(providerId);
+        HerodotusSocialDetails herodotusSocialDetails = socialHandler.parseSocialDetails(providerId, httpServletRequest);
 
-        SocialAuthenticationToken authRequest = new SocialAuthenticationToken(openId, SocialProvider.valueOf(providerId));
+        SocialAuthenticationToken authRequest = new SocialAuthenticationToken(herodotusSocialDetails);
         // Allow subclasses to set the "details" property
         setDetails(httpServletRequest, authRequest);
 
@@ -75,13 +79,7 @@ public class SocialAuthenticationProcessingFilter extends AbstractAuthentication
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 
-    @Nullable
-    protected String obtainOpenId(HttpServletRequest request) {
-        return this.obtain(request, "openId");
-    }
-
-    @Nullable
-    protected String obtainProviderId(HttpServletRequest request) {
+       protected String obtainProviderId(HttpServletRequest request) {
         return this.obtain(request, "providerId");
     }
 
@@ -96,5 +94,9 @@ public class SocialAuthenticationProcessingFilter extends AbstractAuthentication
 
     public void setPostOnly(boolean postOnly) {
         this.postOnly = postOnly;
+    }
+
+    public void setHerodotusSocialHandlerFactory(AbstractSocialHandlerFactory abstractSocialHandlerFactory) {
+        this.abstractSocialHandlerFactory = abstractSocialHandlerFactory;
     }
 }

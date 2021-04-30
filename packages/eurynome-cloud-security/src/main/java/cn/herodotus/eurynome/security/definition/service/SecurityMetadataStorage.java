@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.security.definition.service;
 
-import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 
 import java.util.List;
 

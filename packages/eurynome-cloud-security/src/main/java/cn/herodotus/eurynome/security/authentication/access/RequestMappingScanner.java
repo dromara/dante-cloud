@@ -29,7 +29,7 @@ import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
-import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

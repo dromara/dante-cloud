@@ -16,28 +16,32 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: SocialHandler.java
+ * File Name: SocialHanderFactory.java
  * Author: gengwei.zheng
- * Date: 2021/4/4 下午5:34
- * LastModified: 2021/4/4 下午5:34
+ * Date: 2021/4/30 下午3:36
+ * LastModified: 2021/4/30 下午3:36
  */
 
 package cn.herodotus.eurynome.security.definition.social;
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: SocialHandler </p>
+ * <p>File: SocialHanderFactory </p>
  *
- * <p>Description: 社交登录处理 </p>
+ * <p>Description: 社交登录工厂定义 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/4/4 17:34
+ * @date : 2021/4/30 15:36
  */
-public interface SocialHandler {
+public interface SocialHanderFactory {
 
-    HerodotusSocialDetails parseSocialDetails(String providerId, HttpServletRequest request);
-
-    String identify(HerodotusSocialDetails herodotusSocialDetails);
+    /**
+     * 根据providerId获取对应的社交登录处理器
+     *
+     * @param providerId 与SocialProvider对应的值
+     * @return
+     * @throws AuthenticationException
+     */
+    SocialHandler getSocialHandler(String providerId) throws AuthenticationException;
 }

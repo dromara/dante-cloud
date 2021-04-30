@@ -24,7 +24,7 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure.logic;
 
-import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;

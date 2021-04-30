@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.autoconfigure.logic;
 
 import cn.herodotus.eurynome.data.cache.CacheTemplate;
-import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;

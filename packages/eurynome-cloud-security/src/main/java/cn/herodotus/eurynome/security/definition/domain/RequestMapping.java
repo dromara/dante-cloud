@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2021 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@
  * Module Name: eurynome-cloud-security
  * File Name: RequestMapping.java
  * Author: gengwei.zheng
- * Date: 2020/6/8 上午11:49
- * LastModified: 2020/6/3 下午2:33
+ * Date: 2021/4/30 下午3:46
+ * LastModified: 2020/6/8 下午12:01
  */
 
-package cn.herodotus.eurynome.security.definition;
+package cn.herodotus.eurynome.security.definition.domain;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.enums.AuthorityType;

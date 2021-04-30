@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.security.authentication.access;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.security.definition.RequestMapping;
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import cn.herodotus.eurynome.security.utils.WebUtils;

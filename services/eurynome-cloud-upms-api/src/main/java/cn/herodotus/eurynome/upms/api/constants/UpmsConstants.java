@@ -2,7 +2,7 @@ package cn.herodotus.eurynome.upms.api.constants;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
 import cn.herodotus.eurynome.data.constants.CacheConstants;
-import cn.herodotus.eurynome.security.definition.GrantType;
+import cn.herodotus.eurynome.security.definition.domain.GrantType;
 import cn.herodotus.eurynome.common.enums.ApplicationType;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
 import cn.herodotus.eurynome.upms.api.constants.enums.Identity;

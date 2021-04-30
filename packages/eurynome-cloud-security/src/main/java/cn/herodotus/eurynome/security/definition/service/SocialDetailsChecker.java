@@ -16,28 +16,32 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: SocialHandler.java
+ * File Name: SocialDetailsChecker.java
  * Author: gengwei.zheng
- * Date: 2021/4/4 下午5:34
- * LastModified: 2021/4/4 下午5:34
+ * Date: 2021/4/30 下午12:48
+ * LastModified: 2021/4/30 下午12:48
  */
 
-package cn.herodotus.eurynome.security.definition.social;
+package cn.herodotus.eurynome.security.definition.service;
 
-import javax.servlet.http.HttpServletRequest;
+import cn.herodotus.eurynome.security.definition.social.HerodotusSocialDetails;
+import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: SocialHandler </p>
+ * <p>File: SocialDetailsChecker </p>
  *
- * <p>Description: 社交登录处理 </p>
+ * <p>Description: 验证码等验证接口 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/4/4 17:34
+ * @date : 2021/4/30 12:48
  */
-public interface SocialHandler {
+public interface SocialDetailsChecker {
 
-    HerodotusSocialDetails parseSocialDetails(String providerId, HttpServletRequest request);
-
-    String identify(HerodotusSocialDetails herodotusSocialDetails);
+    /**
+     * 验证社交信息是否匹配
+     *
+     * @param herodotusSocialDetails 社交信息详情实体
+     * @return ture 验证通过，false 验证失败
+     */
+    void check(HerodotusSocialDetails herodotusSocialDetails) throws AuthenticationException;
 }

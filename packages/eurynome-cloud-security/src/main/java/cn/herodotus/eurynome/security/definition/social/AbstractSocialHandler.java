@@ -33,5 +33,5 @@ package cn.herodotus.eurynome.security.definition.social;
  * @author : gengwei.zheng
  * @date : 2021/4/4 17:37
  */
-public class AbstractSocialHandler implements SocialHandler{
+public abstract class AbstractSocialHandler implements SocialHandler{
 }

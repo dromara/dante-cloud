@@ -25,6 +25,9 @@
 package cn.herodotus.eurynome.security.handler;
 
 import cn.herodotus.eurynome.security.definition.social.AbstractSocialHandler;
+import cn.herodotus.eurynome.security.definition.social.HerodotusSocialDetails;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -36,4 +39,13 @@ import cn.herodotus.eurynome.security.definition.social.AbstractSocialHandler;
  * @date : 2021/4/4 17:37
  */
 public class WxappHandler extends AbstractSocialHandler {
+    @Override
+    public HerodotusSocialDetails parseSocialDetails(String providerId, HttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public String identify(HerodotusSocialDetails herodotusSocialDetails) {
+        return null;
+    }
 }

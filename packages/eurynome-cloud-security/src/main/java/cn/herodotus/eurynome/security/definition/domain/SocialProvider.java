@@ -18,11 +18,11 @@
  * Module Name: eurynome-cloud-security
  * File Name: SocialProvider.java
  * Author: gengwei.zheng
- * Date: 2021/4/3 下午4:06
- * LastModified: 2021/4/3 下午3:56
+ * Date: 2021/4/30 下午3:46
+ * LastModified: 2021/4/4 下午5:58
  */
 
-package cn.herodotus.eurynome.security.definition.social;
+package cn.herodotus.eurynome.security.definition.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;

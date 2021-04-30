@@ -24,7 +24,8 @@
 
 package cn.herodotus.eurynome.security.authentication.social;
 
-import cn.herodotus.eurynome.security.definition.social.SocialProvider;
+import cn.herodotus.eurynome.security.definition.domain.SocialProvider;
+import cn.herodotus.eurynome.security.definition.social.HerodotusSocialDetails;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -50,10 +51,9 @@ public class SocialAuthenticationToken extends AbstractAuthenticationToken {
      */
     private SocialProvider socialProvider;
 
-    public SocialAuthenticationToken(Object openId, SocialProvider socialProvider) {
+    public SocialAuthenticationToken(HerodotusSocialDetails herodotusSocialDetails) {
         super(null);
-        this.principal = openId;
-        this.socialProvider = socialProvider;
+        this.principal = herodotusSocialDetails;
         setAuthenticated(false);
     }
 
@@ -67,10 +67,6 @@ public class SocialAuthenticationToken extends AbstractAuthenticationToken {
     @Override
     public Object getPrincipal() {
         return this.principal;
-    }
-
-    public SocialProvider getProviderType() {
-        return socialProvider;
     }
 
     @Override

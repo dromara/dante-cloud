@@ -25,12 +25,18 @@
 package cn.herodotus.eurynome.security.authentication.social;
 
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
+import cn.herodotus.eurynome.security.definition.service.SocialDetailsChecker;
+import cn.herodotus.eurynome.security.definition.social.HerodotusSocialDetails;
+import cn.herodotus.eurynome.security.response.HerodotusSecurityMessageSource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsChecker;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -44,25 +50,33 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Slf4j
 public class SocialAuthenticationProvider implements AuthenticationProvider {
 
+    private final MessageSourceAccessor messages = HerodotusSecurityMessageSource.getAccessor();
+    private final UserDetailsChecker accountStatusUserDetailsChecker = new AccountStatusUserDetailsChecker();
     private HerodotusUserDetailsService herodotusUserDetailsService;
+    private SocialDetailsChecker socialDetailsChecker;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SocialAuthenticationToken socialAuthenticationToken = (SocialAuthenticationToken) authentication;
+
+        socialDetailsChecker.check((HerodotusSocialDetails) socialAuthenticationToken.getPrincipal());
 
         UserDetails userDetails = herodotusUserDetailsService.loadUserBySocial((String) socialAuthenticationToken.getPrincipal(), socialAuthenticationToken.getProviderType());
 
         if (userDetails == null) {
             log.debug("[Eurynome] |- Authentication failed: no credentials provided");
 
-            throw new InternalAuthenticationServiceException(
-                    "UserDetailsService returned null, which is an interface contract violation");
+            throw new BadCredentialsException(messages
+                    .getMessage("AbstractUserDetailsAuthenticationProvider.noopBindAccount", "Noop Bind Account"));
         }
+
+        accountStatusUserDetailsChecker.check(userDetails);
 
         SocialAuthenticationToken authenticateResult = new SocialAuthenticationToken(userDetails, userDetails.getAuthorities());
         authenticateResult.setDetails(socialAuthenticationToken.getDetails());
 
         return authenticateResult;
+
     }
 
     @Override
@@ -72,5 +86,9 @@ public class SocialAuthenticationProvider implements AuthenticationProvider {
 
     public void setHerodotusUserDetailsService(HerodotusUserDetailsService herodotusUserDetailsService) {
         this.herodotusUserDetailsService = herodotusUserDetailsService;
+    }
+
+    public void setHerodotusVerificationService(SocialDetailsChecker socialDetailsChecker) {
+        this.socialDetailsChecker = socialDetailsChecker;
     }
 }
