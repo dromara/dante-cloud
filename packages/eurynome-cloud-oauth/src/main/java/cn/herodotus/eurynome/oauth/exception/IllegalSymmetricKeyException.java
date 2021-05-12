@@ -24,13 +24,15 @@
 
 package cn.herodotus.eurynome.oauth.exception;
 
+import org.springframework.security.core.AuthenticationException;
+
 /**
  * <p> Description : 非法加密Key Exception </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/1/28 17:32
  */
-public class IllegalSymmetricKeyException extends VerificationCodeException {
+public class IllegalSymmetricKeyException extends AuthenticationException {
 
     public IllegalSymmetricKeyException(String message) {
         super(message);
