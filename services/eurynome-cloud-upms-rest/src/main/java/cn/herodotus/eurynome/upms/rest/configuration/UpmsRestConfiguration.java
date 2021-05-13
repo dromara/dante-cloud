@@ -44,9 +44,7 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.upms.rest.controller",
         "cn.herodotus.eurynome.upms.rest.controller.development",
-        "cn.herodotus.eurynome.upms.rest.controller.hr",
         "cn.herodotus.eurynome.upms.rest.controller.oauth",
-        "cn.herodotus.eurynome.upms.rest.controller.social",
         "cn.herodotus.eurynome.upms.rest.controller.system",
 })
 public class UpmsRestConfiguration {

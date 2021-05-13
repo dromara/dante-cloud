@@ -59,8 +59,6 @@ import javax.annotation.PostConstruct;
 @Configuration
 @EntityScan(basePackages = {
         "cn.herodotus.eurynome.upms.api.entity.system",
-        "cn.herodotus.eurynome.upms.api.entity.social",
-        "cn.herodotus.eurynome.upms.api.entity.hr",
         "cn.herodotus.eurynome.upms.api.entity.oauth",
         "cn.herodotus.eurynome.upms.api.entity.development"
 })

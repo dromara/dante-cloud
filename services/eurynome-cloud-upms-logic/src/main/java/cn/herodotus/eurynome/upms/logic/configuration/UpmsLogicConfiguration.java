@@ -61,22 +61,16 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.upms.logic.configuration",
         "cn.herodotus.eurynome.upms.logic.service.system",
-        "cn.herodotus.eurynome.upms.logic.service.social",
-        "cn.herodotus.eurynome.upms.logic.service.hr",
         "cn.herodotus.eurynome.upms.logic.service.oauth",
         "cn.herodotus.eurynome.upms.logic.service.development",
 })
 @EnableJpaRepositories(basePackages = {
         "cn.herodotus.eurynome.upms.logic.repository.system",
-        "cn.herodotus.eurynome.upms.logic.repository.social",
-        "cn.herodotus.eurynome.upms.logic.repository.hr",
         "cn.herodotus.eurynome.upms.logic.repository.oauth",
         "cn.herodotus.eurynome.upms.logic.repository.development",
 })
 @EnableMethodCache(basePackages = {
         "cn.herodotus.eurynome.upms.logic.service.system",
-        "cn.herodotus.eurynome.upms.logic.service.social",
-        "cn.herodotus.eurynome.upms.logic.service.hr",
         "cn.herodotus.eurynome.upms.logic.service.oauth",
         "cn.herodotus.eurynome.upms.logic.service.development"
 })
