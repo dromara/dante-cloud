@@ -24,9 +24,6 @@
 
 package cn.herodotus.eurynome.oauth.configuration;
 
-import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDecisionManager;
-import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDeniedHandler;
-import cn.herodotus.eurynome.security.authentication.access.HerodotusSecurityMetadataSource;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
@@ -34,12 +31,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 import javax.annotation.PostConstruct;
 
@@ -56,10 +51,6 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Autowired
     private SecurityProperties securityProperties;
-    @Autowired
-    private HerodotusSecurityMetadataSource herodotusSecurityMetadataSource;
-    @Autowired
-    private HerodotusAccessDecisionManager herodotusAccessDecisionManager;
 
     @PostConstruct
     public void postConstruct() {
@@ -77,18 +68,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 // 指定监控访问权限
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().authenticated()
-                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                    @Override
-                    public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-                        fsi.setAccessDecisionManager(herodotusAccessDecisionManager);
-                        fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
-                        return fsi;
-                    }
-                })
                 .and().cors()
                 .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
                 .exceptionHandling()
-                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
 
         // 关闭csrf 跨站（域）攻击防控

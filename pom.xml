@@ -142,11 +142,11 @@
                 <!--不执行代码包混淆-->
                 <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>10.180.80.80:8848</config.server-addr>
+                <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>10.180.80.80:8848</discovery.server-addr>
+                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
             </properties>
         </profile>
@@ -164,14 +164,12 @@
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
-                <!--不执行代码包混淆-->
-                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>172.17.207.82:8848</config.server-addr>
+                <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>172.17.207.82:8848</discovery.server-addr>
+                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
             </properties>
         </profile>
@@ -231,76 +229,6 @@
                         </images>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>com.github.wvengen</groupId>
-                    <artifactId>proguard-maven-plugin</artifactId>
-                    <version>${proguard-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <!-- 打包的时候开始混淆-->
-                            <phase>package</phase>
-                            <goals>
-                                <goal>proguard</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <skip>${skip.execute.package.obfuscate}</skip>
-                        <injar>${project.build.finalName}.jar</injar>
-                        <!--输出的jar-->
-                        <outjar>${project.build.finalName}.jar</outjar>
-                        <!-- 是否混淆-->
-                        <obfuscate>true</obfuscate>
-                        <proguardInclude>${basedir}/proguard.conf</proguardInclude>
-                        <options>
-                            <!--指定java版本号-->
-                            <option>-target 1.8</option>
-                            <!--默认是开启的，这里关闭shrink，即不删除没有使用的类/成员-->
-                            <option>-dontshrink</option>
-                            <!--默认是开启的，这里关闭字节码级别的优化-->
-                            <option>-dontoptimize</option>
-                            <option>-dontskipnonpubliclibraryclasses</option>
-                            <option>-dontskipnonpubliclibraryclassmembers</option>
-                            <!--混淆时不生成大小写混合的类名，默认是可以大小写混合-->
-                            <option>-dontusemixedcaseclassnames</option>
-                            <!--混淆类名之后，对使用Class.forName('className')之类的地方进行相应替代-->
-                            <option>-adaptclassstrings</option>
-                            <option>-allowaccessmodification</option>
-                            <!--指定将相同的混淆名称分配给具有相同名称的类成员，并将不同混淆名称分配给名称不同的类成员,(我猜)假设两个类有相同的类成员(如方法名),则混淆后名称一样-->
-                            <option>-useuniqueclassmembernames</option>
-                            <option>-keeppackagenames</option>
-                            <option>-keepparameternames</option>
-                            <!--对异常、注解信息在runtime予以保留，不然影响springboot启动-->
-                            <option>-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod</option>
-                            <option>-keepclassmembers public class * {
-                                *** get*();
-                                void set*(***);
-                                }
-                            </option>
-                            <!--不混淆所有interface接口-->
-                            <!--<option>-keepnames interface **</option>-->
-                            <!--<option>-keep interface * extends * { *; }</option>-->
-                            <!--保留枚举成员及方法-->
-                            <option>-keepclassmembers enum * { *; }</option>
-                            <!--保留main方法的类及其方法名-->
-                            <option>-keepclasseswithmembers public class * {
-                                public static void main(java.lang.String[]);
-                                }
-                            </option>
-                            <!--#混淆方法里面的代码,不混淆非私有的方法名和类名和变量名,否则被其他模块依赖时调用的类和方法名都需要用a,b,c-->
-                            <option>-keep class ** {
-                                !private *** *;
-                                !private *** *(...);
-                                }
-                            </option>
-                        </options>
-                        <libs>
-                            <!-- 添加依赖 java8-->
-                            <lib>${java.home}/lib/rt.jar</lib>
-                            <lib>${java.home}/lib/jce.jar</lib>
-                        </libs>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -340,13 +268,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>pl.project13.maven</groupId>

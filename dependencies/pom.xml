@@ -43,17 +43,6 @@
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
         <alibaba-nacos.version>2.0.0</alibaba-nacos.version>
 
-        <!--第三方应用集成SDK-->
-        <weixin-java-sdk.version>4.0.8.B</weixin-java-sdk.version>
-        <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
-        <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
-        <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
-        <aliyun-java-sdk-oss.version>3.12.0</aliyun-java-sdk-oss.version>
-        <tencentcloud-java-sdk.version>4.0.11</tencentcloud-java-sdk.version>
-        <jpush-java-sdk.version>3.4.8</jpush-java-sdk.version>
-        <jpush-common.verison>1.1.10</jpush-common.verison>
-
-
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.3</starter-jasypt.version>
         <starter-mybatis.version>2.1.4</starter-mybatis.version>
@@ -170,16 +159,6 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-bpmn-logic</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-integration</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-integration-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -330,73 +309,6 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${starter-mybatis.version}</version>
-            </dependency>
-
-            <!-- 第三方应用集成 -->
-            <!-- https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-miniapp -->
-            <dependency>
-                <groupId>com.github.binarywang</groupId>
-                <artifactId>weixin-java-miniapp</artifactId>
-                <version>${weixin-java-sdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.binarywang</groupId>
-                <artifactId>weixin-java-mp</artifactId>
-                <version>${weixin-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
-            <dependency>
-                <groupId>com.baidu.aip</groupId>
-                <artifactId>java-sdk</artifactId>
-                <version>${baidu-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-core</artifactId>
-                <version>${aliyun-java-sdk-core.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-green -->
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-green</artifactId>
-                <version>${aliyun-java-sdk-green.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun-java-sdk-oss.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-sdk-java -->
-            <dependency>
-                <groupId>com.tencentcloudapi</groupId>
-                <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>${tencentcloud-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jpush-client -->
-            <dependency>
-                <groupId>cn.jpush.api</groupId>
-                <artifactId>jpush-client</artifactId>
-                <version>${jpush-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jiguang-common -->
-            <dependency>
-                <groupId>cn.jpush.api</groupId>
-                <artifactId>jiguang-common</artifactId>
-                <version>${jpush-common.verison}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/me.zhyd.oauth/JustAuth -->
-            <dependency>
-                <groupId>me.zhyd.oauth</groupId>
-                <artifactId>JustAuth</artifactId>
-                <version>${just-auth.verison}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.turo/pushy -->
-            <dependency>
-                <groupId>com.turo</groupId>
-                <artifactId>pushy</artifactId>
-                <version>${pushy.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -28,8 +28,6 @@ import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationFailure
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationProvider;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginDecryptParameterAuthenticationFilter;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginWebAuthenticationDetailsSource;
-import cn.herodotus.eurynome.security.authentication.handler.SocialAuthenticationSuccessHandler;
-import cn.herodotus.eurynome.security.authentication.social.SocialSecurityConfigurerAdapter;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
@@ -163,23 +161,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return jdbcTokenRepository;
     }
 
-    @Bean
-    public SocialAuthenticationSuccessHandler socialAuthenticationSuccessHandler() {
-        SocialAuthenticationSuccessHandler socialAuthenticationSuccessHandler = new SocialAuthenticationSuccessHandler();
-        socialAuthenticationSuccessHandler.setAuthorizationServerTokenServices(defaultAuthorizationServerTokenServices);
-        socialAuthenticationSuccessHandler.setClientDetailsService(herodotusClientDetailsService);
-        socialAuthenticationSuccessHandler.setPasswordEncoder(passwordEncoder());
-        return socialAuthenticationSuccessHandler;
-    }
-
-    @Bean
-    public SocialSecurityConfigurerAdapter socialSecurityConfigurerAdapter() {
-        SocialSecurityConfigurerAdapter socialSecurityConfigurerAdapter = new SocialSecurityConfigurerAdapter();
-        socialSecurityConfigurerAdapter.setAuthenticationSuccessHandler(socialAuthenticationSuccessHandler());
-        socialSecurityConfigurerAdapter.setHerodotusUserDetailsService(herodotusUserDetailsService);
-        return socialSecurityConfigurerAdapter;
-    }
-
     /**
      * 大体意思就是antMatcher()``是HttpSecurity的一个方法，他只告诉了Spring我只配置了一个我这个Adapter能处理哪个的url，它与authorizeRequests()没有任何关系。
      * <p>
@@ -218,7 +199,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                        .userDetailsService(oauth2UserDetailsService)
                 .and().logout().permitAll()
                 .and().cors()
-                .and().csrf().disable().apply(socialSecurityConfigurerAdapter());
+                .and().csrf().disable();
         // @formatter:on
     }
 }

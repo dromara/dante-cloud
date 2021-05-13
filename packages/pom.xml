@@ -51,8 +51,6 @@
         <module>eurynome-cloud-kernel</module>
         <module>eurynome-cloud-oauth</module>
         <module>eurynome-cloud-oauth-starter</module>
-        <module>eurynome-cloud-integration</module>
-        <module>eurynome-cloud-integration-rest</module>
     </modules>
 
 </project>

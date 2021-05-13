@@ -28,7 +28,6 @@ import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.security.definition.domain.SocialProvider;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
@@ -39,7 +38,6 @@ import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Set;
@@ -110,10 +108,5 @@ public class HerodotusOauthUserDetailsService extends BaseService<SysUser, Strin
         }
         log.debug("[Eurynome] |- SysUser Service findSysUserByUserName.");
         return sysUser;
-    }
-
-    @Override
-    public UserDetails loadUserBySocial(String openId, SocialProvider socialProvider) throws UsernameNotFoundException {
-        return null;
     }
 }

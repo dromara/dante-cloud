@@ -3,8 +3,6 @@ package cn.herodotus.eurynome.security.configuration;
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
-import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDecisionManager;
-import cn.herodotus.eurynome.security.authentication.access.HerodotusSecurityMetadataSource;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
@@ -87,33 +85,4 @@ public class SecurityAutoConfiguration {
         log.debug("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
         return requestMappingScan;
     }
-
-    /**
-     * 权限信息存储器
-     */
-    @Bean
-    @ConditionalOnMissingBean(HerodotusSecurityMetadataSource.class)
-    public HerodotusSecurityMetadataSource herodotusSecurityMetadataSource(SecurityProperties securityProperties, SecurityMetadataStorage securityMetadataStorage) {
-        HerodotusSecurityMetadataSource herodotusSecurityMetadataSource = new HerodotusSecurityMetadataSource();
-        herodotusSecurityMetadataSource.setSecurityMetadataStorage(securityMetadataStorage);
-        herodotusSecurityMetadataSource.setSecurityProperties(securityProperties);
-        log.debug("[Eurynome] |- Bean [Herodotus Security Metadata Source] Auto Configure.");
-        return herodotusSecurityMetadataSource;
-    }
-
-    /**
-     * 权限信息判断器
-     * <p>
-     * 服务权限验证逻辑：
-     * 5、捕获用户访问的请求信息，从权限存储其中查找是否有对应的Security Metadata信息。如果有，就说明是权限管控请求；如果没有，就说明是非权限管控请求。
-     * 6、权限控制主要针对权限管控请求，把这个请求对应的配置信息，与用户Token中带的权限信息进行比较。如果用户Token中没有这个权限信息，说明该用户就没有被授权。
-     */
-    @Bean
-    @ConditionalOnMissingBean(HerodotusAccessDecisionManager.class)
-    public HerodotusAccessDecisionManager herodotusAccessDecisionManager() {
-        HerodotusAccessDecisionManager herodotusAccessDecisionManager = new HerodotusAccessDecisionManager();
-        log.debug("[Eurynome] |- Bean [Access Decision Manager] Auto Configure.");
-        return herodotusAccessDecisionManager;
-    }
-
 }
