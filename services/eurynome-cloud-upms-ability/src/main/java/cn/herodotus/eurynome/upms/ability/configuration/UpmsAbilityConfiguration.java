@@ -24,11 +24,8 @@
 
 package cn.herodotus.eurynome.upms.ability.configuration;
 
-import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.annotation.PostConstruct;
 
@@ -43,16 +40,6 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.upms.ability.service.oauth",
-        "cn.herodotus.eurynome.upms.ability.controller.oauth"
-})
-@EnableJpaRepositories(basePackages = {
-        "cn.herodotus.eurynome.upms.ability.repository.oauth"
-})
-@EnableMethodCache(basePackages = {
-        "cn.herodotus.eurynome.upms.ability.service.oauth"
-})
 public class UpmsAbilityConfiguration {
 
     @PostConstruct

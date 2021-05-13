@@ -11,7 +11,6 @@ import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
@@ -186,23 +185,6 @@ public class UpmsHelper {
         }
 
         oauthClientDetails.setAdditionalInformation(JSON.toJSONString(oauthApplications));
-        return oauthClientDetails;
-    }
-
-    public static OauthClientDetails convertOauthMicroserviceToOauthClientDetails(OauthMicroservices oauthMicroservices, OauthClientDetails oauthClientDetails) {
-        if (ObjectUtils.isEmpty(oauthClientDetails)) {
-            oauthClientDetails = new OauthClientDetails();
-        }
-
-        oauthClientDetails.setClientId(oauthMicroservices.getServiceId());
-        oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthMicroservices.getAppSecret()));
-
-        if (CollectionUtils.isNotEmpty(oauthMicroservices.getScopes())) {
-            String scope = oauthMicroservices.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
-            oauthClientDetails.setScope(scope);
-        }
-
-        oauthClientDetails.setAdditionalInformation(JSON.toJSONString(oauthMicroservices));
         return oauthClientDetails;
     }
 
