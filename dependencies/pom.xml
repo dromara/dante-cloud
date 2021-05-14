@@ -44,11 +44,10 @@
         <!--Spring 家族-->
         <spring-cloud-dependencies.version>2020.0.2</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.4.0</spring-boot-admin.version>
+        <spring-boot-admin.version>2.4.1</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <docker-maven-plugin.version>0.35.0</docker-maven-plugin.version>
-        <proguard-maven-plugin.version>2.3.1</proguard-maven-plugin.version>
         <git-commit-id-plugin.version>4.0.4</git-commit-id-plugin.version>
 
         <!--Spring Boot Dependencies中没有的工具包-->
@@ -57,7 +56,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.8.0</commons-io.version>
         <google-guava.version>30.1.1-jre</google-guava.version>
-        <hutool.version>5.6.3</hutool.version>
+        <hutool.version>5.6.5</hutool.version>
         <jackson.version>2.12.2</jackson.version>
 
         <!--Alibaba开源的工具包-->
@@ -76,9 +75,7 @@
         <p6spy.version>3.9.1</p6spy.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
-        <okhttps.version>3.0.1</okhttps.version>
-        <pushy.version>0.13.10</pushy.version>
-        <just-auth.verison>1.15.9</just-auth.verison>
+        <okhttps.version>3.0.2</okhttps.version>
         <lombok.version>1.18.20</lombok.version>
 
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
@@ -238,12 +235,6 @@
                 <version>${okhttps.version}</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-yaml</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>

@@ -4,7 +4,7 @@ services:
     image: ${MANAGEMENT_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ../../context/development/Dockerfile
+      dockerfile: /development/Dockerfile
       args:
         - VERSION=${VERSION}
         - SERVICE_NAME=${MANAGEMENT_SERVICE_NAME}
@@ -17,7 +17,7 @@ services:
     image: ${UPMS_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ../../context/development/Dockerfile
+      dockerfile: /development/Dockerfile
       args:
         - VERSION=${VERSION}
         - SERVICE_NAME=${UPMS_SERVICE_NAME}
@@ -32,7 +32,7 @@ services:
     image: ${GATEWAY_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ../../context/development/Dockerfile
+      dockerfile: /development/Dockerfile
       args:
         - VERSION=${VERSION}
         - SERVICE_NAME=${GATEWAY_SERVICE_NAME}
@@ -47,7 +47,7 @@ services:
     image: ${UAA_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ../../context/development/Dockerfile
+      dockerfile: /development/Dockerfile
       args:
         - VERSION=${VERSION}
         - SERVICE_NAME=${UAA_SERVICE_NAME}
@@ -63,7 +63,7 @@ services:
     image: ${BPMN_SERVICE_NAME}:${VERSION}
     build:
       context: ../../context
-      dockerfile: ../../context/development/Dockerfile
+      dockerfile: /development/Dockerfile
       args:
         - VERSION=${VERSION}
         - SERVICE_NAME=${BPMN_SERVICE_NAME}

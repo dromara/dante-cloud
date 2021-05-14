@@ -20,17 +20,18 @@ ENV SERVICE_PORT ${SERVICE_PORT}
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 # 运行参数
 ENV JAVA_OPTS=""
-ENV SW_AGENT_SERVICE_NAME="default" SW_COLLECTOR_BACKEND_SERVICE="127.0.0.1:11800"
+ENV SW_AGENT_SERVICE_NAME=""
+ENV SW_COLLECTOR_BACKEND_SERVICE=""
 
 # 声明一个挂载点，容器内此路径会对应宿主机的某个文件夹
 VOLUME /tmp
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
 ADD ./target/${SERVICE_NAME}-${VERSION}.jar app.jar
-ADD skywalking-agent-840-es7.jar skywalking-agent.jar
+COPY ./agent/skywalking-agent-840-es7.jar agent.jar
 
 # 声明运行时端口
 EXPOSE ${SERVICE_PORT}
 
 # 启动容器时的进程
-ENTRYPOINT java -javaagent:/skywalking-agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar /app.jar
+ENTRYPOINT java -javaagent:/agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar /app.jar
