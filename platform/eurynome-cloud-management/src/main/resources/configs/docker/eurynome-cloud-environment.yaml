@@ -23,7 +23,8 @@ herodotus:
         loggers:
           cn.herodotus.eurynome: debug
           org.springframework.security: debug
-          com.alibaba.nacos.client.naming: off
+          com.alibaba.nacos.client.naming: error
+          com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.grpc.netty: error
           com.alibaba: debug
 
 jasypt:

@@ -21,10 +21,11 @@ herodotus:
       log-center:
         server-addr: ${herodotus.environment.logstash-server-addr}
         loggers:
-          cn.herodotus.eurynome: debug
-          org.springframework.security: debug
-          com.alibaba.nacos.client.naming: off
-          com.alibaba: debug
+          cn.herodotus.eurynome: info
+          org.springframework.security: info
+          com.alibaba.nacos.client.naming: error
+          com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.grpc.netty: error
+          com.alibaba: info
 
 jasypt:
   encryptor:
