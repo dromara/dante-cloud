@@ -29,7 +29,6 @@ import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthMicroservices;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthClientDetailsRepository;
 import com.alicp.jetcache.Cache;
@@ -80,14 +79,6 @@ public class OauthClientDetailsService extends BaseService<OauthClientDetails, S
     public OauthClientDetails synchronize(OauthApplications oauthApplications) {
         OauthClientDetails oauthClientDetails = findById(oauthApplications.getAppKey());
         oauthClientDetails = UpmsHelper.convertOauthApplicationsToOauthClientDetails(oauthApplications, oauthClientDetails);
-
-        log.debug("[Eurynome] |- OauthClientDetails Service synchronize.");
-        return saveOrUpdate(oauthClientDetails);
-    }
-
-    public OauthClientDetails synchronize(OauthMicroservices oauthMicroservices) {
-        OauthClientDetails oauthClientDetails = findById(oauthMicroservices.getServiceId());
-        oauthClientDetails = UpmsHelper.convertOauthMicroserviceToOauthClientDetails(oauthMicroservices, oauthClientDetails);
 
         log.debug("[Eurynome] |- OauthClientDetails Service synchronize.");
         return saveOrUpdate(oauthClientDetails);

@@ -51,16 +51,17 @@ spring:
     mode: HTML
     cache: false
     prefix: classpath:/templates
-  http:
-    encoding:
-      charset: UTF-8
-      force: true
-      enabled: true
 
-
+herodotus:
+  platform:
+    security:
+      interceptor:
+        whitelist:
+          - "/login"
+          - "/defaultKaptcha"
 logging:
   level:
     cn.herodotus.eurynome: debug
     org.springframework.security: debug
     org.apache.kafka: WARN
-    com.alibaba.nacos.client: off
+    com.alibaba.nacos: off

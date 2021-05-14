@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2019-2021 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-oauth-starter
  * File Name: HerodotusOauthUserDetailsService.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 下午5:52
- * LastModified: 2021/1/17 下午5:20
+ * Date: 2021/05/13 11:11:13
  */
 
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
@@ -28,7 +26,6 @@ import cn.herodotus.eurynome.crud.service.BaseService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.security.definition.social.SocialProvider;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
@@ -39,7 +36,6 @@ import com.alicp.jetcache.anno.CreateCache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Set;
@@ -110,10 +106,5 @@ public class HerodotusOauthUserDetailsService extends BaseService<SysUser, Strin
         }
         log.debug("[Eurynome] |- SysUser Service findSysUserByUserName.");
         return sysUser;
-    }
-
-    @Override
-    public UserDetails loadUserBySocial(String openId, SocialProvider socialProvider) throws UsernameNotFoundException {
-        return null;
     }
 }

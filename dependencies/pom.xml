@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  ~ Project Name: eurynome-cloud
+  ~ Module Name: dependencies
+  ~ File Name: pom.xml
+  ~ Author: gengwei.zheng
+  ~ Date: 2021/05/13 11:07:13
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -25,7 +47,9 @@
         <spring-boot-admin.version>2.4.0</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
-        <maven-docker-plugin.version>0.35.0</maven-docker-plugin.version>
+        <docker-maven-plugin.version>0.35.0</docker-maven-plugin.version>
+        <proguard-maven-plugin.version>2.3.1</proguard-maven-plugin.version>
+        <git-commit-id-plugin.version>4.0.4</git-commit-id-plugin.version>
 
         <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -37,20 +61,9 @@
         <jackson.version>2.12.2</jackson.version>
 
         <!--Alibaba开源的工具包-->
-        <alibaba-fastjson.version>1.2.76</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
         <alibaba-nacos.version>2.0.0</alibaba-nacos.version>
-
-        <!--第三方应用集成SDK-->
-        <weixin-java-sdk.version>4.0.8.B</weixin-java-sdk.version>
-        <baidu-java-sdk.version>4.15.7</baidu-java-sdk.version>
-        <aliyun-java-sdk-core.version>4.5.20</aliyun-java-sdk-core.version>
-        <aliyun-java-sdk-green.version>3.6.4</aliyun-java-sdk-green.version>
-        <aliyun-java-sdk-oss.version>3.12.0</aliyun-java-sdk-oss.version>
-        <tencentcloud-java-sdk.version>4.0.11</tencentcloud-java-sdk.version>
-        <jpush-java-sdk.version>3.4.8</jpush-java-sdk.version>
-        <jpush-common.verison>1.1.10</jpush-common.verison>
-
 
         <!--Spring Boot Dependencies中没有的依赖Starter组件-->
         <starter-jasypt.version>3.0.3</starter-jasypt.version>
@@ -137,11 +150,6 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-operation</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-message</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -168,16 +176,6 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-bpmn-logic</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-integration</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-integration-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -328,73 +326,6 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${starter-mybatis.version}</version>
-            </dependency>
-
-            <!-- 第三方应用集成 -->
-            <!-- https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-miniapp -->
-            <dependency>
-                <groupId>com.github.binarywang</groupId>
-                <artifactId>weixin-java-miniapp</artifactId>
-                <version>${weixin-java-sdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.binarywang</groupId>
-                <artifactId>weixin-java-mp</artifactId>
-                <version>${weixin-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.baidu.aip/java-sdk -->
-            <dependency>
-                <groupId>com.baidu.aip</groupId>
-                <artifactId>java-sdk</artifactId>
-                <version>${baidu-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-core -->
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-core</artifactId>
-                <version>${aliyun-java-sdk-core.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.aliyun/aliyun-java-sdk-green -->
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-green</artifactId>
-                <version>${aliyun-java-sdk-green.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.aliyun.oss/aliyun-sdk-oss -->
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun-java-sdk-oss.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.tencentcloudapi/tencentcloud-sdk-java -->
-            <dependency>
-                <groupId>com.tencentcloudapi</groupId>
-                <artifactId>tencentcloud-sdk-java</artifactId>
-                <version>${tencentcloud-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jpush-client -->
-            <dependency>
-                <groupId>cn.jpush.api</groupId>
-                <artifactId>jpush-client</artifactId>
-                <version>${jpush-java-sdk.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/cn.jpush.api/jiguang-common -->
-            <dependency>
-                <groupId>cn.jpush.api</groupId>
-                <artifactId>jiguang-common</artifactId>
-                <version>${jpush-common.verison}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/me.zhyd.oauth/JustAuth -->
-            <dependency>
-                <groupId>me.zhyd.oauth</groupId>
-                <artifactId>JustAuth</artifactId>
-                <version>${just-auth.verison}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.turo/pushy -->
-            <dependency>
-                <groupId>com.turo</groupId>
-                <artifactId>pushy</artifactId>
-                <version>${pushy.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

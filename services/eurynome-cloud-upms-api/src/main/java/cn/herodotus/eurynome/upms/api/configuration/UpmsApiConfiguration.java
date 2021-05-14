@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
- * Project Name: luban-cloud
- * Module Name: luban-cloud-component-data
- * File Name: ComponentDataConfiguration.java
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-upms-api
+ * File Name: UpmsApiConfiguration.java
  * Author: gengwei.zheng
- * Date: 2020/2/3 下午5:13
- * LastModified: 2020/2/3 下午5:13
+ * Date: 2021/05/13 11:42:13
  */
 
 package cn.herodotus.eurynome.upms.api.configuration;
@@ -59,8 +57,6 @@ import javax.annotation.PostConstruct;
 @Configuration
 @EntityScan(basePackages = {
         "cn.herodotus.eurynome.upms.api.entity.system",
-        "cn.herodotus.eurynome.upms.api.entity.social",
-        "cn.herodotus.eurynome.upms.api.entity.hr",
         "cn.herodotus.eurynome.upms.api.entity.oauth",
         "cn.herodotus.eurynome.upms.api.entity.development"
 })
