@@ -14,8 +14,8 @@
 
 组件 | 版本 | 说明
 ---|---|---
-Spring Boot | 2.4.2 | 功能版本要与其它组件匹配
-Spring Cloud | 2020.0.0 |
+Spring Boot | 2.4.5 | 功能版本要与其它组件匹配
+Spring Cloud | 2020.0.2 |
 Spring Cloud Alibaba | 2.2.3.RELEASE
 Spring Boot Admin | 2.3.1 |
 Nacos | 1.4.0 |
