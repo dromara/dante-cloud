@@ -1,8 +1,0 @@
-herodotus:
-  integration:
-    push:
-      apns:
-        sandbox: true
-        file-path: classpath:/certification/ios/apnsdev.p12
-        password: 123456
-        bundle-id: com.braineex.brainex2test

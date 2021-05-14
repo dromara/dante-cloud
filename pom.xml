@@ -18,6 +18,13 @@
     <name>eurynome-cloud</name>
     <description>Top Eurynome project pom.xml file</description>
 
+    <!-- ${basedir} 项目根目录 -->
+    <!-- ${project.build.directory} 构建目录，缺省为target -->
+    <!-- ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes -->
+    <!-- ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version} -->
+    <!-- ${project.packaging} 打包类型，缺省为jar -->
+    <!-- ${project.xxx} 当前pom文件的任意节点的内容 如project.artifactId -->
+
     <properties>
         <java.version>1.8</java.version>
         <resource.delimiter>@</resource.delimiter>
@@ -26,9 +33,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!--通用配置参数-->
-        <docker.resource.name>${project.artifactId}-${project.version}.jar</docker.resource.name>
+        <configurations.directory>../../configurations</configurations.directory>
+        <allatori.directory>${configurations.directory}/allatori</allatori.directory>
+        <!--配置参数-->
+        <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
+        <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
         <docker.namespace>eurynome.cloud</docker.namespace>
+        <docker.host>http://192.168.101.10:2375</docker.host>
+        <docker.registry>192.168.101.10</docker.registry>
+        <docker.namespace>eurynome.cloud</docker.namespace>
+        <docker.username>username</docker.username>
+        <docker.password>password</docker.password>
     </properties>
 
     <!-- 所有的子项目默认依赖 -->
@@ -62,6 +77,15 @@
                 <!--当前环境-->
                 <profile.name>development</profile.name>
                 <database.type>postgresql</database.type>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
+                <!--不copy代码包到docker构建目录-->
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--不执行代码包混淆-->
+                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -69,8 +93,6 @@
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
             </properties>
         </profile>
         <!-- Docker -->
@@ -83,7 +105,17 @@
             <properties>
                 <!--当前环境-->
                 <profile.name>docker</profile.name>
+                <!--数据库类型-->
                 <database.type>postgresql</database.type>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
+                <!--不copy代码包到docker构建目录-->
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--不执行代码包混淆-->
+                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>192.168.101.10:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -91,14 +123,6 @@
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
                 <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
-                <!--配置参数-->
-                <docker.host>http://192.168.101.10:2375</docker.host>
-                <docker.registry>192.168.101.10</docker.registry>
-                <docker.namespace>eurynome.cloud</docker.namespace>
-                <docker.username>username</docker.username>
-                <docker.password>password</docker.password>
             </properties>
         </profile>
         <!-- 测试 -->
@@ -108,15 +132,22 @@
                 <!--当前环境-->
                 <profile.name>testing</profile.name>
                 <database.type>postgresql</database.type>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
+                <!--不copy代码包到docker构建目录-->
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--不执行代码包混淆-->
+                <skip.execute.package.obfuscate>true</skip.execute.package.obfuscate>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>10.180.80.80:8848</config.server-addr>
+                <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>10.180.80.80:8848</discovery.server-addr>
+                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
             </properties>
         </profile>
         <!-- 生产 -->
@@ -126,15 +157,20 @@
                 <!--当前环境,生产环境为空-->
                 <profile.name>production</profile.name>
                 <database.type>postgresql</database.type>
+                <!--代码构建控制-->
+                <!--跳过构建源代码包-->
+                <skip.build.source.package>false</skip.build.source.package>
+                <!--不copy代码包到docker构建目录-->
+                <skip.copy.docker.resource>false</skip.copy.docker.resource>
+                <!--不执行git commit 构建-->
+                <skip.build.git.commit.info>false</skip.build.git.commit.info>
                 <!--Nacos配置中心地址-->
-                <config.server-addr>172.17.207.82:8848</config.server-addr>
+                <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
-                <discovery.server-addr>172.17.207.82:8848</discovery.server-addr>
+                <discovery.server-addr>127.0.0.1:8848</discovery.server-addr>
                 <sentinel.server-addr>127.0.0.1:8858</sentinel.server-addr>
-                <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
-                <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
             </properties>
         </profile>
     </profiles>
@@ -156,7 +192,7 @@
                 <plugin>
                     <groupId>io.fabric8</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
-                    <version>${maven-docker-plugin.version}</version>
+                    <version>${docker-maven-plugin.version}</version>
                     <!--全局配置-->
                     <configuration>
                         <!--这一部分是为了实现对远程docker容器的控制-->
@@ -193,43 +229,6 @@
                         </images>
                     </configuration>
                 </plugin>
-
-                <!-- 拷贝插件 -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-antrun-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>delete-jar-file</id>
-                            <phase>pre-clean</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <configuration>
-                                <target>
-                                    <delete file="${docker.build.directory}/${docker.resource.name}"/>
-                                </target>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>prepare-docker-resource</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>run</goal>
-                            </goals>
-                            <configuration>
-                                <target>
-                                    <!--jar包保存位置 -->
-                                    <copy todir="${docker.build.directory}">
-                                        <fileset dir="${project.basedir}/target">
-                                            <include name="${docker.resource.name}"/>
-                                        </fileset>
-                                    </copy>
-                                </target>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -257,20 +256,54 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <skipSource>${skip.build.source.package}</skipSource>
+                    <attach>true</attach>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git-commit-id-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <!-- 默认绑定阶段initialize -->
+                        <phase>initialize</phase>
+                        <goals>
+                            <!-- 目标：revision -->
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
+                    <skip>${skip.build.git.commit.info}</skip>
+                    <!-- 检查的仓库根目录，${project.basedir}：项目根目录，即包含pom.xml文件的目录 -->
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <!-- git属性文件中各属性前缀，默认值git，可以不配置 -->
+                    <prefix>git</prefix>
+                    <!-- false：扫描路径时不打印更多信息，默认值false，可以不配置 -->
+                    <verbose>false</verbose>
+                    <!-- 生成git属性文件，默认false：不生成 -->
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!-- 生成git属性文件路径及文件名，默认${project.build.outputDirectory}/git.properties -->
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <!-- 生成git属性文件格式，默认值properties -->
+                    <format>json</format>
+                    <!-- 配置git-describe命令 -->
+                    <gitDescribe>
+                        <skip>false</skip>
+                        <always>false</always>
+                        <dirty>-dirty</dirty>
+                    </gitDescribe>
                 </configuration>
             </plugin>
         </plugins>

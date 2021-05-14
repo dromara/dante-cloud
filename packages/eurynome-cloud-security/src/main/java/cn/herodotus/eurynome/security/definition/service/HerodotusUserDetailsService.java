@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2019-2021 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,21 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
  * File Name: HerodotusUserDetailsService.java
  * Author: gengwei.zheng
- * Date: 2021/1/17 下午12:49
- * LastModified: 2021/1/17 下午12:49
+ * Date: 2021/05/13 10:59:13
  */
 
 package cn.herodotus.eurynome.security.definition.service;
 
-import cn.herodotus.eurynome.security.definition.social.SocialProvider;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * <p>Project: eurynome-cloud </p>
@@ -40,15 +35,4 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public interface HerodotusUserDetailsService extends UserDetailsService {
 
-    /**
-     * 通过社交集成的唯一id，获取用户信息
-     *
-     * 如果是短信验证码，openId就是手机号码
-     *
-     * @param openId 社交集成唯一Id
-     * @param socialProvider 社交集成提供商
-     * @return {@link UserDetails}
-     * @throws UsernameNotFoundException 用户不存在
-     */
-    UserDetails loadUserBySocial(String openId, SocialProvider socialProvider) throws UsernameNotFoundException;
 }

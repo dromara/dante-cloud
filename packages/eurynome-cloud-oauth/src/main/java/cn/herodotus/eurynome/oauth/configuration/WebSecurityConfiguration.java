@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2020-2021 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
- * Project Name: eurynome-cloud-athena
- * Module Name: eurynome-cloud-athena-kernel
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-oauth
  * File Name: WebSecurityConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/1/6 上午11:50
- * LastModified: 2021/1/6 上午11:46
+ * Date: 2021/05/13 11:06:13
  */
 
 package cn.herodotus.eurynome.oauth.configuration;
@@ -28,8 +26,6 @@ import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationFailure
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationProvider;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginDecryptParameterAuthenticationFilter;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginWebAuthenticationDetailsSource;
-import cn.herodotus.eurynome.security.authentication.handler.SocialAuthenticationSuccessHandler;
-import cn.herodotus.eurynome.security.authentication.social.SocialSecurityConfigurerAdapter;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
@@ -163,23 +159,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return jdbcTokenRepository;
     }
 
-    @Bean
-    public SocialAuthenticationSuccessHandler socialAuthenticationSuccessHandler() {
-        SocialAuthenticationSuccessHandler socialAuthenticationSuccessHandler = new SocialAuthenticationSuccessHandler();
-        socialAuthenticationSuccessHandler.setAuthorizationServerTokenServices(defaultAuthorizationServerTokenServices);
-        socialAuthenticationSuccessHandler.setClientDetailsService(herodotusClientDetailsService);
-        socialAuthenticationSuccessHandler.setPasswordEncoder(passwordEncoder());
-        return socialAuthenticationSuccessHandler;
-    }
-
-    @Bean
-    public SocialSecurityConfigurerAdapter socialSecurityConfigurerAdapter() {
-        SocialSecurityConfigurerAdapter socialSecurityConfigurerAdapter = new SocialSecurityConfigurerAdapter();
-        socialSecurityConfigurerAdapter.setAuthenticationSuccessHandler(socialAuthenticationSuccessHandler());
-        socialSecurityConfigurerAdapter.setHerodotusUserDetailsService(herodotusUserDetailsService);
-        return socialSecurityConfigurerAdapter;
-    }
-
     /**
      * 大体意思就是antMatcher()``是HttpSecurity的一个方法，他只告诉了Spring我只配置了一个我这个Adapter能处理哪个的url，它与authorizeRequests()没有任何关系。
      * <p>
@@ -218,7 +197,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                        .userDetailsService(oauth2UserDetailsService)
                 .and().logout().permitAll()
                 .and().cors()
-                .and().csrf().disable().apply(socialSecurityConfigurerAdapter());
+                .and().csrf().disable();
         // @formatter:on
     }
 }

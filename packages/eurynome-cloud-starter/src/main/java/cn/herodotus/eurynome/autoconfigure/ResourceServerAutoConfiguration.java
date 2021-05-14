@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2019-2020 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-starter
- * File Name: ResourceServerConfiguration.java
+ * File Name: ResourceServerAutoConfiguration.java
  * Author: gengwei.zheng
- * Date: 2020/6/6 下午12:51
- * LastModified: 2020/6/6 下午12:50
+ * Date: 2021/05/13 11:01:13
  */
 
 package cn.herodotus.eurynome.autoconfigure;
 
-import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDecisionManager;
-import cn.herodotus.eurynome.security.authentication.access.HerodotusAccessDeniedHandler;
-import cn.herodotus.eurynome.security.authentication.access.HerodotusSecurityMetadataSource;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
@@ -36,7 +31,6 @@ import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointR
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -44,7 +38,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 /**
  * <p>Description: 通用的ResourceService配置 </p>
  *
@@ -62,10 +55,6 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     private ResourceServerProperties resourceServerProperties;
     @Autowired
     private DefaultAccessTokenConverter defaultAccessTokenConverter;
-    @Autowired
-    private HerodotusSecurityMetadataSource herodotusSecurityMetadataSource;
-    @Autowired
-    private HerodotusAccessDecisionManager herodotusAccessDecisionManager;
 
     @Bean
     public ResourceServerTokenServices tokenServices() {
@@ -90,17 +79,8 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
                 // 指定监控访问权限
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().authenticated()
-                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                    @Override
-                    public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-                        fsi.setAccessDecisionManager(herodotusAccessDecisionManager);
-                        fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
-                        return fsi;
-                    }
-                })
                 .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
                 .exceptionHandling()
-                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
 
         // 关闭csrf 跨站（域）攻击防控
