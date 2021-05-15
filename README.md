@@ -1,7 +1,5 @@
 <h1 align="center"> Eurynome Cloud </h1>
 
----
-
 <p align="center">
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-1.8%2B-green" alt="JDK 1.8+"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-2.4.5-blue" alt="Spring Boot 2.4.5"></a>
@@ -15,11 +13,13 @@
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
 
-# 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！
+## 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！
 
-## Eurynome Cloud 微服务管理开发平台
+---
 
-Eurynome Cloud是一款从商业平台衍生而来的微服务管理开发平台。基于SpringBoot2.4.5、Spring Cloud 2020.0.2、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+## Eurynome Cloud 微服务能力管理和开发平台
+
+Eurynome Cloud是一款从商业平台衍生而来的微服务能力管理和开发平台。基于SpringBoot2.4.5、Spring Cloud 2020.0.2、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## 1、功能介绍
 
@@ -39,10 +39,10 @@ Eurynome Cloud是一款从商业平台衍生而来的微服务管理开发平台
 
 ## 2、技术栈和版本说明
 
-### Spring全家桶及核心技术版本
+### （1）Spring全家桶及核心技术版本
   
 组件 | 版本 
----|---|---
+---|---
 Spring Boot | 2.4.5 
 Spring Cloud | 2020.0.2 
 Spring Cloud Alibaba | 2021.1
@@ -53,13 +53,13 @@ Seata | 1.3.0 |
 
 > Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
-### 所涉及的相关的技术有： 
+### （2）所涉及的相关的技术： 
 
 * JSON序列化：Jackson & FastJson 
 * 消息队列：Kafka 适配RabbitMQ，支持消息总线(Spring Cloud Bus)
 * 数据缓存：JetCache + Redis （两级缓存）
 * 数据库： Postgresql，MySQL，Oracle ...
-* 前端实现：Vue + Vuetify
+* 前端实现：Vue + Vuetify（单体版Vue + Vuetify + Typescript + 模块化）
 * 持久层框架： Spring Data Jpa & Mybatis
 * API网关：Gateway
 * 服务注册&发现和配置中心: Nacos 
@@ -99,26 +99,35 @@ eurynome-cloud
 ├    ├── eurynome-cloud-message -- 消息队列、BUG相关代码组件
 ├    ├── eurynome-cloud-kernel -- 微服务接入平台必备组件
 ├    ├── eurynome-cloud-oauth-starter -- 自定义OAuth2 Starter
-├    ├── eurynome-cloud-starter -- 微服务核心Starter
+├    └── eurynome-cloud-starter -- 微服务核心Starter
 ├── platform -- 业务模块
-├    ├── blade-desk -- 工作台模块 
-├    ├── blade-log -- 日志模块 
-├    ├── blade-system -- 系统模块 
-├    └── blade-user -- 用户模块 
+├    ├── eurynome-cloud-gateway -- 服务网关
+├    ├── eurynome-cloud-management -- Spring Boot Admin 监控服务
+├    └── eurynome-cloud-uaa -- 统一认证模块
 ├── services -- 业务模块api封装
-├    ├── blade-desk-api -- 工作台api 
-├    ├── blade-dict-api -- 字典api 
-├    ├── blade-system-api -- 系统api 
-└──  └── blade-user-api -- 用户api 
+├    ├── eurynome-cloud-upms-api -- 通用用户权限api 
+├    ├── eurynome-cloud-upms-logic -- 通用用户权限service
+├    ├── eurynome-cloud-upms-rest -- 通用用户权限rest 接口
+├    ├── eurynome-cloud-upms-ability -- 通用用户权限服务
+└──  └── eurynome-cloud-bpmn-ability -- 工作流服务 
 ```
+
+## 5、项目地址
+* 后端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud](https://gitee.com/herodotus/eurynome-cloud)
+* 后端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud](https://gitee.com/herodotus/eurynome-cloud)
 
 ## 交流反馈
 
 * 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
-* 博客：https://zlt2000.gitee.io
-* 邮箱：zltdiablo@163.com
-个人公众号：陶陶技术笔记
-GitChat：https://gitbook.cn/gitchat/author/5b2362320398d50d7b7ab29e
+* 博客：https://blog.csdn.net/Pointer_v
+* 邮箱：herodotus@aliyun.com
+
+用户权益
+* 允许免费用于学习、毕设、公司项目、私活等。
+* 对未经过授权、不遵循 Apache 2.0 协议以及代码50%以上相似度二次开源或者商业化我们将追究到底。
+* 参考请注明：参考自 Eurynome：https://gitee.com/smallc/SpringBlade 。另请遵循 Apache 2.0 协议。
+* 注意：若禁止条款被发现有权追讨 19999 的授权费。
+
 
 界面预览
 

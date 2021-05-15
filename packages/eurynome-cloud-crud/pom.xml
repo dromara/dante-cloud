@@ -34,6 +34,7 @@
 
     <artifactId>eurynome-cloud-crud</artifactId>
     <version>2.4.5.48</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
