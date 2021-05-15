@@ -23,7 +23,7 @@ Eurynome Cloud是一款从商业平台衍生而来的微服务能力管理和开
 
 ## 1、功能介绍
 
-<img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/eurynome.png"/>
+<img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/eurynome.png"/>
 
 特点：
 * 优化的代码分包和包依赖，代码包职责明确，规避无意义的依赖以及重复依赖，对基础依赖组件进行高度封装，降低IDE索引时间，提升开发效率
