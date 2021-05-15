@@ -100,11 +100,11 @@ eurynome-cloud
 ├    ├── eurynome-cloud-kernel -- 微服务接入平台必备组件
 ├    ├── eurynome-cloud-oauth-starter -- 自定义OAuth2 Starter
 ├    └── eurynome-cloud-starter -- 微服务核心Starter
-├── platform -- 业务模块
+├── platform -- 平台核心服务
 ├    ├── eurynome-cloud-gateway -- 服务网关
 ├    ├── eurynome-cloud-management -- Spring Boot Admin 监控服务
 ├    └── eurynome-cloud-uaa -- 统一认证模块
-├── services -- 业务模块api封装
+├── services -- 平台业务服务
 ├    ├── eurynome-cloud-upms-api -- 通用用户权限api 
 ├    ├── eurynome-cloud-upms-logic -- 通用用户权限service
 ├    ├── eurynome-cloud-upms-rest -- 通用用户权限rest 接口
