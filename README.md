@@ -115,6 +115,7 @@ eurynome-cloud
 ## 5、项目地址
 * 后端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud](https://gitee.com/herodotus/eurynome-cloud)
 * 单体版示例工程：[https://gitee.com/herodotus/eurynome-cloud-athena](https://gitee.com/herodotus/eurynome-cloud-athena)
+* 前端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud-ui](https://gitee.com/herodotus/eurynome-cloud-ui)
 
 ## 6、开源协议
 
@@ -141,27 +142,27 @@ Apache Licence 2.0 [（英文原文）](https://www.apache.org/licenses/LICENSE-
 ## 9、界面预览
 <table>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/ui1.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/ui2.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui1.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui2.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/ui3.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/camunda.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui3.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/camunda.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/nacos.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/elk"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/nacos.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/elk"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/skywalking.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/sentinel.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/skywalking.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/sentinel.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/spring-boot-admin-1.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/spring-boot-admin-2.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/spring-boot-admin-1.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/spring-boot-admin-2.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/oauth2-login1.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/blob/master/documents/readme/oauth2-login2.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/oauth2-login1.png"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/oauth2-login2.png"/></td>
     </tr>
 </table>
