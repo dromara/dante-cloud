@@ -75,7 +75,7 @@ Seata | 1.3.0 |
 * 日志中心：ELK
 * 日志收集：Logstash Logback Encoder
 
-# 3、 版本号说明
+## 3、 版本号说明
 
 本系统版本号，分为四段。
 
