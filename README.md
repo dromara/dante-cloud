@@ -151,7 +151,7 @@ Apache Licence 2.0 [（英文原文）](https://www.apache.org/licenses/LICENSE-
     </tr>
     <tr>
         <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/nacos.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/elk"/></td>
+        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/elk.png"/></td>
     </tr>
     <tr>
         <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/skywalking.png"/></td>
