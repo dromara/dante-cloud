@@ -1,9 +1,3 @@
-<h1 align="center"> “祝融落火” </h1>
-
-<h4 align="center"> 巧了，本项目同天开源。恭祝天问一号成功着陆火星！ :+1: 值得纪念的一天。 :smile:  </h4>
-
----
-
 <h1 align="center"> Eurynome Cloud </h1>
 
 <p align="center">
