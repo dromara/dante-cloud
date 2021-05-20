@@ -13,6 +13,11 @@
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
 
+<p align="center">
+    <a href="https://github.com/herodotus-cloud/eurynome-cloud">Github 仓库</a> &nbsp; | &nbsp; 
+    <a href="https://gitee.com/herodotus/eurynome-cloud">Gitee 仓库</a>
+</p>
+
 ## 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！
 
 ---
@@ -114,6 +119,7 @@ eurynome-cloud
 
 ## 5、项目地址
 * 后端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud](https://gitee.com/herodotus/eurynome-cloud)
+* 后端Github地址：[https://github.com/herodotus-cloud/eurynome-cloud](https://github.com/herodotus-cloud/eurynome-cloud)
 * 单体版示例工程：[https://gitee.com/herodotus/eurynome-cloud-athena](https://gitee.com/herodotus/eurynome-cloud-athena)
 * 前端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud-ui](https://gitee.com/herodotus/eurynome-cloud-ui)
 
@@ -130,14 +136,12 @@ Apache Licence 2.0 [（英文原文）](https://www.apache.org/licenses/LICENSE-
 * 允许免费用于学习、毕设、公司项目、私活等。
 * 对未经过授权、不遵循 Apache 2.0 协议以及代码50%以上相似度二次开源或者商业化我们将追究到底。
 * 参考请注明：参考自 Eurynome Cloud：https://gitee.com/herodotus/eurynome-cloud。
-* 注意：若禁止条款被发现有权追讨 19999 的授权费。
 
 ## 8、交流反馈
 * 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
 * 博客：https://blog.csdn.net/Pointer_v
 * 邮箱：herodotus@aliyun.com
 
-> 更多高级功能，详询 herodotus@aliyun.com
 
 ## 9、界面预览
 <table>
