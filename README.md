@@ -18,7 +18,8 @@
     <a href="https://gitee.com/herodotus/eurynome-cloud">Gitee 仓库</a>
 </p>
 
-## 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！
+
+<h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
 
 ---
 
@@ -26,7 +27,7 @@
 
 Eurynome Cloud是一款微服务能力管理和开发平台。基于SpringBoot2.4.5、Spring Cloud 2020.0.2、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
-## 1、功能介绍
+## [1]、功能介绍
 
 <img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/eurynome.png"/>
 
@@ -42,7 +43,7 @@ Eurynome Cloud是一款微服务能力管理和开发平台。基于SpringBoot2.
 * 同时支持分布式和单体式两种架构，基于单体式架构可快速搭建基于OAuth2的前后端分离应用
 * 共享式、统一化多环境配置模式，Yml、Docker均采用此方式配置，避免同类配置多出修改的问题
 
-## 2、技术栈和版本说明
+## [2]、技术栈和版本说明
 
 ### （1）Spring全家桶及核心技术版本
   
@@ -80,7 +81,7 @@ Seata | 1.3.0 |
 * 日志中心：ELK
 * 日志收集：Logstash Logback Encoder
 
-## 3、 版本号说明
+## [3]、 版本号说明
 
 本系统版本号，分为四段。
 
@@ -88,7 +89,8 @@ Seata | 1.3.0 |
 - 第三段，表示系统功能的变化
 - 第四段，表示系统功能维护及优化情况
 
-## 4、工程结构
+## [4]、工程结构
+
 ``` 
 eurynome-cloud
 ├── configurations -- 配置文件脚本和统一Docker build上下文目录
@@ -117,13 +119,13 @@ eurynome-cloud
 └──  └── eurynome-cloud-bpmn-ability -- 工作流服务 
 ```
 
-## 5、项目地址
+## [5]、项目地址
 * 后端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud](https://gitee.com/herodotus/eurynome-cloud)
 * 后端Github地址：[https://github.com/herodotus-cloud/eurynome-cloud](https://github.com/herodotus-cloud/eurynome-cloud)
 * 单体版示例工程：[https://gitee.com/herodotus/eurynome-cloud-athena](https://gitee.com/herodotus/eurynome-cloud-athena)
 * 前端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud-ui](https://gitee.com/herodotus/eurynome-cloud-ui)
 
-## 6、开源协议
+## [6]、开源协议
 
 Apache Licence 2.0 [（英文原文）](https://www.apache.org/licenses/LICENSE-2.0.html) Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，同样鼓励代码共享和尊重原作者的著作权，同样允许代码修改，再发布（作为开源或商业软件）。 需要满足的条件如下：
 
@@ -132,18 +134,17 @@ Apache Licence 2.0 [（英文原文）](https://www.apache.org/licenses/LICENSE-
 - 在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。
 - 如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。 Apache Licence也是对商业应用友好的许可。使用者也可以在需要的时候修改代码来满足需要并作为开源或商业产品发布/销售。
 
-## 7、用户权益
+## [7]、用户权益
 * 允许免费用于学习、毕设、公司项目、私活等。
 * 对未经过授权、不遵循 Apache 2.0 协议以及代码50%以上相似度二次开源或者商业化我们将追究到底。
 * 参考请注明：参考自 Eurynome Cloud：https://gitee.com/herodotus/eurynome-cloud。
 
-## 8、交流反馈
+## [8]、交流反馈
 * 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
-* 博客：https://blog.csdn.net/Pointer_v
 * 邮箱：herodotus@aliyun.com
 
 
-## 9、界面预览
+## [9]、界面预览
 <table>
     <tr>
         <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui1.png"/></td>
