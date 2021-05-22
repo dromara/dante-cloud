@@ -2,13 +2,13 @@
 
 <p align="center">
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-1.8%2B-green" alt="JDK 1.8+"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-2.4.5-blue" alt="Spring Boot 2.4.5"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-2.4.6-blue" alt="Spring Boot 2.4.6"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2020.0.2-blue" alt="Spring Cloud 2020.0.2"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2021.1-blue" alt="Spring Cloud Alibaba 2021.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.0.1-brightgreen" alt="Nacos 2.0.1"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-2.4.5.48-red" alt="Version 2.4.5.48"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-2.4.5.60-red" alt="Version 2.4.5.60"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -25,7 +25,7 @@
 
 ## Eurynome Cloud 微服务能力管理和开发平台
 
-Eurynome Cloud是一款微服务能力管理和开发平台。基于SpringBoot2.4.5、Spring Cloud 2020.0.2、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Eurynome Cloud是一款微服务能力管理和开发平台。基于SpringBoot2.4.6、Spring Cloud 2020.0.2、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## [1]、功能介绍
 
@@ -49,7 +49,7 @@ Eurynome Cloud是一款微服务能力管理和开发平台。基于SpringBoot2.
   
 组件 | 版本 
 ---|---
-Spring Boot | 2.4.5 
+Spring Boot | 2.4.6 
 Spring Cloud | 2020.0.2 
 Spring Cloud Alibaba | 2021.1
 Spring Boot Admin | 2.4.1 
@@ -85,7 +85,7 @@ Seata | 1.3.0 |
 
 本系统版本号，分为四段。
 
-- 第一段和第二段，与Spring Boot 版本对应，根据采用的Spring Boot版本变更。例如，当前采用Spring Boot 2.4.5版本，那么就以2.4.X.X开头
+- 第一段和第二段，与Spring Boot 版本对应，根据采用的Spring Boot版本变更。例如，当前采用Spring Boot 2.4.6版本，那么就以2.4.X.X开头
 - 第三段，表示系统功能的变化
 - 第四段，表示系统功能维护及优化情况
 
@@ -138,10 +138,14 @@ Apache Licence 2.0 [（英文原文）](https://www.apache.org/licenses/LICENSE-
 * 允许免费用于学习、毕设、公司项目、私活等。
 * 对未经过授权、不遵循 Apache 2.0 协议以及代码50%以上相似度二次开源或者商业化我们将追究到底。
 * 参考请注明：参考自 Eurynome Cloud：https://gitee.com/herodotus/eurynome-cloud。
+* 注意：若禁止条款被发现有权追讨 19999 的授权费。
 
 ## [8]、交流反馈
 * 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
+* 博客：https://blog.csdn.net/Pointer_v
 * 邮箱：herodotus@aliyun.com
+
+> 更多高级功能，详询 herodotus@aliyun.com
 
 
 ## [9]、界面预览

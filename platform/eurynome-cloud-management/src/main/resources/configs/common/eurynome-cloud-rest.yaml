@@ -36,3 +36,5 @@ ribbon:
     enabled: true # 用OkHttp代替HttpClient
   eager-load:
     enabled: true
+  nacos:
+    enabled: false

@@ -25,6 +25,8 @@ spring:
           filters:
             - StripPrefix=1
     loadbalancer:
+      ribbon:
+        enabled: false
       retry:
         enabled: true # 内部已经默认开启这里列出来说明比较重要
     nacos:

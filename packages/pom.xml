@@ -29,7 +29,7 @@
     <parent>
         <artifactId>eurynome-cloud</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.4.5.48</version>
+        <version>2.4.5.60</version>
     </parent>
 
     <artifactId>packages</artifactId>
