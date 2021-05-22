@@ -70,7 +70,7 @@ Seata | 1.3.0 |
 * API网关：Gateway
 * 服务注册&发现和配置中心: Nacos 
 * 服务消费：OpenFeign & RestTemplate & OkHttp3
-* 负载均衡：Ribbon
+* 负载均衡：Spring Cloud Loadbalancer
 * 服务熔断&降级&限流：Sentinel
 * 项目构建：Maven
 * 分布式事务：Seata
