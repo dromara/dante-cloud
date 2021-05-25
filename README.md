@@ -23,7 +23,7 @@
 
 ---
 
-## Eurynome Cloud 微服务能力管理和开发平台
+## Eurynome企业中台微服务架构及服务能力开发平台
 
 Eurynome Cloud是一款微服务能力管理和开发平台。基于SpringBoot2.4.6、Spring Cloud 2020.0.2、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
