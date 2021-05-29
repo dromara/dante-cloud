@@ -29,13 +29,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.6</version>
+        <version>2.5.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.4.5.60</version>
+    <version>2.5.1.0</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -45,6 +45,8 @@
         <spring-cloud-dependencies.version>2020.0.2</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.4.1</spring-boot-admin.version>
+
+        <spring-kafka.version>2.6.6</spring-kafka.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <docker-maven-plugin.version>0.35.0</docker-maven-plugin.version>
