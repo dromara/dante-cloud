@@ -124,19 +124,22 @@ eurynome-cloud
 
 ## [6]、用户权益
 * 允许免费用于学习、毕设、公司项目、私活等。
+* 遵循Apache-2.0开源协议
 
 ## [7]、交流反馈
 * 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
 * 博客：https://blog.csdn.net/Pointer_v
 * 邮箱：herodotus@aliyun.com
-* @@群：922565573
+* QQ群：922565573
 
 ## [8]、特别鸣谢
 
 * [EasyCaptcha](https://gitee.com/whvse/EasyCaptcha)
 * [JustAuth](https://gitee.com/yadong.zhang/JustAuth)
+* [Okhttps](https://gitee.com/ejlchina-zhxu/okhttps)
+* [Guerlab-sms](https://gitee.com/guerlab_net/guerlab-sms)
 
-## [8]、界面预览
+## [9]、界面预览
 <table>
     <tr>
         <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui1.png"/></td>
