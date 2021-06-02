@@ -27,11 +27,11 @@ ENV SW_COLLECTOR_BACKEND_SERVICE=""
 VOLUME /tmp
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
-ADD ./target/${SERVICE_NAME}-${VERSION}.jar app.jar
-COPY ./agent/skywalking-agent-840-es7.jar agent.jar
+ADD ./target/${SERVICE_NAME}-${VERSION}.jar /usr/local/app.jar
+COPY ./agent/skywalking-agent-es7-8.5.0.jar /usr/local/sw/agent.jar
 
 # 声明运行时端口
 EXPOSE ${SERVICE_PORT}
 
 # 启动容器时的进程
-ENTRYPOINT java -javaagent:/agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar /app.jar
+ENTRYPOINT java -javaagent:/usr/local/sw/agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar /usr/local/app.jar

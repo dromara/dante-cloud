@@ -78,7 +78,7 @@ public class LogstashConfiguration {
         LoggerContext loggerContext = rootLogger.getLoggerContext();
 
         LogstashTcpSocketAppender logstashTcpSocketAppender = new LogstashTcpSocketAppender();
-        logstashTcpSocketAppender.setName("LOGSTASH");
+        logstashTcpSocketAppender.setName("HERODOTUS-LOGSTASH");
         logstashTcpSocketAppender.setContext(loggerContext);
         logstashTcpSocketAppender.addDestination(managementProperties.getLogCenter().getServerAddr());
 

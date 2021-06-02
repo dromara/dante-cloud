@@ -3,7 +3,7 @@
 <p align="center">
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-1.8%2B-green" alt="JDK 1.8+"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-2.5.0-blue" alt="Spring Boot 2.5.0"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2020.0.2-blue" alt="Spring Cloud 2020.0.2"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2020.0.3-blue" alt="Spring Cloud 2020.0.3"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2021.1-blue" alt="Spring Cloud Alibaba 2021.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.0.1-brightgreen" alt="Nacos 2.0.1"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
@@ -27,23 +27,19 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Eurynome Cloud是一款企业级技术中台微服务架构与服务能力开发平台。基于Spring Boot 2.5.0、Spring Cloud 2020.0.2、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.5.0、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2021.1、Nacos 2.0.1等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## [1]、功能介绍
 
 <img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/eurynome.png"/>
 
 特点：
-* 优化的代码分包和包依赖，代码包职责明确，规避无意义的依赖以及重复依赖，对基础依赖组件进行高度封装，降低IDE索引时间，提升开发效率
+* 更优的代码分包和包依赖，代码包职责明确，规避无意义的依赖以及重复依赖，对基础依赖组件进行高度封装，降低IDE索引时间，提升开发效率
 * 遵循微服开发模式，强化整体的可配置性，依赖功能均可以通过@EnableXXX开启，支持策略化的注入改变部分核心代码的实现逻辑。提供的starter，开箱即用，可零配置创建服务，快速进行开发
-* 基于JetCache自研缓存拓展，支持分页和条件查询缓存动态更新
-* 拓展OAuth2默认登录，支持多种验证码和登录数据加密传输，可通过配置进行自定义设置。
-* 多数据库支持，默认采用Postgresql数据库，同时支持Spring Data Jpa 和Mybatis
-* 多种消息队列支持，适配RabbitMQ和Kafka，默认使用Kafka，支持消息总线(Spring Cloud Bus)
-* Rest接口自动化扫描生成权限数据，支持扫描包和扫描注解动态配置
-* 采用Camunda实现工作流服务，支持在线编辑
-* 同时支持分布式和单体式两种架构，基于单体式架构可快速搭建基于OAuth2的前后端分离应用
-* 共享式、统一化多环境配置模式，Yml、Docker均采用此方式配置，避免同类配置多出修改的问题
+* 同时支持分布式和单体式两种架构，基于单体式架构无须搭建复杂的基础设施即可快速搭建应用，并且可无缝迁移至分布式架构
+* 集成微信小程序、内容审核、证照识别、消息推送、社交登录、多通道SMS等丰富的第三方技术能力输出，可快速构建面向互联网的小程序、APP等应用。
+
+> 更多详细功能，参见：[功能说明](./documents/guides/description.md)
 
 ## [2]、技术栈和版本说明
 
@@ -52,7 +48,7 @@ Eurynome Cloud是一款企业级技术中台微服务架构与服务能力开发
 组件 | 版本 
 ---|---
 Spring Boot | 2.5.0
-Spring Cloud | 2020.0.2 
+Spring Cloud | 2020.0.3 
 Spring Cloud Alibaba | 2021.1
 Spring Boot Admin | 2.4.1 
 Nacos | 2.0.1 |
@@ -74,14 +70,13 @@ Seata | 1.3.0 |
 * 服务消费：OpenFeign & RestTemplate & OkHttp3
 * 负载均衡：Spring Cloud Loadbalancer
 * 服务熔断&降级&限流：Sentinel
-* 项目构建：Maven
 * 分布式事务：Seata
 * 服务监控：Spring Boot Admin
 * 链路跟踪：Skywalking
 * 文件服务：阿里云OSS/Minio
 * 数据调试：p6spy
 * 日志中心：ELK
-* 日志收集：Logstash Logback Encoder
+* 日志收集：Logstash Logback Encoder，Skywalking
 
 ## [3]、 版本号说明
 
@@ -134,7 +129,12 @@ eurynome-cloud
 * 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
 * 博客：https://blog.csdn.net/Pointer_v
 * 邮箱：herodotus@aliyun.com
+* @@群：922565573
 
+## [8]、特别鸣谢
+
+* [EasyCaptcha](https://gitee.com/whvse/EasyCaptcha)
+* [JustAuth](https://gitee.com/yadong.zhang/JustAuth)
 
 ## [8]、界面预览
 <table>
