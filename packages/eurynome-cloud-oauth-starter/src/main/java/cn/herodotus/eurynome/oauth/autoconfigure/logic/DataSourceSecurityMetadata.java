@@ -72,9 +72,9 @@ public class DataSourceSecurityMetadata extends SecurityMetadataStorage {
             } else {
                 log.error("[Eurynome] |- Store Service Resources May Be Error, Please Check!");
             }
-
-            log.info("[Eurynome] |- Store Service Resources Success!");
         }
+
+        log.info("[Eurynome] |- Store Service Resources Passed!");
     }
 
     @Override
