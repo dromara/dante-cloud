@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,29 +14,38 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
- * File Name: Architecture.java
+ * Module Name: eurynome-cloud-common
+ * File Name: ProtocolType.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/06/13 04:05:13
  */
 
-package cn.herodotus.eurynome.rest.enums;
+package cn.herodotus.eurynome.common.enums;
 
 /**
- * <p> Description : 用于区分是单体应用还是微服务应用 </p>
+ * <p>Description: Protocol枚举 </p>
  *
  * @author : gengwei.zheng
- * @date : 2019/11/26 11:33
+ * @date : 2021/6/13 4:05
  */
-public enum Architecture {
+public enum ProtocolType {
 
-    /**
-     * 分布式架构
-     */
-    DISTRIBUTED,
+    HTTP("http://", "http"),
+    HTTPS("https://", "https");
 
-    /**
-     * 单体式架构
-     */
-    MONOCOQUE;
+    private final String format;
+    private final String prefix;
+
+    ProtocolType(String format, String prefix) {
+        this.format = format;
+        this.prefix = prefix;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
 }

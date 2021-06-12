@@ -1,8 +1,8 @@
 security:
   oauth2:
     client:
-      clientId: f8e3f156-2cf4-449c-926d-d1377fe82c86
-      clientSecret: 067e9d1c-12ed-4400-92ce-97281ddd71ff
+      client-id: f8e3f156-2cf4-449c-926d-d1377fe82c86
+      client-secret: 067e9d1c-12ed-4400-92ce-97281ddd71ff
     resource:
-      tokenInfoUri: ${herodotus.platform.token-info-uri}
-      userInfoUri: ${herodotus.platform.user-info-uri}
+      token-info-uri: ${herodotus.platform.token-info-uri}
+      user-info-uri: ${herodotus.platform.user-info-uri}

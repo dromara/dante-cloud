@@ -77,10 +77,16 @@ public enum ResultStatus {
     METHOD_NOT_ALLOWED(4105, "请求方法不支持"),
 
     /**
-     * 5*.* 为数据操作相关错误
+     * 6*.* 为数据操作相关错误
      */
     BAD_SQL_GRAMMAR(6000, "低级SQL语法错误，检查SQL能否正常运行或者字段名称是否正确"),
     DATA_INTEGRITY_VIOLATION(6200, "该数据正在被其它数据引用，请先删除引用关系，再进行数据删除操作"),
+
+    /**
+     * 7*.* 基础设施交互错误
+     * 71.* Redis 操作出现错误
+     */
+    PIPELINE_INVALID_COMMANDS(7100, "Redis管道包含一个或多个无效命令"),
 
 
     // TODO: 以下状态码和错误信息要重新梳理，重点要看自定义错误码以及对应的HttpStatus是否合适。如果发现新的没有定义的错误，增加到上面。

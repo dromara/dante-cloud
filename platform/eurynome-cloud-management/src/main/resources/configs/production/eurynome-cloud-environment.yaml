@@ -15,6 +15,9 @@ herodotus:
     gateway-server-addr: http://localhost:8847
   initialization:
     hibernate-ddl-auto: update
+  switch:
+    swagger:
+      enabled: false
 
   platform:
     management:

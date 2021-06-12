@@ -71,8 +71,9 @@
         <starter-camunda.version>7.15.0</starter-camunda.version>
 
         <!--Spring Boot Dependencies中没有的依赖组件-->
-        <swagger.version>3.0.0</swagger.version>
-        <knife4j.version>3.0.2</knife4j.version>
+        <springfox.version>2.9.2</springfox.version>
+        <swagger.version>1.6.2</swagger.version>
+        <knife4j.version>2.0.6</knife4j.version>
         <p6spy.version>3.9.1</p6spy.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
@@ -251,18 +252,33 @@
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
+                <version>${springfox.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger.version}</version>
+                <version>${springfox.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/io.swagger/swagger-models -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+
             <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
             <dependency>
                 <groupId>p6spy</groupId>
@@ -274,12 +290,6 @@
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
                 <version>${logstash-logback-encoder.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-ui</artifactId>
-                <version>${knife4j.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
             <dependency>

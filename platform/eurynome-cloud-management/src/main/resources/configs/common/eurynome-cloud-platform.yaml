@@ -1,9 +1,12 @@
 herodotus:
   platform:
-    gateway-server-addr: ${herodotus.environment.gateway-server-addr}
-    uaa-server-addr: ${herodotus.platform.gateway-server-addr}/eurynome-cloud-uaa
-    upms-server-addr: ${herodotus.platform.gateway-server-addr}/eurynome-cloud-upms-ability
-    access-token-uri: ${herodotus.platform.uaa-server-addr}/oauth/token
-    user-authorization-uri: ${herodotus.platform.uaa-server-addr}/oauth/authorize
-    token-info-uri: ${herodotus.platform.uaa-server-addr}/oauth/check_token
-    user-info-uri: ${herodotus.platform.uaa-server-addr}/identity/profile
+    endpoint:
+      gateway-address: ${herodotus.environment.gateway-server-addr}
+      uaa-service-uri: ${herodotus.platform.endpoint.gateway-address}/eurynome-cloud-uaa
+      upms-service-uri: ${herodotus.platform.endpoint.gateway-address}/eurynome-cloud-upms-ability
+      access-token-uri: ${herodotus.platform.endpoint.uaa-service-uri}/oauth/token
+      user-authorization-uri: ${herodotus.platform.endpoint.uaa-service-uri}/oauth/authorize
+      token-info-uri: ${herodotus.platform.endpoint.uaa-service-uri}/oauth/check_token
+      user-info-uri: ${herodotus.platform.endpoint.uaa-service-uri}/identity/profile
+    swagger:
+      enabled: ${herodotus.switch.swagger.enabled}

@@ -25,7 +25,7 @@ package cn.herodotus.eurynome.security.authentication.access;
 import cn.herodotus.eurynome.common.constants.SecurityConstants;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.rest.enums.Architecture;
-import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
@@ -69,7 +69,7 @@ import java.util.stream.Collectors;
 public class RequestMappingScanner implements ApplicationContextAware {
 
     private final RestProperties restProperties;
-    private final ApplicationProperties applicationProperties;
+    private final PlatformProperties platformProperties;
     private final SecurityMetadataStorage securityMetadataStorage;
 
     private ApplicationContext applicationContext;
@@ -79,9 +79,9 @@ public class RequestMappingScanner implements ApplicationContextAware {
      */
     private Class<? extends Annotation> scanAnnotationClass = EnableResourceServer.class;
 
-    public RequestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage) {
+    public RequestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, SecurityMetadataStorage securityMetadataStorage) {
         this.restProperties = restProperties;
-        this.applicationProperties = applicationProperties;
+        this.platformProperties = platformProperties;
         this.securityMetadataStorage = securityMetadataStorage;
     }
 
@@ -256,7 +256,7 @@ public class RequestMappingScanner implements ApplicationContextAware {
     }
 
     private boolean isMicroserviceArchitecture() {
-        return applicationProperties.getArchitecture() == Architecture.MICROSERVICE;
+        return platformProperties.getArchitecture() == Architecture.DISTRIBUTED;
     }
 
     private String idGenerator(String serviceId, String urls, String requestMethods) {

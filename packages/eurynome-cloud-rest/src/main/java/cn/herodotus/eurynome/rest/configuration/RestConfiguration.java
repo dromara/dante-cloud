@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +55,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(ApplicationProperties.class)
+@EnableConfigurationProperties(PlatformProperties.class)
 public class RestConfiguration {
 
     @PostConstruct

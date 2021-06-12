@@ -71,10 +71,11 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
         private String[] getIgnoredStaticResources() {
             List<String> defaultIgnored = Lists.newArrayList("/error",
                     "/static/**",
-                    "/swagger-ui/*",
-                    "/swagger-resources/**",
-                    "/v3/api-docs",
                     "/webjars/**",
+                    "/resources/**",
+                    "/swagger-ui.html",
+                    "/swagger-resources/**",
+                    "/v2/api-docs",
                     "/features/**",
                     "/plugins/**",
                     "/favicon.ico");

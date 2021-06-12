@@ -112,6 +112,8 @@ public class GlobalExceptionHandler {
         // 6*.** 对应错误
         EXCEPTION_DICTIONARY.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
         EXCEPTION_DICTIONARY.put("DataIntegrityViolationException", getResult(ResultStatus.DATA_INTEGRITY_VIOLATION));
+        // 7*.** 对应错误
+        EXCEPTION_DICTIONARY.put("RedisPipelineException", getResult(ResultStatus.PIPELINE_INVALID_COMMANDS, HttpStatus.SC_INTERNAL_SERVER_ERROR));
         // 以下是没有重新梳理过的错误。
         EXCEPTION_DICTIONARY.put("UsernameNotFoundException", getUnauthorizedResult(ResultStatus.USERNAME_NOT_FOUND));
         EXCEPTION_DICTIONARY.put("BadCredentialsException", getUnauthorizedResult(ResultStatus.BAD_CREDENTIALS));

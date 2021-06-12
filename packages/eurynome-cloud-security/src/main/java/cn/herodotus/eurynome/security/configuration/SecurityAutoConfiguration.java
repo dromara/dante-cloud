@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.security.configuration;
 
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
-import cn.herodotus.eurynome.rest.properties.ApplicationProperties;
+import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
@@ -102,8 +102,8 @@ public class SecurityAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(RequestMappingScanner.class)
-    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, ApplicationProperties applicationProperties, SecurityMetadataStorage securityMetadataStorage) {
-        RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, applicationProperties, securityMetadataStorage);
+    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, SecurityMetadataStorage securityMetadataStorage) {
+        RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, platformProperties, securityMetadataStorage);
         log.debug("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
         return requestMappingScan;
     }

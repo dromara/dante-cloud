@@ -22,26 +22,25 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.rest.properties.SwaggerProperties;
+import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.OAuthBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.SecurityScheme;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
+import java.util.Collections;
 
 /**
  * <p> Description : SwaggerConfiguration </p>
@@ -53,46 +52,72 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(SwaggerProperties.class)
-@EnableOpenApi
+@ConditionalOnProperty(value = "herodotus.platform.swagger.enabled", havingValue = "true", matchIfMissing = true)
+@EnableSwagger2
 public class SwaggerConfiguration {
 
+    private static final String SCHEMA_BEARER_TOKEN = "Bearer Token";
+
     @Autowired
-    private SwaggerProperties swaggerProperties;
+    private PlatformProperties platformProperties;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Bean [Swagger] Auto Configure.");
+        log.debug("[Eurynome] |- Plugin [Eurynome Swagger] Auto Configure.");
     }
 
     @Bean
-    public Docket createRestApi() {
+    public Docket docket() {
         // 注意此处改动，需要将SWAGGER_2改成OAS_30
-        return new Docket(DocumentationType.OAS_30)
-                .apiInfo(apiInfo())
+        return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 // 扫描所有有注解的api，用这种方式更灵活
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(apiInfo())
+                // 支持的通讯协议集合
+                .securitySchemes(Collections.singletonList(securityScheme()))
+                .securityContexts(Collections.singletonList(securityContexts()));
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title(swaggerProperties.getTitle())
-                .description(swaggerProperties.getDescription())
+                .title("Herodotus Cloud 聚合文档")
+                .description("Herodotus Cloud 微服务框架")
+                .contact(new Contact("码匠君", "https://blog.csdn.net/Pointer_v", "herodotus@aliyun.com"))
                 .version("1.0")
                 .build();
     }
 
-    /***
-     * oauth2配置
-     * 需要增加swagger授权回调地址
-     * http://localhost:8888/webjars/springfox-swagger-ui/o2c.html
-     * @return
+    /**
+     * 这里是写允许认证的scope
      */
-    @Bean
-    SecurityScheme securityScheme() {
-        return new ApiKey("BearerToken", "Authorization", "header");
+    private AuthorizationScope[] scopes() {
+        return new AuthorizationScope[]{
+                new AuthorizationScope("all", "All scope is trusted!")
+        };
+    }
+
+    /**
+     * 这个类决定了你使用哪种认证方式，我这里使用密码模式
+     */
+    private SecurityScheme securityScheme() {
+        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant(platformProperties.getEndpoint().getAccessTokenUri());
+
+        return new OAuthBuilder()
+                .name(SCHEMA_BEARER_TOKEN)
+                .grantTypes(Collections.singletonList(grantType))
+                .build();
+    }
+
+    /**
+     * 授权信息全局应用
+     */
+    private SecurityContext securityContexts() {
+        return SecurityContext.builder()
+                .securityReferences(Collections.singletonList(new SecurityReference(SCHEMA_BEARER_TOKEN, scopes())))
+                .forPaths(PathSelectors.any())
+                .build();
     }
 }

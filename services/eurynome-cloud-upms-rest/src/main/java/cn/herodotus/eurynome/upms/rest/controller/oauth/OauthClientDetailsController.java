@@ -48,8 +48,8 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
 
     @ApiOperation(value = "获取ClientDetails分页数据", notes = "通过pageNumber和pageSize获取分页数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数", dataType = "Integer", dataTypeClass = Integer.class, paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目", dataType = "Integer", dataTypeClass = Integer.class, paramType = "query")
+            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数", dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目", dataType = "int", paramType = "query")
     })
     @GetMapping
     @Override

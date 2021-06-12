@@ -4,5 +4,5 @@ security:
       clientId: 004b87d8-0a18-4e62-a35c-f2f123713349
       clientSecret: 2bda7d3a-dba1-45a4-b08e-cbd731a0418e
     resource:
-      tokenInfoUri: ${herodotus.platform.token-info-uri}
-      userInfoUri: ${herodotus.platform.user-info-uri}
+      token-info-uri: ${herodotus.platform.token-info-uri}
+      user-info-uri: ${herodotus.platform.user-info-uri}
