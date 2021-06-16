@@ -1,5 +1,5 @@
 <p align="center"><img src="./documents/readme/logo.jpg" height="200" alt="logo"/></p>
-<h1 align="center">简介优雅 · 稳定高效 | 宁静致远 · 精益求精 </h1>
+<h2 align="center">简洁优雅 · 稳定高效 | 宁静致远 · 精益求精 </h2>
 <h3 align="center">Eurynome Cloud 微服务架构</h3>
 
 ---
