@@ -1,4 +1,8 @@
-<h1 align="center"> Eurynome Cloud </h1>
+<p align="center"><img src="./documents/readme/logo.jpg" height="200" alt="logo"/></p>
+<h1 align="center">简介优雅 · 稳定高效 | 宁静致远 · 精益求精 </h1>
+<h3 align="center">Eurynome Cloud 微服务架构</h3>
+
+---
 
 <p align="center">
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-1.8%2B-green" alt="JDK 1.8+"></a>
@@ -24,6 +28,7 @@
 ---
 
 > 注意：由于Spring Boot 2.5.0 DataSource 自动初始化机制的变化，升级版本后，一定记得修改数据库的配置（Nacos中），否则会出错。
+
 > 注意：梳理和优化了平台配置属性，更新代码后需要同步更新Nacos配置。
 
 ## 企业级技术中台微服务架构与服务能力开发平台
@@ -143,27 +148,27 @@ eurynome-cloud
 ## [9]、界面预览
 <table>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui1.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui2.png"/></td>
+        <td><img src="./documents/readme/ui1.png"/></td>
+        <td><img src="./documents/readme/ui2.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/ui3.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/camunda.png"/></td>
+        <td><img src="./documents/readme/ui3.png"/></td>
+        <td><img src="./documents/readme/camunda.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/nacos.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/elk.png"/></td>
+        <td><img src="./documents/readme/nacos.png"/></td>
+        <td><img src="./documents/readme/elk.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/skywalking.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/sentinel.png"/></td>
+        <td><img src="./documents/readme/skywalking.png"/></td>
+        <td><img src="./documents/readme/sentinel.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/spring-boot-admin-1.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/spring-boot-admin-2.png"/></td>
+        <td><img src="./documents/readme/spring-boot-admin-1.png"/></td>
+        <td><img src="./documents/readme/spring-boot-admin-2.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/oauth2-login1.png"/></td>
-        <td><img src="https://gitee.com/herodotus/eurynome-cloud/raw/master/documents/readme/oauth2-login2.png"/></td>
+        <td><img src="./documents/readme/oauth2-login1.png"/></td>
+        <td><img src="./documents/readme/oauth2-login2.png"/></td>
     </tr>
 </table>
