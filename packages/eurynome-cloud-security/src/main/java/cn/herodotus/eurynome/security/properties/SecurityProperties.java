@@ -26,7 +26,6 @@ import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.captcha.CaptchaFont;
 import cn.herodotus.eurynome.common.enums.captcha.CaptchaLetterType;
 import cn.herodotus.eurynome.common.enums.captcha.CaptchaType;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
@@ -46,7 +45,6 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2019/11/28 13:08
  */
-@Slf4j
 @ConfigurationProperties(prefix = "herodotus.platform.security")
 public class SecurityProperties implements Serializable {
 
@@ -60,10 +58,6 @@ public class SecurityProperties implements Serializable {
     private VerificationCode verificationCode = new VerificationCode();
 
     private Interceptor interceptor = new Interceptor();
-
-    public SecurityProperties() {
-        log.debug("[Eurynome] |- Properties [Security] is Enabled.");
-    }
 
     public String getSigningKey() {
         return signingKey;

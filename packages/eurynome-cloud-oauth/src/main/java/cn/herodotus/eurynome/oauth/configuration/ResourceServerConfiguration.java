@@ -52,7 +52,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Adapter [Resource Server Configurer Adapter] Auto Configure.");
+        log.debug("[Eurynome] |- Core [Herodotus Resource Server in component oauth] Auto Configure.");
     }
 
     @Override

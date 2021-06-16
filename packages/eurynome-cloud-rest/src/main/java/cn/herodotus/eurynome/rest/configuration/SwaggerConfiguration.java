@@ -22,10 +22,14 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
+import cn.herodotus.eurynome.common.constants.PlatformConstants;
+import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
+import cn.herodotus.eurynome.rest.properties.ServiceProperties;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,17 +57,31 @@ import java.util.Collections;
 @Slf4j
 @Configuration
 @ConditionalOnProperty(value = "herodotus.platform.swagger.enabled", havingValue = "true", matchIfMissing = true)
+@AutoConfigureAfter(ServiceConfiguration.class)
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    private static final String SCHEMA_BEARER_TOKEN = "Bearer Token";
+    /**
+     * Knife4j的一个问题，只能设置"oauth2"，否则token配置界面不会显示
+     */
+    private static final String SCHEMA_OAUTH_NAME = "oauth2";
 
     @Autowired
     private PlatformProperties platformProperties;
+    @Autowired
+    private ServiceProperties serviceProperties;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Eurynome Swagger] Auto Configure.");
+        log.debug("[Eurynome] |- Plugin [Herodotus Swagger] Auto Configure.");
+    }
+
+    private String getTokenAddress() {
+        if (platformProperties.getArchitecture().equals(Architecture.MONOCOQUE)) {
+            return serviceProperties.getUrl() + PlatformConstants.ENDPOINT_OAUTH_TOKEN;
+        } else {
+            return platformProperties.getEndpoint().getAccessTokenUri();
+        }
     }
 
     @Bean
@@ -103,10 +121,10 @@ public class SwaggerConfiguration {
      * 这个类决定了你使用哪种认证方式，我这里使用密码模式
      */
     private SecurityScheme securityScheme() {
-        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant(platformProperties.getEndpoint().getAccessTokenUri());
+        GrantType grantType = new ResourceOwnerPasswordCredentialsGrant(this.getTokenAddress());
 
         return new OAuthBuilder()
-                .name(SCHEMA_BEARER_TOKEN)
+                .name(SCHEMA_OAUTH_NAME)
                 .grantTypes(Collections.singletonList(grantType))
                 .build();
     }
@@ -116,7 +134,7 @@ public class SwaggerConfiguration {
      */
     private SecurityContext securityContexts() {
         return SecurityContext.builder()
-                .securityReferences(Collections.singletonList(new SecurityReference(SCHEMA_BEARER_TOKEN, scopes())))
+                .securityReferences(Collections.singletonList(new SecurityReference(SCHEMA_OAUTH_NAME, scopes())))
                 .forPaths(PathSelectors.any())
                 .build();
     }

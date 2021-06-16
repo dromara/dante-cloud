@@ -46,7 +46,7 @@ import java.util.*;
 @Primary
 public class SwaggerProvider implements SwaggerResourcesProvider {
 
-    public static final String API_URI = "/v3/api-docs";
+    public static final String API_URI = "/v2/api-docs";
 
     /**
      * 网关应用名称

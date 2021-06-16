@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.annotation;
 
-import cn.herodotus.eurynome.rest.configuration.*;
+import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -42,12 +42,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({
-        JacksonConfiguration.class,
-        RestConfiguration.class,
-        RestTemplateConfiguration.class,
-        SwaggerConfiguration.class,
-        UndertowWebServerFactoryCustomizer.class
-})
+@Import({RestConfiguration.class})
 public @interface EnableHerodotusRest {
 }

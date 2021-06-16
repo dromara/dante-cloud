@@ -26,6 +26,7 @@ import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 
@@ -56,6 +57,13 @@ import javax.annotation.PostConstruct;
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(PlatformProperties.class)
+@Import({
+        JacksonConfiguration.class,
+        RestTemplateConfiguration.class,
+        ServiceConfiguration.class,
+        SwaggerConfiguration.class,
+        UndertowWebServerFactoryCustomizer.class
+})
 public class RestConfiguration {
 
     @PostConstruct

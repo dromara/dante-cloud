@@ -55,7 +55,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(KafkaProducer.class)
     public KafkaProducer kafkaProducer(KafkaTemplate kafkaTemplate) {
         KafkaProducer kafkaProducer = new KafkaProducer(kafkaTemplate);
-        log.debug("[Eurynome] |- Bean [Kafka Producer] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Kafka Producer] Auto Configure.");
         return kafkaProducer;
     }
 
@@ -69,7 +69,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(SecurityMetadataStorage.class)
     public SecurityMetadataStorage securityMetadataStorage() {
         LocalCacheSecurityMetadata localCacheSecurityMetadata = new LocalCacheSecurityMetadata();
-        log.debug("[Eurynome] |- Bean [Local Cache Security Metadata] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Local Cache Security Metadata] Auto Configure.");
         return localCacheSecurityMetadata;
     }
 
@@ -87,7 +87,7 @@ public class AutoConfiguration {
         SecurityMetadataProducer securityMetadataProducer = new SecurityMetadataProducer();
         securityMetadataProducer.setKafkaProducer(kafkaProducer);
         securityMetadataProducer.setSecurityMetadataStorage(securityMetadataStorage);
-        log.debug("[Eurynome] |- Bean [Security Metadata Producer] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Security Metadata Producer] Auto Configure.");
         return securityMetadataProducer;
     }
 }

@@ -41,10 +41,6 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "herodotus.platform.management")
 public class ManagementProperties {
 
-    public ManagementProperties() {
-        log.info("[Eurynome] |- Properties [Management] is Enabled.");
-    }
-
     private final LogCenter logCenter = new LogCenter();
     private final ConfigCenter configCenter = new ConfigCenter();
 

@@ -38,6 +38,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+
+import javax.annotation.PostConstruct;
+
 /**
  * <p>Description: 通用的ResourceService配置 </p>
  *
@@ -56,6 +59,11 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @Autowired
     private DefaultAccessTokenConverter defaultAccessTokenConverter;
 
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Eurynome] |- Core [Herodotus Resource Server in starter] Auto Configure.");
+    }
+
     @Bean
     public ResourceServerTokenServices tokenServices() {
         RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
@@ -69,7 +77,7 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        log.debug("[Eurynome] |- Bean [Core Resource Server] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Core Resource Server] Auto Configure.");
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 

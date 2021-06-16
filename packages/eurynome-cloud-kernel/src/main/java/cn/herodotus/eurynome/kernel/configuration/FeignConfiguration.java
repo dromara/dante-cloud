@@ -31,6 +31,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,11 +46,16 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class FeignConfiguration {
 
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Plugin [Herodotus Feign] Auto Configure.");
+    }
+
     @Bean
     @ConditionalOnMissingBean(HerodotusFeignRequestInterceptor.class)
     public RequestInterceptor feignRequestInterceptor() {
         HerodotusFeignRequestInterceptor oAuth2FeignRequestInterceptor = new HerodotusFeignRequestInterceptor();
-        log.debug("[Eurynome] |- Bean [Feign Request Interceptor] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Feign Request Interceptor] Auto Configure.");
         return oAuth2FeignRequestInterceptor;
     }
 

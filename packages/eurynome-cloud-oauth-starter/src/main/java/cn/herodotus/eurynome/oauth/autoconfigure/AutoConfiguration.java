@@ -112,7 +112,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(HerodotusUserDetailsService.class)
     public HerodotusUserDetailsService herodotusUserDetailsService() {
         HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService();
-        log.debug("[Eurynome] |- Bean [Herodotus User Details Service] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Herodotus User Details Service] Auto Configure.");
         return herodotusOauthUserDetailsService;
     }
 
@@ -120,7 +120,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(HerodotusClientDetailsService.class)
     public HerodotusClientDetailsService herodotusClientDetailsService() {
         HerodotusOauthClientDetailsService herodotusOauthClientDetailsService = new HerodotusOauthClientDetailsService();
-        log.debug("[Eurynome] |- Bean [Herodotus Client Details Service] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Herodotus Client Details Service] Auto Configure.");
         return herodotusOauthClientDetailsService;
     }
 
@@ -128,7 +128,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(SecurityMetadataStorage.class)
     public SecurityMetadataStorage securityMetadataStorage(SysAuthorityService sysAuthorityService) {
         DataSourceSecurityMetadata dataSourceSecurityMetadata = new DataSourceSecurityMetadata(sysAuthorityService);
-        log.debug("[Eurynome] |- Bean [Data Source Security Metadata] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Data Source Security Metadata] Auto Configure.");
         return dataSourceSecurityMetadata;
     }
 }

@@ -95,7 +95,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Adapter [Web Server Configurer Adapter] Auto Configure.");
+        log.debug("[Eurynome] |- Core [Herodotus Web Security  in component oauth] Auto Configure.");
     }
 
     @Override

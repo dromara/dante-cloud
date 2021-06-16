@@ -90,7 +90,7 @@ public class SecurityAutoConfiguration {
         HerodotusUserAuthenticationConverter herodotusUserAuthenticationConverter = new HerodotusUserAuthenticationConverter();
         DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
         defaultAccessTokenConverter.setUserTokenConverter(herodotusUserAuthenticationConverter);
-        log.debug("[Eurynome] |- Bean [Default Access Token Converter] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Default Access Token Converter] Auto Configure.");
         return defaultAccessTokenConverter;
     }
 
@@ -104,7 +104,7 @@ public class SecurityAutoConfiguration {
     @ConditionalOnMissingBean(RequestMappingScanner.class)
     public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, SecurityMetadataStorage securityMetadataStorage) {
         RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, platformProperties, securityMetadataStorage);
-        log.debug("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
         return requestMappingScan;
     }
 }

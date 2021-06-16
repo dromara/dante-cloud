@@ -35,6 +35,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -50,15 +51,17 @@ public class RedisConfiguration {
     @Resource
     private LettuceConnectionFactory lettuceConnectionFactory;
 
-    public RedisConfiguration() {
-    }
-
     private RedisSerializer<String> keySerializer() {
         return new StringRedisSerializer();
     }
 
     private RedisSerializer<Object> valueSerializer() {
         return new FastJsonRedisSerializer<>(Object.class);
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Plugin [Herodotus Redis] Auto Configure.");
     }
 
     /**
@@ -78,7 +81,7 @@ public class RedisConfiguration {
         redisTemplate.setDefaultSerializer(valueSerializer());
         redisTemplate.afterPropertiesSet();
 
-        log.debug("[Eurynome] |- Bean [Redis Template] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Redis Template] Auto Configure.");
 
         return redisTemplate;
     }
@@ -90,7 +93,7 @@ public class RedisConfiguration {
         stringRedisTemplate.setConnectionFactory(lettuceConnectionFactory);
         stringRedisTemplate.afterPropertiesSet();
 
-        log.debug("[Eurynome] |- Bean [String Redis Template] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [String Redis Template] Auto Configure.");
 
         return stringRedisTemplate;
     }

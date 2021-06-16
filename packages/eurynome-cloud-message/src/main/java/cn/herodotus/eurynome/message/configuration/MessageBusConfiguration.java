@@ -50,6 +50,6 @@ public class MessageBusConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Bean [Message Bus] Auto Configure.");
+        log.debug("[Eurynome] |- Plugin [Herodotus Message Bus] Auto Configure.");
     }
 }

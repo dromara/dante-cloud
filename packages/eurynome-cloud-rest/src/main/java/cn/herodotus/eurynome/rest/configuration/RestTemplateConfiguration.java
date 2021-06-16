@@ -55,7 +55,7 @@ public class RestTemplateConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Bean [Rest Template] Auto Configure.");
+        log.debug("[Eurynome] |- Plugin [Herodotus Rest Template] Auto Configure.");
     }
 
     /**

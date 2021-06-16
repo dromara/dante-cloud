@@ -32,9 +32,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
+import javax.annotation.PostConstruct;
+
 /**
  * <p>Description: Jackson配置 </p>
- * 
+ *
  * @author : gengwei.zheng
  * @date : 2019/11/8 17:15
  */
@@ -43,11 +45,17 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 @AutoConfigureAfter(org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration.class)
 public class JacksonConfiguration {
 
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Eurynome] |- Plugin [Herodotus Jackson] Auto Configure.");
+    }
+
+
     @Bean(name = "jacksonObjectMapper")
     @ConditionalOnMissingBean(ObjectMapper.class)
     @Primary
     public ObjectMapper jacksonObjectMapper() {
-        log.debug("[Eurynome] |- Bean [Jackson Object Mapper] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Jackson Object Mapper] Auto Configure.");
         return JacksonUtils.getObjectMapper();
     }
 

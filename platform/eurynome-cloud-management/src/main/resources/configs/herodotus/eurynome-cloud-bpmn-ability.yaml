@@ -4,5 +4,5 @@ security:
       client-id: e2a746fc-cb1a-49c3-9436-67004117b039
       client-secret: 25c9a32b-45a9-447a-a7e3-3a28d6a6834e
     resource:
-      token-info-uri: ${herodotus.platform.token-info-uri}
-      user-info-uri: ${herodotus.platform.user-info-uri}
+      token-info-uri: ${herodotus.platform.endpoint.token-info-uri}
+      user-info-uri: ${herodotus.platform.endpoint.user-info-uri}

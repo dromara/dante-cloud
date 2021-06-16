@@ -49,7 +49,7 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Adapter [Web Mvc Configurer Adapter] Auto Configure.");
+        log.debug("[Eurynome] |- Core [Herodotus Web Mvc in component security] Auto Configure.");
     }
 
 
