@@ -1,0 +1,8 @@
+language: java
+jdk: oraclejdk8
+
+script: mvn clean package -Dmaven.test.skip=true
+
+notifications:
+  email:
+    - pointer_v@qq.com
