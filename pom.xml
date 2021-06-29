@@ -348,8 +348,8 @@
 
     <repositories>
         <repository>
-            <id>aliyun-repos</id>
-            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <id>aliyun-repository</id>
+            <url>https://maven.aliyun.com/repository/public</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -358,8 +358,8 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>aliyun-plugin</id>
-            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <id>aliyun-repository</id>
+            <url>https://maven.aliyun.com/repository/public</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
