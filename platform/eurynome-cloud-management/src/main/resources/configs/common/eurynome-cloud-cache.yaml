@@ -10,8 +10,8 @@ jetcache:
     default:
       type: redis.lettuce
       keyConvertor: fastjson
-      valueEncoder: java
-      valueDecoder: java
+      valueEncoder: kryo
+      valueDecoder: kryo
       poolConfig:
         minIdle: ${spring.redis.lettuce.pool.min-idle}
         maxIdle: ${spring.redis.lettuce.pool.max-idle}

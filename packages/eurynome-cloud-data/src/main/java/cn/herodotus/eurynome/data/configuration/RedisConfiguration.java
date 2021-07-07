@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
-import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -32,6 +32,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -43,10 +44,11 @@ import javax.annotation.Resource;
  *
  * @author gengwei.zheng
  */
-@Slf4j
 @Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter({RedisAutoConfiguration.class})
 public class RedisConfiguration {
+
+    private final Logger log = LoggerFactory.getLogger(RedisConfiguration.class);
 
     @Resource
     private LettuceConnectionFactory lettuceConnectionFactory;
@@ -56,7 +58,7 @@ public class RedisConfiguration {
     }
 
     private RedisSerializer<Object> valueSerializer() {
-        return new FastJsonRedisSerializer<>(Object.class);
+        return new Jackson2JsonRedisSerializer<>(Object.class);
     }
 
     @PostConstruct
