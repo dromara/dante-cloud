@@ -22,15 +22,17 @@
 
 package cn.herodotus.eurynome.crud.controller;
 
-import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.crud.service.BaseReadableService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * <p> Description : BaseRestController </p>
@@ -38,19 +40,11 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/2/29 15:28
  */
-public abstract class BaseRestController<E extends AbstractEntity, ID extends Serializable> extends BaseController<E, ID> {
+public abstract class BaseRestController<E extends AbstractEntity, ID extends Serializable> extends BaseReadableRestController<E, ID> implements WriteableController<E, ID> {
 
-    @ApiOperation(value = "分页查询数据", notes = "通过pageNumber和pageSize获取分页数据", produces = "application/json")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目", dataType = "int", paramType = "query")
-    })
-    @GetMapping
     @Override
-    public Result<Map<String, Object>> findByPage(
-            @RequestParam("pageNumber") Integer pageNumber,
-            @RequestParam("pageSize") Integer pageSize) {
-        return super.findByPage(pageNumber, pageSize);
+    public BaseReadableService<E, ID> getBaseReadableService() {
+        return this.getBaseService();
     }
 
     @ApiOperation(value = "保存或更新数据", notes = "接收JSON数据，转换为实体，进行保存或更新", produces = "application/json", consumes = "application/json")
@@ -60,7 +54,7 @@ public abstract class BaseRestController<E extends AbstractEntity, ID extends Se
     @PostMapping
     @Override
     public Result<E> saveOrUpdate(@RequestBody E domain) {
-        return super.saveOrUpdate(domain);
+        return WriteableController.super.saveOrUpdate(domain);
     }
 
     @ApiOperation(value = "删除数据", notes = "根据实体ID删除数据，以及相关联的关联数据", consumes = "application/json")
@@ -70,6 +64,6 @@ public abstract class BaseRestController<E extends AbstractEntity, ID extends Se
     @DeleteMapping
     @Override
     public Result<String> delete(@RequestBody ID id) {
-        return super.delete(id);
+        return WriteableController.super.delete(id);
     }
 }
