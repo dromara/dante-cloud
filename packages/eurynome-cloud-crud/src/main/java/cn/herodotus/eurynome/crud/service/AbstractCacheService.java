@@ -52,7 +52,7 @@ import java.util.List;
  * @date : 2020/2/19 21:43
  */
 @Slf4j
-public abstract class AbstractCacheService<E extends AbstractEntity, ID extends Serializable> extends AbstractCache<E> implements Service<E, ID> {
+public abstract class AbstractCacheService<E extends AbstractEntity, ID extends Serializable> extends AbstractCache<E> {
 
     private static final String CACHE_NAME_PREFIX_PAGE = "page:";
     private static final String CACHE_NAME_PAGE_TOTAL = "total";
@@ -71,7 +71,8 @@ public abstract class AbstractCacheService<E extends AbstractEntity, ID extends 
 
     /**
      * 缓存分页数据
-     * @param pages JPA Page对象
+     *
+     * @param pages  JPA Page对象
      * @param params 除了pageNumber 和 pageSize以外的参数
      */
     public void writeToCache(Page<E> pages, Object... params) {
@@ -84,9 +85,10 @@ public abstract class AbstractCacheService<E extends AbstractEntity, ID extends 
 
     /**
      * 读取分页数据
+     *
      * @param pageNumber 当前页面
-     * @param pageSize 数据条目
-     * @param params 查询条件
+     * @param pageSize   数据条目
+     * @param params     查询条件
      * @return JPA page
      */
     public Page<E> readPageFromCache(int pageNumber, int pageSize, Object... params) {

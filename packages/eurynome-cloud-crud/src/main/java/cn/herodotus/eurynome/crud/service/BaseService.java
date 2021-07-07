@@ -23,14 +23,10 @@
 package cn.herodotus.eurynome.crud.service;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * <p> Description : BaseService </p>
@@ -38,68 +34,22 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/4/29 18:22
  */
-@Slf4j
-public abstract class BaseService<E extends AbstractEntity, ID extends Serializable> extends AbstractCacheService<E, ID> {
+public abstract class BaseService<E extends AbstractEntity, ID extends Serializable> extends BaseReadableService<E, ID> implements WriteableService<E, ID> {
 
-    @Override
-    public E findById(ID id) {
-        E domain = readOneFromCache(String.valueOf(id));
-        if (ObjectUtils.isEmpty(domain)) {
-            domain = super.findById(id);
-            writeToCache(domain);
-        }
-
-        log.debug("[Eurynome] |- AbstractCrudService Service findById.");
-        return domain;
-    }
+    private final static Logger log = LoggerFactory.getLogger(BaseService.class);
 
     @Override
     public void deleteById(ID id) {
-        super.deleteById(id);
+        WriteableService.super.deleteById(id);
         deleteFromCache(String.valueOf(id));
         log.debug("[Eurynome] |- AbstractCrudService Service delete.");
     }
 
     @Override
     public E saveOrUpdate(E domain) {
-        E savedDomain = super.saveAndFlush(domain);
+        E savedDomain = WriteableService.super.saveAndFlush(domain);
         writeToCache(savedDomain);
         log.debug("[Eurynome] |- AbstractCrudService Service saveOrUpdate.");
         return savedDomain;
-    }
-
-    @Override
-    public Page<E> findByPage(int pageNumber, int pageSize) {
-        Page<E> pages = readPageFromCache(pageNumber, pageSize);
-        if (CollectionUtils.isEmpty(pages.getContent())) {
-            pages = super.findByPage(pageNumber, pageSize);
-            writeToCache(pages);
-        }
-
-        log.debug("[Eurynome] |- AbstractCrudService Service findByPage.");
-        return pages;
-    }
-
-    @Override
-    public Page<E> findByPage(int pageNumber, int pageSize, Sort.Direction direction, String... properties) {
-        Page<E> pages = readPageFromCache(pageNumber, pageSize);
-        if (CollectionUtils.isEmpty(pages.getContent())) {
-            pages = super.findByPage(pageNumber, pageSize, direction, properties);
-            writeToCache(pages);
-        }
-
-        log.debug("[Eurynome] |- AbstractCrudService Service findByPage.");
-        return pages;
-    }
-
-    @Override
-    public List<E> findAll() {
-        List<E> domains = readFromCache();
-        if (CollectionUtils.isEmpty(domains)) {
-            domains = super.findAll();
-            writeToCache(domains);
-        }
-        log.debug("[Eurynome] |- AbstractCrudService Service findAll.");
-        return domains;
     }
 }

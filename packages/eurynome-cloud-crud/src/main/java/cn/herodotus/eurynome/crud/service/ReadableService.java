@@ -23,7 +23,6 @@
 package cn.herodotus.eurynome.crud.service;
 
 import cn.herodotus.eurynome.common.definition.entity.Entity;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,9 +38,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/2/15 11:56
  */
-public interface ReadableService<E extends Entity, ID extends Serializable> {
-
-    BaseRepository<E, ID> getRepository();
+public interface ReadableService<E extends Entity, ID extends Serializable> extends Service<E, ID>{
 
     default List<E> findAll() {
         return getRepository().findAll();
