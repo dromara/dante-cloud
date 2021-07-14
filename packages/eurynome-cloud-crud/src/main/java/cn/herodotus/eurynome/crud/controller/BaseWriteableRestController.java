@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.crud.controller;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.service.BaseReadableService;
+import cn.herodotus.eurynome.crud.service.ReadableService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -40,11 +40,11 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2020/2/29 15:28
  */
-public abstract class BaseRestController<E extends AbstractEntity, ID extends Serializable> extends BaseReadableRestController<E, ID> implements WriteableController<E, ID> {
+public abstract class BaseWriteableRestController<E extends AbstractEntity, ID extends Serializable> extends BaseReadableRestController<E, ID> implements WriteableController<E, ID> {
 
     @Override
-    public BaseReadableService<E, ID> getBaseReadableService() {
-        return this.getBaseService();
+    public ReadableService<E, ID> getReadableService() {
+        return this.getWriteableService();
     }
 
     @ApiOperation(value = "保存或更新数据", notes = "接收JSON数据，转换为实体，进行保存或更新", produces = "application/json", consumes = "application/json")

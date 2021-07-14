@@ -23,7 +23,10 @@
 package cn.herodotus.eurynome.upms.api.entity.development;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
+import com.google.common.base.MoreObjects;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -37,6 +40,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "dev_supplier", uniqueConstraints = {@UniqueConstraint(columnNames = {"supplier_code"})},
         indexes = {@Index(name = "dev_supplier_id_idx", columnList = "supplier_id"), @Index(name = "dev_supplier_code_idx", columnList = "supplier_code")})
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_DEVELOPMENT_SUPPLIER)
 public class Supplier extends BaseSysEntity {
 
     @Id
@@ -110,12 +115,12 @@ public class Supplier extends BaseSysEntity {
 
     @Override
     public String toString() {
-        return "Supplier{" +
-                "supplierId='" + supplierId + '\'' +
-                ", supplierName='" + supplierName + '\'' +
-                ", supplierCode='" + supplierCode + '\'' +
-                ", supplierType=" + supplierType +
-                ", parentId='" + parentId + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("supplierId", supplierId)
+                .add("supplierName", supplierName)
+                .add("supplierCode", supplierCode)
+                .add("supplierType", supplierType)
+                .add("parentId", parentId)
+                .toString();
     }
 }

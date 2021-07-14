@@ -22,13 +22,19 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
+import cn.herodotus.eurynome.data.properties.CacheProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -44,7 +50,8 @@ import javax.annotation.Resource;
  *
  * @author gengwei.zheng
  */
-@Configuration(proxyBeanMethods = false)
+@Configuration
+@EnableConfigurationProperties(CacheProperties.class)
 @AutoConfigureAfter({RedisAutoConfiguration.class})
 public class RedisConfiguration {
 
@@ -52,6 +59,8 @@ public class RedisConfiguration {
 
     @Resource
     private LettuceConnectionFactory lettuceConnectionFactory;
+    @Autowired
+    private CacheProperties cacheProperties;
 
     private RedisSerializer<String> keySerializer() {
         return new StringRedisSerializer();
@@ -98,6 +107,27 @@ public class RedisConfiguration {
         log.trace("[Eurynome] |- Bean [String Redis Template] Auto Configure.");
 
         return stringRedisTemplate;
+    }
+
+
+    @Bean
+    @ConditionalOnMissingBean(RedisCacheManager.class)
+    public RedisCacheManager redisCacheManager() {
+
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(lettuceConnectionFactory);
+
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+//                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
+//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))
+                .disableCachingNullValues()
+                .entryTtl(cacheProperties.getTtl());
+
+        RedisCacheManager redisCacheManager = new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
+        redisCacheManager.setTransactionAware(false);
+        redisCacheManager.afterPropertiesSet();
+
+        log.trace("[Eurynome] |- Bean [Redis Cache Manager] Auto Configure.");
+        return redisCacheManager;
     }
 
 //    @Bean

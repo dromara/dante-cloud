@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.development;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.crud.controller.BaseRestController;
+import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
+import cn.herodotus.eurynome.crud.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
 import cn.herodotus.eurynome.upms.logic.service.development.SupplierService;
 import io.swagger.annotations.Api;
@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/microservice/supplier")
 @Api(tags = {"用户中心服务", "开发团队/厂商管理接口"})
-public class SupplierController extends BaseRestController<Supplier, String> {
+public class SupplierController extends BaseWriteableRestController<Supplier, String> {
 
     private final SupplierService supplierService;
 
@@ -33,7 +33,7 @@ public class SupplierController extends BaseRestController<Supplier, String> {
     }
 
     @Override
-    public BaseService<Supplier, String> getBaseService() {
+    public WriteableService<Supplier, String> getWriteableService() {
         return this.supplierService;
     }
 

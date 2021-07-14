@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.crud.controller;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.service.BaseReadableService;
+import cn.herodotus.eurynome.crud.service.ReadableService;
 import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
@@ -44,20 +44,20 @@ public interface ReadableController<E extends AbstractEntity, ID extends Seriali
      *
      * @return Service
      */
-    BaseReadableService<E, ID> getBaseReadableService();
+    ReadableService<E, ID> getReadableService();
 
     default Result<Map<String, Object>> findByPage(Integer pageNumber, Integer pageSize) {
-        Page<E> pages = getBaseReadableService().findByPage(pageNumber, pageSize);
+        Page<E> pages = getReadableService().findByPage(pageNumber, pageSize);
         return result(pages);
     }
 
     default Result<List<E>> findAll() {
-        List<E> domains = getBaseReadableService().findAll();
+        List<E> domains = getReadableService().findAll();
         return result(domains);
     }
 
     default Result<E> findById(ID id) {
-        E domain = getBaseReadableService().findById(id);
+        E domain = getReadableService().findById(id);
         return result(domain);
     }
 }

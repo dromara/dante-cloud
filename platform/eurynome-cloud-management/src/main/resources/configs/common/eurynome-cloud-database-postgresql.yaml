@@ -15,7 +15,23 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+        show_sql: true
+        generate_statistics: false
+        cache:
+          use_query_cache: true
+          use_second_level_cache: true
+          region:
+            factory_class: cn.herodotus.eurynome.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
+        javax:
+          cache:
+            missing_cache_strategy: create
         temp:
           use_jdbc_metadata_defaults: false
   sql:

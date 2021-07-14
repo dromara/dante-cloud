@@ -25,8 +25,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.crud.controller.BaseRestController;
+import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
+import cn.herodotus.eurynome.crud.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
 import io.swagger.annotations.Api;
@@ -48,7 +48,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 @Api(tags = {"用户中心服务", "系统用户接口"})
-public class SysUserController extends BaseRestController<SysUser, String> {
+public class SysUserController extends BaseWriteableRestController<SysUser, String> {
 
     private final SysUserService sysUserService;
 
@@ -58,7 +58,7 @@ public class SysUserController extends BaseRestController<SysUser, String> {
     }
 
     @Override
-    public BaseService<SysUser, String> getBaseService() {
+    public WriteableService<SysUser, String> getWriteableService() {
         return this.sysUserService;
     }
 

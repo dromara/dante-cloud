@@ -24,17 +24,13 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
+import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,17 +43,10 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2019/11/9 10:03
  */
-@Slf4j
 @Service
-public class SysUserService extends BaseService<SysUser, String> {
+public class SysUserService extends BaseLayeredService<SysUser, String> {
 
-    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_USER;
-
-    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, SysUser> dataCache;
-
-    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
+    private static final Logger log = LoggerFactory.getLogger(SysUserService.class);
 
     private final SysUserRepository sysUserRepository;
 
@@ -67,27 +56,13 @@ public class SysUserService extends BaseService<SysUser, String> {
     }
 
     @Override
-    public Cache<String, SysUser> getCache() {
-        return dataCache;
-    }
-
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return indexCache;
-    }
-
-    @Override
     public BaseRepository<SysUser, String> getRepository() {
         return sysUserRepository;
     }
 
-    public SysUser findSysUserByUserName(String userName) {
-        SysUser sysUser = readOneFromCacheByLink(userName);
-        if (ObjectUtils.isEmpty(sysUser)) {
-            sysUser = sysUserRepository.findByUserName(userName);
-            writeToCache(sysUser);
-        }
-        log.debug("[Eurynome] |- SysUser Service findSysUserByUserName.");
+    public SysUser findByUserName(String userName) {
+        SysUser sysUser = sysUserRepository.findByUserName(userName);
+        log.debug("[Eurynome] |- SysUser Service findByUserName.");
         return sysUser;
     }
 

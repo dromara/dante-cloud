@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.crud.controller;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.service.BaseService;
+import cn.herodotus.eurynome.crud.service.WriteableService;
 
 import java.io.Serializable;
 
@@ -34,23 +34,23 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/7/7 17:29
  */
-public interface WriteableController<E extends AbstractEntity, ID extends Serializable> extends Controller {
+public interface WriteableController<E extends AbstractEntity, ID extends Serializable> extends ReadableController<E, ID> {
 
     /**
      * 获取Service
      *
      * @return Service
      */
-    BaseService<E, ID> getBaseService();
+    WriteableService<E, ID> getWriteableService();
 
     default Result<E> saveOrUpdate(E domain) {
-        E savedDomain = getBaseService().saveOrUpdate(domain);
+        E savedDomain = getWriteableService().saveOrUpdate(domain);
         return result(savedDomain);
     }
 
     default Result<String> delete(ID id) {
         Result<String> result = result(String.valueOf(id));
-        getBaseService().deleteById(id);
+        getWriteableService().deleteById(id);
         return result;
     }
 }

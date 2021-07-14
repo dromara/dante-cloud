@@ -31,8 +31,10 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -51,6 +53,8 @@ import java.util.Set;
 @Entity
 @Table(name = "sys_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})},
         indexes = {@Index(name = "sys_user_id_idx", columnList = "user_id"), @Index(name = "sys_user_unm_idx", columnList = "user_name")})
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_USER)
 public class SysUser extends BaseSysEntity {
 
     @ApiModelProperty(value = "用户ID")
@@ -76,6 +80,7 @@ public class SysUser extends BaseSysEntity {
     @Column(name = "employee_id", length = 256)
     private String employeeId;
 
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_USER_ROLE)
     @ApiModelProperty(value = "用户角色")
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)

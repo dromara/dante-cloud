@@ -34,9 +34,9 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2020/4/29 18:22
  */
-public abstract class BaseService<E extends AbstractEntity, ID extends Serializable> extends BaseReadableService<E, ID> implements WriteableService<E, ID> {
+public abstract class BaseWriteableService<E extends AbstractEntity, ID extends Serializable> extends BaseReadableService<E, ID> implements WriteableService<E, ID> {
 
-    private final static Logger log = LoggerFactory.getLogger(BaseService.class);
+    private final static Logger log = LoggerFactory.getLogger(BaseWriteableService.class);
 
     @Override
     public void deleteById(ID id) {
