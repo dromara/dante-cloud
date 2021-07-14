@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
-import cn.herodotus.eurynome.crud.service.BaseService;
+import cn.herodotus.eurynome.crud.service.BaseWriteableService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
@@ -59,7 +59,7 @@ import java.util.Set;
  */
 
 @Slf4j
-public class HerodotusOauthClientDetailsService extends BaseService<OauthClientDetails, String> implements HerodotusClientDetailsService {
+public class HerodotusOauthClientDetailsService extends BaseWriteableService<OauthClientDetails, String> implements HerodotusClientDetailsService {
 
     private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS;
 

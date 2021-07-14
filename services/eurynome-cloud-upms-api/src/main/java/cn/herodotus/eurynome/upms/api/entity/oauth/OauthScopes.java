@@ -23,9 +23,11 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -43,6 +45,8 @@ import java.util.Set;
 @Entity
 @Table(name = "oauth_scopes", uniqueConstraints = {@UniqueConstraint(columnNames = {"scope_code"})},
         indexes = {@Index(name = "oauth_scopes_id_idx", columnList = "scope_id"), @Index(name = "oauth_scopes_code_idx", columnList = "scope_code")})
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_SCOPES)
 public class OauthScopes extends BaseSysEntity {
 
     @Id
@@ -72,7 +76,7 @@ public class OauthScopes extends BaseSysEntity {
      * <p>
      * {@link :https://www.jianshu.com/p/23bd82a7b96e}
      */
-
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_SCOPES_AUTHORITY)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "oauth_scopes_authority",

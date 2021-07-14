@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.crud.controller.BaseRestController;
+import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
+import cn.herodotus.eurynome.crud.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthScopesService;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/oauth/scopes")
 @Api(tags = {"用户中心服务", "Oauth权限范围接口"})
-public class OauthScopesController extends BaseRestController<OauthScopes, String> {
+public class OauthScopesController extends BaseWriteableRestController<OauthScopes, String> {
 
     private final OauthScopesService oauthScopesService;
 
@@ -34,7 +34,7 @@ public class OauthScopesController extends BaseRestController<OauthScopes, Strin
     }
 
     @Override
-    public BaseService<OauthScopes, String> getBaseService() {
+    public WriteableService<OauthScopes, String> getWriteableService() {
         return this.oauthScopesService;
     }
 

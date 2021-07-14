@@ -33,7 +33,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/7/7 16:47
  */
-public interface WriteableService<E extends Entity, ID extends Serializable> extends Service<E, ID> {
+public interface WriteableService<E extends Entity, ID extends Serializable> extends ReadableService<E, ID> {
 
     default void delete(E entity) {
         getRepository().delete(entity);

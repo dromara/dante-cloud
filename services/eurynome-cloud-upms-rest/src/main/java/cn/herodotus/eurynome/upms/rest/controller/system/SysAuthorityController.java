@@ -28,8 +28,8 @@ import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.common.domain.TreeNode;
 import cn.herodotus.eurynome.common.enums.AuthorityType;
 import cn.herodotus.eurynome.common.utils.TreeUtils;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.crud.controller.BaseRestController;
+import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
+import cn.herodotus.eurynome.crud.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import io.swagger.annotations.Api;
@@ -52,7 +52,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/authority")
 @Api(tags = {"用户中心服务", "系统权限接口"})
-public class SysAuthorityController extends BaseRestController<SysAuthority, String> {
+public class SysAuthorityController extends BaseWriteableRestController<SysAuthority, String> {
 
     private final SysAuthorityService sysAuthorityService;
 
@@ -62,7 +62,7 @@ public class SysAuthorityController extends BaseRestController<SysAuthority, Str
     }
 
     @Override
-    public BaseService<SysAuthority, String> getBaseService() {
+    public WriteableService<SysAuthority, String> getWriteableService() {
         return this.sysAuthorityService;
     }
 

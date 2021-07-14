@@ -23,9 +23,11 @@
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
 import cn.herodotus.eurynome.data.base.entity.BaseAppEntity;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -42,6 +44,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "oauth_applications", indexes = {@Index(name = "oauth_applications_id_idx", columnList = "app_key")})
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_APPLICATIONS)
 public class OauthApplications extends BaseAppEntity {
 
     @Id
@@ -63,6 +67,7 @@ public class OauthApplications extends BaseAppEntity {
     @Column(name = "website", length = 1024)
     private String website;
 
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_APPLICATIONS_SCOPES)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "oauth_applications_scopes",

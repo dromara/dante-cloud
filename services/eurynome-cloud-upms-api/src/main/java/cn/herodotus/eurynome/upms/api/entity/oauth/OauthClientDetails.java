@@ -24,7 +24,9 @@ package cn.herodotus.eurynome.upms.api.entity.oauth;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import com.alibaba.fastjson.JSON;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -39,6 +41,8 @@ import java.util.Map;
  */
 @Entity
 @Table(name = "oauth_client_details", indexes = {@Index(name = "oauth_client_details_id_idx", columnList = "client_id")})
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_CLIENTDETAILS)
 public class OauthClientDetails extends AbstractEntity {
 
     @Id

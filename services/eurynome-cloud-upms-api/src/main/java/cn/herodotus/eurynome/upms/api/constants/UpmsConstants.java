@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.upms.api.constants;
 
+import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.StatusEnum;
 import cn.herodotus.eurynome.data.constants.CacheConstants;
 import cn.herodotus.eurynome.security.definition.domain.GrantType;
@@ -50,22 +51,28 @@ public class UpmsConstants extends CacheConstants {
 
     public static final String CACHE_AREA_PREFIX = "data:upms:";
 
-    public static final String CACHE_NAME_WEAPP_USER = CACHE_AREA_PREFIX + "weapp:user:";
+    public static final String REGION_SYS_USER = CACHE_AREA_PREFIX + "sys:user";
+    public static final String REGION_SYS_ROLE = CACHE_AREA_PREFIX + "sys:role";
+    public static final String REGION_SYS_AUTHORITY = CACHE_AREA_PREFIX + "sys:authority";
+    public static final String REGION_SYS_USER_ROLE = CACHE_AREA_PREFIX + "sys:user_role";
+    public static final String REGION_SYS_ROLE_AUTHORITY = CACHE_AREA_PREFIX + "sys:role_authority";
+    public static final String CACHE_NAME_SYS_USER = CACHE_AREA_PREFIX + REGION_SYS_USER + SymbolConstants.COLON;
+    public static final String CACHE_NAME_SYS_ROLE = CACHE_AREA_PREFIX + REGION_SYS_ROLE + SymbolConstants.COLON;
+    public static final String CACHE_NAME_SYS_AUTHORITY = CACHE_AREA_PREFIX + REGION_SYS_AUTHORITY + SymbolConstants.COLON;
 
-    public static final String CACHE_NAME_DEVELOPMENT_SUPPLIER = CACHE_AREA_PREFIX + "development:supplier:";
+    public static final String REGION_DEVELOPMENT_SUPPLIER = CACHE_AREA_PREFIX + "development:supplier";
+    public static final String CACHE_NAME_DEVELOPMENT_SUPPLIER = CACHE_AREA_PREFIX + REGION_DEVELOPMENT_SUPPLIER + SymbolConstants.COLON;
 
-    public static final String CACHE_NAME_SYS_AUTHORITY = CACHE_AREA_PREFIX + "sys:authority:";
-    public static final String CACHE_NAME_SYS_ROLE = CACHE_AREA_PREFIX + "sys:role:";
-    public static final String CACHE_NAME_SYS_USER = CACHE_AREA_PREFIX + "sys:user:";
-    public static final String CACHE_NAME_SYS_DEPARTMENT = CACHE_AREA_PREFIX + "sys:department:";
-    public static final String CACHE_NAME_SYS_EMPLOYEE = CACHE_AREA_PREFIX + "sys:employee:";
-    public static final String CACHE_NAME_SYS_ORGANIZATION = CACHE_AREA_PREFIX + "sys:organization:";
-    public static final String CACHE_NAME_SYS_POSITION = CACHE_AREA_PREFIX + "sys:position:";
-
-    public static final String CACHE_NAME_OAUTH_CLIENTDETAILS = CACHE_AREA_PREFIX + "oauth:clientdetails:";
-    public static final String CACHE_NAME_OAUTH_APPLICATIONS = CACHE_AREA_PREFIX + "oauth:applications:";
-    public static final String CACHE_NAME_OAUTH_SCOPES = CACHE_AREA_PREFIX + "oauth:scopes:";
-    public static final String CACHE_NAME_OAUTH_MICROSERVICES = CACHE_AREA_PREFIX + "oauth:microservices:";
+    public static final String REGION_OAUTH_APPLICATIONS = CACHE_AREA_PREFIX + "oauth:applications";
+    public static final String REGION_OAUTH_APPLICATIONS_SCOPES = CACHE_AREA_PREFIX + "oauth:applications_scopes";
+    public static final String REGION_OAUTH_CLIENTDETAILS = CACHE_AREA_PREFIX + "oauth:clientdetails";
+    public static final String REGION_OAUTH_MICROSERVICES = CACHE_AREA_PREFIX + "oauth:microservices";
+    public static final String REGION_OAUTH_MICROSERVICES_SCOPES = CACHE_AREA_PREFIX + "oauth:microservices_scopes";
+    public static final String REGION_OAUTH_SCOPES = CACHE_AREA_PREFIX + "oauth:scopes";
+    public static final String REGION_OAUTH_SCOPES_AUTHORITY = CACHE_AREA_PREFIX + "oauth:scopes_authority";
+    public static final String CACHE_NAME_OAUTH_APPLICATIONS = CACHE_AREA_PREFIX + REGION_OAUTH_APPLICATIONS + SymbolConstants.COLON;
+    public static final String CACHE_NAME_OAUTH_CLIENTDETAILS = CACHE_AREA_PREFIX + REGION_OAUTH_CLIENTDETAILS + SymbolConstants.COLON;
+    public static final String CACHE_NAME_OAUTH_SCOPES = CACHE_AREA_PREFIX + REGION_OAUTH_SCOPES + SymbolConstants.COLON;
 
     private static final List<Map<String, Object>> STATUS_ENUM = StatusEnum.getToJsonStruct();
     private static final List<Map<String, Object>> APPLICATION_TYPE_ENUM = ApplicationType.getToJsonStruct();

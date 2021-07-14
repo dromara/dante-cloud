@@ -24,20 +24,16 @@
 
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
+import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthApplicationsRepository;
-import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
 import cn.hutool.core.util.IdUtil;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,32 +46,15 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2020/3/19 17:00
  */
-@Slf4j
 @Service
-public class OauthApplicationsService extends BaseService<OauthApplications, String> {
+public class OauthApplicationsService extends BaseLayeredService<OauthApplications, String> {
 
-    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_OAUTH_APPLICATIONS;
-
-    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, OauthApplications> dataCache;
-
-    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
+    private static final Logger log = LoggerFactory.getLogger(OauthApplicationsService.class);
 
     @Autowired
     private OauthApplicationsRepository oauthApplicationsRepository;
     @Autowired
     private OauthClientDetailsService oauthClientDetailsService;
-
-    @Override
-    public Cache<String, OauthApplications> getCache() {
-        return this.dataCache;
-    }
-
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return this.indexCache;
-    }
 
     @Override
     public BaseRepository<OauthApplications, String> getRepository() {

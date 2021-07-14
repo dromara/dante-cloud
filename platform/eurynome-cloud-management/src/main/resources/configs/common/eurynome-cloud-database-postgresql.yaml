@@ -28,7 +28,7 @@ spring:
           use_query_cache: true
           use_second_level_cache: true
           region:
-            factory_class: cn.herodotus.engine.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
+            factory_class: cn.herodotus.eurynome.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
         javax:
           cache:
             missing_cache_strategy: create

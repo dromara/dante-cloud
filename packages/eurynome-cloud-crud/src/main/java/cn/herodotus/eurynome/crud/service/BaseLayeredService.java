@@ -15,25 +15,22 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-crud
- * File Name: Service.java
+ * File Name: BaseLayeredService.java
  * Author: gengwei.zheng
- * Date: 2021/07/07 16:45:07
+ * Date: 2021/07/14 17:53:14
  */
 
 package cn.herodotus.eurynome.crud.service;
 
-import cn.herodotus.eurynome.common.definition.entity.Entity;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 
 import java.io.Serializable;
 
 /**
- * <p>Description: 服务基础定义 </p>
+ * <p>Description: 基于自研Hibernate多层二级缓存的基础服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/7 16:45
+ * @date : 2021/7/14 17:53
  */
-public interface Service <E extends Entity, ID extends Serializable>{
-
-    BaseRepository<E, ID> getRepository();
+public abstract class BaseLayeredService < E extends AbstractEntity, ID extends Serializable> implements WriteableService<E, ID>{
 }

@@ -24,8 +24,10 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.common.enums.AuthorityType;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -38,6 +40,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "sys_authority", indexes = {@Index(name = "sys_authority_id_idx", columnList = "authority_id")})
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_AUTHORITY)
 public class SysAuthority extends BaseSysEntity {
 
     @Id

@@ -24,16 +24,13 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
+import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysRoleRepository;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,32 +44,15 @@ import java.util.Set;
  * @date : 2019/11/25 11:07
  */
 @Service
-@Slf4j
-public class SysRoleService extends BaseService<SysRole, String> {
+public class SysRoleService extends BaseLayeredService<SysRole, String> {
 
-    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_ROLE;
-
-    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, SysRole> dataCache;
-
-    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
+    private static final Logger log = LoggerFactory.getLogger(SysRoleService.class);
 
     private final SysRoleRepository sysRoleRepository;
 
     @Autowired
     public SysRoleService(SysRoleRepository sysRoleRepository) {
         this.sysRoleRepository = sysRoleRepository;
-    }
-
-    @Override
-    public Cache<String, SysRole> getCache() {
-        return dataCache;
-    }
-
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return indexCache;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.crud.controller.BaseRestController;
+import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
+import cn.herodotus.eurynome.crud.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthApplicationsService;
 import io.swagger.annotations.Api;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/oauth/applications")
 @Api(tags = {"用户中心服务", "Oauth应用接口"})
 @Transactional(rollbackFor = Exception.class)
-public class OauthApplicationsController extends BaseRestController<OauthApplications, String> {
+public class OauthApplicationsController extends BaseWriteableRestController<OauthApplications, String> {
 
     private final OauthApplicationsService oauthApplicationsService;
 
@@ -36,7 +36,7 @@ public class OauthApplicationsController extends BaseRestController<OauthApplica
     }
 
     @Override
-    public BaseService<OauthApplications, String> getBaseService() {
+    public WriteableService<OauthApplications, String> getWriteableService() {
         return this.oauthApplicationsService;
     }
 

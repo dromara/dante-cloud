@@ -25,21 +25,16 @@
 package cn.herodotus.eurynome.upms.logic.service.system;
 
 import cn.herodotus.eurynome.common.enums.AuthorityType;
+import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.crud.service.BaseService;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysAuthorityRepository;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * <p>Description: SysAuthorityService </p>
@@ -47,33 +42,16 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2019/11/25 16:11
  */
-@Slf4j
 @Service
-public class SysAuthorityService extends BaseService<SysAuthority, String> {
+public class SysAuthorityService extends BaseLayeredService<SysAuthority, String> {
 
-    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_AUTHORITY;
-
-    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, SysAuthority> dataCache;
-
-    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
+    private static final Logger log = LoggerFactory.getLogger(SysAuthorityService.class);
 
     private final SysAuthorityRepository sysAuthorityRepository;
 
     @Autowired
     public SysAuthorityService(SysAuthorityRepository sysAuthorityRepository) {
         this.sysAuthorityRepository = sysAuthorityRepository;
-    }
-
-    @Override
-    public Cache<String, SysAuthority> getCache() {
-        return dataCache;
-    }
-
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return indexCache;
     }
 
     @Override
@@ -87,12 +65,8 @@ public class SysAuthorityService extends BaseService<SysAuthority, String> {
     }
 
     public List<SysAuthority> findAllByAuthorityType(AuthorityType authorityType) {
-        List<SysAuthority> sysAuthorities = readFromCache(authorityType);
-        if (CollectionUtils.isEmpty(sysAuthorities)) {
-            sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
-            writeToCache(sysAuthorities, authorityType);
-        }
-
+        List<SysAuthority> sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
+        log.debug("[Eurynome] |- SysAuthority Service findAllByAuthorityType.");
         return sysAuthorities;
     }
 }

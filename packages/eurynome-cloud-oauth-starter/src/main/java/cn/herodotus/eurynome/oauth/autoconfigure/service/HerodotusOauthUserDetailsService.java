@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
-import cn.herodotus.eurynome.crud.service.BaseService;
+import cn.herodotus.eurynome.crud.service.BaseWriteableService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
@@ -56,7 +56,7 @@ import java.util.Set;
  * @date : 2019/11/25 11:02
  */
 @Slf4j
-public class HerodotusOauthUserDetailsService extends BaseService<SysUser, String> implements HerodotusUserDetailsService {
+public class HerodotusOauthUserDetailsService extends BaseWriteableService<SysUser, String> implements HerodotusUserDetailsService {
 
     private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_USER;
 

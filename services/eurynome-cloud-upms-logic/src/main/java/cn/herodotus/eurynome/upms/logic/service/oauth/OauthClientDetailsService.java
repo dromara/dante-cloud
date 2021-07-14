@@ -24,21 +24,16 @@
 
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
-import cn.herodotus.eurynome.crud.service.BaseService;
+import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthClientDetailsRepository;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 /**
  * <p> Description : OauthClientDetailService </p>
@@ -46,30 +41,13 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2020/3/19 16:59
  */
-@Slf4j
 @Service
-public class OauthClientDetailsService extends BaseService<OauthClientDetails, String> {
+public class OauthClientDetailsService extends BaseLayeredService<OauthClientDetails, String> {
 
-    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS;
-
-    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, OauthClientDetails> dataCache;
-
-    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
+    private static final Logger log = LoggerFactory.getLogger(OauthClientDetailsService.class);
 
     @Autowired
     private OauthClientDetailsRepository oauthClientDetailsRepository;
-
-    @Override
-    public Cache<String, OauthClientDetails> getCache() {
-        return dataCache;
-    }
-
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return indexCache;
-    }
 
     @Override
     public BaseRepository<OauthClientDetails, String> getRepository() {
