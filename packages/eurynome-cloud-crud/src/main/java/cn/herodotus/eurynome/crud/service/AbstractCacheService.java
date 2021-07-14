@@ -25,7 +25,7 @@ package cn.herodotus.eurynome.crud.service;
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.definition.entity.Entity;
-import cn.herodotus.eurynome.data.cache.AbstractCache;
+import cn.herodotus.eurynome.data.cache.query.AbstractCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

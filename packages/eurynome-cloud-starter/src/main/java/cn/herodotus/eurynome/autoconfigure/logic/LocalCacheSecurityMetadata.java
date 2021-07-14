@@ -22,7 +22,8 @@
 
 package cn.herodotus.eurynome.autoconfigure.logic;
 
-import cn.herodotus.eurynome.data.cache.CacheTemplate;
+import cn.herodotus.eurynome.data.cache.query.CacheTemplate;
+import cn.herodotus.eurynome.data.cache.query.AbstractCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import com.github.benmanes.caffeine.cache.Cache;
@@ -42,7 +43,7 @@ import java.util.Set;
  *
  * <p>Description: 本地存储，用于存储Security Metadata Source </p>
  * <p>
- * 这里没有用自己编写的{@link cn.herodotus.eurynome.data.cache.AbstractCache}，主要是因为在应用启动的过程中，JetCache启动时机与Oauth不同。会产生注入的循环问题。
+ * 这里没有用自己编写的{@link AbstractCache}，主要是因为在应用启动的过程中，JetCache启动时机与Oauth不同。会产生注入的循环问题。
  *
  * @author : gengwei.zheng
  * @date : 2020/12/30 14:35

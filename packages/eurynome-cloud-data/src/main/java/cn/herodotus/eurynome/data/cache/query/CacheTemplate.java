@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
  * Module Name: eurynome-cloud-data
  * File Name: CacheTemplate.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/06/29 15:58:29
  */
 
-package cn.herodotus.eurynome.data.cache;
+package cn.herodotus.eurynome.data.cache.query;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import org.apache.commons.lang3.StringUtils;
