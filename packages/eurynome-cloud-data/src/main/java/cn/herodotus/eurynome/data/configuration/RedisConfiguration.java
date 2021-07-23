@@ -109,7 +109,6 @@ public class RedisConfiguration {
         return stringRedisTemplate;
     }
 
-
     @Bean
     @ConditionalOnMissingBean(RedisCacheManager.class)
     public RedisCacheManager redisCacheManager() {
