@@ -25,11 +25,11 @@ package cn.herodotus.eurynome.upms.api.helper;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.StatusEnum;
-import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.definition.core.HerodotusAuthority;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.core.HerodotusRole;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
@@ -60,7 +60,7 @@ public class UpmsHelper {
     public static HerodotusRole convertSysRoleToArtisanRole(SysRole sysRole) {
         HerodotusRole herodotusRole = new HerodotusRole();
         herodotusRole.setRoleId(sysRole.getRoleId());
-        herodotusRole.setRoleName(sysRole.getRoleName());
+//        herodotusRole.setRoleName(sysRole.getRoleName());
         herodotusRole.setRoleCode(sysRole.getRoleCode());
         return herodotusRole;
     }
@@ -75,13 +75,13 @@ public class UpmsHelper {
     private static HerodotusAuthority convertSysAuthorityToArtisanAuthority(SysAuthority sysAuthority) {
         HerodotusAuthority herodotusAuthority = new HerodotusAuthority();
         herodotusAuthority.setAuthorityId(sysAuthority.getAuthorityId());
-        herodotusAuthority.setAuthorityName(sysAuthority.getAuthorityName());
-        herodotusAuthority.setUrl(sysAuthority.getUrl());
-        herodotusAuthority.setParentId(sysAuthority.getParentId());
         herodotusAuthority.setAuthorityCode(sysAuthority.getAuthorityCode());
-        herodotusAuthority.setAuthorityType(sysAuthority.getAuthorityType());
-        herodotusAuthority.setMenuClass(sysAuthority.getMenuClass());
-        herodotusAuthority.setRanking(sysAuthority.getRanking());
+//        herodotusAuthority.setAuthorityType(sysAuthority.getAuthorityType());
+//        herodotusAuthority.setMenuClass(sysAuthority.getMenuClass());
+//        herodotusAuthority.setRanking(sysAuthority.getRanking());
+//        herodotusAuthority.setAuthorityName(sysAuthority.getAuthorityName());
+//        herodotusAuthority.setUrl(sysAuthority.getUrl());
+//        herodotusAuthority.setParentId(sysAuthority.getParentId());
         return herodotusAuthority;
     }
 

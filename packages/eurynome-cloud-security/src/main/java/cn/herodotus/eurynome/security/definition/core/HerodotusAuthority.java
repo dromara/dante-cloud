@@ -22,7 +22,8 @@
 
 package cn.herodotus.eurynome.security.definition.core;
 
-import cn.herodotus.eurynome.common.enums.AuthorityType;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
@@ -32,19 +33,19 @@ public final class HerodotusAuthority implements GrantedAuthority {
 
     private String authorityId;
 
-    private String authorityName;
+//    private String authorityName;
 
     private String authorityCode;
 
-    private String parentId;
-
-    private String url;
-
-    private String menuClass;
-
-    private Integer ranking;
-
-    private AuthorityType authorityType;
+//    private String parentId;
+//
+//    private String url;
+//
+//    private String menuClass;
+//
+//    private Integer ranking;
+//
+//    private AuthorityType authorityType;
 
     public HerodotusAuthority() {
     }
@@ -57,14 +58,6 @@ public final class HerodotusAuthority implements GrantedAuthority {
         this.authorityId = authorityId;
     }
 
-    public String getAuthorityName() {
-        return authorityName;
-    }
-
-    public void setAuthorityName(String authorityName) {
-        this.authorityName = authorityName;
-    }
-
     public String getAuthorityCode() {
         return authorityCode;
     }
@@ -73,62 +66,33 @@ public final class HerodotusAuthority implements GrantedAuthority {
         this.authorityCode = authorityCode;
     }
 
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     @Override
     public String getAuthority() {
         return getAuthorityCode();
     }
 
-    public AuthorityType getAuthorityType() {
-        return authorityType;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        HerodotusAuthority that = (HerodotusAuthority) o;
+        return Objects.equal(authorityId, that.authorityId) && Objects.equal(authorityCode, that.authorityCode);
     }
 
-    public void setAuthorityType(AuthorityType authorityType) {
-        this.authorityType = authorityType;
-    }
-
-    public String getMenuClass() {
-        return menuClass;
-    }
-
-    public void setMenuClass(String menuClass) {
-        this.menuClass = menuClass;
-    }
-
-    public Integer getRanking() {
-        return ranking;
-    }
-
-    public void setRanking(Integer ranking) {
-        this.ranking = ranking;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(authorityId, authorityCode);
     }
 
     @Override
     public String toString() {
-        return "ArtisanAuthority{" +
-                "authorityId='" + authorityId + '\'' +
-                ", authorityName='" + authorityName + '\'' +
-                ", authorityCode='" + authorityCode + '\'' +
-                ", parentId='" + parentId + '\'' +
-                ", url='" + url + '\'' +
-                ", menuClass='" + menuClass + '\'' +
-                ", ranking=" + ranking +
-                ", authorityType=" + authorityType +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("authorityId", authorityId)
+                .add("authorityCode", authorityCode)
+                .toString();
     }
 }

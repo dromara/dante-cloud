@@ -29,6 +29,8 @@ import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
+import cn.hutool.core.util.HashUtil;
+import cn.hutool.crypto.SecureUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -232,12 +234,14 @@ public class RequestMappingScanner implements ApplicationContextAware {
         String identifyingCode = isMicroserviceArchitecture() ? serviceId : classSimpleName;
 
         // 5.2.8、根据serviceId, requestMethods, urls生成的MD5值，作为自定义主键
-        String id = idGenerator(identifyingCode, urls, requestMethods);
+        String flag = serviceId + SymbolConstants.DASH + requestMethods + SymbolConstants.DASH + urls;
+        String id = SecureUtil.md5(flag);
+        int code = HashUtil.fnvHash(flag);
 
         // 5.2.9、组装对象
         RequestMapping securityMetadata = new RequestMapping();
         securityMetadata.setMetadataId(id);
-        securityMetadata.setMetadataCode(SecurityConstants.AUTHORITY_PREFIX + id);
+        securityMetadata.setMetadataCode(SecurityConstants.AUTHORITY_PREFIX + code);
         // 微服务需要明确ServiceId，同时也知道ParentId，Hammer有办法，但是太繁琐，还是生成数据后，配置一把好点。
         if (isMicroserviceArchitecture()) {
             securityMetadata.setServiceId(identifyingCode);
@@ -257,18 +261,5 @@ public class RequestMappingScanner implements ApplicationContextAware {
 
     private boolean isMicroserviceArchitecture() {
         return platformProperties.getArchitecture() == Architecture.DISTRIBUTED;
-    }
-
-    private String idGenerator(String serviceId, String urls, String requestMethods) {
-        String builder = serviceId +
-                SymbolConstants.DASH +
-                requestMethods +
-                SymbolConstants.DASH +
-                urls;
-
-        byte[] md5Bytes = builder.getBytes(Charset.defaultCharset());
-
-        String md5 = DigestUtils.md5DigestAsHex(md5Bytes);
-        return md5.toUpperCase();
     }
 }

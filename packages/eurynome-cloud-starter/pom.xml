@@ -29,11 +29,11 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.5.3.30</version>
+        <version>2.5.3.40</version>
     </parent>
 
     <artifactId>eurynome-cloud-starter</artifactId>
-    <version>2.5.3.30</version>
+    <version>2.5.3.40</version>
 
     <description>通用配置starter,此包的定位是统一未来接入的微服务使用</description>
     <packaging>jar</packaging>

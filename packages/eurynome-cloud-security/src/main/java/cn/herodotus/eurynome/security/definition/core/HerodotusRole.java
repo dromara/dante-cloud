@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.security.definition.core;
 
+import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,7 +34,7 @@ public final class HerodotusRole implements GrantedAuthority {
 
     private String roleId;
 
-    private String roleName;
+//    private String roleName;
 
     private String roleCode;
 
@@ -48,13 +49,13 @@ public final class HerodotusRole implements GrantedAuthority {
         this.roleId = roleId;
     }
 
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
+//    public String getRoleName() {
+//        return roleName;
+//    }
+//
+//    public void setRoleName(String roleName) {
+//        this.roleName = roleName;
+//    }
 
     public String getRoleCode() {
         return roleCode;
@@ -97,10 +98,9 @@ public final class HerodotusRole implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return "ArtisanRole{" +
-                "roleId='" + roleId + '\'' +
-                ", roleName='" + roleName + '\'' +
-                ", roleCode='" + roleCode + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("roleId", roleId)
+                .add("roleCode", roleCode)
+                .toString();
     }
 }
