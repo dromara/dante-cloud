@@ -20,20 +20,10 @@
  * Date: 2021/05/07 11:28:07
  */
 
-create extension "uuid-ossp";
 -- ----------------------------
--- 初始化用户信息
+-- 如果要重新生成权限数据，可以用下面脚本生成角色1 与权限的关系
 -- ----------------------------
-INSERT INTO sys_user (user_id, create_time, update_time, ranking, is_reserved, status, employee_id, user_name,
-                      nick_name, password)
-SELECT uuid_generate_v4()                                             AS user_id,
-       se.create_time,
-       se.update_time,
-       se.ranking,
-       TRUE                                                           AS is_reserved,
-       se.status,
-       se.employee_id,
-       se.employee_name                                               AS user_name,
-       se.mobile_phone_number                                         AS nick_name,
-       '$2a$10$fi5ecIcM3hy9RQwE0x78oeyNecPFiUgi0PnhESeENjX3G4CBvYOLO' AS password
-FROM "sys_employee" se
+INSERT INTO sys_role_authority (role_id, authority_id)
+SELECT '1' role_id,
+       sa.authority_id
+FROM "sys_authority" sa

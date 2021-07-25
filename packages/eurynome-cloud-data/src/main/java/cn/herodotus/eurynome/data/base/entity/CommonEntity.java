@@ -29,7 +29,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
-import javax.persistence.OrderBy;
+import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
@@ -40,6 +40,7 @@ import java.util.Date;
  * @author : gengwei.zheng
  * @date : 2021/7/7 16:32
  */
+@MappedSuperclass
 public abstract class CommonEntity extends AbstractEntity {
 
     @ApiModelProperty(value = "数据创建时间")
@@ -56,7 +57,6 @@ public abstract class CommonEntity extends AbstractEntity {
 
     @ApiModelProperty(value = "排序值")
     @Column(name = "ranking")
-    @OrderBy("ranking asc")
     private Integer ranking = 0;
 
     public Date getCreateTime() {
