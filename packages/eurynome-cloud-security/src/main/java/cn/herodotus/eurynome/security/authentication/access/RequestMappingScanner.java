@@ -28,7 +28,6 @@ import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import cn.hutool.core.util.HashUtil;
 import cn.hutool.crypto.SecureUtil;
 import io.swagger.annotations.ApiOperation;
@@ -42,7 +41,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.env.Environment;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
@@ -52,7 +50,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.lang.annotation.Annotation;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +69,7 @@ public class RequestMappingScanner implements ApplicationContextAware {
 
     private final RestProperties restProperties;
     private final PlatformProperties platformProperties;
-    private final SecurityMetadataStorage securityMetadataStorage;
+    private final RequestMappingLocalCache requestMappingLocalCache;
 
     private ApplicationContext applicationContext;
 
@@ -81,10 +78,10 @@ public class RequestMappingScanner implements ApplicationContextAware {
      */
     private Class<? extends Annotation> scanAnnotationClass = EnableResourceServer.class;
 
-    public RequestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, SecurityMetadataStorage securityMetadataStorage) {
+    public RequestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, RequestMappingLocalCache requestMappingLocalCache) {
         this.restProperties = restProperties;
         this.platformProperties = platformProperties;
-        this.securityMetadataStorage = securityMetadataStorage;
+        this.requestMappingLocalCache = requestMappingLocalCache;
     }
 
     public void setScanAnnotationClass(Class<? extends Annotation> scanAnnotationClass) {
@@ -135,7 +132,7 @@ public class RequestMappingScanner implements ApplicationContextAware {
         }
 
         if (CollectionUtils.isNotEmpty(resources)) {
-            securityMetadataStorage.save(resources);
+            requestMappingLocalCache.save(resources);
         }
 
         log.info("[Eurynome] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);

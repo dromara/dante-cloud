@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,52 +14,47 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-oauth-starter
- * File Name: DataSourceSecurityMetadata.java
+ * Module Name: eurynome-cloud-upms-logic
+ * File Name: LocalSecurityMetadataStorageService.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 11:08:13
+ * Date: 2021/07/28 19:01:28
  */
 
-package cn.herodotus.eurynome.oauth.autoconfigure.logic;
+package cn.herodotus.eurynome.upms.logic.strategy;
 
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
+import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
 /**
- * <p>Project: eurynome-cloud-athena </p>
- * <p>File: DataSourceSecurityMetadata </p>
- *
- * <p>Description: 直连数据源的SecurityMetadata存储 </p>
+ * <p>Description: LocalSecurity本地直联服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/12/30 14:54
+ * @date : 2021/7/28 19:01
  */
-@Slf4j
-public class DataSourceSecurityMetadata extends SecurityMetadataStorage {
+public class LocalSecurityMetadataStorageService implements StrategySecurityMetadataService {
+    private static final Logger log = LoggerFactory.getLogger(LocalSecurityMetadataStorageService.class);
 
     private static final String DDL_AUTO_TYPE_NONE = "none";
-
-    private SysAuthorityService sysAuthorityService;
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlAuto;
 
-    public DataSourceSecurityMetadata(SysAuthorityService sysAuthorityService) {
-        this.sysAuthorityService = sysAuthorityService;
-    }
+    @Autowired
+    private SysAuthorityService sysAuthorityService;
 
     @Override
-    public void save(List<RequestMapping> requestMappings) {
-
+    public void store(List<RequestMapping> requestMappings) {
         log.debug("[Eurynome] |- spring.jpa.ddl-auto value is : {}", ddlAuto);
 
         if (StringUtils.isNotEmpty(ddlAuto) && !StringUtils.equalsIgnoreCase(ddlAuto, DDL_AUTO_TYPE_NONE)) {
@@ -74,12 +69,6 @@ public class DataSourceSecurityMetadata extends SecurityMetadataStorage {
             }
         }
 
-        log.info("[Eurynome] |- Store Service Resources Passed!");
-    }
-
-    @Override
-    public List<RequestMapping> findAll() {
-        List<SysAuthority> sysAuthorities = sysAuthorityService.findAll();
-        return UpmsHelper.convertSysAuthoritiesToRequestMappings(sysAuthorities);
+        log.debug("[Eurynome] |- Skip Store Service Resources.");
     }
 }

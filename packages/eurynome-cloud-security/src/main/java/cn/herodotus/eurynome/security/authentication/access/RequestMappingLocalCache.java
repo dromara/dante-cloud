@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,22 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-starter
- * File Name: LocalCacheSecurityMetadata.java
+ * Module Name: eurynome-cloud-security
+ * File Name: RequestMappingLocalCache.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 11:04:13
+ * Date: 2021/07/28 18:15:28
  */
 
-package cn.herodotus.eurynome.autoconfigure.logic;
+package cn.herodotus.eurynome.security.authentication.access;
 
 import cn.herodotus.eurynome.data.cache.query.CacheTemplate;
-import cn.herodotus.eurynome.data.cache.query.AbstractCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +37,15 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: LocalCacheSecurityMetadata </p>
- *
- * <p>Description: 本地存储，用于存储Security Metadata Source </p>
+ * <p>Description: RequestMapping 服务本地缓存 </p>
  * <p>
- * 这里没有用自己编写的{@link AbstractCache}，主要是因为在应用启动的过程中，JetCache启动时机与Oauth不同。会产生注入的循环问题。
+ * 因为是使用Request Mapping值作为权限，所以将扫描后的Request Mapping值缓存至本地，便于使用。
  *
  * @author : gengwei.zheng
- * @date : 2020/12/30 14:35
+ * @date : 2021/7/28 18:15
  */
-@Slf4j
-public class LocalCacheSecurityMetadata extends SecurityMetadataStorage {
+public class RequestMappingLocalCache {
+    private static final Logger log = LoggerFactory.getLogger(RequestMappingLocalCache.class);
 
     private static final String ALL = "all";
 
@@ -57,7 +53,6 @@ public class LocalCacheSecurityMetadata extends SecurityMetadataStorage {
 
     private final Cache<String, Set<String>> indexCache = Caffeine.newBuilder().maximumSize(10_000).build();
 
-    @Override
     public void save(List<RequestMapping> requestMappings) {
         if (CollectionUtils.isNotEmpty(requestMappings)) {
             CacheTemplate<RequestMapping> cacheTemplate = new CacheTemplate<>();
@@ -68,7 +63,6 @@ public class LocalCacheSecurityMetadata extends SecurityMetadataStorage {
         }
     }
 
-    @Override
     public List<RequestMapping> findAll() {
         Set<String> indexes = indexCache.getIfPresent(ALL);
         if (CollectionUtils.isNotEmpty(indexes)) {

@@ -43,7 +43,7 @@ INSERT INTO "oauth_scopes"("scope_id", "create_time", "ranking", "update_time", 
 -- ----------------------------
 -- Table data for sys_user
 -- ----------------------------
-INSERT INTO "sys_user"("user_id", "create_time", "ranking", "update_time", "description", "is_reserved", "status", "employee_id", "nick_name", "password", "user_name", "reversion") VALUES ('1', '2019-07-23 07:19:50', 1, '2019-07-23 07:19:52', '平台管理员', 't', 1, '', 'Hades', '$2a$10$fi5ecIcM3hy9RQwE0x78oeyNecPFiUgi0PnhESeENjX3G4CBvYOLO', 'system', NULL);
+INSERT INTO "sys_user"("user_id", "create_time", "ranking", "update_time", "description", "is_reserved", "status", "nick_name", "password", "user_name", "reversion") VALUES ('1', '2019-07-23 07:19:50', 1, '2019-07-23 07:19:52', '平台管理员', 't', 1, 'Hades', '$2a$10$fi5ecIcM3hy9RQwE0x78oeyNecPFiUgi0PnhESeENjX3G4CBvYOLO', 'system', NULL);
 
 -- ----------------------------
 -- Table data for sys_role

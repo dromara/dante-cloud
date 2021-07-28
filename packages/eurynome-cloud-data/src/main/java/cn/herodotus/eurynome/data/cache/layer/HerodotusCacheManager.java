@@ -22,6 +22,8 @@
 
 package cn.herodotus.eurynome.data.cache.layer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCache;
@@ -43,6 +45,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date : 2021/7/14 11:07
  */
 public class HerodotusCacheManager implements CacheManager {
+
+    private static final Logger log = LoggerFactory.getLogger(HerodotusCacheManager.class);
 
     private RedisCacheManager redisCacheManager;
     private CaffeineCacheManager caffeineCacheManager;
@@ -97,6 +101,7 @@ public class HerodotusCacheManager implements CacheManager {
     protected Cache createHerodotusCache(String name) {
         CaffeineCache caffeineCache = (CaffeineCache) this.caffeineCacheManager.getCache(name);
         RedisCache redisCache = (RedisCache) this.redisCacheManager.getCache(name);
+        log.trace("[Eurynome] |- CACHE - Herodotus cache [{}] is CREATED.", name);
         return new HerodotusCache(name, caffeineCache, redisCache, desensitization, clearRemoteOnExit);
     }
 

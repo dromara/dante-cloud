@@ -25,12 +25,17 @@ package cn.herodotus.eurynome.security.configuration;
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
-import cn.herodotus.eurynome.security.definition.service.SecurityMetadataStorage;
+import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import lombok.extern.slf4j.Slf4j;
+import cn.herodotus.eurynome.security.service.SecurityMetadataStorageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -63,7 +68,6 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2020/3/2 16:00
  */
-@Slf4j
 @Configuration
 @EnableHerodotusRest
 @EnableConfigurationProperties({
@@ -74,6 +78,8 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.security.response.exception"
 })
 public class SecurityAutoConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(SecurityAutoConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
@@ -94,6 +100,14 @@ public class SecurityAutoConfiguration {
         return defaultAccessTokenConverter;
     }
 
+    @Bean
+    @ConditionalOnMissingBean(RequestMappingLocalCache.class)
+    public RequestMappingLocalCache requestMappingLocalCache() {
+        RequestMappingLocalCache requestMappingLocalCache = new RequestMappingLocalCache();
+        log.trace("[Eurynome] |- Bean [Request Mapping Local Cache] Auto Configure.");
+        return requestMappingLocalCache;
+    }
+
     /**
      * 自定义注解扫描器
      * <p>
@@ -102,9 +116,21 @@ public class SecurityAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(RequestMappingScanner.class)
-    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, SecurityMetadataStorage securityMetadataStorage) {
-        RequestMappingScanner requestMappingScan = new RequestMappingScanner(restProperties, platformProperties, securityMetadataStorage);
+    @ConditionalOnBean(RequestMappingLocalCache.class)
+    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, RequestMappingLocalCache requestMappingLocalCache) {
+        RequestMappingScanner requestMappingScanner = new RequestMappingScanner(restProperties, platformProperties, requestMappingLocalCache);
         log.trace("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
-        return requestMappingScan;
+        return requestMappingScanner;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(SecurityMetadataStorageService.class)
+    @ConditionalOnSingleCandidate(StrategySecurityMetadataService.class)
+    public SecurityMetadataStorageService securityMetadataStorageService(StrategySecurityMetadataService strategySecurityMetadataService, RequestMappingLocalCache requestMappingLocalCache) {
+        SecurityMetadataStorageService securityMetadataStorageService = new SecurityMetadataStorageService();
+        securityMetadataStorageService.setStrategySecurityMetadataService(strategySecurityMetadataService);
+        securityMetadataStorageService.setRequestMappingLocalCache(requestMappingLocalCache);
+        log.trace("[Eurynome] |- Bean [Security Metadata Storage Service] Auto Configure.");
+        return securityMetadataStorageService;
     }
 }

@@ -24,6 +24,7 @@
 
 package cn.herodotus.eurynome.message.queue;
 
+import cn.herodotus.eurynome.common.definition.MessageProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -37,7 +38,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
  * @date : 2019/11/21 12:01
  */
 @Slf4j
-public class KafkaProducer {
+public class KafkaProducer implements MessageProducer {
 
     private KafkaTemplate<String, String> kafkaTemplate;
 

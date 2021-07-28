@@ -88,7 +88,7 @@ public class DataConfiguration {
         herodotusCacheManager.setDesensitization(cacheProperties.getDesensitization());
         herodotusCacheManager.setClearRemoteOnExit(cacheProperties.getClearRemoteOnExit());
 
-        log.trace("[Herodotus] |- Bean [Herodotus Cache Manager] Auto Configure.");
+        log.trace("[Eurynome] |- Bean [Herodotus Cache Manager] Auto Configure.");
 
         return herodotusCacheManager;
     }

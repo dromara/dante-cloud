@@ -24,16 +24,18 @@ package cn.herodotus.eurynome.data.base.entity;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
-/** 
+/**
  * <p>Description: 框架基础权限实体通用基础类</p>
- * 
+ *
  * @author : gengwei.zheng
  * @date : 2019/11/25 15:05
  */
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseSysEntity extends BaseEntity {
 
     @ApiModelProperty(value = "数据状态")
@@ -47,7 +49,6 @@ public abstract class BaseSysEntity extends BaseEntity {
 
     @ApiModelProperty(value = "版本号")
     @Column(name = "reversion")
-    @OrderBy("reversion asc")
     private Integer reversion = 0;
 
     /**

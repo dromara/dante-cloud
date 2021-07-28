@@ -40,8 +40,8 @@ spring:
       platform: ${herodotus.environment.database-platform}
       continue-on-error: true
       encoding: UTF-8
-        username: ${herodotus.environment.username}
-        password: ${herodotus.environment.password}
+      username: ${herodotus.environment.username}
+      password: ${herodotus.environment.password}
 #        data-locations:
 #        schema-locations:
   datasource:

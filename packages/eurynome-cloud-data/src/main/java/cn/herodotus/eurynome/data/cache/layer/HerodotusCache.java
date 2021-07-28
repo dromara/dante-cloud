@@ -23,13 +23,17 @@
 package cn.herodotus.eurynome.data.cache.layer;
 
 import cn.hutool.crypto.SecureUtil;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
 import org.springframework.cache.caffeine.CaffeineCache;
+import org.springframework.cache.support.AbstractValueAdaptingCache;
+import org.springframework.cache.support.NullValue;
 import org.springframework.data.redis.cache.RedisCache;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.util.concurrent.Callable;
@@ -40,7 +44,7 @@ import java.util.concurrent.Callable;
  * @author : gengwei.zheng
  * @date : 2021/7/14 11:04
  */
-public class HerodotusCache implements Cache {
+public class HerodotusCache extends AbstractValueAdaptingCache {
     private static final Logger log = LoggerFactory.getLogger(HerodotusCache.class);
 
     private final String name;
@@ -50,12 +54,14 @@ public class HerodotusCache implements Cache {
     private final boolean clearRemoteOnExit;
 
     public HerodotusCache(String name, CaffeineCache caffeineCache, RedisCache redisCache, boolean desensitization, boolean clearRemoteOnExit) {
-        Assert.notNull(name, "Name must not be null!");
-        Assert.notNull(caffeineCache, "CaffeineCache must not be null!");
-        Assert.notNull(redisCache, "RedisCache must not be null!");
+        this(name, caffeineCache, redisCache, desensitization, clearRemoteOnExit, true);
+    }
+
+    public HerodotusCache(String name, CaffeineCache caffeineCache, RedisCache redisCache, boolean desensitization, boolean clearRemoteOnExit, boolean allowNullValues) {
+        super(allowNullValues);
+        this.name = name;
         this.caffeineCache = caffeineCache;
         this.redisCache = redisCache;
-        this.name = name;
         this.desensitization = desensitization;
         this.clearRemoteOnExit = clearRemoteOnExit;
     }
@@ -72,14 +78,40 @@ public class HerodotusCache implements Cache {
         return original;
     }
 
+    @Nullable
     @Override
     public String getName() {
         return this.name;
     }
 
+    @Nullable
     @Override
-    public CaffeineCache getNativeCache() {
-        return this.caffeineCache;
+    public Object getNativeCache() {
+        return this;
+    }
+
+    @Override
+    protected Object lookup(Object key) {
+
+        String secure = secure(key);
+
+        log.debug("[Eurynome] |- CACHE - Lookup the cache for key: [{}]", secure);
+
+        Object caffeineValue = caffeineCache.get(secure);
+        if (ObjectUtils.isNotEmpty(caffeineValue)) {
+            log.trace("[Eurynome] |- CACHE - Found the cache in caffeine cache, value is : [{}]", JSON.toJSONString(caffeineValue));
+            return caffeineValue;
+        }
+
+        Object redisValue = redisCache.get(secure);
+        if (ObjectUtils.isNotEmpty(redisValue)) {
+            log.trace("[Eurynome] |- CACHE - Found the cache in redis cache, value is : [{}]", JSON.toJSONString(redisValue));
+            return redisValue;
+        }
+
+        log.debug("[Eurynome] |- CACHE - Can not found the cache.");
+
+        return null;
     }
 
     @Override
@@ -87,21 +119,21 @@ public class HerodotusCache implements Cache {
 
         String secure = secure(key);
 
+        log.debug("[Eurynome] |- CACHE - Get ValueWrapper data form Herodotus Cache for key: [{}]", secure);
+
         ValueWrapper caffeineValue = caffeineCache.get(secure);
         if (ObjectUtils.isNotEmpty(caffeineValue)) {
-            log.trace("[Eurynome] |- CACHE - Get from caffeine cache, hit key: [{}]", secure);
+            log.trace("[Eurynome] |- CACHE - Get ValueWrapper data from caffeine cache, hit the cache.");
             return caffeineValue;
         }
 
         ValueWrapper redisValue = redisCache.get(secure);
         if (ObjectUtils.isNotEmpty(redisValue)) {
-            log.trace("[Eurynome] |- CACHE - Get from the redis cache, hit key: [{}]", secure);
-            caffeineCache.put(secure, redisValue.get());
-            log.trace("[Eurynome] |- CACHE - Sync the cache to caffeine cache, in lookup action");
+            log.trace("[Eurynome] |- CACHE - Get ValueWrapper data from redis cache, hit the cache.");
             return redisValue;
         }
 
-        log.trace("[Eurynome] |- CACHE - Can not get the key: [{}] in whole cache", secure);
+        log.debug("[Eurynome] |- CACHE - Can not get ValueWrapper data in Herodotus Cache.");
 
         return null;
     }
@@ -111,47 +143,55 @@ public class HerodotusCache implements Cache {
 
         String secure = secure(key);
 
+        log.debug("[Eurynome] |- CACHE - Get <T> with type form Herodotus Cache for key: [{}]", secure);
+
         T caffeineValue = caffeineCache.get(secure, type);
         if (ObjectUtils.isNotEmpty(caffeineValue)) {
-            log.trace("[Eurynome] |- CACHE - Get with type from caffeine cache, hit key: [{}]", secure);
+            log.trace("[Eurynome] |- CACHE - Get <T> with type form caffeine cache, hit the cache.");
             return caffeineValue;
         }
 
         T redisValue = redisCache.get(secure, type);
         if (ObjectUtils.isNotEmpty(redisValue)) {
-            log.trace("[Eurynome] |- CACHE - Get with type from the redis cache, hit key: [{}]", secure);
+            log.trace("[Eurynome] |- CACHE - Get <T> with type form redis cache, hit the cache.");
             caffeineCache.put(secure, redisValue);
-            log.trace("[Eurynome] |- CACHE - Sync the cache to caffeine cache, in lookup action");
+            log.trace("[Eurynome] |- CACHE - Sync redis cache to caffeine cache, in 'Get <T> with type' action");
             return redisValue;
         }
 
-        log.trace("[Eurynome] |- CACHE - Can not get the key: [{}] with TYPE in whole cache", secure);
+        log.debug("[Eurynome] |- CACHE - Can not get <T> with type in Herodotus Cache.");
 
         return null;
     }
 
+    /**
+     * 查询二级缓存
+     *
+     * @param key
+     * @param valueLoader
+     * @return
+     */
+    private <T> Object getRedisStoreValue(Object key, Callable<T> valueLoader) {
+        T value = redisCache.get(key, valueLoader);
+        log.trace("[Eurynome] |- CACHE - Get <T> with valueLoader form redis cache, hit the cache.");
+        return toStoreValue(value);
+    }
+
+    @Nullable
     @Override
     public <T> T get(Object key, Callable<T> valueLoader) {
 
         String secure = secure(key);
 
-        T caffeineValue = caffeineCache.get(secure, valueLoader);
-        if (ObjectUtils.isNotEmpty(caffeineValue)) {
-            log.trace("[Eurynome] |- CACHE - Get with valueLoader from caffeine cache, hit key: [{}]", secure);
-            return caffeineValue;
+        log.debug("[Eurynome] |- CACHE - Get <T> with type form valueLoader Cache for key: [{}]", secure);
+
+        T value = (T) caffeineCache.getNativeCache().get(secure, k -> getRedisStoreValue(k, valueLoader));
+        if (value instanceof NullValue) {
+            log.debug("[Eurynome] |- Can not get <T> with valueLoader in Herodotus Cache.");
+            return null;
         }
 
-        T redisValue = redisCache.get(secure, valueLoader);
-        if (ObjectUtils.isNotEmpty(redisValue)) {
-            log.trace("[Eurynome] |- CACHE - Get with valueLoader from the redis cache, hit key: [{}]", secure);
-            caffeineCache.put(secure, redisValue);
-            log.trace("[Eurynome] |- CACHE - Sync the cache to caffeine cache, in lookup action");
-            return redisValue;
-        }
-
-        log.trace("[Eurynome] |- CACHE - Can not get the key: [{}] with VALUELOADER in whole cache", secure);
-
-        return null;
+        return value;
     }
 
     @Override
@@ -159,34 +199,51 @@ public class HerodotusCache implements Cache {
 
         String secure = secure(key);
 
-        redisCache.put(secure, value);
-        log.trace("[Eurynome] |- CACHE - Put into redis cache, with key: [{}] and value: [{}]", secure, value);
-
         caffeineCache.put(secure, value);
-        log.trace("[Eurynome] |- CACHE - Put into caffeine cache, with key: [{}] and value: [{}]", secure, value);
+        redisCache.put(secure, value);
+
+        log.debug("[Eurynome] |- CACHE - Put data into Herodotus Cache, with key: [{}] and value: [{}]", secure, value);
     }
 
+    @Override
+    public ValueWrapper putIfAbsent(Object key, Object value) {
+
+        String secure = secure(key);
+
+        caffeineCache.putIfAbsent(secure, value);
+        ValueWrapper valueWrapper = redisCache.putIfAbsent(secure, value);
+
+        log.debug("[Eurynome] |- CACHE - Put data into Herodotus Cache If Absent, with key: [{}] and value: [{}]", secure, value);
+        return valueWrapper;
+    }
+
+    @Nullable
     @Override
     public void evict(Object key) {
 
         String secure = secure(key);
 
+        log.debug("[Eurynome] |- CACHE - Evict Herodotus Cache for key: {}", secure);
+
+        // 删除的时候要先删除二级缓存再删除一级缓存，否则有并发问题
         redisCache.evict(secure);
-        log.trace("[Eurynome] |- CACHE - Evict redis cache, key: {}", secure);
+        log.trace("[Eurynome] |- CACHE - Evict Herodotus Cache in redis cache, key: {}", secure);
 
         caffeineCache.evict(secure);
-        log.trace("[Eurynome] |- CACHE - Evict caffeine cache, key: {}", secure);
+        log.trace("[Eurynome] |- CACHE - Evict Herodotus Cache in caffeine cache, key: {}", secure);
     }
 
     @Override
     public void clear() {
 
+        log.debug("[Eurynome] |- CACHE - Clear Herodotus Cache.");
+
         if (clearRemoteOnExit) {
             redisCache.clear();
-            log.trace("[Eurynome] |- CACHE - Clear redis cache.");
+            log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache in redis cache.");
         }
 
         caffeineCache.clear();
-        log.trace("[Eurynome] |- CACHE - Clear caffeine cache.");
+        log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache in caffeine cache.");
     }
 }

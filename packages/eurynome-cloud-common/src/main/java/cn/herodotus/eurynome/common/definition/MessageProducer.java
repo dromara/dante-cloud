@@ -14,24 +14,27 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
- * File Name: BaseViewEntity.java
+ * Module Name: eurynome-cloud-common
+ * File Name: MessageProducer.java
  * Author: gengwei.zheng
- * Date: 2021/07/07 16:36:07
+ * Date: 2021/07/28 18:00:28
  */
 
-package cn.herodotus.eurynome.data.base.entity;
-
-import javax.persistence.MappedSuperclass;
+package cn.herodotus.eurynome.common.definition;
 
 /**
- * <p>Description: 视图类型实体基础类 </p>
- * <p>
- * 视图只能支持读取，而不支持新增、修改、删除等操作。因此，为了产生比必要的隐患，规避@EntityListeners(AuditingEntityListener.class)注解可能会出现的修改操作。
+ * <p>Description: 消息队列消息生产者定义 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/7 16:36
+ * @date : 2021/7/28 18:00
  */
-@MappedSuperclass
-public abstract class BaseViewEntity extends CommonEntity {
+public interface MessageProducer {
+
+    /**
+     * 发送消息
+     *
+     * @param topic 消息主题
+     * @param data  数据
+     */
+    void sendMessage(String topic, String data);
 }
