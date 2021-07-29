@@ -42,8 +42,8 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/7/28 19:01
  */
-public class LocalSecurityMetadataStorageService implements StrategySecurityMetadataService {
-    private static final Logger log = LoggerFactory.getLogger(LocalSecurityMetadataStorageService.class);
+public class LocalSecurityMetadataService implements StrategySecurityMetadataService {
+    private static final Logger log = LoggerFactory.getLogger(LocalSecurityMetadataService.class);
 
     private static final String DDL_AUTO_TYPE_NONE = "none";
 

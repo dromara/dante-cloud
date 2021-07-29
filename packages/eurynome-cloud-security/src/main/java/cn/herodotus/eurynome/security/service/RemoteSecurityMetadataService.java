@@ -36,11 +36,11 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/7/28 18:21
  */
-public class RemoteSecurityMetadataStorageService implements StrategySecurityMetadataService {
+public class RemoteSecurityMetadataService implements StrategySecurityMetadataService {
 
     private final MessageProducer messageProducer;
 
-    public RemoteSecurityMetadataStorageService(MessageProducer messageProducer) {
+    public RemoteSecurityMetadataService(MessageProducer messageProducer) {
         this.messageProducer = messageProducer;
     }
 

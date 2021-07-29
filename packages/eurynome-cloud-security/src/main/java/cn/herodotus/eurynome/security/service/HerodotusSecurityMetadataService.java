@@ -38,7 +38,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/7/28 18:22
  */
-public class SecurityMetadataStorageService {
+public class HerodotusSecurityMetadataService {
 
     private StrategySecurityMetadataService strategySecurityMetadataService;
 

@@ -32,10 +32,10 @@ import cn.herodotus.eurynome.oauth.condition.RemoteStrategyCondition;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
-import cn.herodotus.eurynome.security.service.RemoteSecurityMetadataStorageService;
+import cn.herodotus.eurynome.security.service.RemoteSecurityMetadataService;
 import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
-import cn.herodotus.eurynome.upms.logic.strategy.LocalSecurityMetadataStorageService;
+import cn.herodotus.eurynome.upms.logic.strategy.LocalSecurityMetadataService;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -122,7 +122,7 @@ public class AutoConfiguration {
         @Bean
         public StrategySecurityMetadataService localSecurityMetadataStoreService() {
             log.trace("[Eurynome] |- Bean [Local Security Metadata Storage Service] Auto Configure.");
-            return new LocalSecurityMetadataStorageService();
+            return new LocalSecurityMetadataService();
         }
     }
 
@@ -142,7 +142,7 @@ public class AutoConfiguration {
         @ConditionalOnBean(MessageProducer.class)
         public StrategySecurityMetadataService remoteSecurityMetadataStorageService(MessageProducer messageProducer) {
             log.trace("[Eurynome] |- Bean [Remote Security Metadata Storage Service] Auto Configure.");
-            return new RemoteSecurityMetadataStorageService(messageProducer);
+            return new RemoteSecurityMetadataService(messageProducer);
         }
     }
 

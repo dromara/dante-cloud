@@ -30,7 +30,7 @@ import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanne
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.security.service.SecurityMetadataStorageService;
+import cn.herodotus.eurynome.security.service.HerodotusSecurityMetadataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -124,13 +124,13 @@ public class SecurityAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(SecurityMetadataStorageService.class)
+    @ConditionalOnMissingBean(HerodotusSecurityMetadataService.class)
     @ConditionalOnSingleCandidate(StrategySecurityMetadataService.class)
-    public SecurityMetadataStorageService securityMetadataStorageService(StrategySecurityMetadataService strategySecurityMetadataService, RequestMappingLocalCache requestMappingLocalCache) {
-        SecurityMetadataStorageService securityMetadataStorageService = new SecurityMetadataStorageService();
-        securityMetadataStorageService.setStrategySecurityMetadataService(strategySecurityMetadataService);
-        securityMetadataStorageService.setRequestMappingLocalCache(requestMappingLocalCache);
+    public HerodotusSecurityMetadataService securityMetadataStorageService(StrategySecurityMetadataService strategySecurityMetadataService, RequestMappingLocalCache requestMappingLocalCache) {
+        HerodotusSecurityMetadataService herodotusSecurityMetadataService = new HerodotusSecurityMetadataService();
+        herodotusSecurityMetadataService.setStrategySecurityMetadataService(strategySecurityMetadataService);
+        herodotusSecurityMetadataService.setRequestMappingLocalCache(requestMappingLocalCache);
         log.trace("[Eurynome] |- Bean [Security Metadata Storage Service] Auto Configure.");
-        return securityMetadataStorageService;
+        return herodotusSecurityMetadataService;
     }
 }
