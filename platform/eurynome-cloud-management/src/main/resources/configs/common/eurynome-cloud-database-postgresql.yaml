@@ -21,8 +21,8 @@ spring:
             mode: ENABLE_SELECTIVE
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL10Dialect
-        format_sql: true
-        show_sql: true
+        format_sql: false
+        show_sql: false
         generate_statistics: false
         cache:
           use_query_cache: true
