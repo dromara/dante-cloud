@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.security.service;
 
 import cn.herodotus.eurynome.common.definition.MessageProducer;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
+import cn.herodotus.eurynome.security.definition.service.StrategyAuthoritiesStorageService;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -36,11 +36,11 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/7/28 18:21
  */
-public class RemoteSecurityMetadataService implements StrategySecurityMetadataService {
+public class RemoteAuthoritiesStorageService implements StrategyAuthoritiesStorageService {
 
     private final MessageProducer messageProducer;
 
-    public RemoteSecurityMetadataService(MessageProducer messageProducer) {
+    public RemoteAuthoritiesStorageService(MessageProducer messageProducer) {
         this.messageProducer = messageProducer;
     }
 

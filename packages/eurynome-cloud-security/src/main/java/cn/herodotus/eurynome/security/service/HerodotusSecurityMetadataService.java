@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.security.service;
 
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
+import cn.herodotus.eurynome.security.definition.service.StrategyAuthoritiesStorageService;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -40,12 +40,12 @@ import java.util.List;
  */
 public class HerodotusSecurityMetadataService {
 
-    private StrategySecurityMetadataService strategySecurityMetadataService;
+    private StrategyAuthoritiesStorageService strategyAuthoritiesStorageService;
 
     private RequestMappingLocalCache requestMappingLocalCache;
 
-    public void setStrategySecurityMetadataService(StrategySecurityMetadataService strategySecurityMetadataService) {
-        this.strategySecurityMetadataService = strategySecurityMetadataService;
+    public void setStrategySecurityMetadataService(StrategyAuthoritiesStorageService strategyAuthoritiesStorageService) {
+        this.strategyAuthoritiesStorageService = strategyAuthoritiesStorageService;
     }
 
     public void setRequestMappingLocalCache(RequestMappingLocalCache requestMappingLocalCache) {
@@ -59,7 +59,7 @@ public class HerodotusSecurityMetadataService {
 
         if (CollectionUtils.isNotEmpty(requestMappings)) {
             List<RequestMapping> securityMetadata = ImmutableList.copyOf(requestMappings);
-            strategySecurityMetadataService.store(securityMetadata);
+            strategyAuthoritiesStorageService.store(securityMetadata);
         }
     }
 }

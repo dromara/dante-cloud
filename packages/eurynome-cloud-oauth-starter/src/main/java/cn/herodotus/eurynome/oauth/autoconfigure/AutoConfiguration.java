@@ -31,11 +31,11 @@ import cn.herodotus.eurynome.oauth.condition.LocalStrategyCondition;
 import cn.herodotus.eurynome.oauth.condition.RemoteStrategyCondition;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
-import cn.herodotus.eurynome.security.service.RemoteSecurityMetadataService;
+import cn.herodotus.eurynome.security.definition.service.StrategyAuthoritiesStorageService;
+import cn.herodotus.eurynome.security.service.RemoteAuthoritiesStorageService;
 import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
-import cn.herodotus.eurynome.upms.logic.strategy.LocalSecurityMetadataService;
+import cn.herodotus.eurynome.upms.logic.strategy.LocalAuthoritiesStorageService;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -120,9 +120,9 @@ public class AutoConfiguration {
     static class DataAccessStrategyLocalConfiguration {
 
         @Bean
-        public StrategySecurityMetadataService localSecurityMetadataStoreService() {
+        public StrategyAuthoritiesStorageService localSecurityMetadataStoreService() {
             log.trace("[Eurynome] |- Bean [Local Security Metadata Storage Service] Auto Configure.");
-            return new LocalSecurityMetadataService();
+            return new LocalAuthoritiesStorageService();
         }
     }
 
@@ -140,9 +140,9 @@ public class AutoConfiguration {
 
         @Bean
         @ConditionalOnBean(MessageProducer.class)
-        public StrategySecurityMetadataService remoteSecurityMetadataStorageService(MessageProducer messageProducer) {
+        public StrategyAuthoritiesStorageService remoteSecurityMetadataStorageService(MessageProducer messageProducer) {
             log.trace("[Eurynome] |- Bean [Remote Security Metadata Storage Service] Auto Configure.");
-            return new RemoteSecurityMetadataService(messageProducer);
+            return new RemoteAuthoritiesStorageService(messageProducer);
         }
     }
 

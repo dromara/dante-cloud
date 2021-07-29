@@ -28,7 +28,7 @@ import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
-import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
+import cn.herodotus.eurynome.security.definition.service.StrategyAuthoritiesStorageService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.service.HerodotusSecurityMetadataService;
 import org.slf4j.Logger;
@@ -125,10 +125,10 @@ public class SecurityAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(HerodotusSecurityMetadataService.class)
-    @ConditionalOnSingleCandidate(StrategySecurityMetadataService.class)
-    public HerodotusSecurityMetadataService securityMetadataStorageService(StrategySecurityMetadataService strategySecurityMetadataService, RequestMappingLocalCache requestMappingLocalCache) {
+    @ConditionalOnSingleCandidate(StrategyAuthoritiesStorageService.class)
+    public HerodotusSecurityMetadataService securityMetadataStorageService(StrategyAuthoritiesStorageService strategyAuthoritiesStorageService, RequestMappingLocalCache requestMappingLocalCache) {
         HerodotusSecurityMetadataService herodotusSecurityMetadataService = new HerodotusSecurityMetadataService();
-        herodotusSecurityMetadataService.setStrategySecurityMetadataService(strategySecurityMetadataService);
+        herodotusSecurityMetadataService.setStrategySecurityMetadataService(strategyAuthoritiesStorageService);
         herodotusSecurityMetadataService.setRequestMappingLocalCache(requestMappingLocalCache);
         log.trace("[Eurynome] |- Bean [Security Metadata Storage Service] Auto Configure.");
         return herodotusSecurityMetadataService;

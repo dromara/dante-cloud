@@ -32,7 +32,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/7/28 18:14
  */
-public interface StrategySecurityMetadataService {
+public interface StrategyAuthoritiesStorageService {
 
     /**
      * 将扫描到的RequestMapping转换为权限数据，统一汇总存储。

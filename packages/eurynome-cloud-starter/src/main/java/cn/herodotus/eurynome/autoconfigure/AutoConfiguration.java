@@ -25,8 +25,8 @@ package cn.herodotus.eurynome.autoconfigure;
 import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
 import cn.herodotus.eurynome.message.queue.KafkaProducer;
-import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
-import cn.herodotus.eurynome.security.service.RemoteSecurityMetadataService;
+import cn.herodotus.eurynome.security.definition.service.StrategyAuthoritiesStorageService;
+import cn.herodotus.eurynome.security.service.RemoteAuthoritiesStorageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -60,8 +60,8 @@ public class AutoConfiguration {
 
     @Bean
     @ConditionalOnBean(KafkaProducer.class)
-    public StrategySecurityMetadataService remoteSecurityMetadataStorageService(KafkaProducer kafkaProducer) {
+    public StrategyAuthoritiesStorageService remoteSecurityMetadataStorageService(KafkaProducer kafkaProducer) {
         log.trace("[Eurynome] |- Bean [Remote Security Metadata Storage Service] Auto Configure.");
-        return new RemoteSecurityMetadataService(kafkaProducer);
+        return new RemoteAuthoritiesStorageService(kafkaProducer);
     }
 }

@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.strategy;
 
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.definition.service.StrategySecurityMetadataService;
+import cn.herodotus.eurynome.security.definition.service.StrategyAuthoritiesStorageService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
@@ -42,8 +42,8 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/7/28 19:01
  */
-public class LocalSecurityMetadataService implements StrategySecurityMetadataService {
-    private static final Logger log = LoggerFactory.getLogger(LocalSecurityMetadataService.class);
+public class LocalAuthoritiesStorageService implements StrategyAuthoritiesStorageService {
+    private static final Logger log = LoggerFactory.getLogger(LocalAuthoritiesStorageService.class);
 
     private static final String DDL_AUTO_TYPE_NONE = "none";
 
