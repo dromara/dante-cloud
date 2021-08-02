@@ -340,6 +340,12 @@
                 <artifactId>jetcache-starter-redis-lettuce</artifactId>
                 <version>${alibaba-jetcache.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-core -->
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-core</artifactId>
+                <version>${alibaba-jetcache.version}</version>
+            </dependency>
 
             <!-- 第三方Starter -->
             <dependency>

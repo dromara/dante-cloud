@@ -31,12 +31,11 @@ import cn.herodotus.eurynome.oauth.condition.LocalStrategyCondition;
 import cn.herodotus.eurynome.oauth.condition.RemoteStrategyCondition;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.security.definition.service.StrategyAuthoritiesStorageService;
-import cn.herodotus.eurynome.security.service.RemoteAuthoritiesStorageService;
+import cn.herodotus.eurynome.security.definition.service.StrategyRequestMappingGatherService;
+import cn.herodotus.eurynome.security.service.RemoteRequestMappingGatherService;
 import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
-import cn.herodotus.eurynome.upms.logic.strategy.LocalAuthoritiesStorageService;
-import com.alicp.jetcache.anno.config.EnableMethodCache;
+import cn.herodotus.eurynome.upms.logic.strategy.LocalRequestMappingGatherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -105,9 +104,6 @@ import javax.annotation.PostConstruct;
 @EnableHerodotusCrud
 @EnableUpmsInterface
 @EnableUpmsLogic
-@EnableMethodCache(basePackages = {
-        "cn.herodotus.eurynome.oauth.autoconfigure.service",
-})
 public class AutoConfiguration {
 
     @PostConstruct
@@ -120,9 +116,9 @@ public class AutoConfiguration {
     static class DataAccessStrategyLocalConfiguration {
 
         @Bean
-        public StrategyAuthoritiesStorageService localSecurityMetadataStoreService() {
+        public StrategyRequestMappingGatherService localSecurityMetadataStoreService() {
             log.trace("[Eurynome] |- Bean [Local Security Metadata Storage Service] Auto Configure.");
-            return new LocalAuthoritiesStorageService();
+            return new LocalRequestMappingGatherService();
         }
     }
 
@@ -140,9 +136,9 @@ public class AutoConfiguration {
 
         @Bean
         @ConditionalOnBean(MessageProducer.class)
-        public StrategyAuthoritiesStorageService remoteSecurityMetadataStorageService(MessageProducer messageProducer) {
+        public StrategyRequestMappingGatherService remoteSecurityMetadataStorageService(MessageProducer messageProducer) {
             log.trace("[Eurynome] |- Bean [Remote Security Metadata Storage Service] Auto Configure.");
-            return new RemoteAuthoritiesStorageService(messageProducer);
+            return new RemoteRequestMappingGatherService(messageProducer);
         }
     }
 

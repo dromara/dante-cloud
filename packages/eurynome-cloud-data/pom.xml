@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>com.alicp.jetcache</groupId>
-            <artifactId>jetcache-starter-redis-lettuce</artifactId>
+            <artifactId>jetcache-core</artifactId>
         </dependency>
 
         <dependency>

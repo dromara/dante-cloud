@@ -28,14 +28,16 @@ import cn.herodotus.eurynome.rest.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
+import cn.herodotus.eurynome.security.event.RequestMappingGatherEvent;
 import cn.hutool.core.util.HashUtil;
 import cn.hutool.crypto.SecureUtil;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -64,24 +66,21 @@ import java.util.stream.Collectors;
  * @author : gengwei.zheng
  * @date : 2020/6/2 19:52
  */
-@Slf4j
 public class RequestMappingScanner implements ApplicationContextAware {
+
+    private static final Logger log = LoggerFactory.getLogger(RequestMappingScanner.class);
 
     private final RestProperties restProperties;
     private final PlatformProperties platformProperties;
-    private final RequestMappingLocalCache requestMappingLocalCache;
-
-    private ApplicationContext applicationContext;
 
     /**
      * 在外部动态指定扫描的注解，而不是在内部写死
      */
     private Class<? extends Annotation> scanAnnotationClass = EnableResourceServer.class;
 
-    public RequestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, RequestMappingLocalCache requestMappingLocalCache) {
+    public RequestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties) {
         this.restProperties = restProperties;
         this.platformProperties = platformProperties;
-        this.requestMappingLocalCache = requestMappingLocalCache;
     }
 
     public void setScanAnnotationClass(Class<? extends Annotation> scanAnnotationClass) {
@@ -90,7 +89,6 @@ public class RequestMappingScanner implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
         onApplicationEvent(applicationContext);
     }
 
@@ -132,7 +130,7 @@ public class RequestMappingScanner implements ApplicationContextAware {
         }
 
         if (CollectionUtils.isNotEmpty(resources)) {
-            requestMappingLocalCache.save(resources);
+            applicationContext.publishEvent(new RequestMappingGatherEvent(resources));
         }
 
         log.info("[Eurynome] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
