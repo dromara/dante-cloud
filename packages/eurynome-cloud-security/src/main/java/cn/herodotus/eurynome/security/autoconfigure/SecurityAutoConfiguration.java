@@ -27,6 +27,7 @@ import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
+import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
 import cn.herodotus.eurynome.security.definition.service.StrategyRequestMappingGatherService;
 import cn.herodotus.eurynome.security.event.RequestMappingGatherListener;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
@@ -39,6 +40,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 
 import javax.annotation.PostConstruct;
@@ -75,6 +77,9 @@ import javax.annotation.PostConstruct;
 @ComponentScan(basePackages = {
         "cn.hutool.extra.spring",
         "cn.herodotus.eurynome.security.response.exception"
+})
+@Import({
+        MethodSecurityMetadataConfiguration.class
 })
 public class SecurityAutoConfiguration {
 

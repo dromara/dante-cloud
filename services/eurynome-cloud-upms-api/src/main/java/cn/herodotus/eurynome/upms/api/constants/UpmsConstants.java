@@ -22,10 +22,9 @@
 
 package cn.herodotus.eurynome.upms.api.constants;
 
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.StatusEnum;
 import cn.herodotus.eurynome.data.constants.CacheConstants;
-import cn.herodotus.eurynome.security.definition.domain.GrantType;
+import cn.herodotus.eurynome.security.definition.constants.enums.GrantType;
 import cn.herodotus.eurynome.common.enums.ApplicationType;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
 import cn.herodotus.eurynome.upms.api.constants.enums.Identity;
@@ -49,30 +48,32 @@ public class UpmsConstants extends CacheConstants {
      */
     public static final String SERVICE_NAME = "eurynome-cloud-upms-ability";
 
-    public static final String CACHE_AREA_PREFIX = "data:upms:";
+    public static final String AREA_PREFIX = "data:upms:";
 
-    public static final String REGION_SYS_USER = CACHE_AREA_PREFIX + "sys:user";
-    public static final String REGION_SYS_ROLE = CACHE_AREA_PREFIX + "sys:role";
-    public static final String REGION_SYS_AUTHORITY = CACHE_AREA_PREFIX + "sys:authority";
-    public static final String REGION_SYS_USER_ROLE = CACHE_AREA_PREFIX + "sys:user_role";
-    public static final String REGION_SYS_ROLE_AUTHORITY = CACHE_AREA_PREFIX + "sys:role_authority";
-    public static final String CACHE_NAME_SYS_USER = CACHE_AREA_PREFIX + REGION_SYS_USER + SymbolConstants.COLON;
-    public static final String CACHE_NAME_SYS_ROLE = CACHE_AREA_PREFIX + REGION_SYS_ROLE + SymbolConstants.COLON;
-    public static final String CACHE_NAME_SYS_AUTHORITY = CACHE_AREA_PREFIX + REGION_SYS_AUTHORITY + SymbolConstants.COLON;
+    public static final String REGION_SYS_USER = AREA_PREFIX + "sys:user";
+    public static final String REGION_SYS_ROLE = AREA_PREFIX + "sys:role";
+    public static final String REGION_SYS_DEFAULT_ROLE = AREA_PREFIX + "sys:defaults:role";
+    public static final String REGION_SYS_AUTHORITY = AREA_PREFIX + "sys:authority";
+    public static final String REGION_SYS_METADATA = AREA_PREFIX + "sys:metadata";
+    public static final String REGION_SYS_OWNERSHIP = AREA_PREFIX + "sys:ownership";
+    public static final String REGION_SYS_SOCIAL_USER = AREA_PREFIX + "sys:social:user";
+    public static final String REGION_VIEW_SYS_OWNERSHIP = AREA_PREFIX + "view:sys:ownership";
 
-    public static final String REGION_DEVELOPMENT_SUPPLIER = CACHE_AREA_PREFIX + "development:supplier";
-    public static final String CACHE_NAME_DEVELOPMENT_SUPPLIER = CACHE_AREA_PREFIX + REGION_DEVELOPMENT_SUPPLIER + SymbolConstants.COLON;
+    public static final String REGION_DEVELOPMENT_SUPPLIER = AREA_PREFIX + "development:supplier";
 
-    public static final String REGION_OAUTH_APPLICATIONS = CACHE_AREA_PREFIX + "oauth:applications";
-    public static final String REGION_OAUTH_APPLICATIONS_SCOPES = CACHE_AREA_PREFIX + "oauth:applications_scopes";
-    public static final String REGION_OAUTH_CLIENTDETAILS = CACHE_AREA_PREFIX + "oauth:clientdetails";
-    public static final String REGION_OAUTH_MICROSERVICES = CACHE_AREA_PREFIX + "oauth:microservices";
-    public static final String REGION_OAUTH_MICROSERVICES_SCOPES = CACHE_AREA_PREFIX + "oauth:microservices_scopes";
-    public static final String REGION_OAUTH_SCOPES = CACHE_AREA_PREFIX + "oauth:scopes";
-    public static final String REGION_OAUTH_SCOPES_AUTHORITY = CACHE_AREA_PREFIX + "oauth:scopes_authority";
-    public static final String CACHE_NAME_OAUTH_APPLICATIONS = CACHE_AREA_PREFIX + REGION_OAUTH_APPLICATIONS + SymbolConstants.COLON;
-    public static final String CACHE_NAME_OAUTH_CLIENTDETAILS = CACHE_AREA_PREFIX + REGION_OAUTH_CLIENTDETAILS + SymbolConstants.COLON;
-    public static final String CACHE_NAME_OAUTH_SCOPES = CACHE_AREA_PREFIX + REGION_OAUTH_SCOPES + SymbolConstants.COLON;
+    public static final String REGION_OAUTH_APPLICATIONS = AREA_PREFIX + "oauth:applications";
+    public static final String REGION_OAUTH_CLIENTDETAILS = AREA_PREFIX + "oauth:clientdetails";
+    public static final String REGION_OAUTH_MICROSERVICES = AREA_PREFIX + "oauth:microservices";
+    public static final String REGION_OAUTH_SCOPES = AREA_PREFIX + "oauth:scopes";
+    public static final String REGION_OAUTH_STATIC_EXPRESSIONS = AREA_PREFIX + "oauth:expressions:static";
+    public static final String REGION_OAUTH_DYNAMIC_EXPRESSIONS = AREA_PREFIX + "oauth:expressions:dynamic";
+    public static final String REGION_OAUTH_IP_ADDRESSES = AREA_PREFIX + "oauth:ipaddresses";
+
+    public static final String REGION_SYS_DEPARTMENT = AREA_PREFIX + "sys:department";
+    public static final String REGION_SYS_EMPLOYEE = AREA_PREFIX + "sys:employee";
+    public static final String REGION_SYS_EMPLOYEE_DEPARTMENT = AREA_PREFIX + "sys:employee:department";
+    public static final String REGION_SYS_ORGANIZATION = AREA_PREFIX + "sys:organization";
+    public static final String REGION_SYS_POSITION = AREA_PREFIX + "sys:position";
 
     private static final List<Map<String, Object>> STATUS_ENUM = StatusEnum.getToJsonStruct();
     private static final List<Map<String, Object>> APPLICATION_TYPE_ENUM = ApplicationType.getToJsonStruct();

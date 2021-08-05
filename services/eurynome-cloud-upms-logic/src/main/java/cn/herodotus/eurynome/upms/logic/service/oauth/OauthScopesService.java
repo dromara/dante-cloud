@@ -26,7 +26,7 @@ package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthScopesRepository;
 import org.slf4j.Logger;
@@ -44,7 +44,7 @@ import java.util.Set;
  * @date : 2020/3/19 17:00
  */
 @Service
-public class OauthScopesService extends BaseLayeredService<OauthScopes, String> {
+public class OauthScopesService extends BaseLayeredService<OAuth2Scopes, String> {
 
     private static final Logger log = LoggerFactory.getLogger(OauthScopesService.class);
 
@@ -52,11 +52,11 @@ public class OauthScopesService extends BaseLayeredService<OauthScopes, String> 
     private OauthScopesRepository oauthScopesRepository;
 
     @Override
-    public BaseRepository<OauthScopes, String> getRepository() {
+    public BaseRepository<OAuth2Scopes, String> getRepository() {
         return oauthScopesRepository;
     }
 
-    public OauthScopes authorize(String scopeId, String[] authorities) {
+    public OAuth2Scopes authorize(String scopeId, String[] authorities) {
 
         log.debug("[Eurynome] |- OauthScopes Service authorize.");
 
@@ -67,9 +67,9 @@ public class OauthScopesService extends BaseLayeredService<OauthScopes, String> 
             sysAuthorities.add(sysAuthority);
         }
 
-        OauthScopes oauthScopes = findById(scopeId);
-        oauthScopes.setAuthorities(sysAuthorities);
+        OAuth2Scopes OAuth2Scopes = findById(scopeId);
+        OAuth2Scopes.setAuthorities(sysAuthorities);
 
-        return saveOrUpdate(oauthScopes);
+        return saveOrUpdate(OAuth2Scopes);
     }
 }

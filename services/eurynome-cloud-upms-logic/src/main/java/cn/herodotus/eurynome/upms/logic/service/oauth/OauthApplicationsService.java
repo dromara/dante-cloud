@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.upms.logic.service.oauth;
 import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthApplicationsRepository;
 import cn.hutool.core.util.IdUtil;
 import org.apache.commons.lang3.ObjectUtils;
@@ -83,15 +83,15 @@ public class OauthApplicationsService extends BaseLayeredService<OauthApplicatio
 
         log.debug("[Eurynome] |- OauthApplications Service authorize.");
 
-        Set<OauthScopes> oauthScopesSet = new HashSet<>();
+        Set<OAuth2Scopes> OAuth2ScopesSet = new HashSet<>();
         for (String scopeId : scopeIds) {
-            OauthScopes oauthScopes = new OauthScopes();
-            oauthScopes.setScopeId(scopeId);
-            oauthScopesSet.add(oauthScopes);
+            OAuth2Scopes OAuth2Scopes = new OAuth2Scopes();
+            OAuth2Scopes.setScopeId(scopeId);
+            OAuth2ScopesSet.add(OAuth2Scopes);
         }
 
         OauthApplications oauthApplications = findById(appKey);
-        oauthApplications.setScopes(oauthScopesSet);
+        oauthApplications.setScopes(OAuth2ScopesSet);
 
         return saveOrUpdate(oauthApplications);
     }
