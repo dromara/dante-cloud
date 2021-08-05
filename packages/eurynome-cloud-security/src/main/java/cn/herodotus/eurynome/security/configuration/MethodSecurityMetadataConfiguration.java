@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-oauth
+ * Module Name: eurynome-cloud-security
  * File Name: MethodSecurityConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/07/28 18:11:28
+ * Date: 2021/07/28 18:12:28
  */
 
-package cn.herodotus.eurynome.oauth.configuration;
+package cn.herodotus.eurynome.security.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,9 +38,9 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
-public class MethodSecurityConfiguration extends GlobalMethodSecurityConfiguration {
+public class MethodSecurityMetadataConfiguration extends GlobalMethodSecurityConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(MethodSecurityConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(MethodSecurityMetadataConfiguration.class);
 
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {

@@ -95,8 +95,6 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
 
         String secure = secure(key);
 
-        log.debug("[Eurynome] |- CACHE - Lookup the cache for key: [{}]", secure);
-
         Object caffeineValue = caffeineCache.get(secure);
         if (ObjectUtils.isNotEmpty(caffeineValue)) {
             log.trace("[Eurynome] |- CACHE - Found the cache in caffeine cache, value is : [{}]", JSON.toJSONString(caffeineValue));
@@ -109,7 +107,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
             return redisValue;
         }
 
-        log.debug("[Eurynome] |- CACHE - Can not found the cache.");
+        log.debug("[Eurynome] |- CACHE - Lookup the cache for key: [{}], value is null", secure);
 
         return null;
     }
@@ -118,8 +116,6 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
     public ValueWrapper get(Object key) {
 
         String secure = secure(key);
-
-        log.debug("[Eurynome] |- CACHE - Get ValueWrapper data form Herodotus Cache for key: [{}]", secure);
 
         ValueWrapper caffeineValue = caffeineCache.get(secure);
         if (ObjectUtils.isNotEmpty(caffeineValue)) {
@@ -133,7 +129,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
             return redisValue;
         }
 
-        log.debug("[Eurynome] |- CACHE - Can not get ValueWrapper data in Herodotus Cache.");
+        log.debug("[Eurynome] |- CACHE - Get ValueWrapper data form Herodotus Cache for key: [{}], value is null", secure);
 
         return null;
     }
@@ -143,7 +139,6 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
 
         String secure = secure(key);
 
-        log.debug("[Eurynome] |- CACHE - Get <T> with type form Herodotus Cache for key: [{}]", secure);
 
         T caffeineValue = caffeineCache.get(secure, type);
         if (ObjectUtils.isNotEmpty(caffeineValue)) {
@@ -159,7 +154,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
             return redisValue;
         }
 
-        log.debug("[Eurynome] |- CACHE - Can not get <T> with type in Herodotus Cache.");
+        log.debug("[Eurynome] |- CACHE - Get <T> with type form Herodotus Cache for key: [{}], value is null", secure);
 
         return null;
     }
@@ -177,17 +172,16 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
         return toStoreValue(value);
     }
 
+    @SuppressWarnings("unchecked")
     @Nullable
     @Override
     public <T> T get(Object key, Callable<T> valueLoader) {
 
         String secure = secure(key);
 
-        log.debug("[Eurynome] |- CACHE - Get <T> with type form valueLoader Cache for key: [{}]", secure);
-
         T value = (T) caffeineCache.getNativeCache().get(secure, k -> getRedisStoreValue(k, valueLoader));
         if (value instanceof NullValue) {
-            log.debug("[Eurynome] |- Can not get <T> with valueLoader in Herodotus Cache.");
+            log.debug("[Eurynome] |- CACHE - Get <T> with type form valueLoader Cache for key: [{}], value is null", secure);
             return null;
         }
 

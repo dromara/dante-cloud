@@ -67,7 +67,7 @@ public class OauthApplications extends BaseAppEntity {
     @Column(name = "website", length = 1024)
     private String website;
 
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_APPLICATIONS_SCOPES)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_SCOPES)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "oauth_applications_scopes",
@@ -75,7 +75,7 @@ public class OauthApplications extends BaseAppEntity {
             inverseJoinColumns = {@JoinColumn(name = "scope_id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"app_key", "scope_id"})},
             indexes = {@Index(name = "oauth_applications_scopes_aid_idx", columnList = "app_key"), @Index(name = "oauth_applications_scopes_sid_idx", columnList = "scope_id")})
-    private Set<OauthScopes> scopes = new HashSet<>();
+    private Set<OAuth2Scopes> scopes = new HashSet<>();
 
     public String getAppKey() {
         return appKey;
@@ -109,11 +109,11 @@ public class OauthApplications extends BaseAppEntity {
         this.website = website;
     }
 
-    public Set<OauthScopes> getScopes() {
+    public Set<OAuth2Scopes> getScopes() {
         return scopes;
     }
 
-    public void setScopes(Set<OauthScopes> scopes) {
+    public void setScopes(Set<OAuth2Scopes> scopes) {
         this.scopes = scopes;
     }
 

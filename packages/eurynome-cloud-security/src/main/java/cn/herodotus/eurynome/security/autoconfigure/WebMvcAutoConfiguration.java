@@ -20,7 +20,7 @@
  * Date: 2021/05/07 11:28:07
  */
 
-package cn.herodotus.eurynome.security.configuration;
+package cn.herodotus.eurynome.security.autoconfigure;
 
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import com.google.common.collect.Lists;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,29 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: FilterOrder.java
+ * File Name: StrategySecurityMetadataService.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:46:07
+ * Date: 2021/07/28 18:14:28
  */
 
-package cn.herodotus.eurynome.security.definition.domain;
+package cn.herodotus.eurynome.security.definition.service;
+
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
+
+import java.util.List;
 
 /**
- * <p> Description : 统一管理filter顺序 </p>
+ * <p>Description: Authority 服务策略定义 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/6 12:10
+ * @date : 2021/7/28 18:14
  */
-public class FilterOrder {
+public interface StrategyRequestMappingGatherService {
 
-    private static final int INITIAL_ORDER = -105;
-    private static final int ORDER_STEP = 1;
-
-    public static final int TENANT_IDENTIFICATION_FILTER = INITIAL_ORDER + ORDER_STEP;
+    /**
+     * 将扫描到的RequestMapping转换为权限数据，统一汇总存储。
+     *
+     * @param requestMappings 扫描的接口数据{@link RequestMapping}
+     */
+    void store(List<RequestMapping> requestMappings);
 }

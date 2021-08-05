@@ -23,24 +23,17 @@
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
 import cn.herodotus.eurynome.common.enums.StatusEnum;
-import cn.herodotus.eurynome.crud.service.BaseWriteableService;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
-import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthClientDetailsRepository;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import lombok.extern.slf4j.Slf4j;
+import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
-
-import java.util.Set;
 
 /**
  * <p>Description: ClientDetailsService核心类 </p>
@@ -58,34 +51,12 @@ import java.util.Set;
  * @date : 2019/11/25 11:02
  */
 
-@Slf4j
-public class HerodotusOauthClientDetailsService extends BaseWriteableService<OauthClientDetails, String> implements HerodotusClientDetailsService {
+public class HerodotusOauthClientDetailsService implements HerodotusClientDetailsService {
 
-    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_OAUTH_CLIENTDETAILS;
-
-    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, OauthClientDetails> dataCache;
-
-    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
+    private static final Logger log = LoggerFactory.getLogger(HerodotusOauthClientDetailsService.class);
 
     @Autowired
-    private OauthClientDetailsRepository oauthClientDetailsRepository;
-
-    @Override
-    public Cache<String, OauthClientDetails> getCache() {
-        return dataCache;
-    }
-
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return indexCache;
-    }
-
-    @Override
-    public BaseRepository<OauthClientDetails, String> getRepository() {
-        return oauthClientDetailsRepository;
-    }
+    private OauthClientDetailsService oauthClientDetailsService;
 
     /**
      * 这里AdditionalInformation的用途：
@@ -128,7 +99,7 @@ public class HerodotusOauthClientDetailsService extends BaseWriteableService<Oau
      */
     @Override
     public HerodotusClientDetails getOauthClientDetails(String clientId) {
-        OauthClientDetails oauthClientDetails = findById(clientId);
+        OauthClientDetails oauthClientDetails = oauthClientDetailsService.findById(clientId);
 
         if (ObjectUtils.isEmpty(oauthClientDetails)) {
             log.error("[Eurynome] |- Can not Fetch the Remote Client Details!");

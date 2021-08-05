@@ -22,8 +22,6 @@ spring:
             group: common
           - data-id: eurynome-cloud-redis.yaml
             group: common
-          - data-id: eurynome-cloud-cache.yaml
-            group: common
           - data-id: eurynome-cloud-rest.yaml
             group: common
           - data-id: eurynome-cloud-kafka.yaml

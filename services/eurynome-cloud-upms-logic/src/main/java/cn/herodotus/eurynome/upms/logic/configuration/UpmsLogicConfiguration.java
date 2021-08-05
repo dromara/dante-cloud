@@ -24,7 +24,6 @@
 
 package cn.herodotus.eurynome.upms.logic.configuration;
 
-import com.alicp.jetcache.anno.config.EnableMethodCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -68,11 +67,6 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.repository.system",
         "cn.herodotus.eurynome.upms.logic.repository.oauth",
         "cn.herodotus.eurynome.upms.logic.repository.development",
-})
-@EnableMethodCache(basePackages = {
-        "cn.herodotus.eurynome.upms.logic.service.system",
-        "cn.herodotus.eurynome.upms.logic.service.oauth",
-        "cn.herodotus.eurynome.upms.logic.service.development"
 })
 public class UpmsLogicConfiguration {
 

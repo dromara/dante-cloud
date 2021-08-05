@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,23 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: SecurityMetadataStorage.java
+ * File Name: FilterOrder.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 10:58:13
+ * Date: 2021/06/29 15:58:29
  */
 
-package cn.herodotus.eurynome.security.definition.service;
-
-import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-
-import java.util.List;
+package cn.herodotus.eurynome.security.definition.constants;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: SecurityMetadataStorage </p>
- *
- * <p>Description: SecurityMetadataStorage接口，预期要支持微服务和单体等不同需求的存储方式 </p>
+ * <p> Description : 统一管理filter顺序 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/12/30 14:26
+ * @date : 2020/3/6 12:10
  */
-public abstract class SecurityMetadataStorage {
+public class FilterOrder {
 
-    public abstract void save(List<RequestMapping> requestMappings);
+    private static final int INITIAL_ORDER = -105;
+    private static final int ORDER_STEP = 1;
 
-    public abstract List<RequestMapping> findAll();
+    public static final int TENANT_IDENTIFICATION_FILTER = INITIAL_ORDER + ORDER_STEP;
 }

@@ -25,12 +25,15 @@ package cn.herodotus.eurynome.upms.api.entity.oauth;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
+import cn.herodotus.eurynome.upms.api.listener.entity.SysScopeEntityListener;
+import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -47,7 +50,8 @@ import java.util.Set;
         indexes = {@Index(name = "oauth_scopes_id_idx", columnList = "scope_id"), @Index(name = "oauth_scopes_code_idx", columnList = "scope_code")})
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_SCOPES)
-public class OauthScopes extends BaseSysEntity {
+@EntityListeners({SysScopeEntityListener.class})
+public class OAuth2Scopes extends BaseSysEntity implements GrantedAuthority {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -76,7 +80,7 @@ public class OauthScopes extends BaseSysEntity {
      * <p>
      * {@link :https://www.jianshu.com/p/23bd82a7b96e}
      */
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_SCOPES_AUTHORITY)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_AUTHORITY)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "oauth_scopes_authority",
@@ -130,6 +134,11 @@ public class OauthScopes extends BaseSysEntity {
 
 
     @Override
+    public String getAuthority() {
+        return this.getScopeCode();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -139,7 +148,7 @@ public class OauthScopes extends BaseSysEntity {
             return false;
         }
 
-        OauthScopes that = (OauthScopes) o;
+        OAuth2Scopes that = (OAuth2Scopes) o;
 
         return new EqualsBuilder()
                 .append(getScopeId(), that.getScopeId())
@@ -155,10 +164,10 @@ public class OauthScopes extends BaseSysEntity {
 
     @Override
     public String toString() {
-        return "OauthScope{" +
-                "scopeId='" + scopeId + '\'' +
-                ", scopeCode='" + scopeCode + '\'' +
-                ", scopeName='" + scopeName + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("scopeId", scopeId)
+                .add("scopeCode", scopeCode)
+                .add("scopeName", scopeName)
+                .toString();
     }
 }

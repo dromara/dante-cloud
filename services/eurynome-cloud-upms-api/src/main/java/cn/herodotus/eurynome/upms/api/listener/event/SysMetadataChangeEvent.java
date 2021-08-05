@@ -14,30 +14,33 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
- * File Name: StrategySecurityMetadataService.java
+ * Module Name: eurynome-cloud-upms-api
+ * File Name: SysMetadataChangeEvent.java
  * Author: gengwei.zheng
- * Date: 2021/07/28 18:14:28
+ * Date: 2021/08/05 17:09:05
  */
 
-package cn.herodotus.eurynome.security.definition.service;
+package cn.herodotus.eurynome.upms.api.listener.event;
 
-import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-
-import java.util.List;
+import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
+import org.springframework.context.ApplicationEvent;
 
 /**
- * <p>Description: Authority 服务策略定义 </p>
+ * <p>Description: SysMetadata实体数据变更事件 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/28 18:14
+ * @date : 2021/8/5 17:09
  */
-public interface StrategyAuthoritiesStorageService {
+public class SysMetadataChangeEvent extends ApplicationEvent {
 
-    /**
-     * 将扫描到的RequestMapping转换为权限数据，统一汇总存储。
-     *
-     * @param requestMappings 扫描的接口数据{@link RequestMapping}
-     */
-    void store(List<RequestMapping> requestMappings);
+    private final SysMetadata sysMetadata;
+
+    public SysMetadataChangeEvent(SysMetadata sysMetadata) {
+        super(sysMetadata);
+        this.sysMetadata = sysMetadata;
+    }
+
+    public SysMetadata getSysMetadata() {
+        return sysMetadata;
+    }
 }

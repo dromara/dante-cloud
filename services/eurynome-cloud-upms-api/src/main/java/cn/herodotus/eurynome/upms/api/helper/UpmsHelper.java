@@ -25,16 +25,18 @@ package cn.herodotus.eurynome.upms.api.helper;
 
 import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.enums.StatusEnum;
+import cn.herodotus.eurynome.security.definition.constants.SecurityExpression;
 import cn.herodotus.eurynome.security.definition.core.HerodotusAuthority;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.core.HerodotusRole;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
+import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import com.alibaba.fastjson.JSON;
@@ -193,6 +195,24 @@ public class UpmsHelper {
         return requestMapping;
     }
 
+    public static List<SysMetadata> convertSysAuthoritiesToSysMetadatas(Collection<SysAuthority> sysAuthorities) {
+        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
+            return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToSysMetadata).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    private static SysMetadata convertSysAuthorityToSysMetadata(SysAuthority sysAuthority) {
+        SysMetadata sysMetadata = new SysMetadata();
+        sysMetadata.setMetadataId(sysAuthority.getAuthorityId());
+        sysMetadata.setDefaultExpressionElement(sysAuthority.getAuthorityCode());
+        sysMetadata.setUrl(sysAuthority.getUrl());
+        sysMetadata.setRequestMethod(sysMetadata.getRequestMethod());
+        sysMetadata.setServiceId(sysMetadata.getServiceId());
+        sysMetadata.setScopeExpressionElement(SecurityExpression.SCOPE_DENY_ACCESS);
+        return sysMetadata;
+    }
+
     public static OauthClientDetails convertOauthApplicationsToOauthClientDetails(OauthApplications oauthApplications, OauthClientDetails oauthClientDetails) {
         if (ObjectUtils.isEmpty(oauthClientDetails)) {
             oauthClientDetails = new OauthClientDetails();
@@ -202,7 +222,7 @@ public class UpmsHelper {
         oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthApplications.getAppSecret()));
 
         if (CollectionUtils.isNotEmpty(oauthApplications.getScopes())) {
-            String scope = oauthApplications.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
+            String scope = oauthApplications.getScopes().stream().map(OAuth2Scopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
             oauthClientDetails.setScope(scope);
         }
 

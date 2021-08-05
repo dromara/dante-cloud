@@ -3,7 +3,7 @@ package cn.herodotus.eurynome.upms.rest.controller.oauth;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.crud.service.WriteableService;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthScopesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/oauth/scopes")
 @Api(tags = {"用户中心服务", "Oauth权限范围接口"})
-public class OauthScopesController extends BaseWriteableRestController<OauthScopes, String> {
+public class OauthScopesController extends BaseWriteableRestController<OAuth2Scopes, String> {
 
     private final OauthScopesService oauthScopesService;
 
@@ -34,7 +34,7 @@ public class OauthScopesController extends BaseWriteableRestController<OauthScop
     }
 
     @Override
-    public WriteableService<OauthScopes, String> getWriteableService() {
+    public WriteableService<OAuth2Scopes, String> getWriteableService() {
         return this.oauthScopesService;
     }
 
@@ -44,8 +44,8 @@ public class OauthScopesController extends BaseWriteableRestController<OauthScop
             @ApiImplicitParam(name = "authorities[]", required = true, value = "权限对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
     })
     @PutMapping
-    public Result<OauthScopes> authorize(@RequestParam(name = "scopeId") String scopeId, @RequestParam(name = "authorities[]") String[] authorities) {
-        OauthScopes oauthScopes = oauthScopesService.authorize(scopeId, authorities);
-        return result(oauthScopes);
+    public Result<OAuth2Scopes> authorize(@RequestParam(name = "scopeId") String scopeId, @RequestParam(name = "authorities[]") String[] authorities) {
+        OAuth2Scopes OAuth2Scopes = oauthScopesService.authorize(scopeId, authorities);
+        return result(OAuth2Scopes);
     }
 }

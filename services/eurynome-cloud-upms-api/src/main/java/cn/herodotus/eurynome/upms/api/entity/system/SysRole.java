@@ -24,12 +24,15 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import cn.herodotus.eurynome.upms.api.listener.entity.SysRoleEntityListener;
+import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -40,7 +43,8 @@ import java.util.Set;
         indexes = {@Index(name = "sys_role_rid_idx", columnList = "role_id"), @Index(name = "sys_role_rcd_idx", columnList = "role_code")})
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
-public class SysRole extends BaseSysEntity {
+@EntityListeners(value = {SysRoleEntityListener.class})
+public class SysRole extends BaseSysEntity implements GrantedAuthority {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
@@ -62,10 +66,11 @@ public class SysRole extends BaseSysEntity {
      * 从输出可看出，在执行criteria.list()时通过一条sql 获取了所有的City和Hotel。
      * 使用@Fetch(FetchMode.JOIN)需要注意的是：它在Join查询时是Full Join, 所以会有重复City出现
      * (4) 加上@Fetch(FetchMode.SUBSELECT), 那么Hibernate将强行设置为fetch=FetchType.EAGER, 用户设置fetch=FetchType.LAZY将不会生效 从输出可看出，在执行criteria.list()时通过两条sql分别获取City和Hotel
-     *
+     * <p>
      * {@link :https://www.jianshu.com/p/23bd82a7b96e}
      */
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE_AUTHORITY)
+
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_AUTHORITY)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "sys_role_authority",
@@ -74,6 +79,15 @@ public class SysRole extends BaseSysEntity {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"role_id", "authority_id"})},
             indexes = {@Index(name = "sys_role_authority_rid_idx", columnList = "role_id"), @Index(name = "sys_role_authority_aid_idx", columnList = "authority_id")})
     private Set<SysAuthority> authorities = new HashSet<>();
+
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_DEFAULT_ROLE)
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Set<SysDefaultRole> defaults = new HashSet<>();
+
+    @Override
+    public String getAuthority() {
+        return this.getRoleCode();
+    }
 
     @Override
     public String getId() {
@@ -85,6 +99,13 @@ public class SysRole extends BaseSysEntity {
         return getRoleCode();
     }
 
+    public Set<SysDefaultRole> getDefaults() {
+        return defaults;
+    }
+
+    public void setDefaults(Set<SysDefaultRole> defaults) {
+        this.defaults = defaults;
+    }
 
     public String getRoleId() {
         return roleId;
@@ -144,10 +165,10 @@ public class SysRole extends BaseSysEntity {
 
     @Override
     public String toString() {
-        return "SysRole{" +
-                "roleId='" + roleId + '\'' +
-                ", roleCode='" + roleCode + '\'' +
-                ", roleName='" + roleName + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("roleId", roleId)
+                .add("roleCode", roleCode)
+                .add("roleName", roleName)
+                .toString();
     }
 }

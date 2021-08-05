@@ -22,23 +22,15 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
-import cn.herodotus.eurynome.crud.service.BaseWriteableService;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
-import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
-import com.alicp.jetcache.Cache;
-import com.alicp.jetcache.anno.CacheType;
-import com.alicp.jetcache.anno.CreateCache;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
+import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.Set;
 
 /**
  * <p>Description: UserDetailsService核心类 </p>
@@ -55,34 +47,12 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2019/11/25 11:02
  */
-@Slf4j
-public class HerodotusOauthUserDetailsService extends BaseWriteableService<SysUser, String> implements HerodotusUserDetailsService {
+public class HerodotusOauthUserDetailsService implements HerodotusUserDetailsService {
 
-    private static final String CACHE_NAME = UpmsConstants.CACHE_NAME_SYS_USER;
-
-    @CreateCache(name = CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, SysUser> dataCache;
-
-    @CreateCache(name = CACHE_NAME + UpmsConstants.INDEX_CACHE_NAME, expire = UpmsConstants.DEFAULT_UPMS_CACHE_EXPIRE, cacheType = CacheType.BOTH, localLimit = UpmsConstants.DEFAULT_UPMS_LOCAL_LIMIT)
-    private Cache<String, Set<String>> indexCache;
+    private static final Logger log = LoggerFactory.getLogger(HerodotusOauthUserDetailsService.class);
 
     @Autowired
-    private SysUserRepository sysUserRepository;
-
-    @Override
-    public Cache<String, SysUser> getCache() {
-        return dataCache;
-    }
-
-    @Override
-    public Cache<String, Set<String>> getIndexCache() {
-        return indexCache;
-    }
-
-    @Override
-    public BaseRepository<SysUser, String> getRepository() {
-        return sysUserRepository;
-    }
+    private SysUserService sysUserService;
 
     @Override
     public HerodotusUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -99,11 +69,7 @@ public class HerodotusOauthUserDetailsService extends BaseWriteableService<SysUs
     }
 
     private SysUser findByUserName(String userName) {
-        SysUser sysUser = readOneFromCacheByLink(userName);
-        if (ObjectUtils.isEmpty(sysUser)) {
-            sysUser = sysUserRepository.findByUserName(userName);
-            writeToCache(sysUser);
-        }
+        SysUser sysUser = sysUserService.findByUserName(userName);
         log.debug("[Eurynome] |- SysUser Service findSysUserByUserName.");
         return sysUser;
     }

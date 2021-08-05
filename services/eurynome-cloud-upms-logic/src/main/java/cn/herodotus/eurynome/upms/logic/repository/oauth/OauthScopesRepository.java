@@ -25,7 +25,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.oauth;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
 
 /**
  * <p> Description : OauthScopeRepository </p>
@@ -33,6 +33,6 @@ import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
  * @author : gengwei.zheng
  * @date : 2020/3/19 16:57
  */
-public interface OauthScopesRepository extends BaseRepository<OauthScopes, String> {
+public interface OauthScopesRepository extends BaseRepository<OAuth2Scopes, String> {
 
 }
