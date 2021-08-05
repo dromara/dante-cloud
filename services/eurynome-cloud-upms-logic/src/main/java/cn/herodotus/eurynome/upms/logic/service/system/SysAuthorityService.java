@@ -65,13 +65,13 @@ public class SysAuthorityService extends BaseLayeredService<SysAuthority, String
     }
 
     public List<SysAuthority> batchSaveOrUpdate(List<SysAuthority> sysAuthorities) {
-        log.debug("[Herodotus] |- SysAuthority Service batchSaveOrUpdate.");
+        log.debug("[Eurynome] |- SysAuthority Service batchSaveOrUpdate.");
         return sysAuthorityRepository.saveAllAndFlush(sysAuthorities);
     }
 
     public List<SysAuthority> findAllByAuthorityType(AuthorityType authorityType) {
         List<SysAuthority> sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
-        log.debug("[Herodotus] |- SysAuthority Service findAllByAuthorityType.");
+        log.debug("[Eurynome] |- SysAuthority Service findAllByAuthorityType.");
         return sysAuthorities;
     }
 
@@ -103,7 +103,7 @@ public class SysAuthorityService extends BaseLayeredService<SysAuthority, String
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Herodotus] |- SysAuthority Service findAllocatable.");
+        log.debug("[Eurynome] |- SysAuthority Service findAllocatable.");
         return this.findAll(specification);
     }
 }

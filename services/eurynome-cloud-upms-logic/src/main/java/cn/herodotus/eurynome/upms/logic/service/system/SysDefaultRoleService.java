@@ -57,7 +57,7 @@ public class SysDefaultRoleService extends BaseLayeredService<SysDefaultRole, St
 
     public SysDefaultRole findByScene(AccountType scene) {
         SysDefaultRole sysDefaultRole = this.sysDefaultRoleRepository.findByScene(scene);
-        log.debug("[Herodotus] |- SysDefaultRole Service findBySource.");
+        log.debug("[Eurynome] |- SysDefaultRole Service findBySource.");
         return sysDefaultRole;
     }
 }

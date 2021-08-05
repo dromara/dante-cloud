@@ -59,7 +59,7 @@ public class SysMetadata extends BaseSysEntity implements SecurityMetadata {
     @ApiModelProperty(value = "元数据ID")
     @Id
     @GeneratedValue(generator = "metadata-uuid")
-    @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.cloud.upms.api.generator.SysMetadataUUIDGenerator")
+    @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.eurynome.upms.api.generator.SysMetadataUUIDGenerator")
     @Column(name = "metadata_id", length = 64)
     private String metadataId;
 

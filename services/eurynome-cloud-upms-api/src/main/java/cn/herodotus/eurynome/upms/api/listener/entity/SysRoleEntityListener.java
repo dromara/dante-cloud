@@ -62,20 +62,20 @@ public class SysRoleEntityListener implements ApplicationContextAware {
 
     @PreUpdate
     protected void preUpdate(SysRole entity) {
-        log.trace("[Herodotus] |- SysRoleEntityListener @PreUpdate : [{}]", entity.toString());
+        log.trace("[Eurynome] |- SysRoleEntityListener @PreUpdate : [{}]", entity.toString());
         this.preSysRole = entity;
     }
 
     @PostUpdate
     protected void postUpdate(SysRole entity) {
-        log.trace("[Herodotus] |- SysRoleEntityListener @PostUpdate : [{}]", entity.toString());
+        log.trace("[Eurynome] |- SysRoleEntityListener @PostUpdate : [{}]", entity.toString());
         this.postSysRole = entity;
         this.applicationContext.publishEvent(new SysMetadataRelationChangeEvent(this.getChangedAuthority()));
     }
 
     @PostRemove
     protected void postRemove(SysRole entity) {
-        log.trace("[Herodotus] |- BaseEntityListener @PostRemove : [{}]", entity.toString());
+        log.trace("[Eurynome] |- BaseEntityListener @PostRemove : [{}]", entity.toString());
         if (CollectionUtils.isNotEmpty(entity.getAuthorities())) {
             this.applicationContext.publishEvent(new SysMetadataRelationChangeEvent(entity.getAuthorities()));
         }

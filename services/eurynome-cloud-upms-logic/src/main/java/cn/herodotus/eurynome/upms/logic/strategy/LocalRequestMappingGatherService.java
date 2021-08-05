@@ -62,7 +62,7 @@ public class LocalRequestMappingGatherService implements StrategyRequestMappingG
     @Async
     @Override
     public void store(List<RequestMapping> requestMappings) {
-        log.debug("[Herodotus] |- spring.jpa.ddl-auto value is : {}", ddlAuto);
+        log.debug("[Eurynome] |- spring.jpa.ddl-auto value is : {}", ddlAuto);
 
         if (StringUtils.isNotEmpty(ddlAuto) && !StringUtils.equalsIgnoreCase(ddlAuto, DDL_AUTO_TYPE_NONE)) {
             if (CollectionUtils.isNotEmpty(requestMappings)) {
@@ -71,7 +71,7 @@ public class LocalRequestMappingGatherService implements StrategyRequestMappingG
             }
 
         } else {
-            log.debug("[Herodotus] |- Skip Store Service Resources.");
+            log.debug("[Eurynome] |- Skip Store Service Resources.");
         }
     }
 
@@ -79,9 +79,9 @@ public class LocalRequestMappingGatherService implements StrategyRequestMappingG
         List<SysAuthority> sysAuthorities = UpmsHelper.convertRequestMappingsToSysAuthorities(requestMappings);
         List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
         if (CollectionUtils.isNotEmpty(result)) {
-            log.info("[Herodotus] |- Store Request Mapping to SysAuthority Success!");
+            log.info("[Eurynome] |- Store Request Mapping to SysAuthority Success!");
         } else {
-            log.error("[Herodotus] |- Store Request Mapping to SysAuthority  May Be Error, Please Check!");
+            log.error("[Eurynome] |- Store Request Mapping to SysAuthority  May Be Error, Please Check!");
         }
     }
 
@@ -91,9 +91,9 @@ public class LocalRequestMappingGatherService implements StrategyRequestMappingG
             List<SysMetadata> sysMetadata = UpmsHelper.convertSysAuthoritiesToSysMetadatas(sysAuthorities);
             List<SysMetadata> result = sysMetadataService.batchSaveOrUpdate(sysMetadata);
             if (CollectionUtils.isNotEmpty(result)) {
-                log.info("[Herodotus] |- Store Request Mapping to SysMetadata Success!");
+                log.info("[Eurynome] |- Store Request Mapping to SysMetadata Success!");
             } else {
-                log.error("[Herodotus] |- Store Request Mapping to SysMetadata May Be Error, Please Check!");
+                log.error("[Eurynome] |- Store Request Mapping to SysMetadata May Be Error, Please Check!");
             }
         }
     }

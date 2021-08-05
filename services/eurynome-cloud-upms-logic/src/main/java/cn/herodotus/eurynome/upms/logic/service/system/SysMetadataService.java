@@ -64,12 +64,12 @@ public class SysMetadataService extends BaseLayeredService<SysMetadata, String> 
     }
 
     public List<SysMetadata> batchSaveOrUpdate(List<SysMetadata> sysMetadata) {
-        log.debug("[Herodotus] |- SysMetadata Service batchSaveOrUpdate.");
+        log.debug("[Eurynome] |- SysMetadata Service batchSaveOrUpdate.");
         return sysMetadataRepository.saveAllAndFlush(sysMetadata);
     }
 
     public List<SysMetadata> findByMetadataIn(List<String> ids) {
-        log.debug("[Herodotus] |- SysMetadata Service findByMetadataIn.");
+        log.debug("[Eurynome] |- SysMetadata Service findByMetadataIn.");
         return sysMetadataRepository.findByMetadataIdIn(ids);
     }
 
@@ -109,7 +109,7 @@ public class SysMetadataService extends BaseLayeredService<SysMetadata, String> 
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Herodotus] |- SysMetadata Service findByCondition.");
+        log.debug("[Eurynome] |- SysMetadata Service findByCondition.");
         return this.sysMetadataRepository.findAll(specification);
     }
 }

@@ -62,20 +62,20 @@ public class SysScopeEntityListener implements ApplicationContextAware {
 
     @PreUpdate
     protected void preUpdate(OAuth2Scopes entity) {
-        log.trace("[Herodotus] |- SysScopeEntityListener @PreUpdate : [{}]", entity.toString());
+        log.trace("[Eurynome] |- SysScopeEntityListener @PreUpdate : [{}]", entity.toString());
         this.preOAuth2Scopes = entity;
     }
 
     @PostUpdate
     protected void postUpdate(OAuth2Scopes entity) {
-        log.trace("[Herodotus] |- SysScopeEntityListener @PostUpdate : [{}]", entity.toString());
+        log.trace("[Eurynome] |- SysScopeEntityListener @PostUpdate : [{}]", entity.toString());
         this.postOAuth2Scopes = entity;
         this.applicationContext.publishEvent(new SysMetadataRelationChangeEvent(this.getChangedAuthority()));
     }
 
     @PostRemove
     protected void postRemove(OAuth2Scopes entity) {
-        log.trace("[Herodotus] |- SysScopeEntityListener @PostRemove : [{}]", entity.toString());
+        log.trace("[Eurynome] |- SysScopeEntityListener @PostRemove : [{}]", entity.toString());
         if (CollectionUtils.isNotEmpty(entity.getAuthorities())) {
             this.applicationContext.publishEvent(new SysMetadataRelationChangeEvent(entity.getAuthorities()));
         }
