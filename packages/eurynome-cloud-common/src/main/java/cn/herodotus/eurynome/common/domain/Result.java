@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.common.domain;
 
 
-import cn.herodotus.eurynome.common.enums.ResultStatus;
+import cn.herodotus.eurynome.constant.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;

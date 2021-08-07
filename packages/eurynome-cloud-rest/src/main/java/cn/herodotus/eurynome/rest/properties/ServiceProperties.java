@@ -22,8 +22,9 @@
 
 package cn.herodotus.eurynome.rest.properties;
 
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
 import cn.herodotus.eurynome.common.utils.ConvertUtils;
+import cn.herodotus.eurynome.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -34,7 +35,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author : gengwei.zheng
  * @date : 2021/6/13 16:58
  */
-@ConfigurationProperties(prefix = "herodotus.environment.service")
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_SERVICE)
 public class ServiceProperties {
 
     /**

@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.5.4.10</version>
+    <version>2.5.4.20</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -128,7 +128,17 @@
             <!-- Eurynome Cloud -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-constant</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-assistant</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -164,11 +174,6 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-kernel</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-message</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -345,12 +350,6 @@
             <dependency>
                 <groupId>com.alicp.jetcache</groupId>
                 <artifactId>jetcache-starter-redis-lettuce</artifactId>
-                <version>${alibaba-jetcache.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-core -->
-            <dependency>
-                <groupId>com.alicp.jetcache</groupId>
-                <artifactId>jetcache-core</artifactId>
                 <version>${alibaba-jetcache.version}</version>
             </dependency>
 

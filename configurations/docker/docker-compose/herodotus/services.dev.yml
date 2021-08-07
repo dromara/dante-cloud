@@ -58,16 +58,3 @@ services:
     depends_on:
       - upms
       - management
-
-  bpmn:
-    image: ${BPMN_SERVICE_NAME}:${VERSION}
-    build:
-      context: ../../context
-      dockerfile: /development/Dockerfile
-      args:
-        - VERSION=${VERSION}
-        - SERVICE_NAME=${BPMN_SERVICE_NAME}
-        - SERVICE_PORT=${BPMN_SERVICE_PORT}
-    container_name: bpmn
-    ports:
-      - ${BPMN_SERVICE_PORT}:${BPMN_SERVICE_PORT}

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.base.entity;
 
-import cn.herodotus.eurynome.common.enums.StatusEnum;
+import cn.herodotus.eurynome.constant.enums.StatusEnum;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

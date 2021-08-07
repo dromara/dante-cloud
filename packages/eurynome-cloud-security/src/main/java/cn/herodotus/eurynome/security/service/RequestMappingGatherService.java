@@ -22,13 +22,17 @@
 
 package cn.herodotus.eurynome.security.service;
 
+import cn.herodotus.eurynome.constant.magic.ServiceConstants;
+import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.definition.service.StrategyRequestMappingGatherService;
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.ObjectUtils;
+import cn.herodotus.eurynome.security.event.remote.RemoteRequestMappingGatherEvent;
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.cloud.bus.event.Destination;
+import org.springframework.cloud.bus.event.PathDestinationFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,18 +48,32 @@ public class RequestMappingGatherService {
 
     private static final Logger log = LoggerFactory.getLogger(RequestMappingGatherService.class);
 
-    private StrategyRequestMappingGatherService strategyRequestMappingGatherService;
+    private RequestMappingLocalCache requestMappingLocalCache;
 
-    public void setStrategySecurityMetadataService(StrategyRequestMappingGatherService strategyRequestMappingGatherService) {
-        this.strategyRequestMappingGatherService = strategyRequestMappingGatherService;
+    public void setRequestMappingLocalCache(RequestMappingLocalCache requestMappingLocalCache) {
+        this.requestMappingLocalCache = requestMappingLocalCache;
     }
 
-    @Async
-    public void postProcess(List<RequestMapping> requestMappings) {
-        if (CollectionUtils.isNotEmpty(requestMappings) && ObjectUtils.isNotEmpty(strategyRequestMappingGatherService)) {
-            log.debug("[Eurynome] |- Request mapping gather async process begin!");
-            strategyRequestMappingGatherService.store(requestMappings);
-            log.debug("[Eurynome] |- Request mapping gather async process finished!");
+    /**
+     * 发布远程事件，传送RequestMapping
+     *
+     * @param requestMappings    扫描到的RequestMapping
+     * @param applicationContext {@link ApplicationContext}
+     * @param serviceId          当前服务的service name。目前取的是：spring.application.name, applicationContext.getApplicationName取到的是空串
+     * @param isDistributed      是否是分布式架构
+     */
+    public void postProcess(List<RequestMapping> requestMappings, ApplicationContext applicationContext, String serviceId, boolean isDistributed) {
+
+        requestMappingLocalCache.save(requestMappings);
+
+        if (isDistributed && !StringUtils.equals(serviceId, ServiceConstants.SERVICE_NAME_UPMS)) {
+            String source = JSON.toJSONString(requestMappings);
+
+            PathDestinationFactory pathDestinationFactory = new PathDestinationFactory();
+            Destination destination = pathDestinationFactory.getDestination(ServiceConstants.SERVICE_NAME_UPMS + ":**");
+
+            applicationContext.publishEvent(new RemoteRequestMappingGatherEvent(source, serviceId, destination));
+            log.debug("[Herodotus] |- Request Mapping Gather Service Process Remote Event!");
         }
     }
 }

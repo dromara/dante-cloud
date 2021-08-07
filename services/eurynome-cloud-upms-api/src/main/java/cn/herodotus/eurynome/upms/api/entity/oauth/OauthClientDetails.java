@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.api.entity.oauth;
 
-import cn.herodotus.eurynome.common.enums.StatusEnum;
+import cn.herodotus.eurynome.constant.enums.StatusEnum;
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import com.alibaba.fastjson.JSON;

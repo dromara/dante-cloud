@@ -24,15 +24,8 @@ package cn.herodotus.eurynome.autoconfigure;
 
 import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
-import cn.herodotus.eurynome.message.queue.KafkaProducer;
-import cn.herodotus.eurynome.security.definition.service.StrategyRequestMappingGatherService;
-import cn.herodotus.eurynome.security.service.RemoteRequestMappingGatherService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.core.KafkaTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -48,20 +41,5 @@ public class AutoConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.info("[Eurynome] |- Starter [Herodotus Starter] Auto Configure.");
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(KafkaProducer.class)
-    public KafkaProducer kafkaProducer(KafkaTemplate kafkaTemplate) {
-        KafkaProducer kafkaProducer = new KafkaProducer(kafkaTemplate);
-        log.trace("[Eurynome] |- Bean [Kafka Producer] Auto Configure.");
-        return kafkaProducer;
-    }
-
-    @Bean
-    @ConditionalOnBean(KafkaProducer.class)
-    public StrategyRequestMappingGatherService remoteSecurityMetadataStorageService(KafkaProducer kafkaProducer) {
-        log.trace("[Eurynome] |- Bean [Remote Security Metadata Storage Service] Auto Configure.");
-        return new RemoteRequestMappingGatherService(kafkaProducer);
     }
 }

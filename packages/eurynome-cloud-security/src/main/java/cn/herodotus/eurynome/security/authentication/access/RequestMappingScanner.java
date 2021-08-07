@@ -22,13 +22,15 @@
 
 package cn.herodotus.eurynome.security.authentication.access;
 
-import cn.herodotus.eurynome.common.constants.SecurityConstants;
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.rest.enums.Architecture;
+import cn.herodotus.eurynome.assistant.utils.PropertyResolver;
+import cn.herodotus.eurynome.constant.enums.Architecture;
+import cn.herodotus.eurynome.constant.magic.PlatformConstants;
+import cn.herodotus.eurynome.constant.magic.SecurityConstants;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.security.event.RequestMappingGatherEvent;
+import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import cn.hutool.core.util.HashUtil;
 import cn.hutool.crypto.SecureUtil;
 import io.swagger.annotations.ApiOperation;
@@ -38,10 +40,9 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.env.Environment;
+import org.springframework.context.ApplicationListener;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
@@ -66,21 +67,25 @@ import java.util.stream.Collectors;
  * @author : gengwei.zheng
  * @date : 2020/6/2 19:52
  */
-public class RequestMappingScanner implements ApplicationContextAware {
+public class RequestMappingScanner implements ApplicationListener<ApplicationReadyEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(RequestMappingScanner.class);
 
     private final RestProperties restProperties;
     private final PlatformProperties platformProperties;
+    private final RequestMappingGatherService requestMappingGatherService;
+
+    private ApplicationContext applicationContext;
 
     /**
      * 在外部动态指定扫描的注解，而不是在内部写死
      */
     private Class<? extends Annotation> scanAnnotationClass = EnableResourceServer.class;
 
-    public RequestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties) {
+    public RequestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, RequestMappingGatherService requestMappingGatherService) {
         this.restProperties = restProperties;
         this.platformProperties = platformProperties;
+        this.requestMappingGatherService = requestMappingGatherService;
     }
 
     public void setScanAnnotationClass(Class<? extends Annotation> scanAnnotationClass) {
@@ -88,17 +93,20 @@ public class RequestMappingScanner implements ApplicationContextAware {
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        onApplicationEvent(applicationContext);
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+        this.applicationContext = event.getApplicationContext();
+        String ddlAuto = PropertyResolver.getDdlAuto(applicationContext.getEnvironment());
+        if (StringUtils.isNotEmpty(ddlAuto) && !StringUtils.equalsIgnoreCase(ddlAuto, PlatformConstants.NONE)) {
+            onApplicationEvent(applicationContext);
+        }
     }
 
     public void onApplicationEvent(ApplicationContext applicationContext) {
         // 1、获取服务ID：该服务ID对于微服务是必需的。
-        Environment environment = applicationContext.getEnvironment();
-        String serviceId = environment.getProperty("spring.application.name", "application");
+        String serviceId = PropertyResolver.getApplicationName(applicationContext.getEnvironment());
 
         // 2、只针对有EnableResourceServer注解的微服务进行扫描。如果变为单体架构目前不会用到EnableResourceServer所以增加的了一个Architecture判断
-        if (isMicroserviceArchitecture()) {
+        if (isDistributedArchitecture()) {
             Map<String, Object> resourceServer = applicationContext.getBeansWithAnnotation(scanAnnotationClass);
             if (MapUtils.isEmpty(resourceServer)) {
                 // 只扫描资源服务器
@@ -130,10 +138,10 @@ public class RequestMappingScanner implements ApplicationContextAware {
         }
 
         if (CollectionUtils.isNotEmpty(resources)) {
-            applicationContext.publishEvent(new RequestMappingGatherEvent(resources));
+            requestMappingGatherService.postProcess(resources, applicationContext, serviceId, isDistributedArchitecture());
         }
 
-        log.info("[Eurynome] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
+        log.info("[Herodotus] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
     }
 
     /**
@@ -219,14 +227,14 @@ public class RequestMappingScanner implements ApplicationContextAware {
         PatternsRequestCondition patternsRequestCondition = info.getPatternsCondition();
         String urls = StringUtils.join(patternsRequestCondition.getPatterns(), SymbolConstants.COMMA);
         // 对于单体架构路径一般都是menu，还是手动设置吧。
-        if (!isMicroserviceArchitecture()) {
+        if (!isDistributedArchitecture()) {
             if (StringUtils.contains(urls, "index")) {
                 return null;
             }
         }
 
         // 5.2.7、微服务范围更加粗放， 单体架构应用通过classSimpleName进行细化
-        String identifyingCode = isMicroserviceArchitecture() ? serviceId : classSimpleName;
+        String identifyingCode = isDistributedArchitecture() ? serviceId : classSimpleName;
 
         // 5.2.8、根据serviceId, requestMethods, urls生成的MD5值，作为自定义主键
         String flag = serviceId + SymbolConstants.DASH + requestMethods + SymbolConstants.DASH + urls;
@@ -234,27 +242,27 @@ public class RequestMappingScanner implements ApplicationContextAware {
         int code = HashUtil.fnvHash(flag);
 
         // 5.2.9、组装对象
-        RequestMapping securityMetadata = new RequestMapping();
-        securityMetadata.setMetadataId(id);
-        securityMetadata.setMetadataCode(SecurityConstants.AUTHORITY_PREFIX + code);
+        RequestMapping requestMapping = new RequestMapping();
+        requestMapping.setMetadataId(id);
+        requestMapping.setMetadataCode(SecurityConstants.AUTHORITY_PREFIX + code);
         // 微服务需要明确ServiceId，同时也知道ParentId，Hammer有办法，但是太繁琐，还是生成数据后，配置一把好点。
-        if (isMicroserviceArchitecture()) {
-            securityMetadata.setServiceId(identifyingCode);
-            securityMetadata.setParentId(identifyingCode);
+        if (isDistributedArchitecture()) {
+            requestMapping.setServiceId(identifyingCode);
+            requestMapping.setParentId(identifyingCode);
         }
         ApiOperation apiOperation = method.getMethodAnnotation(ApiOperation.class);
         if (ObjectUtils.isNotEmpty(apiOperation)) {
-            securityMetadata.setMetadataName(apiOperation.value());
-            securityMetadata.setDescription(apiOperation.notes());
+            requestMapping.setMetadataName(apiOperation.value());
+            requestMapping.setDescription(apiOperation.notes());
         }
-        securityMetadata.setRequestMethod(requestMethods);
-        securityMetadata.setUrl(urls);
-        securityMetadata.setClassName(className);
-        securityMetadata.setMethodName(methodName);
-        return securityMetadata;
+        requestMapping.setRequestMethod(requestMethods);
+        requestMapping.setUrl(urls);
+        requestMapping.setClassName(className);
+        requestMapping.setMethodName(methodName);
+        return requestMapping;
     }
 
-    private boolean isMicroserviceArchitecture() {
+    private boolean isDistributedArchitecture() {
         return platformProperties.getArchitecture() == Architecture.DISTRIBUTED;
     }
 }

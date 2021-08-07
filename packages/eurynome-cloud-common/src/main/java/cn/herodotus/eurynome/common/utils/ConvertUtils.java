@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.common.utils;
 
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.common.enums.ProtocolType;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.constant.enums.ProtocolType;
 import org.apache.commons.lang3.StringUtils;
 
 /**

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.utils;
 
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson.JSON;
 import com.google.common.net.HttpHeaders;

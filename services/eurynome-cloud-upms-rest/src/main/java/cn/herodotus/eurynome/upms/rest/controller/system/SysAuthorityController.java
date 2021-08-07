@@ -26,7 +26,7 @@ package cn.herodotus.eurynome.upms.rest.controller.system;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.common.domain.TreeNode;
-import cn.herodotus.eurynome.common.enums.AuthorityType;
+import cn.herodotus.eurynome.constant.enums.AuthorityType;
 import cn.herodotus.eurynome.common.utils.TreeUtils;
 import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.crud.service.WriteableService;

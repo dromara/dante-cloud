@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.security.utils;
 
 import cn.herodotus.eurynome.common.utils.BeanUtils;
 import cn.hutool.core.bean.BeanUtil;
-import cn.herodotus.eurynome.common.constants.SecurityConstants;
+import cn.herodotus.eurynome.constant.magic.SecurityConstants;
 import cn.herodotus.eurynome.security.definition.core.HerodotusRole;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import lombok.extern.slf4j.Slf4j;

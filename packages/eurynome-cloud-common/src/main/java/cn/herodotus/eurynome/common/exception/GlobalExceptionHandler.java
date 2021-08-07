@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.common.exception;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.common.enums.ResultStatus;
+import cn.herodotus.eurynome.constant.enums.ResultStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.api.entity.system;
 
-import cn.herodotus.eurynome.common.enums.AuthorityType;
+import cn.herodotus.eurynome.constant.enums.AuthorityType;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import org.apache.commons.lang3.builder.EqualsBuilder;

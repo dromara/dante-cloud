@@ -1,44 +1,43 @@
 spring:
   cloud:
     bus:
-      enabled: true
-      destination: event-bus
+      destination: SecurityMetadata
       id: ${spring.application.name}
     stream:
-      default-binder: kafka
-      bindings:
-        security-metadata-input:
-          destination: security.metadata
-          group: ${spring.application.name}
-        security-metadata-output:
-          destination: security.metadata
-          group: ${spring.application.name}
       kafka:
         binder:
+          brokers: ${herodotus.environment.kafka-bootstrap-servers}
+          default-broker-port: 9092
           auto-add-partitions: true
           auto-create-topics: true
+          min-partition-count: 1
           configuration:
             commit.interval.ms: 1000
             default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
             default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-  kafka:
-    bootstrap-servers: ${herodotus.environment.kafka-bootstrap-servers}
-    listener:
-      missing-topics-fatal: false
-    producer:
-      retries: 0
-      batch-size: 16384
-      buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-      properties:
-        linger.ms: 1
-    consumer:
-      enable-auto-commit: false
-      auto-commit-interval: 100ms
-      key-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
-      properties:
-        session.timeout.ms: 15000
-        max.poll.interval.ms: 500000
-        max.poll.records: 50
+          producer-properties:
+            # 发生错误后，消息重发的次数。
+            retries: 1
+            # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
+            # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
+            # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
+            acks: 1
+            #当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算。
+            batch.size: 16384
+            # 设置生产者内存缓冲区的大小。
+            buffer.memory: 33554432
+            # 10ms的延迟
+            linger.ms: 1
+          consumer-properties:
+            allow.auto.create.topics: true
+            auto.commit.interval.ms: 1000
+      function:
+        bindings:
+          busConsumer-out-0: springCloudBusOutput
+          busConsumer-in-0: springCloudBusInput
+      bindings:
+        springCloudBusOutput:
+          content-type: application/json
+        springCloudBusInput:
+          content-type: application/json
+          group: ${spring.application.name}

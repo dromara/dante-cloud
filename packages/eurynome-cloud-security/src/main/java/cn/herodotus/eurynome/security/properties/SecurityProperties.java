@@ -22,10 +22,11 @@
 
 package cn.herodotus.eurynome.security.properties;
 
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.common.enums.captcha.CaptchaFont;
-import cn.herodotus.eurynome.common.enums.captcha.CaptchaLetterType;
-import cn.herodotus.eurynome.common.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.constant.enums.captcha.CaptchaFont;
+import cn.herodotus.eurynome.constant.enums.captcha.CaptchaLetterType;
+import cn.herodotus.eurynome.constant.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;
@@ -45,7 +46,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2019/11/28 13:08
  */
-@ConfigurationProperties(prefix = "herodotus.platform.security")
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_SECURITY)
 public class SecurityProperties implements Serializable {
 
     private String signingKey = "eurynome-cloud";

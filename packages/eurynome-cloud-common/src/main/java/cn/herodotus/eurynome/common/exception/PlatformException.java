@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.common.exception;
 
-import cn.herodotus.eurynome.common.enums.ResultStatus;
+import cn.herodotus.eurynome.constant.enums.ResultStatus;
 
 /**
  * <p>Description: 平台基础Exception </p>

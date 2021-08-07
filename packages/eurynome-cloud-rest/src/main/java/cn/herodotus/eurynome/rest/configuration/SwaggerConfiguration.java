@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.common.constants.PlatformConstants;
-import cn.herodotus.eurynome.rest.enums.Architecture;
+import cn.herodotus.eurynome.constant.magic.SecurityConstants;
+import cn.herodotus.eurynome.constant.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.ServiceProperties;
 import io.swagger.annotations.Api;
@@ -78,7 +78,7 @@ public class SwaggerConfiguration {
 
     private String getTokenAddress() {
         if (platformProperties.getArchitecture().equals(Architecture.MONOCOQUE)) {
-            return serviceProperties.getUrl() + PlatformConstants.ENDPOINT_OAUTH_TOKEN;
+            return serviceProperties.getUrl() + SecurityConstants.ENDPOINT_OAUTH_TOKEN;
         } else {
             return platformProperties.getEndpoint().getAccessTokenUri();
         }

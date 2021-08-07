@@ -22,27 +22,17 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
-import cn.herodotus.eurynome.common.definition.MessageProducer;
 import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
-import cn.herodotus.eurynome.message.queue.KafkaProducer;
 import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthClientDetailsService;
 import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthUserDetailsService;
-import cn.herodotus.eurynome.oauth.condition.LocalStrategyCondition;
-import cn.herodotus.eurynome.oauth.condition.RemoteStrategyCondition;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.security.definition.service.StrategyRequestMappingGatherService;
-import cn.herodotus.eurynome.security.service.RemoteRequestMappingGatherService;
 import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
-import cn.herodotus.eurynome.upms.logic.strategy.LocalRequestMappingGatherService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.core.KafkaTemplate;
 
 import javax.annotation.PostConstruct;
 
@@ -109,37 +99,6 @@ public class AutoConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.info("[Eurynome] |- Starter [Herodotus OAuth Starter] Auto Configure.");
-    }
-
-    @Configuration(proxyBeanMethods = false)
-    @Conditional(LocalStrategyCondition.class)
-    static class DataAccessStrategyLocalConfiguration {
-
-        @Bean
-        public StrategyRequestMappingGatherService localSecurityMetadataStoreService() {
-            log.trace("[Eurynome] |- Bean [Local Security Metadata Storage Service] Auto Configure.");
-            return new LocalRequestMappingGatherService();
-        }
-    }
-
-    @Configuration
-    @Conditional(RemoteStrategyCondition.class)
-    static class DataAccessStrategyRemoteConfiguration {
-
-        @Bean
-        @ConditionalOnMissingBean(MessageProducer.class)
-        public MessageProducer kafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
-            KafkaProducer kafkaProducer = new KafkaProducer(kafkaTemplate);
-            log.trace("[Eurynome] |- Bean [Kafka Producer] Auto Configure.");
-            return kafkaProducer;
-        }
-
-        @Bean
-        @ConditionalOnBean(MessageProducer.class)
-        public StrategyRequestMappingGatherService remoteSecurityMetadataStorageService(MessageProducer messageProducer) {
-            log.trace("[Eurynome] |- Bean [Remote Security Metadata Storage Service] Auto Configure.");
-            return new RemoteRequestMappingGatherService(messageProducer);
-        }
     }
 
     @Bean

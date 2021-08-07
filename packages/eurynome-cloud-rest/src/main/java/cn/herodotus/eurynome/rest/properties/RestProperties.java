@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.rest.properties;
 
+import cn.herodotus.eurynome.constant.magic.PropertyConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -41,7 +42,7 @@ import java.util.List;
  * @date : 2020/5/31 16:39
  */
 @Slf4j
-@ConfigurationProperties(prefix = "herodotus.platform.rest")
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_REST)
 public class RestProperties {
 
     private RequestMapping requestMapping = new RequestMapping();

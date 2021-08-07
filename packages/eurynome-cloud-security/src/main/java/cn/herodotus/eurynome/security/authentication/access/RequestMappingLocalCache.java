@@ -30,6 +30,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,7 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2021/7/28 18:15
  */
+@Component
 public class RequestMappingLocalCache {
     private static final Logger log = LoggerFactory.getLogger(RequestMappingLocalCache.class);
 

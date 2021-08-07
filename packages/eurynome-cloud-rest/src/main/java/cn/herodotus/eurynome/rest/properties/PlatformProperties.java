@@ -22,10 +22,12 @@
 
 package cn.herodotus.eurynome.rest.properties;
 
-import cn.herodotus.eurynome.common.constants.PlatformConstants;
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
-import cn.herodotus.eurynome.common.enums.ProtocolType;
-import cn.herodotus.eurynome.rest.enums.Architecture;
+import cn.herodotus.eurynome.constant.enums.ProtocolType;
+import cn.herodotus.eurynome.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.constant.magic.SecurityConstants;
+import cn.herodotus.eurynome.constant.magic.ServiceConstants;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.constant.enums.Architecture;
 import com.google.common.base.MoreObjects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +40,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date : 2019/11/17 15:22
  */
 @Slf4j
-@ConfigurationProperties(prefix = "herodotus.platform")
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_PLATFORM)
 public class PlatformProperties {
 
     /**
@@ -140,7 +142,7 @@ public class PlatformProperties {
 
         public String getUaaServiceUri() {
             if (StringUtils.isBlank(this.uaaServiceUri)) {
-                return this.getGatewayAddress() + SymbolConstants.FORWARD_SLASH + PlatformConstants.SERVICE_NAME_UAA;
+                return this.getGatewayAddress() + SymbolConstants.FORWARD_SLASH + ServiceConstants.SERVICE_NAME_UAA;
             }
             return uaaServiceUri;
         }
@@ -151,7 +153,7 @@ public class PlatformProperties {
 
         public String getUpmsServiceUri() {
             if (StringUtils.isBlank(this.upmsServiceUri)) {
-                return this.getGatewayAddress() + SymbolConstants.FORWARD_SLASH + PlatformConstants.SERVICE_NAME_UPMS;
+                return this.getGatewayAddress() + SymbolConstants.FORWARD_SLASH + ServiceConstants.SERVICE_NAME_UPMS;
             }
             return upmsServiceUri;
         }
@@ -162,7 +164,7 @@ public class PlatformProperties {
 
         public String getAccessTokenUri() {
             if (StringUtils.isBlank(this.accessTokenUri)) {
-                return this.getUaaServiceUri() + PlatformConstants.ENDPOINT_OAUTH_TOKEN;
+                return this.getUaaServiceUri() + SecurityConstants.ENDPOINT_OAUTH_TOKEN;
             }
             return accessTokenUri;
         }
@@ -173,7 +175,7 @@ public class PlatformProperties {
 
         public String getUserAuthorizationUri() {
             if (StringUtils.isBlank(this.userAuthorizationUri)) {
-                return this.getUserInfoUri() + PlatformConstants.ENDPOINT_OAUTH_AUTHORIZE;
+                return this.getUserInfoUri() + SecurityConstants.ENDPOINT_OAUTH_AUTHORIZE;
             }
             return userAuthorizationUri;
         }
@@ -184,7 +186,7 @@ public class PlatformProperties {
 
         public String getTokenInfoUri() {
             if (StringUtils.isBlank(this.tokenInfoUri)) {
-                return this.getUaaServiceUri() + PlatformConstants.ENDPOINT_OAUTH_CHECK_TOKEN;
+                return this.getUaaServiceUri() + SecurityConstants.ENDPOINT_OAUTH_CHECK_TOKEN;
             }
             return tokenInfoUri;
         }
@@ -195,7 +197,7 @@ public class PlatformProperties {
 
         public String getUserInfoUri() {
             if (StringUtils.isBlank(this.userInfoUri)) {
-                return this.getUaaServiceUri() + PlatformConstants.ENDPOINT_OAUTH_IDENTITY_PROFILE;
+                return this.getUaaServiceUri() + SecurityConstants.ENDPOINT_OAUTH_IDENTITY_PROFILE;
             }
             return userInfoUri;
         }

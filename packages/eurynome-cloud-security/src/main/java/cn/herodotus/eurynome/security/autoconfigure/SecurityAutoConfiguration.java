@@ -25,18 +25,17 @@ package cn.herodotus.eurynome.security.autoconfigure;
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
-import cn.herodotus.eurynome.security.definition.service.StrategyRequestMappingGatherService;
-import cn.herodotus.eurynome.security.event.RequestMappingGatherListener;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.bus.jackson.RemoteApplicationEventScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -75,11 +74,13 @@ import javax.annotation.PostConstruct;
         SecurityProperties.class
 })
 @ComponentScan(basePackages = {
-        "cn.hutool.extra.spring",
-        "cn.herodotus.eurynome.security.response.exception"
+        "cn.hutool.extra.spring"
 })
 @Import({
         MethodSecurityMetadataConfiguration.class
+})
+@RemoteApplicationEventScan({
+        "cn.herodotus.eurynome.security.event.remote"
 })
 public class SecurityAutoConfiguration {
 
@@ -104,6 +105,23 @@ public class SecurityAutoConfiguration {
         return defaultAccessTokenConverter;
     }
 
+    @Bean
+    @ConditionalOnMissingBean(RequestMappingLocalCache.class)
+    public RequestMappingLocalCache requestMappingLocalCache() {
+        RequestMappingLocalCache requestMappingLocalCache = new RequestMappingLocalCache();
+        log.trace("[Eurynome] |- Bean [Request Mapping Local Cache] Auto Configure.");
+        return requestMappingLocalCache;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(RequestMappingGatherService.class)
+    public RequestMappingGatherService requestMappingGatherService(RequestMappingLocalCache requestMappingLocalCache) {
+        RequestMappingGatherService requestMappingGatherService = new RequestMappingGatherService();
+        requestMappingGatherService.setRequestMappingLocalCache(requestMappingLocalCache);
+        log.trace("[Eurynome] |- Bean [Request Mapping Gather Service] Auto Configure.");
+        return requestMappingGatherService;
+    }
+
     /**
      * 自定义注解扫描器
      * <p>
@@ -112,27 +130,9 @@ public class SecurityAutoConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(RequestMappingScanner.class)
-    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties) {
-        RequestMappingScanner requestMappingScanner = new RequestMappingScanner(restProperties, platformProperties);
+    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, RequestMappingGatherService requestMappingGatherService) {
+        RequestMappingScanner requestMappingScanner = new RequestMappingScanner(restProperties, platformProperties, requestMappingGatherService);
         log.trace("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
         return requestMappingScanner;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(RequestMappingGatherService.class)
-    @ConditionalOnSingleCandidate(StrategyRequestMappingGatherService.class)
-    public RequestMappingGatherService requestMappingGatherService(StrategyRequestMappingGatherService strategyRequestMappingGatherService) {
-        RequestMappingGatherService requestMappingGatherService = new RequestMappingGatherService();
-        requestMappingGatherService.setStrategySecurityMetadataService(strategyRequestMappingGatherService);
-        log.trace("[Eurynome] |- Bean [Request Mapping Gather Service] Auto Configure.");
-        return requestMappingGatherService;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(RequestMappingGatherListener.class)
-    public RequestMappingGatherListener requestMappingGatherListener(RequestMappingGatherService requestMappingGatherService) {
-        RequestMappingGatherListener requestMappingGatherListener = new RequestMappingGatherListener(requestMappingGatherService);
-        log.trace("[Eurynome] |- Bean [Request Mapping Gather Listener] Auto Configure.");
-        return requestMappingGatherListener;
     }
 }

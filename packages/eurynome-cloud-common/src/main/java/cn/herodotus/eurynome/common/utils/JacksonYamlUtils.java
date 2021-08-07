@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.common.utils;
 
-import cn.herodotus.eurynome.common.constants.SymbolConstants;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
