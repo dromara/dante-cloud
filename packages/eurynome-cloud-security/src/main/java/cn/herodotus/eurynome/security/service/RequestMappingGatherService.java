@@ -73,7 +73,7 @@ public class RequestMappingGatherService {
             Destination destination = pathDestinationFactory.getDestination(ServiceConstants.SERVICE_NAME_UPMS + ":**");
 
             applicationContext.publishEvent(new RemoteRequestMappingGatherEvent(source, serviceId, destination));
-            log.debug("[Herodotus] |- Request Mapping Gather Service Process Remote Event!");
+            log.debug("[Eurynome] |- Request Mapping Gather Service Process Remote Event!");
         }
     }
 }

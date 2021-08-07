@@ -141,7 +141,7 @@ public class RequestMappingScanner implements ApplicationListener<ApplicationRea
             requestMappingGatherService.postProcess(resources, applicationContext, serviceId, isDistributedArchitecture());
         }
 
-        log.info("[Herodotus] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
+        log.info("[Eurynome] |- Request Mapping Scan for Service: [{}] FINISHED!", serviceId);
     }
 
     /**

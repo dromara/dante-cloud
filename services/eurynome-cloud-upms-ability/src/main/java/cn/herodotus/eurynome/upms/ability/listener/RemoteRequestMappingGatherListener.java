@@ -56,7 +56,7 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
 
     @Override
     public void onApplicationEvent(RemoteRequestMappingGatherEvent event) {
-        log.info("[Herodotus] |- Request Mapping Gather REMOTE Listener, response event!");
+        log.info("[Eurynome] |- Request Mapping Gather REMOTE Listener, response event!");
 
         String requestMapping = event.getRequestMapping();
         if (ObjectUtils.isNotEmpty(requestMapping)) {
