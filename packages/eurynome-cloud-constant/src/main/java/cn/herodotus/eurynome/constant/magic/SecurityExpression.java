@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
+ * Module Name: eurynome-cloud-constant
  * File Name: SecurityExpression.java
  * Author: gengwei.zheng
- * Date: 2021/08/05 17:13:05
+ * Date: 2021/08/05 18:32:05
  */
 
-package cn.herodotus.eurynome.security.definition.constants;
+package cn.herodotus.eurynome.constant.magic;
 
 /**
  * <p>Description: 静态权限表达式 </p>
@@ -31,7 +31,7 @@ package cn.herodotus.eurynome.security.definition.constants;
 public class SecurityExpression {
 
     /**
-     * ScopeVoter权限表达式 {@link org.springframework.security.oauth2.provider.vote.ScopeVoter}
+     * ScopeVoter权限表达式
      */
     public static final String SCOPE_DENY_ACCESS = "DENY_OAUTH";
 }

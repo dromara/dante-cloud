@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
-import cn.herodotus.eurynome.security.definition.constants.enums.AccountType;
+import cn.herodotus.eurynome.constant.enums.AccountType;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModelProperty;

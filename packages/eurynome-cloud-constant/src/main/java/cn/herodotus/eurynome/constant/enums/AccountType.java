@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
+ * Module Name: eurynome-cloud-constant
  * File Name: AccountType.java
  * Author: gengwei.zheng
- * Date: 2021/08/05 17:33:05
+ * Date: 2021/08/05 18:32:05
  */
 
-package cn.herodotus.eurynome.security.definition.constants.enums;
+package cn.herodotus.eurynome.constant.enums;
 
 /**
  * <p>Description: TODO </p>

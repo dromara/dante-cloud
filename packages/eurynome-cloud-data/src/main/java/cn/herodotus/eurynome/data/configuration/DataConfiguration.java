@@ -67,7 +67,7 @@ import javax.annotation.PostConstruct;
 @Configuration(proxyBeanMethods = false)
 @EnableJpaAuditing
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
-@Import({SpringUtil.class, CaffeineConfiguration.class})
+@Import({SpringUtil.class, CaffeineConfiguration.class, KafkaConfiguration.class})
 public class DataConfiguration {
 
 

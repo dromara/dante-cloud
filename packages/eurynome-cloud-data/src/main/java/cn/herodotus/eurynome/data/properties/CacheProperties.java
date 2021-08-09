@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.data.properties;
 
+import cn.herodotus.eurynome.constant.magic.PropertyConstants;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  * @author : gengwei.zheng
  * @date : 2021/7/14 11:11
  */
-@ConfigurationProperties(prefix = "herodotus.cache")
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_CACHE)
 public class CacheProperties {
 
     /**

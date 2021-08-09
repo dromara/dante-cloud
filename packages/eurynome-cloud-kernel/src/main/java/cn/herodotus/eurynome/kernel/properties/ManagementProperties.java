@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.kernel.properties;
 
+import cn.herodotus.eurynome.constant.magic.PropertyConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.logging.LogLevel;
@@ -38,7 +39,7 @@ import java.util.Map;
  * @date : 2020/4/30 16:01
  */
 @Slf4j
-@ConfigurationProperties(prefix = "herodotus.platform.management")
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_MANAGEMENT)
 public class ManagementProperties {
 
     private final LogCenter logCenter = new LogCenter();
