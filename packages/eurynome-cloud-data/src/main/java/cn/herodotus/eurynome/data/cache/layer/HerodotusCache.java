@@ -28,13 +28,11 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.Cache;
 import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.cache.support.AbstractValueAdaptingCache;
 import org.springframework.cache.support.NullValue;
 import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.lang.Nullable;
-import org.springframework.util.Assert;
 
 import java.util.concurrent.Callable;
 
@@ -45,6 +43,7 @@ import java.util.concurrent.Callable;
  * @date : 2021/7/14 11:04
  */
 public class HerodotusCache extends AbstractValueAdaptingCache {
+
     private static final Logger log = LoggerFactory.getLogger(HerodotusCache.class);
 
     private final String name;
@@ -52,10 +51,6 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
     private final RedisCache redisCache;
     private final boolean desensitization;
     private final boolean clearRemoteOnExit;
-
-    public HerodotusCache(String name, CaffeineCache caffeineCache, RedisCache redisCache, boolean desensitization, boolean clearRemoteOnExit) {
-        this(name, caffeineCache, redisCache, desensitization, clearRemoteOnExit, true);
-    }
 
     public HerodotusCache(String name, CaffeineCache caffeineCache, RedisCache redisCache, boolean desensitization, boolean clearRemoteOnExit, boolean allowNullValues) {
         super(allowNullValues);
@@ -139,7 +134,6 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
 
         String secure = secure(key);
 
-
         T caffeineValue = caffeineCache.get(secure, type);
         if (ObjectUtils.isNotEmpty(caffeineValue)) {
             log.trace("[Eurynome] |- CACHE - Get <T> with type form caffeine cache, hit the cache.");
@@ -189,14 +183,20 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
     }
 
     @Override
-    public void put(Object key, Object value) {
+    public void put(Object key, @Nullable Object value) {
 
-        String secure = secure(key);
+        if (!isAllowNullValues() && value == null) {
+            throw new IllegalArgumentException(String.format(
+                    "Cache '%s' does not allow 'null' values. Avoid storing null via '@Cacheable(unless=\"#result == null\")' or configure RedisCache to allow 'null' via RedisCacheConfiguration.",
+                    name));
+        } else {
+            String secure = secure(key);
 
-        caffeineCache.put(secure, value);
-        redisCache.put(secure, value);
+            caffeineCache.put(secure, value);
+            redisCache.put(secure, value);
 
-        log.debug("[Eurynome] |- CACHE - Put data into Herodotus Cache, with key: [{}] and value: [{}]", secure, value);
+            log.debug("[Eurynome] |- CACHE - Put data into Herodotus Cache, with key: [{}] and value: [{}]", secure, value);
+        }
     }
 
     @Override
@@ -230,7 +230,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
     @Override
     public void clear() {
 
-        log.debug("[Eurynome] |- CACHE - Clear Herodotus Cache.");
+        log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache.");
 
         if (clearRemoteOnExit) {
             redisCache.clear();

@@ -20,7 +20,7 @@
  * Date: 2021/08/07 20:50:07
  */
 
-package cn.herodotus.eurynome.upms.ability.processor;
+package cn.herodotus.eurynome.upms.logic.processor;
 
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;

@@ -30,13 +30,20 @@ package cn.herodotus.eurynome.constant.magic;
  */
 public class CacheConstants {
 
-    public static final String CACHE_SIMPLE_BASE_PREFIX = "cache:simple:";
+    public static final String CACHE_PREFIX = "cache:";
 
-    public static final String CACHE_TOKEN_BASE_PREFIX = "cache:token:";
+    public static final String CACHE_SIMPLE_BASE_PREFIX = CACHE_PREFIX + "simple:";
+    public static final String CACHE_TOKEN_BASE_PREFIX = CACHE_PREFIX + "token:";
+
+    public static final String CACHE_SECURITY_PREFIX = CACHE_PREFIX + "security:";
+    public static final String CACHE_SECURITY_METADATA_PREFIX = CACHE_SECURITY_PREFIX + "metadata:";
+
+    public static final String CACHE_NAME_SECURITY_METADATA_ATTRIBUTES = CACHE_SECURITY_METADATA_PREFIX + "attributes:";
+    public static final String CACHE_NAME_SECURITY_METADATA_INDEXABLE = CACHE_SECURITY_METADATA_PREFIX + "indexable:";
+    public static final String CACHE_NAME_SECURITY_METADATA_COMPATIBLE = CACHE_SECURITY_METADATA_PREFIX + "compatible:";
 
     public static final int DEFAULT_UPMS_CACHE_EXPIRE = 86400;
     public static final int DEFAULT_UPMS_LOCAL_LIMIT = 1000;
-
 
     public static final String INDEX_CACHE_NAME = "index:";
 }

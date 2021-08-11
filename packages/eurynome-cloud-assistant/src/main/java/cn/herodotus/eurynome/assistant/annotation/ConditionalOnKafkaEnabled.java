@@ -14,43 +14,28 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
- * File Name: SecurityMetadata.java
+ * Module Name: eurynome-cloud-assistant
+ * File Name: ConditionalOnKafkaEnabled.java
  * Author: gengwei.zheng
- * Date: 2021/08/05 17:14:05
+ * Date: 2021/08/11 20:36:11
  */
 
-package cn.herodotus.eurynome.security.definition.core;
+package cn.herodotus.eurynome.assistant.annotation;
 
-import org.springframework.security.core.GrantedAuthority;
+import cn.herodotus.eurynome.constant.magic.PropertyConstants;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
-import java.util.Collection;
+import java.lang.annotation.*;
 
 /**
- * <p>Description: 安全元数据 </p>
+ * <p>Description: kafka是否开启条件准基 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/5 17:14
+ * @date : 2021/8/11 20:36
  */
-public interface SecurityMetadata {
-
-    String getDefaultExpression();
-
-    String getStaticExpression();
-
-    String getDynamicExpression();
-
-    String getScopeExpression();
-
-    Collection<? extends GrantedAuthority> getRoles();
-
-    Collection<? extends GrantedAuthority> getScopes();
-
-    String getIpExpression();
-
-    String getUrl();
-
-    String getRequestMethod();
-
-    String getServiceId();
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Documented
+@ConditionalOnProperty(value = PropertyConstants.ITEM_PLATFORM_KAFKA_ENABLED)
+public @interface ConditionalOnKafkaEnabled {
 }

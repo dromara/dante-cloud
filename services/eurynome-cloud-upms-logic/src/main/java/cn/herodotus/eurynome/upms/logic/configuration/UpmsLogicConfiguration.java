@@ -62,6 +62,8 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.system",
         "cn.herodotus.eurynome.upms.logic.service.oauth",
         "cn.herodotus.eurynome.upms.logic.service.development",
+        "cn.herodotus.eurynome.upms.logic.listener",
+        "cn.herodotus.eurynome.upms.logic.processor",
 })
 @EnableJpaRepositories(basePackages = {
         "cn.herodotus.eurynome.upms.logic.repository.system",

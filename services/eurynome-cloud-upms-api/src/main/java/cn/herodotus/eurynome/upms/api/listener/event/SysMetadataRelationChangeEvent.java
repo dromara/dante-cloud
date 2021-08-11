@@ -26,6 +26,7 @@ import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import org.springframework.context.ApplicationEvent;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>Description: SysMetadata关联数据变更Event </p>
@@ -35,15 +36,14 @@ import java.util.Collection;
  */
 public class SysMetadataRelationChangeEvent extends ApplicationEvent {
 
-    private final Collection<SysAuthority> changedAuthorities;
+    private final List<String> changedAuthorities;
 
-    public SysMetadataRelationChangeEvent(Collection<SysAuthority> changedAuthorities) {
+    public SysMetadataRelationChangeEvent(List<String> changedAuthorities) {
         super(changedAuthorities);
         this.changedAuthorities = changedAuthorities;
-
     }
 
-    public Collection<SysAuthority> getChangedAuthorities() {
+    public List<String> getChangedAuthorities() {
         return changedAuthorities;
     }
 }

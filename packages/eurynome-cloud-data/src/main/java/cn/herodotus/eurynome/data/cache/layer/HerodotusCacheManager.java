@@ -52,6 +52,7 @@ public class HerodotusCacheManager implements CacheManager {
     private CaffeineCacheManager caffeineCacheManager;
     private boolean desensitization = true;
     private boolean clearRemoteOnExit = false;
+    private boolean allowNullValues = true;
 
     private boolean dynamic = true;
 
@@ -80,6 +81,14 @@ public class HerodotusCacheManager implements CacheManager {
         this.clearRemoteOnExit = clearRemoteOnExit;
     }
 
+    public boolean isAllowNullValues() {
+        return allowNullValues;
+    }
+
+    public void setAllowNullValues(boolean allowNullValues) {
+        this.allowNullValues = allowNullValues;
+    }
+
     /**
      * Specify the set of cache names for this CacheManager's 'static' mode.
      * <p>The number of caches and their names will be fixed after a call to this method,
@@ -102,7 +111,7 @@ public class HerodotusCacheManager implements CacheManager {
         CaffeineCache caffeineCache = (CaffeineCache) this.caffeineCacheManager.getCache(name);
         RedisCache redisCache = (RedisCache) this.redisCacheManager.getCache(name);
         log.debug("[Eurynome] |- CACHE - Herodotus cache [{}] is CREATED.", name);
-        return new HerodotusCache(name, caffeineCache, redisCache, desensitization, clearRemoteOnExit);
+        return new HerodotusCache(name, caffeineCache, redisCache, desensitization, clearRemoteOnExit, isAllowNullValues());
     }
 
     @Override

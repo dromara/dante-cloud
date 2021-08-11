@@ -41,7 +41,7 @@ public class CacheProperties {
 
     /**
      * 分布式缓存Redis端是否进行数据脱敏， 默认值，true
-     *
+     * <p>
      * Hibernate二级缓存中，会基于SQL进行数据缓存。这种缓存以SQL作为key，一方面这个Key会比较长，另一方面SQL明文存入Redis缺少安全性。
      * 通过这个配置，可以设定是否对Hibernate二级缓存的SQL进行脱敏，脱敏后会将SQL转换为MD5值。当然这也会带来一定的性能损耗
      */
@@ -49,10 +49,15 @@ public class CacheProperties {
 
     /**
      * 退出时是否清理远端缓存，默认值，false
-     *
+     * <p>
      * 服务退出时，会清理本地以及远端的缓存，为了在集群情况下避免因此导致的缓存击穿问题，默认退出时不清除远端缓存。
      */
     private Boolean clearRemoteOnExit = false;
+
+    /**
+     * 是否允许存储空值
+     */
+    private Boolean allowNullValues = true;
 
     /**
      * 统一缓存时长，默认：1
@@ -101,6 +106,14 @@ public class CacheProperties {
         return ttl;
     }
 
+    public Boolean getAllowNullValues() {
+        return allowNullValues;
+    }
+
+    public void setAllowNullValues(Boolean allowNullValues) {
+        this.allowNullValues = allowNullValues;
+    }
+
     public void setTtl(Duration ttl) {
         this.ttl = ttl;
     }
@@ -139,6 +152,7 @@ public class CacheProperties {
         return MoreObjects.toStringHelper(this)
                 .add("desensitization", desensitization)
                 .add("clearRemoteOnExit", clearRemoteOnExit)
+                .add("allowNullValues", allowNullValues)
                 .add("duration", duration)
                 .add("unit", unit)
                 .add("ttl", ttl)

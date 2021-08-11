@@ -25,7 +25,8 @@ package cn.herodotus.eurynome.data.configuration;
 import cn.herodotus.eurynome.data.cache.layer.HerodotusCacheManager;
 import cn.herodotus.eurynome.data.properties.CacheProperties;
 import cn.hutool.extra.spring.SpringUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
@@ -63,13 +64,13 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2020/3/4 10:49
  */
-@Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableJpaAuditing
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
 @Import({SpringUtil.class, CaffeineConfiguration.class, KafkaConfiguration.class})
 public class DataConfiguration {
 
+    private static final Logger log = LoggerFactory.getLogger(DataConfiguration.class);
 
     @Autowired
     private CacheProperties cacheProperties;
@@ -87,6 +88,7 @@ public class DataConfiguration {
         herodotusCacheManager.setRedisCacheManager(redisCacheManager);
         herodotusCacheManager.setDesensitization(cacheProperties.getDesensitization());
         herodotusCacheManager.setClearRemoteOnExit(cacheProperties.getClearRemoteOnExit());
+        herodotusCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
 
         log.trace("[Eurynome] |- Bean [Herodotus Cache Manager] Auto Configure.");
 

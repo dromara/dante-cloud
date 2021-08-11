@@ -33,12 +33,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import javax.persistence.PostLoad;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
 import javax.persistence.PreUpdate;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * <p>Description: SysRole实体变更监听 </p>
@@ -46,70 +45,40 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2021/8/5 17:21
  */
-public class SysRoleEntityListener implements ApplicationContextAware {
+public class SysRoleEntityListener extends AbstractRelationEntityListener {
 
     private static final Logger log = LoggerFactory.getLogger(SysRoleEntityListener.class);
 
-    private ApplicationContext applicationContext;
+    private List<String> clone(SysRole sysRole) {
+        if (ObjectUtils.isNotEmpty(sysRole)) {
+            return this.clone(sysRole.getAuthorities());
+        }
+        return new ArrayList<>();
+    }
 
-    private SysRole preSysRole;
-    private SysRole postSysRole;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+    @PostLoad
+    protected void postLoad(SysRole entity) {
+        log.debug("[Eurynome] |- SysRoleEntityListener @PostLoad : [{}]", entity.toString());
+        this.setBefore(clone(entity));
     }
 
     @PreUpdate
     protected void preUpdate(SysRole entity) {
-        log.trace("[Eurynome] |- SysRoleEntityListener @PreUpdate : [{}]", entity.toString());
-        this.preSysRole = entity;
+        log.debug("[Eurynome] |- SysRoleEntityListener @PreUpdate actived, value is : [{}]. Trigger SysMetadata relation change event.", entity.toString());
+        this.setAfter(clone(entity));
     }
 
     @PostUpdate
     protected void postUpdate(SysRole entity) {
-        log.trace("[Eurynome] |- SysRoleEntityListener @PostUpdate : [{}]", entity.toString());
-        this.postSysRole = entity;
-        this.applicationContext.publishEvent(new SysMetadataRelationChangeEvent(this.getChangedAuthority()));
+        log.debug("[Eurynome] |- SysRoleEntityListener @PostUpdate actived, value is : [{}]. Trigger SysMetadata relation change event.", entity.toString());
+        this.getApplicationContext().publishEvent(new SysMetadataRelationChangeEvent(this.getChangedAuthority()));
     }
 
     @PostRemove
     protected void postRemove(SysRole entity) {
-        log.trace("[Eurynome] |- BaseEntityListener @PostRemove : [{}]", entity.toString());
+        log.debug("[Eurynome] |- SysRoleEntityListener @PostRemove actived, value is : [{}]. Trigger SysMetadata relation change event.", entity.toString());
         if (CollectionUtils.isNotEmpty(entity.getAuthorities())) {
-            this.applicationContext.publishEvent(new SysMetadataRelationChangeEvent(entity.getAuthorities()));
+            this.getApplicationContext().publishEvent(new SysMetadataRelationChangeEvent(clone(entity)));
         }
-    }
-
-    private Set<SysAuthority> getPostAuthorities() {
-        if (ObjectUtils.isNotEmpty(this.postSysRole)) {
-            return this.postSysRole.getAuthorities();
-        }
-        return null;
-    }
-
-    private Set<SysAuthority> getPreAuthorities() {
-        if (ObjectUtils.isNotEmpty(this.preSysRole)) {
-            return this.preSysRole.getAuthorities();
-        }
-        return null;
-    }
-
-    private Collection<SysAuthority> getChangedAuthority() {
-        Set<SysAuthority> preAuthorities = this.getPreAuthorities();
-        Set<SysAuthority> postAuthorities = this.getPostAuthorities();
-        if (CollectionUtils.isNotEmpty(preAuthorities) && CollectionUtils.isNotEmpty(postAuthorities)) {
-            return CollectionUtils.disjunction(preAuthorities, postAuthorities);
-        }
-
-        if (CollectionUtils.isNotEmpty(preAuthorities) && CollectionUtils.isEmpty(postAuthorities)) {
-            return preAuthorities;
-        }
-
-        if (CollectionUtils.isEmpty(preAuthorities) && CollectionUtils.isNotEmpty(postAuthorities)) {
-            return postAuthorities;
-        }
-
-        return new HashSet<>();
     }
 }

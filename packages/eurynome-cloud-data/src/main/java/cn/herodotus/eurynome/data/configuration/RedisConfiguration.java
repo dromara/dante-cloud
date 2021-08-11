@@ -115,11 +115,15 @@ public class RedisConfiguration {
 
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(lettuceConnectionFactory);
 
-        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
 //                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
 //                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))
-                .disableCachingNullValues()
-                .entryTtl(cacheProperties.getTtl());
+        redisCacheConfiguration.entryTtl(cacheProperties.getTtl());
+
+        boolean allowNullValues = cacheProperties.getAllowNullValues();
+        if (!allowNullValues) {
+            redisCacheConfiguration.disableCachingNullValues();
+        }
 
         RedisCacheManager redisCacheManager = new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
         redisCacheManager.setTransactionAware(false);
@@ -128,29 +132,4 @@ public class RedisConfiguration {
         log.trace("[Eurynome] |- Bean [Redis Cache Manager] Auto Configure.");
         return redisCacheManager;
     }
-
-//    @Bean
-//    @ConditionalOnBean(RedisTemplate.class)
-//    public RedisCaffeineCacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
-//        log.debug("[Eurynome] |- Bean [Redis Caffeine Cache Manager] Auto Configure.");
-//        return new RedisCaffeineCacheManager(redisCaffeineCacheProperties, redisTemplate);
-//    }
-//
-//    @Bean(name = CacheConstants.DEFAULT_KEY_GENERATOR)
-//    public KeyGenerator keyGenerator(){
-//        log.debug("[Eurynome] |- Bean [Redis Caffeine Cache Key Generator] Auto Configure.");
-//        return new RedisCaffeineCacheKeyGenerator();
-//    }
-//
-//    @Bean
-//    public RedisMessageListenerContainer redisMessageListenerContainer(RedisTemplate<Object, Object> redisTemplate,
-//                                                                       RedisCaffeineCacheManager redisCaffeineCacheManager) {
-//        RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();
-//        redisMessageListenerContainer.setConnectionFactory(redisTemplate.getConnectionFactory());
-//        CacheMessageListener cacheMessageListener = new CacheMessageListener(redisTemplate, redisCaffeineCacheManager);
-//        redisMessageListenerContainer.addMessageListener(cacheMessageListener, new ChannelTopic(redisCaffeineCacheProperties.getRedis().getTopic()));
-//
-//        log.debug("[Eurynome] |- Bean [Redis Message Listener Container] Auto Configure.");
-//        return redisMessageListenerContainer;
-//    }
 }

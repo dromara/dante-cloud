@@ -68,6 +68,7 @@ public class CaffeineConfiguration {
     public CaffeineCacheManager caffeineCacheManager() {
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
         caffeineCacheManager.setCaffeine(caffeine());
+        caffeineCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
 
         log.trace("[Eurynome] |- Bean [Caffeine Cache Manager] Auto Configure.");
 

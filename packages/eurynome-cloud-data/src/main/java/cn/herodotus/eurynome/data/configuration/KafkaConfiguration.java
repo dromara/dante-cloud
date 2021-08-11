@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
+import cn.herodotus.eurynome.assistant.annotation.ConditionalOnKafkaEnabled;
 import cn.herodotus.eurynome.data.properties.QueueProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ import javax.annotation.PostConstruct;
  * @date : 2021/8/8 10:41
  */
 @Configuration
+@ConditionalOnKafkaEnabled
 public class KafkaConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(KafkaConfiguration.class);

@@ -20,11 +20,11 @@
  * Date: 2021/08/07 20:49:07
  */
 
-package cn.herodotus.eurynome.upms.ability.listener;
+package cn.herodotus.eurynome.upms.logic.listener;
 
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.event.remote.RemoteRequestMappingGatherEvent;
-import cn.herodotus.eurynome.upms.ability.processor.RequestMappingStoreProcessor;
+import cn.herodotus.eurynome.upms.logic.processor.RequestMappingStoreProcessor;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;

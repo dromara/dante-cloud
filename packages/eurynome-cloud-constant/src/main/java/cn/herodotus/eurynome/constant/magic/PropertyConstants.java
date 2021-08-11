@@ -65,6 +65,7 @@ public class PropertyConstants {
 
     public static final String ITEM_PLATFORM_DATA_ACCESS_STRATEGY = PROPERTY_PREFIX_PLATFORM + ".data-access-strategy";
     public static final String ITEM_PLATFORM_ARCHITECTURE = PROPERTY_PREFIX_PLATFORM + ".architecture";
+    public static final String ITEM_PLATFORM_KAFKA_ENABLED = PROPERTY_PREFIX_MANAGEMENT_QUEUE + ".kafka.enabled";
 
     public static final String ANNOTATION_DEBEZIUM_ENABLED = "${herodotus.platform.debezium.enabled}";
 }

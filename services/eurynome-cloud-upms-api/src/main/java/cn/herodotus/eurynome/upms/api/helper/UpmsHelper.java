@@ -205,11 +205,11 @@ public class UpmsHelper {
     private static SysMetadata convertSysAuthorityToSysMetadata(SysAuthority sysAuthority) {
         SysMetadata sysMetadata = new SysMetadata();
         sysMetadata.setMetadataId(sysAuthority.getAuthorityId());
-        sysMetadata.setDefaultExpressionElement(sysAuthority.getAuthorityCode());
+        sysMetadata.setDefaultExpression(sysAuthority.getAuthorityCode());
         sysMetadata.setUrl(sysAuthority.getUrl());
-        sysMetadata.setRequestMethod(sysMetadata.getRequestMethod());
-        sysMetadata.setServiceId(sysMetadata.getServiceId());
-        sysMetadata.setScopeExpressionElement(SecurityExpression.SCOPE_DENY_ACCESS);
+        sysMetadata.setRequestMethod(sysAuthority.getRequestMethod());
+        sysMetadata.setServiceId(sysAuthority.getServiceId());
+        sysMetadata.setScopeExpression(SecurityExpression.SCOPE_DENY_ACCESS);
         return sysMetadata;
     }
 
