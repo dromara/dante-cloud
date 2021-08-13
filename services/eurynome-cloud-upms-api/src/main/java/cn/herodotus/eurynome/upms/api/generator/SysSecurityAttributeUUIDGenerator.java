@@ -15,14 +15,14 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-api
- * File Name: SysMetadataUUIDGenerator.java
+ * File Name: SysSecurityAttributeUUIDGenerator.java
  * Author: gengwei.zheng
  * Date: 2021/08/05 17:17:05
  */
 
 package cn.herodotus.eurynome.upms.api.generator;
 
-import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
+import cn.herodotus.eurynome.upms.api.entity.system.SysSecurityAttribute;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
@@ -39,7 +39,7 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/8/5 17:17
  */
-public class SysMetadataUUIDGenerator extends UUIDGenerator {
+public class SysSecurityAttributeUUIDGenerator extends UUIDGenerator {
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
@@ -47,12 +47,12 @@ public class SysMetadataUUIDGenerator extends UUIDGenerator {
             throw new HibernateException(new NullPointerException());
         }
 
-        SysMetadata sysMetadata = (SysMetadata) object;
+        SysSecurityAttribute sysSecurityAttribute = (SysSecurityAttribute) object;
 
-        if (StringUtils.isEmpty(sysMetadata.getMetadataId())) {
+        if (StringUtils.isEmpty(sysSecurityAttribute.getAttributeId())) {
             return super.generate(session, object);
         } else {
-            return sysMetadata.getMetadataId();
+            return sysSecurityAttribute.getAttributeId();
         }
     }
 }

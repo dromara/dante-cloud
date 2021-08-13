@@ -15,7 +15,7 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-api
- * File Name: SysMetadata.java
+ * File Name: SysSecurityAttribute.java
  * Author: gengwei.zheng
  * Date: 2021/08/05 17:06:05
  */
@@ -24,11 +24,8 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2DynamicExpressions;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2IpAddresses;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2StaticExpressions;
-import cn.herodotus.eurynome.upms.api.listener.entity.SysMetadataEntityListener;
+import cn.herodotus.eurynome.upms.api.listener.entity.SysSecurityAttributeEntityListener;
 import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -49,18 +46,18 @@ import java.util.Set;
  */
 @ApiModel(description = "系统权限元数据")
 @Entity
-@Table(name = "sys_metadata", indexes = {@Index(name = "sys_metadata_id_idx", columnList = "metadata_id")})
+@Table(name = "sys_security_attribute", indexes = {@Index(name = "sys_security_attribute_id_idx", columnList = "attribute_id")})
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_METADATA)
-@EntityListeners(value = {SysMetadataEntityListener.class})
-public class SysMetadata extends BaseSysEntity {
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_SECURITY_ATTRIBUTE)
+@EntityListeners(value = {SysSecurityAttributeEntityListener.class})
+public class SysSecurityAttribute extends BaseSysEntity {
 
     @ApiModelProperty(value = "元数据ID")
     @Id
     @GeneratedValue(generator = "metadata-uuid")
-    @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.cloud.upms.api.generator.SysMetadataUUIDGenerator")
-    @Column(name = "metadata_id", length = 64)
-    private String metadataId;
+    @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.cloud.upms.api.generator.SysSecurityAttributeUUIDGenerator")
+    @Column(name = "attribute_id", length = 64)
+    private String attributeId;
 
     @ApiModelProperty(value = "URL")
     @Column(name = "url", length = 2048)
@@ -74,38 +71,28 @@ public class SysMetadata extends BaseSysEntity {
     @Column(name = "service_id", length = 128)
     private String serviceId;
 
-    @ApiModelProperty(value = "默认表达式", notes = "该值即authority_code值，会被封装成hasAuthority('XX'), 是自动生成的默认权限")
-    @Column(name = "default_expression", length = 128)
-    private String defaultExpression;
+    @ApiModelProperty(value = "默认权限代码", notes = "该值即authority_code值，如果没有设置其它权限，该值会被封装成hasAuthority('XX')作为默认权限, 是自动生成的默认权限")
+    @Column(name = "attribute_code", length = 128)
+    private String attributeCode;
 
-    @ApiModelProperty(value = "Scope权限表达式", notes = "该表达式要符合ScopeVoter规则")
-    @Column(name = "scope_expression", length = 128)
-    private String scopeExpression;
+    @ApiModelProperty(value = "表达式", notes = "Security和OAuth2涉及的表达式字符串，通过该值设置不同的权限")
+    @Column(name = "expression", length = 128)
+    private String expression;
 
-    @ApiModelProperty(value = "静态字符串表达式", notes = "Security和OAuth2涉及的表达式字符串")
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_STATIC_EXPRESSIONS)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "static_expression_id", referencedColumnName = "expression_id")
-    private OAuth2StaticExpressions staticExpression;
+    @ApiModelProperty(value = "IP地址", notes = "该表达式要符合WebExpressionVoter规则,根据配置的IP地址动态生成")
+    @Column(name = "ip_address", length = 64)
+    private String ipAddress;
 
-    @ApiModelProperty(value = "动态字符串表达式", notes = "通过UI界面等配置生成的合规的表达式")
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_DYNAMIC_EXPRESSIONS)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "dynamic_expression_id", referencedColumnName = "expression_id")
-    private OAuth2DynamicExpressions dynamicExpression;
-
-    @ApiModelProperty(value = "IP地址表达式", notes = "该表达式要符合WebExpressionVoter规则,根据配置的IP地址动态生成")
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_IP_ADDRESSES)
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ip_expression_id", referencedColumnName = "ip_id")
-    private OAuth2IpAddresses ipExpression;
+    @ApiModelProperty(value = "指定表达式", notes = "预留字段，该值可手动设置具体的权限表达式，而不是通过Role、Scope等关联数据自动生成")
+    @Column(name = "manual_setting", length = 256)
+    private String manualSetting;
 
     @ApiModelProperty(value = "动态权限表达式", notes = "该表达式要符合WebExpressionVoter规则,根据配置动态生成")
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "sys_role_authority",
-            joinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "metadata_id")},
+            joinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "attribute_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
     private Set<SysRole> roles = new HashSet<>();
 
@@ -114,7 +101,7 @@ public class SysMetadata extends BaseSysEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "oauth_scopes_authority",
-            joinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "metadata_id")},
+            joinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "attribute_id")},
             inverseJoinColumns = {@JoinColumn(name = "scope_id", referencedColumnName = "scope_id")})
     private Set<OAuth2Scopes> scopes = new HashSet<>();
 
@@ -125,15 +112,15 @@ public class SysMetadata extends BaseSysEntity {
 
     @Override
     public String getId() {
-        return this.getMetadataId();
+        return this.getAttributeId();
     }
 
-    public String getMetadataId() {
-        return metadataId;
+    public String getAttributeId() {
+        return attributeId;
     }
 
-    public void setMetadataId(String metadataId) {
-        this.metadataId = metadataId;
+    public void setAttributeId(String attributeId) {
+        this.attributeId = attributeId;
     }
 
     public String getUrl() {
@@ -160,44 +147,36 @@ public class SysMetadata extends BaseSysEntity {
         this.serviceId = serviceId;
     }
 
-    public String getDefaultExpression() {
-        return defaultExpression;
+    public String getAttributeCode() {
+        return attributeCode;
     }
 
-    public void setDefaultExpression(String defaultExpression) {
-        this.defaultExpression = defaultExpression;
+    public void setAttributeCode(String attributeCode) {
+        this.attributeCode = attributeCode;
     }
 
-    public String getScopeExpression() {
-        return scopeExpression;
+    public String getExpression() {
+        return expression;
     }
 
-    public void setScopeExpression(String scopeExpression) {
-        this.scopeExpression = scopeExpression;
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 
-    public OAuth2StaticExpressions getStaticExpression() {
-        return staticExpression;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public void setStaticExpression(OAuth2StaticExpressions staticExpression) {
-        this.staticExpression = staticExpression;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
-    public OAuth2DynamicExpressions getDynamicExpression() {
-        return dynamicExpression;
+    public String getManualSetting() {
+        return manualSetting;
     }
 
-    public void setDynamicExpression(OAuth2DynamicExpressions dynamicExpression) {
-        this.dynamicExpression = dynamicExpression;
-    }
-
-    public OAuth2IpAddresses getIpExpression() {
-        return ipExpression;
-    }
-
-    public void setIpExpression(OAuth2IpAddresses ipExpression) {
-        this.ipExpression = ipExpression;
+    public void setManualSetting(String manualSetting) {
+        this.manualSetting = manualSetting;
     }
 
     public Set<SysRole> getRoles() {
@@ -219,15 +198,14 @@ public class SysMetadata extends BaseSysEntity {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("metadataId", metadataId)
+                .add("attributeId", attributeId)
                 .add("url", url)
                 .add("requestMethod", requestMethod)
                 .add("serviceId", serviceId)
-                .add("defaultExpression", defaultExpression)
-                .add("scopeExpression", scopeExpression)
-                .add("staticExpression", staticExpression)
-                .add("dynamicExpression", dynamicExpression)
-                .add("ipExpression", ipExpression)
+                .add("attributeCode", attributeCode)
+                .add("expression", expression)
+                .add("ipAddress", ipAddress)
+                .add("manualSetting", manualSetting)
                 .toString();
     }
 }

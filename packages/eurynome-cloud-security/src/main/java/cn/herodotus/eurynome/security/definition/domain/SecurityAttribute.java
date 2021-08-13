@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.security.definition.domain;
 
-import cn.herodotus.eurynome.security.definition.core.HerodotusAuthority;
 import com.google.common.base.MoreObjects;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -36,17 +36,17 @@ import java.util.Set;
  */
 public class SecurityAttribute implements Serializable {
 
-    private String metadataId;
+    private String attributeId;
 
-    private String defaultExpression;
+    private String attributeCode;
 
-    private String staticExpression;
+    private String attributeName;
 
-    private String dynamicExpression;
+    private String expression;
 
-    private String scopeExpression;
+    private String manualSetting;
 
-    private String ipExpression;
+    private String ipAddress;
 
     private String url;
 
@@ -54,56 +54,56 @@ public class SecurityAttribute implements Serializable {
 
     private String serviceId;
 
-    private Set<HerodotusAuthority> roles;
+    private Set<SimpleGrantedAuthority> roles;
 
-    private Set<HerodotusAuthority> scopes;
+    private Set<SimpleGrantedAuthority> scopes;
 
-    public String getMetadataId() {
-        return metadataId;
+    public String getAttributeId() {
+        return attributeId;
     }
 
-    public void setMetadataId(String metadataId) {
-        this.metadataId = metadataId;
+    public void setAttributeId(String attributeId) {
+        this.attributeId = attributeId;
     }
 
-    public String getDefaultExpression() {
-        return defaultExpression;
+    public String getAttributeCode() {
+        return attributeCode;
     }
 
-    public void setDefaultExpression(String defaultExpression) {
-        this.defaultExpression = defaultExpression;
+    public void setAttributeCode(String attributeCode) {
+        this.attributeCode = attributeCode;
     }
 
-    public String getStaticExpression() {
-        return staticExpression;
+    public String getAttributeName() {
+        return attributeName;
     }
 
-    public void setStaticExpression(String staticExpression) {
-        this.staticExpression = staticExpression;
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
     }
 
-    public String getDynamicExpression() {
-        return dynamicExpression;
+    public String getExpression() {
+        return expression;
     }
 
-    public void setDynamicExpression(String dynamicExpression) {
-        this.dynamicExpression = dynamicExpression;
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 
-    public String getScopeExpression() {
-        return scopeExpression;
+    public String getManualSetting() {
+        return manualSetting;
     }
 
-    public void setScopeExpression(String scopeExpression) {
-        this.scopeExpression = scopeExpression;
+    public void setManualSetting(String manualSetting) {
+        this.manualSetting = manualSetting;
     }
 
-    public String getIpExpression() {
-        return ipExpression;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public void setIpExpression(String ipExpression) {
-        this.ipExpression = ipExpression;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
     public String getUrl() {
@@ -130,31 +130,31 @@ public class SecurityAttribute implements Serializable {
         this.serviceId = serviceId;
     }
 
-    public Set<HerodotusAuthority> getRoles() {
+    public Set<SimpleGrantedAuthority> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<HerodotusAuthority> roles) {
+    public void setRoles(Set<SimpleGrantedAuthority> roles) {
         this.roles = roles;
     }
 
-    public Set<HerodotusAuthority> getScopes() {
+    public Set<SimpleGrantedAuthority> getScopes() {
         return scopes;
     }
 
-    public void setScopes(Set<HerodotusAuthority> scopes) {
+    public void setScopes(Set<SimpleGrantedAuthority> scopes) {
         this.scopes = scopes;
     }
 
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("metadataId", metadataId)
-                .add("defaultExpression", defaultExpression)
-                .add("staticExpression", staticExpression)
-                .add("dynamicExpression", dynamicExpression)
-                .add("scopeExpression", scopeExpression)
-                .add("ipExpression", ipExpression)
+                .add("attributeId", attributeId)
+                .add("attributeCode", attributeCode)
+                .add("attributeName", attributeName)
+                .add("expression", expression)
+                .add("manualSetting", manualSetting)
+                .add("ipAddress", ipAddress)
                 .add("url", url)
                 .add("requestMethod", requestMethod)
                 .add("serviceId", serviceId)

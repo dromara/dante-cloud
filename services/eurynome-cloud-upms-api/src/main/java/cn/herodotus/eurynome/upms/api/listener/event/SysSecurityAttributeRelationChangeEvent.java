@@ -15,7 +15,7 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-api
- * File Name: SysMetadataRelationChangeEvent.java
+ * File Name: SysSecurityAttributeRelationChangeEvent.java
  * Author: gengwei.zheng
  * Date: 2021/08/05 17:10:05
  */
@@ -29,16 +29,16 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * <p>Description: SysMetadata关联数据变更Event </p>
+ * <p>Description: SysSecurityAttribute关联数据变更Event </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/8/5 17:10
  */
-public class SysMetadataRelationChangeEvent extends ApplicationEvent {
+public class SysSecurityAttributeRelationChangeEvent extends ApplicationEvent {
 
     private final List<String> changedAuthorities;
 
-    public SysMetadataRelationChangeEvent(List<String> changedAuthorities) {
+    public SysSecurityAttributeRelationChangeEvent(List<String> changedAuthorities) {
         super(changedAuthorities);
         this.changedAuthorities = changedAuthorities;
     }

@@ -15,32 +15,32 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-api
- * File Name: SysMetadataChangeEvent.java
+ * File Name: SysSecurityAttributeChangeEvent.java
  * Author: gengwei.zheng
  * Date: 2021/08/05 17:09:05
  */
 
 package cn.herodotus.eurynome.upms.api.listener.event;
 
-import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
+import cn.herodotus.eurynome.upms.api.entity.system.SysSecurityAttribute;
 import org.springframework.context.ApplicationEvent;
 
 /**
- * <p>Description: SysMetadata实体数据变更事件 </p>
+ * <p>Description: SysSecurityAttribute实体数据变更事件 </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/8/5 17:09
  */
-public class SysMetadataChangeEvent extends ApplicationEvent {
+public class SysSecurityAttributeChangeEvent extends ApplicationEvent {
 
-    private final SysMetadata sysMetadata;
+    private final SysSecurityAttribute sysSecurityAttribute;
 
-    public SysMetadataChangeEvent(SysMetadata sysMetadata) {
-        super(sysMetadata);
-        this.sysMetadata = sysMetadata;
+    public SysSecurityAttributeChangeEvent(SysSecurityAttribute sysSecurityAttribute) {
+        super(sysSecurityAttribute);
+        this.sysSecurityAttribute = sysSecurityAttribute;
     }
 
-    public SysMetadata getSysMetadata() {
-        return sysMetadata;
+    public SysSecurityAttribute getSysSecurityAttribute() {
+        return sysSecurityAttribute;
     }
 }

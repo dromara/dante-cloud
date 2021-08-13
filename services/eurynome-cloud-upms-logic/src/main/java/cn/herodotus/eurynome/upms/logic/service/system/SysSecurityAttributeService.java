@@ -15,7 +15,7 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-logic
- * File Name: SysMetadataService.java
+ * File Name: SysSecurityAttributeService.java
  * Author: gengwei.zheng
  * Date: 2021/08/05 17:50:05
  */
@@ -24,9 +24,9 @@ package cn.herodotus.eurynome.upms.logic.service.system;
 
 import cn.herodotus.eurynome.crud.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
+import cn.herodotus.eurynome.upms.api.entity.system.SysSecurityAttribute;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
-import cn.herodotus.eurynome.upms.logic.repository.system.SysMetadataRepository;
+import cn.herodotus.eurynome.upms.logic.repository.system.SysSecurityAttributeRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,66 +41,66 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Description: SysMetadataService </p>
+ * <p>Description: SysSecurityAttributeService </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/8/5 17:50
  */
 @Service
-public class SysMetadataService extends BaseLayeredService<SysMetadata, String> {
+public class SysSecurityAttributeService extends BaseLayeredService<SysSecurityAttribute, String> {
 
-    private static final Logger log = LoggerFactory.getLogger(SysMetadataService.class);
+    private static final Logger log = LoggerFactory.getLogger(SysSecurityAttributeService.class);
 
-    private final SysMetadataRepository sysMetadataRepository;
+    private final SysSecurityAttributeRepository sysSecurityAttributeRepository;
 
     @Autowired
-    public SysMetadataService(SysMetadataRepository sysMetadataRepository) {
-        this.sysMetadataRepository = sysMetadataRepository;
+    public SysSecurityAttributeService(SysSecurityAttributeRepository sysSecurityAttributeRepository) {
+        this.sysSecurityAttributeRepository = sysSecurityAttributeRepository;
     }
 
     @Override
-    public BaseRepository<SysMetadata, String> getRepository() {
-        return this.sysMetadataRepository;
+    public BaseRepository<SysSecurityAttribute, String> getRepository() {
+        return this.sysSecurityAttributeRepository;
     }
 
-    public List<SysMetadata> batchSaveOrUpdate(List<SysMetadata> sysMetadata) {
-        log.debug("[Eurynome] |- SysMetadata Service batchSaveOrUpdate.");
-        return sysMetadataRepository.saveAllAndFlush(sysMetadata);
+    public List<SysSecurityAttribute> batchSaveOrUpdate(List<SysSecurityAttribute> sysMetadata) {
+        log.debug("[Eurynome] |- SysSecurityAttribute Service batchSaveOrUpdate.");
+        return sysSecurityAttributeRepository.saveAllAndFlush(sysMetadata);
     }
 
-    public List<SysMetadata> findByMetadataIn(List<String> ids) {
-        log.debug("[Eurynome] |- SysMetadata Service findByMetadataIn.");
-        return sysMetadataRepository.findByMetadataIdIn(ids);
+    public List<SysSecurityAttribute> findByAttributeIdIn(List<String> ids) {
+        log.debug("[Eurynome] |- SysSecurityAttribute Service findByAttributeIdIn.");
+        return sysSecurityAttributeRepository.findByAttributeIdIn(ids);
     }
 
-    public List<SysMetadata> findByRoleId(String roleId) {
+    public List<SysSecurityAttribute> findByRoleId(String roleId) {
         return this.findByCondition(roleId, null, null);
     }
 
-    public List<SysMetadata> findByScopeId(String scopeId) {
+    public List<SysSecurityAttribute> findByScopeId(String scopeId) {
         return this.findByCondition(null, scopeId, null);
     }
 
-    public List<SysMetadata> findByIpAddressId(String ipAddressId) {
+    public List<SysSecurityAttribute> findByIpAddressId(String ipAddressId) {
         return this.findByCondition(null, null, ipAddressId);
     }
 
-    public List<SysMetadata> findByCondition(String roleId, String scopeId, String ipAddressId) {
-        Specification<SysMetadata> specification = (root, criteriaQuery, criteriaBuilder) -> {
+    public List<SysSecurityAttribute> findByCondition(String roleId, String scopeId, String ipAddressId) {
+        Specification<SysSecurityAttribute> specification = (root, criteriaQuery, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
             if (StringUtils.isNotBlank(roleId)) {
-                SetJoin<SysMetadata, SysRole> join = root.joinSet("roles", JoinType.INNER);
+                SetJoin<SysSecurityAttribute, SysRole> join = root.joinSet("roles", JoinType.INNER);
                 predicates.add(criteriaBuilder.equal(join.get("roleId").as(String.class), roleId));
             }
 
             if (StringUtils.isNotBlank(scopeId)) {
-                SetJoin<SysMetadata, SysRole> join = root.joinSet("scopes", JoinType.INNER);
+                SetJoin<SysSecurityAttribute, SysRole> join = root.joinSet("scopes", JoinType.INNER);
                 predicates.add(criteriaBuilder.equal(join.get("scopeId").as(String.class), scopeId));
             }
 
             if (StringUtils.isNotBlank(ipAddressId)) {
-                SetJoin<SysMetadata, SysRole> join = root.joinSet("ipAddress", JoinType.INNER);
+                SetJoin<SysSecurityAttribute, SysRole> join = root.joinSet("ipAddress", JoinType.INNER);
                 predicates.add(criteriaBuilder.equal(join.get("ipId").as(String.class), ipAddressId));
             }
 
@@ -109,7 +109,7 @@ public class SysMetadataService extends BaseLayeredService<SysMetadata, String> 
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Eurynome] |- SysMetadata Service findByCondition.");
-        return this.sysMetadataRepository.findAll(specification);
+        log.debug("[Eurynome] |- SysSecurityAttribute Service findByCondition.");
+        return this.sysSecurityAttributeRepository.findAll(specification);
     }
 }

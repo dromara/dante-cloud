@@ -15,7 +15,7 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-logic
- * File Name: SysMetadataRepository.java
+ * File Name: SysSecurityAttributeRepository.java
  * Author: gengwei.zheng
  * Date: 2021/08/05 17:48:05
  */
@@ -23,20 +23,20 @@
 package cn.herodotus.eurynome.upms.logic.repository.system;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
+import cn.herodotus.eurynome.upms.api.entity.system.SysSecurityAttribute;
 import org.springframework.data.jpa.repository.QueryHints;
 
 import javax.persistence.QueryHint;
 import java.util.List;
 
 /**
- * <p>Description: SysMetadataRepository </p>
+ * <p>Description: SysSecurityAttributeRepository </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/8/5 17:48
  */
-public interface SysMetadataRepository extends BaseRepository<SysMetadata, String> {
+public interface SysSecurityAttributeRepository extends BaseRepository<SysSecurityAttribute, String> {
 
     @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
-    List<SysMetadata> findByMetadataIdIn(List<String> ids);
+    List<SysSecurityAttribute> findByAttributeIdIn(List<String> ids);
 }

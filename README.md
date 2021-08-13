@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.0.3-brightgreen" alt="Nacos 2.0.3"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-2.5.4.40-red" alt="Version 2.5.4.40"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-2.5.4.50-red" alt="Version 2.5.4.50"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -46,6 +46,10 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 * 集成微信小程序、内容审核、证照识别、消息推送、社交登录、多通道SMS等丰富的第三方技术能力输出，可快速构建面向互联网的小程序、APP等应用。
 
 > 部分功能演示，正在逐步添加
+
+### （2） 方法级动态权限
+
+![输入图片说明](./documents/readme/preview/oauth2expression.gif)
 
 ### （1） 服务调用链监控
 

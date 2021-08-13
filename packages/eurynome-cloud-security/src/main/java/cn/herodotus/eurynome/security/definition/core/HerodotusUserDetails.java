@@ -24,12 +24,12 @@ package cn.herodotus.eurynome.security.definition.core;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.MoreObjects;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author gengwei.zheng
@@ -45,10 +45,6 @@ public class HerodotusUserDetails implements UserDetails {
     private String nickName;
 
     private String avatar;
-
-    private String clientId;
-
-    private List<HerodotusRole> roles = new ArrayList<>();
 
     private Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
 
@@ -151,35 +147,18 @@ public class HerodotusUserDetails implements UserDetails {
         this.avatar = avatar;
     }
 
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public List<HerodotusRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<HerodotusRole> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public String toString() {
-        return "ArtisanUserDetails{" +
-                "userId='" + userId + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", clientId='" + clientId + '\'' +
-                ", accountNonExpired=" + accountNonExpired +
-                ", accountNonLocked=" + accountNonLocked +
-                ", credentialsNonExpired=" + credentialsNonExpired +
-                ", enabled=" + enabled +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("userId", userId)
+                .add("username", username)
+                .add("password", password)
+                .add("nickName", nickName)
+                .add("avatar", avatar)
+                .add("accountNonExpired", accountNonExpired)
+                .add("accountNonLocked", accountNonLocked)
+                .add("credentialsNonExpired", credentialsNonExpired)
+                .add("enabled", enabled)
+                .toString();
     }
 }

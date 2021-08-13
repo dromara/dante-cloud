@@ -15,15 +15,15 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-api
- * File Name: SysMetadataEntityListener.java
+ * File Name: SysSecurityAttributeEntityListener.java
  * Author: gengwei.zheng
  * Date: 2021/08/05 17:08:05
  */
 
 package cn.herodotus.eurynome.upms.api.listener.entity;
 
-import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
-import cn.herodotus.eurynome.upms.api.listener.event.SysMetadataChangeEvent;
+import cn.herodotus.eurynome.upms.api.entity.system.SysSecurityAttribute;
+import cn.herodotus.eurynome.upms.api.listener.event.SysSecurityAttributeChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -33,14 +33,14 @@ import org.springframework.context.ApplicationContextAware;
 import javax.persistence.PostUpdate;
 
 /**
- * <p>Description: SysMetadata实体变更监听 </p>
+ * <p>Description: SysSecurityAttribute实体变更监听 </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/8/5 17:08
  */
-public class SysMetadataEntityListener implements ApplicationContextAware {
+public class SysSecurityAttributeEntityListener implements ApplicationContextAware {
 
-    private static final Logger log = LoggerFactory.getLogger(SysMetadataEntityListener.class);
+    private static final Logger log = LoggerFactory.getLogger(SysSecurityAttributeEntityListener.class);
 
     private ApplicationContext applicationContext;
 
@@ -50,8 +50,8 @@ public class SysMetadataEntityListener implements ApplicationContextAware {
     }
 
     @PostUpdate
-    protected void postUpdate(SysMetadata entity) {
-        log.trace("[Eurynome] |- SysMetadataEntityListener @PostUpdate : [{}]", entity.toString());
-        this.applicationContext.publishEvent(new SysMetadataChangeEvent(entity));
+    protected void postUpdate(SysSecurityAttribute entity) {
+        log.trace("[Eurynome] |- SysSecurityAttributeEntityListener @PostUpdate : [{}]", entity.toString());
+        this.applicationContext.publishEvent(new SysSecurityAttributeChangeEvent(entity));
     }
 }

@@ -23,12 +23,9 @@
 package cn.herodotus.eurynome.upms.api.helper;
 
 
-import cn.herodotus.eurynome.constant.magic.SymbolConstants;
 import cn.herodotus.eurynome.constant.enums.StatusEnum;
-import cn.herodotus.eurynome.constant.magic.SecurityExpression;
-import cn.herodotus.eurynome.security.definition.core.HerodotusAuthority;
+import cn.herodotus.eurynome.constant.magic.SymbolConstants;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
-import cn.herodotus.eurynome.security.definition.core.HerodotusRole;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
@@ -36,19 +33,16 @@ import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
-import cn.herodotus.eurynome.upms.api.entity.system.SysMetadata;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -58,34 +52,6 @@ import java.util.stream.Collectors;
  * @date : 2019/11/18 11:38
  */
 public class UpmsHelper {
-
-    public static HerodotusRole convertSysRoleToArtisanRole(SysRole sysRole) {
-        HerodotusRole herodotusRole = new HerodotusRole();
-        herodotusRole.setRoleId(sysRole.getRoleId());
-//        herodotusRole.setRoleName(sysRole.getRoleName());
-        herodotusRole.setRoleCode(sysRole.getRoleCode());
-        return herodotusRole;
-    }
-
-    public static List<HerodotusAuthority> convertSysAuthoritiesToHerodotusAuthorities(Collection<SysAuthority> sysAuthorities) {
-        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-            return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToArtisanAuthority).collect(Collectors.toList());
-        }
-        return new ArrayList<>();
-    }
-
-    private static HerodotusAuthority convertSysAuthorityToArtisanAuthority(SysAuthority sysAuthority) {
-        HerodotusAuthority herodotusAuthority = new HerodotusAuthority();
-        herodotusAuthority.setAuthorityId(sysAuthority.getAuthorityId());
-        herodotusAuthority.setAuthorityCode(sysAuthority.getAuthorityCode());
-//        herodotusAuthority.setAuthorityType(sysAuthority.getAuthorityType());
-//        herodotusAuthority.setMenuClass(sysAuthority.getMenuClass());
-//        herodotusAuthority.setRanking(sysAuthority.getRanking());
-//        herodotusAuthority.setAuthorityName(sysAuthority.getAuthorityName());
-//        herodotusAuthority.setUrl(sysAuthority.getUrl());
-//        herodotusAuthority.setParentId(sysAuthority.getParentId());
-        return herodotusAuthority;
-    }
 
     public static HerodotusClientDetails convertOauthClientDetailsToHerodotusClientDetails(OauthClientDetails oauthClientDetails) {
         HerodotusClientDetails herodotusClientDetails = null;
@@ -134,21 +100,21 @@ public class UpmsHelper {
         herodotusUserDetails.setUsername(sysUser.getUserName());
         herodotusUserDetails.setPassword(sysUser.getPassword());
         herodotusUserDetails.setNickName(sysUser.getNickName());
-        herodotusUserDetails.setClientId(sysUser.getEmployeeId());
         herodotusUserDetails.setAccountNonExpired(sysUser.getStatus() != StatusEnum.EXPIRED);
         herodotusUserDetails.setAccountNonLocked(sysUser.getStatus() != StatusEnum.LOCKING);
         herodotusUserDetails.setEnabled(sysUser.getStatus() == StatusEnum.ENABLE);
 
-        List<HerodotusRole> herodotusRoles = new ArrayList<>();
-        List<HerodotusAuthority> herodotusAuthorities = new ArrayList<>();
+        Collection<SimpleGrantedAuthority> authorities = new LinkedHashSet<>();
 
         for (SysRole sysRole : sysUser.getRoles()) {
-            herodotusRoles.add(convertSysRoleToArtisanRole(sysRole));
-            herodotusAuthorities.addAll(convertSysAuthoritiesToHerodotusAuthorities(sysRole.getAuthorities()));
+            authorities.add(new SimpleGrantedAuthority(SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
+            Set<SysAuthority> sysAuthorities = sysRole.getAuthorities();
+            if (CollectionUtils.isNotEmpty(sysAuthorities)) {
+                sysAuthorities.forEach(sysAuthority -> authorities.add(new SimpleGrantedAuthority((sysAuthority.getAuthorityCode()))));
+            }
         }
 
-        herodotusUserDetails.setRoles(herodotusRoles);
-        herodotusUserDetails.setAuthorities(herodotusAuthorities);
+        herodotusUserDetails.setAuthorities(authorities);
 
         return herodotusUserDetails;
     }
@@ -172,45 +138,6 @@ public class UpmsHelper {
         sysAuthority.setClassName(requestMapping.getClassName());
         sysAuthority.setMethodName(requestMapping.getMethodName());
         return sysAuthority;
-    }
-
-    public static List<RequestMapping> convertSysAuthoritiesToRequestMappings(Collection<SysAuthority> sysAuthorities) {
-        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-            return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToRequestMapping).collect(Collectors.toList());
-        }
-        return new ArrayList<>();
-    }
-
-    private static RequestMapping convertSysAuthorityToRequestMapping(SysAuthority sysAuthority) {
-        RequestMapping requestMapping = new RequestMapping();
-        requestMapping.setMetadataId(sysAuthority.getAuthorityId());
-        requestMapping.setMetadataCode(sysAuthority.getAuthorityCode());
-        requestMapping.setMetadataName(sysAuthority.getAuthorityName());
-        requestMapping.setRequestMethod(sysAuthority.getRequestMethod());
-        requestMapping.setServiceId(sysAuthority.getServiceId());
-        requestMapping.setClassName(sysAuthority.getClassName());
-        requestMapping.setMethodName(sysAuthority.getMethodName());
-        requestMapping.setUrl(sysAuthority.getUrl());
-        requestMapping.setParentId(sysAuthority.getParentId());
-        return requestMapping;
-    }
-
-    public static List<SysMetadata> convertSysAuthoritiesToSysMetadatas(Collection<SysAuthority> sysAuthorities) {
-        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-            return sysAuthorities.stream().map(UpmsHelper::convertSysAuthorityToSysMetadata).collect(Collectors.toList());
-        }
-        return new ArrayList<>();
-    }
-
-    private static SysMetadata convertSysAuthorityToSysMetadata(SysAuthority sysAuthority) {
-        SysMetadata sysMetadata = new SysMetadata();
-        sysMetadata.setMetadataId(sysAuthority.getAuthorityId());
-        sysMetadata.setDefaultExpression(sysAuthority.getAuthorityCode());
-        sysMetadata.setUrl(sysAuthority.getUrl());
-        sysMetadata.setRequestMethod(sysAuthority.getRequestMethod());
-        sysMetadata.setServiceId(sysAuthority.getServiceId());
-        sysMetadata.setScopeExpression(SecurityExpression.SCOPE_DENY_ACCESS);
-        return sysMetadata;
     }
 
     public static OauthClientDetails convertOauthApplicationsToOauthClientDetails(OauthApplications oauthApplications, OauthClientDetails oauthClientDetails) {

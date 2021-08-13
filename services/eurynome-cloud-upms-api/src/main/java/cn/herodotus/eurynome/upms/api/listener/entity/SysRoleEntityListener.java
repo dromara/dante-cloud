@@ -22,16 +22,12 @@
 
 package cn.herodotus.eurynome.upms.api.listener.entity;
 
-import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
-import cn.herodotus.eurynome.upms.api.listener.event.SysMetadataRelationChangeEvent;
+import cn.herodotus.eurynome.upms.api.listener.event.SysSecurityAttributeRelationChangeEvent;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
 import javax.persistence.PostLoad;
 import javax.persistence.PostRemove;
@@ -64,21 +60,21 @@ public class SysRoleEntityListener extends AbstractRelationEntityListener {
 
     @PreUpdate
     protected void preUpdate(SysRole entity) {
-        log.debug("[Eurynome] |- SysRoleEntityListener @PreUpdate actived, value is : [{}]. Trigger SysMetadata relation change event.", entity.toString());
+        log.debug("[Eurynome] |- SysRoleEntityListener @PreUpdate actived, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
         this.setAfter(clone(entity));
     }
 
     @PostUpdate
     protected void postUpdate(SysRole entity) {
-        log.debug("[Eurynome] |- SysRoleEntityListener @PostUpdate actived, value is : [{}]. Trigger SysMetadata relation change event.", entity.toString());
-        this.getApplicationContext().publishEvent(new SysMetadataRelationChangeEvent(this.getChangedAuthority()));
+        log.debug("[Eurynome] |- SysRoleEntityListener @PostUpdate actived, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
+        this.getApplicationContext().publishEvent(new SysSecurityAttributeRelationChangeEvent(this.getChangedAuthority()));
     }
 
     @PostRemove
     protected void postRemove(SysRole entity) {
-        log.debug("[Eurynome] |- SysRoleEntityListener @PostRemove actived, value is : [{}]. Trigger SysMetadata relation change event.", entity.toString());
+        log.debug("[Eurynome] |- SysRoleEntityListener @PostRemove actived, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
         if (CollectionUtils.isNotEmpty(entity.getAuthorities())) {
-            this.getApplicationContext().publishEvent(new SysMetadataRelationChangeEvent(clone(entity)));
+            this.getApplicationContext().publishEvent(new SysSecurityAttributeRelationChangeEvent(clone(entity)));
         }
     }
 }

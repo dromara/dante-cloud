@@ -23,34 +23,36 @@
 package cn.herodotus.eurynome.security.utils;
 
 import cn.herodotus.eurynome.common.utils.BeanUtils;
-import cn.hutool.core.bean.BeanUtil;
-import cn.herodotus.eurynome.constant.magic.SecurityConstants;
-import cn.herodotus.eurynome.security.definition.core.HerodotusRole;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
-import lombok.extern.slf4j.Slf4j;
+import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 /**
- * @author LIQIU
- * @date 2018-3-8
- **/
-@Slf4j
+ * <p>Description: 安全工具类 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/8/13 16:50
+ */
 public class SecurityUtils {
+
+    private static final Logger log = LoggerFactory.getLogger(SecurityUtils.class);
+
+    public static final String PREFIX_ROLE = "ROLE_";
+    public static final String PREFIX_SCOPE = "SCOPE_";
 
     public static SecurityContext getSecurityContext() {
         return SecurityContextHolder.getContext();
@@ -70,6 +72,7 @@ public class SecurityUtils {
 
     /**
      * 当用户角色发生变化，或者用户角色对应的权限发生变化，那么就从数据库中重新查询用户相关信息
+     *
      * @param newHerodotusUserDetails 从数据库中重新查询并生成的用户信息
      */
     public static void reloadAuthority(HerodotusUserDetails newHerodotusUserDetails) {
@@ -110,14 +113,6 @@ public class SecurityUtils {
         return null;
     }
 
-    public static String getClientId() {
-        HerodotusUserDetails user = getPrincipal();
-        if (user != null) {
-            return user.getClientId();
-        }
-        return null;
-    }
-
     public static HerodotusUserDetails getPrincipals() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal != null) {
@@ -140,24 +135,6 @@ public class SecurityUtils {
             }
         }
         return null;
-    }
-
-    public static boolean hasRole(String role) {
-
-        if (!StringUtils.startsWith(role, SecurityConstants.ROLE_PREFIX)) {
-            return false;
-        }
-
-        HerodotusUserDetails herodotusUserDetails = getPrincipal();
-        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
-            List<HerodotusRole> roles = herodotusUserDetails.getRoles();
-            if (CollectionUtils.isNotEmpty(roles)) {
-                Collection filteredResult = roles.stream().filter(artisanRole -> artisanRole.getAuthority().equals(role)).collect(Collectors.toList());
-                return CollectionUtils.isNotEmpty(filteredResult);
-            }
-        }
-
-        return false;
     }
 
     public static String getUserId() {
@@ -187,24 +164,6 @@ public class SecurityUtils {
         return null;
     }
 
-    public static boolean hasAuthority(String authority) {
-
-        if (!StringUtils.startsWith(authority, SecurityConstants.AUTHORITY_PREFIX)) {
-            return false;
-        }
-
-        HerodotusUserDetails herodotusUserDetails = getPrincipal();
-        if (ObjectUtils.isNotEmpty(herodotusUserDetails)) {
-            Collection<? extends GrantedAuthority> authorities = herodotusUserDetails.getAuthorities();
-            if (CollectionUtils.isNotEmpty(authorities)) {
-                Collection filteredResult = authorities.stream().filter(grantedAuthority -> grantedAuthority.getAuthority().equals(authority)).collect(Collectors.toList());
-                return CollectionUtils.isNotEmpty(filteredResult);
-            }
-        }
-
-        return false;
-    }
-
     public static String encrypt(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);
@@ -213,12 +172,24 @@ public class SecurityUtils {
     public static String[] whitelistToAntMatchers(List<String> list) {
         if (CollectionUtils.isNotEmpty(list)) {
             String[] array = new String[list.size()];
-            log.debug("[Eurynome] |- Fetch The REST White List.");
+            log.debug("[Herodotus] |- Fetch The REST White List.");
             return list.toArray(array);
         }
 
-        log.warn("[Eurynome] |- Can not Fetch The REST White List Configurations.");
+        log.warn("[Herodotus] |- Can not Fetch The REST White List Configurations.");
         return new String[]{};
+    }
+
+    public static String wellFormRolePrefix(String content) {
+        return wellFormPrefix(content, PREFIX_ROLE);
+    }
+
+    public static String wellFormPrefix(String content, String prefix) {
+        if (StringUtils.startsWith(content, prefix)) {
+            return content;
+        } else {
+            return prefix + content;
+        }
     }
 
 }

@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.upms.api.constants;
 
+import cn.herodotus.eurynome.constant.enums.OAuth2Expression;
 import cn.herodotus.eurynome.constant.enums.StatusEnum;
 import cn.herodotus.eurynome.constant.magic.CacheConstants;
 import cn.herodotus.eurynome.constant.enums.GrantType;
@@ -54,7 +55,7 @@ public class UpmsConstants extends CacheConstants {
     public static final String REGION_SYS_ROLE = AREA_PREFIX + "sys:role";
     public static final String REGION_SYS_DEFAULT_ROLE = AREA_PREFIX + "sys:defaults:role";
     public static final String REGION_SYS_AUTHORITY = AREA_PREFIX + "sys:authority";
-    public static final String REGION_SYS_METADATA = AREA_PREFIX + "sys:metadata";
+    public static final String REGION_SYS_SECURITY_ATTRIBUTE = AREA_PREFIX + "sys:security:attribute";
     public static final String REGION_SYS_OWNERSHIP = AREA_PREFIX + "sys:ownership";
     public static final String REGION_SYS_SOCIAL_USER = AREA_PREFIX + "sys:social:user";
     public static final String REGION_VIEW_SYS_OWNERSHIP = AREA_PREFIX + "view:sys:ownership";
@@ -65,7 +66,7 @@ public class UpmsConstants extends CacheConstants {
     public static final String REGION_OAUTH_CLIENTDETAILS = AREA_PREFIX + "oauth:clientdetails";
     public static final String REGION_OAUTH_MICROSERVICES = AREA_PREFIX + "oauth:microservices";
     public static final String REGION_OAUTH_SCOPES = AREA_PREFIX + "oauth:scopes";
-    public static final String REGION_OAUTH_STATIC_EXPRESSIONS = AREA_PREFIX + "oauth:expressions:static";
+    public static final String REGION_OAUTH_EXPRESSIONS = AREA_PREFIX + "oauth:expressions";
     public static final String REGION_OAUTH_DYNAMIC_EXPRESSIONS = AREA_PREFIX + "oauth:expressions:dynamic";
     public static final String REGION_OAUTH_IP_ADDRESSES = AREA_PREFIX + "oauth:ipaddresses";
 
@@ -82,6 +83,7 @@ public class UpmsConstants extends CacheConstants {
     private static final List<Map<String, Object>> SUPPLIER_TYPE_ENUM = SupplierType.getToJsonStruct();
     private static final List<Map<String, Object>> GENDER_ENUM = Gender.getToJsonStruct();
     private static final List<Map<String, Object>> IDENTITY_ENUM = Identity.getToJsonStruct();
+    private static final List<Map<String, Object>> EXPRESSION_ENUM = OAuth2Expression.getToJsonStruct();
 
 
     public static Map<String, Object> getAllEnums() {
@@ -93,6 +95,7 @@ public class UpmsConstants extends CacheConstants {
         map.put("supplierType", SUPPLIER_TYPE_ENUM);
         map.put("gender", GENDER_ENUM);
         map.put("identity", IDENTITY_ENUM);
+        map.put("expression", EXPRESSION_ENUM);
         return map;
     }
 }
