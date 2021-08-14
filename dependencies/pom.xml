@@ -62,9 +62,7 @@
         <spring-boot-dependencies.version>2.5.3</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2020.0.3</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.4.2</spring-boot-admin.version>
-
-        <spring-kafka.version>2.6.6</spring-kafka.version>
+        <spring-boot-admin.version>2.5.0</spring-boot-admin.version>
 
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <docker-maven-plugin.version>0.36.1</docker-maven-plugin.version>
@@ -76,7 +74,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.11.0</commons-io.version>
         <guava.version>30.1.1-jre</guava.version>
-        <hutool.version>5.7.6</hutool.version>
+        <hutool.version>5.7.8</hutool.version>
 
         <!--Alibaba开源的工具包-->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
@@ -97,7 +95,7 @@
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <okhttps.version>3.1.3</okhttps.version>
         <lombok.version>1.18.20</lombok.version>
-        <just-auth.verison>1.16.1</just-auth.verison>
+        <just-auth.verison>1.16.2</just-auth.verison>
 
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
     </properties>
