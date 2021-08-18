@@ -30,6 +30,7 @@ import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanne
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.response.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,6 +80,7 @@ import javax.annotation.PostConstruct;
 @Import({
         MethodSecurityMetadataConfiguration.class
 })
+@ComponentScan(basePackageClasses = SecurityGlobalExceptionHandler.class)
 @RemoteApplicationEventScan({
         "cn.herodotus.eurynome.security.event.remote"
 })

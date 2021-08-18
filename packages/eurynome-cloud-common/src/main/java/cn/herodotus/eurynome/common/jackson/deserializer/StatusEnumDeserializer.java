@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.common.jackson.deserializer;
 
-import cn.herodotus.eurynome.constant.enums.StatusEnum;
+import cn.herodotus.eurynome.common.constant.enums.StatusEnum;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;

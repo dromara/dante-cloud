@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.kernel.properties;
 
-import cn.herodotus.eurynome.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.logging.LogLevel;

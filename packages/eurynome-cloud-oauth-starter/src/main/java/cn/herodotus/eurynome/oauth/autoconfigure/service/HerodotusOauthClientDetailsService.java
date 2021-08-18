@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
-import cn.herodotus.eurynome.constant.enums.StatusEnum;
+import cn.herodotus.eurynome.common.constant.enums.StatusEnum;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;

@@ -22,16 +22,22 @@
 
 package cn.herodotus.eurynome.security.response.exception;
 
+import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
+import cn.herodotus.eurynome.assistant.exception.platform.PlatformException;
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.common.exception.GlobalExceptionHandler;
-import cn.herodotus.eurynome.common.exception.PlatformException;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.ClientAuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,9 +51,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author : gengwei.zheng
  * @date : 2019/11/18 8:12
  */
-@Slf4j
-@ControllerAdvice
-public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
+@RestControllerAdvice
+public class SecurityGlobalExceptionHandler{
+
+    private static final Logger log = LoggerFactory.getLogger(SecurityGlobalExceptionHandler.class);
 
     /**
      * 定义错误显示页，error.html
@@ -64,11 +71,12 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
 
     /**
      * Rest Template 错误处理
-     * @see :https://www.baeldung.com/spring-rest-template-error-handling
+     *
      * @param ex
      * @param request
      * @param response
      * @return
+     * @see :https://www.baeldung.com/spring-rest-template-error-handling
      */
     @ExceptionHandler({HttpClientErrorException.class, HttpServerErrorException.class})
     @ResponseBody
@@ -109,6 +117,30 @@ public class SecurityGlobalExceptionHandler extends GlobalExceptionHandler {
         Result<String> result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getStatus());
         return result;
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class})
+    public static Result<String> validationException(MethodArgumentNotValidException ex, HttpServletRequest request, HttpServletResponse response) {
+        return validationException(ex, request, response);
+    }
+
+    @ExceptionHandler({BindException.class})
+    public static Result<String> validationException(BindException ex, HttpServletRequest request, HttpServletResponse response) {
+        Result<String> result = resolveException(ex, request.getRequestURI());
+
+        BindingResult bindingResult = ex.getBindingResult();
+        FieldError fieldError = bindingResult.getFieldError();
+        //返回第一个错误的信息
+        if (ObjectUtils.isNotEmpty(fieldError)) {
+            result.validation(fieldError.getDefaultMessage(), fieldError.getCode(), fieldError.getField());
+        }
+
+        response.setStatus(result.getStatus());
+        return result;
+    }
+
+    public static Result<String> resolveException(Exception ex, String path) {
+        return HerodotusExceptionHandler.resolveException(ex, path);
     }
 
     /**

@@ -48,7 +48,7 @@
         <h3 th:text="'请求时间： '+ ${timestamp}"></h3>
         <h3>异常堆栈跟踪日志,StackTrace: </h3>
         <div>
-            <div th:each="line:${error}">
+            <div th:each="line:${stackTrace}">
                 <h5 th:inline="text">[[${line}]]</h5>
             </div>
         </div>

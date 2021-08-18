@@ -24,11 +24,11 @@ package cn.herodotus.eurynome.crud.controller;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.rest.base.business.Pager;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -43,14 +43,10 @@ public abstract class BaseReadableRestController<E extends AbstractEntity, ID ex
 
     @ApiOperation(value = "分页查询数据", notes = "通过pageNumber和pageSize获取分页数据", produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目", dataType = "int", paramType = "query")
+            @ApiImplicitParam(name = "pager", required = true, value = "分页Bo对象", dataType = "Pager", dataTypeClass = Pager.class, paramType = "query")
     })
     @GetMapping
-    @Override
-    public Result<Map<String, Object>> findByPage(
-            @RequestParam("pageNumber") Integer pageNumber,
-            @RequestParam("pageSize") Integer pageSize) {
-        return ReadableController.super.findByPage(pageNumber, pageSize);
+    public Result<Map<String, Object>> findByPage(Pager pager) {
+        return ReadableController.super.findByPage(pager.getPageNumber(), pager.getPageSize());
     }
 }

@@ -23,10 +23,10 @@
 package cn.herodotus.eurynome.security.authentication.access;
 
 import cn.herodotus.eurynome.assistant.utils.PropertyResolver;
-import cn.herodotus.eurynome.constant.enums.Architecture;
-import cn.herodotus.eurynome.constant.magic.PlatformConstants;
-import cn.herodotus.eurynome.constant.magic.SecurityConstants;
-import cn.herodotus.eurynome.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.common.constant.enums.Architecture;
+import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
+import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
+import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;

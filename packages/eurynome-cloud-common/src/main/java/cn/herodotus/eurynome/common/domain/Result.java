@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.common.domain;
 
 
-import cn.herodotus.eurynome.constant.enums.ResultStatus;
+import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
@@ -60,11 +60,14 @@ public class Result<T> implements Serializable {
     private int status;
 
     @ApiModelProperty(value = "错误堆栈信息")
-    private Throwable error;
+    private StackTraceElement[] stackTrace;
 
     @ApiModelProperty(value = "响应时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp = new Date();
+
+    @ApiModelProperty(value = "校验错误信息")
+    private Error error = new Error();
 
     public Result() {
         super();
@@ -90,12 +93,16 @@ public class Result<T> implements Serializable {
         return status;
     }
 
+    public StackTraceElement[] getStackTrace() {
+        return stackTrace;
+    }
+
     public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public Error getError() {
+        return error;
     }
 
     public Result<T> ok() {
@@ -143,8 +150,20 @@ public class Result<T> implements Serializable {
         return this;
     }
 
-    public Result<T> error(Throwable error) {
-        this.error = error;
+    public Result<T> stackTrace(StackTraceElement[] stackTrace) {
+        this.stackTrace = stackTrace;
+        return this;
+    }
+
+    public Result<T> detail(String detail) {
+        this.error.setDetail(detail);
+        return this;
+    }
+
+    public Result<T> validation(String message, String code, String field) {
+        this.error.setMessage(message);
+        this.error.setCode(code);
+        this.error.setField(field);
         return this;
     }
 
@@ -156,8 +175,9 @@ public class Result<T> implements Serializable {
                 .add("path", path)
                 .add("data", data)
                 .add("status", status)
-                .add("error", error)
+                .add("stackTrace", stackTrace)
                 .add("timestamp", timestamp)
+                .add("error", error)
                 .toString();
     }
 
@@ -168,8 +188,9 @@ public class Result<T> implements Serializable {
         result.put("path", path);
         result.put("data", data);
         result.put("status", status);
-        result.put("error", error);
+        result.put("stackTrace", stackTrace);
         result.put("timestamp", timestamp);
+        result.put("error", error);
         return result;
     }
 }

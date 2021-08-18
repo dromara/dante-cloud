@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.controller;
 
-import cn.herodotus.eurynome.constant.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.common.constant.enums.captcha.CaptchaType;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import com.wf.captcha.*;
 import com.wf.captcha.base.Captcha;

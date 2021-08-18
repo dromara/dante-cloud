@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.assistant.utils;
 
-import cn.herodotus.eurynome.constant.magic.PlatformConstants;
-import cn.herodotus.eurynome.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
+import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
 import org.springframework.core.env.Environment;
 
 /**

@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.gateway.exception;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.constant.enums.ResultStatus;
-import cn.herodotus.eurynome.common.exception.GlobalExceptionHandler;
+import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
+import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.cloud.gateway.support.NotFoundException;
@@ -128,7 +128,7 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
 
             log.error("[Eurynome] |- ERROR ==> Response Status Exception : {}", result);
         } else {
-            result = GlobalExceptionHandler.resolveException((Exception) ex, path);
+            result = HerodotusExceptionHandler.resolveException((Exception) ex, path);
         }
 
         /**

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.assistant.annotation;
 
-import cn.herodotus.eurynome.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.lang.annotation.*;

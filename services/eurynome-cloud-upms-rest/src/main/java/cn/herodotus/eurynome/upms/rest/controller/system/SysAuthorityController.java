@@ -24,14 +24,16 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
+import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.common.domain.TreeNode;
-import cn.herodotus.eurynome.constant.enums.AuthorityType;
-import cn.herodotus.eurynome.common.utils.TreeUtils;
+import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
 import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.crud.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNode;
+import cn.hutool.core.lang.tree.TreeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections4.CollectionUtils;
@@ -68,19 +70,19 @@ public class SysAuthorityController extends BaseWriteableRestController<SysAutho
 
     @ApiOperation(value = "获取权限树", notes = "获取权限树形数据")
     @GetMapping("/tree")
-    public Result<List<TreeNode>> findTree() {
-        Result<List<TreeNode>> result = new Result<>();
+    public Result<List<Tree<String>>> findTree() {
+        Result<List<Tree<String>>> result = new Result<>();
 
         List<SysAuthority> sysAuthorities = sysAuthorityService.findAll();
         if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-            List<TreeNode> treeNodes = sysAuthorities.stream().map(sysAuthority -> {
-                TreeNode treeNode = new TreeNode();
+            List<TreeNode<String>> treeNodes = sysAuthorities.stream().map(sysAuthority -> {
+                TreeNode<String> treeNode = new TreeNode<>();
                 treeNode.setId(sysAuthority.getAuthorityId());
                 treeNode.setName(sysAuthority.getAuthorityName());
                 treeNode.setParentId(sysAuthority.getParentId());
                 return treeNode;
             }).collect(Collectors.toList());
-            return result.data(TreeUtils.build(treeNodes));
+            return result.data(TreeUtil.build(treeNodes, PlatformConstants.DEFAULT_TREE_ROOT_ID));
         } else {
             return result.message("获取数据失败");
         }

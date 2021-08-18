@@ -22,11 +22,11 @@
 
 package cn.herodotus.eurynome.upms.api.constants;
 
-import cn.herodotus.eurynome.constant.enums.OAuth2Expression;
-import cn.herodotus.eurynome.constant.enums.StatusEnum;
-import cn.herodotus.eurynome.constant.magic.CacheConstants;
-import cn.herodotus.eurynome.constant.enums.GrantType;
-import cn.herodotus.eurynome.constant.enums.ApplicationType;
+import cn.herodotus.eurynome.common.constant.enums.OAuth2Expression;
+import cn.herodotus.eurynome.common.constant.enums.StatusEnum;
+import cn.herodotus.eurynome.common.constant.magic.CacheConstants;
+import cn.herodotus.eurynome.common.constant.enums.GrantType;
+import cn.herodotus.eurynome.common.constant.enums.ApplicationType;
 import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
 import cn.herodotus.eurynome.upms.api.constants.enums.Identity;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;

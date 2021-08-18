@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.constant.magic.SecurityConstants;
-import cn.herodotus.eurynome.constant.enums.Architecture;
+import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
+import cn.herodotus.eurynome.common.constant.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.ServiceProperties;
 import io.swagger.annotations.Api;
