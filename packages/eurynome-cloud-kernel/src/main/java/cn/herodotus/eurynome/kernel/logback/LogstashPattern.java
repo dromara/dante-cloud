@@ -22,6 +22,8 @@
 
 package cn.herodotus.eurynome.kernel.logback;
 
+import com.google.common.base.MoreObjects;
+
 import java.io.Serializable;
 
 /**
@@ -125,17 +127,17 @@ public class LogstashPattern implements Serializable {
 
     @Override
     public String toString() {
-        return "LogstashPattern{" +
-                "level='" + level + '\'' +
-                ", service='" + service + '\'' +
-                ", trace='" + trace + '\'' +
-                ", span='" + span + '\'' +
-                ", parent='" + parent + '\'' +
-                ", exportable='" + exportable + '\'' +
-                ", pid='" + pid + '\'' +
-                ", thread='" + thread + '\'' +
-                ", clazz='" + clazz + '\'' +
-                ", log='" + log + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("level", level)
+                .add("service", service)
+                .add("trace", trace)
+                .add("span", span)
+                .add("parent", parent)
+                .add("exportable", exportable)
+                .add("pid", pid)
+                .add("thread", thread)
+                .add("clazz", clazz)
+                .add("log", log)
+                .toString();
     }
 }

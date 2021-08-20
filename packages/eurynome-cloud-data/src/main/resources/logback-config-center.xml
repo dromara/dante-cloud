@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    ​
+
     <!--source指定的是application.yml配置文件中key,日志配置文件直接用${logstash-server-addr}引用这个值-->
     <springProperty scop="context" name="spring.application.name" source="spring.application.name" defaultValue="logs"/>
-    <springProperty scop="context" name="logstash-server-addr" source="eurynome.environment.logstash-server-addr" defaultValue="logs"/>
+    <springProperty scop="context" name="logstash-server-addr" source="herodotus.environment.logstash-server-addr"
+                    defaultValue="logs"/>
     <!-- Example for logging into the build folder of your project -->
-    <property name="LOG_FILE" value="logs/${spring.application.name}"/>​
+    <property name="LOG_FILE" value="logs/${spring.application.name}"/>
 
     <!-- You can override this to have a custom pattern -->
     <!-- <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } -&#45;&#45; [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>-->
@@ -20,7 +21,7 @@
         </encoder>
     </appender>
 
-    <!-- Appender to log to file -->​
+    <!-- Appender to log to file -->
     <!-- Log file debug output -->
     <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_FILE}/debug.log</file>
@@ -91,7 +92,7 @@
             </providers>
         </encoder>
     </appender>
-    ​
+
     <!--开发环境:打印控制台-->
     <springProfile name="development">
         <root level="debug">
