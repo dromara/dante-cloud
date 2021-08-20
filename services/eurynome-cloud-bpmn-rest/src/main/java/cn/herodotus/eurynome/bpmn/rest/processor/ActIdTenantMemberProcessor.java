@@ -48,7 +48,7 @@ public class ActIdTenantMemberProcessor extends AbstractProcessor<ActIdTenantMem
         this.actIdTenantMemberService = actIdTenantMemberService;
     }
 
-    @KafkaListener(topics = {"herodotus.public.sys_ownership"}, groupId = "herodotus.debezium")
+    @KafkaListener(topics = {"herodotus.public.sys_ownership"}, groupId = "herodotus.debezium", containerFactory = "concurrentKafkaListenerContainerFactory")
     public void received(String body) {
         log.info("[Eurynome] |- Recived Debezium event message from [sys_ownership], content is : [{}]", body);
         this.execute(body);

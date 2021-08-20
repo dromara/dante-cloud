@@ -55,7 +55,7 @@ public class SysSecurityAttribute extends BaseSysEntity {
     @ApiModelProperty(value = "元数据ID")
     @Id
     @GeneratedValue(generator = "metadata-uuid")
-    @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.cloud.upms.api.generator.SysSecurityAttributeUUIDGenerator")
+    @GenericGenerator(name = "metadata-uuid", strategy = "cn.herodotus.eurynome.upms.api.generator.SysSecurityAttributeUUIDGenerator")
     @Column(name = "attribute_id", length = 64)
     private String attributeId;
 

@@ -67,6 +67,7 @@
         <!--Spring Boot Dependencies中没有的Maven Plugin-->
         <docker-maven-plugin.version>0.36.1</docker-maven-plugin.version>
         <git-commit-id-maven-plugin.version>5.0.0</git-commit-id-maven-plugin.version>
+        <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
 
         <!--Spring Boot Dependencies中没有的工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -299,6 +300,12 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-ui</artifactId>
                 <version>${knife4j.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct-processor.version}</version>
             </dependency>
 
 

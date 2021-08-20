@@ -24,12 +24,14 @@ package cn.herodotus.eurynome.data.configuration;
 
 import cn.herodotus.eurynome.data.cache.layer.HerodotusCacheManager;
 import cn.herodotus.eurynome.data.properties.CacheProperties;
+import cn.herodotus.eurynome.data.properties.QueueProperties;
 import cn.hutool.extra.spring.SpringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,7 +69,12 @@ import javax.annotation.PostConstruct;
 @Configuration(proxyBeanMethods = false)
 @EnableJpaAuditing
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
-@Import({SpringUtil.class, CaffeineConfiguration.class, KafkaConfiguration.class})
+@EnableConfigurationProperties({QueueProperties.class})
+@Import({
+        SpringUtil.class,
+        CaffeineConfiguration.class,
+        KafkaConfiguration.class
+})
 public class DataConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DataConfiguration.class);

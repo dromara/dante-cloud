@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
+import cn.herodotus.eurynome.assistant.annotation.ConditionalOnSwaggerEnabled;
 import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
 import cn.herodotus.eurynome.common.constant.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
@@ -56,7 +57,7 @@ import java.util.Collections;
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(value = "herodotus.platform.swagger.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnSwaggerEnabled
 @AutoConfigureAfter(ServiceConfiguration.class)
 @EnableSwagger2
 public class SwaggerConfiguration {

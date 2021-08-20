@@ -15,9 +15,9 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-assistant
- * File Name: ConditionalOnKafkaEnabled.java
+ * File Name: ConditionalOnSwaggerEnabled.java
  * Author: gengwei.zheng
- * Date: 2021/08/11 20:36:11
+ * Date: 2021/08/20 11:36:20
  */
 
 package cn.herodotus.eurynome.assistant.annotation;
@@ -28,14 +28,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import java.lang.annotation.*;
 
 /**
- * <p>Description: kafka是否开启条件准基 </p>
+ * <p>Description: Swagger条件开启主机 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/11 20:36
+ * @date : 2021/8/20 11:36
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@ConditionalOnProperty(value = PropertyConstants.ITEM_MANAGEMENT_KAFKA_ENABLED)
-public @interface ConditionalOnKafkaEnabled {
+@ConditionalOnProperty(value = PropertyConstants.ITEM_PLATFORM_SWAGGER_ENABLED, havingValue = "true", matchIfMissing = true)
+public @interface ConditionalOnSwaggerEnabled {
 }

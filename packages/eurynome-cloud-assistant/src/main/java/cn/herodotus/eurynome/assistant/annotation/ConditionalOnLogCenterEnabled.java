@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.assistant.annotation;
 
+import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.lang.annotation.*;
@@ -35,6 +36,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@ConditionalOnProperty(name = "herodotus.platform.management.log-center.server-addr")
+@ConditionalOnProperty(name = PropertyConstants.ITEM_MANAGEMENT_LOG_CENTER_ENABLED)
 public @interface ConditionalOnLogCenterEnabled {
 }

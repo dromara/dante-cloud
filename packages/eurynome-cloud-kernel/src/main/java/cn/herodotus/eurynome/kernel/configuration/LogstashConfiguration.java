@@ -26,6 +26,8 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import cn.herodotus.eurynome.assistant.annotation.ConditionalOnLogCenterEnabled;
+import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
 import cn.herodotus.eurynome.kernel.logback.LogstashPattern;
 import cn.herodotus.eurynome.kernel.properties.ManagementProperties;
 import com.alibaba.fastjson.JSON;
@@ -39,7 +41,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.annotation.Configuration;
@@ -63,10 +64,10 @@ import java.util.Map;
 @EnableConfigurationProperties({
         ManagementProperties.class
 })
-@ConditionalOnProperty(name = "herodotus.platform.management.log-center.server-addr")
+@ConditionalOnLogCenterEnabled
 public class LogstashConfiguration {
 
-    @Value("${spring.application.name}")
+    @Value(PropertyConstants.ANNOTATION_APPLICATION_NAME)
     private String serviceName;
 
     @Autowired

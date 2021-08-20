@@ -40,9 +40,11 @@ public class PropertyConstants {
     public static final String PROPERTY_PREFIX_CACHE = PROPERTY_PREFIX_PLATFORM + ".cache";
     public static final String PROPERTY_PREFIX_REST = PROPERTY_PREFIX_PLATFORM + ".rest";
     public static final String PROPERTY_PREFIX_SECURITY = PROPERTY_PREFIX_PLATFORM + ".security";
+    public static final String PROPERTY_PREFIX_SWAGGER = PROPERTY_PREFIX_PLATFORM + ".swagger";
 
     public static final String PROPERTY_PREFIX_MANAGEMENT_NACOS = PROPERTY_PREFIX_MANAGEMENT + ".nacos";
     public static final String PROPERTY_PREFIX_MANAGEMENT_QUEUE = PROPERTY_PREFIX_MANAGEMENT + ".queue";
+    public static final String PROPERTY_PREFIX_MANAGEMENT_LOG_CENTER = PROPERTY_PREFIX_MANAGEMENT + ".log-center";
     public static final String PROPERTY_PREFIX_MANAGEMENT_SERVICE = PROPERTY_PREFIX_MANAGEMENT + ".service";
 
     public static final String PROPERTY_PREFIX_SOCIAL_JUSTAUTH = PROPERTY_PREFIX_SOCIAL + ".justauth";
@@ -59,13 +61,16 @@ public class PropertyConstants {
     public static final String PROPERTY_PREFIX_AUDIT_BAIDU = PROPERTY_PREFIX_AUDIT + ".baidu";
     public static final String PROPERTY_PREFIX_AUDIT_TIANYAN = PROPERTY_PREFIX_AUDIT + ".tianyan";
 
-
     public static final String ITEM_SPRING_APPLICATION_NAME = "spring.application.name";
     public static final String ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
 
     public static final String ITEM_PLATFORM_DATA_ACCESS_STRATEGY = PROPERTY_PREFIX_PLATFORM + ".data-access-strategy";
     public static final String ITEM_PLATFORM_ARCHITECTURE = PROPERTY_PREFIX_PLATFORM + ".architecture";
-    public static final String ITEM_PLATFORM_KAFKA_ENABLED = PROPERTY_PREFIX_MANAGEMENT_QUEUE + ".kafka.enabled";
+    public static final String ITEM_PLATFORM_SWAGGER_ENABLED = PROPERTY_PREFIX_SWAGGER + ".enabled";
 
+    public static final String ITEM_MANAGEMENT_KAFKA_ENABLED = PROPERTY_PREFIX_MANAGEMENT_QUEUE + ".kafka.enabled";
+    public static final String ITEM_MANAGEMENT_LOG_CENTER_ENABLED = PROPERTY_PREFIX_MANAGEMENT_LOG_CENTER + ".server-addr";
+
+    public static final String ANNOTATION_APPLICATION_NAME = "${" + ITEM_SPRING_APPLICATION_NAME + "}";
     public static final String ANNOTATION_DEBEZIUM_ENABLED = "${herodotus.platform.debezium.enabled}";
 }
