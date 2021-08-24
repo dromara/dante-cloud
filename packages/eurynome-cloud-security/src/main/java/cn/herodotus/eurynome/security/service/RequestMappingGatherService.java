@@ -22,16 +22,16 @@
 
 package cn.herodotus.eurynome.security.service;
 
+import cn.herodotus.eurynome.assistant.utils.DestinationResolver;
 import cn.herodotus.eurynome.common.constant.magic.ServiceConstants;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
+import cn.herodotus.eurynome.security.event.LocalRequestMappingGatherEvent;
 import cn.herodotus.eurynome.security.event.remote.RemoteRequestMappingGatherEvent;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cloud.bus.event.Destination;
-import org.springframework.cloud.bus.event.PathDestinationFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -66,14 +66,13 @@ public class RequestMappingGatherService {
 
         requestMappingLocalCache.save(requestMappings);
 
-        if (isDistributed && !StringUtils.equals(serviceId, ServiceConstants.SERVICE_NAME_UPMS)) {
+        if (!isDistributed || StringUtils.equals(serviceId, ServiceConstants.SERVICE_NAME_UPMS)) {
+            log.debug("[Herodotus] |- (3) Request mapping gather service trigger LOCAL event!");
+            applicationContext.publishEvent(new LocalRequestMappingGatherEvent(requestMappings));
+        } else {
             String source = JSON.toJSONString(requestMappings);
-
-            PathDestinationFactory pathDestinationFactory = new PathDestinationFactory();
-            Destination destination = pathDestinationFactory.getDestination(ServiceConstants.SERVICE_NAME_UPMS + ":**");
-
-            applicationContext.publishEvent(new RemoteRequestMappingGatherEvent(source, serviceId, destination));
-            log.debug("[Eurynome] |- Request Mapping Gather Service Process Remote Event!");
+            log.debug("[Herodotus] |- (3) Request mapping gather service trigger REMOTE event!");
+            applicationContext.publishEvent(new RemoteRequestMappingGatherEvent(source, serviceId, DestinationResolver.create(ServiceConstants.SERVICE_NAME_UPMS)));
         }
     }
 }

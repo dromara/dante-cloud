@@ -25,7 +25,6 @@ package cn.herodotus.eurynome.upms.api.entity.oauth;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
-import cn.herodotus.eurynome.upms.api.listener.entity.SysScopeEntityListener;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -50,7 +49,6 @@ import java.util.Set;
         indexes = {@Index(name = "oauth_scopes_id_idx", columnList = "scope_id"), @Index(name = "oauth_scopes_code_idx", columnList = "scope_code")})
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_OAUTH_SCOPES)
-@EntityListeners({SysScopeEntityListener.class})
 public class OAuth2Scopes extends BaseSysEntity implements GrantedAuthority {
 
     @Id

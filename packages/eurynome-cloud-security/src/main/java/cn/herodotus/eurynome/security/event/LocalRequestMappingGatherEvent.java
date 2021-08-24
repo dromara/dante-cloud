@@ -14,33 +14,35 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-upms-api
- * File Name: SysSecurityAttributeChangeEvent.java
+ * Module Name: eurynome-cloud-security
+ * File Name: LocalRequestMappingGatherEvent.java
  * Author: gengwei.zheng
- * Date: 2021/08/05 17:09:05
+ * Date: 2021/08/23 18:53:23
  */
 
-package cn.herodotus.eurynome.upms.api.listener.event;
+package cn.herodotus.eurynome.security.event;
 
-import cn.herodotus.eurynome.upms.api.entity.system.SysSecurityAttribute;
+import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import org.springframework.context.ApplicationEvent;
 
+import java.util.List;
+
 /**
- * <p>Description: SysSecurityAttribute实体数据变更事件 </p>
+ * <p>Description: 本地RequestMapping收集事件 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/5 17:09
+ * @date : 2021/8/23 18:53
  */
-public class SysSecurityAttributeChangeEvent extends ApplicationEvent {
+public class LocalRequestMappingGatherEvent extends ApplicationEvent {
 
-    private final SysSecurityAttribute sysSecurityAttribute;
+    private final List<RequestMapping> requestMappings;
 
-    public SysSecurityAttributeChangeEvent(SysSecurityAttribute sysSecurityAttribute) {
-        super(sysSecurityAttribute);
-        this.sysSecurityAttribute = sysSecurityAttribute;
+    public LocalRequestMappingGatherEvent(List<RequestMapping> requestMappings) {
+        super(requestMappings);
+        this.requestMappings = requestMappings;
     }
 
-    public SysSecurityAttribute getSysSecurityAttribute() {
-        return sysSecurityAttribute;
+    public List<RequestMapping> getRequestMappings() {
+        return requestMappings;
     }
 }

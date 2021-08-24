@@ -24,7 +24,6 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import cn.herodotus.eurynome.upms.api.listener.entity.SysRoleEntityListener;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -43,7 +42,6 @@ import java.util.Set;
         indexes = {@Index(name = "sys_role_rid_idx", columnList = "role_id"), @Index(name = "sys_role_rcd_idx", columnList = "role_code")})
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
-@EntityListeners(value = {SysRoleEntityListener.class})
 public class SysRole extends BaseSysEntity implements GrantedAuthority {
 
     @Id

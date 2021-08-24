@@ -3,7 +3,7 @@
 # Author: gengwei.zheng
 
 ### 基础镜像，使用alpine操作系统，openjkd使用
-FROM openjdk:8-jdk-alpine
+FROM apache/skywalking-java-agent:8.7.0-jdk8
 
 # 作者
 MAINTAINER genwei.zheng <pointer_v@qq.com>
