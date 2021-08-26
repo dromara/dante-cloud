@@ -22,8 +22,6 @@
 
 package cn.herodotus.eurynome.assistant.exception.platform;
 
-import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
-
 /**
  * <p>Description: 平台基础Exception </p>
  *
@@ -31,8 +29,6 @@ import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
  * @date : 2019/12/18 15:31
  */
 public class PlatformException extends RuntimeException {
-
-    private int code = ResultStatus.ERROR.getCode();
 
     public PlatformException() {
     }
@@ -52,14 +48,4 @@ public class PlatformException extends RuntimeException {
     public PlatformException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-
 }

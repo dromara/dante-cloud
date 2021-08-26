@@ -73,7 +73,8 @@ import javax.annotation.PostConstruct;
 @Import({
         SpringUtil.class,
         CaffeineConfiguration.class,
-        KafkaConfiguration.class
+        KafkaConfiguration.class,
+        StampConfiguration.class
 })
 public class DataConfiguration {
 

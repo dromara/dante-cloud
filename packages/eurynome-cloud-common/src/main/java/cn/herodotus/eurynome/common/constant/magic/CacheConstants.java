@@ -38,6 +38,12 @@ public class CacheConstants {
     public static final String CACHE_SECURITY_PREFIX = CACHE_PREFIX + "security:";
     public static final String CACHE_SECURITY_METADATA_PREFIX = CACHE_SECURITY_PREFIX + "metadata:";
 
+    public static final String CACHE_NAME_TOKEN_IDEMPOTENT = CACHE_TOKEN_BASE_PREFIX + "idempotent:";
+    public static final String CACHE_NAME_TOKEN_ACCESS_LIMITED = CACHE_TOKEN_BASE_PREFIX + "access_limited:";
+    public static final String CACHE_NAME_TOKEN_VERIFICATION_CODE = CACHE_TOKEN_BASE_PREFIX + "verification:";
+    public static final String CACHE_NAME_TOKEN_EASEMOB = CACHE_TOKEN_BASE_PREFIX + "easemob:";
+    public static final String CACHE_NAME_TOKEN_JUSTAUTH_STATE = CACHE_TOKEN_BASE_PREFIX + "justauth_state:";
+
     public static final String CACHE_NAME_SECURITY_METADATA_ATTRIBUTES = CACHE_SECURITY_METADATA_PREFIX + "attributes:";
     public static final String CACHE_NAME_SECURITY_METADATA_INDEXABLE = CACHE_SECURITY_METADATA_PREFIX + "indexable:";
     public static final String CACHE_NAME_SECURITY_METADATA_COMPATIBLE = CACHE_SECURITY_METADATA_PREFIX + "compatible:";

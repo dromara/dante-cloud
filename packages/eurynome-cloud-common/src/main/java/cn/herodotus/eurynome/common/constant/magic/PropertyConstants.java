@@ -41,6 +41,7 @@ public class PropertyConstants {
     public static final String PROPERTY_PREFIX_REST = PROPERTY_PREFIX_PLATFORM + ".rest";
     public static final String PROPERTY_PREFIX_SECURITY = PROPERTY_PREFIX_PLATFORM + ".security";
     public static final String PROPERTY_PREFIX_SWAGGER = PROPERTY_PREFIX_PLATFORM + ".swagger";
+    public static final String PROPERTY_PREFIX_STAMP = PROPERTY_PREFIX_PLATFORM + ".stamp";
 
     public static final String PROPERTY_PREFIX_MANAGEMENT_NACOS = PROPERTY_PREFIX_MANAGEMENT + ".nacos";
     public static final String PROPERTY_PREFIX_MANAGEMENT_QUEUE = PROPERTY_PREFIX_MANAGEMENT + ".queue";
@@ -60,6 +61,7 @@ public class PropertyConstants {
     public static final String PROPERTY_PREFIX_AUDIT_ALIYUN = PROPERTY_PREFIX_AUDIT + ".aliyun";
     public static final String PROPERTY_PREFIX_AUDIT_BAIDU = PROPERTY_PREFIX_AUDIT + ".baidu";
     public static final String PROPERTY_PREFIX_AUDIT_TIANYAN = PROPERTY_PREFIX_AUDIT + ".tianyan";
+
 
     public static final String ITEM_SPRING_APPLICATION_NAME = "spring.application.name";
     public static final String ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO = "spring.jpa.hibernate.ddl-auto";

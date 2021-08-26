@@ -110,7 +110,10 @@ public class HerodotusExceptionHandler {
         EXCEPTION_DICTIONARY.put("AccessDeniedException", getUnauthorizedResult(ResultStatus.ACCESS_DENIED));
         EXCEPTION_DICTIONARY.put("AccessDeniedAuthorityLimitedException", getUnauthorizedResult(ResultStatus.ACCESS_DENIED_AUTHORITY_LIMITED));
         // 4*.** 对应错误
+        // 4*.** 对应错误
         EXCEPTION_DICTIONARY.put("HttpRequestMethodNotSupportedException", getResult(ResultStatus.METHOD_NOT_ALLOWED, HttpStatus.SC_METHOD_NOT_ALLOWED));
+        EXCEPTION_DICTIONARY.put("RepeatSubmissionException", getResult(ResultStatus.REPEAT_SUBMISSION, HttpStatus.SC_NOT_ACCEPTABLE));
+        EXCEPTION_DICTIONARY.put("FrequentRequestsException", getResult(ResultStatus.FREQUENT_REQUESTS, HttpStatus.SC_NOT_ACCEPTABLE));
         // 6*.** 对应错误
         EXCEPTION_DICTIONARY.put("BadSqlGrammarException", getResult(ResultStatus.BAD_SQL_GRAMMAR));
         EXCEPTION_DICTIONARY.put("DataIntegrityViolationException", getResult(ResultStatus.DATA_INTEGRITY_VIOLATION));

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.ConditionalOnKafkaEnabled;
+import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnKafkaEnabled;
 import cn.herodotus.eurynome.data.properties.QueueProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

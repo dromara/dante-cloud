@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,12 @@
  * Module Name: eurynome-cloud-rest
  * File Name: EnableHerodotusRest.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/08/24 12:23:24
  */
 
 package cn.herodotus.eurynome.rest.annotation;
 
+import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
 import org.springframework.context.annotation.Import;
 
@@ -42,6 +43,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableHerodotusData
 @Import({RestConfiguration.class})
 public @interface EnableHerodotusRest {
 }

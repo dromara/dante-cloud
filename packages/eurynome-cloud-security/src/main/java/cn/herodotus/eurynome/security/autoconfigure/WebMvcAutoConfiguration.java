@@ -22,15 +22,21 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
+import cn.herodotus.eurynome.data.stamp.AccessLimitedStampManager;
+import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
+import cn.herodotus.eurynome.rest.interceptor.AccessLimitedInterceptor;
+import cn.herodotus.eurynome.rest.interceptor.IdempotentInterceptor;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -47,9 +53,37 @@ import java.util.List;
 @Configuration(proxyBeanMethods = false)
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
+    @Autowired
+    private IdempotentStampManager idempotentStampManager;
+    @Autowired
+    private AccessLimitedStampManager accessLimitedStampManager;
+
     @PostConstruct
     public void postConstruct() {
         log.debug("[Eurynome] |- Core [Herodotus Web Mvc in component security] Auto Configure.");
+    }
+
+    @Bean
+    public IdempotentInterceptor idempotentInterceptor() {
+        IdempotentInterceptor idempotentInterceptor = new IdempotentInterceptor();
+        idempotentInterceptor.setIdempotentStampManager(idempotentStampManager);
+        log.trace("[Eurynome] |- Bean [Idempotent Interceptor] Auto Configure.");
+        return idempotentInterceptor;
+    }
+
+    @Bean
+    public AccessLimitedInterceptor accessLimitedInterceptor() {
+        AccessLimitedInterceptor accessLimitedInterceptor = new AccessLimitedInterceptor();
+        accessLimitedInterceptor.setAccessLimitedStampManager(accessLimitedStampManager);
+        log.trace("[Eurynome] |- Bean [Access Limited Interceptor] Auto Configure.");
+        return accessLimitedInterceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(accessLimitedInterceptor());
+        registry.addInterceptor(idempotentInterceptor());
+        WebMvcConfigurer.super.addInterceptors(registry);
     }
 
 

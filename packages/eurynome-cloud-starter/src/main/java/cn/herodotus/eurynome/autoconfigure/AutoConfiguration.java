@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.autoconfigure;
 
-import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
+import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,7 +34,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableHerodotusCrud
+@EnableHerodotusRest
 @EnableHerodotusKernel
 public class AutoConfiguration {
 
