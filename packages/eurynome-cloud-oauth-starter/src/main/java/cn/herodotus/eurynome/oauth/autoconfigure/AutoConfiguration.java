@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
-import cn.herodotus.eurynome.crud.annotation.EnableHerodotusCrud;
 import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthClientDetailsService;
 import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthUserDetailsService;
+import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
@@ -91,7 +91,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-@EnableHerodotusCrud
+@EnableHerodotusRest
 @EnableUpmsInterface
 @EnableUpmsLogic
 public class AutoConfiguration {

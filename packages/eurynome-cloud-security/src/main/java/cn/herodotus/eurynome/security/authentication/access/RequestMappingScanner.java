@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.authentication.access;
 
-import cn.herodotus.eurynome.assistant.utils.PropertyResolver;
+import cn.herodotus.eurynome.assistant.resolver.PropertyResolver;
 import cn.herodotus.eurynome.common.constant.enums.Architecture;
 import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
 import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;

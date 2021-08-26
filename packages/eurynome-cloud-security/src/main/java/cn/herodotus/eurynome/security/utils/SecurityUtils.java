@@ -172,11 +172,11 @@ public class SecurityUtils {
     public static String[] whitelistToAntMatchers(List<String> list) {
         if (CollectionUtils.isNotEmpty(list)) {
             String[] array = new String[list.size()];
-            log.debug("[Herodotus] |- Fetch The REST White List.");
+            log.debug("[Eurynome] |- Fetch The REST White List.");
             return list.toArray(array);
         }
 
-        log.warn("[Herodotus] |- Can not Fetch The REST White List Configurations.");
+        log.warn("[Eurynome] |- Can not Fetch The REST White List Configurations.");
         return new String[]{};
     }
 

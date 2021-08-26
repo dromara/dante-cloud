@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.development;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
-import cn.herodotus.eurynome.crud.service.WriteableService;
+import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
+import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
 import cn.herodotus.eurynome.upms.logic.service.development.SupplierService;
 import io.swagger.annotations.Api;

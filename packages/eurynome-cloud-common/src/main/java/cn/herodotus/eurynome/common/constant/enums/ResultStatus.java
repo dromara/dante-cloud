@@ -75,6 +75,8 @@ public enum ResultStatus {
     WARNING(4001, "警告"),
 
     METHOD_NOT_ALLOWED(4105, "请求方法不支持"),
+    REPEAT_SUBMISSION(4601, "不要重复提交"),
+    FREQUENT_REQUESTS(4602, "请求过于频繁请稍后再试"),
 
     /**
      * 6*.* 为数据操作相关错误

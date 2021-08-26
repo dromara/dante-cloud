@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.controller.BaseWriteableRestController;
-import cn.herodotus.eurynome.crud.service.WriteableService;
+import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
+import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthScopesService;
 import io.swagger.annotations.Api;

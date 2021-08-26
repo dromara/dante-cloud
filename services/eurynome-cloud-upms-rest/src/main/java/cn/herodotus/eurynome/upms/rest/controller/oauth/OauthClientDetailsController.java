@@ -1,8 +1,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.crud.controller.BaseController;
-import cn.herodotus.eurynome.crud.service.WriteableService;
+import cn.herodotus.eurynome.rest.base.controller.BaseController;
+import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;

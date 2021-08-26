@@ -22,7 +22,6 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
-import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
@@ -70,7 +69,6 @@ import javax.annotation.PostConstruct;
  * @date : 2020/3/2 16:00
  */
 @Configuration
-@EnableHerodotusRest
 @EnableConfigurationProperties({
         SecurityProperties.class
 })

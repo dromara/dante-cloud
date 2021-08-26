@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
  * Module Name: eurynome-cloud-rest
  * File Name: SwaggerConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/08/20 11:58:20
  */
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.ConditionalOnSwaggerEnabled;
+import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnSwaggerEnabled;
 import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
 import cn.herodotus.eurynome.common.constant.enums.Architecture;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
@@ -31,7 +31,6 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;

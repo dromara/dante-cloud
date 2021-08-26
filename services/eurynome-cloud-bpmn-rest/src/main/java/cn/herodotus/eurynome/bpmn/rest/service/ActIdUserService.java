@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.bpmn.rest.service;
 
 import cn.herodotus.eurynome.bpmn.rest.entity.ActIdUser;
 import cn.herodotus.eurynome.bpmn.rest.repository.ActIdUserRepository;
-import cn.herodotus.eurynome.crud.service.WriteableService;
+import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
