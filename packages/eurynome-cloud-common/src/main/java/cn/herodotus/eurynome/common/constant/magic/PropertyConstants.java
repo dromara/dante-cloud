@@ -65,6 +65,7 @@ public class PropertyConstants {
 
     public static final String ITEM_SPRING_APPLICATION_NAME = "spring.application.name";
     public static final String ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
+    public static final String ITEM_SPRING_SQL_INIT_PLATFORM = "spring.sql.init.platform";
 
     public static final String ITEM_PLATFORM_DATA_ACCESS_STRATEGY = PROPERTY_PREFIX_PLATFORM + ".data-access-strategy";
     public static final String ITEM_PLATFORM_ARCHITECTURE = PROPERTY_PREFIX_PLATFORM + ".architecture";
@@ -73,6 +74,11 @@ public class PropertyConstants {
     public static final String ITEM_MANAGEMENT_KAFKA_ENABLED = PROPERTY_PREFIX_MANAGEMENT_QUEUE + ".kafka.enabled";
     public static final String ITEM_MANAGEMENT_LOG_CENTER_ENABLED = PROPERTY_PREFIX_MANAGEMENT_LOG_CENTER + ".server-addr";
 
-    public static final String ANNOTATION_APPLICATION_NAME = "${" + ITEM_SPRING_APPLICATION_NAME + "}";
+    public static final String ANNOTATION_PREFIX = "${";
+    public static final String ANNOTATION_SUFFIX = "}";
+
+
+    public static final String ANNOTATION_APPLICATION_NAME = ANNOTATION_PREFIX + ITEM_SPRING_APPLICATION_NAME + ANNOTATION_SUFFIX;
+    public static final String ANNOTATION_SQL_INIT_PLATFORM = ANNOTATION_PREFIX + ITEM_SPRING_SQL_INIT_PLATFORM + ANNOTATION_SUFFIX;
     public static final String ANNOTATION_DEBEZIUM_ENABLED = "${herodotus.platform.debezium.enabled}";
 }

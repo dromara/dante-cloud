@@ -121,6 +121,7 @@ public class HerodotusExceptionHandler {
         EXCEPTION_DICTIONARY.put("MethodArgumentNotValidException", getValidationResult(ResultStatus.METHOD_ARGUMENT_NOT_VALID));
         // 7*.** 对应错误
         EXCEPTION_DICTIONARY.put("RedisPipelineException", getResult(ResultStatus.PIPELINE_INVALID_COMMANDS, HttpStatus.SC_INTERNAL_SERVER_ERROR));
+        EXCEPTION_DICTIONARY.put("CacheConfigException", getResult(ResultStatus.CACHE_CONFIG_NOT_FOUND, HttpStatus.SC_NOT_IMPLEMENTED));
         // 以下是没有重新梳理过的错误。
         EXCEPTION_DICTIONARY.put("UsernameNotFoundException", getUnauthorizedResult(ResultStatus.USERNAME_NOT_FOUND));
         EXCEPTION_DICTIONARY.put("BadCredentialsException", getUnauthorizedResult(ResultStatus.BAD_CREDENTIALS));

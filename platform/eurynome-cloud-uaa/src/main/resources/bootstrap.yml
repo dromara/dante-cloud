@@ -52,16 +52,9 @@ spring:
     cache: false
     prefix: classpath:/templates
 
-herodotus:
-  platform:
-    security:
-      interceptor:
-        whitelist:
-          - "/login"
-          - "/defaultKaptcha"
 logging:
   level:
     cn.herodotus.eurynome: debug
     org.springframework.security: debug
-    org.apache.kafka: WARN
+    org.apache.kafka: info
     com.alibaba.nacos: off

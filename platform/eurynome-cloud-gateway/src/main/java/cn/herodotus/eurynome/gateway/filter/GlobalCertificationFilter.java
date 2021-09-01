@@ -90,7 +90,9 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
 //                return chain.filter(exchange);
 //            }
 //        }
+        log.debug("[Eurynome] |- current url is [{}]!", url);
         if (WebFluxUtils.isPathMatch(whiteList, url)) {
+            log.debug("[Eurynome] |- is match!");
             return chain.filter(exchange);
         }
 

@@ -55,3 +55,10 @@ herodotus:
       - "/oauth/check_token"
       - "/oauth/authorize"
       - "/v2/api-docs/**"
+
+logging:
+  level:
+    cn.herodotus.eurynome: debug
+    org.springframework.security: info
+    org.apache.kafka: info
+    com.alibaba.nacos: off

@@ -25,7 +25,8 @@ package cn.herodotus.eurynome.oauth.configuration;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
@@ -42,10 +43,11 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2020/6/6 10:49
  */
-@Slf4j
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+
+    private static final Logger log = LoggerFactory.getLogger(ResourceServerConfiguration.class);
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -62,6 +64,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
         // @formatter:off
         http.authorizeRequests()
+                .antMatchers("/", "/defaultKaptcha").permitAll()
                 .antMatchers(SecurityUtils.whitelistToAntMatchers(securityProperties.getInterceptor().getWhitelist())).permitAll()
                 // 指定监控访问权限
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()

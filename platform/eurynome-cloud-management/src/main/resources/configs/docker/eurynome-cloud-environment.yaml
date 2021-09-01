@@ -5,7 +5,7 @@ herodotus:
     redis-password:
     kafka-bootstrap-servers: 192.168.101.10:9092
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://192.168.101.10:15432/herodotus
     username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)

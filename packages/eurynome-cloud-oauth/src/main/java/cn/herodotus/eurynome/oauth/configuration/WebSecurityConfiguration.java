@@ -30,7 +30,8 @@ import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsS
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,11 +74,12 @@ import javax.sql.DataSource;
  * @author : gengwei.zheng
  * @date : 2020/3/11 19:16
  */
-@Slf4j
 @Configuration
 @EnableWebSecurity
 @Order(2)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private static final Logger log = LoggerFactory.getLogger(WebSecurityConfiguration.class);
 
     @Autowired
     private DataSource dataSource;

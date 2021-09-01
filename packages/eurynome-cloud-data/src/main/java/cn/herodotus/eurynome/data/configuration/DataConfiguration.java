@@ -74,7 +74,8 @@ import javax.annotation.PostConstruct;
         SpringUtil.class,
         CaffeineConfiguration.class,
         KafkaConfiguration.class,
-        StampConfiguration.class
+        StampConfiguration.class,
+        MybatisPlusConfiguration.class
 })
 public class DataConfiguration {
 

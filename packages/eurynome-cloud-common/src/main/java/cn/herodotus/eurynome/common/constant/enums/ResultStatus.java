@@ -75,6 +75,16 @@ public enum ResultStatus {
     WARNING(4001, "警告"),
 
     METHOD_NOT_ALLOWED(4105, "请求方法不支持"),
+
+    /**
+     * 43.** 禁止的请求，与403对应
+     */
+    SQL_INJECTION_REQUEST(4301, "疑似SQL注入请求"),
+
+
+    /**
+     * 46.** 不接受的请求，与406对应
+     */
     REPEAT_SUBMISSION(4601, "不要重复提交"),
     FREQUENT_REQUESTS(4602, "请求过于频繁请稍后再试"),
 
@@ -88,8 +98,10 @@ public enum ResultStatus {
     /**
      * 7*.* 基础设施交互错误
      * 71.* Redis 操作出现错误
+     * 72.* Cache 操作出现错误
      */
     PIPELINE_INVALID_COMMANDS(7100, "Redis管道包含一个或多个无效命令"),
+    CACHE_CONFIG_NOT_FOUND(7200, "服务需要使用缓存，但是未找到*-cache.yaml配置"),
 
 
     // TODO: 以下状态码和错误信息要重新梳理，重点要看自定义错误码以及对应的HttpStatus是否合适。如果发现新的没有定义的错误，增加到上面。

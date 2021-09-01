@@ -24,12 +24,14 @@ package cn.herodotus.eurynome.common.utils;
 
 import cn.herodotus.eurynome.common.jackson.FastJsonSerializerFeatureCompatibleForJackson;
 import cn.herodotus.eurynome.common.jackson.SerializerFeature;
+import cn.herodotus.eurynome.common.jackson.deserializer.XssStringJsonDeserializer;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,19 +42,19 @@ import java.util.List;
 import java.util.TimeZone;
 
 /**
- * @author gengwei.zheng
+ * <p>Description: Jackson单例工具类 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/9/1 12:18
  */
 public class JacksonUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JacksonUtils.class);
 
-    private static final ObjectMapper objectMapper;
+    private static volatile JacksonUtils INSTANCE;
+    private final ObjectMapper objectMapper;
 
-    public static ObjectMapper getObjectMapper() {
-        return objectMapper;
-    }
-
-    static {
+    private JacksonUtils() {
         objectMapper = new ObjectMapper();
         // 设置为中国上海时区
         objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
@@ -68,6 +70,7 @@ public class JacksonUtils {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         // 单引号处理
         objectMapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         objectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
 
         /**
@@ -77,6 +80,7 @@ public class JacksonUtils {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        simpleModule.addDeserializer(String.class, new XssStringJsonDeserializer());
 
         objectMapper.registerModule(simpleModule);
         // 兼容fastJson 的一些空值处理
@@ -90,15 +94,35 @@ public class JacksonUtils {
         objectMapper.setSerializerFactory(objectMapper.getSerializerFactory().withSerializerModifier(new FastJsonSerializerFeatureCompatibleForJackson(features)));
     }
 
+    private static JacksonUtils getInstance() {
+        if (ObjectUtils.isEmpty(INSTANCE)) {
+            synchronized (JacksonUtils.class) {
+                if (ObjectUtils.isEmpty(INSTANCE)) {
+                    INSTANCE = new JacksonUtils();
+                }
+            }
+        }
+
+        return INSTANCE;
+    }
+
+    private ObjectMapper objectMapper() {
+        return this.objectMapper;
+    }
+
+    public static ObjectMapper getObjectMapper() {
+        return JacksonUtils.getInstance().objectMapper();
+    }
+
     public static <T> T toObject(String json, Class<T> clazz) {
         try {
             return getObjectMapper().readValue(json, clazz);
         } catch (JsonParseException e) {
-            logger.error("[JacksonUtils] |- toObject parse json error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toObject parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("[JacksonUtils] |- toObject mapping to object error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toObject mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("[JacksonUtils] |- toObject read content error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toObject read content error! {}", e.getMessage());
         }
 
         return null;
@@ -108,27 +132,26 @@ public class JacksonUtils {
         try {
             return getObjectMapper().writeValueAsString(entity);
         } catch (JsonParseException e) {
-            logger.error("[JacksonUtils] |- toCollection parse json error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toCollection parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("[JacksonUtils] |- toCollection mapping to object error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toCollection mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("[JacksonUtils] |- toCollection read content error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toCollection read content error! {}", e.getMessage());
         }
 
         return null;
     }
 
-    @SuppressWarnings("unchecked")
     public static <T> List<T> toList(String json, Class<T> clazz) {
         JavaType javaType = getObjectMapper().getTypeFactory().constructParametricType(ArrayList.class, clazz);
         try {
-            return (List<T>) getObjectMapper().readValue(json, javaType);
+            return getObjectMapper().readValue(json, javaType);
         } catch (JsonParseException e) {
-            logger.error("[JacksonUtils] |- toCollection parse json error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toCollection parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("[JacksonUtils] |- toCollection mapping to object error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toCollection mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("[JacksonUtils] |- toCollection read content error! {}", e.getMessage());
+            logger.error("[Eurynome] |- JacksonUtils toCollection read content error! {}", e.getMessage());
         }
 
         return null;
@@ -138,11 +161,11 @@ public class JacksonUtils {
         try {
             return getObjectMapper().readValue(json, typeReference);
         } catch (JsonParseException e) {
-            logger.error("-| [JacksonUtils]: toCollection parse json error! {}", e.getMessage());
+            logger.error("-| [Eurynome]: JacksonUtils toCollection parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("-| [JacksonUtils]: toCollection mapping to object error! {}", e.getMessage());
+            logger.error("-| [Eurynome]: JacksonUtils toCollection mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("-| [JacksonUtils]: toCollection read content error! {}", e.getMessage());
+            logger.error("-| [Eurynome]: JacksonUtils toCollection read content error! {}", e.getMessage());
         }
 
         return null;

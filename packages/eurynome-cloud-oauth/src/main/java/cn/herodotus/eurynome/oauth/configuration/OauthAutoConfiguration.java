@@ -22,7 +22,8 @@
 
 package cn.herodotus.eurynome.oauth.configuration;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -39,13 +40,14 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2021/1/17 11:11
  */
-@Slf4j
 @Configuration
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.oauth.configuration",
         "cn.herodotus.eurynome.oauth.controller"
 })
 public class OauthAutoConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(OauthAutoConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

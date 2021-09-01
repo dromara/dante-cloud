@@ -68,3 +68,12 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         cachePrepStmts: true
+
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+  configuration:
+    cache-enabled: true
+    map-underscore-to-camel-case: true

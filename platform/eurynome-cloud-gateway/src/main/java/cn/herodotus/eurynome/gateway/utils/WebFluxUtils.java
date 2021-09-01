@@ -25,9 +25,11 @@ package cn.herodotus.eurynome.gateway.utils;
 import cn.herodotus.eurynome.common.domain.Result;
 import com.alibaba.fastjson.JSON;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
@@ -36,9 +38,11 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class WebFluxUtils {
 
@@ -94,5 +98,26 @@ public class WebFluxUtils {
 
         DataBuffer buffer = response.bufferFactory().wrap(bytes);
         return response.writeWith(Flux.just(buffer));
+    }
+
+    public static boolean isJsonMediaType(String contentType) {
+        return MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(contentType) || MediaType.APPLICATION_JSON_UTF8_VALUE.equalsIgnoreCase(contentType);
+    }
+
+    /**
+     * 从Flux<DataBuffer>中获取字符串的方法
+     * @return 请求体
+     */
+    public static String getRequestBody(ServerHttpRequest serverHttpRequest) {
+        //获取请求体
+        Flux<DataBuffer> body = serverHttpRequest.getBody();
+        AtomicReference<String> bodyReference = new AtomicReference<>();
+        body.subscribe(buffer -> {
+            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.asByteBuffer());
+            DataBufferUtils.release(buffer);
+            bodyReference.set(charBuffer.toString());
+        });
+        //获取request body
+        return bodyReference.get();
     }
 }

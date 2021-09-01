@@ -27,21 +27,19 @@ import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsS
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.response.HerodotusWebResponseExceptionTranslator;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
@@ -92,10 +90,11 @@ import java.util.Map;
  *
  * @author gengwei.zheng
  */
-@Slf4j
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+
+    private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
 
     @Autowired
     private DataSource dataSource;

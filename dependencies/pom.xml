@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.5.4.80</version>
+    <version>2.5.4.90</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -62,43 +62,47 @@
         <spring-boot-dependencies.version>2.5.4</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2020.0.3</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.5.0</spring-boot-admin.version>
+        <spring-boot-admin.version>2.5.1</spring-boot-admin.version>
 
-        <!--Spring Boot Dependencies中没有的Maven Plugin-->
-        <docker-maven-plugin.version>0.36.1</docker-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>5.0.0</git-commit-id-maven-plugin.version>
+        <!--Maven Plugin 相关组件-->
+        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
+        <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
 
-        <!--Spring Boot Dependencies中没有的工具包-->
+        <!--开源通用工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-text.version>1.9</commons-text.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.11.0</commons-io.version>
         <guava.version>30.1.1-jre</guava.version>
-        <hutool.version>5.7.8</hutool.version>
+        <antisamy.version>1.6.4</antisamy.version>
 
-        <!--Alibaba开源的工具包-->
+        <!-- 应用开发辅助工具组件 -->
+        <lombok.version>1.18.20</lombok.version>
+        <p6spy.version>3.9.1</p6spy.version>
+        <springfox.version>2.9.2</springfox.version>
+        <swagger.version>1.6.2</swagger.version>
+        <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
+
+        <!-- 阿里巴巴开源工具依赖 -->
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
         <alibaba-nacos.version>2.0.3</alibaba-nacos.version>
 
-        <!--Spring Boot Dependencies中没有的依赖Starter组件-->
-        <starter-jasypt.version>3.0.3</starter-jasypt.version>
-        <starter-mybatis.version>2.2.0</starter-mybatis.version>
-        <starter-camunda.version>7.15.0</starter-camunda.version>
-
-        <!--Spring Boot Dependencies中没有的依赖组件-->
-        <springfox.version>2.9.2</springfox.version>
-        <swagger.version>1.6.2</swagger.version>
+        <!-- 国内开源通用组件 -->
+        <hutool.version>5.7.10</hutool.version>
+        <okhttps.version>3.1.4</okhttps.version>
+        <just-auth.verison>1.16.3</just-auth.verison>
         <knife4j.version>2.0.6</knife4j.version>
-        <p6spy.version>3.9.1</p6spy.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
-        <okhttps.version>3.1.3</okhttps.version>
-        <lombok.version>1.18.20</lombok.version>
-        <just-auth.verison>1.16.2</just-auth.verison>
 
-        <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
+        <!--第三方starter-->
+        <starter-jasypt.version>3.0.3</starter-jasypt.version>
+        <starter-camunda.version>7.15.0</starter-camunda.version>
+        <starter-mybatis-plus.version>3.4.3.2</starter-mybatis-plus.version>
+        <mybatis-plus-generator.version>3.5.0</mybatis-plus-generator.version>
+        <velocity.version>2.3</velocity.version>
     </properties>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
@@ -124,6 +128,8 @@
                 <artifactId>spring-boot-admin-starter-server</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>
+
+
             <!-- Eurynome Cloud -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -191,14 +197,29 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- 通用工具组件 -->
-            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+
+            <!-- Maven插件相关组件 -->
+            <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-                <scope>provided</scope>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker-maven-plugin.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/pl.project13.maven/git-commit-id-plugin -->
+            <dependency>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git-commit-id-plugin.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct-processor.version}</version>
+            </dependency>
+
+
+            <!-- 开源通用工具包 -->
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
@@ -228,31 +249,22 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-fastjson</artifactId>
-                <version>${okhttps.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-gson</artifactId>
-                <version>${okhttps.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-jackson</artifactId>
-                <version>${okhttps.version}</version>
-            </dependency>
             <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
             <dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson-bom.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson-bom.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jdk8 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jdk8</artifactId>
                 <version>${jackson-bom.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin -->
@@ -261,13 +273,22 @@
                 <artifactId>jackson-module-kotlin</artifactId>
                 <version>${jackson-bom.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/me.zhyd.oauth/JustAuth -->
+            <!-- https://mvnrepository.com/artifact/org.owasp.antisamy/antisamy -->
             <dependency>
-                <groupId>me.zhyd.oauth</groupId>
-                <artifactId>JustAuth</artifactId>
-                <version>${just-auth.verison}</version>
+                <groupId>org.owasp.antisamy</groupId>
+                <artifactId>antisamy</artifactId>
+                <version>${antisamy.version}</version>
             </dependency>
 
+
+            <!-- 应用开发辅助工具组件 -->
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
@@ -290,20 +311,6 @@
                 <artifactId>swagger-models</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-ui</artifactId>
-                <version>${knife4j.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${mapstruct-processor.version}</version>
-            </dependency>
-
-
             <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
             <dependency>
                 <groupId>p6spy</groupId>
@@ -316,18 +323,7 @@
                 <artifactId>logstash-logback-encoder</artifactId>
                 <version>${logstash-logback-encoder.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
-            <dependency>
-                <groupId>com.github.penggle</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
-            <dependency>
-                <groupId>com.github.whvcse</groupId>
-                <artifactId>easy-captcha</artifactId>
-                <version>${easy-captcha.version}</version>
-            </dependency>
+
 
             <!-- 阿里巴巴依赖 -->
             <dependency>
@@ -348,6 +344,55 @@
                 <version>${alibaba-jetcache.version}</version>
             </dependency>
 
+
+            <!-- 国内开源通用组件 -->
+            <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ejlchina</groupId>
+                <artifactId>okhttps-fastjson</artifactId>
+                <version>${okhttps.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ejlchina</groupId>
+                <artifactId>okhttps-gson</artifactId>
+                <version>${okhttps.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ejlchina</groupId>
+                <artifactId>okhttps-jackson</artifactId>
+                <version>${okhttps.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/me.zhyd.oauth/JustAuth -->
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${just-auth.verison}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+
+
             <!-- 第三方Starter -->
             <dependency>
                 <groupId>org.camunda.bpm.springboot</groupId>
@@ -360,11 +405,23 @@
                 <artifactId>jasypt-spring-boot-starter</artifactId>
                 <version>${starter-jasypt.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+            <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${starter-mybatis.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${starter-mybatis-plus.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-generator -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity-engine-core -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -431,9 +488,9 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>io.github.git-commit-id</groupId>
-                    <artifactId>git-commit-id-maven-plugin</artifactId>
-                    <version>${git-commit-id-maven-plugin.version}</version>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <version>${git-commit-id-plugin.version}</version>
                     <configuration>
                         <!-- 检查的仓库根目录，${project.basedir}：项目根目录，即包含pom.xml文件的目录 -->
                         <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
@@ -446,8 +503,9 @@
                         <!-- 生成git属性文件路径及文件名，默认${project.build.outputDirectory}/git.properties -->
                         <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
                         </generateGitPropertiesFilename>
+                        <dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
                         <!-- 生成git属性文件格式，默认值properties -->
-                        <format>json</format>
+<!--                        <format>json</format>-->
                         <!-- 配置git-describe命令 -->
                         <gitDescribe>
                             <skip>false</skip>

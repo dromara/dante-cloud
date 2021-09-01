@@ -29,11 +29,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.5.4.80</version>
+        <version>2.5.4.90</version>
     </parent>
 
     <artifactId>eurynome-cloud-management</artifactId>
-    <version>2.5.4.80</version>
+    <version>2.5.4.90</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -44,6 +44,16 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>eurynome-cloud-kernel</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-cloud-starter-bus-kafka</artifactId>
+                    <groupId>org.springframework.cloud</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>springfox-swagger2</artifactId>
+                    <groupId>io.springfox</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

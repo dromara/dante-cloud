@@ -24,6 +24,8 @@ package cn.herodotus.eurynome.gateway;
 
 import cn.herodotus.eurynome.data.annotation.EnableRedisStorage;
 import com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration;
+import com.baomidou.mybatisplus.autoconfigure.IdentifierGeneratorAutoConfiguration;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -37,7 +39,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableRedisStorage
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JetCacheAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JetCacheAutoConfiguration.class, IdentifierGeneratorAutoConfiguration.class, MybatisPlusAutoConfiguration.class})
 public class GatewayApplication {
 
     public static void main(String[] args) {

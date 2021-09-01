@@ -24,6 +24,8 @@ package cn.herodotus.eurynome.management;
 
 import cn.herodotus.eurynome.kernel.annotation.EnableLogCenter;
 import com.alicp.jetcache.autoconfigure.JetCacheAutoConfiguration;
+import com.baomidou.mybatisplus.autoconfigure.IdentifierGeneratorAutoConfiguration;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,7 +39,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  */
 @EnableAdminServer
 @EnableLogCenter
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JetCacheAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JetCacheAutoConfiguration.class, IdentifierGeneratorAutoConfiguration.class, MybatisPlusAutoConfiguration.class})
 public class ManagementApplication {
 
     public static void main(String[] args) {

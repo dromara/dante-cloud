@@ -5,7 +5,7 @@ herodotus:
     redis-password:
     kafka-bootstrap-servers: 127.0.0.1:9092
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     url: jdbc:p6spy:postgresql://localhost:15432/herodotus
     username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)

@@ -26,13 +26,3 @@ spring:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
 
-herodotus:
-  platform:
-    management:
-      log-center:
-        server-addr: 192.168.101.10:5044
-      config-center:
-        server-addr: ${spring.cloud.nacos.config.server-addr}
-        initialize: false
-
-

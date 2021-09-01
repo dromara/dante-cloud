@@ -20,7 +20,7 @@
  * Date: 2021/08/26 19:07:26
  */
 
-package cn.herodotus.eurynome.rest.interceptor;
+package cn.herodotus.eurynome.rest.security;
 
 import cn.herodotus.eurynome.assistant.annotation.rest.Idempotent;
 import cn.herodotus.eurynome.assistant.exception.operation.RepeatSubmissionException;
@@ -83,7 +83,7 @@ public class IdempotentInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        log.debug("[Eurynome] |- IdempotentInterceptor preHandle postProcess.");
+        log.trace("[Eurynome] |- IdempotentInterceptor preHandle postProcess.");
 
         if (!(handler instanceof HandlerMethod)) {
             return true;

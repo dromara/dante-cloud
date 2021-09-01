@@ -24,18 +24,22 @@ package cn.herodotus.eurynome.security.autoconfigure;
 
 import cn.herodotus.eurynome.data.stamp.AccessLimitedStampManager;
 import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
-import cn.herodotus.eurynome.rest.interceptor.AccessLimitedInterceptor;
-import cn.herodotus.eurynome.rest.interceptor.IdempotentInterceptor;
+import cn.herodotus.eurynome.rest.security.AccessLimitedInterceptor;
+import cn.herodotus.eurynome.rest.security.IdempotentInterceptor;
+import cn.herodotus.eurynome.rest.security.XssHttpServletFilter;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -49,9 +53,10 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/3/4 11:00
  */
-@Slf4j
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class WebMvcAutoConfiguration implements WebMvcConfigurer {
+
+    private static final Logger log = LoggerFactory.getLogger(WebMvcAutoConfiguration.class);
 
     @Autowired
     private IdempotentStampManager idempotentStampManager;
@@ -96,6 +101,11 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
         @Autowired
         private SecurityProperties securityProperties;
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.addFilterBefore(new XssHttpServletFilter(), FilterSecurityInterceptor.class);
+        }
 
         @Override
         public void configure(WebSecurity web) throws Exception {

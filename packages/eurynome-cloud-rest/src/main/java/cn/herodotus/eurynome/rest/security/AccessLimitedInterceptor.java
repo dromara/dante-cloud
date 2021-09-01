@@ -20,7 +20,7 @@
  * Date: 2021/08/26 19:06:26
  */
 
-package cn.herodotus.eurynome.rest.interceptor;
+package cn.herodotus.eurynome.rest.security;
 
 import cn.herodotus.eurynome.assistant.annotation.rest.AccessLimited;
 import cn.herodotus.eurynome.assistant.exception.operation.FrequentRequestsException;
@@ -58,7 +58,7 @@ public class AccessLimitedInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        log.debug("[Eurynome] |- AccessLimitedInterceptor preHandle postProcess.");
+        log.trace("[Eurynome] |- AccessLimitedInterceptor preHandle postProcess.");
 
         if (!(handler instanceof HandlerMethod)) {
             return true;
