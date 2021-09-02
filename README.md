@@ -50,7 +50,8 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ## [2]、功能介绍
 
-![详情见Wiki](https://gitee.com/herodotus/eurynome-cloud/wikis)
+<a href="https://gitee.com/herodotus/eurynome-cloud/wikis">详情见Wiki</a>
+
 
 ## [3]、技术栈和版本说明
 
