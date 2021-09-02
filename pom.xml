@@ -90,7 +90,8 @@
                 <!--Nacos配置中心地址-->
                 <config.server-addr>192.168.101.10:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <config.namespace>8fdcc073-2e51-4722-8274-3f5b76362bb8</config.namespace>
+<!--                <config.namespace>8fdcc073-2e51-4722-8274-3f5b76362bb8</config.namespace>-->
+                <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
                 <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
@@ -151,7 +152,8 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
@@ -307,7 +309,7 @@
                     <!-- 检查的仓库根目录，${project.basedir}：项目根目录，即包含pom.xml文件的目录 -->
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     <!-- git属性文件中各属性前缀，默认值git，可以不配置 -->
-                    <prefix></prefix>
+                    <prefix>git</prefix>
                     <!-- false：扫描路径时不打印更多信息，默认值false，可以不配置 -->
                     <verbose>false</verbose>
                     <!-- 生成git属性文件，默认false：不生成 -->

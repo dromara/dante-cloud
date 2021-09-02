@@ -35,7 +35,6 @@
 # .idea/modules.xml
 # .idea/*.iml
 # .idea/modules
-# *.iml
 # *.ipr
 
 # CMake
@@ -50,6 +49,8 @@ cmake-build-*/
 # IntelliJ
 out/
 target/
+.idea/
+*.iml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
