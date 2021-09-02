@@ -28,7 +28,6 @@ spring:
             group: common
           - data-id: eurynome-cloud-kafka.yaml
             group: common
-
         extension-configs:
           - data-id: ${spring.application.name}.yaml
             group: herodotus

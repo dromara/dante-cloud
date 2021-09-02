@@ -68,6 +68,7 @@
         <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 
         <!--开源通用工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
