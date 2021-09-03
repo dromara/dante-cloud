@@ -20,6 +20,8 @@ spring:
             group: common
           - data-id: eurynome-cloud-database-@database.type@.yaml
             group: common
+          - data-id: eurynome-cloud-database.yaml
+            group: common
           - data-id: eurynome-cloud-redis.yaml
             group: common
           - data-id: eurynome-cloud-cache.yaml
@@ -38,19 +40,6 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
-    bus:
-      enabled: true
-      destination: event-bus
-      id: ${spring.application.name}
-    stream:
-      default-binder: kafka
-      bindings:
-        security-metadata-output:
-          destination: security.metadata
-  thymeleaf:
-    mode: HTML
-    cache: false
-    prefix: classpath:/templates
 
 logging:
   level:

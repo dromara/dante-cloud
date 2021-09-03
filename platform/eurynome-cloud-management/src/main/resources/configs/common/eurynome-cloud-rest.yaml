@@ -1,3 +1,9 @@
+spring:
+  thymeleaf:
+    mode: HTML
+    cache: false
+    prefix: classpath:/templates
+
 management:
   endpoints:
     web:

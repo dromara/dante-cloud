@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.5.4.90</version>
+    <version>2.5.4.100</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -68,7 +68,6 @@
         <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 
         <!--开源通用工具包-->
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -358,16 +357,16 @@
                 <artifactId>okhttps-fastjson</artifactId>
                 <version>${okhttps.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-gson</artifactId>
-                <version>${okhttps.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.ejlchina</groupId>
-                <artifactId>okhttps-jackson</artifactId>
-                <version>${okhttps.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.ejlchina</groupId>-->
+<!--                <artifactId>okhttps-gson</artifactId>-->
+<!--                <version>${okhttps.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.ejlchina</groupId>-->
+<!--                <artifactId>okhttps-jackson</artifactId>-->
+<!--                <version>${okhttps.version}</version>-->
+<!--            </dependency>-->
             <!-- https://mvnrepository.com/artifact/me.zhyd.oauth/JustAuth -->
             <dependency>
                 <groupId>me.zhyd.oauth</groupId>

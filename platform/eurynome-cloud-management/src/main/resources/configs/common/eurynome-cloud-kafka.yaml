@@ -6,7 +6,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: ${herodotus.environment.kafka-bootstrap-servers}
+          brokers: ${herodotus.environment.kafka.bootstrap-servers}
           default-broker-port: 9092
           auto-add-partitions: true
           auto-create-topics: true

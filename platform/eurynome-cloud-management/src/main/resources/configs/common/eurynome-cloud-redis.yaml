@@ -1,9 +1,9 @@
 spring:
   redis:
     database: 0
-    host: ${herodotus.environment.redis-host}
-    password: ${herodotus.environment.redis-password}
-    port: ${herodotus.environment.redis-port}
+    host: ${herodotus.environment.redis.host}
+    password: ${herodotus.environment.redis.password}
+    port: ${herodotus.environment.redis.port}
     timeout: 10000
     # 如果使用的jedis 则将lettuce改成jedis即可
     lettuce:

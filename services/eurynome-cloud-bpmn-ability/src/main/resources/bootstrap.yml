@@ -20,6 +20,8 @@ spring:
             group: common
           - data-id: eurynome-cloud-database-@database.type@.yaml
             group: common
+          - data-id: eurynome-cloud-database.yaml
+            group: common
           - data-id: eurynome-cloud-redis.yaml
             group: common
           - data-id: eurynome-cloud-cache.yaml
@@ -39,10 +41,6 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
-  thymeleaf:
-    mode: HTML
-    cache: false
-    prefix: classpath:/templates
 
 logging:
   level:
@@ -50,12 +48,6 @@ logging:
     org.springframework.security: debug
     org.apache.kafka: WARN
     com.alibaba.nacos.client: off
-
-herodotus:
-  platform:
-    security:
-      interceptor:
-        open-authorization-check: false
 
 camunda:
   bpm:

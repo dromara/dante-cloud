@@ -1,21 +1,26 @@
 herodotus:
   environment:
-    redis-host: 127.0.0.1
-    redis-port: 6379
-    redis-password:
-    kafka-bootstrap-servers: 127.0.0.1:9092
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:p6spy:postgresql://localhost:5432/herodotus
-    username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
-    password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
-    show-sql: false
     logstash-server-addr: 127.0.0.1:5044
     gateway-server-addr: http://localhost:8847
-  initialization:
-    hibernate-ddl-auto: update
+    database:
+      host: 127.0.0.1
+      port: 15432
+      name: herodotus
+      username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+      password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+    kafka:
+      bootstrap-servers: 127.0.0.1:9092
   switch:
+    database:
+      ddl-auto: update
+      use-second-level-cache: true
+      show-sql: false
+      format-sql: false
+      generate-statistics: false
     swagger:
       enabled: false
 
@@ -23,8 +28,8 @@ herodotus:
     log-center:
       server-addr: ${herodotus.environment.logstash-server-addr}
       loggers:
-        cn.herodotus.eurynome: info
-        org.springframework.security: info
+        cn.herodotus.eurynome: debug
+        org.springframework.security: debug
         com.alibaba.nacos.client.naming: error
         com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.grpc.netty: error
         # 关闭不必要的日志
@@ -32,6 +37,7 @@ herodotus:
         com.alibaba.nacos.client: error
         com.alibaba.nacos.common.remote.client: error
         com.ulisesbocchio: error
+
 jasypt:
   encryptor:
     password: ${JASPYT_HOME:2bda7d3a-dba1-45a4-b08e-cbd731a0418e}

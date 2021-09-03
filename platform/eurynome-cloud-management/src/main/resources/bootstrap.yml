@@ -18,6 +18,8 @@ spring:
             group: common
           - data-id: eurynome-cloud-database-@database.type@.yaml
             group: common
+          - data-id: eurynome-cloud-database.yaml
+            group: common
           - data-id: eurynome-cloud-redis.yaml
             group: common
           - data-id: eurynome-cloud-cache.yaml

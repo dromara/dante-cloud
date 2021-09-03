@@ -1,21 +1,26 @@
 herodotus:
   environment:
-    redis-host: 192.168.101.10
-    redis-port: 6379
-    redis-password:
-    kafka-bootstrap-servers: 192.168.101.10:9092
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://192.168.101.10:15432/herodotus
-    username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
-    password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
-    show-sql: false
-    logstash-server-addr: 192.168.101.10:5044
-    gateway-server-addr: http://192.168.101.10:8847
-  initialization:
-    hibernate-ddl-auto: update
+    logstash-server-addr: 127.0.0.1:5044
+    gateway-server-addr: http://localhost:8847
+    database:
+      host: 127.0.0.1
+      port: 15432
+      name: herodotus
+      username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+      password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+    kafka:
+      bootstrap-servers: 127.0.0.1:9092
   switch:
+    database:
+      ddl-auto: update
+      use-second-level-cache: true
+      show-sql: false
+      format-sql: false
+      generate-statistics: false
     swagger:
       enabled: true
 
