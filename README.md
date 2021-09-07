@@ -1,4 +1,4 @@
-<p align="center"><img src="./documents/readme/logo.jpg" height="200" alt="logo"/></p>
+<p align="center"><img src="./documents/readme/logo.jp" height="200" alt="logo"/></p>
 <h2 align="center">简洁优雅 · 稳定高效 | 宁静致远 · 精益求精 </h2>
 <h3 align="center">Eurynome Cloud 微服务架构</h3>
 
@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.0.3-brightgreen" alt="Nacos 2.0.3"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-2.5.4.100-red" alt="Version 2.5.4.100"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-`2.5.4.110-red" alt="Version `2.5.4.110"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -20,7 +20,7 @@
 <p align="center">
     <a href="https://github.com/herodotus-cloud/eurynome-cloud">Github 仓库</a> &nbsp; | &nbsp; 
     <a href="https://gitee.com/herodotus/eurynome-cloud">Gitee 仓库</a> &nbsp; | &nbsp; 
-    <a href="https://gitee.com/herodotus/eurynome-cloud/wikis">文档</a>
+    <a href="https://herodotus.gitee.io/eurynome-cloud">文档</a>
 </p>
 
 
