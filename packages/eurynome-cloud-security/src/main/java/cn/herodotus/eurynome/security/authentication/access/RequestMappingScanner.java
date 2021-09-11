@@ -33,7 +33,8 @@ import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import cn.hutool.core.util.HashUtil;
 import cn.hutool.crypto.SecureUtil;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -50,7 +51,6 @@ import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -179,11 +179,12 @@ public class RequestMappingScanner implements ApplicationListener<ApplicationRea
      * @return boolean
      */
     private boolean isSwaggerAnnotationMatched(HandlerMethod handlerMethod) {
-        if (handlerMethod.getMethodAnnotation(ApiIgnore.class) != null) {
+        if (handlerMethod.getMethodAnnotation(Hidden.class) != null) {
             return false;
         }
 
-        return handlerMethod.getMethodAnnotation(ApiOperation.class) != null;
+        Operation operation = handlerMethod.getMethodAnnotation(Operation.class);
+        return ObjectUtils.isNotEmpty(operation) && !operation.hidden();
     }
 
     /**
@@ -250,10 +251,10 @@ public class RequestMappingScanner implements ApplicationListener<ApplicationRea
             requestMapping.setServiceId(identifyingCode);
             requestMapping.setParentId(identifyingCode);
         }
-        ApiOperation apiOperation = method.getMethodAnnotation(ApiOperation.class);
+        Operation apiOperation = method.getMethodAnnotation(Operation.class);
         if (ObjectUtils.isNotEmpty(apiOperation)) {
-            requestMapping.setMetadataName(apiOperation.value());
-            requestMapping.setDescription(apiOperation.notes());
+            requestMapping.setMetadataName(apiOperation.summary());
+            requestMapping.setDescription(apiOperation.description());
         }
         requestMapping.setRequestMethod(requestMethods);
         requestMapping.setUrl(urls);

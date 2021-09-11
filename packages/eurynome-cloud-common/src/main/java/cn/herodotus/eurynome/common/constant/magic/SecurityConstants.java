@@ -38,6 +38,8 @@ public class SecurityConstants {
 
     public static final String ENDPOINT_OAUTH_IDENTITY_PROFILE = "/identity/profile";
 
+    public static final String OPEN_API_SECURITY_SCHEME_BEARER_NAME = "HERODOTUS_AUTH";
+
     /**
      * Oauth2 四种模式类型
      */

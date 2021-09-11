@@ -42,12 +42,23 @@ spring:
         port: 8719
         dashboard: @sentinel.server-addr@
 
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    urls-primary-name: CamundaRestAPI
+    urls:
+      - url: /openapi.json
+        name: CamundaRestAPI
+
 logging:
   level:
-    cn.herodotus.eurynome: debug
-    org.springframework.security: debug
+    cn.herodotus: info
+    org.springframework.security: info
+    org.springframework.cloud.bus: info
     org.apache.kafka: WARN
+    org.reflections.Reflections: error
     com.alibaba.nacos.client: off
+    com.alibaba.nacos.common.remote.client: error
 
 camunda:
   bpm:

@@ -5,8 +5,8 @@ import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.development.Supplier;
 import cn.herodotus.eurynome.upms.logic.service.development.SupplierService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/microservice/supplier")
-@Api(tags = {"用户中心服务", "开发团队/厂商管理接口"})
+@Tag(name = "开发团队/厂商管理接口")
 public class SupplierController extends BaseWriteableRestController<Supplier, String> {
 
     private final SupplierService supplierService;
@@ -37,7 +37,7 @@ public class SupplierController extends BaseWriteableRestController<Supplier, St
         return this.supplierService;
     }
 
-    @ApiOperation(value = "获取全部厂商数据", notes = "查询全部的厂商数据，用作列表选择根据目前观测该类数据不会太多，如果过多就需要修改查询方法和方式")
+    @Operation(summary = "获取全部厂商数据", description = "查询全部的厂商数据，用作列表选择根据目前观测该类数据不会太多，如果过多就需要修改查询方法和方式")
     @GetMapping("/list")
     @Override
     public Result<List<Supplier>> findAll() {

@@ -23,6 +23,7 @@
 package cn.herodotus.eurynome.rest.base.business;
 
 import com.google.common.base.MoreObjects;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -34,16 +35,19 @@ import javax.validation.constraints.NotNull;
  * @author : gengwei.zheng
  * @date : 2021/8/18 17:55
  */
+@Schema(title = "分页参数BO对象")
 public class Pager {
 
     @NotNull(message = "页码不能为空")
     @Min(value = 0, message = "页码不能为负")
-    private Integer pageNumber;
+    @Schema(title = "页码", type = "integer", minimum = "0", defaultValue = "0")
+    private Integer pageNumber = 0;
 
     @NotNull(message = "每页条数不能为空")
     @Min(value = 1, message = "每页条数至少为1条")
     @Max(value = 1000, message = "每页条数不能超过1000")
-    private Integer pageSize;
+    @Schema(title = "每页数据条数", type = "integer", minimum = "0", maximum = "1000", defaultValue = "10")
+    private Integer pageSize = 10;
 
     public Integer getPageNumber() {
         return pageNumber;

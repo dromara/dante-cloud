@@ -22,8 +22,7 @@
 
 package cn.herodotus.eurynome.common.constant.enums;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 自定义返回码
@@ -44,7 +43,7 @@ import io.swagger.annotations.ApiModelProperty;
  *
  * @author gengwei.zheng
  */
-@ApiModel(description = "响应结果状态")
+@Schema(name = "响应结果状态")
 public enum ResultStatus {
 
     /**
@@ -152,9 +151,9 @@ public enum ResultStatus {
     GATEWAY_TIMEOUT(5004, "Gateway Timeout"),
     SERVICE_UNAVAILABLE(5003, "Service Unavailable");
 
-    @ApiModelProperty(value = "结果代码")
+    @Schema(title =  "结果代码")
     private final int code;
-    @ApiModelProperty(value = "结果信息")
+    @Schema(title =  "结果信息")
     private final String message;
 
 

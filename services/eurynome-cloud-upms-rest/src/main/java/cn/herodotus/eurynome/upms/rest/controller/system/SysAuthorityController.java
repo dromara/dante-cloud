@@ -24,9 +24,9 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
+import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
 import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
 import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
@@ -34,8 +34,8 @@ import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +53,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/authority")
-@Api(tags = {"用户中心服务", "系统权限接口"})
+@Tag(name = "系统权限接口")
 public class SysAuthorityController extends BaseWriteableRestController<SysAuthority, String> {
 
     private final SysAuthorityService sysAuthorityService;
@@ -68,7 +68,7 @@ public class SysAuthorityController extends BaseWriteableRestController<SysAutho
         return this.sysAuthorityService;
     }
 
-    @ApiOperation(value = "获取权限树", notes = "获取权限树形数据")
+    @Operation(summary = "获取权限树", description = "获取权限树形数据")
     @GetMapping("/tree")
     public Result<List<Tree<String>>> findTree() {
         Result<List<Tree<String>>> result = new Result<>();
@@ -88,7 +88,7 @@ public class SysAuthorityController extends BaseWriteableRestController<SysAutho
         }
     }
 
-    @ApiOperation(value = "获取全部API接口", notes = "获取全部API接口")
+    @Operation(summary = "获取全部API接口", description = "获取全部API接口")
     @GetMapping("/apis")
     public Result<List<SysAuthority>> findAllApis() {
         List<SysAuthority> sysAuthorities = sysAuthorityService.findAllByAuthorityType(AuthorityType.API);

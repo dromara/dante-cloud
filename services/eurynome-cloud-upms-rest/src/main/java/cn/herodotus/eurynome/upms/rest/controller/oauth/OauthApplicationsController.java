@@ -5,10 +5,10 @@ import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthApplicationsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/oauth/applications")
-@Api(tags = {"用户中心服务", "Oauth应用接口"})
+@Tag(name = "Oauth应用接口")
 @Transactional(rollbackFor = Exception.class)
 public class OauthApplicationsController extends BaseWriteableRestController<OauthApplications, String> {
 
@@ -40,10 +40,10 @@ public class OauthApplicationsController extends BaseWriteableRestController<Oau
         return this.oauthApplicationsService;
     }
 
-    @ApiOperation(value = "给应用分配Scope", notes = "给应用分配Scope")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "appKey", required = true, value = "appKey", dataType = "String", dataTypeClass = String.class, paramType = "query"),
-            @ApiImplicitParam(name = "scopes[]", required = true, value = "Scope对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
+    @Operation(summary = "给应用分配Scope", description = "给应用分配Scope")
+    @Parameters({
+            @Parameter(name = "appKey", required = true, description = "appKey"),
+            @Parameter(name = "scopes[]", required = true, description = "Scope对象组成的数组")
     })
     @PutMapping
     public Result<OauthApplications> assign(@RequestParam(name = "appKey") String scopeId, @RequestParam(name = "scopes[]") String[] scopes) {

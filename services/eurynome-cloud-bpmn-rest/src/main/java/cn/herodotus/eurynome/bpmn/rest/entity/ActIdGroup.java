@@ -26,8 +26,7 @@ import cn.herodotus.eurynome.bpmn.rest.domain.base.BaseEntity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -40,33 +39,33 @@ import javax.persistence.*;
  * @author : gengwei.zheng
  * @date : 2021/7/20 12:55
  */
-@ApiModel(description = "Camunda 组")
+@Schema(name = "Camunda 组")
 @Entity
 @Table(name = "act_id_group", indexes = {@Index(name = "act_id_group_id_idx", columnList = "id_")})
 public class ActIdGroup extends BaseEntity {
 
     @JSONField(name = "department_id")
     @JsonProperty("department_id")
-    @ApiModelProperty(value = "部门ID")
+    @Schema(title =  "部门ID")
     @Id
     @GeneratedValue(generator = "act-group-uuid")
     @GenericGenerator(name = "act-group-uuid", strategy = "cn.herodotus.eurynome.bpmn.rest.generator.ActIdGroupUUIDGenerator")
     @Column(name = "id_", length = 64)
     private String id;
 
-    @ApiModelProperty(value = "修订")
+    @Schema(title =  "修订")
     @JSONField(name = "revision")
     @JsonProperty("revision")
     @Column(name = "rev_")
     private Integer revision;
 
-    @ApiModelProperty(value = "名称")
+    @Schema(title =  "名称")
     @JSONField(name = "department_name")
     @JsonProperty("department_name")
     @Column(name = "name_")
     private String name;
 
-    @ApiModelProperty(value = "类型")
+    @Schema(title =  "类型")
     @JSONField(name = "organization_id")
     @JsonProperty("organization_id")
     @Column(name = "type_")

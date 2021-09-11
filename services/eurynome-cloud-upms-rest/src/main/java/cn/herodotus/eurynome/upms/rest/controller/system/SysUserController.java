@@ -29,10 +29,10 @@ import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +47,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/user")
-@Api(tags = {"用户中心服务", "系统用户接口"})
+@Tag(name = "系统用户接口")
 public class SysUserController extends BaseWriteableRestController<SysUser, String> {
 
     private final SysUserService sysUserService;
@@ -62,10 +62,10 @@ public class SysUserController extends BaseWriteableRestController<SysUser, Stri
         return this.sysUserService;
     }
 
-    @ApiOperation(value = "给用户分配角色", notes = "给用户分配角色", produces = "application/x-www-form-urlencoded", consumes = "application/json")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", required = true, value = "userId", dataType = "String", dataTypeClass = String.class, paramType = "query"),
-            @ApiImplicitParam(name = "roles[]", required = true, value = "角色对象组成的数组", dataType = "String[]", dataTypeClass = String[].class, paramType = "query")
+    @Operation(summary = "给用户分配角色", description = "给用户分配角色")
+    @Parameters({
+            @Parameter(name = "userId", required = true, description = "userId"),
+            @Parameter(name = "roles[]", required = true, description = "角色对象组成的数组")
     })
     @PutMapping
     public Result<SysUser> assign(@RequestParam(name = "userId") String userId, @RequestParam(name = "roles[]") String[] roles) {

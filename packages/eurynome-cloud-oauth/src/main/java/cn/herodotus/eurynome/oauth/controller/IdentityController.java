@@ -25,8 +25,8 @@ package cn.herodotus.eurynome.oauth.controller;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +41,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @RestController
-@Api(tags = "认证接口")
+@Tag(name = "认证接口")
 public class IdentityController {
 
     @Resource
@@ -52,7 +52,7 @@ public class IdentityController {
      *
      * @return Result<HerodotusUserDetails>
      */
-    @ApiOperation(value = "获取当前登录用户信息", notes = "获取当前登录用户信息")
+    @Operation(summary = "获取当前登录用户信息", description = "获取当前登录用户信息")
     @GetMapping("/identity/profile")
     public Result<HerodotusUserDetails> getUserProfile() {
 

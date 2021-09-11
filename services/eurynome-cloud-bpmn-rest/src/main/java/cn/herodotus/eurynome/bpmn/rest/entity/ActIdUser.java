@@ -26,8 +26,7 @@ import cn.herodotus.eurynome.bpmn.rest.domain.base.BaseEntity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -41,57 +40,57 @@ import java.util.Date;
  * @author : gengwei.zheng
  * @date : 2021/7/20 12:49
  */
-@ApiModel(description = "Camunda用户")
+@Schema(name = "Camunda用户")
 @Entity
 @Table(name = "act_id_user", indexes = {@Index(name = "act_id_user_id_idx", columnList = "id_")})
 public class ActIdUser extends BaseEntity {
 
     @JSONField(name = "employee_id")
     @JsonProperty("employee_id")
-    @ApiModelProperty(value = "人员ID")
+    @Schema(title =  "人员ID")
     @Id
     @GeneratedValue(generator = "act-user-uuid")
     @GenericGenerator(name = "act-user-uuid", strategy = "cn.herodotus.eurynome.bpmn.rest.generator.ActUserUUIDGenerator")
     @Column(name = "id_", length = 64)
     private String id;
 
-    @ApiModelProperty(value = "修订")
+    @Schema(title =  "修订")
     @JSONField(name = "reversion")
     @JsonProperty("reversion")
     @Column(name = "rev_")
     private Integer revision = 0;
 
-    @ApiModelProperty(value = "姓")
+    @Schema(title =  "姓")
     @JSONField(name = "employee_name")
     @JsonProperty("employee_name")
     @Column(name = "first_")
     private String firstName;
 
-    @ApiModelProperty(value = "名")
+    @Schema(title =  "名")
     @JSONField(name = "mobile_phone_number")
     @JsonProperty("mobile_phone_number")
     @Column(name = "last_")
     private String lastName;
 
-    @ApiModelProperty(value = "电子邮箱")
+    @Schema(title =  "电子邮箱")
     @JSONField(name = "email")
     @JsonProperty("email")
     @Column(name = "email_")
     private String email;
 
-    @ApiModelProperty(value = "密码")
+    @Schema(title =  "密码")
     @JSONField(name = "password")
     @JsonProperty("password")
     @Column(name = "pwd_")
     private String password;
 
-    @ApiModelProperty(value = "密码盐")
+    @Schema(title =  "密码盐")
     @JSONField(name = "salt")
     @JsonProperty("salt")
     @Column(name = "salt_")
     private String salt;
 
-    @ApiModelProperty(value = "锁定过期时间")
+    @Schema(title =  "锁定过期时间")
     @JSONField(name = "lock_expiration_time")
     @JsonProperty("lock_expiration_time")
     @Column(name = "lock_exp_time_")

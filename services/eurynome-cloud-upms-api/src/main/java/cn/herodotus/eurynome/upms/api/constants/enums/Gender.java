@@ -25,8 +25,7 @@ package cn.herodotus.eurynome.upms.api.constants.enums;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +35,7 @@ import java.util.Map;
 /**
  * @author gengwei.zheng
  */
-@ApiModel(value = "性别")
+@Schema(name = "性别")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Gender {
     /**
@@ -46,9 +45,9 @@ public enum Gender {
     MAN(1, "男"),
     WOMAN(2, "女");
 
-    @ApiModelProperty(value = "索引")
+    @Schema(title =  "索引")
     private final Integer index;
-    @ApiModelProperty(value = "文字")
+    @Schema(title =  "文字")
     private final String text;
 
     private static final Map<Integer, Gender> indexMap = new HashMap<>();
@@ -74,7 +73,7 @@ public enum Gender {
     /**
      * 不加@JsonValue，转换的时候转换出完整的对象。
      * 加了@JsonValue，只会显示相应的属性的值
-     *
+     * <p>
      * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
      *
      * @return Enum索引

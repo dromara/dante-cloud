@@ -26,9 +26,9 @@ import cn.herodotus.eurynome.assistant.annotation.rest.Idempotent;
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.rest.base.service.ReadableService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,9 +49,9 @@ public abstract class BaseWriteableRestController<E extends AbstractEntity, ID e
     }
 
     @Idempotent
-    @ApiOperation(value = "保存或更新数据", notes = "接收JSON数据，转换为实体，进行保存或更新", produces = "application/json", consumes = "application/json")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "domain", required = true, value = "可转换为实体的json数据", dataType = "AbstractEntity", dataTypeClass = AbstractEntity.class, paramType = "body")
+    @Operation(summary = "保存或更新数据", description = "接收JSON数据，转换为实体，进行保存或更新")
+    @Parameters({
+            @Parameter(name = "domain", required = true, description = "可转换为实体的json数据")
     })
     @PostMapping
     @Override
@@ -60,9 +60,9 @@ public abstract class BaseWriteableRestController<E extends AbstractEntity, ID e
     }
 
     @Idempotent
-    @ApiOperation(value = "删除数据", notes = "根据实体ID删除数据，以及相关联的关联数据", consumes = "application/json")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", required = true, value = "实体ID，@Id注解对应的实体属性", dataType = "Serializable", dataTypeClass = Serializable.class, paramType = "body")
+    @Operation(summary = "删除数据", description = "根据实体ID删除数据，以及相关联的关联数据")
+    @Parameters({
+            @Parameter(name = "id", required = true, description = "实体ID，@Id注解对应的实体属性")
     })
     @DeleteMapping
     @Override

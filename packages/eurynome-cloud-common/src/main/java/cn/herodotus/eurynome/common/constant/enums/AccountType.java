@@ -32,8 +32,7 @@ package cn.herodotus.eurynome.common.constant.enums;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import me.zhyd.oauth.config.AuthDefaultSource;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ import java.util.Map;
  * @author gengwei.zheng
  * 登录类型:password-密码、mobile-手机号、email-邮箱、weixin-微信、weibo-微博、qq-等等
  */
-@ApiModel(description = "账号类型")
+@Schema(name = "账号类型")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum AccountType {
 
@@ -97,11 +96,11 @@ public enum AccountType {
     OKTA(AuthDefaultSource.OKTA.name(), AccountType.JUST_AUTH_HANDLER, "Okta"),
     PINTEREST(AuthDefaultSource.PINTEREST.name(), AccountType.JUST_AUTH_HANDLER, "Pinterest");
 
-    @ApiModelProperty(value = "索引")
+    @Schema(title =  "索引")
     private final String key;
-    @ApiModelProperty(value = "处理器")
+    @Schema(title =  "处理器")
     private final String handler;
-    @ApiModelProperty(value = "文字")
+    @Schema(title =  "文字")
     private final String description;
 
     private static final Map<String, AccountType> INDEX_MAP = new HashMap<>();

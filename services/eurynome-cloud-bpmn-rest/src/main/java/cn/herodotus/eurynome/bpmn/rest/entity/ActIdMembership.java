@@ -27,7 +27,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import io.swagger.annotations.ApiModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.persistence.*;
 
@@ -39,7 +39,7 @@ import javax.persistence.*;
  * @author : gengwei.zheng
  * @date : 2021/7/20 13:04
  */
-@ApiModel(description = "Camunda 人员和组关系")
+@Schema(name = "Camunda 人员和组关系")
 @Entity
 @Table(name = "act_id_membership", indexes = {
         @Index(name = "act_id_membership_uid_idx", columnList = "user_id_"),

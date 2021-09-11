@@ -61,7 +61,7 @@ import javax.annotation.PostConstruct;
         JacksonConfiguration.class,
         RestTemplateConfiguration.class,
         ServiceConfiguration.class,
-        SwaggerConfiguration.class,
+        OpenAPIConfiguration.class,
         UndertowWebServerFactoryCustomizer.class
 })
 public class RestConfiguration {

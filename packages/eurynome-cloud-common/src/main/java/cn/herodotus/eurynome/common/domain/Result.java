@@ -26,8 +26,7 @@ package cn.herodotus.eurynome.common.domain;
 import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.http.HttpStatus;
 
 import java.io.Serializable;
@@ -41,32 +40,32 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/2/29 14:50
  */
-@ApiModel(description = "统一响应实体")
+@Schema(title = "统一响应返回实体", example = "new Result<T>().ok().message(\"XXX\")")
 public class Result<T> implements Serializable {
 
-    @ApiModelProperty(value = "自定义响应编码")
+    @Schema(title = "自定义响应编码")
     private int code = 0;
 
-    @ApiModelProperty(value = "响应返回信息")
+    @Schema(title = "响应返回信息")
     private String message;
 
-    @ApiModelProperty(value = "请求路径")
+    @Schema(title = "请求路径")
     private String path;
 
-    @ApiModelProperty(value = "响应返回数据")
+    @Schema(title = "响应返回数据")
     private T data;
 
-    @ApiModelProperty(value = "http状态码")
+    @Schema(title = "http状态码")
     private int status;
 
-    @ApiModelProperty(value = "错误堆栈信息")
+    @Schema(title = "错误堆栈信息")
     private StackTraceElement[] stackTrace;
 
-    @ApiModelProperty(value = "响应时间戳")
+    @Schema(title = "响应时间戳", pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp = new Date();
 
-    @ApiModelProperty(value = "校验错误信息")
+    @Schema(title = "校验错误信息")
     private Error error = new Error();
 
     public Result() {

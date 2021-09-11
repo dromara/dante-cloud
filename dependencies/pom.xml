@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.5.4.110</version>
+    <version>2.5.4.120</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -80,8 +80,7 @@
         <!-- 应用开发辅助工具组件 -->
         <lombok.version>1.18.20</lombok.version>
         <p6spy.version>3.9.1</p6spy.version>
-        <springfox.version>2.9.2</springfox.version>
-        <swagger.version>1.6.2</swagger.version>
+        <springdoc.version>1.5.10</springdoc.version>
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
 
         <!-- 阿里巴巴开源工具依赖 -->
@@ -93,7 +92,7 @@
         <hutool.version>5.7.10</hutool.version>
         <okhttps.version>3.1.4</okhttps.version>
         <just-auth.verison>1.16.3</just-auth.verison>
-        <knife4j.version>2.0.6</knife4j.version>
+        <knife4j.version>3.0.3</knife4j.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
 
@@ -289,27 +288,29 @@
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-common -->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-common</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${springfox.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
+            <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-webflux-ui -->
             <dependency>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>${swagger.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-webflux-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/io.swagger/swagger-models -->
+            <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-security -->
             <dependency>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-models</artifactId>
-                <version>${swagger.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-security</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/p6spy/p6spy -->
             <dependency>
@@ -373,10 +374,10 @@
                 <artifactId>JustAuth</artifactId>
                 <version>${just-auth.verison}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
+            <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-springdoc-ui -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-ui</artifactId>
+                <artifactId>knife4j-springdoc-ui</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
@@ -505,7 +506,7 @@
                         </generateGitPropertiesFilename>
                         <dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
                         <!-- 生成git属性文件格式，默认值properties -->
-<!--                        <format>json</format>-->
+                        <!--                        <format>json</format>-->
                         <!-- 配置git-describe命令 -->
                         <gitDescribe>
                             <skip>false</skip>

@@ -116,12 +116,12 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
             List<String> defaultIgnored = Lists.newArrayList("/error",
                     "/static/**",
                     "/webjars/**",
-                    "/resources/**",
-                    "/swagger-ui.html",
-                    "/swagger-resources/**",
-                    "/v2/api-docs",
                     "/features/**",
                     "/plugins/**",
+                    "/swagger-ui.html",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**",
+                    "/openapi*",
                     "/favicon.ico");
 
             List<String> customIgnored = securityProperties.getInterceptor().getStaticResource();

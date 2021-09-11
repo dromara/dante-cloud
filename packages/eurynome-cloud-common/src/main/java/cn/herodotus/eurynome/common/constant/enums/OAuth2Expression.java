@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.common.constant.enums;
 
 import com.google.common.collect.ImmutableMap;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +37,9 @@ import java.util.Map;
  * @date : 2021/8/14 6:50
  */
 public enum OAuth2Expression {
-
+    /**
+     * 允许全部
+     */
     PERMIT_ALL(0, "permitAll"),
     ANONYMOUS(1, "anonymous"),
     REMEMBER_ME(2, "rememberMe"),
@@ -69,9 +71,9 @@ public enum OAuth2Expression {
     private static final Map<String, OAuth2Expression> INDEX_MAP = new HashMap<>();
     private static final List<Map<String, Object>> TO_JSON_STRUCT = new ArrayList<>();
 
-    @ApiModelProperty(value = "索引")
+    @Schema(title =  "索引")
     private final int index;
-    @ApiModelProperty(value = "文字")
+    @Schema(title =  "文字")
     private final String content;
 
     static {

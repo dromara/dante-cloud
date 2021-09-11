@@ -32,8 +32,7 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -49,7 +48,7 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2020/4/10 11:06
  */
-@ApiModel(description = "系统用户")
+@Schema(name = "系统用户")
 @Entity
 @Table(name = "sys_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})},
         indexes = {@Index(name = "sys_user_id_idx", columnList = "user_id"), @Index(name = "sys_user_unm_idx", columnList = "user_name")})
@@ -57,31 +56,31 @@ import java.util.Set;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_USER)
 public class SysUser extends BaseSysEntity {
 
-    @ApiModelProperty(value = "用户ID")
+    @Schema(title =  "用户ID")
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "user_id", length = 64)
     private String userId;
 
-    @ApiModelProperty(value = "用户名")
+    @Schema(title =  "用户名")
     @Column(name = "user_name", length = 128, unique = true)
     private String userName;
 
-    @ApiModelProperty(value = "密码", notes = "BCryptPasswordEncoder")
+    @Schema(title =  "密码", description = "BCryptPasswordEncoder")
     @Column(name = "password", length = 256)
     private String password;
 
-    @ApiModelProperty(value = "昵称")
+    @Schema(title =  "昵称")
     @Column(name = "nick_name", length = 64)
     private String nickName;
 
-    @ApiModelProperty(value = "人员ID")
+    @Schema(title =  "人员ID")
     @Column(name = "employee_id", length = 256)
     private String employeeId;
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
-    @ApiModelProperty(value = "用户角色")
+    @Schema(title =  "用户角色")
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "sys_user_role",

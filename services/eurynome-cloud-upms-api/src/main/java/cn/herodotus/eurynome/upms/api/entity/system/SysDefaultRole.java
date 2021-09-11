@@ -22,11 +22,11 @@
 
 package cn.herodotus.eurynome.upms.api.entity.system;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.common.constant.enums.AccountType;
+import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import com.google.common.base.MoreObjects;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -54,13 +54,13 @@ public class SysDefaultRole extends BaseSysEntity {
     @Column(name = "default_id", length = 64)
     private String defaultId;
 
-    @ApiModelProperty(value = "场景")
+    @Schema(title =  "场景")
     @Column(name = "scene", unique = true)
     @Enumerated(EnumType.STRING)
     private AccountType scene = AccountType.INSTITUTION;
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
-    @ApiModelProperty(value = "角色ID")
+    @Schema(title =  "角色ID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id", nullable = false)
     private SysRole role;

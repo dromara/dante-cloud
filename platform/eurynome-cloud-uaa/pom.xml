@@ -29,11 +29,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.5.4.110</version>
+        <version>2.5.4.120</version>
     </parent>
 
     <artifactId>eurynome-cloud-uaa</artifactId>
-    <version>2.5.4.110</version>
+    <version>2.5.4.120</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -48,11 +48,6 @@
             <artifactId>eurynome-cloud-kernel</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <!-- 需要以服务方式运行的包，按照以下进行build plugin的配置，以便支持docker打包；-->

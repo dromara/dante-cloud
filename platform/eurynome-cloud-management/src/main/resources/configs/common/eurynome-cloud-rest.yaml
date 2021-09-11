@@ -4,6 +4,19 @@ spring:
     cache: false
     prefix: classpath:/templates
 
+springdoc:
+  api-docs:
+    resolve-schema-properties: true
+  swagger-ui:
+    enabled: ${herodotus.switch.swagger.enabled}
+    disable-swagger-default-url: true
+    operations-sorter: method
+    show-common-extensions: true
+    show-extensions: true
+    oauth:
+      use-pkce-with-authorization-code-grant: true
+      app-name: ${spring.application.name}
+
 management:
   endpoints:
     web:

@@ -7,10 +7,10 @@ import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +28,11 @@ import java.util.stream.Collectors;
  * @author : gengwei.zheng
  * @date : 2020/3/20 11:48
  */
-@Api(tags = {"用户中心服务", "Oauth客户端详情接口"})
+@Tag(name = "Oauth客户端详情接口")
 @RestController
 @RequestMapping("/oauth/client_details")
 @Transactional(rollbackFor = Exception.class)
-public class OauthClientDetailsController extends BaseController<OauthClientDetails, String>{
+public class OauthClientDetailsController extends BaseController<OauthClientDetails, String> {
 
     private final OauthClientDetailsService oauthClientDetailsService;
 
@@ -46,10 +46,10 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
         return oauthClientDetailsService;
     }
 
-    @ApiOperation(value = "获取ClientDetails分页数据", notes = "通过pageNumber和pageSize获取分页数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNumber", required = true, value = "当前页数", dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", required = true, value = "每页显示数据条目", dataType = "int", paramType = "query")
+    @Operation(summary = "获取ClientDetails分页数据", description = "通过pageNumber和pageSize获取分页数据")
+    @Parameters({
+            @Parameter(name = "pageNumber", required = true, description = "当前页数"),
+            @Parameter(name = "pageSize", required = true, description = "每页显示数据条目")
     })
     @GetMapping
     @Override
@@ -66,9 +66,9 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
         return new Result<Map<String, Object>>().failed().message("查询数据失败！");
     }
 
-    @ApiOperation(value = "更新ClientDetails", notes = "接收JSON数据，转换为OauthClientDetails实体，进行更新")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "oauthClientDetails", required = true, value = "可转换为OauthClientDetails实体的json数据", dataType = "HerodotusClientDetails", dataTypeClass = HerodotusClientDetails.class, paramType = "body")
+    @Operation(summary = "更新ClientDetails", description = "接收JSON数据，转换为OauthClientDetails实体，进行更新")
+    @Parameters({
+            @Parameter(name = "oauthClientDetails", required = true, description = "可转换为OauthClientDetails实体的json数据")
     })
     @PostMapping
     public Result<OauthClientDetails> saveOrUpdate(@RequestBody HerodotusClientDetails domain) {
@@ -76,9 +76,9 @@ public class OauthClientDetailsController extends BaseController<OauthClientDeta
         return result(oauthClientDetails);
     }
 
-    @ApiOperation(value = "删除ClientDetails", notes = "根据clientId删除ClientDetails，以及相关联的关系数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientId", required = true, value = "clientId", dataType = "String", dataTypeClass = String.class, paramType = "body")
+    @Operation(summary = "删除ClientDetails", description = "根据clientId删除ClientDetails，以及相关联的关系数据")
+    @Parameters({
+            @Parameter(name = "clientId", required = true, description = "clientId")
     })
     @DeleteMapping
     @Override

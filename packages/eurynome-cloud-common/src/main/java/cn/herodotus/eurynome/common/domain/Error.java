@@ -23,8 +23,7 @@
 package cn.herodotus.eurynome.common.domain;
 
 import com.google.common.base.MoreObjects;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
@@ -34,19 +33,19 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/8/18 18:12
  */
-@ApiModel(description = "响应错误详情")
+@Schema(title = "响应错误详情")
 public class Error implements Serializable {
 
-    @ApiModelProperty(value = "Exception完整信息")
+    @Schema(title = "Exception完整信息", type = "string")
     private String detail;
 
-    @ApiModelProperty(value = "额外的错误信息，目前主要是Validation的Message")
+    @Schema(title = "额外的错误信息，目前主要是Validation的Message")
     private String message;
 
-    @ApiModelProperty(value = "额外的错误代码，目前主要是Validation的Code")
+    @Schema(title = "额外的错误代码，目前主要是Validation的Code")
     private String code;
 
-    @ApiModelProperty(value = "额外的错误字段，目前主要是Validation的Field")
+    @Schema(title = "额外的错误字段，目前主要是Validation的Field")
     private String field;
 
     public String getDetail() {

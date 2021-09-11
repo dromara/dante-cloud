@@ -26,8 +26,7 @@ import cn.herodotus.eurynome.bpmn.rest.domain.base.BaseEntity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -38,14 +37,14 @@ import javax.persistence.*;
  * @author : gengwei.zheng
  * @date : 2021/7/20 13:00
  */
-@ApiModel(description = "Camunda租户")
+@Schema(name = "Camunda租户")
 @Entity
 @Table(name = "act_id_tenant", indexes = {@Index(name = "act_id_tenant_id_idx", columnList = "id_")})
 public class ActIdTenant extends BaseEntity {
 
     @JSONField(name = "organization_id")
     @JsonProperty("organization_id")
-    @ApiModelProperty(value = "租户ID")
+    @Schema(title =  "租户ID")
     @Id
     @GeneratedValue(generator = "act-tenant-uuid")
     @GenericGenerator(name = "act-tenant-uuid", strategy = "cn.herodotus.eurynome.bpmn.rest.generator.ActIdTenantUUIDGenerator")

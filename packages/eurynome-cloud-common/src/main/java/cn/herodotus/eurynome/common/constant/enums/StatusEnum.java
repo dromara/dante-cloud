@@ -25,8 +25,7 @@ package cn.herodotus.eurynome.common.constant.enums;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,18 +35,30 @@ import java.util.Map;
 /**
  * @author gengwei.zheng
  */
-@ApiModel(value = "数据状态")
+@Schema(name = "ResultStatus", title = "响应结果状态", description = "自定义错误码以及对应的、友好的错误信息")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum StatusEnum {
 
+    /**
+     * 禁用
+     */
     FORBIDDEN(0, "禁用"),
+    /**
+     * 启用
+     */
     ENABLE(1, "启用"),
+    /**
+     * 锁定
+     */
     LOCKING(2, "锁定"),
+    /**
+     * 过期
+     */
     EXPIRED(3, "过期");
 
-    @ApiModelProperty(value = "索引")
+    @Schema(title =  "索引")
     private final Integer index;
-    @ApiModelProperty(value = "文字")
+    @Schema(title =  "文字")
     private final String text;
 
     private static final Map<Integer, StatusEnum> indexMap = new HashMap<>();
@@ -73,7 +84,7 @@ public enum StatusEnum {
     /**
      * 不加@JsonValue，转换的时候转换出完整的对象。
      * 加了@JsonValue，只会显示相应的属性的值
-     *
+     * <p>
      * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
      *
      * @return Enum索引

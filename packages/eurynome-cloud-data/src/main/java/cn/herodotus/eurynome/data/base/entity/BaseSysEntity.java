@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.data.base.entity;
 
 import cn.herodotus.eurynome.common.constant.enums.StatusEnum;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -38,23 +38,23 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseSysEntity extends BaseEntity {
 
-    @ApiModelProperty(value = "数据状态")
+    @Schema(title =  "数据状态")
     @Column(name = "status")
     @Enumerated(EnumType.ORDINAL)
     private StatusEnum status = StatusEnum.ENABLE;
 
-    @ApiModelProperty(value = "是否为保留数据", notes = "True 为不能删，False为可以删除")
+    @Schema(title =  "是否为保留数据", description = "True 为不能删，False为可以删除")
     @Column(name = "is_reserved")
     private Boolean reserved = Boolean.FALSE;
 
-    @ApiModelProperty(value = "版本号")
+    @Schema(title =  "版本号")
     @Column(name = "reversion")
     private Integer reversion = 0;
 
     /**
      * 角色描述,UI界面显示使用
      */
-    @ApiModelProperty(value = "备注")
+    @Schema(title =  "备注")
     @Column(name = "description", length = 512)
     private String description;
 
