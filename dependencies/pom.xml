@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.5.4.120</version>
+    <version>2.5.4.130</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
