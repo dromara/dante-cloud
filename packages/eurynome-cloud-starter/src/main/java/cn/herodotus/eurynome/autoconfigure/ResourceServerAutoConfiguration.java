@@ -79,20 +79,25 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
 
         log.trace("[Eurynome] |- Bean [Core Resource Server] Auto Configure.");
 
+        // 如果不设置，那么在通过浏览器访问被保护的任何资源时，每次是不同的SessionID，并且将每次请求的历史都记录在OAuth2Authentication的details的中
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+
+        // 禁用CSRF 开启跨域
+        http.csrf().disable().cors();
+
+        // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
+        http.exceptionHandling()
+                // 未登录认证异常
+                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
 
         // @formatter:off
         http.authorizeRequests()
                 .antMatchers(SecurityUtils.whitelistToAntMatchers(securityProperties.getInterceptor().getWhitelist())).permitAll()
                 // 指定监控访问权限
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .anyRequest().authenticated()
-                .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
-                .exceptionHandling()
-                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+                .anyRequest().authenticated();
 
-        // 关闭csrf 跨站（域）攻击防控
-        http.csrf().disable();
-        // @formatter:on
+        // 防止iframe 造成跨域
+        http.headers().frameOptions().disable();
     }
 }

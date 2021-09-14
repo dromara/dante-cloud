@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-oauth
+ * Module Name: eurynome-cloud-oauth-starter
  * File Name: WebSecurityConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 11:06:13
+ * Date: 2021/09/14 14:43:14
  */
 
-package cn.herodotus.eurynome.oauth.configuration;
+package cn.herodotus.eurynome.oauth.autoconfigure;
 
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationFailureHandler;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationProvider;
@@ -36,7 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -65,7 +64,7 @@ import javax.sql.DataSource;
  * <p>
  * <p>
  * WebSecurityConfigurerAdapter默认情况下是spring security的http配置。默认情况下为：@Order（100）{@link WebSecurityConfigurerAdapter}
- * ResourceServerConfigurerAdapter默认情况下是spring security oauth2的http配置。默认情况下为：@Order（3）{@link ResourceServerConfiguration}
+ * ResourceServerConfigurerAdapter默认情况下是spring security oauth2的http配置。默认情况下为：@Order（3）{@link ResourceServerAutoConfiguration}
  * <p>
  * 因此二者是分工协作的
  * · 在WebSecurityConfigurerAdapter不拦截oauth要开放的资源
@@ -77,9 +76,9 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @Order(2)
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final Logger log = LoggerFactory.getLogger(WebSecurityConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(WebSecurityAutoConfiguration.class);
 
     @Autowired
     private DataSource dataSource;
@@ -175,22 +174,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
         // @formatter:off
-        http.requestMatchers().antMatchers(HttpMethod.OPTIONS, "/oauth/**", "/login**")
+        http.requestMatchers().antMatchers("/oauth/**", "/login**")
                 .and()
-                    .authorizeRequests()
-                    .antMatchers("/oauth/**").authenticated()
-                    .antMatchers("/oauth/client_details").permitAll()
-                    .antMatchers(SecurityUtils.whitelistToAntMatchers(securityProperties.getInterceptor().getWhitelist())).permitAll()
+                .authorizeRequests()
+                .antMatchers("/oauth/**").authenticated()
+                .antMatchers(SecurityUtils.whitelistToAntMatchers(securityProperties.getInterceptor().getWhitelist())).permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .addFilterBefore(formLoginDecryptParameterAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                    .authorizeRequests()
-                    .anyRequest().authenticated()
-                .and()
-                    .formLogin()
+                .addFilterBefore(formLoginDecryptParameterAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 // 可以设置自定义的登录页面 或者 （登录）接口
                 // 注意1： 一般来说设置成（登录）接口后，该接口会配置成无权限即可访问，所以会走匿名filter, 也就意味着不会走认证过程了，所以我们一般不直接设置成接口地址
                 // 注意2： 这里配置的 地址一定要配置成无权限访问，否则将出现 一直重定向问题（因为无权限后又会重定向到这里配置的登录页url）
-                        .loginPage(securityProperties.getLogin().getLoginUrl()).permitAll()
+                .formLogin().loginPage(securityProperties.getLogin().getLoginUrl()).permitAll()
 //                .and()
 //                    .rememberMe()
 //                        .tokenRepository(persistentTokenRepository())

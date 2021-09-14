@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-oauth
+ * Module Name: eurynome-cloud-oauth-starter
  * File Name: ResourceServerConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 11:07:13
+ * Date: 2021/09/01 12:31:01
  */
 
-package cn.herodotus.eurynome.oauth.configuration;
+package cn.herodotus.eurynome.oauth.autoconfigure;
 
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
@@ -45,9 +45,9 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static final Logger log = LoggerFactory.getLogger(ResourceServerConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(ResourceServerAutoConfiguration.class);
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -62,20 +62,23 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
+        // 禁用CSRF 开启跨域
+        http.csrf().disable().cors();
+
+        // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
+        http.exceptionHandling()
+                // 未登录认证异常
+                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/", "/defaultKaptcha").permitAll()
+                .antMatchers("/defaultKaptcha").permitAll()
                 .antMatchers(SecurityUtils.whitelistToAntMatchers(securityProperties.getInterceptor().getWhitelist())).permitAll()
                 // 指定监控访问权限
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .anyRequest().authenticated()
-                .and().cors()
-                .and() // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
-                .exceptionHandling()
-                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+                .anyRequest().authenticated();
 
-        // 关闭csrf 跨站（域）攻击防控
-        http.csrf().disable();
-        // @formatter:on
+        // 防止iframe 造成跨域
+        http.headers().frameOptions().disable();
     }
 }

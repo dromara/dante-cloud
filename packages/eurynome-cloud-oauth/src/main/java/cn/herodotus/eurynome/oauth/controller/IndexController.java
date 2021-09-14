@@ -24,9 +24,9 @@ package cn.herodotus.eurynome.oauth.controller;
 
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.oauth.utils.SymmetricUtils;
-import cn.herodotus.eurynome.security.response.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.response.exception.SecurityGlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.ObjectUtils;
@@ -35,6 +35,7 @@ import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,7 +73,7 @@ public class IndexController {
      *
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(Map<String, Object> model, HttpServletRequest request) throws DecoderException {
 
         ModelAndView modelAndView = new ModelAndView("/login");
@@ -105,7 +106,7 @@ public class IndexController {
      * @param model
      * @return
      */
-    @RequestMapping("/oauth/confirm_access")
+    @RequestMapping(value = "/oauth/confirm_access")
     public ModelAndView confirmAccess(Map<String, Object> model, HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView("/confirm_access");
@@ -131,6 +132,7 @@ public class IndexController {
      */
     @RequestMapping("/oauth/error")
     public String handleError(Map<String, Object> model, HttpServletRequest request) {
+
         Object error = request.getAttribute("error");
         if (error instanceof Exception) {
             Exception exception = (Exception) error;

@@ -18,7 +18,7 @@
         }
     </script>
 
-    <link th:href="@{/plugins/error/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
+    <link th:href="@{/features/error/css/style.css}" rel="stylesheet" type="text/css" media="all"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,33 +29,34 @@
 </head>
 
 <body>
-    <div class="main w3l">
-        <div class="nav_w3l">
-            <ul>
-                <li><a th:href="@{/logout}" class="back">返回首页</a></li>
-                <li><a href="javascript:history.go(-1)" class="back">返回上一页</a></li>
-                <li><a th:href="@{'https://www.google.com/webhp?hl=zh-CN#safe=strict&hl=zh-CN&q='+${message}}" class="back" target="_blank" id="Google">Google</a></li>
-                <li><a th:href="@{'https://www.baidu.com/s?wd='+${message}}" class="back"  target="_blank" id="Baidu">Baidu</a></li>
-                <li><a th:href="@{'http://stackoverflow.com/search?q='+${message}}" class="back"  target="_blank" id="StackOverFlow">StackOverFlow</a></li>
-            </ul>
-        </div>
+<div class="main w3l" th:with="result=${error}">
+    <div class="nav_w3l">
+        <ul>
+            <li><a th:href="@{/logout}" class="back">返回首页</a></li>
+            <li><a href="javascript:history.go(-1)" class="back">返回上一页</a></li>
+            <li><a th:href="@{'https://www.google.com/webhp?hl=zh-CN#safe=strict&hl=zh-CN&q='+${result.message}}" class="back" target="_blank" id="Google">Google</a></li>
+            <li><a th:href="@{'https://www.baidu.com/s?wd='+${result.message}}" class="back"  target="_blank" id="Baidu">Baidu</a></li>
+            <li><a th:href="@{'https://stackoverflow.com/search?q='+${result.message}}" class="back"  target="_blank" id="StackOverFlow">StackOverFlow</a></li>
+        </ul>
+    </div>
 
-        <h2 th:text="${status} + '     错误!'"></h2>
-        <hr/>
-        <h3 th:text="'错误代码： '+ ${code}"></h3>
-        <h3 th:text="'错误信息： '+ ${message}"></h3>
-        <h3 th:text="'请求地址： '+ ${path}"></h3>
-        <h3 th:text="'请求时间： '+ ${timestamp}"></h3>
-        <h3>异常堆栈跟踪日志,StackTrace: </h3>
-        <div>
-            <div th:each="line:${stackTrace}">
-                <h5 th:inline="text">[[${line}]]</h5>
-            </div>
-        </div>
-
-         <div class="footer agileits">
-            <p>Copyright © 2018. All Rights Reserved | Design by <a href="www.baidu.com" target="_blank">Felix</a></p>
+    <h2 th:text="${result.status} + '     错误!'"></h2>
+    <hr/>
+    <h3 th:text="'错误代码： '+ ${result.code}"></h3>
+    <h3 th:text="'错误信息： '+ ${result.message}"></h3>
+    <h3 th:text="'错误详情： '+ ${result.error.detail}"></h3>
+    <h3 th:text="'请求地址： '+ ${result.path}"></h3>
+    <h3 th:text="'请求时间： '+ ${#dates.format(result.timestamp,'yyyy-MM-dd HH:mm:ss')}"></h3>
+    <h3>异常堆栈跟踪日志,StackTrace: </h3>
+    <div>
+        <div th:each="line:${result.error.stackTrace}">
+            <h5 th:inline="text">[[${line}]]</h5>
         </div>
     </div>
+
+    <div class="footer agileits">
+        <p>Copyright © 2018~2021. All Rights Reserved | Design by <a href="https://gitee.com/herodotus/eurynome-cloud" target="_blank">码匠君</a></p>
+    </div>
+</div>
 </body>
 </html>

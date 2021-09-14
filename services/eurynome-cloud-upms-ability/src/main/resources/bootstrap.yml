@@ -43,11 +43,19 @@ spring:
         dashboard: @sentinel.server-addr@
 
 logging:
+  file:
+    name: logs/${spring.application.name}.log
   level:
+    root: INFO
+    # 关闭不必要的日志
+    org.reflections.Reflections: off
+    com.alibaba.nacos.client: error
+    com.alibaba.nacos.common.remote.client: error
+    com.ulisesbocchio: error
+    # 开发、调试需要的日志
     cn.herodotus: info
     org.springframework.security: info
+    org.springframework.web: info
+    com.alicp.jetcache: info
     org.springframework.cloud.bus: info
-    org.apache.kafka: WARN
-    org.reflections.Reflections: error
-    com.alibaba.nacos.client: off
-    com.alibaba.nacos.common.remote.client: error
+    org.apache.kafka: warn

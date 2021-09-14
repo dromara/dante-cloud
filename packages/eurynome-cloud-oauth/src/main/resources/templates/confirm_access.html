@@ -31,7 +31,7 @@
     <form id='confirmationForm' name='confirmationForm' action="/oauth/authorize" method='post'>
         <input type="hidden" name="user_oauth_approval" value="true"/>
         <input type="hidden" name="authorize" value="Authorize"/>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
         <p><a th:href="${app.website}" target="_blank" th:text="${app.appName}">应用</a> 将获得以下权限：</p>
         <ul class="list-group">
             <li class="list-group-item">

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,17 @@
  * Module Name: eurynome-cloud-oauth
  * File Name: OauthAutoConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/09/01 12:31:01
  */
 
-package cn.herodotus.eurynome.oauth.configuration;
+package cn.herodotus.eurynome.oauth.autoconfigure;
 
+import cn.herodotus.eurynome.oauth.configuration.AuthorizationServerConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 
@@ -42,8 +44,10 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 @ComponentScan(basePackages = {
-        "cn.herodotus.eurynome.oauth.configuration",
         "cn.herodotus.eurynome.oauth.controller"
+})
+@Import({
+        AuthorizationServerConfiguration.class
 })
 public class OauthAutoConfiguration {
 

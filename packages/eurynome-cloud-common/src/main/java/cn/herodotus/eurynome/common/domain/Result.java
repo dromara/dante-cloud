@@ -40,7 +40,7 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/2/29 14:50
  */
-@Schema(title = "统一响应返回实体", example = "new Result<T>().ok().message(\"XXX\")")
+@Schema(title = "统一响应返回实体", description = "所有Rest接口统一返回的实体定义", example = "new Result<T>().ok().message(\"XXX\")")
 public class Result<T> implements Serializable {
 
     @Schema(title = "自定义响应编码")
@@ -57,9 +57,6 @@ public class Result<T> implements Serializable {
 
     @Schema(title = "http状态码")
     private int status;
-
-    @Schema(title = "错误堆栈信息")
-    private StackTraceElement[] stackTrace;
 
     @Schema(title = "响应时间戳", pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -90,10 +87,6 @@ public class Result<T> implements Serializable {
 
     public int getStatus() {
         return status;
-    }
-
-    public StackTraceElement[] getStackTrace() {
-        return stackTrace;
     }
 
     public Date getTimestamp() {
@@ -150,7 +143,7 @@ public class Result<T> implements Serializable {
     }
 
     public Result<T> stackTrace(StackTraceElement[] stackTrace) {
-        this.stackTrace = stackTrace;
+        this.error.setStackTrace(stackTrace);
         return this;
     }
 
@@ -174,7 +167,6 @@ public class Result<T> implements Serializable {
                 .add("path", path)
                 .add("data", data)
                 .add("status", status)
-                .add("stackTrace", stackTrace)
                 .add("timestamp", timestamp)
                 .add("error", error)
                 .toString();
@@ -187,7 +179,6 @@ public class Result<T> implements Serializable {
         result.put("path", path);
         result.put("data", data);
         result.put("status", status);
-        result.put("stackTrace", stackTrace);
         result.put("timestamp", timestamp);
         result.put("error", error);
         return result;

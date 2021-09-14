@@ -48,6 +48,9 @@ public class Error implements Serializable {
     @Schema(title = "额外的错误字段，目前主要是Validation的Field")
     private String field;
 
+    @Schema(title = "错误堆栈信息")
+    private StackTraceElement[] stackTrace;
+
     public String getDetail() {
         return detail;
     }
@@ -78,6 +81,14 @@ public class Error implements Serializable {
 
     public void setField(String field) {
         this.field = field;
+    }
+
+    public StackTraceElement[] getStackTrace() {
+        return stackTrace;
+    }
+
+    public void setStackTrace(StackTraceElement[] stackTrace) {
+        this.stackTrace = stackTrace;
     }
 
     @Override

@@ -26,6 +26,7 @@ import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
 import cn.herodotus.eurynome.assistant.exception.platform.PlatformException;
 import cn.herodotus.eurynome.common.domain.Result;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -52,17 +53,11 @@ import javax.servlet.http.HttpServletResponse;
  * @date : 2019/11/18 8:12
  */
 @RestControllerAdvice
-public class SecurityGlobalExceptionHandler{
+public class SecurityGlobalExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityGlobalExceptionHandler.class);
 
-    /**
-     * 定义错误显示页，error.html
-     */
-    public static final String DEFAULT_ERROR_VIEW = "/error";
-
     @ExceptionHandler({Exception.class, PlatformException.class})
-    @ResponseBody
     public static Result<String> exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getStatus());
@@ -72,48 +67,15 @@ public class SecurityGlobalExceptionHandler{
     /**
      * Rest Template 错误处理
      *
-     * @param ex
-     * @param request
-     * @param response
-     * @return
-     * @see :https://www.baeldung.com/spring-rest-template-error-handling
+     * @param ex       错误
+     * @param request  请求
+     * @param response 响应
+     * @return {@link Result<String>}
+     * <p>
+     * {@see :https://www.baeldung.com/spring-rest-template-error-handling}
      */
     @ExceptionHandler({HttpClientErrorException.class, HttpServerErrorException.class})
-    @ResponseBody
     public static Result<String> restTemplateException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
-        Result<String> result = resolveException(ex, request.getRequestURI());
-        response.setStatus(result.getStatus());
-        return result;
-    }
-
-    /**
-     * 统一异常处理
-     * AuthenticationException
-     *
-     * @param ex
-     * @param request
-     * @param response
-     * @return
-     */
-    @ExceptionHandler({AuthenticationException.class})
-    @ResponseBody
-    public static Result<String> authenticationException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
-        Result<String> result = resolveException(ex, request.getRequestURI());
-        response.setStatus(result.getStatus());
-        return result;
-    }
-
-    /**
-     * OAuth2Exception
-     *
-     * @param ex
-     * @param request
-     * @param response
-     * @return
-     */
-    @ExceptionHandler({OAuth2Exception.class, ClientAuthenticationException.class})
-    @ResponseBody
-    public static Result<String> oauth2Exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
         response.setStatus(result.getStatus());
         return result;
@@ -139,6 +101,39 @@ public class SecurityGlobalExceptionHandler{
         return result;
     }
 
+    /**
+     * 统一异常处理
+     * AuthenticationException
+     *
+     * @param ex       错误
+     * @param request  请求
+     * @param response 响应
+     * @return {@link Result<String>}
+     */
+    @ExceptionHandler({AuthenticationException.class})
+    @ResponseBody
+    public static Result<String> authenticationException(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result<String> result = resolveException(ex, request.getRequestURI());
+        response.setStatus(result.getStatus());
+        return result;
+    }
+
+    /**
+     * OAuth2Exception
+     *
+     * @param ex       错误
+     * @param request  请求
+     * @param response 响应
+     * @return {@link Result<String>}
+     */
+    @ExceptionHandler({OAuth2Exception.class, ClientAuthenticationException.class})
+    @ResponseBody
+    public static Result<String> oauth2Exception(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+        Result<String> result = resolveException(ex, request.getRequestURI());
+        response.setStatus(result.getStatus());
+        return result;
+    }
+
     public static Result<String> resolveException(Exception ex, String path) {
         return HerodotusExceptionHandler.resolveException(ex, path);
     }
@@ -146,8 +141,8 @@ public class SecurityGlobalExceptionHandler{
     /**
      * 静态解析认证异常
      *
-     * @param exception
-     * @return
+     * @param exception 错误信息
+     * @return {@link Result<String>}
      */
     public static Result<String> resolveOauthException(Exception exception, String path) {
 
@@ -160,16 +155,10 @@ public class SecurityGlobalExceptionHandler{
             result = resolveException(exception, exception.getMessage());
         }
 
-        return result.message(exception.getMessage()).path(path);
-    }
+        if (StringUtils.isBlank(result.getMessage())) {
+            result.message(exception.getMessage());
+        }
 
-    public static ModelAndView errorView(Result<String> result) {
-        // 设置跳转路径
-        ModelAndView modelAndView = new ModelAndView(DEFAULT_ERROR_VIEW);
-        // 将异常对象传递过去
-        modelAndView.addObject(result);
-        modelAndView.setViewName(DEFAULT_ERROR_VIEW);
-        return modelAndView;
+        return result.path(path);
     }
-
 }

@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,7 +55,8 @@ public class XssStringJsonDeserializer extends JsonDeserializer<String> {
     public String deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         String value = jsonParser.getValueAsString();
         if (StringUtils.isNotBlank(value)) {
-            return  XssUtils.cleaning(value);
+            String content = XssUtils.cleaning(value);
+            return  StringEscapeUtils.unescapeHtml4(content);
         }
         return value;
     }

@@ -78,7 +78,7 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
         Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> swaggerUrls = routes.stream().map(this::createSwaggerUrl).collect(Collectors.toSet());
 
         if (ObjectUtils.isNotEmpty(swaggerUiConfigParameters)) {
-            log.debug("[Herodotus] |- Services is Changed, update Urls");
+            log.debug("[Eurynome] |- Services is Changed, update Urls");
             swaggerUiConfigParameters.setUrls(swaggerUrls);
             swaggerUiConfigProperties.setUrls(swaggerUrls);
         }
@@ -94,7 +94,7 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
 
         String url = "/" + service.toLowerCase() + data;
 
-        log.debug("[Herodotus] |- Create Swagger Url - Name: {}, Location {}.", service, url);
+        log.debug("[Eurynome] |- Create Swagger Url - Name: {}, Location {}.", service, url);
 
         AbstractSwaggerUiConfigProperties.SwaggerUrl swaggerUrl = new AbstractSwaggerUiConfigProperties.SwaggerUrl();
         swaggerUrl.setUrl(url);

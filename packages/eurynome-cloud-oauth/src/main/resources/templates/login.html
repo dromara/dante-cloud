@@ -75,7 +75,7 @@
                                         <i class="fa fa-lock"></i>
                                         <input type="password" class="form-control" name="fighter" id="fighter" >
                                     </div>
-                                    <div th:if="!${hide_verification_code}" class="form-group">
+                                    <div th:if="${hide_verification_code} == false" class="form-group">
                                         <div class="row">
                                             <div class="col-md-7">
                                                 <label for="missile">验证码</label>

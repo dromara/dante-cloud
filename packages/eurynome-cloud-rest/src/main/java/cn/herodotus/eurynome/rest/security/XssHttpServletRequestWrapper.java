@@ -67,9 +67,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
     }
 
     private String[] cleaning(String[] parameters) {
-        List<String> cleanParamters = Arrays.stream(parameters).map(XssUtils::cleaning).collect(Collectors.toList());
-        String[] results = new String[cleanParamters.size()];
-        return ArrayUtils.toArray(results);
+        List<String> cleanParameters = Arrays.stream(parameters).map(XssUtils::cleaning).collect(Collectors.toList());
+        String[] results = new String[cleanParameters.size()];
+        return cleanParameters.toArray(results);
     }
 
     /**
