@@ -55,8 +55,7 @@ public class XssStringJsonDeserializer extends JsonDeserializer<String> {
     public String deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         String value = jsonParser.getValueAsString();
         if (StringUtils.isNotBlank(value)) {
-            String content = XssUtils.cleaning(value);
-            return  StringEscapeUtils.unescapeHtml4(content);
+            return XssUtils.cleaning(value);
         }
         return value;
     }

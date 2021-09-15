@@ -43,10 +43,14 @@ public class XssUtils {
 
     private static volatile XssUtils INSTANCE;
     private final AntiSamy antiSamy;
+    private final String nbsp;
+    private final String quot;
 
     private XssUtils() {
         Policy policy = createPolicy();
         this.antiSamy = ObjectUtils.isNotEmpty(policy) ? new AntiSamy(policy) : new AntiSamy();
+        this.nbsp = cleanHtml("&nbsp;");
+        this.quot = cleanHtml("\"");
     }
 
     private static XssUtils getInstance() {
@@ -63,42 +67,40 @@ public class XssUtils {
 
     private Policy createPolicy() {
         try {
-            URL url = ResourceUtils.getURL("classpath:antisamy/antisamy-ebay.xml");
+            URL url = ResourceUtils.getURL("classpath:antisamy/antisamy-anythinggoes.xml");
             return Policy.getInstance(url);
         } catch (IOException | PolicyException e) {
-            log.warn("[Eurynome] |- Antisamy create policy error! {}", e.getMessage());
+            log.warn("[Herodotus] |- Antisamy create policy error! {}", e.getMessage());
             return null;
         }
     }
 
-    private AntiSamy antiSamy() {
-        return antiSamy;
+    private CleanResults scan(String taintedHtml) throws ScanException, PolicyException {
+        return antiSamy.scan(taintedHtml);
     }
 
-    public static AntiSamy getAntiSamy() {
-        return XssUtils.getInstance().antiSamy();
-    }
-
-    public static CleanResults scan(String taintedHtml) throws ScanException, PolicyException {
-        return getAntiSamy().scan(taintedHtml);
-    }
-
-    public static String cleaning(String value) {
+    private String cleanHtml(String taintedHtml) {
         try {
-            log.trace("[Eurynome] |- Before Antisamy cleaning XSS, value is: [{}]", value);
+            log.trace("[Herodotus] |- Before Antisamy Scan, value is: [{}]", taintedHtml);
 
             // 使用AntiSamy清洗数据
-            final CleanResults cleanResults = XssUtils.scan(value);
-            // 获得安全的HTML输出
-            value = cleanResults.getCleanHTML();
-            // 对转义的HTML特殊字符（<、>、"等）进行反转义，因为AntiSamy调用scan方法时会将特殊字符转义
-            String result = StringEscapeUtils.unescapeHtml4(value);
-
-            log.trace("[Eurynome] |- After Antisamy cleaning XSS, value is: [{}]", value);
+            final CleanResults cleanResults = scan(taintedHtml);
+            String result = cleanResults.getCleanHTML();
+            log.trace("[Herodotus] |- After  Antisamy Scan, value is: [{}]", result);
             return result;
         } catch (ScanException | PolicyException e) {
-            log.error("[Eurynome] |- Antisamy cleaning XSS catch error! {}", e.getMessage());
+            log.error("[Herodotus] |- Antisamy scan catch error! {}", e.getMessage());
+            return taintedHtml;
         }
-        return value;
+    }
+
+    public static String cleaning(String taintedHTML) {
+        // 对转义的HTML特殊字符（<、>、"等）进行反转义，因为AntiSamy调用scan方法时会将特殊字符转义
+        String cleanHtml = StringEscapeUtils.unescapeHtml4(getInstance().cleanHtml(taintedHTML));
+        //AntiSamy会把“&nbsp;”转换成乱码，把双引号转换成"&quot;" 先将&nbsp;的乱码替换为空，双引号的乱码替换为双引号
+        String temp = cleanHtml.replaceAll(getInstance().nbsp, "");
+        String result = temp.replaceAll(getInstance().quot, "\"");
+        log.trace("[Herodotus] |- After  Antisamy Well Formed, value is: [{}]", result);
+        return result;
     }
 }

@@ -212,7 +212,7 @@ public class SecurityProperties implements Serializable {
         private int width = 130;
         private int height = 48;
         private int length = 5;
-        private CaptchaFont captchaFont = CaptchaFont.FONT_4;
+        private CaptchaFont captchaFont = CaptchaFont.FONT_5;
         private CaptchaLetterType captchaLetterType = CaptchaLetterType.DEFAULT;
         private CaptchaType captchaType = CaptchaType.LETTERS;
 
