@@ -1,0 +1,6 @@
+herodotus:
+  database-information:
+    platform: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL57Dialect
+    url: jdbc:mysql://${herodotus.environment.database.host}:${herodotus.environment.database.port}/${herodotus.environment.database.name}?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
