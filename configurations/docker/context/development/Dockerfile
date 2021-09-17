@@ -6,7 +6,7 @@
 FROM openjdk:8-jdk-alpine
 
 # 作者
-MAINTAINER genwei.zheng <herodotus@aliyun.com>
+MAINTAINER 码匠君 <herodotus@aliyun.com>
 
 ARG VERSION
 ARG SERVICE_NAME

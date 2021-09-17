@@ -3,10 +3,10 @@
 # Author: gengwei.zheng
 
 ### 基础镜像，使用alpine操作系统，openjkd使用
-FROM apache/skywalking-java-agent:8.7.0-jdk8
+FROM openjdk:8-jdk-alpine
 
 # 作者
-MAINTAINER genwei.zheng <pointer_v@qq.com>
+MAINTAINER 码匠君 <herodotus@aliyun.com>
 
 # 外部传递参数
 ARG VERSION

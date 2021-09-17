@@ -16,7 +16,7 @@ herodotus:
       bootstrap-servers: 127.0.0.1:9092
   switch:
     database:
-      ddl-auto: update
+      ddl-auto: create
       use-second-level-cache: true
       show-sql: false
       format-sql: false
