@@ -36,7 +36,7 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2021/8/14 6:50
  */
-public enum OAuth2Expression {
+public enum OauthExpression {
     /**
      * 允许全部
      */
@@ -68,7 +68,7 @@ public enum OAuth2Expression {
     IS_USER(25, "#oauth2.isUser()"),
     IS_CLIENT(26, "#oauth2.isClient()");
 
-    private static final Map<String, OAuth2Expression> INDEX_MAP = new HashMap<>();
+    private static final Map<String, OauthExpression> INDEX_MAP = new HashMap<>();
     private static final List<Map<String, Object>> TO_JSON_STRUCT = new ArrayList<>();
 
     @Schema(title =  "索引")
@@ -77,18 +77,18 @@ public enum OAuth2Expression {
     private final String content;
 
     static {
-        for (OAuth2Expression OAuth2Expression : OAuth2Expression.values()) {
-            INDEX_MAP.put(OAuth2Expression.name(), OAuth2Expression);
-            TO_JSON_STRUCT.add(OAuth2Expression.ordinal(),
+        for (OauthExpression OauthExpression : OauthExpression.values()) {
+            INDEX_MAP.put(OauthExpression.name(), OauthExpression);
+            TO_JSON_STRUCT.add(OauthExpression.ordinal(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", OAuth2Expression.name())
-                            .put("key", OAuth2Expression.name())
-                            .put("text", OAuth2Expression.getContent())
+                            .put("value", OauthExpression.name())
+                            .put("key", OauthExpression.name())
+                            .put("text", OauthExpression.getContent())
                             .build());
         }
     }
 
-    OAuth2Expression(int index, String content) {
+    OauthExpression(int index, String content) {
         this.index = index;
         this.content = content;
     }
@@ -101,7 +101,7 @@ public enum OAuth2Expression {
         return content;
     }
 
-    public static OAuth2Expression getSecurityExpressions(int index) {
+    public static OauthExpression getSecurityExpressions(int index) {
         return INDEX_MAP.get(index);
     }
 

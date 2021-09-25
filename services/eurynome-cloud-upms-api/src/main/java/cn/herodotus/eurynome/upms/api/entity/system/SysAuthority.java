@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-api
  * File Name: SysAuthority.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/09/25 10:38:25
  */
 
 package cn.herodotus.eurynome.upms.api.entity.system;
@@ -25,6 +25,9 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -40,13 +43,15 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "sys_authority", indexes = {@Index(name = "sys_authority_id_idx", columnList = "authority_id")})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "authorityId")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_AUTHORITY)
+
 public class SysAuthority extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "authority-uuid")
-    @GenericGenerator(name = "authority-uuid", strategy = "cn.herodotus.eurynome.upms.api.generator.SysAuthorityUUIDGenerator")
+    @GenericGenerator(name = "authority-uuid", strategy = "cn.herodotus.cloud.upms.api.generator.SysAuthorityUUIDGenerator")
     @Column(name = "authority_id", length = 64)
     private String authorityId;
 
@@ -221,18 +226,18 @@ public class SysAuthority extends BaseSysEntity {
 
     @Override
     public String toString() {
-        return "SysAuthority{" +
-                "authorityId='" + authorityId + '\'' +
-                ", authorityCode='" + authorityCode + '\'' +
-                ", authorityName='" + authorityName + '\'' +
-                ", requestMethod='" + requestMethod + '\'' +
-                ", authorityType=" + authorityType +
-                ", serviceId='" + serviceId + '\'' +
-                ", className='" + className + '\'' +
-                ", methodName='" + methodName + '\'' +
-                ", url='" + url + '\'' +
-                ", menuClass='" + menuClass + '\'' +
-                ", parentId='" + parentId + '\'' +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("authorityId", authorityId)
+                .add("authorityCode", authorityCode)
+                .add("authorityName", authorityName)
+                .add("requestMethod", requestMethod)
+                .add("authorityType", authorityType)
+                .add("serviceId", serviceId)
+                .add("className", className)
+                .add("methodName", methodName)
+                .add("url", url)
+                .add("menuClass", menuClass)
+                .add("parentId", parentId)
+                .toString();
     }
 }

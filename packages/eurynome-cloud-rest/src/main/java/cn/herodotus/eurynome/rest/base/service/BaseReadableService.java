@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: BaseReadableService.java
  * Author: gengwei.zheng
- * Date: 2021/08/24 12:23:24
+ * Date: 2021/09/25 10:33:25
  */
 
 package cn.herodotus.eurynome.rest.base.service;
@@ -35,13 +35,13 @@ import java.util.List;
 
 /**
  * <p>Description: 只读操作的基础通用Service </p>
- *
+ * <p>
  * 该Service只包含“读”相关的操作，这个是为了支持数据库视图的读取。
  *
  * @author : gengwei.zheng
  * @date : 2021/7/7 16:51
  */
-public abstract class BaseReadableService <E extends AbstractEntity, ID extends Serializable> extends AbstractCacheService<E, ID> implements ReadableService<E, ID>{
+public abstract class BaseReadableService<E extends AbstractEntity, ID extends Serializable> extends AbstractCacheService<E, ID> implements ReadableService<E, ID> {
 
     private final static Logger log = LoggerFactory.getLogger(BaseReadableService.class);
 
@@ -53,7 +53,7 @@ public abstract class BaseReadableService <E extends AbstractEntity, ID extends 
             writeToCache(domain);
         }
 
-        log.debug("[Eurynome] |- BaseReadableService findById.");
+        log.debug("[Herodotus] |- BaseReadableService findById.");
         return domain;
     }
 
@@ -65,7 +65,7 @@ public abstract class BaseReadableService <E extends AbstractEntity, ID extends 
             writeToCache(pages);
         }
 
-        log.debug("[Eurynome] |- BaseReadableService findByPage.");
+        log.debug("[Herodotus] |- BaseReadableService findByPage.");
         return pages;
     }
 
@@ -77,18 +77,18 @@ public abstract class BaseReadableService <E extends AbstractEntity, ID extends 
             writeToCache(pages);
         }
 
-        log.debug("[Eurynome] |- BaseReadableService findByPage.");
+        log.debug("[Herodotus] |- BaseReadableService findByPage.");
         return pages;
     }
 
     @Override
-    public List<E> findAll() {
+    public List<E> findByPage() {
         List<E> domains = readFromCache();
         if (CollectionUtils.isEmpty(domains)) {
-            domains = ReadableService.super.findAll();
+            domains = ReadableService.super.findByPage();
             writeToCache(domains);
         }
-        log.debug("[Eurynome] |- BaseReadableService findAll.");
+        log.debug("[Herodotus] |- BaseReadableService findAll.");
         return domains;
     }
 }

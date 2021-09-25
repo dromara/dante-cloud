@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-api
  * File Name: TechnologyType.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/09/25 10:41:25
  */
 
 package cn.herodotus.eurynome.upms.api.constants.enums;
@@ -55,9 +55,9 @@ public enum TechnologyType {
     ALIAPP(7, "支付宝小程序应用"),
     DUAPP(8, "百度小程序应用");
 
-    @Schema(title =  "索引")
+    @Schema(title = "索引")
     private final Integer index;
-    @Schema(title =  "文字")
+    @Schema(title = "文字")
     private final String text;
 
     private static final Map<Integer, TechnologyType> indexMap = new HashMap<>();

@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: BaseController.java
  * Author: gengwei.zheng
- * Date: 2021/08/24 12:23:24
+ * Date: 2021/09/25 10:31:25
  */
 
 package cn.herodotus.eurynome.rest.base.controller;
@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 /**
  * <p> Description : 通用Controller </p>
- *
+ * <p>
  * 单独提取出一些公共方法，是为了解决某些支持feign的controller，requestMapping 不方便统一编写的问题。
  *
  * @author : gengwei.zheng
@@ -48,11 +48,13 @@ public abstract class BaseController<E extends AbstractEntity, ID extends Serial
         return this.getWriteableService();
     }
 
+    @Override
     public Result<E> saveOrUpdate(E domain) {
         E savedDomain = getWriteableService().saveOrUpdate(domain);
         return result(savedDomain);
     }
 
+    @Override
     public Result<String> delete(ID id) {
         Result<String> result = result(String.valueOf(id));
         getWriteableService().deleteById(id);

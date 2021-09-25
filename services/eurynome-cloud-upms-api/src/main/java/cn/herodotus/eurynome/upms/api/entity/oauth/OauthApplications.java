@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-api
  * File Name: OauthApplications.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 11:32:13
+ * Date: 2021/09/19 13:30:19
  */
 
 package cn.herodotus.eurynome.upms.api.entity.oauth;
@@ -75,7 +75,7 @@ public class OauthApplications extends BaseAppEntity {
             inverseJoinColumns = {@JoinColumn(name = "scope_id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"app_key", "scope_id"})},
             indexes = {@Index(name = "oauth_applications_scopes_aid_idx", columnList = "app_key"), @Index(name = "oauth_applications_scopes_sid_idx", columnList = "scope_id")})
-    private Set<OAuth2Scopes> scopes = new HashSet<>();
+    private Set<OauthScopes> scopes = new HashSet<>();
 
     public String getAppKey() {
         return appKey;
@@ -109,11 +109,11 @@ public class OauthApplications extends BaseAppEntity {
         this.website = website;
     }
 
-    public Set<OAuth2Scopes> getScopes() {
+    public Set<OauthScopes> getScopes() {
         return scopes;
     }
 
-    public void setScopes(Set<OAuth2Scopes> scopes) {
+    public void setScopes(Set<OauthScopes> scopes) {
         this.scopes = scopes;
     }
 

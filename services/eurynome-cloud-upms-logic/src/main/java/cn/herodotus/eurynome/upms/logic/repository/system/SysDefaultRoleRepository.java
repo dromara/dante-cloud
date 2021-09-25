@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-logic
  * File Name: SysDefaultRoleRepository.java
  * Author: gengwei.zheng
- * Date: 2021/08/05 17:47:05
+ * Date: 2021/08/18 17:48:18
  */
 
 package cn.herodotus.eurynome.upms.logic.repository.system;

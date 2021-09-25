@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: ReadableService.java
  * Author: gengwei.zheng
- * Date: 2021/08/24 12:23:24
+ * Date: 2021/09/23 15:08:23
  */
 
 package cn.herodotus.eurynome.rest.base.service;
@@ -41,57 +41,158 @@ import java.util.List;
  */
 public interface ReadableService<E extends Entity, ID extends Serializable> {
 
+    /**
+     * 获取Repository
+     *
+     * @return {@link BaseRepository}
+     */
     BaseRepository<E, ID> getRepository();
 
-    default List<E> findAll() {
-        return getRepository().findAll();
-    }
-
-    default Page<E> findAll(Pageable pageable) {
-        return getRepository().findAll(pageable);
-    }
-
-    default List<E> findAll(Sort sort) {
-        return getRepository().findAll(sort);
-    }
-
-    default List<E> findAll(Specification<E> specification) {
-        return getRepository().findAll(specification);
-    }
-
-    default Page<E> findAll(Specification<E> specification, Pageable pageable) {
-        return getRepository().findAll(specification, pageable);
-    }
-
-    default List<E> findAll(Specification<E> specification, Sort sort) {
-        return getRepository().findAll(specification, sort);
-    }
-
+    /**
+     * 根据ID查询数据
+     *
+     * @param id 数据ID
+     * @return 与ID对应的数据，如果不存在则返回空
+     */
     default E findById(ID id) {
         return getRepository().findById(id).orElse(null);
     }
 
-    default Page<E> findByPage(int pageNumber, int pageSize) {
-        return findAll(PageRequest.of(pageNumber, pageSize));
-    }
-
-    default Page<E> findByPage(int pageNumber, int pageSize, Sort.Direction direction) {
-        return findAll(PageRequest.of(pageNumber, pageSize, direction));
-    }
-
-    default Page<E> findByPage(int pageNumber, int pageSize, Sort.Direction direction, String... properties) {
-        return findAll(PageRequest.of(pageNumber, pageSize, direction, properties));
-    }
-
+    /**
+     * 数据是否存在
+     *
+     * @param id 数据ID
+     * @return true 存在，false 不存在
+     */
     default boolean existsById(ID id) {
         return getRepository().existsById(id);
     }
 
+    /**
+     * 查询数量
+     *
+     * @return 数据数量
+     */
     default long count() {
         return getRepository().count();
     }
 
+    /**
+     * 查询数量
+     *
+     * @param specification {@link Specification}
+     * @return 数据数量
+     */
     default long count(Specification<E> specification) {
         return getRepository().count(specification);
+    }
+
+    /**
+     * 查询全部数据
+     *
+     * @return 全部数据列表
+     */
+    default List<E> findByPage() {
+        return getRepository().findAll();
+    }
+
+    /**
+     * 查询全部数据
+     *
+     * @param sort {@link Sort}
+     * @return 已排序的全部数据列表
+     */
+    default List<E> findByPage(Sort sort) {
+        return getRepository().findAll(sort);
+    }
+
+    /**
+     * 查询全部数据
+     *
+     * @param specification {@link Specification}
+     * @return 全部数据列表
+     */
+    default List<E> findByPage(Specification<E> specification) {
+        return getRepository().findAll(specification);
+    }
+
+    /**
+     * 查询全部数据
+     *
+     * @param specification {@link Specification}
+     * @param sort          {@link Sort}
+     * @return 全部数据列表
+     */
+    default List<E> findByPage(Specification<E> specification, Sort sort) {
+        return getRepository().findAll(specification, sort);
+    }
+
+    /**
+     * 查询分页数据
+     *
+     * @param pageable {@link Pageable}
+     * @return 分页数据
+     */
+    default Page<E> findByPage(Pageable pageable) {
+        return getRepository().findAll(pageable);
+    }
+
+    /**
+     * 查询分页数据
+     *
+     * @param pageNumber 当前页码, 起始页码 0
+     * @param pageSize   每页显示的数据条数
+     * @return 分页数据
+     */
+    default Page<E> findByPage(int pageNumber, int pageSize) {
+        return findByPage(PageRequest.of(pageNumber, pageSize));
+    }
+
+    /**
+     * 查询分页数据
+     *
+     * @param specification {@link Specification}
+     * @param pageable      {@link Pageable}
+     * @return 分页数据
+     */
+    default Page<E> findByPage(Specification<E> specification, Pageable pageable) {
+        return getRepository().findAll(specification, pageable);
+    }
+
+    /**
+     * 查询分页数据
+     *
+     * @param specification {@link Specification}
+     * @param pageNumber    当前页码, 起始页码 0
+     * @param pageSize      每页显示的数据条数
+     * @return 分页数据
+     */
+    default Page<E> findByPage(Specification<E> specification, int pageNumber, int pageSize) {
+        return getRepository().findAll(specification, PageRequest.of(pageNumber, pageSize));
+    }
+
+    /**
+     * 查询分页数据
+     *
+     * @param pageNumber 当前页码, 起始页码 0
+     * @param pageSize   每页显示的数据条数
+     * @param direction  {@link org.springframework.data.domain.Sort.Direction}
+     * @return 分页数据
+     */
+    default Page<E> findByPage(int pageNumber, int pageSize, Sort.Direction direction) {
+        return findByPage(PageRequest.of(pageNumber, pageSize, direction));
+    }
+
+    /**
+     * 查询分页数据
+     *
+     * @param pageNumber 当前页码, 起始页码 0
+     * @param pageSize   每页显示的数据条数
+     * @param direction  {@link org.springframework.data.domain.Sort.Direction}
+     * @param properties 排序的属性名称
+     * @return 分页数据
+     */
+    default Page<E> findByPage(int pageNumber, int pageSize, Sort.Direction direction, String... properties) {
+        return findByPage(PageRequest.of(pageNumber, pageSize, direction, properties));
     }
 }

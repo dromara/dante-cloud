@@ -40,6 +40,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -76,6 +77,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(2)
 public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -174,6 +176,9 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
+        // 禁用CSRF 开启跨域
+        http.csrf().disable().cors();
+
         // @formatter:off
         http.requestMatchers().antMatchers("/oauth/**", "/login**")
                 .and()
@@ -193,9 +198,7 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
 //                        .tokenValiditySeconds(securityProperties.getRememberMe().getValiditySeconds())
 //                        .key(securityProperties.getRememberMe().getCookieName())
 //                        .userDetailsService(oauth2UserDetailsService)
-                .and().logout().permitAll()
-                .and().cors()
-                .and().csrf().disable();
+                .and().logout().permitAll();
         // @formatter:on
     }
 }

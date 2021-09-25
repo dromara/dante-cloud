@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2019 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
- * Project Name: luban-cloud
- * Module Name: luban-cloud-upms-logic
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-upms-logic
  * File Name: SysAuthorityService.java
  * Author: gengwei.zheng
- * Date: 2019/11/19 上午11:03
- * LastModified: 2019/11/19 上午11:00
+ * Date: 2021/09/25 10:46:25
  */
 
 package cn.herodotus.eurynome.upms.logic.service.system;
@@ -32,8 +30,12 @@ import cn.herodotus.eurynome.upms.logic.repository.system.SysAuthorityRepository
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 import java.util.List;
 
 /**
@@ -60,13 +62,13 @@ public class SysAuthorityService extends BaseLayeredService<SysAuthority, String
     }
 
     public List<SysAuthority> batchSaveOrUpdate(List<SysAuthority> sysAuthorities) {
-        log.debug("[Eurynome] |- SysAuthority Service batchSaveOrUpdate.");
+        log.debug("[Herodotus] |- SysAuthority Service batchSaveOrUpdate.");
         return sysAuthorityRepository.saveAllAndFlush(sysAuthorities);
     }
 
     public List<SysAuthority> findAllByAuthorityType(AuthorityType authorityType) {
         List<SysAuthority> sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
-        log.debug("[Eurynome] |- SysAuthority Service findAllByAuthorityType.");
+        log.debug("[Herodotus] |- SysAuthority Service findAllByAuthorityType.");
         return sysAuthorities;
     }
 }

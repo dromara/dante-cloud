@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2019-2021 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-logic
  * File Name: OauthApplicationsService.java
  * Author: gengwei.zheng
- * Date: 2021/1/18 下午6:20
- * LastModified: 2021/1/17 下午7:25
+ * Date: 2021/09/25 10:46:25
  */
 
 package cn.herodotus.eurynome.upms.logic.service.oauth;
@@ -27,7 +25,7 @@ package cn.herodotus.eurynome.upms.logic.service.oauth;
 import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthApplicationsRepository;
 import cn.hutool.core.util.IdUtil;
 import org.apache.commons.lang3.ObjectUtils;
@@ -69,7 +67,7 @@ public class OauthApplicationsService extends BaseLayeredService<OauthApplicatio
 
     @Override
     public OauthApplications saveOrUpdate(OauthApplications domain) {
-        if(ObjectUtils.isNotEmpty(domain)) {
+        if (ObjectUtils.isNotEmpty(domain)) {
             if (StringUtils.isBlank(domain.getAppSecret())) {
                 domain.setAppSecret(IdUtil.randomUUID());
             }
@@ -83,9 +81,9 @@ public class OauthApplicationsService extends BaseLayeredService<OauthApplicatio
 
         log.debug("[Eurynome] |- OauthApplications Service authorize.");
 
-        Set<OAuth2Scopes> OAuth2ScopesSet = new HashSet<>();
+        Set<OauthScopes> OAuth2ScopesSet = new HashSet<>();
         for (String scopeId : scopeIds) {
-            OAuth2Scopes OAuth2Scopes = new OAuth2Scopes();
+            OauthScopes OAuth2Scopes = new OauthScopes();
             OAuth2Scopes.setScopeId(scopeId);
             OAuth2ScopesSet.add(OAuth2Scopes);
         }

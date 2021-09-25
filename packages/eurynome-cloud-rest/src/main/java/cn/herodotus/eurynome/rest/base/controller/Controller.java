@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: Controller.java
  * Author: gengwei.zheng
- * Date: 2021/08/24 12:23:24
+ * Date: 2021/09/25 10:31:25
  */
 
 package cn.herodotus.eurynome.rest.base.controller;
@@ -55,7 +55,7 @@ public interface Controller {
 
     default <E extends AbstractEntity> Result<List<E>> result(List<E> domains) {
         Result<List<E>> result = new Result<>();
-        if (CollectionUtils.isNotEmpty(domains)) {
+        if (ObjectUtils.isNotEmpty(domains)) {
             return result.ok().message("查询数据成功！").data(domains);
         } else {
             return result.failed().message("查询数据失败！");
@@ -73,7 +73,7 @@ public interface Controller {
 
     default Result<Map<String, Object>> result(Map<String, Object> map) {
         Result<Map<String, Object>> result = new Result<>();
-        if (MapUtils.isNotEmpty(map)) {
+        if (ObjectUtils.isNotEmpty(map)) {
             return result.ok().message("查询数据成功！").data(map);
         } else {
             return result.failed().message("查询失败！");
@@ -83,6 +83,15 @@ public interface Controller {
     default <ID extends Serializable> Result<String> result(ID parameter) {
         Result<String> result = new Result<>();
         if (ObjectUtils.isNotEmpty(parameter)) {
+            return result.ok().message("操作成功！");
+        } else {
+            return result.failed().message("操作失败！");
+        }
+    }
+
+    default Result<String> result(boolean status) {
+        Result<String> result = new Result<>();
+        if (status) {
             return result.ok().message("操作成功！");
         } else {
             return result.failed().message("操作失败！");

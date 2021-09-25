@@ -23,7 +23,7 @@
 -- ----------------------------
 -- Table data for oauth_applications
 -- ----------------------------
-INSERT INTO "oauth_applications"("app_key", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_icon", "app_name", "app_name_en", "app_secret", "app_type", "app_tech", "website", "app_code") VALUES ('010e659a-4005-4610-98f6-00b822f4758e', '2020-04-21 19:00:19.197', 0, '2020-05-05 18:02:48.367', '', 't', 0, 1, NULL, '业务中台管理端', 'Eurynome', '04165a07-cffd-45cf-a20a-1c2a69f65fb1', 0, 3, 'http://localhost:8080', '');
+INSERT INTO "oauth_applications"("app_key", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "app_icon", "app_name", "app_name_en", "app_secret", "app_type", "app_tech", "website", "app_code") VALUES ('010e659a-4005-4610-98f6-00b822f4758e', '2020-04-21 19:00:19.197', 0, '2020-05-05 18:02:48.367', '', 't', 0, 0, NULL, '业务中台管理端', 'Eurynome', '04165a07-cffd-45cf-a20a-1c2a69f65fb1', 0, 3, 'http://localhost:8080', '');
 
 -- ----------------------------
 -- Table data for oauth_client_details
@@ -38,22 +38,24 @@ INSERT INTO "oauth_client_details" ("client_id", "resource_ids", "client_secret"
 -- ----------------------------
 -- Table data for oauth_scopes
 -- ----------------------------
-INSERT INTO "oauth_scopes"("scope_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "scope_code", "scope_name") VALUES ('c153737a-5234-11ea-ae28-14cf92c9b916', '2020-04-14 16:06:12', 1, '2020-04-17 07:52:46.481', '中台全部服务权限', 't', 0, 1, 'all', '全部权限');
+INSERT INTO "oauth_scopes"("scope_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "scope_code", "scope_name") VALUES ('c153737a-5234-11ea-ae28-14cf92c9b916', '2020-04-14 16:06:12', 1, '2020-04-17 07:52:46.481', '中台全部服务权限', 't', 0, 0, 'all', '全部权限');
 
 -- ----------------------------
 -- Table data for sys_user
 -- ----------------------------
-INSERT INTO "sys_user"("user_id", "create_time", "ranking", "update_time", "description", "is_reserved", "status", "nick_name", "password", "user_name", "reversion") VALUES ('1', '2019-07-23 07:19:50', 1, '2019-07-23 07:19:52', '平台管理员', 't', 1, 'Hades', '$2a$10$fi5ecIcM3hy9RQwE0x78oeyNecPFiUgi0PnhESeENjX3G4CBvYOLO', 'system', NULL);
+INSERT INTO "sys_user"("user_id", "create_time", "ranking", "update_time", "description", "is_reserved", "status", "nick_name", "password", "user_name", "reversion") VALUES ('1', '2019-07-23 07:19:50', 1, '2019-07-23 07:19:52', '平台管理员', 't', 0, 'Hades', '$2a$10$fi5ecIcM3hy9RQwE0x78oeyNecPFiUgi0PnhESeENjX3G4CBvYOLO', 'system', NULL);
 
 -- ----------------------------
 -- Table data for sys_role
 -- ----------------------------
-INSERT INTO "sys_role"("role_id", "create_time", "ranking", "update_time", "description", "is_reserved", "status", "role_code", "role_name", "reversion") VALUES ('1', '2019-07-23 07:22:27', 1, '2019-09-11 12:04:52', '中台管理员角色', 't', 1, 'ROLE_ADMINISTRATOR', '平台管理员角色', NULL);
+INSERT INTO "sys_role"("role_id", "create_time", "ranking", "update_time", "description", "is_reserved", "status", "role_code", "role_name", "reversion") VALUES ('1', '2019-07-23 07:22:27', 1, '2019-09-11 12:04:52', '中台管理员角色', 't', 0, 'ROLE_ADMINISTRATOR', '平台管理员角色', NULL);
 
 -- ----------------------------
 -- Table data for sys_user_role
 -- ----------------------------
 INSERT INTO "sys_user_role"("user_id", "role_id") VALUES ('1', '1');
+
+TRUNCATE "sys_role_authority";
 
 -- ----------------------------
 -- 如果要重新生成权限数据，可以用下面脚本生成角色1 与权限的关系

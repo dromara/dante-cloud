@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: ServiceProperties.java
  * Author: gengwei.zheng
- * Date: 2021/08/18 17:48:18
+ * Date: 2021/08/26 20:40:26
  */
 
 package cn.herodotus.eurynome.rest.properties;

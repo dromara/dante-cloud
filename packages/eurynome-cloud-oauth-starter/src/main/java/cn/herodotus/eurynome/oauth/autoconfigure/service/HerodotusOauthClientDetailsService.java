@@ -73,7 +73,7 @@ public class HerodotusOauthClientDetailsService implements HerodotusClientDetail
 
         HerodotusClientDetails herodotusClientDetails = getOauthClientDetails(clientId);
         if (herodotusClientDetails != null && herodotusClientDetails.getAdditionalInformation() != null) {
-            String status = herodotusClientDetails.getAdditionalInformation().getOrDefault("status", "1").toString();
+            String status = herodotusClientDetails.getAdditionalInformation().getOrDefault("status", "0").toString();
             if (String.valueOf(StatusEnum.FORBIDDEN.getIndex()).equals(status)) {
                 log.warn("[Eurynome] |- Client [{}] has been Forbidden! ", herodotusClientDetails.getClientId());
                 throw new ClientRegistrationException("客户端已被禁用");
