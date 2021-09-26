@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: PlatformProperties.java
  * Author: gengwei.zheng
- * Date: 2021/08/18 17:48:18
+ * Date: 2021/09/25 10:33:25
  */
 
 package cn.herodotus.eurynome.rest.properties;
@@ -33,9 +33,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/** 
+/**
  * <p>Description: 平台服务相关配置 </p>
- * 
+ *
  * @author : gengwei.zheng
  * @date : 2019/11/17 15:22
  */

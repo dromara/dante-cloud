@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2019 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,22 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
- * Project Name: luban-cloud
- * Module Name: luban-cloud-upms-logic
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-upms-logic
  * File Name: SysUserService.java
  * Author: gengwei.zheng
- * Date: 2019/11/19 上午11:03
- * LastModified: 2019/11/19 上午11:00
+ * Date: 2021/09/18 21:07:18
  */
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
+import cn.herodotus.eurynome.common.constant.enums.AccountType;
 import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
+import cn.herodotus.eurynome.security.definition.core.SocialUserDetails;
+import cn.herodotus.eurynome.security.utils.SecurityUtils;
+import cn.herodotus.eurynome.upms.api.entity.system.SysDefaultRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
+import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
+import cn.hutool.core.util.IdUtil;
+import com.google.common.collect.ImmutableSet;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +58,12 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
     private static final Logger log = LoggerFactory.getLogger(SysUserService.class);
 
     private final SysUserRepository sysUserRepository;
+    private final SysDefaultRoleService sysDefaultRoleService;
 
     @Autowired
-    public SysUserService(SysUserRepository sysUserRepository) {
+    public SysUserService(SysUserRepository sysUserRepository, SysDefaultRoleService sysDefaultRoleService) {
         this.sysUserRepository = sysUserRepository;
+        this.sysDefaultRoleService = sysDefaultRoleService;
     }
 
     @Override
@@ -67,19 +78,90 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
     }
 
     public SysUser assign(String userId, String[] roleIds) {
-
         log.debug("[Eurynome] |- SysUser Service assign.");
 
-        Set<SysRole> sysRoleSet = new HashSet<>();
+        SysUser sysUser = findById(userId);
+        return this.register(sysUser, roleIds);
+    }
+
+    public SysUser register(SysUser sysUser, String[] roleIds) {
+        Set<SysRole> sysRoles = new HashSet<>();
         for (String roleId : roleIds) {
             SysRole sysRole = new SysRole();
             sysRole.setRoleId(roleId);
-            sysRoleSet.add(sysRole);
+            sysRoles.add(sysRole);
+        }
+        return this.register(sysUser, sysRoles);
+    }
+
+    public SysUser register(SysUser sysUser, AccountType source) {
+        SysDefaultRole sysDefaultRole = sysDefaultRoleService.findByScene(source);
+        if (ObjectUtils.isNotEmpty(sysDefaultRole)) {
+            SysRole sysRole = sysDefaultRole.getRole();
+            if (ObjectUtils.isNotEmpty(sysRole)) {
+                return this.register(sysUser, sysRole);
+            }
+        }
+        log.error("[Eurynome] |- Default role for [{}] is not set correct, may case register error!", source);
+        return null;
+    }
+
+    public SysUser register(SysUser sysUser, SysRole sysRole) {
+        Set<SysRole> sysRoles = ImmutableSet.of(sysRole);
+        return this.register(sysUser, sysRoles);
+    }
+
+    public SysUser register(SysUser sysUser, Set<SysRole> sysRoles) {
+        if (CollectionUtils.isNotEmpty(sysRoles)) {
+            sysUser.setRoles(sysRoles);
+        }
+        log.debug("[Eurynome] |- SysUser Service register.");
+        return saveOrUpdate(sysUser);
+    }
+
+    private String enhance(String userName) {
+        if (StringUtils.isNotBlank(userName)) {
+            SysUser checkedSysUser = this.findByUserName(userName);
+            if (ObjectUtils.isNotEmpty(checkedSysUser)) {
+                return checkedSysUser.getUserName() + IdUtil.nanoId(6);
+            } else {
+                return userName;
+            }
+        } else {
+            return "Herodotus" + IdUtil.nanoId(6);
+        }
+    }
+
+    public SysUser register(SocialUserDetails socialUserDetails) {
+        SysUser sysUser = new SysUser();
+
+        String userName = enhance(socialUserDetails.getUserName());
+        sysUser.setUserName(userName);
+
+        String nickName = socialUserDetails.getNickName();
+        if (StringUtils.isNotBlank(nickName)) {
+            sysUser.setNickName(nickName);
         }
 
-        SysUser sysUser = findById(userId);
-        sysUser.setRoles(sysRoleSet);
+        String phoneNumber = socialUserDetails.getPhoneNumber();
+        if (StringUtils.isNotBlank(phoneNumber)) {
+            sysUser.setPhoneNumber(SecurityUtils.encrypt(phoneNumber));
+        }
 
-        return saveOrUpdate(sysUser);
+        String avatar = socialUserDetails.getAvatar();
+        if (StringUtils.isNotBlank(avatar)) {
+            sysUser.setAvatar(avatar);
+        }
+
+        sysUser.setPassword(SecurityUtils.encrypt("herodotus-cloud"));
+
+        return register(sysUser, AccountType.getAccountType(socialUserDetails.getSource()));
+    }
+
+    public HerodotusUserDetails registerUserDetails(SocialUserDetails socialUserDetails) {
+        SysUser newSysUser = register(socialUserDetails);
+
+        log.debug("[Eurynome] |- SysUser Service register UserDetails.");
+        return UpmsHelper.convertSysUserToHerodotusUserDetails(newSysUser);
     }
 }

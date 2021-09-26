@@ -83,14 +83,14 @@ public class StampProperties {
     public static class AccessLimited implements Serializable {
 
         /**
-         * 单位时间内同一个接口可以访问的次数
+         * 单位时间内同一个接口可以访问的次数，默认10次
          */
-        private int maxTimes = 5;
+        private int maxTimes = 10;
 
         /**
-         * 持续时间，即在多长时间内，限制访问多少次。默认为 1 分钟。
+         * 持续时间，即在多长时间内，限制访问多少次。默认为 30秒。
          */
-        private Duration expire = Duration.ofMinutes(1);
+        private Duration expire = Duration.ofSeconds(30);
 
         public int getMaxTimes() {
             return maxTimes;

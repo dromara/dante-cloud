@@ -88,6 +88,7 @@ public class HerodotusExceptionHandler {
         // 6*.** 对应错误
         EXCEPTION_DICTIONARY.put("BadSqlGrammarException", getInternalServerErrorResult(ResultStatus.BAD_SQL_GRAMMAR));
         EXCEPTION_DICTIONARY.put("DataIntegrityViolationException", getInternalServerErrorResult(ResultStatus.DATA_INTEGRITY_VIOLATION));
+        EXCEPTION_DICTIONARY.put("TransactionRollbackException", getInternalServerErrorResult(ResultStatus.TRANSACTION_ROLLBACK));
         EXCEPTION_DICTIONARY.put("BindException", getValidationResult(ResultStatus.METHOD_ARGUMENT_NOT_VALID));
         EXCEPTION_DICTIONARY.put("MethodArgumentNotValidException", getValidationResult(ResultStatus.METHOD_ARGUMENT_NOT_VALID));
 
@@ -161,6 +162,7 @@ public class HerodotusExceptionHandler {
     private static Result<String> getServiceUnavailableResult(ResultStatus resultCode) {
         return getResult(resultCode, HttpStatus.SC_SERVICE_UNAVAILABLE);
     }
+
 
     protected static Result<String> getResult(ResultStatus resultStatus, int httpStatus) {
         return new Result<String>().failed().code(resultStatus.getCode()).message(resultStatus.getMessage()).status(httpStatus);

@@ -73,7 +73,7 @@ public enum ResultStatus {
     /**
      * 403.** 禁止的请求，与403对应
      */
-    REPEAT_SUBMISSION(40301, "不要重复提交"),
+    REPEAT_SUBMISSION(40301, "请不要重复提交"),
     FREQUENT_REQUESTS(40302, "请求过于频繁请稍后再试"),
     SQL_INJECTION_REQUEST(40603, "疑似SQL注入请求"),
     /**
@@ -95,7 +95,7 @@ public enum ResultStatus {
      * 412.* 未经授权 Precondition Failed 客户端请求信息的先决条件错误
      */
     INVALID_TOKEN(41201, "无法解析的Token，也许Token已经失效"),
-    INVALID_GRANT(41202, "账号或者密码错误！"),
+    INVALID_GRANT(41202, "认证信息错误！"),
     INVALID_SCOPE(41203, "授权范围错误"),
     INVALID_CLIENT(41204, "非法的客户端"),
     INVALID_REQUEST(41205, "无效的请求，参数使用错误或配置无效."),
@@ -111,9 +111,9 @@ public enum ResultStatus {
     ERROR(50000, "Error"),
     NULL_POINTER_EXCEPTION(50001, "后台代码出现了空值"),
     IO_EXCEPTION(50002, "IO异常"),
-    HTTP_MESSAGE_NOT_READABLE_EXCEPTION(50003, "Http Message 不可读异常"),
+    HTTP_MESSAGE_NOT_READABLE_EXCEPTION(50003, "JSON转换为实体出错！"),
     TYPE_MISMATCH_EXCEPTION(50004, "类型不匹配"),
-    MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION(50005, "Servlet请求参数缺失"),
+    MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION(50005, "接口参数使用错误或必要参数缺失，请查阅接口文档！"),
     IllegalArgumentException(50006, "非法参数错误"),
 
     SERVICE_UNAVAILABLE(50301, "Service Unavailable"),
@@ -127,6 +127,7 @@ public enum ResultStatus {
      * 62.* 数据库操作相关错误
      */
     DATA_INTEGRITY_VIOLATION(62000, "该数据正在被其它数据引用，请先删除引用关系，再进行数据删除操作"),
+    TRANSACTION_ROLLBACK(62001, "数据事务处理失败，数据回滚"),
     /**
      * 63.* Spring Boot Validation校验相关操作
      */

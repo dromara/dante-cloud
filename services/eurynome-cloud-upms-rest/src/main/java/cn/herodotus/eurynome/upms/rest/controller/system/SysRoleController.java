@@ -1,11 +1,11 @@
 /*
- * Copyright 2019-2019 the original author or authors.
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *
- * Project Name: luban-cloud
- * Module Name: luban-cloud-upms-ability
+ * Project Name: eurynome-cloud
+ * Module Name: eurynome-cloud-upms-rest
  * File Name: SysRoleController.java
  * Author: gengwei.zheng
- * Date: 2019/11/25 上午11:05
- * LastModified: 2019/11/25 上午11:02
+ * Date: 2021/09/25 10:52:25
  */
 
 package cn.herodotus.eurynome.upms.rest.controller.system;

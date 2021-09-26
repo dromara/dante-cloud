@@ -17,11 +17,12 @@
  * Module Name: eurynome-cloud-rest
  * File Name: BaseLayeredService.java
  * Author: gengwei.zheng
- * Date: 2021/08/24 12:23:24
+ * Date: 2021/09/25 10:33:25
  */
 
 package cn.herodotus.eurynome.rest.base.service;
 
+import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 
 import java.io.Serializable;
@@ -32,5 +33,9 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/7/14 17:53
  */
-public abstract class BaseLayeredService < E extends AbstractEntity, ID extends Serializable> implements WriteableService<E, ID>{
+public abstract class BaseLayeredService<E extends AbstractEntity, ID extends Serializable> implements WriteableService<E, ID> {
+
+    protected String like(String property) {
+        return SymbolConstants.PERCENT + property + SymbolConstants.PERCENT;
+    }
 }

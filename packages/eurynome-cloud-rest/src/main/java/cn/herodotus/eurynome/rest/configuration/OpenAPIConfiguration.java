@@ -15,9 +15,9 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-rest
- * File Name: SwaggerConfiguration.java
+ * File Name: OpenAPIConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/08/20 11:58:20
+ * Date: 2021/09/12 01:51:12
  */
 
 package cn.herodotus.eurynome.rest.configuration;

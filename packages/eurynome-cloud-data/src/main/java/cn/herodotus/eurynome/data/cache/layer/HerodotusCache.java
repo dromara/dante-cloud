@@ -73,21 +73,8 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
         return original;
     }
 
-    @Nullable
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Nullable
-    @Override
-    public Object getNativeCache() {
-        return this;
-    }
-
     @Override
     protected Object lookup(Object key) {
-
         String secure = secure(key);
 
         Object caffeineValue = caffeineCache.get(secure);
@@ -105,6 +92,87 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
         log.debug("[Eurynome] |- CACHE - Lookup the cache for key: [{}], value is null", secure);
 
         return null;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public Object getNativeCache() {
+        return this;
+    }
+
+    /**
+     * 查询二级缓存
+     *
+     * @param key
+     * @param valueLoader
+     * @return
+     */
+    private <T> Object getRedisStoreValue(Object key, Callable<T> valueLoader) {
+        T value = redisCache.get(key, valueLoader);
+        log.trace("[Eurynome] |- CACHE - Get <T> with valueLoader form redis cache, hit the cache.");
+        return toStoreValue(value);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    @Nullable
+    public <T> T get(Object key, Callable<T> valueLoader) {
+        String secure = secure(key);
+
+        T value = (T) caffeineCache.getNativeCache().get(secure, k -> getRedisStoreValue(k, valueLoader));
+        if (value instanceof NullValue) {
+            log.debug("[Eurynome] |- CACHE - Get <T> with type form valueLoader Cache for key: [{}], value is null", secure);
+            return null;
+        }
+
+        return value;
+    }
+
+    @Override
+    public void put(Object key, Object value) {
+        if (!isAllowNullValues() && value == null) {
+            throw new IllegalArgumentException(String.format(
+                    "Cache '%s' does not allow 'null' values. Avoid storing null via '@Cacheable(unless=\"#result == null\")' or configure RedisCache to allow 'null' via RedisCacheConfiguration.",
+                    name));
+        } else {
+            String secure = secure(key);
+
+            caffeineCache.put(secure, value);
+            redisCache.put(secure, value);
+
+            log.debug("[Eurynome] |- CACHE - Put data into Herodotus Cache, with key: [{}] and value: [{}]", secure, value);
+        }
+    }
+
+    @Override
+    public void evict(Object key) {
+        String secure = secure(key);
+
+        log.debug("[Eurynome] |- CACHE - Evict Herodotus Cache for key: {}", secure);
+
+        // 删除的时候要先删除二级缓存再删除一级缓存，否则有并发问题
+        redisCache.evict(secure);
+        log.trace("[Eurynome] |- CACHE - Evict Herodotus Cache in redis cache, key: {}", secure);
+
+        caffeineCache.evict(secure);
+        log.trace("[Eurynome] |- CACHE - Evict Herodotus Cache in caffeine cache, key: {}", secure);
+    }
+
+    @Override
+    public void clear() {
+        log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache.");
+
+        if (clearRemoteOnExit) {
+            redisCache.clear();
+            log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache in redis cache.");
+        }
+
+        caffeineCache.clear();
+        log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache in caffeine cache.");
     }
 
     @Override
@@ -127,117 +195,5 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
         log.debug("[Eurynome] |- CACHE - Get ValueWrapper data form Herodotus Cache for key: [{}], value is null", secure);
 
         return null;
-    }
-
-    @Override
-    public <T> T get(Object key, Class<T> type) {
-
-        String secure = secure(key);
-
-        T caffeineValue = caffeineCache.get(secure, type);
-        if (ObjectUtils.isNotEmpty(caffeineValue)) {
-            log.trace("[Eurynome] |- CACHE - Get <T> with type form caffeine cache, hit the cache.");
-            return caffeineValue;
-        }
-
-        T redisValue = redisCache.get(secure, type);
-        if (ObjectUtils.isNotEmpty(redisValue)) {
-            log.trace("[Eurynome] |- CACHE - Get <T> with type form redis cache, hit the cache.");
-            caffeineCache.put(secure, redisValue);
-            log.trace("[Eurynome] |- CACHE - Sync redis cache to caffeine cache, in 'Get <T> with type' action");
-            return redisValue;
-        }
-
-        log.debug("[Eurynome] |- CACHE - Get <T> with type form Herodotus Cache for key: [{}], value is null", secure);
-
-        return null;
-    }
-
-    /**
-     * 查询二级缓存
-     *
-     * @param key
-     * @param valueLoader
-     * @return
-     */
-    private <T> Object getRedisStoreValue(Object key, Callable<T> valueLoader) {
-        T value = redisCache.get(key, valueLoader);
-        log.trace("[Eurynome] |- CACHE - Get <T> with valueLoader form redis cache, hit the cache.");
-        return toStoreValue(value);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Nullable
-    @Override
-    public <T> T get(Object key, Callable<T> valueLoader) {
-
-        String secure = secure(key);
-
-        T value = (T) caffeineCache.getNativeCache().get(secure, k -> getRedisStoreValue(k, valueLoader));
-        if (value instanceof NullValue) {
-            log.debug("[Eurynome] |- CACHE - Get <T> with type form valueLoader Cache for key: [{}], value is null", secure);
-            return null;
-        }
-
-        return value;
-    }
-
-    @Override
-    public void put(Object key, @Nullable Object value) {
-
-        if (!isAllowNullValues() && value == null) {
-            throw new IllegalArgumentException(String.format(
-                    "Cache '%s' does not allow 'null' values. Avoid storing null via '@Cacheable(unless=\"#result == null\")' or configure RedisCache to allow 'null' via RedisCacheConfiguration.",
-                    name));
-        } else {
-            String secure = secure(key);
-
-            caffeineCache.put(secure, value);
-            redisCache.put(secure, value);
-
-            log.debug("[Eurynome] |- CACHE - Put data into Herodotus Cache, with key: [{}] and value: [{}]", secure, value);
-        }
-    }
-
-    @Override
-    public ValueWrapper putIfAbsent(Object key, Object value) {
-
-        String secure = secure(key);
-
-        caffeineCache.putIfAbsent(secure, value);
-        ValueWrapper valueWrapper = redisCache.putIfAbsent(secure, value);
-
-        log.debug("[Eurynome] |- CACHE - Put data into Herodotus Cache If Absent, with key: [{}] and value: [{}]", secure, value);
-        return valueWrapper;
-    }
-
-    @Nullable
-    @Override
-    public void evict(Object key) {
-
-        String secure = secure(key);
-
-        log.debug("[Eurynome] |- CACHE - Evict Herodotus Cache for key: {}", secure);
-
-        // 删除的时候要先删除二级缓存再删除一级缓存，否则有并发问题
-        redisCache.evict(secure);
-        log.trace("[Eurynome] |- CACHE - Evict Herodotus Cache in redis cache, key: {}", secure);
-
-        caffeineCache.evict(secure);
-        log.trace("[Eurynome] |- CACHE - Evict Herodotus Cache in caffeine cache, key: {}", secure);
-    }
-
-    @Override
-    public void clear() {
-
-        log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache.");
-
-        if (clearRemoteOnExit) {
-            redisCache.clear();
-            log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache in redis cache.");
-        }
-
-        caffeineCache.clear();
-        log.trace("[Eurynome] |- CACHE - Clear Herodotus Cache in caffeine cache.");
     }
 }

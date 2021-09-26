@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: ReadableController.java
  * Author: gengwei.zheng
- * Date: 2021/08/24 12:23:24
+ * Date: 2021/09/25 10:33:25
  */
 
 package cn.herodotus.eurynome.rest.base.controller;
@@ -46,13 +46,20 @@ public interface ReadableController<E extends AbstractEntity, ID extends Seriali
      */
     ReadableService<E, ID> getReadableService();
 
+    /**
+     * 查询分页数据
+     *
+     * @param pageNumber 当前页码，起始页码 0
+     * @param pageSize   每页显示数据条数
+     * @return {@link Result}
+     */
     default Result<Map<String, Object>> findByPage(Integer pageNumber, Integer pageSize) {
         Page<E> pages = getReadableService().findByPage(pageNumber, pageSize);
         return result(pages);
     }
 
     default Result<List<E>> findAll() {
-        List<E> domains = getReadableService().findAll();
+        List<E> domains = getReadableService().findByPage();
         return result(domains);
     }
 

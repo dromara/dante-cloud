@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-api
  * File Name: SysDefaultRole.java
  * Author: gengwei.zheng
- * Date: 2021/08/05 17:32:05
+ * Date: 2021/09/25 10:41:25
  */
 
 package cn.herodotus.eurynome.upms.api.entity.system;
@@ -54,13 +54,13 @@ public class SysDefaultRole extends BaseSysEntity {
     @Column(name = "default_id", length = 64)
     private String defaultId;
 
-    @Schema(title =  "场景")
+    @Schema(title = "场景")
     @Column(name = "scene", unique = true)
     @Enumerated(EnumType.STRING)
     private AccountType scene = AccountType.INSTITUTION;
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
-    @Schema(title =  "角色ID")
+    @Schema(title = "角色ID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id", nullable = false)
     private SysRole role;

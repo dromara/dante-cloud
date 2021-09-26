@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: AccessLimitedInterceptor.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 19:06:26
+ * Date: 2021/09/01 12:34:01
  */
 
 package cn.herodotus.eurynome.rest.security;

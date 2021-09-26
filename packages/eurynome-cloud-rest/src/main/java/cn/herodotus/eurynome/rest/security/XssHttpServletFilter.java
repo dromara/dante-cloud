@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: XssHttpServletFilter.java
  * Author: gengwei.zheng
- * Date: 2021/09/01 12:34:01
+ * Date: 2021/09/25 10:33:25
  */
 
 package cn.herodotus.eurynome.rest.security;
@@ -43,7 +43,7 @@ public class XssHttpServletFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(request);
-        log.debug ("[Eurynome] |- XssHttpServletFilter wrapper request for [{}].", request.getRequestURI());
+        log.debug("[Eurynome] |- XssHttpServletFilter wrapper request for [{}].", request.getRequestURI());
         filterChain.doFilter(xssRequest, servletResponse);
     }
 }

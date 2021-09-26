@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: RestTemplateConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/06/29 15:58:29
+ * Date: 2021/08/26 20:40:26
  */
 
 package cn.herodotus.eurynome.rest.configuration;

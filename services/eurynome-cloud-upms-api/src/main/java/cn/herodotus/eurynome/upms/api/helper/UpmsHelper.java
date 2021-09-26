@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-api
  * File Name: UpmsHelper.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 11:53:13
+ * Date: 2021/09/19 13:30:19
  */
 
 package cn.herodotus.eurynome.upms.api.helper;
@@ -29,7 +29,7 @@ import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OAuth2Scopes;
+import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
@@ -149,7 +149,7 @@ public class UpmsHelper {
         oauthClientDetails.setClientSecret(SecurityUtils.encrypt(oauthApplications.getAppSecret()));
 
         if (CollectionUtils.isNotEmpty(oauthApplications.getScopes())) {
-            String scope = oauthApplications.getScopes().stream().map(OAuth2Scopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
+            String scope = oauthApplications.getScopes().stream().map(OauthScopes::getScopeCode).collect(Collectors.joining(SymbolConstants.COMMA));
             oauthClientDetails.setScope(scope);
         }
 

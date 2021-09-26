@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-api
  * File Name: OauthClientDetails.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 11:31:13
+ * Date: 2021/08/18 17:48:18
  */
 
 package cn.herodotus.eurynome.upms.api.entity.oauth;

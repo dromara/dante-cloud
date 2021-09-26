@@ -40,13 +40,13 @@ import java.util.Map;
 public enum StatusEnum {
 
     /**
-     * 禁用
-     */
-    FORBIDDEN(0, "禁用"),
-    /**
      * 启用
      */
-    ENABLE(1, "启用"),
+    ENABLE(0, "启用"),
+    /**
+     * 禁用
+     */
+    FORBIDDEN(1, "禁用"),
     /**
      * 锁定
      */

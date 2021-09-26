@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-rest
  * File Name: WriteableController.java
  * Author: gengwei.zheng
- * Date: 2021/08/24 12:23:24
+ * Date: 2021/09/25 10:33:25
  */
 
 package cn.herodotus.eurynome.rest.base.controller;
@@ -43,11 +43,24 @@ public interface WriteableController<E extends AbstractEntity, ID extends Serial
      */
     WriteableService<E, ID> getWriteableService();
 
+    /**
+     * 保存或更新实体
+     *
+     * @param domain 实体参数
+     * @return 用Result包装的实体
+     */
+
     default Result<E> saveOrUpdate(E domain) {
         E savedDomain = getWriteableService().saveOrUpdate(domain);
         return result(savedDomain);
     }
 
+    /**
+     * 删除数据
+     *
+     * @param id 实体ID
+     * @return 用Result包装的信息
+     */
     default Result<String> delete(ID id) {
         Result<String> result = result(String.valueOf(id));
         getWriteableService().deleteById(id);

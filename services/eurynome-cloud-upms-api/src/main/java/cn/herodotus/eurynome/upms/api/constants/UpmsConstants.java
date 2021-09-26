@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,13 @@
  * Module Name: eurynome-cloud-upms-api
  * File Name: UpmsConstants.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:46:07
+ * Date: 2021/09/22 17:17:22
  */
 
 package cn.herodotus.eurynome.upms.api.constants;
 
-import cn.herodotus.eurynome.common.constant.enums.OAuth2Expression;
-import cn.herodotus.eurynome.common.constant.enums.StatusEnum;
+import cn.herodotus.eurynome.common.constant.enums.*;
 import cn.herodotus.eurynome.common.constant.magic.CacheConstants;
-import cn.herodotus.eurynome.common.constant.enums.GrantType;
-import cn.herodotus.eurynome.common.constant.enums.ApplicationType;
-import cn.herodotus.eurynome.upms.api.constants.enums.Gender;
-import cn.herodotus.eurynome.upms.api.constants.enums.Identity;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
 
@@ -83,11 +78,11 @@ public class UpmsConstants extends CacheConstants {
     private static final List<Map<String, Object>> SUPPLIER_TYPE_ENUM = SupplierType.getToJsonStruct();
     private static final List<Map<String, Object>> GENDER_ENUM = Gender.getToJsonStruct();
     private static final List<Map<String, Object>> IDENTITY_ENUM = Identity.getToJsonStruct();
-    private static final List<Map<String, Object>> EXPRESSION_ENUM = OAuth2Expression.getToJsonStruct();
+    private static final List<Map<String, Object>> ORGANIZATION_CATEGORY_ENUM = OrganizationCategory.getToJsonStruct();
 
 
     public static Map<String, Object> getAllEnums() {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(8);
         map.put("status", STATUS_ENUM);
         map.put("applicationType", APPLICATION_TYPE_ENUM);
         map.put("grantType", OAUTH2_GRANT_TYPE_ENUM);
@@ -95,7 +90,7 @@ public class UpmsConstants extends CacheConstants {
         map.put("supplierType", SUPPLIER_TYPE_ENUM);
         map.put("gender", GENDER_ENUM);
         map.put("identity", IDENTITY_ENUM);
-        map.put("expression", EXPRESSION_ENUM);
+        map.put("organizationCategory", ORGANIZATION_CATEGORY_ENUM);
         return map;
     }
 }
