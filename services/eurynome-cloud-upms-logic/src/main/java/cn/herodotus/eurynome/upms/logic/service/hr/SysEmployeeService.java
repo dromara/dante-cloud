@@ -31,8 +31,8 @@ import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
-import cn.herodotus.eurynome.upms.logic.dto.OwnershipConfig;
-import cn.herodotus.eurynome.upms.logic.dto.OwnershipRemove;
+import cn.herodotus.eurynome.upms.logic.dto.AllocatableDeploy;
+import cn.herodotus.eurynome.upms.logic.dto.AllocatableRemove;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysEmployeeRepository;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -48,9 +48,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Subquery;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,7 +139,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Herodotus] |- SysEmployee Service findByCondition.");
+        log.debug("[Eurynome] |- SysEmployee Service findByCondition.");
         return this.findByPage(specification, pageable);
     }
 
@@ -202,23 +200,23 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
             List<Predicate> rootPredicates = new ArrayList<>();
             rootPredicates.add(criteriaBuilder.not(criteriaBuilder.exists(subQuery)));
             if (StringUtils.isNotBlank(employeeName)) {
-                subPredicates.add(criteriaBuilder.like(root.get("employeeName"), like(employeeName)));
+                rootPredicates.add(criteriaBuilder.like(root.get("employeeName"), like(employeeName)));
             }
 
             if (StringUtils.isNotBlank(mobilePhoneNumber)) {
-                subPredicates.add(criteriaBuilder.like(root.get("mobilePhoneNumber"), like(mobilePhoneNumber)));
+                rootPredicates.add(criteriaBuilder.like(root.get("mobilePhoneNumber"), like(mobilePhoneNumber)));
             }
 
             if (StringUtils.isNotBlank(email)) {
-                subPredicates.add(criteriaBuilder.like(root.get("email"), like(email)));
+                rootPredicates.add(criteriaBuilder.like(root.get("email"), like(email)));
             }
 
             if (ObjectUtils.isNotEmpty(gender)) {
-                subPredicates.add(criteriaBuilder.equal(root.get("gender"), gender));
+                rootPredicates.add(criteriaBuilder.equal(root.get("gender"), gender));
             }
 
             if (ObjectUtils.isNotEmpty(identity)) {
-                subPredicates.add(criteriaBuilder.equal(root.get("identity"), identity));
+                rootPredicates.add(criteriaBuilder.equal(root.get("identity"), identity));
             }
 
             Predicate[] rootPredicateArray = new Predicate[rootPredicates.size()];
@@ -228,7 +226,19 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Herodotus] |- SysEmployee Service findAllocatable.");
+        log.debug("[Eurynome] |- SysEmployee Service findAllocatable.");
+        return this.findByPage(specification, pageable);
+    }
+
+    public Page<SysEmployee> findByDeparmentId(int pageNumber, int pageSize, String departmentId) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        Specification<SysEmployee> specification = (root, criteriaQuery, criteriaBuilder) -> {
+            Join<SysEmployee, SysDepartment> join = root.join("departments", JoinType.LEFT);
+            return criteriaBuilder.equal(join.get("departmentId"), departmentId);
+        };
+
+        log.debug("[Eurynome] |- SysEmployee Service findAllocatable.");
         return this.findByPage(specification, pageable);
     }
 
@@ -237,7 +247,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         SysUser sysUser = sysUserService.register(sysEmployee);
         sysEmployee.setUser(sysUser);
 
-        log.debug("[Herodotus] |- SysEmployee Service authorize.");
+        log.debug("[Eurynome] |- SysEmployee Service authorize.");
         return this.saveOrUpdate(sysEmployee);
     }
 
@@ -246,17 +256,18 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
     public void deleteById(String employeeId) {
         sysOwnershipService.deleteByEmployeeId(employeeId);
         super.deleteById(employeeId);
-        log.debug("[Herodotus] |- SysEmployee Service deleteById.");
+        log.debug("[Eurynome] |- SysEmployee Service deleteById.");
     }
 
     @Transactional(rollbackFor = TransactionRollbackException.class)
-    public boolean configOwnership(OwnershipConfig ownershipConfig) {
-        List<SysEmployee> sysEmployees = ownershipConfig.getAllocatable();
-        List<SysOwnership> sysOwnerships = ownershipConfig.getOwnerships();
+    public boolean deployAllocatable(AllocatableDeploy allocatableDeploy) {
+        List<SysEmployee> sysEmployees = allocatableDeploy.getAllocatable();
+        List<SysOwnership> sysOwnerships = allocatableDeploy.getOwnerships();
         if (CollectionUtils.isNotEmpty(sysEmployees) && CollectionUtils.isNotEmpty(sysOwnerships)) {
             List<SysEmployee> result = sysEmployeeRepository.saveAllAndFlush(sysEmployees);
             if (CollectionUtils.isNotEmpty(result)) {
                 sysOwnershipService.saveAll(sysOwnerships);
+                log.debug("[Eurynome] |- SysEmployee Service deleteById.");
                 return true;
             }
         }
@@ -265,15 +276,15 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
     }
 
     @Transactional(rollbackFor = TransactionRollbackException.class)
-    public boolean removeOwnership(OwnershipRemove ownershipRemove) {
-        SysEmployee sysEmployee = super.findById(ownershipRemove.getEmployeeId());
+    public boolean removeAllocatable(AllocatableRemove allocatableRemove) {
+        SysEmployee sysEmployee = super.findById(allocatableRemove.getEmployeeId());
         if (ObjectUtils.isNotEmpty(sysEmployee)) {
             SysDepartment sysDepartment = new SysDepartment();
-            sysDepartment.setDepartmentId(ownershipRemove.getDepartmentId());
+            sysDepartment.setDepartmentId(allocatableRemove.getDepartmentId());
             sysEmployee.getDepartments().remove(sysDepartment);
             SysEmployee result = super.save(sysEmployee);
             if (ObjectUtils.isNotEmpty(result)) {
-                sysOwnershipService.deleteById(ownershipRemove.getOwnershipId());
+                sysOwnershipService.delete(allocatableRemove.getOrganizationId(), allocatableRemove.getDepartmentId(), allocatableRemove.getEmployeeId());
                 return true;
             }
         }

@@ -111,9 +111,9 @@ public enum ResultStatus {
     ERROR(50000, "Error"),
     NULL_POINTER_EXCEPTION(50001, "后台代码出现了空值"),
     IO_EXCEPTION(50002, "IO异常"),
-    HTTP_MESSAGE_NOT_READABLE_EXCEPTION(50003, "Http Message 不可读异常"),
+    HTTP_MESSAGE_NOT_READABLE_EXCEPTION(50003, "JSON转换为实体出错！"),
     TYPE_MISMATCH_EXCEPTION(50004, "类型不匹配"),
-    MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION(50005, "Servlet请求参数缺失"),
+    MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION(50005, "接口参数使用错误或必要参数缺失，请查阅接口文档！"),
     IllegalArgumentException(50006, "非法参数错误"),
 
     SERVICE_UNAVAILABLE(50301, "Service Unavailable"),

@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-rest
  * File Name: SysEmployeeController.java
  * Author: gengwei.zheng
- * Date: 2021/09/25 10:52:25
+ * Date: 2021/09/26 10:34:26
  */
 
 package cn.herodotus.eurynome.upms.rest.controller.hr;
@@ -28,8 +28,8 @@ import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.common.constant.enums.Gender;
 import cn.herodotus.eurynome.common.constant.enums.Identity;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
-import cn.herodotus.eurynome.upms.logic.dto.OwnershipConfig;
-import cn.herodotus.eurynome.upms.logic.dto.OwnershipRemove;
+import cn.herodotus.eurynome.upms.logic.dto.AllocatableDeploy;
+import cn.herodotus.eurynome.upms.logic.dto.AllocatableRemove;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysEmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -110,6 +110,17 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
         return result(pages);
     }
 
+    @Operation(summary = "给人员分配用户", description = "为人员创建用户，生成默认用户信息，让人员可以进入系统",
+            responses = {@ApiResponse(description = "已分配用户的人员信息", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysEmployee.class)))})
+    @Parameters({
+            @Parameter(name = "employeeId", description = "人员ID")
+    })
+    @PutMapping
+    public Result<SysEmployee> authorize(@RequestParam("employeeId") String employeeId) {
+        SysEmployee sysEmployee = sysEmployeeService.authorize(employeeId);
+        return result(sysEmployee);
+    }
+
     @Operation(summary = "查询可设置人事归属的人员", description = "根据输入的单位和部门，分页查询当前部门下未设置人事归属的人员信息，排除了已经设置的人员信息",
             responses = {@ApiResponse(description = "可配置人员分页列表", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))})
     @Parameters({
@@ -137,28 +148,32 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
         return result(pages);
     }
 
-    @Operation(summary = "给人员分配用户", description = "为人员创建用户，生成默认用户信息，让人员可以进入系统",
-            responses = {@ApiResponse(description = "已分配用户的人员信息", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysEmployee.class)))})
+    @Operation(summary = "查询已设置归属关系的人员", description = "根据输入的部门，分页查询当前部门下已设置人事归属的人员信息",
+            responses = {@ApiResponse(description = "可配置人员分页列表", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))})
     @Parameters({
-            @Parameter(name = "employeeId", description = "人员ID")
+            @Parameter(name = "pageNumber", required = true, description = "当前页码"),
+            @Parameter(name = "pageSize", required = true, description = "每页显示数量"),
+            @Parameter(name = "departmentId", required = true, description = "部门ID"),
     })
-    @PutMapping
-    public Result<SysEmployee> authorize(@RequestParam("employeeId") String employeeId) {
-        SysEmployee sysEmployee = sysEmployeeService.authorize(employeeId);
-        return result(sysEmployee);
+    @GetMapping("/assigned")
+    public Result<Map<String, Object>> findAssigned(@NotBlank @RequestParam("pageNumber") Integer pageNumber,
+                                                    @NotBlank @RequestParam("pageSize") Integer pageSize,
+                                                    @NotBlank @RequestParam("departmentId") String departmentId) {
+        Page<SysEmployee> pages = sysEmployeeService.findByDeparmentId(pageNumber, pageSize, departmentId);
+        return result(pages);
     }
 
     @Operation(summary = "设置人事归属", description = "根据输入的单位和部门，设置当前部门下未设置人事归属的人员信息，排除了已经设置的人员信息",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
             responses = {@ApiResponse(description = "是否设置成功", content = @Content(mediaType = "application/json"))})
     @Parameters({
-            @Parameter(name = "ownershipConfig", required = true, description = "当前页码", schema = @Schema(implementation = OwnershipConfig.class)),
+            @Parameter(name = "allocatableDeploy", required = true, description = "当前页码", schema = @Schema(implementation = AllocatableDeploy.class)),
     })
     @PostMapping("/allocatable")
-    public Result<String> saveAllocatable(@RequestBody OwnershipConfig ownershipConfig) {
+    public Result<String> saveAllocatable(@RequestBody AllocatableDeploy allocatableDeploy) {
         boolean isSuccess;
-        if (ObjectUtils.isNotEmpty(ownershipConfig)) {
-            isSuccess = sysEmployeeService.configOwnership(ownershipConfig);
+        if (ObjectUtils.isNotEmpty(allocatableDeploy)) {
+            isSuccess = sysEmployeeService.deployAllocatable(allocatableDeploy);
         } else {
             isSuccess = false;
         }
@@ -170,13 +185,13 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
             responses = {@ApiResponse(description = "是否删除成功", content = @Content(mediaType = "application/json"))})
     @Parameters({
-            @Parameter(name = "ownershipRemove", required = true, description = "增加人员归属参数BO对象", schema = @Schema(implementation = OwnershipRemove.class)),
+            @Parameter(name = "allocatableRemove", required = true, description = "增加人员归属参数BO对象", schema = @Schema(implementation = AllocatableRemove.class)),
     })
     @DeleteMapping("/allocatable")
-    public Result<String> deleteAllocatable(@RequestBody OwnershipRemove ownershipRemove) {
+    public Result<String> deleteAllocatable(@RequestBody AllocatableRemove allocatableRemove) {
         boolean isSuccess;
-        if (ObjectUtils.isNotEmpty(ownershipRemove)) {
-            isSuccess = sysEmployeeService.removeOwnership(ownershipRemove);
+        if (ObjectUtils.isNotEmpty(allocatableRemove)) {
+            isSuccess = sysEmployeeService.removeAllocatable(allocatableRemove);
         } else {
             isSuccess = false;
         }

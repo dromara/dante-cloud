@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-rest
  * File Name: UpmsRestConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/06/29 15:58:29
+ * Date: 2021/09/25 10:52:25
  */
 
 package cn.herodotus.eurynome.upms.rest.configuration;

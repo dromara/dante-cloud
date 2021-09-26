@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-rest
  * File Name: OauthApplicationsController.java
  * Author: gengwei.zheng
- * Date: 2021/09/19 17:43:19
+ * Date: 2021/09/25 10:52:25
  */
 
 package cn.herodotus.eurynome.upms.rest.controller.oauth;

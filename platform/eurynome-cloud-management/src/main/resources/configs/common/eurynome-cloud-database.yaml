@@ -36,7 +36,7 @@ spring:
           use_jdbc_metadata_defaults: false
   sql:
     init:
-      mode: never
+      mode: ${herodotus.switch.database.init-mode}
       platform: ${herodotus.database-information.platform}
       continue-on-error: true
       encoding: UTF-8

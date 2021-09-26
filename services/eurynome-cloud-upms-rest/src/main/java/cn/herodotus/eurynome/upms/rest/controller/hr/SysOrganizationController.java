@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-upms-rest
  * File Name: SysOrganizationController.java
  * Author: gengwei.zheng
- * Date: 2021/09/25 10:48:25
+ * Date: 2021/09/26 10:36:26
  */
 
 package cn.herodotus.eurynome.upms.rest.controller.hr;
@@ -41,6 +41,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -125,14 +126,18 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
 
         List<SysOrganization> sysOrganizations = getSysOrganizations(category);
         if (ObjectUtils.isNotEmpty(sysOrganizations)) {
+            final String[] rootId = {null};
             List<TreeNode<String>> treeNodes = sysOrganizations.stream().map(sysOrganization -> {
                 TreeNode<String> treeNode = new TreeNode<>();
                 treeNode.setId(sysOrganization.getOrganizationId());
                 treeNode.setName(sysOrganization.getOrganizationName());
                 treeNode.setParentId(sysOrganization.getParentId());
+                if (StringUtils.isBlank(sysOrganization.getParentId()) || StringUtils.equals(sysOrganization.getParentId(), PlatformConstants.DEFAULT_TREE_ROOT_ID)) {
+                    rootId[0] = sysOrganization.getParentId();
+                }
                 return treeNode;
             }).collect(Collectors.toList());
-            return result.ok().message("查询数据成功").data(TreeUtil.build(treeNodes, null));
+            return result.ok().message("查询数据成功").data(TreeUtil.build(treeNodes, rootId[0]));
         } else {
             return result.failed().message("查询数据失败");
         }

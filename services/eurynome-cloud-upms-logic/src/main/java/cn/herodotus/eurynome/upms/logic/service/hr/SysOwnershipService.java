@@ -22,6 +22,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
+import cn.herodotus.eurynome.common.constant.enums.Gender;
+import cn.herodotus.eurynome.common.constant.enums.Identity;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;
@@ -60,69 +62,23 @@ public class SysOwnershipService extends BaseLayeredService<SysOwnership, String
         return this.sysOwnershipRepository;
     }
 
-    /**
-     * 根据单位ID删除人事归属
-     * <p>
-     * 从操作的完整性上应该包含该操作，但是这个操作风险很大，会删除较多内容
-     *
-     * @param organizationId 单位ID
-     */
     public void deleteByOrganizationId(String organizationId) {
         sysOwnershipRepository.deleteByOrganizationId(organizationId);
-        log.debug("[Herodotus] |- SysOwnershipService Service deleteByOrganizationId.");
+        log.debug("[Eurynome] |- SysOwnershipService Service deleteByOrganizationId.");
     }
 
-    /**
-     * 根据单位ID删除人事归属
-     * <p>
-     * 从操作的完整性上应该包含该操作，但是这个操作风险很大，会删除较多内容
-     *
-     * @param departmentId 部门ID
-     */
     public void deleteByDepartmentId(String departmentId) {
         sysOwnershipRepository.deleteByDepartmentId(departmentId);
-        log.debug("[Herodotus] |- SysOwnershipService Service deleteByDepartmentId.");
+        log.debug("[Eurynome] |- SysOwnershipService Service deleteByDepartmentId.");
     }
 
-    /**
-     * 根据单位ID删除人事归属
-     * <p>
-     * 从操作的完整性上应该包含该操作，但是这个操作风险很大，会删除较多内容
-     *
-     * @param employeeId 人员ID
-     */
     public void deleteByEmployeeId(String employeeId) {
         sysOwnershipRepository.deleteByEmployeeId(employeeId);
-        log.debug("[Herodotus] |- SysOwnershipService Service deleteByEmployeeId.");
+        log.debug("[Eurynome] |- SysOwnershipService Service deleteByEmployeeId.");
     }
 
-    /**
-     * 批量设置人事归属关系
-     * <p>
-     * 如果是通过{@link SysEmployeeService#findAllocatable(int, int, String, String)}获取未设置人事归属关系的人员列表。
-     * 那么本方法逻辑上不会出现重复数据的设置。
-     *
-     * @param organizationId 单位ID
-     * @param departmentId   部门ID
-     * @param employeeIds    人员IDs
-     * @return 已设置的人事归属列表，如果未设置成功，列表size为 0
-     */
-    public List<SysOwnership> assign(String organizationId, String departmentId, String[] employeeIds) {
-        List<SysOwnership> result = new ArrayList<>();
-
-        if (ArrayUtils.isNotEmpty(employeeIds)) {
-            List<SysOwnership> iterable = Arrays.stream(employeeIds).map(employeeId -> {
-                SysOwnership sysOwnership = new SysOwnership();
-                sysOwnership.setOrganizationId(organizationId);
-                sysOwnership.setDepartmentId(departmentId);
-                sysOwnership.setEmployeeId(employeeId);
-                return sysOwnership;
-            }).collect(Collectors.toList());
-
-            result = sysOwnershipRepository.saveAllAndFlush(iterable);
-        }
-
-        log.debug("[Herodotus] |- SysOwnershipService Service assign.");
-        return result;
+    public void delete(String organizationId, String departmentId, String employeeId) {
+        sysOwnershipRepository.deleteByOrganizationIdAndDepartmentIdAndEmployeeId(organizationId, departmentId, employeeId);
+        log.debug("[Eurynome] |- SysOwnershipService delete.");
     }
 }

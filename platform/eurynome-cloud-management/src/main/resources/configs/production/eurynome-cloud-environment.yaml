@@ -17,6 +17,7 @@ herodotus:
   switch:
     database:
       ddl-auto: update
+      init-mode: never
       use-second-level-cache: true
       show-sql: false
       format-sql: false

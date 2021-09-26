@@ -51,7 +51,7 @@ public class SysAuthority extends BaseSysEntity {
 
     @Id
     @GeneratedValue(generator = "authority-uuid")
-    @GenericGenerator(name = "authority-uuid", strategy = "cn.herodotus.cloud.upms.api.generator.SysAuthorityUUIDGenerator")
+    @GenericGenerator(name = "authority-uuid", strategy = "cn.herodotus.eurynome.upms.api.generator.SysAuthorityUUIDGenerator")
     @Column(name = "authority_id", length = 64)
     private String authorityId;
 
