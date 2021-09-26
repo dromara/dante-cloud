@@ -29,7 +29,7 @@
 ---
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.5.4、Spring Cloud 2020.0.3、Spring Cloud Alibaba 2021.1、Nacos 2.0.3 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.5.5、Spring Cloud 2020.0.4、Spring Cloud Alibaba 2021.1、Nacos 2.0.3 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## Gitee Star趋势图
 [![Giteye chart](https://chart.giteye.net/gitee/herodotus/eurynome-cloud/254B32UX.png)](https://giteye.net/chart/254B32UX)
@@ -59,8 +59,8 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
   
 组件 | 版本 
 ---|---
-Spring Boot | 2.5.4
-Spring Cloud | 2020.0.3 
+Spring Boot | 2.5.5
+Spring Cloud | 2020.0.4 
 Spring Cloud Alibaba | 2021.1
 Spring Boot Admin | 2.5.1
 Nacos | 2.0.3 |
