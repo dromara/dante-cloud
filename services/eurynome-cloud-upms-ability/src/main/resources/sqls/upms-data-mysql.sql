@@ -60,7 +60,8 @@ INSERT INTO `sys_user_role`(`user_id`, `role_id`) VALUES ('1', '1');
 INSERT INTO sys_role_authority (role_id, authority_id)
 SELECT '1' role_id,
        sa.authority_id
-FROM "sys_authority" sa
+FROM sys_authority sa
+
 
 
 
