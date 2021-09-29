@@ -72,6 +72,10 @@
         <!-- 开发 -->
         <profile>
             <id>development</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <!--当前环境-->
                 <profile.name>development</profile.name>
@@ -96,10 +100,6 @@
         <!-- 生产 -->
         <profile>
             <id>production</id>
-            <activation>
-                <!--默认激活配置-->
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <!--当前环境-->
                 <profile.name>production</profile.name>
