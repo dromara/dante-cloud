@@ -1,4 +1,4 @@
-<p align="center"><img src="./docs/readme/logo.png" height="150" width="150" alt="logo"/></p>
+<p align="center"><img src="./readme/logo.png" height="150" width="150" alt="logo"/></p>
 <h2 align="center">简洁优雅 · 稳定高效 | 宁静致远 · 精益求精 </h2>
 <h3 align="center">Eurynome Cloud 微服务架构</h3>
 
@@ -36,17 +36,17 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ## [1]、总体架构
 
-![输入图片说明](./docs/readme/architecture.jpg)
+![输入图片说明](./readme/architecture.jpg)
 
 > 部分功能演示，正在逐步添加
 
 ### （1） 方法级动态权限
 
-![输入图片说明](./docs/readme/preview/oauth2expression.gif)
+![输入图片说明](./readme/preview/oauth2expression.gif)
 
 ### （2） 服务调用链监控
 
-![输入图片说明](./docs/readme/preview/skywalking.gif)
+![输入图片说明](./readme/preview/skywalking.gif)
 
 ## [2]、功能介绍
 
@@ -145,27 +145,27 @@ eurynome-cloud
 ## [9]、界面预览
 <table>
     <tr>
-        <td><img src="./docs/readme/ui1.png"/></td>
-        <td><img src="./docs/readme/ui2.png"/></td>
+        <td><img src="./readme/ui1.png"/></td>
+        <td><img src="./readme/ui2.png"/></td>
     </tr>
     <tr>
-        <td><img src="./docs/readme/ui3.png"/></td>
-        <td><img src="./docs/readme/camunda.png"/></td>
+        <td><img src="./readme/ui3.png"/></td>
+        <td><img src="./readme/camunda.png"/></td>
     </tr>
     <tr>
-        <td><img src="./docs/readme/nacos.png"/></td>
-        <td><img src="./docs/readme/elk.png"/></td>
+        <td><img src="./readme/nacos.png"/></td>
+        <td><img src="./readme/elk.png"/></td>
     </tr>
     <tr>
-        <td><img src="./docs/readme/oauth2-login1.png"/></td>
-        <td><img src="./docs/readme/sentinel.png"/></td>
+        <td><img src="./readme/oauth2-login1.png"/></td>
+        <td><img src="./readme/sentinel.png"/></td>
     </tr>
     <tr>
-        <td><img src="./docs/readme/spring-boot-admin-1.png"/></td>
-        <td><img src="./docs/readme/spring-boot-admin-2.png"/></td>
+        <td><img src="./readme/spring-boot-admin-1.png"/></td>
+        <td><img src="./readme/spring-boot-admin-2.png"/></td>
     </tr>
     <tr>
-        <td><img src="./docs/readme/skywalking.png"/></td>
-        <td><img src="./docs/readme/skywalking2.png"/></td>
+        <td><img src="./readme/skywalking.png"/></td>
+        <td><img src="./readme/skywalking2.png"/></td>
     </tr>
 </table>
