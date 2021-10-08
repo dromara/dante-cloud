@@ -70,7 +70,7 @@ public class XssUtils {
             URL url = ResourceUtils.getURL("classpath:antisamy/antisamy-anythinggoes.xml");
             return Policy.getInstance(url);
         } catch (IOException | PolicyException e) {
-            log.warn("[Eurynome] |- Antisamy create policy error! {}", e.getMessage());
+            log.warn("[Herodotus] |- Antisamy create policy error! {}", e.getMessage());
             return null;
         }
     }
@@ -81,15 +81,15 @@ public class XssUtils {
 
     private String cleanHtml(String taintedHtml) {
         try {
-            log.trace("[Eurynome] |- Before Antisamy Scan, value is: [{}]", taintedHtml);
+            log.trace("[Herodotus] |- Before Antisamy Scan, value is: [{}]", taintedHtml);
 
             // 使用AntiSamy清洗数据
             final CleanResults cleanResults = scan(taintedHtml);
             String result = cleanResults.getCleanHTML();
-            log.trace("[Eurynome] |- After  Antisamy Scan, value is: [{}]", result);
+            log.trace("[Herodotus] |- After  Antisamy Scan, value is: [{}]", result);
             return result;
         } catch (ScanException | PolicyException e) {
-            log.error("[Eurynome] |- Antisamy scan catch error! {}", e.getMessage());
+            log.error("[Herodotus] |- Antisamy scan catch error! {}", e.getMessage());
             return taintedHtml;
         }
     }
@@ -100,7 +100,7 @@ public class XssUtils {
         //AntiSamy会把“&nbsp;”转换成乱码，把双引号转换成"&quot;" 先将&nbsp;的乱码替换为空，双引号的乱码替换为双引号
         String temp = cleanHtml.replaceAll(getInstance().nbsp, "");
         String result = temp.replaceAll(getInstance().quot, "\"");
-        log.trace("[Eurynome] |- After  Antisamy Well Formed, value is: [{}]", result);
+        log.trace("[Herodotus] |- After  Antisamy Well Formed, value is: [{}]", result);
         return result;
     }
 }

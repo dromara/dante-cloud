@@ -57,24 +57,24 @@ public class HerodotusFeignRequestInterceptor implements RequestInterceptor {
                 requestTemplate.header(entry.getKey(), entry.getValue());
             }
 
-            log.debug("[Eurynome] |- FeignRequestInterceptor copy all need transfer header!");
+            log.debug("[Herodotus] |- FeignRequestInterceptor copy all need transfer header!");
 
             // 微服务之间传递的唯一标识,区分大小写所以通过httpServletRequest查询
             if (headers.containsKey(HttpHeaders.X_REQUEST_ID)) {
                 String traceId = headers.get(HttpHeaders.X_REQUEST_ID);
                 MDC.put("traceId", traceId);
-                log.info("[Eurynome] |- Feign Request Interceptor Trace: {}", traceId);
+                log.info("[Herodotus] |- Feign Request Interceptor Trace: {}", traceId);
             }
         }
 
-        log.trace("[Eurynome] |- Feign Request Interceptor [{}]", requestTemplate.toString());
+        log.trace("[Herodotus] |- Feign Request Interceptor [{}]", requestTemplate.toString());
     }
 
     private HttpServletRequest getHttpServletRequest() {
         try {
             return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         } catch (Exception e) {
-            log.error("[Eurynome] |- Feign Request Interceptor can not get Request.");
+            log.error("[Herodotus] |- Feign Request Interceptor can not get Request.");
             return null;
         }
     }

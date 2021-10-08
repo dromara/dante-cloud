@@ -25,11 +25,12 @@ package cn.herodotus.eurynome.oauth.controller;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.oauth.utils.SymmetricUtils;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
+import cn.herodotus.eurynome.security.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.security.response.exception.SecurityGlobalExceptionHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -46,10 +47,11 @@ import java.util.Map;
 /**
  * @author gengwei.zheng
  */
-@Slf4j
 @Controller
 @SessionAttributes("authorizationRequest")
 public class IndexController {
+
+    private final Logger log = LoggerFactory.getLogger(IndexController.class);
 
     private static final String ERROR_MESSAGE_KEY = "SPRING_SECURITY_LAST_EXCEPTION_CUSTOM_MESSAGE";
 
@@ -106,7 +108,7 @@ public class IndexController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/oauth/confirm_access")
+    @RequestMapping("/oauth/confirm_access")
     public ModelAndView confirmAccess(Map<String, Object> model, HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView("/confirm_access");
@@ -132,7 +134,6 @@ public class IndexController {
      */
     @RequestMapping("/oauth/error")
     public String handleError(Map<String, Object> model, HttpServletRequest request) {
-
         Object error = request.getAttribute("error");
         if (error instanceof Exception) {
             Exception exception = (Exception) error;

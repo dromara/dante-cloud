@@ -15,30 +15,30 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: SocialHandlerNotFoundException.java
+ * File Name: IllegalAuthenticationArgumentException.java
  * Author: gengwei.zheng
  * Date: 2021/05/07 11:46:07
  */
 
-package cn.herodotus.eurynome.security.response.exception;
+package cn.herodotus.eurynome.security.exception;
 
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>File: SocialHandlerNotFoundException </p>
+ * <p>File: IllegalAuthenticationArgumentException </p>
  *
- * <p>Description: 社交登录处理器未找到错误 </p>
+ * <p>Description: 认证参数错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/4/30 13:24
+ * @date : 2021/4/30 13:21
  */
-public class SocialHandlerNotFoundException extends AuthenticationException {
+public class IllegalAuthenticationArgumentException extends AuthenticationException {
 
-    public SocialHandlerNotFoundException(String msg, Throwable cause) {
+    public IllegalAuthenticationArgumentException(String msg, Throwable cause) {
         super(msg, cause);
     }
 
-    public SocialHandlerNotFoundException(String msg) {
+    public IllegalAuthenticationArgumentException(String msg) {
         super(msg);
     }
 }

@@ -49,12 +49,12 @@ public abstract class AbstractProcessor<T extends BaseEntity> {
             if (ObjectUtils.isNotEmpty(event)) {
                 this.operate(event, response);
 
-                log.info("[Eurynome] |- Sync data base on Debezium for  [{}] succeed!", event.name());
+                log.info("[Herodotus] |- Sync data base on Debezium for  [{}] succeed!", event.name());
                 return true;
             }
         }
 
-        log.info("[Eurynome] |- Sync data base on Debezium for [{}] failed!", body);
+        log.info("[Herodotus] |- Sync data base on Debezium for [{}] failed!", body);
         return false;
     }
 
@@ -63,11 +63,11 @@ public abstract class AbstractProcessor<T extends BaseEntity> {
             Message<T> response = JSON.parseObject(body, new TypeReference<Message<T>>() {
             });
             if (ObjectUtils.isNotEmpty(response)) {
-                log.debug("[Eurynome] |- Convert Object is : [{}]", response);
+                log.debug("[Herodotus] |- Convert Object is : [{}]", response);
                 return response;
             }
         }
-        log.error("[Eurynome] |- JSON parse the string body error!");
+        log.error("[Herodotus] |- JSON parse the string body error!");
         return null;
     }
 
@@ -75,7 +75,7 @@ public abstract class AbstractProcessor<T extends BaseEntity> {
         String action = response.getPayload().getOperation();
         DebeziumEvent event = DebeziumEvent.getDebeziumEvent(action);
         if (ObjectUtils.isNotEmpty(event)) {
-            log.debug("[Eurynome] |- The  Debezium event is : [{}]", event.name());
+            log.debug("[Herodotus] |- The  Debezium event is : [{}]", event.name());
             return event;
         }
 

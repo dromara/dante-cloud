@@ -64,21 +64,21 @@ public class SysOwnershipService extends BaseLayeredService<SysOwnership, String
 
     public void deleteByOrganizationId(String organizationId) {
         sysOwnershipRepository.deleteByOrganizationId(organizationId);
-        log.debug("[Eurynome] |- SysOwnershipService Service deleteByOrganizationId.");
+        log.debug("[Herodotus] |- SysOwnershipService Service deleteByOrganizationId.");
     }
 
     public void deleteByDepartmentId(String departmentId) {
         sysOwnershipRepository.deleteByDepartmentId(departmentId);
-        log.debug("[Eurynome] |- SysOwnershipService Service deleteByDepartmentId.");
+        log.debug("[Herodotus] |- SysOwnershipService Service deleteByDepartmentId.");
     }
 
     public void deleteByEmployeeId(String employeeId) {
         sysOwnershipRepository.deleteByEmployeeId(employeeId);
-        log.debug("[Eurynome] |- SysOwnershipService Service deleteByEmployeeId.");
+        log.debug("[Herodotus] |- SysOwnershipService Service deleteByEmployeeId.");
     }
 
     public void delete(String organizationId, String departmentId, String employeeId) {
         sysOwnershipRepository.deleteByOrganizationIdAndDepartmentIdAndEmployeeId(organizationId, departmentId, employeeId);
-        log.debug("[Eurynome] |- SysOwnershipService delete.");
+        log.debug("[Herodotus] |- SysOwnershipService delete.");
     }
 }

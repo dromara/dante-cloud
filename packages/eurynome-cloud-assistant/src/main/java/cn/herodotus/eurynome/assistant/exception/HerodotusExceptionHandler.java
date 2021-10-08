@@ -170,7 +170,7 @@ public class HerodotusExceptionHandler {
 
     public static Result<String> resolveException(Exception ex, String path) {
 
-        log.trace("[Eurynome] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
+        log.trace("[Herodotus] |- Global Exception Handler, Path : [{}], Exception : [{}]", path, ex);
 
         Result<String> result = new Result<String>().failed();
 
@@ -179,7 +179,7 @@ public class HerodotusExceptionHandler {
             if (EXCEPTION_DICTIONARY.containsKey(exceptionName)) {
                 result = EXCEPTION_DICTIONARY.get(exceptionName);
             } else {
-                log.warn("[Eurynome] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
+                log.warn("[Herodotus] |- Global Exception Handler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
             }
         }
 
@@ -187,7 +187,7 @@ public class HerodotusExceptionHandler {
         result.stackTrace(ex.getStackTrace());
         result.detail(ex.getMessage());
 
-        log.debug("[Eurynome] |- Global Exception Handler, Error is : {}", result);
+        log.debug("[Herodotus] |- Global Exception Handler, Error is : {}", result);
 
         return result;
     }

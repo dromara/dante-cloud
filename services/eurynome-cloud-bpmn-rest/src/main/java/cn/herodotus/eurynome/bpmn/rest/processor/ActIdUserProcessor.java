@@ -50,7 +50,7 @@ public class ActIdUserProcessor extends AbstractProcessor<ActIdUser> {
 
     @KafkaListener(topics = {"herodotus.public.sys_employee"}, groupId = "herodotus.debezium", containerFactory = "concurrentKafkaListenerContainerFactory")
     public void received(String body) {
-        log.info("[Eurynome] |- Recived Debezium event message from [sys_employee], content is : [{}]", body);
+        log.info("[Herodotus] |- Recived Debezium event message from [sys_employee], content is : [{}]", body);
         this.execute(body);
     }
 

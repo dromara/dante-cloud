@@ -53,7 +53,7 @@ public class IdempotentStampManager extends AbstractStampManager<String, String>
     }
 
     @Override
-    public String generate() {
+    public String generate(String key) {
         return IdUtil.fastSimpleUUID();
     }
 

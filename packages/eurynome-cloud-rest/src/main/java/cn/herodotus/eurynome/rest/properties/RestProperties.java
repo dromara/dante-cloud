@@ -48,7 +48,7 @@ public class RestProperties {
     private RestTemplate restTemplate = new RestTemplate();
 
     public RestProperties() {
-        log.debug("[Eurynome] |- Properties [Rest] is Enabled.");
+        log.debug("[Herodotus] |- Properties [Rest] is Enabled.");
     }
 
     public RequestMapping getRequestMapping() {

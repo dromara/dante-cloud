@@ -73,12 +73,12 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
 
     public SysUser findByUserName(String userName) {
         SysUser sysUser = sysUserRepository.findByUserName(userName);
-        log.debug("[Eurynome] |- SysUser Service findByUserName.");
+        log.debug("[Herodotus] |- SysUser Service findByUserName.");
         return sysUser;
     }
 
     public SysUser assign(String userId, String[] roleIds) {
-        log.debug("[Eurynome] |- SysUser Service assign.");
+        log.debug("[Herodotus] |- SysUser Service assign.");
 
         SysUser sysUser = findById(userId);
         return this.register(sysUser, roleIds);
@@ -102,7 +102,7 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
                 return this.register(sysUser, sysRole);
             }
         }
-        log.error("[Eurynome] |- Default role for [{}] is not set correct, may case register error!", source);
+        log.error("[Herodotus] |- Default role for [{}] is not set correct, may case register error!", source);
         return null;
     }
 
@@ -115,7 +115,7 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
         if (CollectionUtils.isNotEmpty(sysRoles)) {
             sysUser.setRoles(sysRoles);
         }
-        log.debug("[Eurynome] |- SysUser Service register.");
+        log.debug("[Herodotus] |- SysUser Service register.");
         return saveOrUpdate(sysUser);
     }
 
@@ -161,7 +161,7 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
     public HerodotusUserDetails registerUserDetails(SocialUserDetails socialUserDetails) {
         SysUser newSysUser = register(socialUserDetails);
 
-        log.debug("[Eurynome] |- SysUser Service register UserDetails.");
+        log.debug("[Herodotus] |- SysUser Service register UserDetails.");
         return UpmsHelper.convertSysUserToHerodotusUserDetails(newSysUser);
     }
 }

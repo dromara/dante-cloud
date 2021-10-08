@@ -53,7 +53,7 @@ public abstract class BaseReadableService<E extends AbstractEntity, ID extends S
             writeToCache(domain);
         }
 
-        log.debug("[Eurynome] |- BaseReadableService findById.");
+        log.debug("[Herodotus] |- BaseReadableService findById.");
         return domain;
     }
 
@@ -65,7 +65,7 @@ public abstract class BaseReadableService<E extends AbstractEntity, ID extends S
             writeToCache(pages);
         }
 
-        log.debug("[Eurynome] |- BaseReadableService findByPage.");
+        log.debug("[Herodotus] |- BaseReadableService findByPage.");
         return pages;
     }
 
@@ -77,7 +77,7 @@ public abstract class BaseReadableService<E extends AbstractEntity, ID extends S
             writeToCache(pages);
         }
 
-        log.debug("[Eurynome] |- BaseReadableService findByPage.");
+        log.debug("[Herodotus] |- BaseReadableService findByPage.");
         return pages;
     }
 
@@ -88,7 +88,7 @@ public abstract class BaseReadableService<E extends AbstractEntity, ID extends S
             domains = ReadableService.super.findByPage();
             writeToCache(domains);
         }
-        log.debug("[Eurynome] |- BaseReadableService findAll.");
+        log.debug("[Herodotus] |- BaseReadableService findAll.");
         return domains;
     }
 }

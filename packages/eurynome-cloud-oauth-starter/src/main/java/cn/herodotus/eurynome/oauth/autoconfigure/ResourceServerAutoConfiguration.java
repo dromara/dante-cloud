@@ -54,7 +54,7 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Core [Herodotus Resource Server in component oauth] Auto Configure.");
+        log.debug("[Herodotus] |- Core [Herodotus Resource Server in component oauth] Auto Configure.");
     }
 
     @Override

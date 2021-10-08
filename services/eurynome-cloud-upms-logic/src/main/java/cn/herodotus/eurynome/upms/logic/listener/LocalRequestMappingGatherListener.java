@@ -57,7 +57,7 @@ public class LocalRequestMappingGatherListener implements ApplicationListener<Lo
     @Override
     public void onApplicationEvent(LocalRequestMappingGatherEvent event) {
 
-        log.info("[Eurynome] |- Request mapping gather LOCAL listener, response event!");
+        log.info("[Herodotus] |- Request mapping gather LOCAL listener, response event!");
 
         List<RequestMapping> requestMappings = event.getRequestMappings();
         if (CollectionUtils.isNotEmpty(requestMappings)) {

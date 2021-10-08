@@ -118,11 +118,11 @@ public class JacksonUtils {
         try {
             return getObjectMapper().readValue(json, clazz);
         } catch (JsonParseException e) {
-            logger.error("[Eurynome] |- JacksonUtils toObject parse json error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toObject parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("[Eurynome] |- JacksonUtils toObject mapping to object error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toObject mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("[Eurynome] |- JacksonUtils toObject read content error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toObject read content error! {}", e.getMessage());
         }
 
         return null;
@@ -132,11 +132,11 @@ public class JacksonUtils {
         try {
             return getObjectMapper().writeValueAsString(entity);
         } catch (JsonParseException e) {
-            logger.error("[Eurynome] |- JacksonUtils toCollection parse json error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toCollection parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("[Eurynome] |- JacksonUtils toCollection mapping to object error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toCollection mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("[Eurynome] |- JacksonUtils toCollection read content error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toCollection read content error! {}", e.getMessage());
         }
 
         return null;
@@ -147,11 +147,11 @@ public class JacksonUtils {
         try {
             return getObjectMapper().readValue(json, javaType);
         } catch (JsonParseException e) {
-            logger.error("[Eurynome] |- JacksonUtils toCollection parse json error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toCollection parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("[Eurynome] |- JacksonUtils toCollection mapping to object error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toCollection mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("[Eurynome] |- JacksonUtils toCollection read content error! {}", e.getMessage());
+            logger.error("[Herodotus] |- JacksonUtils toCollection read content error! {}", e.getMessage());
         }
 
         return null;
@@ -161,11 +161,11 @@ public class JacksonUtils {
         try {
             return getObjectMapper().readValue(json, typeReference);
         } catch (JsonParseException e) {
-            logger.error("-| [Eurynome]: JacksonUtils toCollection parse json error! {}", e.getMessage());
+            logger.error("-| [Herodotus]: JacksonUtils toCollection parse json error! {}", e.getMessage());
         } catch (JsonMappingException e) {
-            logger.error("-| [Eurynome]: JacksonUtils toCollection mapping to object error! {}", e.getMessage());
+            logger.error("-| [Herodotus]: JacksonUtils toCollection mapping to object error! {}", e.getMessage());
         } catch (IOException e) {
-            logger.error("-| [Eurynome]: JacksonUtils toCollection read content error! {}", e.getMessage());
+            logger.error("-| [Herodotus]: JacksonUtils toCollection read content error! {}", e.getMessage());
         }
 
         return null;

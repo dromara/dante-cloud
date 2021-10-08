@@ -47,7 +47,7 @@ public class JacksonConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Jackson] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Jackson] Auto Configure.");
     }
 
 
@@ -55,7 +55,7 @@ public class JacksonConfiguration {
     @ConditionalOnMissingBean(ObjectMapper.class)
     @Primary
     public ObjectMapper jacksonObjectMapper() {
-        log.trace("[Eurynome] |- Bean [Jackson Object Mapper] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Jackson Object Mapper] Auto Configure.");
         return JacksonUtils.getObjectMapper();
     }
 

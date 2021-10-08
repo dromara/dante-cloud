@@ -72,7 +72,7 @@ public class RedisConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Redis] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Redis] Auto Configure.");
     }
 
     /**
@@ -92,7 +92,7 @@ public class RedisConfiguration {
         redisTemplate.setDefaultSerializer(valueSerializer());
         redisTemplate.afterPropertiesSet();
 
-        log.trace("[Eurynome] |- Bean [Redis Template] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Redis Template] Auto Configure.");
 
         return redisTemplate;
     }
@@ -104,7 +104,7 @@ public class RedisConfiguration {
         stringRedisTemplate.setConnectionFactory(lettuceConnectionFactory);
         stringRedisTemplate.afterPropertiesSet();
 
-        log.trace("[Eurynome] |- Bean [String Redis Template] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [String Redis Template] Auto Configure.");
 
         return stringRedisTemplate;
     }
@@ -129,7 +129,7 @@ public class RedisConfiguration {
         redisCacheManager.setTransactionAware(false);
         redisCacheManager.afterPropertiesSet();
 
-        log.trace("[Eurynome] |- Bean [Redis Cache Manager] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Redis Cache Manager] Auto Configure.");
         return redisCacheManager;
     }
 }

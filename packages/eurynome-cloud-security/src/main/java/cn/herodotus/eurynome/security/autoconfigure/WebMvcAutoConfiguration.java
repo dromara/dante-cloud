@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
-import cn.herodotus.eurynome.data.stamp.AccessLimitedStampManager;
-import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
+import cn.herodotus.eurynome.rest.crypto.DecryptRequestParamStringResolver;
 import cn.herodotus.eurynome.rest.security.AccessLimitedInterceptor;
 import cn.herodotus.eurynome.rest.security.IdempotentInterceptor;
+import cn.herodotus.eurynome.rest.security.OauthTokenServletFilter;
 import cn.herodotus.eurynome.rest.security.XssHttpServletFilter;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import com.google.common.collect.Lists;
@@ -33,7 +33,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -59,35 +58,21 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
     private static final Logger log = LoggerFactory.getLogger(WebMvcAutoConfiguration.class);
 
     @Autowired
-    private IdempotentStampManager idempotentStampManager;
+    private IdempotentInterceptor idempotentInterceptor;
     @Autowired
-    private AccessLimitedStampManager accessLimitedStampManager;
+    private AccessLimitedInterceptor accessLimitedInterceptor;
+    @Autowired
+    private DecryptRequestParamStringResolver decryptRequestParamStringResolver;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Core [Herodotus Web Mvc in component security] Auto Configure.");
-    }
-
-    @Bean
-    public IdempotentInterceptor idempotentInterceptor() {
-        IdempotentInterceptor idempotentInterceptor = new IdempotentInterceptor();
-        idempotentInterceptor.setIdempotentStampManager(idempotentStampManager);
-        log.trace("[Eurynome] |- Bean [Idempotent Interceptor] Auto Configure.");
-        return idempotentInterceptor;
-    }
-
-    @Bean
-    public AccessLimitedInterceptor accessLimitedInterceptor() {
-        AccessLimitedInterceptor accessLimitedInterceptor = new AccessLimitedInterceptor();
-        accessLimitedInterceptor.setAccessLimitedStampManager(accessLimitedStampManager);
-        log.trace("[Eurynome] |- Bean [Access Limited Interceptor] Auto Configure.");
-        return accessLimitedInterceptor;
+        log.debug("[Herodotus] |- Core [Herodotus Web Mvc in component security] Auto Configure.");
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(accessLimitedInterceptor());
-        registry.addInterceptor(idempotentInterceptor());
+        registry.addInterceptor(accessLimitedInterceptor);
+        registry.addInterceptor(idempotentInterceptor);
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 
@@ -101,10 +86,15 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
 
         @Autowired
         private SecurityProperties securityProperties;
+        @Autowired
+        private XssHttpServletFilter xssHttpServletFilter;
+        @Autowired
+        private OauthTokenServletFilter oauthTokenServletFilter;
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.addFilterBefore(new XssHttpServletFilter(), FilterSecurityInterceptor.class);
+            http.addFilterBefore(xssHttpServletFilter, FilterSecurityInterceptor.class);
+            http.addFilterBefore(oauthTokenServletFilter, XssHttpServletFilter.class);
         }
 
         @Override

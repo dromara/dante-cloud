@@ -47,7 +47,7 @@ public class EnvUtils {
             address = InetAddress.getLocalHost();
             return address.getHostAddress();
         } catch (UnknownHostException e) {
-            log.error("[Eurynome] |- Get host address error: {}", e.getLocalizedMessage());
+            log.error("[Herodotus] |- Get host address error: {}", e.getLocalizedMessage());
             return null;
         }
     }

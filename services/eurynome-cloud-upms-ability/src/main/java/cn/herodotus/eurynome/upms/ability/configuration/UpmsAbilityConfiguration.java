@@ -42,6 +42,6 @@ public class UpmsAbilityConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Service [Upms Ability] Auto Configure.");
+        log.info("[Herodotus] |- Service [Upms Ability] Auto Configure.");
     }
 }

@@ -63,6 +63,6 @@ public class ServiceConfiguration {
         serviceProperties.setPort(serverPort);
         serviceProperties.setIp(EnvUtils.getHostAddress());
         serviceProperties.setApplicationName(applicationName);
-        log.debug("[Eurynome] |- Plugin [Herodotus Service] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Service] Auto Configure.");
     }
 }

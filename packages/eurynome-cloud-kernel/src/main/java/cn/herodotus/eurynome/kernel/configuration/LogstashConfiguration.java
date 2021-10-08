@@ -111,7 +111,7 @@ public class LogstashConfiguration {
             logger.setLevel(Level.toLevel(value.name()));
         });
 
-        log.debug("[Eurynome] |- Plugin [Herodotus Logstash] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Logstash] Auto Configure.");
     }
 
     private String getJsonPattern() {

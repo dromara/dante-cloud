@@ -60,7 +60,7 @@ public class SysRoleService extends BaseLayeredService<SysRole, String> {
 
     public SysRole authorize(String roleId, String[] authorities) {
 
-        log.debug("[Eurynome] |- SysRole Service authorize.");
+        log.debug("[Herodotus] |- SysRole Service authorize.");
 
         Set<SysAuthority> sysAuthorities = new HashSet<>();
         for (String authority : authorities) {

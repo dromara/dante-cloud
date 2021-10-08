@@ -20,7 +20,7 @@
  * Date: 2021/05/07 11:28:07
  */
 
-package cn.herodotus.eurynome.security.response.exception;
+package cn.herodotus.eurynome.security.exception;
 
 import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
 import cn.herodotus.eurynome.assistant.exception.platform.PlatformException;
@@ -41,7 +41,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -82,12 +81,12 @@ public class SecurityGlobalExceptionHandler {
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    public static Result<String> validationException(MethodArgumentNotValidException ex, HttpServletRequest request, HttpServletResponse response) {
-        return validationException(ex, request, response);
+    public static Result<String> validationMethodArgumentException(MethodArgumentNotValidException ex, HttpServletRequest request, HttpServletResponse response) {
+        return validationBindException(ex, request, response);
     }
 
     @ExceptionHandler({BindException.class})
-    public static Result<String> validationException(BindException ex, HttpServletRequest request, HttpServletResponse response) {
+    public static Result<String> validationBindException(BindException ex, HttpServletRequest request, HttpServletResponse response) {
         Result<String> result = resolveException(ex, request.getRequestURI());
 
         BindingResult bindingResult = ex.getBindingResult();

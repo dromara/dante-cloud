@@ -54,7 +54,7 @@ public class KafkaConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Kafka] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Kafka] Auto Configure.");
     }
 
     @Bean
@@ -63,7 +63,7 @@ public class KafkaConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, String> concurrentKafkaListenerContainerFactory = new ConcurrentKafkaListenerContainerFactory<>();
         concurrentKafkaListenerContainerFactory.setConsumerFactory(consumerFactory);
         concurrentKafkaListenerContainerFactory.setAutoStartup(queueProperties.getKafka().getEnabled());
-        log.trace("[Eurynome] |- Bean [Concurrent Kafka Listener ContainerFactory] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Concurrent Kafka Listener ContainerFactory] Auto Configure.");
         return concurrentKafkaListenerContainerFactory;
     }
 }

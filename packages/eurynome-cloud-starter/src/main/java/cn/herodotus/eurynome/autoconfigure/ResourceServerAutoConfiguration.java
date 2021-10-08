@@ -61,7 +61,7 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Core [Herodotus Resource Server in starter] Auto Configure.");
+        log.info("[Herodotus] |- Core [Herodotus Resource Server in starter] Auto Configure.");
     }
 
     @Bean
@@ -77,7 +77,7 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        log.trace("[Eurynome] |- Bean [Core Resource Server] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Core Resource Server] Auto Configure.");
 
         // 如果不设置，那么在通过浏览器访问被保护的任何资源时，每次是不同的SessionID，并且将每次请求的历史都记录在OAuth2Authentication的details的中
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);

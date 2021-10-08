@@ -42,11 +42,11 @@ public class SymmetricUtils {
 
     private static String encryptedRealSecretKey(String symmetricKey) {
         String realSecretKey = RandomUtil.randomString(16);
-        log.trace("[Eurynome] |- Generate Random Secret Key is : [{}]", realSecretKey);
+        log.trace("[Herodotus] |- Generate Random Secret Key is : [{}]", realSecretKey);
 
         AES ase = SecureUtil.aes(symmetricKey.getBytes());
         String encryptedRealSecretKey = ase.encryptHex(realSecretKey);
-        log.trace("[Eurynome] |- Generate Encrypt Hex Secret Key is : [{}]", encryptedRealSecretKey);
+        log.trace("[Herodotus] |- Generate Encrypt Hex Secret Key is : [{}]", encryptedRealSecretKey);
 
         return encryptedRealSecretKey;
     }
@@ -54,7 +54,7 @@ public class SymmetricUtils {
     public static String getEncryptedSymmetricKey() {
         String symmetricKey = RandomUtil.randomString(16);
         String realSecretKey = encryptedRealSecretKey(symmetricKey);
-        log.trace("[Eurynome] |- Generate Symmetric Key is : [{}]", realSecretKey);
+        log.trace("[Herodotus] |- Generate Symmetric Key is : [{}]", realSecretKey);
 
         StringBuilder builder = new StringBuilder();
         builder.append(symmetricKey);

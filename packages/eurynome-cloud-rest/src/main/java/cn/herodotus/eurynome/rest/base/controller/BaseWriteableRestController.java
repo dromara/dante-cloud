@@ -29,9 +29,11 @@ import cn.herodotus.eurynome.rest.base.service.ReadableService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -68,11 +70,11 @@ public abstract class BaseWriteableRestController<E extends AbstractEntity, ID e
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/json")),
             responses = {@ApiResponse(description = "操作消息", content = @Content(mediaType = "application/json"))})
     @Parameters({
-            @Parameter(name = "id", required = true, description = "实体ID，@Id注解对应的实体属性")
+            @Parameter(name = "id", required = true, in = ParameterIn.PATH, description = "实体ID，@Id注解对应的实体属性")
     })
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @Override
-    public Result<String> delete(@RequestBody ID id) {
+    public Result<String> delete(@PathVariable ID id) {
         return WriteableController.super.delete(id);
     }
 }

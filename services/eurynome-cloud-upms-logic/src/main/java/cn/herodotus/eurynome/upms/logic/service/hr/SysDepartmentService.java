@@ -81,7 +81,7 @@ public class SysDepartmentService extends BaseLayeredService<SysDepartment, Stri
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Eurynome] |- SysDepartment Service findByCondition.");
+        log.debug("[Herodotus] |- SysDepartment Service findByCondition.");
         return this.findByPage(specification, pageable);
     }
 
@@ -97,6 +97,6 @@ public class SysDepartmentService extends BaseLayeredService<SysDepartment, Stri
     public void deleteById(String departmentId) {
         sysOwnershipService.deleteByDepartmentId(departmentId);
         super.deleteById(departmentId);
-        log.debug("[Eurynome] |- SysDepartment Service deleteById.");
+        log.debug("[Herodotus] |- SysDepartment Service deleteById.");
     }
 }

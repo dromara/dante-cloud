@@ -110,7 +110,7 @@ public class HerodotusCacheManager implements CacheManager {
     protected Cache createHerodotusCache(String name) {
         CaffeineCache caffeineCache = (CaffeineCache) this.caffeineCacheManager.getCache(name);
         RedisCache redisCache = (RedisCache) this.redisCacheManager.getCache(name);
-        log.debug("[Eurynome] |- CACHE - Herodotus cache [{}] is CREATED.", name);
+        log.debug("[Herodotus] |- CACHE - Herodotus cache [{}] is CREATED.", name);
         return new HerodotusCache(name, caffeineCache, redisCache, desensitization, clearRemoteOnExit, isAllowNullValues());
     }
 

@@ -27,6 +27,9 @@ import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 
 import java.io.Serializable;
@@ -97,6 +100,7 @@ public class Result<T> implements Serializable {
         return error;
     }
 
+    @Deprecated
     public Result<T> ok() {
         this.code = ResultStatus.OK.getCode();
         this.message = ResultStatus.OK.getMessage();
@@ -104,6 +108,7 @@ public class Result<T> implements Serializable {
         return this;
     }
 
+    @Deprecated
     public Result<T> failed() {
         this.code = ResultStatus.FAIL.getCode();
         this.message = ResultStatus.FAIL.getMessage();
@@ -157,6 +162,94 @@ public class Result<T> implements Serializable {
         this.error.setCode(code);
         this.error.setField(field);
         return this;
+    }
+
+    private static <T> Result<T> create(String message, String detail, int code, int status, T data, StackTraceElement[] stackTrace) {
+        Result<T> result = new Result<>();
+        if (StringUtils.isNotBlank(message)) {
+            result.message(message);
+        }
+
+        if (StringUtils.isNotBlank(detail)) {
+            result.detail(detail);
+        }
+
+        result.code(code);
+        result.status(status);
+
+        if (ObjectUtils.isNotEmpty(data)) {
+            result.data(data);
+        }
+
+        if (ArrayUtils.isNotEmpty(stackTrace)) {
+            result.stackTrace(stackTrace);
+        }
+
+        return result;
+    }
+
+    public static <T> Result<T> success(String message, int code, int status, T data) {
+        return create(message, null, code, status, data, null);
+    }
+
+    public static <T> Result<T> success(String message, int code, T data) {
+        return success(message, code, HttpStatus.SC_OK, data);
+    }
+
+    public static <T> Result<T> success(ResultStatus resultStatus, T data) {
+        return success(resultStatus.getMessage(), resultStatus.getCode(), data);
+    }
+
+    public static <T> Result<T> success(String message, T data) {
+        return success(message, ResultStatus.OK.getCode(), data);
+    }
+
+    public static <T> Result<T> success(String message) {
+        return success(message, null);
+    }
+
+    public static <T> Result<T> success() {
+        return success("操作成功！");
+    }
+
+    public static <T> Result<T> content(T data) {
+        return success("操作成功！", data);
+    }
+
+    public static <T> Result<T> failure(String message, String detail, int code, int status, T data, StackTraceElement[] stackTrace) {
+        return create(message, detail, code, status, data, stackTrace);
+    }
+
+    public static <T> Result<T> failure(String message, String detail, int code, int status, T data) {
+        return failure(message, detail, code, status, data, null);
+    }
+
+    public static <T> Result<T> failure(String message, int code, int status, T data) {
+        return failure(message, message, code, status, data);
+    }
+
+    public static <T> Result<T> failure(String message, String detail, int code, T data) {
+        return failure(message, detail, code, HttpStatus.SC_INTERNAL_SERVER_ERROR, data);
+    }
+
+    public static <T> Result<T> failure(String message, int code, T data) {
+        return failure(message, message, code, data);
+    }
+
+    public static <T> Result<T> failure(ResultStatus resultStatus, T data) {
+        return failure(resultStatus.getMessage(), resultStatus.getCode(), data);
+    }
+
+    public static <T> Result<T> failure(String message, T data) {
+        return failure(message, ResultStatus.FAIL.getCode(), data);
+    }
+
+    public static <T> Result<T> failure(String message) {
+        return failure(message, null);
+    }
+
+    public static <T> Result<T> failure() {
+        return failure("操作失败！");
     }
 
     @Override
