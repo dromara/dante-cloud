@@ -96,7 +96,7 @@ public class SysOrganizationService extends BaseLayeredService<SysOrganization, 
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Eurynome] |- SysOrganization Service findByCondition.");
+        log.debug("[Herodotus] |- SysOrganization Service findByCondition.");
         return this.findByPage(specification, pageable);
     }
 
@@ -117,7 +117,7 @@ public class SysOrganizationService extends BaseLayeredService<SysOrganization, 
     public void deleteById(String organizationId) {
         sysOwnershipService.deleteByOrganizationId(organizationId);
         super.deleteById(organizationId);
-        log.debug("[Eurynome] |- SysOrganization Service deleteById.");
+        log.debug("[Herodotus] |- SysOrganization Service deleteById.");
     }
 
     /**

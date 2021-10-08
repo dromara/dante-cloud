@@ -79,7 +79,7 @@ public abstract class AbstractCache<E extends AbstractEntity> extends CacheConst
         if (ObjectUtils.isNotEmpty(getCache())) {
             return true;
         } else {
-            log.error("[Eurynome] |- Data Cache must be configured in the Service class or the cache will not take effect！");
+            log.error("[Herodotus] |- Data Cache must be configured in the Service class or the cache will not take effect！");
             return false;
         }
     }
@@ -93,7 +93,7 @@ public abstract class AbstractCache<E extends AbstractEntity> extends CacheConst
         if (ObjectUtils.isNotEmpty(getIndexCache())) {
             return true;
         } else {
-            log.error("[Eurynome] |- Index Cache must be configured in the Service class or the cache will not take effect！");
+            log.error("[Herodotus] |- Index Cache must be configured in the Service class or the cache will not take effect！");
             return false;
         }
     }
@@ -126,17 +126,17 @@ public abstract class AbstractCache<E extends AbstractEntity> extends CacheConst
                 } else if (ClassUtils.isPrimitiveOrWrapper(param.getClass()) || param instanceof String) {
                     key.append(param);
                 } else {
-                    log.warn("[Eurynome] |- Using an object as a cache name may lead to unexpected results. ");
+                    log.warn("[Herodotus] |- Using an object as a cache name may lead to unexpected results. ");
                     key.append(param.hashCode());
                 }
                 key.append(SymbolConstants.DASH);
             }
 
             String dynamicKey = key.toString();
-            log.debug("[Eurynome] |- Generate dynamic cache name={}", dynamicKey);
+            log.debug("[Herodotus] |- Generate dynamic cache name={}", dynamicKey);
             return dynamicKey;
         } else {
-            log.debug("[Eurynome] |- Using default cache name={}", CACHE_NAME_ENTIRE);
+            log.debug("[Herodotus] |- Using default cache name={}", CACHE_NAME_ENTIRE);
             return CACHE_NAME_ENTIRE;
         }
     }

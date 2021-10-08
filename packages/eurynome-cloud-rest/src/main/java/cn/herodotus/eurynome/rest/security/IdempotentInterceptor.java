@@ -24,6 +24,7 @@ package cn.herodotus.eurynome.rest.security;
 
 import cn.herodotus.eurynome.assistant.annotation.rest.Idempotent;
 import cn.herodotus.eurynome.assistant.exception.operation.RepeatSubmissionException;
+import cn.herodotus.eurynome.common.constant.magic.HttpHeaders;
 import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
 import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
 import cn.hutool.crypto.SecureUtil;
@@ -59,31 +60,22 @@ public class IdempotentInterceptor implements HandlerInterceptor {
         this.idempotentStampManager = idempotentStampManager;
     }
 
-    private String generateKey(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String url = request.getRequestURI();
-        String method = request.getMethod();
+    private String generateKey(String sessionId, String url, String method) {
 
-        if (ObjectUtils.isNotEmpty(session)) {
-            String sessionId = session.getId();
-            if (StringUtils.isNotBlank(sessionId)) {
-                String key = SecureUtil.md5(sessionId + SymbolConstants.COLON + url + SymbolConstants.COLON + method);
-                log.debug("[Eurynome] |- IdempotentInterceptor key is [{}].", key);
-                return key;
-            } else {
-                log.warn("[Eurynome] |- IdempotentInterceptor cannot create key, because sessionId is null.");
-                return null;
-            }
+        if (StringUtils.isNotBlank(sessionId)) {
+            String key = SecureUtil.md5(sessionId + SymbolConstants.COLON + url + SymbolConstants.COLON + method);
+            log.debug("[Herodotus] |- IdempotentInterceptor key is [{}].", key);
+            return key;
+        } else {
+            log.warn("[Herodotus] |- IdempotentInterceptor cannot create key, because sessionId is null.");
+            return null;
         }
-
-        log.warn("[Eurynome] |- IdempotentInterceptor cannot get session from request.");
-        return null;
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        log.trace("[Eurynome] |- IdempotentInterceptor preHandle postProcess.");
+        log.trace("[Herodotus] |- IdempotentInterceptor preHandle postProcess.");
 
         if (!(handler instanceof HandlerMethod)) {
             return true;
@@ -97,7 +89,13 @@ public class IdempotentInterceptor implements HandlerInterceptor {
             // 幂等性校验, 根据缓存中是否存在Token进行校验。
             // 如果缓存中没有Token，通过放行, 同时在缓存中存入Token。
             // 如果缓存中有Token，意味着同一个操作反复操作，认为失败则抛出异常, 并通过统一异常处理返回友好提示
-            String key = generateKey(request);
+            String sessionId = request.getHeader(HttpHeaders.X_HERODOTUS_SESSION);
+            if (StringUtils.isBlank(sessionId)) {
+                HttpSession session = request.getSession();
+                sessionId = session.getId();
+            }
+
+            String key = generateKey(sessionId, request.getRequestURI(), request.getMethod());
             if (StringUtils.isNotBlank(key)) {
                 String token = idempotentStampManager.get(key);
                 if (StringUtils.isBlank(token)) {
@@ -107,7 +105,7 @@ public class IdempotentInterceptor implements HandlerInterceptor {
                         try {
                             configuredDuration = Duration.parse(annotationExpire);
                         } catch (DateTimeParseException e) {
-                            log.warn("[Eurynome] |- AccessLimited duration value is incorrect, on api [{}].", request.getRequestURI());
+                            log.warn("[Herodotus] |- AccessLimited duration value is incorrect, on api [{}].", request.getRequestURI());
                         }
                     }
 

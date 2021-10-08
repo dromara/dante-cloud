@@ -166,7 +166,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
             response.getWriter().flush();
             response.getWriter().close();
         } catch (IOException e) {
-            log.error("[Eurynome] |- Render response to Json error!");
+            log.error("[Herodotus] |- Render response to Json error!");
         }
     }
 
@@ -247,11 +247,11 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 
         //使用HttpServletRequest中的header检测请求是否为ajax, 如果是ajax则返回json, 如果为非ajax则返回view(即ModelAndView)
         if (isContentTypeHeaderContainJson(request) || isAcceptHeaderContainJson(request) || isContainAjaxFlag(request)) {
-            log.trace("[Eurynome] |- Is Ajax Request!!!!!");
+            log.trace("[Herodotus] |- Is Ajax Request!!!!!");
             return true;
         }
 
-        log.trace("[Eurynome] |- Not a Ajax Request!!!!!");
+        log.trace("[Herodotus] |- Not a Ajax Request!!!!!");
         return false;
     }
 
@@ -333,7 +333,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
                 stringBuilder.append(buffer, 0, length);
             }
         } catch (IOException e) {
-            log.error("[Eurynome] |- Get Request Payload Error!");
+            log.error("[Herodotus] |- Get Request Payload Error!");
         }
 
         return stringBuilder.toString();

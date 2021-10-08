@@ -57,32 +57,32 @@ public class HerodotusDomainDataStorageAccess implements DomainDataStorageAccess
     @Override
     public boolean contains(Object key) {
         Object value = this.get(key);
-        log.debug("[Eurynome] |- CACHE - SPI check is key : [{}] exist.", key);
+        log.trace("[Herodotus] |- CACHE - SPI check is key : [{}] exist.", key);
         return ObjectUtils.isNotEmpty(value);
     }
 
     @Override
     public Object getFromCache(Object key, SharedSessionContractImplementor session) {
         Object value = this.get(key);
-        log.debug("[Eurynome] |- CACHE - SPI get from cache key is : [{}], value is : [{}]", key, value);
+        log.trace("[Herodotus] |- CACHE - SPI get from cache key is : [{}], value is : [{}]", key, value);
         return value;
     }
 
     @Override
     public void putIntoCache(Object key, Object value, SharedSessionContractImplementor session) {
-        log.debug("[Eurynome] |- CACHE - SPI put into cache key is : [{}], value is : [{}]", key, value);
+        log.trace("[Herodotus] |- CACHE - SPI put into cache key is : [{}], value is : [{}]", key, value);
         cache.put(key, value);
     }
 
     @Override
     public void removeFromCache(Object key, SharedSessionContractImplementor session) {
-        log.debug("[Eurynome] |- CACHE - SPI remove from cache key is : [{}]", key);
+        log.trace("[Herodotus] |- CACHE - SPI remove from cache key is : [{}]", key);
         cache.evict(key);
     }
 
     @Override
     public void evictData(Object key) {
-        log.debug("[Eurynome] |- CACHE - SPI evict key : [{}] from cache.", key);
+        log.trace("[Herodotus] |- CACHE - SPI evict key : [{}] from cache.", key);
         cache.evict(key);
     }
 
@@ -93,13 +93,13 @@ public class HerodotusDomainDataStorageAccess implements DomainDataStorageAccess
 
     @Override
     public void evictData() {
-        log.trace("[Eurynome] |- CACHE - SPI clear all cache data.");
+        log.trace("[Herodotus] |- CACHE - SPI clear all cache data.");
         cache.clear();
     }
 
     @Override
     public void release() {
-        log.trace("[Eurynome] |- CACHE - SPI cache release.");
+        log.trace("[Herodotus] |- CACHE - SPI cache release.");
         cache.invalidate();
     }
 }

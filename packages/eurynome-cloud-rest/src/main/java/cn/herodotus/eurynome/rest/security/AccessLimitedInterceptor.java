@@ -58,7 +58,7 @@ public class AccessLimitedInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        log.trace("[Eurynome] |- AccessLimitedInterceptor preHandle postProcess.");
+        log.trace("[Herodotus] |- AccessLimitedInterceptor preHandle postProcess.");
 
         if (!(handler instanceof HandlerMethod)) {
             return true;
@@ -77,7 +77,7 @@ public class AccessLimitedInterceptor implements HandlerInterceptor {
                 try {
                     configuredDuration = Duration.parse(annotationDuration);
                 } catch (DateTimeParseException e) {
-                    log.warn("[Eurynome] |- AccessLimited duration value is incorrect, on api [{}].", request.getRequestURI());
+                    log.warn("[Herodotus] |- AccessLimited duration value is incorrect, on api [{}].", request.getRequestURI());
                 }
             }
 
@@ -97,7 +97,7 @@ public class AccessLimitedInterceptor implements HandlerInterceptor {
                 }
                 return true;
             } else {
-                log.debug("[Eurynome] |- AccessLimitedInterceptor request [{}] times.", times);
+                log.debug("[Herodotus] |- AccessLimitedInterceptor request [{}] times.", times);
 
                 if (times <= maxTimes) {
                     Duration newDuration = calculateRemainingTime(configuredDuration, expireKey);
@@ -130,7 +130,7 @@ public class AccessLimitedInterceptor implements HandlerInterceptor {
         Long current = System.currentTimeMillis();
         long interval = current - begin;
 
-        log.debug("[Eurynome] |- AccessLimitedInterceptor operation interval [{}] millis.", interval);
+        log.debug("[Herodotus] |- AccessLimitedInterceptor operation interval [{}] millis.", interval);
 
         Duration duration;
         if (!configuredDuration.isZero()) {

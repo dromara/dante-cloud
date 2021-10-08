@@ -61,13 +61,14 @@ import javax.annotation.PostConstruct;
         JacksonConfiguration.class,
         RestTemplateConfiguration.class,
         ServiceConfiguration.class,
-        OpenAPIConfiguration.class,
-        UndertowWebServerFactoryCustomizer.class
+        OpenApiConfiguration.class,
+        UndertowWebServerFactoryCustomizer.class,
+        InterfaceSecurityConfiguration.class
 })
 public class RestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Components [Herodotus Rest] Auto Configure.");
+        log.info("[Herodotus] |- Components [Herodotus Rest] Auto Configure.");
     }
 }

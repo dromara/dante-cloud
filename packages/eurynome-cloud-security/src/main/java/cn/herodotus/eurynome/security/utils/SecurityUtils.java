@@ -169,14 +169,19 @@ public class SecurityUtils {
         return encoder.encode(password);
     }
 
+    public static boolean matches(String rawPassowrd, String encodedPassword) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.matches(rawPassowrd, encodedPassword);
+    }
+
     public static String[] whitelistToAntMatchers(List<String> list) {
         if (CollectionUtils.isNotEmpty(list)) {
             String[] array = new String[list.size()];
-            log.debug("[Eurynome] |- Fetch The REST White List.");
+            log.debug("[Herodotus] |- Fetch The REST White List.");
             return list.toArray(array);
         }
 
-        log.warn("[Eurynome] |- Can not Fetch The REST White List Configurations.");
+        log.warn("[Herodotus] |- Can not Fetch The REST White List Configurations.");
         return new String[]{};
     }
 

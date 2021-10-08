@@ -49,6 +49,6 @@ public class UpmsRestConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Componnent [Upms Rest] Auto Configure.");
+        log.info("[Herodotus] |- Componnent [Upms Rest] Auto Configure.");
     }
 }

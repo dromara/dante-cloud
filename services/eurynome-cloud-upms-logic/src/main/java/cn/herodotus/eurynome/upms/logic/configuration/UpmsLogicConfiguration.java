@@ -74,6 +74,6 @@ public class UpmsLogicConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Components [Upms Logic] Auto Configure.");
+        log.info("[Herodotus] |- Components [Upms Logic] Auto Configure.");
     }
 }

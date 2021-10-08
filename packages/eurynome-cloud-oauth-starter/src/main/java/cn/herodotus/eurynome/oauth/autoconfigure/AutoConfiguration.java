@@ -98,14 +98,14 @@ public class AutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Starter [Herodotus OAuth Starter] Auto Configure.");
+        log.info("[Herodotus] |- Starter [Herodotus OAuth Starter] Auto Configure.");
     }
 
     @Bean
     @ConditionalOnMissingBean(HerodotusUserDetailsService.class)
     public HerodotusUserDetailsService herodotusUserDetailsService() {
         HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService();
-        log.trace("[Eurynome] |- Bean [Herodotus User Details Service] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
         return herodotusOauthUserDetailsService;
     }
 
@@ -113,7 +113,7 @@ public class AutoConfiguration {
     @ConditionalOnMissingBean(HerodotusClientDetailsService.class)
     public HerodotusClientDetailsService herodotusClientDetailsService() {
         HerodotusOauthClientDetailsService herodotusOauthClientDetailsService = new HerodotusOauthClientDetailsService();
-        log.trace("[Eurynome] |- Bean [Herodotus Client Details Service] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
         return herodotusOauthClientDetailsService;
     }
 }

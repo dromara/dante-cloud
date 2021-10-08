@@ -41,6 +41,11 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class AbstractStampManager<K, V> implements StampManager<K, V> {
 
+    /**
+     * 指定数据存储缓存
+     *
+     * @return {@link Cache}
+     */
     protected abstract Cache<K, V> getCache();
 
     private static final Duration DEFAULT_EXPIRE = Duration.ofMinutes(1);

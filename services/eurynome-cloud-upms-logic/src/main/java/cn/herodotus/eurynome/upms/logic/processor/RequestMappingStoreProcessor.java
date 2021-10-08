@@ -55,17 +55,17 @@ public class RequestMappingStoreProcessor {
 
     @Async
     public void postProcess(List<RequestMapping> requestMappings) {
-        log.debug("[Eurynome] |- [Async] - Request Mapping Async Process Begin!");
+        log.debug("[Herodotus] |- [Async] - Request Mapping Async Process Begin!");
 
         List<SysAuthority> sysAuthorities = UpmsHelper.convertRequestMappingsToSysAuthorities(requestMappings);
 
         List<SysAuthority> result = sysAuthorityService.batchSaveOrUpdate(sysAuthorities);
         if (CollectionUtils.isNotEmpty(result)) {
-            log.info("[Eurynome] |- Store Service Resources Success!");
+            log.info("[Herodotus] |- Store Service Resources Success!");
         } else {
-            log.error("[Eurynome] |- Store Service Resources May Be Error, Please Check!");
+            log.error("[Herodotus] |- Store Service Resources May Be Error, Please Check!");
         }
 
-        log.debug("[Eurynome] |- [Async] - Request Mapping Async Process End!");
+        log.debug("[Herodotus] |- [Async] - Request Mapping Async Process End!");
     }
 }

@@ -40,6 +40,6 @@ public class AutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Starter [Herodotus Starter] Auto Configure.");
+        log.info("[Herodotus] |- Starter [Herodotus Starter] Auto Configure.");
     }
 }

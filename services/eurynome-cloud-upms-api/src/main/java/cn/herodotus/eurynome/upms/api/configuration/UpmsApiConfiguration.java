@@ -65,6 +65,6 @@ public class UpmsApiConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Components [Upms Api] Auto Configure.");
+        log.info("[Herodotus] |- Components [Upms Api] Auto Configure.");
     }
 }

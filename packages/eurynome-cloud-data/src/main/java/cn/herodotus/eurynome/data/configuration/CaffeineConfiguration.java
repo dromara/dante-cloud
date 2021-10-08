@@ -50,7 +50,7 @@ public class CaffeineConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Caffeine] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Caffeine] Auto Configure.");
     }
 
     @Bean
@@ -58,7 +58,7 @@ public class CaffeineConfiguration {
         Caffeine<Object, Object> caffeine = Caffeine.newBuilder()
                 .expireAfterWrite(cacheProperties.getDuration(), cacheProperties.getUnit());
 
-        log.trace("[Eurynome] |- Bean [Caffeine] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Caffeine] Auto Configure.");
 
         return caffeine;
     }
@@ -70,7 +70,7 @@ public class CaffeineConfiguration {
         caffeineCacheManager.setCaffeine(caffeine());
         caffeineCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
 
-        log.trace("[Eurynome] |- Bean [Caffeine Cache Manager] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Caffeine Cache Manager] Auto Configure.");
 
         return caffeineCacheManager;
     }

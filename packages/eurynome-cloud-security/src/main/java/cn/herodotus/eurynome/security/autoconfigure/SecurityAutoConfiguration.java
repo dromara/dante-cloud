@@ -28,8 +28,8 @@ import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalC
 import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
+import cn.herodotus.eurynome.security.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.security.response.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,7 +88,7 @@ public class SecurityAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Components [Herodotus Security] Auto Configure.");
+        log.info("[Herodotus] |- Components [Herodotus Security] Auto Configure.");
     }
 
     /**
@@ -101,7 +101,7 @@ public class SecurityAutoConfiguration {
         HerodotusUserAuthenticationConverter herodotusUserAuthenticationConverter = new HerodotusUserAuthenticationConverter();
         DefaultAccessTokenConverter defaultAccessTokenConverter = new DefaultAccessTokenConverter();
         defaultAccessTokenConverter.setUserTokenConverter(herodotusUserAuthenticationConverter);
-        log.trace("[Eurynome] |- Bean [Default Access Token Converter] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Default Access Token Converter] Auto Configure.");
         return defaultAccessTokenConverter;
     }
 
@@ -109,7 +109,7 @@ public class SecurityAutoConfiguration {
     @ConditionalOnMissingBean(RequestMappingLocalCache.class)
     public RequestMappingLocalCache requestMappingLocalCache() {
         RequestMappingLocalCache requestMappingLocalCache = new RequestMappingLocalCache();
-        log.trace("[Eurynome] |- Bean [Request Mapping Local Cache] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Request Mapping Local Cache] Auto Configure.");
         return requestMappingLocalCache;
     }
 
@@ -118,7 +118,7 @@ public class SecurityAutoConfiguration {
     public RequestMappingGatherService requestMappingGatherService(RequestMappingLocalCache requestMappingLocalCache) {
         RequestMappingGatherService requestMappingGatherService = new RequestMappingGatherService();
         requestMappingGatherService.setRequestMappingLocalCache(requestMappingLocalCache);
-        log.trace("[Eurynome] |- Bean [Request Mapping Gather Service] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Request Mapping Gather Service] Auto Configure.");
         return requestMappingGatherService;
     }
 
@@ -132,7 +132,7 @@ public class SecurityAutoConfiguration {
     @ConditionalOnMissingBean(RequestMappingScanner.class)
     public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, RequestMappingGatherService requestMappingGatherService) {
         RequestMappingScanner requestMappingScanner = new RequestMappingScanner(restProperties, platformProperties, requestMappingGatherService);
-        log.trace("[Eurynome] |- Bean [Request Mapping Scanner] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Request Mapping Scanner] Auto Configure.");
         return requestMappingScanner;
     }
 }

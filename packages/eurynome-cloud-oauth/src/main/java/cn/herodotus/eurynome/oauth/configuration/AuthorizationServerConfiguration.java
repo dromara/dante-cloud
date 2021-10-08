@@ -117,7 +117,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Core [Herodotus Authorization Server in component oauth] Auto Configure.");
+        log.debug("[Herodotus] |- Core [Herodotus Authorization Server in component oauth] Auto Configure.");
     }
 
     /**

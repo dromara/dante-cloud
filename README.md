@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.0.3-brightgreen" alt="Nacos 2.0.3"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-2.5.5.10-red" alt="Version 2.5.5.10"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-2.5.5.20-red" alt="Version 2.5.5.20"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -62,7 +62,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 Spring Boot | 2.5.5
 Spring Cloud | 2020.0.4 
 Spring Cloud Alibaba | 2021.1
-Spring Boot Admin | 2.5.1
+Spring Boot Admin | 2.5.2
 Nacos | 2.0.3 |
 Sentinel | 1.8.0 |
 Seata | 1.3.0 |

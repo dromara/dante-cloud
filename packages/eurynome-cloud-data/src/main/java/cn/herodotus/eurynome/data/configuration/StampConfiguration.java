@@ -25,6 +25,7 @@ package cn.herodotus.eurynome.data.configuration;
 import cn.herodotus.eurynome.data.properties.StampProperties;
 import cn.herodotus.eurynome.data.stamp.AccessLimitedStampManager;
 import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
+import cn.herodotus.eurynome.data.stamp.SecretKeyStampManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -48,7 +49,7 @@ public class StampConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Stamp] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Stamp] Auto Configure.");
     }
 
     @Bean
@@ -56,7 +57,7 @@ public class StampConfiguration {
     public IdempotentStampManager idempotentStampManager(StampProperties stampProperties) {
         IdempotentStampManager idempotentStampManager = new IdempotentStampManager();
         idempotentStampManager.setStampProperties(stampProperties);
-        log.trace("[Eurynome] |- Bean [Idempotent Stamp Manager] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Idempotent Stamp Manager] Auto Configure.");
         return idempotentStampManager;
     }
 
@@ -65,7 +66,15 @@ public class StampConfiguration {
     public AccessLimitedStampManager accessLimitedStampManager(StampProperties stampProperties) {
         AccessLimitedStampManager accessLimitedStampManager = new AccessLimitedStampManager();
         accessLimitedStampManager.setStampProperties(stampProperties);
-        log.trace("[Eurynome] |- Bean [Access Limited Stamp Manager] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Access Limited Stamp Manager] Auto Configure.");
         return accessLimitedStampManager;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SecretKeyStampManager secretKeyStampManager() {
+        SecretKeyStampManager secretKeyStampManager = new SecretKeyStampManager();
+        log.trace("[Herodotus] |- Bean [Interface Security Stamp Manager] Auto Configure.");
+        return secretKeyStampManager;
     }
 }

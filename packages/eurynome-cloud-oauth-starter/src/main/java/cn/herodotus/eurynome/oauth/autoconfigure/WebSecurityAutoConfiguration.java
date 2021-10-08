@@ -96,7 +96,7 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Core [Herodotus Web Security  in component oauth] Auto Configure.");
+        log.debug("[Herodotus] |- Core [Herodotus Web Security  in component oauth] Auto Configure.");
     }
 
     @Override
@@ -177,10 +177,11 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors();
 
         // @formatter:off
-        http.requestMatchers().antMatchers("/oauth/**", "/login**")
+        http.requestMatchers().antMatchers("/oauth/**", "/login**", "/open/**")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/oauth/**").authenticated()
+                .antMatchers("/open/**").permitAll()
                 .antMatchers(SecurityUtils.whitelistToAntMatchers(securityProperties.getInterceptor().getWhitelist())).permitAll()
                 .anyRequest().authenticated()
                 .and()

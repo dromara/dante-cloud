@@ -61,7 +61,7 @@ public class RequestMappingLocalCache {
             cacheTemplate.append(requestMappings);
             dataCache.putAll(cacheTemplate.getDomains());
             indexCache.put(ALL, cacheTemplate.getQueryIndexes());
-            log.debug("[Eurynome] |- Local Storage batch save the request mappings");
+            log.debug("[Herodotus] |- Local Storage batch save the request mappings");
         }
     }
 
@@ -70,12 +70,12 @@ public class RequestMappingLocalCache {
         if (CollectionUtils.isNotEmpty(indexes)) {
             Map<String, RequestMapping> result = dataCache.getAllPresent(indexes);
             if (MapUtils.isNotEmpty(result)) {
-                log.debug("[Eurynome] |- Get the request mappings from local storage SUCCESS!");
+                log.debug("[Herodotus] |- Get the request mappings from local storage SUCCESS!");
                 return new ArrayList<>(result.values());
             }
         }
 
-        log.warn("[Eurynome] |- Cannot Get the request mappings from local storage, or the result is empty!");
+        log.warn("[Herodotus] |- Cannot Get the request mappings from local storage, or the result is empty!");
         return new ArrayList<>();
     }
 }

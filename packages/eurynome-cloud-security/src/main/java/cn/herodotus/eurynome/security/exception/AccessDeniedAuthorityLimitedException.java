@@ -15,30 +15,35 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: IllegalAuthenticationArgumentException.java
+ * File Name: AccessDeniedAuthorityLimitedException.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:46:07
+ * Date: 2021/05/07 11:28:07
  */
 
-package cn.herodotus.eurynome.security.response.exception;
+package cn.herodotus.eurynome.security.exception;
 
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
- * <p>File: IllegalAuthenticationArgumentException </p>
+ * <p>Project: eurynome-cloud </p>
+ * <p>File: AccessDeniedAuthorityLimitedException </p>
  *
- * <p>Description: 认证参数错误 </p>
+ * <p>Description: 没有权限错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/4/30 13:21
+ * @date : 2020/6/5 15:36
  */
-public class IllegalAuthenticationArgumentException extends AuthenticationException {
+public class AccessDeniedAuthorityLimitedException extends AccessDeniedException {
 
-    public IllegalAuthenticationArgumentException(String msg, Throwable cause) {
-        super(msg, cause);
+    public AccessDeniedAuthorityLimitedException() {
+        super("Not authorized to access");
     }
 
-    public IllegalAuthenticationArgumentException(String msg) {
+    public AccessDeniedAuthorityLimitedException(String msg) {
         super(msg);
+    }
+
+    public AccessDeniedAuthorityLimitedException(String msg, Throwable t) {
+        super(msg, t);
     }
 }

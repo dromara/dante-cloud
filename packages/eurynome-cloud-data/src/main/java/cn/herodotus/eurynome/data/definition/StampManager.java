@@ -85,9 +85,10 @@ public interface StampManager<K, V> extends InitializingBean {
     /**
      * 生成缓存值策略方法，该方法负责生成具体存储的值。
      *
+     * @param key 签章存储Key值
      * @return {@link String}
      */
-    V generate();
+    V generate(K key);
 
     /**
      * 创建具体的Stamp签章值，并存储至本地缓存
@@ -98,7 +99,7 @@ public interface StampManager<K, V> extends InitializingBean {
      * @return 创建的签章值
      */
     default V create(K key, long expireAfterWrite, TimeUnit timeUnit) {
-        V token = this.generate();
+        V token = this.generate(key);
         this.put(key, token, expireAfterWrite, timeUnit);
         return token;
     }

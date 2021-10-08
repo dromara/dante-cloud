@@ -86,7 +86,7 @@ public class DataConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Components [Herodotus Data] Auto Configure.");
+        log.info("[Herodotus] |- Components [Herodotus Data] Auto Configure.");
     }
 
     @Bean
@@ -99,7 +99,7 @@ public class DataConfiguration {
         herodotusCacheManager.setClearRemoteOnExit(cacheProperties.getClearRemoteOnExit());
         herodotusCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
 
-        log.trace("[Eurynome] |- Bean [Herodotus Cache Manager] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Herodotus Cache Manager] Auto Configure.");
 
         return herodotusCacheManager;
     }

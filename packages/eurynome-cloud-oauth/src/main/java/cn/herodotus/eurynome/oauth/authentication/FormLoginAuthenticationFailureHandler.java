@@ -99,7 +99,7 @@ public class FormLoginAuthenticationFailureHandler extends ExceptionMappingAuthe
             if (exceptionDictionary.containsKey(exceptionName)) {
                 errorMessage = exceptionDictionary.get(exceptionName);
             } else {
-                log.warn("[Eurynome] |- Form Login Authentication Failur eHandler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
+                log.warn("[Herodotus] |- Form Login Authentication Failur eHandler,  Can not find the exception name [{}] in dictionary, please do optimize ", exceptionName);
             }
         }
 

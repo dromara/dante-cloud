@@ -54,7 +54,7 @@ public abstract class BaseReadableRestController<E extends AbstractEntity, ID ex
     @Operation(summary = "分页查询数据", description = "通过pageNumber和pageSize获取分页数据",
             responses = {@ApiResponse(description = "单位列表", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Map.class)))})
     @Parameters({
-            @Parameter(name = "pager", required = true, in = ParameterIn.PATH, description = "分页Bo对象")
+            @Parameter(name = "pager", required = true, in = ParameterIn.PATH, description = "分页Bo对象", schema = @Schema(implementation = Pager.class))
     })
     @GetMapping
     public Result<Map<String, Object>> findByPage(@Validated Pager pager) {

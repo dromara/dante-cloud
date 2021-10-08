@@ -64,7 +64,7 @@ import java.util.List;
                         authorizationCode = @OAuthFlow(authorizationUrl = "${herodotus.platform.endpoint.user-authorization-uri}", tokenUrl = "${herodotus.platform.endpoint.access-token-uri}", refreshUrl = "${herodotus.platform.endpoint.access-token-uri}", scopes = @OAuthScope(name = "all"))
                 )),
 })
-public class OpenAPIConfiguration {
+public class OpenApiConfiguration {
 
     @Autowired
     private PlatformProperties platformProperties;
@@ -73,7 +73,7 @@ public class OpenAPIConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Swagger] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Swagger] Auto Configure.");
     }
 
     @Bean
@@ -82,7 +82,7 @@ public class OpenAPIConfiguration {
                 .servers(getServers())
                 .info(new Info().title("Eurynome Cloud")
                         .description("Eurynome Cloud Microservices Architecture")
-                        .version("2.5.5.10")
+                        .version("2.5.5.20")
                         .license(new License().name("Apache 2.0").url("http://www.apache.org/licenses/")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Eurynome Cloud Documentation")

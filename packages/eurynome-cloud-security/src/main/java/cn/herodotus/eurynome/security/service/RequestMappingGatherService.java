@@ -67,11 +67,11 @@ public class RequestMappingGatherService {
         requestMappingLocalCache.save(requestMappings);
 
         if (!isDistributed || StringUtils.equals(serviceId, ServiceConstants.SERVICE_NAME_UPMS)) {
-            log.debug("[Eurynome] |- (3) Request mapping gather service trigger LOCAL event!");
+            log.debug("[Herodotus] |- (3) Request mapping gather service trigger LOCAL event!");
             applicationContext.publishEvent(new LocalRequestMappingGatherEvent(requestMappings));
         } else {
             String source = JSON.toJSONString(requestMappings);
-            log.debug("[Eurynome] |- (3) Request mapping gather service trigger REMOTE event!");
+            log.debug("[Herodotus] |- (3) Request mapping gather service trigger REMOTE event!");
             applicationContext.publishEvent(new RemoteRequestMappingGatherEvent(source, serviceId, DestinationResolver.create(ServiceConstants.SERVICE_NAME_UPMS)));
         }
     }

@@ -42,14 +42,14 @@ public abstract class BaseWriteableService<E extends AbstractEntity, ID extends 
     public void deleteById(ID id) {
         WriteableService.super.deleteById(id);
         deleteFromCache(String.valueOf(id));
-        log.debug("[Eurynome] |- AbstractCrudService Service delete.");
+        log.debug("[Herodotus] |- AbstractCrudService Service delete.");
     }
 
     @Override
     public E saveOrUpdate(E domain) {
         E savedDomain = WriteableService.super.saveAndFlush(domain);
         writeToCache(savedDomain);
-        log.debug("[Eurynome] |- AbstractCrudService Service saveOrUpdate.");
+        log.debug("[Herodotus] |- AbstractCrudService Service saveOrUpdate.");
         return savedDomain;
     }
 }

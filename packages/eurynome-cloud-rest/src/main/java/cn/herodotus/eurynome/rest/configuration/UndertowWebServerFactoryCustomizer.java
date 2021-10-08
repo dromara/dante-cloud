@@ -43,7 +43,7 @@ public class UndertowWebServerFactoryCustomizer implements WebServerFactoryCusto
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Undertow WebServer Factory Customizer] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Undertow WebServer Factory Customizer] Auto Configure.");
     }
 
     @Override

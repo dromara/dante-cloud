@@ -15,35 +15,30 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: AccessDeniedAuthorityLimitedException.java
+ * File Name: SocialHandlerNotFoundException.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/05/07 11:46:07
  */
 
-package cn.herodotus.eurynome.security.response.exception;
+package cn.herodotus.eurynome.security.exception;
 
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: AccessDeniedAuthorityLimitedException </p>
+ * <p>File: SocialHandlerNotFoundException </p>
  *
- * <p>Description: 没有权限错误 </p>
+ * <p>Description: 社交登录处理器未找到错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/6/5 15:36
+ * @date : 2021/4/30 13:24
  */
-public class AccessDeniedAuthorityLimitedException extends AccessDeniedException {
+public class SocialHandlerNotFoundException extends AuthenticationException {
 
-    public AccessDeniedAuthorityLimitedException() {
-        super("Not authorized to access");
+    public SocialHandlerNotFoundException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
-    public AccessDeniedAuthorityLimitedException(String msg) {
+    public SocialHandlerNotFoundException(String msg) {
         super(msg);
-    }
-
-    public AccessDeniedAuthorityLimitedException(String msg, Throwable t) {
-        super(msg, t);
     }
 }

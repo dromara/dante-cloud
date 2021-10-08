@@ -44,6 +44,7 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 @ComponentScan(basePackages = {
+        "cn.herodotus.eurynome.oauth.service",
         "cn.herodotus.eurynome.oauth.controller"
 })
 @Import({
@@ -55,6 +56,6 @@ public class OauthAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Eurynome] |- Components [Herodotus OAuth] Auto Configure.");
+        log.info("[Herodotus] |- Components [Herodotus OAuth] Auto Configure.");
     }
 }

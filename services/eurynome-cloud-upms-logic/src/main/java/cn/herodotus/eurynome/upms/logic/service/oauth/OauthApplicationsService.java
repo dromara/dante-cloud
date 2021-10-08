@@ -79,7 +79,7 @@ public class OauthApplicationsService extends BaseLayeredService<OauthApplicatio
 
     public OauthApplications assign(String appKey, String[] scopeIds) {
 
-        log.debug("[Eurynome] |- OauthApplications Service authorize.");
+        log.debug("[Herodotus] |- OauthApplications Service authorize.");
 
         Set<OauthScopes> OAuth2ScopesSet = new HashSet<>();
         for (String scopeId : scopeIds) {

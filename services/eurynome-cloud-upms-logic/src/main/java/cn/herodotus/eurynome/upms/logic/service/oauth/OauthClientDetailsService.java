@@ -56,7 +56,7 @@ public class OauthClientDetailsService extends BaseLayeredService<OauthClientDet
         OauthClientDetails oauthClientDetails = findById(oauthApplications.getAppKey());
         oauthClientDetails = UpmsHelper.convertOauthApplicationsToOauthClientDetails(oauthApplications, oauthClientDetails);
 
-        log.debug("[Eurynome] |- OauthClientDetails Service synchronize.");
+        log.debug("[Herodotus] |- OauthClientDetails Service synchronize.");
         return saveOrUpdate(oauthClientDetails);
     }
 }

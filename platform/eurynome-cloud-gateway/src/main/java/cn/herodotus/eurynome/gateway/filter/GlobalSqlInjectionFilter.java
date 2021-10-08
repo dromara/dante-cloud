@@ -64,14 +64,14 @@ import java.util.concurrent.atomic.AtomicReference;
  * @date : 2021/9/1 8:47
  */
 @Component
-public class GlobalSQLInjectionFilter implements GlobalFilter, Ordered {
+public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalSQLInjectionFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(GlobalSqlInjectionFilter.class);
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-        log.debug("[Eurynome] |- Global SQL Injection Filter in use!");
+        log.debug("[Herodotus] |- Global SQL Injection Filter in use!");
 
         ServerHttpRequest serverHttpRequest = exchange.getRequest();
         HttpMethod method = serverHttpRequest.getMethod();
@@ -85,7 +85,7 @@ public class GlobalSQLInjectionFilter implements GlobalFilter, Ordered {
                 return chain.filter(exchange);
             }
 
-            log.debug("[Eurynome] |- The original request parameter is [{}]", rawQuery);
+            log.debug("[Herodotus] |- The original request parameter is [{}]", rawQuery);
             // 执行XSS清理
             boolean isSQLInjection = SQLInjectionUtils.checkForGet(rawQuery);
 
@@ -192,7 +192,7 @@ public class GlobalSQLInjectionFilter implements GlobalFilter, Ordered {
     }
 
     private Mono<Void> sqlInjectionResponse(ServerWebExchange exchange, URI uri) {
-        log.error("[Eurynome] |- Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
+        log.error("[Herodotus] |- Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
         return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.SQL_INJECTION_REQUEST).status(HttpStatus.SC_FORBIDDEN));
     }
 

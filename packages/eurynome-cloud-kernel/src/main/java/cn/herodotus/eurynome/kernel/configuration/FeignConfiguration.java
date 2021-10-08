@@ -48,14 +48,14 @@ public class FeignConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Eurynome] |- Plugin [Herodotus Feign] Auto Configure.");
+        log.debug("[Herodotus] |- Plugin [Herodotus Feign] Auto Configure.");
     }
 
     @Bean
     @ConditionalOnMissingBean(HerodotusFeignRequestInterceptor.class)
     public RequestInterceptor feignRequestInterceptor() {
         HerodotusFeignRequestInterceptor oAuth2FeignRequestInterceptor = new HerodotusFeignRequestInterceptor();
-        log.trace("[Eurynome] |- Bean [Feign Request Interceptor] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Feign Request Interceptor] Auto Configure.");
         return oAuth2FeignRequestInterceptor;
     }
 

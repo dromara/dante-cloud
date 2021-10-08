@@ -43,7 +43,7 @@ public class XssHttpServletFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(request);
-        log.debug("[Eurynome] |- XssHttpServletFilter wrapper request for [{}].", request.getRequestURI());
+        log.debug("[Herodotus] |- XssHttpServletFilter wrapper request for [{}].", request.getRequestURI());
         filterChain.doFilter(xssRequest, servletResponse);
     }
 }

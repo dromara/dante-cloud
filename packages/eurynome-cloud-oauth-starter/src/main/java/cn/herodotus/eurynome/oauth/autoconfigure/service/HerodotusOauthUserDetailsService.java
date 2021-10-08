@@ -63,14 +63,14 @@ public class HerodotusOauthUserDetailsService implements HerodotusUserDetailsSer
             throw new UsernameNotFoundException("系统用户 " + username + " 不存在!");
         }
 
-        log.debug("[Eurynome] |- UserDetailsService loaded user : [{}]", username);
+        log.debug("[Herodotus] |- UserDetailsService loaded user : [{}]", username);
 
         return UpmsHelper.convertSysUserToHerodotusUserDetails(sysUser);
     }
 
     private SysUser findByUserName(String userName) {
         SysUser sysUser = sysUserService.findByUserName(userName);
-        log.debug("[Eurynome] |- SysUser Service findSysUserByUserName.");
+        log.debug("[Herodotus] |- SysUser Service findSysUserByUserName.");
         return sysUser;
     }
 }

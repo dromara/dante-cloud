@@ -62,7 +62,7 @@ public class GlobalResponseFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.debug("[Eurynome] |- Gateway Global Response Filter in use!");
+        log.debug("[Herodotus] |- Gateway Global Response Filter in use!");
 
         //获取response的 返回数据
         ServerHttpResponse originalResponse = exchange.getResponse();
@@ -86,7 +86,7 @@ public class GlobalResponseFilter implements GlobalFilter, Ordered {
                                 DataBufferUtils.release(dataBuffer);
                                 list.add(new String(content, StandardCharsets.UTF_8));
                             } catch (Exception e) {
-                                log.error("[Eurynome] |- Load api encryption rules failed， reason ：{}", Throwables.getStackTraceAsString(e));
+                                log.error("[Herodotus] |- Load api encryption rules failed， reason ：{}", Throwables.getStackTraceAsString(e));
                             }
                         });
 

@@ -139,7 +139,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Eurynome] |- SysEmployee Service findByCondition.");
+        log.debug("[Herodotus] |- SysEmployee Service findByCondition.");
         return this.findByPage(specification, pageable);
     }
 
@@ -226,7 +226,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
             return criteriaQuery.getRestriction();
         };
 
-        log.debug("[Eurynome] |- SysEmployee Service findAllocatable.");
+        log.debug("[Herodotus] |- SysEmployee Service findAllocatable.");
         return this.findByPage(specification, pageable);
     }
 
@@ -238,7 +238,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
             return criteriaBuilder.equal(join.get("departmentId"), departmentId);
         };
 
-        log.debug("[Eurynome] |- SysEmployee Service findAllocatable.");
+        log.debug("[Herodotus] |- SysEmployee Service findAllocatable.");
         return this.findByPage(specification, pageable);
     }
 
@@ -247,7 +247,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         SysUser sysUser = sysUserService.register(sysEmployee);
         sysEmployee.setUser(sysUser);
 
-        log.debug("[Eurynome] |- SysEmployee Service authorize.");
+        log.debug("[Herodotus] |- SysEmployee Service authorize.");
         return this.saveOrUpdate(sysEmployee);
     }
 
@@ -256,7 +256,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
     public void deleteById(String employeeId) {
         sysOwnershipService.deleteByEmployeeId(employeeId);
         super.deleteById(employeeId);
-        log.debug("[Eurynome] |- SysEmployee Service deleteById.");
+        log.debug("[Herodotus] |- SysEmployee Service deleteById.");
     }
 
     @Transactional(rollbackFor = TransactionRollbackException.class)
@@ -267,7 +267,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
             List<SysEmployee> result = sysEmployeeRepository.saveAllAndFlush(sysEmployees);
             if (CollectionUtils.isNotEmpty(result)) {
                 sysOwnershipService.saveAll(sysOwnerships);
-                log.debug("[Eurynome] |- SysEmployee Service deleteById.");
+                log.debug("[Herodotus] |- SysEmployee Service deleteById.");
                 return true;
             }
         }

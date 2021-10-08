@@ -54,7 +54,7 @@ public class AccessLimitedStampManager extends AbstractStampManager<String, Long
     }
 
     @Override
-    public Long generate() {
+    public Long generate(String key) {
         return 1L;
     }
 
