@@ -96,7 +96,7 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Core [Herodotus Web Security  in component oauth] Auto Configure.");
+        log.debug("[Herodotus] |- Core [Web Security Configurer Adapter] Auto Configure.");
     }
 
     @Override

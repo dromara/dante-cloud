@@ -177,15 +177,39 @@ public class InterfaceCryptoProcessor {
         return PKCS8_PUBLIC_KEY_BEGIN + SymbolConstants.NEW_LINE + key + SymbolConstants.NEW_LINE + PKCS8_PUBLIC_KEY_END;
     }
 
-    public String encrypt(String sessionKey, String content) throws SessionInvalidException {
-        SecretKey secretKey = getSecretKey(sessionKey);
-        AES aes = SecureUtil.aes(StrUtil.bytes(secretKey.getAesKey(), StandardCharsets.UTF_8));
-        return StrUtil.str(aes.encrypt(content), StandardCharsets.UTF_8);
+    public byte[] encrypt(String sessionId, String content) {
+        try {
+            SecretKey secretKey = getSecretKey(sessionId);
+            AES aes = SecureUtil.aes(StrUtil.bytes(secretKey.getAesKey(), StandardCharsets.UTF_8));
+            return aes.encrypt(content);
+        } catch (Exception e) {
+            log.warn("[Herodotus] |- Aes can not Encrypt content [{}], Skip!", content);
+            return StrUtil.bytes(content, StandardCharsets.UTF_8);
+        }
     }
 
-    public byte[] decrypt(String sessionKey, String content) throws SessionInvalidException {
-        SecretKey secretKey = getSecretKey(sessionKey);
-        AES aes = SecureUtil.aes(StrUtil.bytes(secretKey.getAesKey(), StandardCharsets.UTF_8));
-        return aes.decrypt(Base64.decode(StrUtil.bytes(content, StandardCharsets.UTF_8)));
+    public String encryptToString(String sessionId, String content) {
+        byte[] bytes = encrypt(sessionId, content);
+        String result = StrUtil.str(bytes, StandardCharsets.UTF_8);
+        log.debug("[Herodotus] |- Encrypt content from [{}] to [{}].", content, result);
+        return result;
+    }
+
+    public byte[] decrypt(String sessionId, String content) {
+        try {
+            SecretKey secretKey = getSecretKey(sessionId);
+            AES aes = SecureUtil.aes(StrUtil.bytes(secretKey.getAesKey(), StandardCharsets.UTF_8));
+            return aes.decrypt(Base64.decode(StrUtil.bytes(content, StandardCharsets.UTF_8)));
+        } catch (Exception e) {
+            log.warn("[Herodotus] |- Aes can not Decrypt content [{}], Skip!", content);
+            return StrUtil.bytes(content, StandardCharsets.UTF_8);
+        }
+    }
+
+    public String decryptToString(String sessionId, String content) {
+        byte[] bytes = decrypt(sessionId, content);
+        String result = StrUtil.str(bytes, StandardCharsets.UTF_8);
+        log.debug("[Herodotus] |- Decrypt content from [{}] to [{}].", content, result);
+        return result;
     }
 }

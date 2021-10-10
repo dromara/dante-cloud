@@ -24,8 +24,6 @@ package cn.herodotus.eurynome.rest.base.controller;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.domain.Result;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 
@@ -44,64 +42,114 @@ import java.util.Map;
  */
 public interface Controller {
 
+    /**
+     * 数据实体转换为统一响应实体
+     *
+     * @param domain 数据实体
+     * @param <E>    {@link AbstractEntity} 子类型
+     * @return {@link Result} Entity
+     */
     default <E extends AbstractEntity> Result<E> result(E domain) {
-        Result<E> result = new Result<>();
         if (ObjectUtils.isNotEmpty(domain)) {
-            return result.ok().message("操作成功！").data(domain);
+            return Result.content(domain);
         } else {
-            return result.failed().message("操作失败！");
+            return Result.failure();
         }
     }
 
+    /**
+     * 数据列表转换为统一响应实体
+     *
+     * @param domains 数据实体 List
+     * @param <E>     {@link AbstractEntity} 子类型
+     * @return {@link Result} List
+     */
     default <E extends AbstractEntity> Result<List<E>> result(List<E> domains) {
-        Result<List<E>> result = new Result<>();
         if (ObjectUtils.isNotEmpty(domains)) {
-            return result.ok().message("查询数据成功！").data(domains);
+            return Result.success("查询数据成功！", domains);
         } else {
-            return result.failed().message("查询数据失败！");
+            return Result.failure("查询数据失败！");
         }
     }
 
+    /**
+     * 数据分页对象转换为统一响应实体
+     *
+     * @param pages 分页查询结果 {@link Page}
+     * @param <E>   {@link AbstractEntity} 子类型
+     * @return {@link Result} Map
+     */
     default <E extends AbstractEntity> Result<Map<String, Object>> result(Page<E> pages) {
-        Result<Map<String, Object>> result = new Result<>();
         if (ObjectUtils.isNotEmpty(pages)) {
-            return result.ok().message("查询数据成功！").data(getPageInfoMap(pages));
+            return Result.success("查询数据成功！", getPageInfoMap(pages));
         } else {
-            return result.failed().message("查询失败！");
+            return Result.failure("查询数据失败！");
         }
     }
 
+    /**
+     * 数据 Map 转换为统一响应实体
+     *
+     * @param map 数据 Map
+     * @return {@link Result} Map
+     */
     default Result<Map<String, Object>> result(Map<String, Object> map) {
-        Result<Map<String, Object>> result = new Result<>();
         if (ObjectUtils.isNotEmpty(map)) {
-            return result.ok().message("查询数据成功！").data(map);
+            return Result.success("查询数据成功！", map);
         } else {
-            return result.failed().message("查询失败！");
+            return Result.failure("数据数据失败！");
         }
     }
 
+    /**
+     * 数据操作结果转换为统一响应实体
+     *
+     * @param parameter 数据ID
+     * @param <ID>      ID 数据类型
+     * @return {@link Result} String
+     */
     default <ID extends Serializable> Result<String> result(ID parameter) {
-        Result<String> result = new Result<>();
         if (ObjectUtils.isNotEmpty(parameter)) {
-            return result.ok().message("操作成功！");
+            return Result.success();
         } else {
-            return result.failed().message("操作失败！");
+            return Result.failure();
         }
     }
 
+    /**
+     * 数据操作结果转换为统一响应实体
+     *
+     * @param status 操作状态
+     * @return {@link Result} String
+     */
     default Result<String> result(boolean status) {
-        Result<String> result = new Result<>();
         if (status) {
-            return result.ok().message("操作成功！");
+            return Result.success();
         } else {
-            return result.failed().message("操作失败！");
+            return Result.failure();
         }
     }
 
+    /**
+     * Page 对象转换为 Map
+     *
+     * @param pages 分页查询结果 {@link Page}
+     * @param <E>   {@link AbstractEntity} 子类型
+     * @return Map
+     */
     default <E extends AbstractEntity> Map<String, Object> getPageInfoMap(Page<E> pages) {
         return getPageInfoMap(pages.getContent(), pages.getTotalPages(), pages.getTotalElements());
     }
 
+    /**
+     * Page 对象转换为 Map
+     *
+     * @param content       数据实体 List
+     * @param totalPages    分页总页数
+     * @param totalElements 总的数据条目
+     * @param <E>           {@link AbstractEntity} 子类型
+     * @return Map
+     */
     default <E extends AbstractEntity> Map<String, Object> getPageInfoMap(List<E> content, int totalPages, long totalElements) {
         Map<String, Object> result = new HashMap<>(8);
         result.put("content", content);

@@ -78,7 +78,7 @@ public class HerodotusExceptionHandler {
         EXCEPTION_DICTIONARY.put("HttpMediaTypeNotAcceptableException", getUnsupportedMediaTypeResult(ResultStatus.UNSUPPORTED_MEDIA_TYPE));
 
         // 5*.** 对应错误
-        EXCEPTION_DICTIONARY.put("NullPointerException", getInternalServerErrorResult(ResultStatus.REDIRECT_URI_MISMATCH));
+        EXCEPTION_DICTIONARY.put("NullPointerException", getInternalServerErrorResult(ResultStatus.NULL_POINTER_EXCEPTION));
         EXCEPTION_DICTIONARY.put("IOException", getInternalServerErrorResult(ResultStatus.IO_EXCEPTION));
         EXCEPTION_DICTIONARY.put("HttpMessageNotReadableException", getInternalServerErrorResult(ResultStatus.HTTP_MESSAGE_NOT_READABLE_EXCEPTION));
         EXCEPTION_DICTIONARY.put("TypeMismatchException", getInternalServerErrorResult(ResultStatus.TYPE_MISMATCH_EXCEPTION));

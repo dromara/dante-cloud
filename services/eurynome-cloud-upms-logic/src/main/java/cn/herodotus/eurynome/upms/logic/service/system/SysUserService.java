@@ -77,10 +77,23 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
         return sysUser;
     }
 
+    public SysUser findByUserId(String userId) {
+        SysUser sysUser = sysUserRepository.findByUserId(userId);
+        log.debug("[Herodotus] |- SysUser Service findByUserId.");
+        return sysUser;
+    }
+
+    public SysUser changePassword(String userId, String password) {
+        SysUser sysUser = findByUserId(userId);
+        sysUser.setPassword(SecurityUtils.encrypt(password));
+        log.debug("[Herodotus] |- SysUser Service changePassword.");
+        return saveOrUpdate(sysUser);
+    }
+
     public SysUser assign(String userId, String[] roleIds) {
         log.debug("[Herodotus] |- SysUser Service assign.");
 
-        SysUser sysUser = findById(userId);
+        SysUser sysUser = findByUserId(userId);
         return this.register(sysUser, roleIds);
     }
 

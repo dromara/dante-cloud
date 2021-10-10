@@ -25,13 +25,9 @@ package cn.herodotus.eurynome.rest.configuration;
 import cn.herodotus.eurynome.data.stamp.AccessLimitedStampManager;
 import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
 import cn.herodotus.eurynome.data.stamp.SecretKeyStampManager;
-import cn.herodotus.eurynome.rest.crypto.DecryptRequestBodyAdvice;
-import cn.herodotus.eurynome.rest.crypto.DecryptRequestParamStringResolver;
-import cn.herodotus.eurynome.rest.crypto.EncryptResponseBodyAdvice;
-import cn.herodotus.eurynome.rest.crypto.InterfaceCryptoProcessor;
+import cn.herodotus.eurynome.rest.crypto.*;
 import cn.herodotus.eurynome.rest.security.AccessLimitedInterceptor;
 import cn.herodotus.eurynome.rest.security.IdempotentInterceptor;
-import cn.herodotus.eurynome.rest.security.OauthTokenServletFilter;
 import cn.herodotus.eurynome.rest.security.XssHttpServletFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,17 +93,6 @@ public class InterfaceSecurityConfiguration {
     @Bean
     @ConditionalOnClass(InterfaceCryptoProcessor.class)
     @ConditionalOnMissingBean
-    public OauthTokenServletFilter oauthTokenServletFilter(InterfaceCryptoProcessor interfaceCryptoProcessor) {
-        OauthTokenServletFilter oauthTokenCryptoInterceptor = new OauthTokenServletFilter();
-        oauthTokenCryptoInterceptor.setInterfaceCryptoProcessor(interfaceCryptoProcessor);
-        log.trace("[Herodotus] |- Bean [Oauth Token Servlet Filter] Auto Configure.");
-        return oauthTokenCryptoInterceptor;
-    }
-
-
-    @Bean
-    @ConditionalOnClass(InterfaceCryptoProcessor.class)
-    @ConditionalOnMissingBean
     public DecryptRequestBodyAdvice decryptRequestBodyAdvice(InterfaceCryptoProcessor interfaceCryptoProcessor) {
         DecryptRequestBodyAdvice decryptRequestBodyAdvice = new DecryptRequestBodyAdvice();
         decryptRequestBodyAdvice.setInterfaceCryptoProcessor(interfaceCryptoProcessor);
@@ -125,14 +110,23 @@ public class InterfaceSecurityConfiguration {
         return encryptResponseBodyAdvice;
     }
 
+    @Bean
+    @ConditionalOnClass(InterfaceCryptoProcessor.class)
+    @ConditionalOnMissingBean
+    public DecryptRequestParamMapResolver decryptRequestParamStringResolver(InterfaceCryptoProcessor interfaceCryptoProcessor) {
+        DecryptRequestParamMapResolver decryptRequestParamMapResolver = new DecryptRequestParamMapResolver();
+        decryptRequestParamMapResolver.setInterfaceCryptoProcessor(interfaceCryptoProcessor);
+        log.trace("[Herodotus] |- Bean [Decrypt Request Param Map Resolver] Auto Configure.");
+        return decryptRequestParamMapResolver;
+    }
 
     @Bean
     @ConditionalOnClass(InterfaceCryptoProcessor.class)
     @ConditionalOnMissingBean
-    public DecryptRequestParamStringResolver decryptRequestParamStringResolver(InterfaceCryptoProcessor interfaceCryptoProcessor) {
-        DecryptRequestParamStringResolver decryptRequestParamStringResolver = new DecryptRequestParamStringResolver();
-        decryptRequestParamStringResolver.setInterfaceCryptoProcessor(interfaceCryptoProcessor);
-        log.trace("[Herodotus] |- Bean [Decrypt Request Param Oauth Resolver] Auto Configure.");
-        return decryptRequestParamStringResolver;
+    public DecryptRequestParamResolver decryptRequestParamResolver(InterfaceCryptoProcessor interfaceCryptoProcessor) {
+        DecryptRequestParamResolver decryptRequestParamResolver = new DecryptRequestParamResolver();
+        decryptRequestParamResolver.setInterfaceCryptoProcessor(interfaceCryptoProcessor);
+        log.trace("[Herodotus] |- Bean [Decrypt Request Param Resolver] Auto Configure.");
+        return decryptRequestParamResolver;
     }
 }

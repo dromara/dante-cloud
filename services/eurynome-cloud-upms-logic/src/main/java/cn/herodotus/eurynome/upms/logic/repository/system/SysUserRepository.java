@@ -43,4 +43,13 @@ public interface SysUserRepository extends BaseRepository<SysUser, String> {
      */
     @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
     SysUser findByUserName(String userName);
+
+    /**
+     * 根据用户ID查找用户
+     *
+     * @param userId 用户ID
+     * @return {@link SysUser}
+     */
+    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    SysUser findByUserId(String userId);
 }

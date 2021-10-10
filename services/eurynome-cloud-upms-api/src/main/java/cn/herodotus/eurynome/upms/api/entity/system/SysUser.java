@@ -33,8 +33,10 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
+import cn.herodotus.eurynome.upms.api.processor.SysEmployeeEmptyToNull;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -103,6 +105,27 @@ public class SysUser extends BaseSysEntity {
             indexes = {@Index(name = "sys_user_role_uid_idx", columnList = "user_id"), @Index(name = "sys_user_role_rid_idx", columnList = "role_id")})
     private Set<SysRole> roles = new HashSet<>();
 
+    /**
+     * SysUser 和 SysEmploye 为双向一对一关系，SysUser 为维护端。
+     * <p>
+     * 存在一个问题，SysUser新增操作没有问题，修改操作就会抛出
+     * InvalidDataAccessApiUsageException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : cn.herodotus.cloud.upms.api.entity.system.SysUser.employee -> cn.herodotus.cloud.upms.api.entity.hr.SysEmployee; nested exception is java.lang.IllegalStateException: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing
+     * <p>
+     * 最初以为是 JPA @OneToOne 相关配置不对或者是 JPA save()方法的问题，以及 Hibernate 对象在Session是否是游离状态等几方面问题，尝试解决的好久都没有解决。
+     * <p>
+     * 后面发现，@RequestBody 会将参数绑定为实体。
+     * 在新增操作时，只传递了几个参数，没有employee属性，所以SysUser的employee属性的反序列化之后值是null。
+     * 在修改操作时，employee的是 '{}', Jackson在反序列化的过程中就将其转换为完整的对象结构，但是相关的值是空。
+     * <p>
+     * 这就导致，JPA 在存储数据时，employee 是游离状态的对象，所以一直抛错。
+     * <p>
+     * 这也就解释了下面问题：
+     * 当前 @OneToOne 配置，与上面 @ManyToMany 配置基本一致，而且都是使用 @JoinTable 的方式。
+     * 那么同样的更新操作@OneToOne会出错，@ManyToMany就不会出错？
+     * <p>
+     * 因为 @ManyToMany 使用的是集合，空对象不会被转成对象Set进去。
+     */
+    @JsonDeserialize(using = SysEmployeeEmptyToNull.class)
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_EMPLOYEE)
     @Schema(title = "人员")
     @OneToOne(fetch = FetchType.LAZY)

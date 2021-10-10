@@ -22,26 +22,24 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
-import cn.herodotus.eurynome.rest.crypto.DecryptRequestParamStringResolver;
+import cn.herodotus.eurynome.rest.crypto.DecryptRequestParamMapResolver;
+import cn.herodotus.eurynome.rest.crypto.DecryptRequestParamResolver;
 import cn.herodotus.eurynome.rest.security.AccessLimitedInterceptor;
 import cn.herodotus.eurynome.rest.security.IdempotentInterceptor;
-import cn.herodotus.eurynome.rest.security.OauthTokenServletFilter;
-import cn.herodotus.eurynome.rest.security.XssHttpServletFilter;
-import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.configuration.WebMvcSecurityConfiguration;
 import com.google.common.collect.Lists;
-import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.context.annotation.Import;
+import org.springframework.web.method.annotation.RequestParamMapMethodArgumentResolver;
+import org.springframework.web.method.annotation.RequestParamMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -53,7 +51,10 @@ import java.util.List;
  * @date : 2020/3/4 11:00
  */
 @Configuration
-public class WebMvcAutoConfiguration implements WebMvcConfigurer {
+@Import({
+        WebMvcSecurityConfiguration.class
+})
+public class WebMvcAutoConfiguration extends WebMvcConfigurationSupport {
 
     private static final Logger log = LoggerFactory.getLogger(WebMvcAutoConfiguration.class);
 
@@ -62,75 +63,44 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
     @Autowired
     private AccessLimitedInterceptor accessLimitedInterceptor;
     @Autowired
-    private DecryptRequestParamStringResolver decryptRequestParamStringResolver;
+    private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
+    @Autowired
+    private DecryptRequestParamResolver decryptRequestParamResolver;
+    @Autowired
+    private DecryptRequestParamMapResolver decryptRequestParamMapResolver;
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Core [Herodotus Web Mvc in component security] Auto Configure.");
+        this.postArgumentMethodHandlers();
+        log.info("[Herodotus] |- Core [Web Mvc Configurer] Auto Configure.");
+    }
+
+    private void postArgumentMethodHandlers() {
+        List<HandlerMethodArgumentResolver> unmodifiableList = requestMappingHandlerAdapter.getArgumentResolvers();
+        List<HandlerMethodArgumentResolver> list = Lists.newArrayList();
+        for (HandlerMethodArgumentResolver methodArgumentResolver : unmodifiableList) {
+            //需要在requestParam之前执行自定义逻辑，然后再执行下一个逻辑（责任链模式）
+            if (methodArgumentResolver instanceof RequestParamMapMethodArgumentResolver) {
+                decryptRequestParamMapResolver.setRequestParamMapMethodArgumentResolver((RequestParamMapMethodArgumentResolver) methodArgumentResolver);
+                list.add(decryptRequestParamMapResolver);
+            }
+            if (methodArgumentResolver instanceof RequestParamMethodArgumentResolver) {
+                decryptRequestParamResolver.setRequestParamMethodArgumentResolver((RequestParamMethodArgumentResolver) methodArgumentResolver);
+                list.add(decryptRequestParamResolver);
+            }
+            list.add(methodArgumentResolver);
+        }
+        log.debug("[Herodotus] |- Custom HandlerMethodArgumentResolver Auto Configure.");
+        requestMappingHandlerAdapter.setArgumentResolvers(list);
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(accessLimitedInterceptor);
         registry.addInterceptor(idempotentInterceptor);
-        WebMvcConfigurer.super.addInterceptors(registry);
+        super.addInterceptors(registry);
     }
 
-
-    /**
-     * 多个WebSecurityConfigurerAdapter
-     */
-    @Configuration(proxyBeanMethods = false)
-    @Order(101)
-    public static class StaticResourceSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-        @Autowired
-        private SecurityProperties securityProperties;
-        @Autowired
-        private XssHttpServletFilter xssHttpServletFilter;
-        @Autowired
-        private OauthTokenServletFilter oauthTokenServletFilter;
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.addFilterBefore(xssHttpServletFilter, FilterSecurityInterceptor.class);
-            http.addFilterBefore(oauthTokenServletFilter, XssHttpServletFilter.class);
-        }
-
-        @Override
-        public void configure(WebSecurity web) throws Exception {
-            web.ignoring().antMatchers(getIgnoredStaticResources());
-        }
-
-        private String[] getIgnoredStaticResources() {
-            List<String> defaultIgnored = Lists.newArrayList("/error",
-                    "/static/**",
-                    "/webjars/**",
-                    "/features/**",
-                    "/plugins/**",
-                    "/swagger-ui.html",
-                    "/swagger-ui/**",
-                    "/v3/api-docs/**",
-                    "/openapi*",
-                    "/favicon.ico");
-
-            List<String> customIgnored = securityProperties.getInterceptor().getStaticResource();
-
-            if (CollectionUtils.isNotEmpty(customIgnored)) {
-                defaultIgnored.addAll(customIgnored);
-            }
-
-            String[] result = new String[defaultIgnored.size()];
-            return defaultIgnored.toArray(result);
-        }
-    }
-
-
-    /**
-     * 资源处理器
-     *
-     * @param registry
-     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");

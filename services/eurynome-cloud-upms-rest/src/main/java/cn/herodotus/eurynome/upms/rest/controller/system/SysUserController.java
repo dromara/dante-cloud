@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
+import cn.herodotus.eurynome.assistant.annotation.rest.Crypto;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
@@ -30,12 +31,11 @@ import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>Description: SysUserController </p>
@@ -60,7 +60,16 @@ public class SysUserController extends BaseWriteableRestController<SysUser, Stri
         return this.sysUserService;
     }
 
-    @Operation(summary = "给用户分配角色", description = "给用户分配角色")
+    /**
+     * 给用户分配角色
+     *
+     * @param userId 用户Id
+     * @param roles  角色Id数组
+     * @return {@link Result}
+     */
+    @Operation(summary = "给用户分配角色", description = "给用户分配角色",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/x-www-form-urlencoded")),
+            responses = {@ApiResponse(description = "已保存数据", content = @Content(mediaType = "application/json"))})
     @Parameters({
             @Parameter(name = "userId", required = true, description = "userId"),
             @Parameter(name = "roles[]", required = true, description = "角色对象组成的数组")
@@ -68,6 +77,27 @@ public class SysUserController extends BaseWriteableRestController<SysUser, Stri
     @PutMapping
     public Result<SysUser> assign(@RequestParam(name = "userId") String userId, @RequestParam(name = "roles[]") String[] roles) {
         SysUser sysUser = sysUserService.assign(userId, roles);
+        return result(sysUser);
+    }
+
+    @Operation(summary = "修改密码", description = "修改用户使用密码，默认使用加密请求传输",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(mediaType = "application/x-www-form-urlencoded")),
+            responses = {@ApiResponse(description = "修改密码后的用户信息", content = @Content(mediaType = "application/json"))})
+    @Parameters({
+            @Parameter(name = "userId", required = true, description = "userId"),
+            @Parameter(name = "password", required = true, description = "角色对象组成的数组")
+    })
+    @Crypto(responseEncrypt = false)
+    @PutMapping("/change-password")
+    public Result<SysUser> changePassword(@RequestParam(name = "userId") String userId, @RequestParam(name = "password") String password) {
+        SysUser sysUser = sysUserService.changePassword(userId, password);
+        return result(sysUser);
+    }
+
+    @Operation(summary = "根据用户名查询系统用户", description = "通过username查询系统用户数据")
+    @GetMapping("/sign-in/{userName}")
+    public Result<SysUser> findByUserName(@PathVariable("userName") String userName) {
+        SysUser sysUser = sysUserService.findByUserName(userName);
         return result(sysUser);
     }
 }

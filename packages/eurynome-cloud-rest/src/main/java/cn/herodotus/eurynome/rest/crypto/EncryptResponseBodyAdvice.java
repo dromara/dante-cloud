@@ -84,7 +84,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
         try {
             String bodyString = JacksonUtils.getObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(body);
-            String result = interfaceCryptoProcessor.encrypt(sessionKey, bodyString);
+            String result = interfaceCryptoProcessor.encryptToString(sessionKey, bodyString);
             if (StringUtils.isNotBlank(result)) {
                 log.debug("[Herodotus] |- Encrypt response body for rest method [{}] in [{}] finished.", methodName, className);
                 return result;
