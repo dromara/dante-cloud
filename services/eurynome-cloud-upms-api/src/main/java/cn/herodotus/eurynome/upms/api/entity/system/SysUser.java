@@ -33,7 +33,7 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
-import cn.herodotus.eurynome.upms.api.processor.SysEmployeeEmptyToNull;
+import cn.herodotus.eurynome.upms.api.deserializer.SysEmployeeEmptyToNull;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

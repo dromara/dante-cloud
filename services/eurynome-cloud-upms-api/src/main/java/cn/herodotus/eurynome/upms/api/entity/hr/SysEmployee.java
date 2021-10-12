@@ -23,14 +23,16 @@
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
 import cn.herodotus.eurynome.common.constant.enums.AccountType;
+import cn.herodotus.eurynome.common.constant.enums.Gender;
+import cn.herodotus.eurynome.common.constant.enums.Identity;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.security.definition.core.SocialUserDetails;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import cn.herodotus.eurynome.common.constant.enums.Gender;
-import cn.herodotus.eurynome.common.constant.enums.Identity;
+import cn.herodotus.eurynome.upms.api.deserializer.SysUserEmptyToNull;
 import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -52,6 +54,20 @@ import java.util.Set;
  * @date : 2020/1/19 16:41
  */
 @Schema(title = "人员")
+@NamedEntityGraph(
+        name = "SysEmployeeWithSysUser.Graph",
+        attributeNodes = {
+                @NamedAttributeNode(value = "user", subgraph = "SysUser.SubGraph")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "SysUser.SubGraph",
+                        attributeNodes = {
+                                @NamedAttributeNode(value = "userId")
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "sys_employee", indexes = {@Index(name = "sys_employee_id_idx", columnList = "employee_id")})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "employeeId")
@@ -129,6 +145,8 @@ public class SysEmployee extends BaseSysEntity implements SocialUserDetails {
             indexes = {@Index(name = "sys_employee_department_eid_idx", columnList = "employee_id"), @Index(name = "sys_employee_department_did_idx", columnList = "department_id")})
     private Set<SysDepartment> departments = new HashSet<>();
 
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_USER)
+    @JsonDeserialize(using = SysUserEmptyToNull.class)
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private SysUser user;
 

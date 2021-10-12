@@ -15,14 +15,14 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-upms-api
- * File Name: SysEmployeeEmptyToNull.java
+ * File Name: SysUserEmptyToNull.java
  * Author: gengwei.zheng
- * Date: 2021/10/10 21:47:10
+ * Date: 2021/10/12 22:52:12
  */
 
-package cn.herodotus.eurynome.upms.api.processor;
+package cn.herodotus.eurynome.upms.api.deserializer;
 
-import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
+import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -33,21 +33,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 /**
- * <p>Description: SysEmployee 反序列化 空对象 '{}' 转 为 null </p>
+ * <p>Description: SysUser 反序列化 空对象 '{}' 转 为 null </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/10/10 21:47
+ * @date : 2021/10/12 22:52
  */
-public class SysEmployeeEmptyToNull extends JsonDeserializer<SysEmployee> {
+public class SysUserEmptyToNull extends JsonDeserializer<SysUser> {
 
     @Override
-    public SysEmployee deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public SysUser deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         JsonNode jsonNode = jsonParser.readValueAsTree();
         if (jsonNode.isEmpty() || jsonNode.isNull()) {
             return null;
         } else {
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.treeToValue(jsonNode, SysEmployee.class);
+            return objectMapper.treeToValue(jsonNode, SysUser.class);
         }
     }
 }

@@ -26,9 +26,9 @@ import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
 import cn.herodotus.eurynome.assistant.exception.platform.PlatformException;
 import cn.herodotus.eurynome.common.domain.Result;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.ClientAuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
@@ -145,19 +145,18 @@ public class SecurityGlobalExceptionHandler {
      */
     public static Result<String> resolveOauthException(Exception exception, String path) {
 
-        Result<String> result;
+        Exception reason;
 
         if (exception instanceof OAuth2Exception) {
             OAuth2Exception aex = (OAuth2Exception) exception;
-            result = resolveException(OAuth2Exception.create(aex.getOAuth2ErrorCode(), aex.getMessage()), path);
+            reason = OAuth2Exception.create(aex.getOAuth2ErrorCode(), aex.getMessage());
+        } else if (exception instanceof InsufficientAuthenticationException) {
+            reason = (Exception) exception.getCause();
+            log.debug("[Herodotus] |- InsufficientAuthenticationException cause content is [{}]", reason.getClass().getSimpleName());
         } else {
-            result = resolveException(exception, exception.getMessage());
+            reason = exception;
         }
 
-        if (StringUtils.isBlank(result.getMessage())) {
-            result.message(exception.getMessage());
-        }
-
-        return result.path(path);
+        return resolveException(reason, path);
     }
 }

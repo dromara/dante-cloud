@@ -108,7 +108,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         String redisTokenKey = StringUtils.replace(token, SecurityConstants.BEARER_TOKEN, "access:");
         if (!redisTemplate.hasKey(redisTokenKey)) {
             log.debug("[Herodotus] |- Token is Expired！");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).status(HttpStatus.SC_FORBIDDEN));
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).status(HttpStatus.SC_PRECONDITION_FAILED));
         } else {
             log.debug("[Herodotus] |- Token is OK！");
             return chain.filter(exchange);

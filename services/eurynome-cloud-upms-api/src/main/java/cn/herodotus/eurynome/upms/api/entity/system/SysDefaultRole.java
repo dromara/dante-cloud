@@ -61,7 +61,7 @@ public class SysDefaultRole extends BaseSysEntity {
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
     @Schema(title = "角色ID")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private SysRole role;
 

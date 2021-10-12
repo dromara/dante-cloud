@@ -71,7 +71,7 @@ public class SysAuthorityController extends BaseWriteableRestController<SysAutho
     public Result<List<Tree<String>>> findTree() {
         Result<List<Tree<String>>> result = new Result<>();
 
-        List<SysAuthority> sysAuthorities = sysAuthorityService.findByPage();
+        List<SysAuthority> sysAuthorities = sysAuthorityService.findAll();
         if (CollectionUtils.isNotEmpty(sysAuthorities)) {
             List<TreeNode<String>> treeNodes = sysAuthorities.stream().map(sysAuthority -> {
                 TreeNode<String> treeNode = new TreeNode<>();

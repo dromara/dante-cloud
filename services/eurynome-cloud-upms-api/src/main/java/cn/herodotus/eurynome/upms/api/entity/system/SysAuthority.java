@@ -25,8 +25,6 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -43,7 +41,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "sys_authority", indexes = {@Index(name = "sys_authority_id_idx", columnList = "authority_id")})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "authorityId")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_AUTHORITY)
 

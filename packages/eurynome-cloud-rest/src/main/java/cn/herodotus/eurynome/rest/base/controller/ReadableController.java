@@ -59,7 +59,7 @@ public interface ReadableController<E extends AbstractEntity, ID extends Seriali
     }
 
     default Result<List<E>> findAll() {
-        List<E> domains = getReadableService().findByPage();
+        List<E> domains = getReadableService().findAll();
         return result(domains);
     }
 

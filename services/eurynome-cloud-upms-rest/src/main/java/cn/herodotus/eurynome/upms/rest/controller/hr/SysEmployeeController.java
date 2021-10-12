@@ -34,6 +34,7 @@ import cn.herodotus.eurynome.upms.logic.service.hr.SysEmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -197,5 +198,21 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
         }
 
         return result(isSuccess);
+    }
+
+    @Operation(summary = "根据姓名查询人员", description = "根据输入的人员姓名，分页查询当前部门下已设置人事归属的人员信息",
+            responses = {
+                    @ApiResponse(description = "查询到的人员", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysEmployee.class))),
+                    @ApiResponse(responseCode = "204", description = "查询成功，未查到数据"),
+                    @ApiResponse(responseCode = "500", description = "查询失败")
+            }
+    )
+    @Parameters({
+            @Parameter(name = "employeeName", in = ParameterIn.PATH, required = true, description = "当前页码"),
+    })
+    @GetMapping("/{employeeName}")
+    public Result<SysEmployee> findByEmployeeName(@PathVariable("employeeName") String employeeName) {
+        SysEmployee sysEmployee = sysEmployeeService.findByEmployeeName(employeeName);
+        return result(sysEmployee);
     }
 }

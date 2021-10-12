@@ -92,7 +92,7 @@ public interface ReadableService<E extends Entity, ID extends Serializable> {
      *
      * @return 全部数据列表
      */
-    default List<E> findByPage() {
+    default List<E> findAll() {
         return getRepository().findAll();
     }
 
@@ -102,7 +102,7 @@ public interface ReadableService<E extends Entity, ID extends Serializable> {
      * @param sort {@link Sort}
      * @return 已排序的全部数据列表
      */
-    default List<E> findByPage(Sort sort) {
+    default List<E> findByAll(Sort sort) {
         return getRepository().findAll(sort);
     }
 
@@ -112,7 +112,7 @@ public interface ReadableService<E extends Entity, ID extends Serializable> {
      * @param specification {@link Specification}
      * @return 全部数据列表
      */
-    default List<E> findByPage(Specification<E> specification) {
+    default List<E> findAll(Specification<E> specification) {
         return getRepository().findAll(specification);
     }
 
@@ -123,7 +123,7 @@ public interface ReadableService<E extends Entity, ID extends Serializable> {
      * @param sort          {@link Sort}
      * @return 全部数据列表
      */
-    default List<E> findByPage(Specification<E> specification, Sort sort) {
+    default List<E> findAll(Specification<E> specification, Sort sort) {
         return getRepository().findAll(specification, sort);
     }
 

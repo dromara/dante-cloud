@@ -82,10 +82,10 @@ public abstract class BaseReadableService<E extends AbstractEntity, ID extends S
     }
 
     @Override
-    public List<E> findByPage() {
+    public List<E> findAll() {
         List<E> domains = readFromCache();
         if (CollectionUtils.isEmpty(domains)) {
-            domains = ReadableService.super.findByPage();
+            domains = ReadableService.super.findAll();
             writeToCache(domains);
         }
         log.debug("[Herodotus] |- BaseReadableService findAll.");

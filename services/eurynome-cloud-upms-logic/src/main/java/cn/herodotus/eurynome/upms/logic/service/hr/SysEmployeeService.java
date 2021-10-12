@@ -242,13 +242,20 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         return this.findByPage(specification, pageable);
     }
 
+    @Transactional(rollbackFor = TransactionRollbackException.class)
     public SysEmployee authorize(String employeeId) {
         SysEmployee sysEmployee = this.findById(employeeId);
         SysUser sysUser = sysUserService.register(sysEmployee);
-        sysEmployee.setUser(sysUser);
+        if (ObjectUtils.isNotEmpty(sysUser) && ObjectUtils.isNotEmpty(sysEmployee)) {
+            sysUser.setEmployee(sysEmployee);
+            SysUser newUser = sysUserService.saveOrUpdate(sysUser);
+            if (ObjectUtils.isNotEmpty(newUser)) {
+                log.debug("[Herodotus] |- SysEmployee Service authorize.");
+                return newUser.getEmployee();
+            }
+        }
 
-        log.debug("[Herodotus] |- SysEmployee Service authorize.");
-        return this.saveOrUpdate(sysEmployee);
+        return null;
     }
 
     @Transactional(rollbackFor = TransactionRollbackException.class)
@@ -290,5 +297,11 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         }
 
         return false;
+    }
+
+    public SysEmployee findByEmployeeName(String employeeName) {
+        SysEmployee sysEmployee = sysEmployeeRepository.findByEmployeeName(employeeName);
+        log.debug("[Herodotus] |- SysEmployee Service findByEmployeName.");
+        return sysEmployee;
     }
 }

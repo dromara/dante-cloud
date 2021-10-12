@@ -24,6 +24,8 @@ package cn.herodotus.eurynome.rest.base.controller;
 
 import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.common.domain.Result;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 
@@ -53,7 +55,7 @@ public interface Controller {
         if (ObjectUtils.isNotEmpty(domain)) {
             return Result.content(domain);
         } else {
-            return Result.failure();
+            return Result.empty();
         }
     }
 
@@ -66,7 +68,11 @@ public interface Controller {
      */
     default <E extends AbstractEntity> Result<List<E>> result(List<E> domains) {
         if (ObjectUtils.isNotEmpty(domains)) {
-            return Result.success("查询数据成功！", domains);
+            if (CollectionUtils.isNotEmpty(domains)) {
+                return Result.success("查询数据成功！", domains);
+            } else {
+                return Result.empty("未查询到数据！");
+            }
         } else {
             return Result.failure("查询数据失败！");
         }
@@ -81,7 +87,11 @@ public interface Controller {
      */
     default <E extends AbstractEntity> Result<Map<String, Object>> result(Page<E> pages) {
         if (ObjectUtils.isNotEmpty(pages)) {
-            return Result.success("查询数据成功！", getPageInfoMap(pages));
+            if (CollectionUtils.isNotEmpty(pages.getContent())) {
+                return Result.success("查询数据成功！", getPageInfoMap(pages));
+            } else {
+                return Result.empty("未查询到数据！");
+            }
         } else {
             return Result.failure("查询数据失败！");
         }
@@ -95,7 +105,11 @@ public interface Controller {
      */
     default Result<Map<String, Object>> result(Map<String, Object> map) {
         if (ObjectUtils.isNotEmpty(map)) {
-            return Result.success("查询数据成功！", map);
+            if (MapUtils.isNotEmpty(map)) {
+                return Result.success("查询数据成功！", map);
+            } else {
+                return Result.empty("未查询到数据！");
+            }
         } else {
             return Result.failure("数据数据失败！");
         }

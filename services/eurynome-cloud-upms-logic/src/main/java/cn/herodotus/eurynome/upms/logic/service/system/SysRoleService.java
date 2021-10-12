@@ -60,8 +60,6 @@ public class SysRoleService extends BaseLayeredService<SysRole, String> {
 
     public SysRole authorize(String roleId, String[] authorities) {
 
-        log.debug("[Herodotus] |- SysRole Service authorize.");
-
         Set<SysAuthority> sysAuthorities = new HashSet<>();
         for (String authority : authorities) {
             SysAuthority sysAuthority = new SysAuthority();
@@ -72,8 +70,19 @@ public class SysRoleService extends BaseLayeredService<SysRole, String> {
         SysRole sysRole = findById(roleId);
         sysRole.setAuthorities(sysAuthorities);
 
+        log.debug("[Herodotus] |- SysRole Service authorize.");
         return saveOrUpdate(sysRole);
     }
 
+    public SysRole findByRoleCode(String roleCode) {
+        SysRole sysRole = sysRoleRepository.findByRoleCode(roleCode);
+        log.debug("[Herodotus] |- SysRole Service findByRoleCode.");
+        return sysRole;
+    }
 
+    public SysRole findByRoleId(String roleId) {
+        SysRole sysRole = sysRoleRepository.findByRoleId(roleId);
+        log.debug("[Herodotus] |- SysRole Service findByRoleId.");
+        return sysRole;
+    }
 }

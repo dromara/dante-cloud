@@ -25,9 +25,10 @@ package cn.herodotus.eurynome.security.response;
 import cn.herodotus.eurynome.common.domain.Result;
 import cn.herodotus.eurynome.security.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.utils.WebUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -39,13 +40,14 @@ import java.io.IOException;
  *
  * @author gengwei.zheng
  */
-@Slf4j
-public class HerodotusAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public class HerodotusAuthenticationEntryPoint extends OAuth2AuthenticationEntryPoint {
+
+    private static final Logger log = LoggerFactory.getLogger(HerodotusAuthenticationEntryPoint.class);
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException exception) throws IOException, ServletException {
-        Result<String> result = SecurityGlobalExceptionHandler.resolveException(exception, request.getRequestURI());
+        Result<String> result = SecurityGlobalExceptionHandler.resolveOauthException(exception, request.getRequestURI());
         response.setStatus(result.getStatus());
         WebUtils.renderJson(response, result);
     }

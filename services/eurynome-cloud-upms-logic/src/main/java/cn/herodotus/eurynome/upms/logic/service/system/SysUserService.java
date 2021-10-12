@@ -120,7 +120,8 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
     }
 
     public SysUser register(SysUser sysUser, SysRole sysRole) {
-        Set<SysRole> sysRoles = ImmutableSet.of(sysRole);
+        Set<SysRole> sysRoles = new HashSet<>();
+        sysRoles.add(sysRole);
         return this.register(sysUser, sysRoles);
     }
 

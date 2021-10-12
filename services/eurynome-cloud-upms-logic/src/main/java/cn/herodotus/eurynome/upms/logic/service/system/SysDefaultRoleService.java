@@ -26,7 +26,9 @@ import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.common.constant.enums.AccountType;
 import cn.herodotus.eurynome.upms.api.entity.system.SysDefaultRole;
+import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysDefaultRoleRepository;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +46,12 @@ public class SysDefaultRoleService extends BaseLayeredService<SysDefaultRole, St
     private static final Logger log = LoggerFactory.getLogger(SysDefaultRoleService.class);
 
     private final SysDefaultRoleRepository sysDefaultRoleRepository;
+    private final SysRoleService sysRoleService;
 
     @Autowired
-    public SysDefaultRoleService(SysDefaultRoleRepository sysDefaultRoleRepository) {
+    public SysDefaultRoleService(SysDefaultRoleRepository sysDefaultRoleRepository, SysRoleService sysRoleService) {
         this.sysDefaultRoleRepository = sysDefaultRoleRepository;
+        this.sysRoleService = sysRoleService;
     }
 
     @Override
@@ -59,5 +63,16 @@ public class SysDefaultRoleService extends BaseLayeredService<SysDefaultRole, St
         SysDefaultRole sysDefaultRole = this.sysDefaultRoleRepository.findByScene(scene);
         log.debug("[Herodotus] |- SysDefaultRole Service findBySource.");
         return sysDefaultRole;
+    }
+
+    public SysDefaultRole assign(String defaultId, String roleId) {
+        SysRole sysRole = sysRoleService.findByRoleId(roleId);
+        SysDefaultRole sysDefaultRole = sysDefaultRoleRepository.findByDefaultId(defaultId);
+        if (ObjectUtils.isNotEmpty(sysDefaultRole) && ObjectUtils.isNotEmpty(sysRole)) {
+            sysDefaultRole.setRole(sysRole);
+            return sysDefaultRoleRepository.saveAndFlush(sysDefaultRole);
+        }
+
+        return null;
     }
 }

@@ -30,12 +30,13 @@ import cn.herodotus.eurynome.upms.logic.service.system.SysRoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/role")
@@ -62,6 +63,22 @@ public class SysRoleController extends BaseWriteableRestController<SysRole, Stri
     @PutMapping
     public Result<SysRole> authorize(@RequestParam(name = "roleId") String roleId, @RequestParam(name = "authorities[]") String[] authorities) {
         SysRole sysRole = sysRoleService.authorize(roleId, authorities);
+        return result(sysRole);
+    }
+
+    @Operation(summary = "根据角色代码查询角色", description = "根据输入的角色代码，查询对应的角色",
+            responses = {
+                    @ApiResponse(description = "查询到的角色", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysRole.class))),
+                    @ApiResponse(responseCode = "204", description = "查询成功，未查到数据"),
+                    @ApiResponse(responseCode = "500", description = "查询失败")
+            }
+    )
+    @Parameters({
+            @Parameter(name = "roleCode", in = ParameterIn.PATH, required = true, description = "角色代码"),
+    })
+    @GetMapping("/{roleCode}")
+    public Result<SysRole> findByRoleCode(@PathVariable("roleCode") String roleCode) {
+        SysRole sysRole = sysRoleService.findByRoleCode(roleCode);
         return result(sysRole);
     }
 }

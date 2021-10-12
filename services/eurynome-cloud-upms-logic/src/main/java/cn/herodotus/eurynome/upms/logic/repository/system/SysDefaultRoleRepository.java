@@ -37,6 +37,21 @@ import javax.persistence.QueryHint;
  */
 public interface SysDefaultRoleRepository extends BaseRepository<SysDefaultRole, String> {
 
+    /**
+     * 根据场景查询当前场景对应的默认角色
+     *
+     * @param scene 场景 {@link AccountType}
+     * @return {@link SysDefaultRole}
+     */
     @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
     SysDefaultRole findByScene(AccountType scene);
+
+    /**
+     * 根据默认角色ID查询默认角色
+     *
+     * @param defaultId 默认角色ID
+     * @return {@link SysDefaultRole}
+     */
+    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    SysDefaultRole findByDefaultId(String defaultId);
 }

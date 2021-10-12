@@ -49,6 +49,7 @@ public enum ResultStatus {
      * 2*.** 成功
      */
     OK(20000, "成功"),
+    NO_CONTENT(20400, "无内容"),
 
     /**
      * 4*.** Java常规错误

@@ -24,7 +24,33 @@ package cn.herodotus.eurynome.upms.logic.repository.system;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.system.SysRole;
+import org.springframework.data.jpa.repository.QueryHints;
 
+import javax.persistence.QueryHint;
+
+/**
+ * <p>Description: SysRoleRepository </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/10/12 22:55
+ */
 public interface SysRoleRepository extends BaseRepository<SysRole, String> {
 
+    /**
+     * 根据用户名查找SysUser
+     *
+     * @param roleCode 角色代码
+     * @return {@link SysRole}
+     */
+    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    SysRole findByRoleCode(String roleCode);
+
+    /**
+     * 根据角色ID查询角色
+     *
+     * @param roleId 角色ID
+     * @return {@link SysRole}
+     */
+    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    SysRole findByRoleId(String roleId);
 }

@@ -41,9 +41,9 @@ public enum Gender {
     /**
      * enum
      */
-    OTHERS(0, "其它"),
-    MAN(1, "男"),
-    WOMAN(2, "女");
+    MAN(0, "男"),
+    WOMAN(1, "女"),
+    OTHERS(2, "其它");
 
     @Schema(title =  "索引")
     private final Integer index;

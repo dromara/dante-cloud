@@ -44,9 +44,9 @@ public enum Identity {
     /**
      * enum
      */
-    LEADERSHIP(0, "领导"),
-    SECTION_LEADER(1, "部所负责人"),
-    STAFF(2, "员工");
+    STAFF(0, "员工"),
+    SECTION_LEADER(1, "部门负责人"),
+    LEADERSHIP(2, "领导");
 
     @Schema(title =  "索引")
     private final Integer index;

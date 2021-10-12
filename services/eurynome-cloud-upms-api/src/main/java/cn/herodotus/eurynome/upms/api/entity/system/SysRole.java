@@ -24,8 +24,6 @@ package cn.herodotus.eurynome.upms.api.entity.system;
 
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -38,12 +36,17 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>Description: SysRole </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/10/12 22:58
+ */
 @Entity
 @Table(name = "sys_role", uniqueConstraints = {@UniqueConstraint(columnNames = {"role_code"})},
         indexes = {@Index(name = "sys_role_rid_idx", columnList = "role_id"), @Index(name = "sys_role_rcd_idx", columnList = "role_code")})
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "roleId")
 public class SysRole extends BaseSysEntity {
 
     @Id
@@ -80,10 +83,6 @@ public class SysRole extends BaseSysEntity {
             indexes = {@Index(name = "sys_role_authority_rid_idx", columnList = "role_id"), @Index(name = "sys_role_authority_aid_idx", columnList = "authority_id")})
     private Set<SysAuthority> authorities = new HashSet<>();
 
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_DEFAULT_ROLE)
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<SysDefaultRole> defaults = new HashSet<>();
-
     @Override
     public String getId() {
         return getRoleId();
@@ -92,14 +91,6 @@ public class SysRole extends BaseSysEntity {
     @Override
     public String getLinkedProperty() {
         return getRoleCode();
-    }
-
-    public Set<SysDefaultRole> getDefaults() {
-        return defaults;
-    }
-
-    public void setDefaults(Set<SysDefaultRole> defaults) {
-        this.defaults = defaults;
     }
 
     public String getRoleId() {

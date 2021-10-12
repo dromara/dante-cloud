@@ -32,6 +32,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +95,13 @@ public class SysUserController extends BaseWriteableRestController<SysUser, Stri
         return result(sysUser);
     }
 
-    @Operation(summary = "根据用户名查询系统用户", description = "通过username查询系统用户数据")
+    @Operation(summary = "根据用户名查询系统用户", description = "通过username查询系统用户数据",
+            responses = {
+                    @ApiResponse(description = "查询到的用户", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysUser.class))),
+                    @ApiResponse(responseCode = "204", description = "查询成功，未查到数据"),
+                    @ApiResponse(responseCode = "500", description = "查询失败")
+            }
+    )
     @GetMapping("/sign-in/{userName}")
     public Result<SysUser> findByUserName(@PathVariable("userName") String userName) {
         SysUser sysUser = sysUserService.findByUserName(userName);

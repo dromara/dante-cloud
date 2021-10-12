@@ -165,7 +165,7 @@ public class HerodotusExceptionHandler {
 
 
     protected static Result<String> getResult(ResultStatus resultStatus, int httpStatus) {
-        return new Result<String>().failed().code(resultStatus.getCode()).message(resultStatus.getMessage()).status(httpStatus);
+        return Result.failure(resultStatus.getMessage(), resultStatus.getCode(), httpStatus, null);
     }
 
     public static Result<String> resolveException(Exception ex, String path) {

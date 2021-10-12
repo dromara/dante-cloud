@@ -252,6 +252,22 @@ public class Result<T> implements Serializable {
         return failure("操作失败！");
     }
 
+    public static <T> Result<T> empty(String message, int code) {
+        return create(message, null, code, HttpStatus.SC_NO_CONTENT, null, null);
+    }
+
+    public static <T> Result<T> empty(ResultStatus resultStatus) {
+        return empty(resultStatus.getMessage(), resultStatus.getCode());
+    }
+
+    public static <T> Result<T> empty(String message) {
+        return empty(message, ResultStatus.NO_CONTENT.getCode());
+    }
+
+    public static <T> Result<T> empty() {
+        return empty("未查询到相关内容！");
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)

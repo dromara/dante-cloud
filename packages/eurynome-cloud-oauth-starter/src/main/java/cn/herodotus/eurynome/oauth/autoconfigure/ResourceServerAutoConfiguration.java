@@ -34,6 +34,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 import javax.annotation.PostConstruct;
 
@@ -58,17 +59,19 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
     }
 
     @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
+        resources.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+        super.configure(resources);
+    }
+
+    @Override
     public void configure(HttpSecurity http) throws Exception {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
         // 禁用CSRF 开启跨域
         http.csrf().disable().cors();
-
-        // 认证鉴权错误处理,为了统一异常处理。每个资源服务器都应该加上。
-        http.exceptionHandling()
-                // 未登录认证异常
-                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
 
         // @formatter:off
         http.authorizeRequests()

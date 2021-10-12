@@ -24,6 +24,12 @@ package cn.herodotus.eurynome.upms.logic.repository.hr;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.QueryHints;
+
+import javax.persistence.QueryHint;
 
 /**
  * <p>Description: 人员 Repository </p>
@@ -33,4 +39,18 @@ import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
  */
 public interface SysEmployeeRepository extends BaseRepository<SysEmployee, String> {
 
+    /**
+     * 根据人员性名查找SysEmployee
+     *
+     * @param employeeName 人员姓名
+     * @return {@link SysEmployee}
+     */
+    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @EntityGraph(value = "SysEmployeeWithSysUser.Graph", type = EntityGraph.EntityGraphType.FETCH)
+    SysEmployee findByEmployeeName(String employeeName);
+
+    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @EntityGraph(value = "SysEmployeeWithSysUser.Graph", type = EntityGraph.EntityGraphType.FETCH)
+    @Override
+    Page<SysEmployee> findAll(Pageable pageable);
 }
