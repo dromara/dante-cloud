@@ -24,11 +24,11 @@ package cn.herodotus.eurynome.security.autoconfigure;
 
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.RestProperties;
-import cn.herodotus.eurynome.security.authentication.access.RequestMappingLocalCache;
-import cn.herodotus.eurynome.security.authentication.access.RequestMappingScanner;
-import cn.herodotus.eurynome.security.authentication.token.HerodotusUserAuthenticationConverter;
+import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
+import cn.herodotus.eurynome.security.authentication.RequestMappingScanner;
+import cn.herodotus.eurynome.security.authentication.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
-import cn.herodotus.eurynome.security.exception.SecurityGlobalExceptionHandler;
+import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import org.slf4j.Logger;

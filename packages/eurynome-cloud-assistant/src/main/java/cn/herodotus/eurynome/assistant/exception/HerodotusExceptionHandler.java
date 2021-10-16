@@ -73,7 +73,8 @@ public class HerodotusExceptionHandler {
         EXCEPTION_DICTIONARY.put("InvalidScopeException", getPreconditionFailedResult(ResultStatus.INVALID_SCOPE));
         EXCEPTION_DICTIONARY.put("InvalidClientException", getPreconditionFailedResult(ResultStatus.INVALID_GRANT));
         EXCEPTION_DICTIONARY.put("InvalidRequestException", getPreconditionFailedResult(ResultStatus.INVALID_REQUEST));
-        EXCEPTION_DICTIONARY.put("RedirectMismatchException", getPreconditionFailedResult(ResultStatus.REDIRECT_URI_MISMATCH));
+        EXCEPTION_DICTIONARY.put("RedirectMismatchException", getPreconditionFailedResult(ResultStatus.INVALID_REDIRECT_URI));
+        EXCEPTION_DICTIONARY.put("InvalidArgumentException", getPreconditionFailedResult(ResultStatus.INVALID_ARGUMENT));
         // 415.** 对应错误
         EXCEPTION_DICTIONARY.put("HttpMediaTypeNotAcceptableException", getUnsupportedMediaTypeResult(ResultStatus.UNSUPPORTED_MEDIA_TYPE));
 

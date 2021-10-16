@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
  * Module Name: eurynome-cloud-security
  * File Name: HerodotusUserAuthenticationConverter.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/06/29 15:58:29
  */
 
-package cn.herodotus.eurynome.security.authentication.token;
+package cn.herodotus.eurynome.security.authentication;
 
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.hutool.core.bean.BeanUtil;

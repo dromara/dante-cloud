@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
+ * Module Name: eurynome-cloud-oauth
  * File Name: HerodotusWebResponseExceptionTranslator.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/10/16 16:30:16
  */
 
-package cn.herodotus.eurynome.security.response;
+package cn.herodotus.eurynome.oauth.provider;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.security.exception.SecurityGlobalExceptionHandler;
+import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;

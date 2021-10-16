@@ -26,7 +26,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.AES;
 import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
-import cn.herodotus.eurynome.oauth.exception.IllegalSymmetricKeyException;
+import cn.herodotus.eurynome.security.exception.IllegalSymmetricKeyException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;

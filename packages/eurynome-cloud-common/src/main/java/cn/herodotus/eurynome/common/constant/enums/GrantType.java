@@ -30,6 +30,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>Description: OAuth2 认证模式枚举 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/10/16 16:31
+ */
 public enum GrantType {
 
     /**
@@ -38,7 +44,8 @@ public enum GrantType {
     AUTHORIZATION_CODE(SecurityConstants.AUTHORIZATION_CODE, "Authorization Code 模式"),
     IMPLICIT(SecurityConstants.IMPLICIT, "Implicit 模式"),
     PASSWORD(SecurityConstants.PASSWORD, "Password 模式"),
-    CLIENT_CREDENTIALS(SecurityConstants.CLIENT_CREDENTIALS, "Client Credentials 模式");
+    CLIENT_CREDENTIALS(SecurityConstants.CLIENT_CREDENTIALS, "Client Credentials 模式"),
+    SOCIAL_AUTHENTICATION(SecurityConstants.SOCIAL_AUTHENTICATION, "Social Authentication 模式");
 
     private final String grant;
     private final String description;

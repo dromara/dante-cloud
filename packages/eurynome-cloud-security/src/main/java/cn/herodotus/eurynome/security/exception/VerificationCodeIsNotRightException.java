@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,27 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-oauth
- * File Name: VerificationCodeIsNotExistException.java
+ * Module Name: eurynome-cloud-security
+ * File Name: VerificationCodeIsNotRightException.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/10/16 16:08:16
  */
 
-package cn.herodotus.eurynome.oauth.exception;
+package cn.herodotus.eurynome.security.exception;
 
 /**
- * <p> Description : 验证码不存在Exception </p>
+ * <p> Description : 验证码不正确Exception </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/1/26 18:11
  */
-public class VerificationCodeIsNotExistException extends VerificationCodeException {
+public class VerificationCodeIsNotRightException extends VerificationCodeException{
 
-    public VerificationCodeIsNotExistException(String message) {
-        super(message);
+    public VerificationCodeIsNotRightException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public VerificationCodeIsNotRightException(String msg) {
+        super(msg);
     }
 }

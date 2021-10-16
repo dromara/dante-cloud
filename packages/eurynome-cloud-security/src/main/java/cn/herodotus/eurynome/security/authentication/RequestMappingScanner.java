@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
  * Module Name: eurynome-cloud-security
  * File Name: RequestMappingScanner.java
  * Author: gengwei.zheng
- * Date: 2021/05/13 10:58:13
+ * Date: 2021/10/08 22:54:08
  */
 
-package cn.herodotus.eurynome.security.authentication.access;
+package cn.herodotus.eurynome.security.authentication;
 
 import cn.herodotus.eurynome.assistant.resolver.PropertyResolver;
 import cn.herodotus.eurynome.common.constant.enums.Architecture;

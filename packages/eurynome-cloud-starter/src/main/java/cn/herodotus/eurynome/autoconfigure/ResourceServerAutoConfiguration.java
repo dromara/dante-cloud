@@ -25,7 +25,8 @@ package cn.herodotus.eurynome.autoconfigure;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.security.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
@@ -48,10 +49,11 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2020/6/6 10:49
  */
-@Slf4j
 @Configuration
 @EnableResourceServer
 public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAdapter {
+
+    private static final Logger log = LoggerFactory.getLogger(ResourceServerAutoConfiguration.class);
 
     @Autowired
     private SecurityProperties securityProperties;

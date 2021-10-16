@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.oauth.authentication;
 
-import cn.herodotus.eurynome.oauth.exception.VerificationCodeIsEmptyException;
-import cn.herodotus.eurynome.oauth.exception.VerificationCodeIsNotExistException;
-import cn.herodotus.eurynome.oauth.exception.VerificationCodeIsNotRightException;
+import cn.herodotus.eurynome.security.exception.VerificationCodeIsEmptyException;
+import cn.herodotus.eurynome.security.exception.VerificationCodeIsNotExistException;
+import cn.herodotus.eurynome.security.exception.VerificationCodeIsNotRightException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;

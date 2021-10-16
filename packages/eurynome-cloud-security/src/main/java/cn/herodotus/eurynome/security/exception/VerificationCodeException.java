@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,30 +15,26 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-security
- * File Name: IllegalAuthenticationArgumentException.java
+ * File Name: VerificationCodeException.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:46:07
+ * Date: 2021/10/16 16:30:16
  */
 
 package cn.herodotus.eurynome.security.exception;
 
-import org.springframework.security.core.AuthenticationException;
-
 /**
- * <p>File: IllegalAuthenticationArgumentException </p>
- *
- * <p>Description: 认证参数错误 </p>
+ * <p> Description : 验证码Exception </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/4/30 13:21
+ * @date : 2019/11/29 13:46
  */
-public class IllegalAuthenticationArgumentException extends AuthenticationException {
+public class VerificationCodeException extends SocialAuthenticationException {
 
-    public IllegalAuthenticationArgumentException(String msg, Throwable cause) {
+    public VerificationCodeException(String msg, Throwable cause) {
         super(msg, cause);
     }
 
-    public IllegalAuthenticationArgumentException(String msg) {
+    public VerificationCodeException(String msg) {
         super(msg);
     }
 }

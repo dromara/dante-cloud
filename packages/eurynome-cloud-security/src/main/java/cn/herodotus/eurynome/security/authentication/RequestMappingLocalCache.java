@@ -17,10 +17,10 @@
  * Module Name: eurynome-cloud-security
  * File Name: RequestMappingLocalCache.java
  * Author: gengwei.zheng
- * Date: 2021/07/28 18:15:28
+ * Date: 2021/10/08 22:54:08
  */
 
-package cn.herodotus.eurynome.security.authentication.access;
+package cn.herodotus.eurynome.security.authentication;
 
 import cn.herodotus.eurynome.data.cache.query.CacheTemplate;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;

@@ -100,7 +100,8 @@ public enum ResultStatus {
     INVALID_SCOPE(41203, "授权范围错误"),
     INVALID_CLIENT(41204, "非法的客户端"),
     INVALID_REQUEST(41205, "无效的请求，参数使用错误或配置无效."),
-    REDIRECT_URI_MISMATCH(41206, "Redirect Uri Mismatch"),
+    INVALID_ARGUMENT(41206, "认证请求参数值错误或者参数缺失."),
+    INVALID_REDIRECT_URI(41207, "重定向地址不匹配"),
     /**
      * 415.*	Unsupported Media Type	服务器无法处理请求附带的媒体格式
      */

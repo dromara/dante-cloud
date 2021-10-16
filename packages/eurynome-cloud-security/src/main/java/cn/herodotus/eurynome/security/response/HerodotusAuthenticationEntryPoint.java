@@ -23,7 +23,6 @@
 package cn.herodotus.eurynome.security.response;
 
 import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.security.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.utils.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
+ * Module Name: eurynome-cloud-oauth
  * File Name: HerodotusJwtTokenEnhancer.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/08/18 17:48:18
  */
 
-package cn.herodotus.eurynome.security.authentication.token;
+package cn.herodotus.eurynome.oauth.provider.token;
 
 import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;

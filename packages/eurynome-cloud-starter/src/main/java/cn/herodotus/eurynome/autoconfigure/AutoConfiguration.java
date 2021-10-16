@@ -24,7 +24,8 @@ package cn.herodotus.eurynome.autoconfigure;
 
 import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -32,11 +33,12 @@ import javax.annotation.PostConstruct;
 /**
  * @author gengwei.zheng
  */
-@Slf4j
 @Configuration
 @EnableHerodotusRest
 @EnableHerodotusKernel
 public class AutoConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(AutoConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

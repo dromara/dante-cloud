@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,27 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-oauth
- * File Name: IllegalSymmetricKeyException.java
+ * Module Name: eurynome-cloud-security
+ * File Name: VerificationCodeIsEmptyException.java
  * Author: gengwei.zheng
- * Date: 2021/05/08 06:41:08
+ * Date: 2021/10/16 16:08:16
  */
 
-package cn.herodotus.eurynome.oauth.exception;
-
-import org.springframework.security.core.AuthenticationException;
+package cn.herodotus.eurynome.security.exception;
 
 /**
- * <p> Description : 非法加密Key Exception </p>
+ * <p> Description : 验证码为空Exception </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/1/28 17:32
+ * @date : 2020/1/26 18:11
  */
-public class IllegalSymmetricKeyException extends AuthenticationException {
+public class VerificationCodeIsEmptyException extends VerificationCodeException {
 
-    public IllegalSymmetricKeyException(String message) {
-        super(message);
+    public VerificationCodeIsEmptyException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public VerificationCodeIsEmptyException(String msg) {
+        super(msg);
     }
 }

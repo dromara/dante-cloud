@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,27 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-oauth
- * File Name: VerificationCodeIsNotRightException.java
+ * Module Name: eurynome-cloud-security
+ * File Name: SocialAuthenticationException.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/10/16 16:06:16
  */
 
-package cn.herodotus.eurynome.oauth.exception;
+package cn.herodotus.eurynome.security.exception;
 
 /**
- * <p> Description : 验证码不正确Exception </p>
+ * <p>Description: 社交化认证基础Exception </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/1/26 18:11
+ * @date : 2021/10/16 16:05
  */
-public class VerificationCodeIsNotRightException extends VerificationCodeException{
+public class SocialAuthenticationException extends PlatformAuthenticationException {
 
-    public VerificationCodeIsNotRightException(String message) {
-        super(message);
+    public SocialAuthenticationException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public SocialAuthenticationException(String msg) {
+        super(msg);
     }
 }

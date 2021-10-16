@@ -47,6 +47,7 @@ public class SecurityConstants {
     public static final String IMPLICIT = "implicit";
     public static final String PASSWORD = "password";
     public static final String CLIENT_CREDENTIALS = "client_credentials";
+    public static final String SOCIAL_AUTHENTICATION = "social_authentication";
 
     /**
      * 访问 /oauth/authorize地址的两种 response_type类型值
