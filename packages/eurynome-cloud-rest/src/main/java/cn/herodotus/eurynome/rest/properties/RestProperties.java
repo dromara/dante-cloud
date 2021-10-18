@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.properties;
 
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;

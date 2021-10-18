@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.utils;
 
-import cn.herodotus.eurynome.common.utils.BeanUtils;
+import cn.herodotus.eurynome.assistant.utils.BeanUtils;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.collections4.CollectionUtils;

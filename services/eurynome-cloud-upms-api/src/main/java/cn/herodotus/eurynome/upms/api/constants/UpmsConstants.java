@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.upms.api.constants;
 
-import cn.herodotus.eurynome.common.constant.enums.*;
-import cn.herodotus.eurynome.common.constant.magic.CacheConstants;
+import cn.herodotus.eurynome.assistant.enums.*;
+import cn.herodotus.eurynome.assistant.constant.CacheConstants;
 import cn.herodotus.eurynome.upms.api.constants.enums.SupplierType;
 import cn.herodotus.eurynome.upms.api.constants.enums.TechnologyType;
 

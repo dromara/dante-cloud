@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.gateway.utils;
 
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import com.alibaba.fastjson.JSON;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;

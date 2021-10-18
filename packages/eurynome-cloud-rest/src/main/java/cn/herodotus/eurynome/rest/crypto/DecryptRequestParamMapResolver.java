@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.rest.crypto;
 
 import cn.herodotus.eurynome.assistant.annotation.rest.Crypto;
-import cn.herodotus.eurynome.common.constant.magic.HttpHeaders;
-import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
+import cn.herodotus.eurynome.assistant.constant.HttpHeaders;
+import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

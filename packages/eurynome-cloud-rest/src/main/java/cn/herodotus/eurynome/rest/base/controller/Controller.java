@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.rest.base.controller;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;

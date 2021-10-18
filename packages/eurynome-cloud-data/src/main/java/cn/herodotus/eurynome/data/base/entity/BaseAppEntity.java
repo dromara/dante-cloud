@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.base.entity;
 
-import cn.herodotus.eurynome.common.constant.enums.ApplicationType;
+import cn.herodotus.eurynome.assistant.enums.ApplicationType;
 import cn.hutool.core.util.IdUtil;
 
 import javax.persistence.Column;

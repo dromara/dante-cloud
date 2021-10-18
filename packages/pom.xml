@@ -38,7 +38,6 @@
     <name>eurynome-cloud-packages</name>
 
     <modules>
-        <module>eurynome-cloud-common</module>
         <module>eurynome-cloud-data</module>
         <module>eurynome-cloud-rest</module>
         <module>eurynome-cloud-security</module>

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.base.repository;
 
-import cn.herodotus.eurynome.common.definition.entity.Entity;
+import cn.herodotus.eurynome.assistant.definition.entity.Entity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

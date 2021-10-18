@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
-import cn.herodotus.eurynome.common.constant.enums.AccountType;
+import cn.herodotus.eurynome.assistant.enums.AccountType;
 import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
@@ -34,7 +34,6 @@ import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysUserRepository;
 import cn.hutool.core.util.IdUtil;
-import com.google.common.collect.ImmutableSet;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

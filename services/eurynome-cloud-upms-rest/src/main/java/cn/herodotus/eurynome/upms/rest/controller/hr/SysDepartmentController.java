@@ -22,8 +22,7 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
-import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
@@ -38,7 +37,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

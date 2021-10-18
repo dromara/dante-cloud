@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.jpa;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import org.apache.commons.collections4.CollectionUtils;

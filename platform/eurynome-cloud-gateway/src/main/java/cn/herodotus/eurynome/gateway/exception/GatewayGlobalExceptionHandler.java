@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.gateway.exception;
 
-import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
+import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;

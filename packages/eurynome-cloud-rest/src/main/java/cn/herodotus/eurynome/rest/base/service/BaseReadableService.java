@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.base.service;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;

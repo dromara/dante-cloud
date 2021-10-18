@@ -23,9 +23,9 @@
 package cn.herodotus.eurynome.rest.base.controller;
 
 import cn.herodotus.eurynome.assistant.annotation.rest.AccessLimited;
-import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.rest.base.business.Pager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

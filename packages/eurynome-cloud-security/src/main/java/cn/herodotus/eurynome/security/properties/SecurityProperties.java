@@ -22,11 +22,11 @@
 
 package cn.herodotus.eurynome.security.properties;
 
-import cn.herodotus.eurynome.common.constant.enums.captcha.CaptchaFont;
-import cn.herodotus.eurynome.common.constant.enums.captcha.CaptchaLetterType;
-import cn.herodotus.eurynome.common.constant.enums.captcha.CaptchaType;
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.assistant.enums.captcha.CaptchaFont;
+import cn.herodotus.eurynome.assistant.enums.captcha.CaptchaLetterType;
+import cn.herodotus.eurynome.assistant.enums.captcha.CaptchaType;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;

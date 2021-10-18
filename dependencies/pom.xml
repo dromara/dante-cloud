@@ -131,11 +131,6 @@
             <!-- Eurynome Cloud -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-assistant</artifactId>
                 <version>${project.version}</version>
             </dependency>

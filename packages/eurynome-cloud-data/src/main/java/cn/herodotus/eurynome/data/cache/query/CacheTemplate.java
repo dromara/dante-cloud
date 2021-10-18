@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.cache.query;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 

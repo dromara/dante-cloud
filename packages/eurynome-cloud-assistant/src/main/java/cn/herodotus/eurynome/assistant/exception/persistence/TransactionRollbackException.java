@@ -17,7 +17,7 @@
  * Module Name: eurynome-cloud-assistant
  * File Name: TransactionRollbackException.java
  * Author: gengwei.zheng
- * Date: 2021/09/23 15:12:23
+ * Date: 2021/09/26 19:23:26
  */
 
 package cn.herodotus.eurynome.assistant.exception.persistence;

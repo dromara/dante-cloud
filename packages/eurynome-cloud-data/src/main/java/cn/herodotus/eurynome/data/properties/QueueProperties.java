@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.properties;
 
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**

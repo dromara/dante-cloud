@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.stamp;
 
-import cn.herodotus.eurynome.common.constant.magic.CacheConstants;
+import cn.herodotus.eurynome.assistant.constant.CacheConstants;
 import cn.herodotus.eurynome.data.definition.AbstractStampManager;
 import cn.herodotus.eurynome.data.properties.StampProperties;
 import cn.hutool.core.util.IdUtil;

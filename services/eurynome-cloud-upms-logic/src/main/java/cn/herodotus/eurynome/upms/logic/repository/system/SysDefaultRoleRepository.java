@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.system;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.common.constant.enums.AccountType;
+import cn.herodotus.eurynome.assistant.enums.AccountType;
 import cn.herodotus.eurynome.upms.api.entity.system.SysDefaultRole;
 import org.springframework.data.jpa.repository.QueryHints;
 

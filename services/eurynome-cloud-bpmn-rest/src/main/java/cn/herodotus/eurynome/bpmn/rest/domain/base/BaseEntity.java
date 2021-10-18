@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.bpmn.rest.domain.base;
 
-import cn.herodotus.eurynome.common.definition.entity.Entity;
+import cn.herodotus.eurynome.assistant.definition.entity.Entity;
 
 import javax.persistence.MappedSuperclass;
 

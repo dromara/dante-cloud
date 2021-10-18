@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-common
- * File Name: GlobalExceptionHandler.java
+ * Module Name: eurynome-cloud-assistant
+ * File Name: HerodotusExceptionHandler.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/10/17 22:53:17
  */
 
 package cn.herodotus.eurynome.assistant.exception;
 
-import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.enums.ResultStatus;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;

@@ -24,11 +24,10 @@ package cn.herodotus.eurynome.rest.security;
 
 import cn.herodotus.eurynome.assistant.annotation.rest.Idempotent;
 import cn.herodotus.eurynome.assistant.exception.operation.RepeatSubmissionException;
-import cn.herodotus.eurynome.common.constant.magic.HttpHeaders;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.assistant.constant.HttpHeaders;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
 import cn.hutool.crypto.SecureUtil;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

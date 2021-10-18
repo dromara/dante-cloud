@@ -23,9 +23,9 @@
 package cn.herodotus.eurynome.rest.configuration;
 
 import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnSwaggerEnabled;
-import cn.herodotus.eurynome.common.constant.enums.Architecture;
-import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.assistant.enums.Architecture;
+import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.ServiceProperties;
 import com.google.common.collect.ImmutableList;
