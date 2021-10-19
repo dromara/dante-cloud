@@ -89,15 +89,15 @@
         <alibaba-nacos.version>2.0.3</alibaba-nacos.version>
 
         <!-- 国内开源通用组件 -->
-        <hutool.version>5.7.13</hutool.version>
-        <okhttps.version>3.1.5</okhttps.version>
-        <just-auth.verison>1.16.4</just-auth.verison>
+        <hutool.version>5.7.14</hutool.version>
+        <okhttps.version>3.2.0</okhttps.version>
+        <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
 
         <!--第三方starter-->
         <starter-jasypt.version>3.0.4</starter-jasypt.version>
-        <starter-camunda.version>7.15.0</starter-camunda.version>
+        <starter-camunda.version>7.16.0</starter-camunda.version>
         <starter-mybatis-plus.version>3.4.3.4</starter-mybatis-plus.version>
         <mybatis-plus-generator.version>3.5.1</mybatis-plus-generator.version>
         <velocity.version>2.3</velocity.version>
