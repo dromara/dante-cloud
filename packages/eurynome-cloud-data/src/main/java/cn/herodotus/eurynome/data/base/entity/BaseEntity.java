@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.base.entity;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -17,13 +17,13 @@
  * Module Name: eurynome-cloud-assistant
  * File Name: PropertyResolver.java
  * Author: gengwei.zheng
- * Date: 2021/08/07 20:27:07
+ * Date: 2021/10/17 22:56:17
  */
 
 package cn.herodotus.eurynome.assistant.resolver;
 
-import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import org.springframework.core.env.Environment;
 
 /**

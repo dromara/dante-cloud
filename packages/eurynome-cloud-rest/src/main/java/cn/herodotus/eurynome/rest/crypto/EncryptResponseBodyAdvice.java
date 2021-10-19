@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.rest.crypto;
 
 import cn.herodotus.eurynome.assistant.annotation.rest.Crypto;
-import cn.herodotus.eurynome.common.constant.magic.HttpHeaders;
-import cn.herodotus.eurynome.common.utils.JacksonUtils;
+import cn.herodotus.eurynome.assistant.constant.HttpHeaders;
+import cn.herodotus.eurynome.assistant.utils.JacksonUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

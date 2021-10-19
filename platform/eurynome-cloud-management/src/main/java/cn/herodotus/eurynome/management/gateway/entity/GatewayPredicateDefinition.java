@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.management.gateway.entity;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 

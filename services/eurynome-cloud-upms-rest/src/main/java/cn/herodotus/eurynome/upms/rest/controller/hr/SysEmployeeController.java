@@ -22,11 +22,11 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
-import cn.herodotus.eurynome.common.constant.enums.Gender;
-import cn.herodotus.eurynome.common.constant.enums.Identity;
+import cn.herodotus.eurynome.assistant.enums.Gender;
+import cn.herodotus.eurynome.assistant.enums.Identity;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.dto.AllocatableDeploy;
 import cn.herodotus.eurynome.upms.logic.dto.AllocatableRemove;

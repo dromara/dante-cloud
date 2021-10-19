@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.dto;
 
-import cn.herodotus.eurynome.common.definition.dto.BaseDTO;
+import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 

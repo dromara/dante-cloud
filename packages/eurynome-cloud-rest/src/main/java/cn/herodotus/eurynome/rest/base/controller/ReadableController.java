@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.rest.base.controller;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.rest.base.service.ReadableService;
 import org.springframework.data.domain.Page;
 

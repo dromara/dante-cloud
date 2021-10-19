@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import cn.herodotus.eurynome.data.mybatis.HerodotusIdentifierGenerator;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;

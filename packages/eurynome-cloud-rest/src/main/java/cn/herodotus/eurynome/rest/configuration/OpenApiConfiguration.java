@@ -23,9 +23,9 @@
 package cn.herodotus.eurynome.rest.configuration;
 
 import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnSwaggerEnabled;
-import cn.herodotus.eurynome.common.constant.enums.Architecture;
-import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.assistant.enums.Architecture;
+import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.rest.properties.PlatformProperties;
 import cn.herodotus.eurynome.rest.properties.ServiceProperties;
 import com.google.common.collect.ImmutableList;
@@ -82,7 +82,7 @@ public class OpenApiConfiguration {
                 .servers(getServers())
                 .info(new Info().title("Eurynome Cloud")
                         .description("Eurynome Cloud Microservices Architecture")
-                        .version("2.5.5.50")
+                        .version("2.5.5.60")
                         .license(new License().name("Apache 2.0").url("http://www.apache.org/licenses/")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Eurynome Cloud Documentation")

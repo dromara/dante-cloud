@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.provider.token;
 
-import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
+import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;

@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.data.cache.query;
 
-import cn.herodotus.eurynome.common.constant.magic.CacheConstants;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.constant.CacheConstants;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import com.alicp.jetcache.Cache;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;

@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.rest.properties;
 
-import cn.herodotus.eurynome.common.utils.ConvertUtils;
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.assistant.utils.ConvertUtils;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;

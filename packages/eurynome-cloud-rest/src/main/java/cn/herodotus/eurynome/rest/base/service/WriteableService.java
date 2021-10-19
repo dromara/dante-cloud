@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.base.service;
 
-import cn.herodotus.eurynome.common.definition.entity.Entity;
+import cn.herodotus.eurynome.assistant.definition.entity.Entity;
 
 import java.io.Serializable;
 import java.util.List;

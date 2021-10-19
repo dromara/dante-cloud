@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.rest.controller;
 
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.collections4.MapUtils;

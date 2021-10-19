@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.rest.crypto;
 
 import cn.herodotus.eurynome.assistant.exception.crypto.SessionInvalidException;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.data.domain.SecretKey;
 import cn.herodotus.eurynome.data.stamp.SecretKeyStampManager;
 import cn.hutool.core.codec.Base64;

@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.upms.api.entity.hr;
 
-import cn.herodotus.eurynome.common.constant.enums.AccountType;
-import cn.herodotus.eurynome.common.constant.enums.Gender;
-import cn.herodotus.eurynome.common.constant.enums.Identity;
+import cn.herodotus.eurynome.assistant.enums.AccountType;
+import cn.herodotus.eurynome.assistant.enums.Gender;
+import cn.herodotus.eurynome.assistant.enums.Identity;
 import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
 import cn.herodotus.eurynome.security.definition.core.SocialUserDetails;
 import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;

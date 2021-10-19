@@ -17,12 +17,12 @@
  * Module Name: eurynome-cloud-assistant
  * File Name: ConditionalOnSwaggerEnabled.java
  * Author: gengwei.zheng
- * Date: 2021/08/20 11:56:20
+ * Date: 2021/10/17 22:56:17
  */
 
 package cn.herodotus.eurynome.assistant.annotation.conditional;
 
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.lang.annotation.*;

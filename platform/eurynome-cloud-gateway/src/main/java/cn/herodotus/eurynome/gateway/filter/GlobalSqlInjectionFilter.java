@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.gateway.filter;
 
-import cn.herodotus.eurynome.common.constant.enums.ResultStatus;
-import cn.herodotus.eurynome.common.domain.Result;
-import cn.herodotus.eurynome.common.utils.SQLInjectionUtils;
+import cn.herodotus.eurynome.assistant.enums.ResultStatus;
+import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.eurynome.assistant.utils.SQLInjectionUtils;
 import cn.herodotus.eurynome.gateway.utils.WebFluxUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;

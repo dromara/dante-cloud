@@ -15,9 +15,9 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-assistant
- * File Name: IllegalArgumentException.java
+ * File Name: IllegalStampParameterException.java
  * Author: gengwei.zheng
- * Date: 2021/08/18 17:52:18
+ * Date: 2021/08/26 20:40:26
  */
 
 package cn.herodotus.eurynome.assistant.exception.stamp;

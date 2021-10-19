@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.common.utils.EnvUtils;
+import cn.herodotus.eurynome.assistant.utils.EnvUtils;
 import cn.herodotus.eurynome.rest.properties.ServiceProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

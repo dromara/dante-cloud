@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.security.service;
 
 import cn.herodotus.eurynome.assistant.resolver.DestinationResolver;
-import cn.herodotus.eurynome.common.constant.magic.ServiceConstants;
+import cn.herodotus.eurynome.assistant.constant.ServiceConstants;
 import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.event.LocalRequestMappingGatherEvent;

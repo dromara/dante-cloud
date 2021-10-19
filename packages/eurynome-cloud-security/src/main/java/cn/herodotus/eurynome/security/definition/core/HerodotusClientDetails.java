@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.definition.core;
 
-import cn.herodotus.eurynome.common.definition.dto.BaseDTO;
+import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.core.GrantedAuthority;

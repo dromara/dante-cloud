@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
-import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
+import cn.herodotus.eurynome.assistant.enums.AuthorityType;
 import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
@@ -30,12 +30,8 @@ import cn.herodotus.eurynome.upms.logic.repository.system.SysAuthorityRepository
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Subquery;
 import java.util.List;
 
 /**

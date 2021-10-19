@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
-import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
-import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.enums.AuthorityType;
+import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;

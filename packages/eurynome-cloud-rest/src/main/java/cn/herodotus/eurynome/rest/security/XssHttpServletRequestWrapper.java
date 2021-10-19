@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.security;
 
-import cn.herodotus.eurynome.common.utils.XssUtils;
+import cn.herodotus.eurynome.assistant.utils.XssUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

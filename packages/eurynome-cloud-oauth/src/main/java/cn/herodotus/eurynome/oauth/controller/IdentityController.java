@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.controller;
 
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.data.domain.SecretKey;
 import cn.herodotus.eurynome.oauth.dto.Session;
 import cn.herodotus.eurynome.oauth.dto.SessionCreate;

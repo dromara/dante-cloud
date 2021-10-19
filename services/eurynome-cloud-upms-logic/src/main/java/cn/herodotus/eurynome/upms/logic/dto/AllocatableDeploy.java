@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.dto;
 
-import cn.herodotus.eurynome.common.definition.dto.BaseDTO;
+import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;

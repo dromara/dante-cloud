@@ -22,12 +22,12 @@
 
 package cn.herodotus.eurynome.rest.properties;
 
-import cn.herodotus.eurynome.common.constant.enums.ProtocolType;
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
-import cn.herodotus.eurynome.common.constant.magic.SecurityConstants;
-import cn.herodotus.eurynome.common.constant.magic.ServiceConstants;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
-import cn.herodotus.eurynome.common.constant.enums.Architecture;
+import cn.herodotus.eurynome.assistant.enums.ProtocolType;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
+import cn.herodotus.eurynome.assistant.constant.ServiceConstants;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
+import cn.herodotus.eurynome.assistant.enums.Architecture;
 import com.google.common.base.MoreObjects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -27,7 +27,7 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnLogCenterEnabled;
-import cn.herodotus.eurynome.common.constant.magic.PropertyConstants;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import cn.herodotus.eurynome.kernel.logback.LogstashPattern;
 import cn.herodotus.eurynome.kernel.properties.ManagementProperties;
 import com.alibaba.fastjson.JSON;

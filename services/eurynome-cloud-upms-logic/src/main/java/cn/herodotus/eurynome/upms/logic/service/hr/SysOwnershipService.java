@@ -22,22 +22,14 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.common.constant.enums.Gender;
-import cn.herodotus.eurynome.common.constant.enums.Identity;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysOwnershipRepository;
-import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <p>Description: 人事归属服务 </p>

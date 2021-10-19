@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.security.definition.domain;
 
-import cn.herodotus.eurynome.common.definition.entity.AbstractEntity;
-import cn.herodotus.eurynome.common.constant.enums.AuthorityType;
+import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.assistant.enums.AuthorityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 

@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.upms.api.helper;
 
 
-import cn.herodotus.eurynome.common.constant.enums.StatusEnum;
-import cn.herodotus.eurynome.common.constant.magic.SymbolConstants;
+import cn.herodotus.eurynome.assistant.enums.StatusEnum;
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;

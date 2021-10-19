@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
-import cn.herodotus.eurynome.common.constant.enums.OrganizationCategory;
-import cn.herodotus.eurynome.common.constant.magic.PlatformConstants;
-import cn.herodotus.eurynome.common.domain.Result;
+import cn.herodotus.eurynome.assistant.enums.OrganizationCategory;
+import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
+import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.rest.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
@@ -39,7 +39,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
