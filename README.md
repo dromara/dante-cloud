@@ -18,20 +18,28 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/herodotus-cloud/eurynome-cloud">Github 仓库</a> &nbsp; | &nbsp; 
-    <a href="https://gitee.com/herodotus/eurynome-cloud">Gitee 仓库</a> &nbsp; | &nbsp; 
+    <a href="https://github.com/herodotus-cloud/eurynome-cloud">Github 仓库</a> &nbsp; | &nbsp;
+    <a href="https://gitee.com/herodotus/eurynome-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://herodotus.gitee.io/eurynome-cloud">文档</a>
 </p>
-
 
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
 
 ---
+
 ## 企业级技术中台微服务架构与服务能力开发平台
 
 Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.5.5、Spring Cloud 2020.0.4、Spring Cloud Alibaba 2021.1、Nacos 2.0.3 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
+## 平台定位
+
+- 构建成熟的、完善的、全面的，基于 OAuth2 的、前后端分离的微服务架构解决方案。
+- 面向企业级应用和互联网应用设计开发，既兼顾传统项目的微服务化，又满足互联网应用开发建设、快速迭代的使用需求。
+- 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
+- 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
+
 ## Gitee Star趋势图
+
 [![Giteye chart](https://chart.giteye.net/gitee/herodotus/eurynome-cloud/254B32UX.png)](https://giteye.net/chart/254B32UX)
 
 ## [1]、总体架构
@@ -50,8 +58,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ## [2]、功能介绍
 
-<a href="https://gitee.com/herodotus/eurynome-cloud/wikis">详情见Wiki</a>
-
+<a href="https://herodotus.gitee.io/eurynome-cloud">详情见在线文档</a>
 
 ## [3]、技术栈和版本说明
 
@@ -71,23 +78,23 @@ Seata | 1.3.0 |
 
 ### （2）所涉及的相关的技术： 
 
-* 持久层框架： Spring Data Jpa & Mybatis Plus
-* API网关：Spring Cloud Gateway
-* 服务注册&发现和配置中心: Alibaba Nacos
-* 服务消费：Spring Cloud OpenFeign & RestTemplate & OkHttps
-* 负载均衡：Spring Cloud Loadbalancer
-* 服务熔断&降级&限流：Alibaba Sentinel
-* 服务监控：Spring Boot Admin
-* 消息队列：使用Spring Cloud消息总线Spring Cloud Bus 默认Kafka 适配RabbitMQ
-* 链路跟踪：Skywalking
-* 分布式事务：Seata
-* 数据缓存：JetCache + Redis + Caffeine
-* 数据库： Postgresql，MySQL，Oracle ...
-* JSON序列化：Jackson & FastJson
-* 文件服务：阿里云OSS/Minio
-* 数据调试：p6spy
-* 日志中心：ELK
-* 日志收集：Logstash Logback Encoder
+- 持久层框架： Spring Data Jpa & Mybatis Plus
+- API网关：Spring Cloud Gateway
+- 服务注册&发现和配置中心: Alibaba Nacos
+- 服务消费：Spring Cloud OpenFeign & RestTemplate & OkHttps
+- 负载均衡：Spring Cloud Loadbalancer
+- 服务熔断&降级&限流：Alibaba Sentinel
+- 服务监控：Spring Boot Admin
+- 消息队列：使用Spring Cloud消息总线Spring Cloud Bus 默认Kafka 适配RabbitMQ
+- 链路跟踪：Skywalking
+- 分布式事务：Seata
+- 数据缓存：JetCache + Redis + Caffeine
+- 数据库： Postgresql，MySQL，Oracle ...
+- JSON序列化：Jackson & FastJson
+- 文件服务：阿里云OSS/Minio
+- 数据调试：p6spy
+- 日志中心：ELK
+- 日志收集：Logstash Logback Encoder
 
 ## [4]、 版本号说明
 
@@ -106,7 +113,6 @@ eurynome-cloud
 ├── documents -- 工程相关文档（会逐步清理，统一采用Gitee Wiki）
 ├── packages -- 基础通用依赖包
 ├    ├── eurynome-cloud-assistant -- Spring相关公共辅助工具、注解相关工具代码组件
-├    ├── eurynome-cloud-common -- 公共工具类
 ├    ├── eurynome-cloud-data -- 数据持久化、数据缓存以及Redis等数据处理相关代码组件
 ├    ├── eurynome-cloud-kernel -- 微服务接入平台必备组件
 ├    ├── eurynome-cloud-oauth -- OAuth2通用代码
@@ -127,45 +133,49 @@ eurynome-cloud
 ```
 
 ## [6]、项目地址
-* 后端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud](https://gitee.com/herodotus/eurynome-cloud)
-* 后端Github地址：[https://github.com/herodotus-cloud/eurynome-cloud](https://github.com/herodotus-cloud/eurynome-cloud)
-* 单体版示例工程：[https://gitee.com/herodotus/eurynome-cloud-athena](https://gitee.com/herodotus/eurynome-cloud-athena)
-* 前端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud-ui](https://gitee.com/herodotus/eurynome-cloud-ui)
+
+- 后端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud](https://gitee.com/herodotus/eurynome-cloud)
+- 后端Github地址：[https://github.com/herodotus-cloud/eurynome-cloud](https://github.com/herodotus-cloud/eurynome-cloud)
+- 单体版示例工程：[https://gitee.com/herodotus/eurynome-cloud-athena](https://gitee.com/herodotus/eurynome-cloud-athena)
+- 前端Gitee地址：[https://gitee.com/herodotus/eurynome-cloud-ui](https://gitee.com/herodotus/eurynome-cloud-ui)
 
 ## [7]、用户权益
-* 允许免费用于学习、毕设、公司项目、私活等。
-* 遵循Apache-2.0开源协议
+
+- 允许免费用于学习、毕设、公司项目、私活等。
+- 遵循Apache-2.0开源协议
 
 ## [8]、交流反馈
-* 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
-* 博客：https://blog.csdn.net/Pointer_v
-* 邮箱：herodotus@aliyun.com
-* QQ群：922565573
+
+- 欢迎提交[ISSUS](https://gitee.com/herodotus/eurynome-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
+- 博客：https://blog.csdn.net/Pointer_v
+- 邮箱：herodotus@aliyun.com
+- QQ群：922565573
 
 ## [9]、界面预览
+
 <table>
     <tr>
-        <td><img src="./readme/ui1.png"/></td>
-        <td><img src="./readme/ui2.png"/></td>
+        <td><img src="./readme/ui1.png" alt="前端界面1"/></td>
+        <td><img src="./readme/ui2.png" alt="前端界面2"/></td>
     </tr>
     <tr>
-        <td><img src="./readme/ui3.png"/></td>
-        <td><img src="./readme/camunda.png"/></td>
+        <td><img src="./readme/ui3.png" alt="前端界面3"/></td>
+        <td><img src="./readme/camunda.png" alt="Camunda 工作流在线编辑器"/></td>
     </tr>
     <tr>
-        <td><img src="./readme/nacos.png"/></td>
-        <td><img src="./readme/elk.png"/></td>
+        <td><img src="./readme/nacos.png" alt="Nacos示例界面"/></td>
+        <td><img src="./readme/elk.png" alt="日志中心示例界面"/></td>
     </tr>
     <tr>
-        <td><img src="./readme/oauth2-login1.png"/></td>
-        <td><img src="./readme/sentinel.png"/></td>
+        <td><img src="./readme/oauth2-login1.png" alt="OAuth2 效果示例"/></td>
+        <td><img src="./readme/sentinel.png" alt="Sentinel 效果示例"/></td>
     </tr>
     <tr>
-        <td><img src="./readme/spring-boot-admin-1.png"/></td>
-        <td><img src="./readme/spring-boot-admin-2.png"/></td>
+        <td><img src="./readme/spring-boot-admin-1.png" alt="Spring Boot Admin 效果示例1"/></td>
+        <td><img src="./readme/spring-boot-admin-2.png" alt="Spring Boot Admin 效果示例2"/></td>
     </tr>
     <tr>
-        <td><img src="./readme/skywalking.png"/></td>
-        <td><img src="./readme/skywalking2.png"/></td>
+        <td><img src="./readme/skywalking.png" alt="Skywalking 效果示例1"/></td>
+        <td><img src="./readme/skywalking2.png" alt="Skywalking 效果示例2"/></td>
     </tr>
 </table>
