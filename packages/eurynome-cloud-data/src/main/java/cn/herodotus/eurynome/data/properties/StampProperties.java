@@ -35,7 +35,7 @@ import java.time.Duration;
  * @author : gengwei.zheng
  * @date : 2021/8/26 18:56
  */
-@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_STAMP)
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PLATFORM_STAMP)
 public class StampProperties {
 
     private Idempotent idempotent = new Idempotent();

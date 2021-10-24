@@ -40,7 +40,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date : 2019/11/17 15:22
  */
 @Slf4j
-@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_PLATFORM)
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_HERODOTUS_PLATFORM)
 public class PlatformProperties {
 
     /**

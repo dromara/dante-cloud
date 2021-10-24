@@ -36,6 +36,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@ConditionalOnProperty(value = PropertyConstants.ITEM_PLATFORM_SWAGGER_ENABLED, havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = PropertyConstants.ITEM_SWAGGER_ENABLED, havingValue = "true", matchIfMissing = true)
 public @interface ConditionalOnSwaggerEnabled {
 }

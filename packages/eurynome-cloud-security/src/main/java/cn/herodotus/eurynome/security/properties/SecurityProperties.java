@@ -46,7 +46,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2019/11/28 13:08
  */
-@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_SECURITY)
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PLATFORM_SECURITY)
 public class SecurityProperties implements Serializable {
 
     private String signingKey = "eurynome-cloud";

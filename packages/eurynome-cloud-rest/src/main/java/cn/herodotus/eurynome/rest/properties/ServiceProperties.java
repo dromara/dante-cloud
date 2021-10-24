@@ -35,7 +35,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author : gengwei.zheng
  * @date : 2021/6/13 16:58
  */
-@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_MANAGEMENT_SERVICE)
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_MANAGEMENT_SERVICE)
 public class ServiceProperties {
 
     /**

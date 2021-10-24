@@ -29,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -51,7 +50,6 @@ import javax.annotation.Resource;
  * @author gengwei.zheng
  */
 @Configuration
-@EnableConfigurationProperties(CacheProperties.class)
 @AutoConfigureAfter({RedisAutoConfiguration.class})
 public class RedisConfiguration {
 

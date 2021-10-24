@@ -41,7 +41,7 @@ import java.util.List;
  * @date : 2020/5/31 16:39
  */
 @Slf4j
-@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_REST)
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PLATFORM_REST)
 public class RestProperties {
 
     private RequestMapping requestMapping = new RequestMapping();

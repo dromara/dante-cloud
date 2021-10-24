@@ -36,6 +36,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@ConditionalOnProperty(name = PropertyConstants.ITEM_MANAGEMENT_LOG_CENTER_ENABLED)
+@ConditionalOnProperty(name = PropertyConstants.ITEM_LOG_CENTER_ENABLED)
 public @interface ConditionalOnLogCenterEnabled {
 }

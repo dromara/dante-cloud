@@ -22,7 +22,8 @@
 
 package cn.herodotus.eurynome.data.annotation;
 
-import cn.herodotus.eurynome.data.configuration.RedisConfiguration;
+import cn.herodotus.eurynome.data.configuration.CacheConfiguration;
+import cn.herodotus.eurynome.data.configuration.StampConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -42,6 +43,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import(RedisConfiguration.class)
+@Import({CacheConfiguration.class, StampConfiguration.class,})
 public @interface EnableRedisStorage {
 }

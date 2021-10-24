@@ -29,11 +29,11 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.5.5.60</version>
+        <version>2.5.5.70</version>
     </parent>
 
     <artifactId>eurynome-cloud-data</artifactId>
-    <version>2.5.5.60</version>
+    <version>2.5.5.70</version>
     <packaging>jar</packaging>
 
     <description>数据相关通用代码组件包，包括JPA,Redis,数据实体等相关内容</description>
@@ -63,6 +63,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>

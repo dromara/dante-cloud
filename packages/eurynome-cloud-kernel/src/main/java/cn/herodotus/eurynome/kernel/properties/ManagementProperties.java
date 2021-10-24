@@ -39,7 +39,7 @@ import java.util.Map;
  * @date : 2020/4/30 16:01
  */
 @Slf4j
-@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_MANAGEMENT)
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_HERODOTUS_MANAGEMENT)
 public class ManagementProperties {
 
     private final LogCenter logCenter = new LogCenter();

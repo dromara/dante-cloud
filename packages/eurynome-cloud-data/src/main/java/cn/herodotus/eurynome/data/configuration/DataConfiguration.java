@@ -22,23 +22,14 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
-import cn.herodotus.eurynome.data.cache.layer.HerodotusCacheManager;
-import cn.herodotus.eurynome.data.properties.CacheProperties;
-import cn.herodotus.eurynome.data.properties.QueueProperties;
 import cn.hutool.extra.spring.SpringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cache.caffeine.CaffeineCacheManager;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.data.redis.cache.RedisCacheManager;
 
 import javax.annotation.PostConstruct;
 
@@ -69,38 +60,17 @@ import javax.annotation.PostConstruct;
 @Configuration(proxyBeanMethods = false)
 @EnableJpaAuditing
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
-@EnableConfigurationProperties({QueueProperties.class})
 @Import({
         SpringUtil.class,
-        CaffeineConfiguration.class,
-        KafkaConfiguration.class,
-        StampConfiguration.class,
-        MybatisPlusConfiguration.class
+        MybatisPlusConfiguration.class,
+        QueueConfiguration.class,
 })
 public class DataConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DataConfiguration.class);
 
-    @Autowired
-    private CacheProperties cacheProperties;
-
     @PostConstruct
     public void postConstruct() {
         log.info("[Herodotus] |- Components [Herodotus Data] Auto Configure.");
-    }
-
-    @Bean
-    @Primary
-    public HerodotusCacheManager herodotusCacheManager(CaffeineCacheManager caffeineCacheManager, RedisCacheManager redisCacheManager) {
-        HerodotusCacheManager herodotusCacheManager = new HerodotusCacheManager();
-        herodotusCacheManager.setCaffeineCacheManager(caffeineCacheManager);
-        herodotusCacheManager.setRedisCacheManager(redisCacheManager);
-        herodotusCacheManager.setDesensitization(cacheProperties.getDesensitization());
-        herodotusCacheManager.setClearRemoteOnExit(cacheProperties.getClearRemoteOnExit());
-        herodotusCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
-
-        log.trace("[Herodotus] |- Bean [Herodotus Cache Manager] Auto Configure.");
-
-        return herodotusCacheManager;
     }
 }

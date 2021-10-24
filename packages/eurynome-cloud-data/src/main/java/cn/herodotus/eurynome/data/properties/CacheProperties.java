@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  * @author : gengwei.zheng
  * @date : 2021/7/14 11:11
  */
-@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PREFIX_CACHE)
+@ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PLATFORM_CACHE)
 public class CacheProperties {
 
     /**

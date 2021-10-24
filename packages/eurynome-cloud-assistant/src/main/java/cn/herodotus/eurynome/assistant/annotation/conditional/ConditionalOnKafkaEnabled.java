@@ -36,6 +36,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@ConditionalOnProperty(value = PropertyConstants.ITEM_MANAGEMENT_KAFKA_ENABLED)
+@ConditionalOnProperty(value = PropertyConstants.ITEM_KAFKA_ENABLED)
 public @interface ConditionalOnKafkaEnabled {
 }

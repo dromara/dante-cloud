@@ -30,49 +30,59 @@ package cn.herodotus.eurynome.assistant.constant;
  */
 public class PropertyConstants {
 
+    public static final String PROPERTY_ENABLED = ".enabled";
+
+    public static final String PROPERTY_PREFIX_SPRING = "spring";
     public static final String PROPERTY_PREFIX_HERODOTUS = "herodotus";
-    public static final String PROPERTY_PREFIX_PLATFORM = PROPERTY_PREFIX_HERODOTUS + ".platform";
-    public static final String PROPERTY_PREFIX_AUDIT = PROPERTY_PREFIX_HERODOTUS + ".audit";
-    public static final String PROPERTY_PREFIX_MANAGEMENT = PROPERTY_PREFIX_HERODOTUS + ".management";
-    public static final String PROPERTY_PREFIX_MESSAGE = PROPERTY_PREFIX_HERODOTUS + ".message";
-    public static final String PROPERTY_PREFIX_SOCIAL = PROPERTY_PREFIX_HERODOTUS + ".social";
 
-    public static final String PROPERTY_PREFIX_CACHE = PROPERTY_PREFIX_PLATFORM + ".cache";
-    public static final String PROPERTY_PREFIX_REST = PROPERTY_PREFIX_PLATFORM + ".rest";
-    public static final String PROPERTY_PREFIX_SECURITY = PROPERTY_PREFIX_PLATFORM + ".security";
-    public static final String PROPERTY_PREFIX_SWAGGER = PROPERTY_PREFIX_PLATFORM + ".swagger";
-    public static final String PROPERTY_PREFIX_STAMP = PROPERTY_PREFIX_PLATFORM + ".stamp";
+    public static final String PROPERTY_SPRING_REDIS = PROPERTY_PREFIX_SPRING + ".redis";
 
-    public static final String PROPERTY_PREFIX_MANAGEMENT_NACOS = PROPERTY_PREFIX_MANAGEMENT + ".nacos";
-    public static final String PROPERTY_PREFIX_MANAGEMENT_QUEUE = PROPERTY_PREFIX_MANAGEMENT + ".queue";
-    public static final String PROPERTY_PREFIX_MANAGEMENT_LOG_CENTER = PROPERTY_PREFIX_MANAGEMENT + ".log-center";
-    public static final String PROPERTY_PREFIX_MANAGEMENT_SERVICE = PROPERTY_PREFIX_MANAGEMENT + ".service";
+    public static final String PROPERTY_HERODOTUS_PLATFORM = PROPERTY_PREFIX_HERODOTUS + ".platform";
+    public static final String PROPERTY_HERODOTUS_AUDIT = PROPERTY_PREFIX_HERODOTUS + ".audit";
+    public static final String PROPERTY_HERODOTUS_MANAGEMENT = PROPERTY_PREFIX_HERODOTUS + ".management";
+    public static final String PROPERTY_HERODOTUS_MESSAGE = PROPERTY_PREFIX_HERODOTUS + ".message";
+    public static final String PROPERTY_HERODOTUS_SOCIAL = PROPERTY_PREFIX_HERODOTUS + ".social";
+    public static final String PROPERTY_HERODOTUS_WEBSOCKET = PROPERTY_PREFIX_HERODOTUS + ".websocket";
 
-    public static final String PROPERTY_PREFIX_SOCIAL_JUSTAUTH = PROPERTY_PREFIX_SOCIAL + ".justauth";
-    public static final String PROPERTY_PREFIX_SOCIAL_EASEMOB = PROPERTY_PREFIX_SOCIAL + ".easemob";
-    public static final String PROPERTY_PREFIX_SOCIAL_WXAPP = PROPERTY_PREFIX_SOCIAL + ".wxapp";
-    public static final String PROPERTY_PREFIX_SOCIAL_WXMPP = PROPERTY_PREFIX_SOCIAL + ".wxmpp";
+    public static final String PROPERTY_REDIS_REDISSON = PROPERTY_SPRING_REDIS + ".redisson";
 
-    public static final String PROPERTY_PREFIX_MESSAGE_SMS = PROPERTY_PREFIX_MESSAGE + ".sms";
-    public static final String PROPERTY_PREFIX_MESSAGE_SMS_VERIFICATION_CODE = PROPERTY_PREFIX_MESSAGE_SMS + ".verification-code";
-    public static final String PROPERTY_PREFIX_MESSAGE_PUSH_APNS = PROPERTY_PREFIX_MESSAGE + ".push.apns";
-    public static final String PROPERTY_PREFIX_MESSAGE_PUSH_JPUSH = PROPERTY_PREFIX_MESSAGE + ".push.jpush";
+    public static final String PROPERTY_PLATFORM_CACHE = PROPERTY_HERODOTUS_PLATFORM + ".cache";
+    public static final String PROPERTY_PLATFORM_REST = PROPERTY_HERODOTUS_PLATFORM + ".rest";
+    public static final String PROPERTY_PLATFORM_SECURITY = PROPERTY_HERODOTUS_PLATFORM + ".security";
+    public static final String PROPERTY_PLATFORM_SWAGGER = PROPERTY_HERODOTUS_PLATFORM + ".swagger";
+    public static final String PROPERTY_PLATFORM_STAMP = PROPERTY_HERODOTUS_PLATFORM + ".stamp";
 
-    public static final String PROPERTY_PREFIX_AUDIT_ALIYUN = PROPERTY_PREFIX_AUDIT + ".aliyun";
-    public static final String PROPERTY_PREFIX_AUDIT_BAIDU = PROPERTY_PREFIX_AUDIT + ".baidu";
-    public static final String PROPERTY_PREFIX_AUDIT_TIANYAN = PROPERTY_PREFIX_AUDIT + ".tianyan";
+    public static final String PROPERTY_MANAGEMENT_NACOS = PROPERTY_HERODOTUS_MANAGEMENT + ".nacos";
+    public static final String PROPERTY_MANAGEMENT_QUEUE = PROPERTY_HERODOTUS_MANAGEMENT + ".queue";
+    public static final String PROPERTY_MANAGEMENT_LOG_CENTER = PROPERTY_HERODOTUS_MANAGEMENT + ".log-center";
+    public static final String PROPERTY_MANAGEMENT_SERVICE = PROPERTY_HERODOTUS_MANAGEMENT + ".service";
+
+    public static final String PROPERTY_SOCIAL_JUSTAUTH = PROPERTY_HERODOTUS_SOCIAL + ".justauth";
+    public static final String PROPERTY_SOCIAL_EASEMOB = PROPERTY_HERODOTUS_SOCIAL + ".easemob";
+    public static final String PROPERTY_SOCIAL_WXAPP = PROPERTY_HERODOTUS_SOCIAL + ".wxapp";
+    public static final String PROPERTY_SOCIAL_WXMPP = PROPERTY_HERODOTUS_SOCIAL + ".wxmpp";
+
+    public static final String PROPERTY_MESSAGE_SMS = PROPERTY_HERODOTUS_MESSAGE + ".sms";
+    public static final String PROPERTY_MESSAGE_SMS_VERIFICATION_CODE = PROPERTY_MESSAGE_SMS + ".verification-code";
+    public static final String PROPERTY_MESSAGE_PUSH_APNS = PROPERTY_HERODOTUS_MESSAGE + ".push.apns";
+    public static final String PROPERTY_MESSAGE_PUSH_JPUSH = PROPERTY_HERODOTUS_MESSAGE + ".push.jpush";
+
+    public static final String PROPERTY_AUDIT_ALIYUN = PROPERTY_HERODOTUS_AUDIT + ".aliyun";
+    public static final String PROPERTY_AUDIT_BAIDU = PROPERTY_HERODOTUS_AUDIT + ".baidu";
+    public static final String PROPERTY_AUDIT_TIANYAN = PROPERTY_HERODOTUS_AUDIT + ".tianyan";
 
 
     public static final String ITEM_SPRING_APPLICATION_NAME = "spring.application.name";
     public static final String ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
     public static final String ITEM_SPRING_SQL_INIT_PLATFORM = "spring.sql.init.platform";
 
-    public static final String ITEM_PLATFORM_DATA_ACCESS_STRATEGY = PROPERTY_PREFIX_PLATFORM + ".data-access-strategy";
-    public static final String ITEM_PLATFORM_ARCHITECTURE = PROPERTY_PREFIX_PLATFORM + ".architecture";
-    public static final String ITEM_PLATFORM_SWAGGER_ENABLED = PROPERTY_PREFIX_SWAGGER + ".enabled";
+    public static final String ITEM_PLATFORM_DATA_ACCESS_STRATEGY = PROPERTY_HERODOTUS_PLATFORM + ".data-access-strategy";
+    public static final String ITEM_PLATFORM_ARCHITECTURE = PROPERTY_HERODOTUS_PLATFORM + ".architecture";
 
-    public static final String ITEM_MANAGEMENT_KAFKA_ENABLED = PROPERTY_PREFIX_MANAGEMENT_QUEUE + ".kafka.enabled";
-    public static final String ITEM_MANAGEMENT_LOG_CENTER_ENABLED = PROPERTY_PREFIX_MANAGEMENT_LOG_CENTER + ".server-addr";
+    public static final String ITEM_SWAGGER_ENABLED = PROPERTY_PLATFORM_SWAGGER + PROPERTY_ENABLED;
+    public static final String ITEM_REDISSON_ENABLED = PROPERTY_REDIS_REDISSON + PROPERTY_ENABLED;
+    public static final String ITEM_KAFKA_ENABLED = PROPERTY_MANAGEMENT_QUEUE + ".kafka" + PROPERTY_ENABLED;
+    public static final String ITEM_LOG_CENTER_ENABLED = PROPERTY_MANAGEMENT_LOG_CENTER + ".server-addr";
 
     public static final String ANNOTATION_PREFIX = "${";
     public static final String ANNOTATION_SUFFIX = "}";

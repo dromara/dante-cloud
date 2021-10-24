@@ -32,9 +32,9 @@ public class SymbolConstants {
 	public static final String AMPERSAND_ENCODED = "&amp;";
 
 	public static final String APOSTROPHE = "'";
-	
+
 	public static final String APOSTROPHE_AND_COMMA = "',";
-	
+
 	public static final String APOSTROPHE_AND_COMMA_AND_APOSTROPHE = "','";
 
 	public static final String AT = "@";
@@ -58,7 +58,7 @@ public class SymbolConstants {
 	public static final String COLON = ":";
 
 	public static final String COMMA = ",";
-	
+
 	public static final String COMMA_AND_APOSTROPHE = ",'";
 
 	public static final String COMMA_AND_SPACE = ", ";
@@ -82,19 +82,19 @@ public class SymbolConstants {
 	public static final String FORWARD_SLASH = "/";
 
 	public static final String FOUR_SPACES = "    ";
-	
+
 	public static final String FINISH_LEFT_ANGLE = "</";
-	
+
 	public static final String FINISH_RIGHT_ANGLE = "/>";
-	
+
 	public static final String GBK = "GBK";
 
 	public static final String IS_NOT_NULL = "IS NOT NULL";
 
 	public static final String IS_NULL = "IS NULL";
-	
+
 	public static final String IN = "IN";
-	
+
 	public static final String LEFT_ANGLE = "<";
 
 	public static final String LESS_THAN = "<";
@@ -110,7 +110,7 @@ public class SymbolConstants {
 	public static final String NEW_LINE = "\n";
 
 	public static final String NOT_EQUAL = "!=";
-	
+
 	public static final String DB_NOT_EQUAL = "<>";
 
 	public static final String NOT_LIKE = "NOT LIKE";
@@ -140,7 +140,7 @@ public class SymbolConstants {
 	public static final String RETURN = "\r";
 
 	public static final String RETURN_NEW_LINE = "\r\n";
-	
+
 	public static final String RIGHT_ANGLE = ">";
 
 	public static final String SEMICOLON = ";";
@@ -157,37 +157,39 @@ public class SymbolConstants {
 
 	public static final String UNDERLINE = "_";
 
-	public static final String SUFFIX_EXCEL_2003 = ".xls"; 
-	
-	public static final String SUFFIX_EXCEL_2007 = ".xlsx"; 
-	
-	public static final String SUFFIX_JPEG = ".jpg"; 
-	
+	public static final String SUFFIX_EXCEL_2003 = ".xls";
+
+	public static final String SUFFIX_EXCEL_2007 = ".xlsx";
+
+	public static final String SUFFIX_JPEG = ".jpg";
+
 	public static final String SUFFIX_XML = ".xml";
-	
+
 	public static final String SUFFIX_PDF = ".pdf";
-	
+
 	public static final String SUFFIX_ZIP = ".zip";
-	
+
 	public static final String SUFFIX_DOC = ".doc";
-	
+
 	public static final String SUFFIX_DOCX = ".docx";
-	
+
 	public static final String SUFFIX_PPT = ".ppt";
-	
+
 	public static final String SUFFIX_PPTX = ".pptx";
-	
+
 	public static final String SUFFIX_EXCEL = ".xls";
-	
+
 	public static final String SUFFIX_EXCELX = ".xlsx";
-	
+
 	public static final String SUFFIX_SWF = ".swf";
-	
+
 	public static final String SUFFIX_PROPERTIES = ".properties";
 
 	public static final String SUFFIX_YML = ".yml";
 
 	public static final String SUFFIX_YAML = ".yaml";
+
+	public static final String SUFFIX_JSON = ".json";
 
 	public static final String XML_DECLARATION = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 }
