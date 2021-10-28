@@ -88,7 +88,7 @@ Seata | 1.3.0 |
 - 消息队列：使用Spring Cloud消息总线Spring Cloud Bus 默认Kafka 适配RabbitMQ
 - 链路跟踪：Skywalking
 - 分布式事务：Seata
-- 数据缓存：JetCache + Redis + Caffeine
+- 数据缓存：JetCache + Redis + Caffeine, 自定义多级缓存
 - 数据库： Postgresql，MySQL，Oracle ...
 - JSON序列化：Jackson & FastJson
 - 文件服务：阿里云OSS/Minio
@@ -119,7 +119,8 @@ eurynome-cloud
 ├    ├── eurynome-cloud-oauth-starter -- 自定义OAuth2 Starter，Athena单体版核心Starter
 ├    ├── eurynome-cloud-rest -- Rest相关代码组件
 ├    ├── eurynome-cloud-sercurity -- Security通用代码
-├    └── eurynome-cloud-starter -- 微服务核心Starter
+├    ├── eurynome-cloud-starter -- 微服务核心Starter
+├    └── eurynome-cloud-websocket -- WebSocket核心代码包
 ├── platform -- 平台核心服务
 ├    ├── eurynome-cloud-gateway -- 服务网关
 ├    ├── eurynome-cloud-management -- Spring Boot Admin 监控服务
@@ -129,6 +130,7 @@ eurynome-cloud
 ├    ├── eurynome-cloud-upms-logic -- 通用用户权限service
 ├    ├── eurynome-cloud-upms-rest -- 通用用户权限rest 接口
 ├    ├── eurynome-cloud-upms-ability -- 通用用户权限服务
+├    ├── eurynome-cloud-upms-rest -- 工作流基础代码包
 └──  └── eurynome-cloud-bpmn-ability -- 工作流服务 
 ```
 
