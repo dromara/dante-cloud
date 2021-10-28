@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
+import cn.herodotus.eurynome.data.cache.layer.HerodotusCaffeineCacheManager;
 import cn.herodotus.eurynome.data.properties.CacheProperties;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
@@ -66,12 +67,9 @@ public class CaffeineConfiguration {
     @Bean
     @ConditionalOnMissingBean(CaffeineCacheManager.class)
     public CaffeineCacheManager caffeineCacheManager() {
-        CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
-        caffeineCacheManager.setCaffeine(caffeine());
-        caffeineCacheManager.setAllowNullValues(cacheProperties.getAllowNullValues());
-
+        HerodotusCaffeineCacheManager herodotusCaffeineCacheManager = new HerodotusCaffeineCacheManager(cacheProperties);
+        herodotusCaffeineCacheManager.setCaffeine(caffeine());
         log.trace("[Herodotus] |- Bean [Caffeine Cache Manager] Auto Configure.");
-
-        return caffeineCacheManager;
+        return herodotusCaffeineCacheManager;
     }
 }

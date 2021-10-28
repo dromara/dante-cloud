@@ -28,6 +28,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,7 +39,7 @@ import java.util.concurrent.TimeUnit;
  * @date : 2021/7/14 11:11
  */
 @ConfigurationProperties(prefix = PropertyConstants.PROPERTY_PLATFORM_CACHE)
-public class CacheProperties {
+public class CacheProperties extends Expire {
 
     /**
      * 分布式缓存Redis端是否进行数据脱敏， 默认值，true
@@ -60,63 +62,17 @@ public class CacheProperties {
     private Boolean allowNullValues = true;
 
     /**
-     * 统一缓存时长，默认：1
-     */
-    private Long duration = 1L;
-
-    /**
-     * 统一缓存时长单位，默认：小时。
-     */
-    private TimeUnit unit = TimeUnit.HOURS;
-
-    /**
-     * Redis缓存TTL设置，默认：1小时，单位小时
+     * 缓存名称转换分割符。默认值，"-"
      * <p>
-     * 使用Duration类型，配置参数形式如下：
-     * "?ns" //纳秒
-     * "?us" //微秒
-     * "?ms" //毫秒
-     * "?s" //秒
-     * "?m" //分
-     * "?h" //小时
-     * "?d" //天
+     * 默认缓存名称采用 Redis Key 格式（使用 ":" 分割），使用 ":" 分割的字符串作为Map的Key，":"会丢失。
+     * 指定一个分隔符，用于 ":" 分割符的转换
      */
-    private Duration ttl;
+    private String separator = "-";
 
-    public Long getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Long duration) {
-        this.duration = duration;
-    }
-
-    public TimeUnit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(TimeUnit unit) {
-        this.unit = unit;
-    }
-
-    public Duration getTtl() {
-        if (ObjectUtils.isEmpty(this.ttl)) {
-            this.ttl = convertToDuration(this.duration, this.unit);
-        }
-        return ttl;
-    }
-
-    public Boolean getAllowNullValues() {
-        return allowNullValues;
-    }
-
-    public void setAllowNullValues(Boolean allowNullValues) {
-        this.allowNullValues = allowNullValues;
-    }
-
-    public void setTtl(Duration ttl) {
-        this.ttl = ttl;
-    }
+    /**
+     * 针对不同实体单独设置的过期时间，如果不设置，则统一使用默认时间。
+     */
+    private Map<String, Expire> expires = new HashMap<>();
 
     public Boolean getDesensitization() {
         return desensitization;
@@ -134,17 +90,28 @@ public class CacheProperties {
         this.clearRemoteOnExit = clearRemoteOnExit;
     }
 
-    private Duration convertToDuration(Long duration, TimeUnit timeUnit) {
-        switch (timeUnit) {
-            case DAYS:
-                return Duration.ofDays(duration);
-            case HOURS:
-                return Duration.ofHours(duration);
-            case SECONDS:
-                return Duration.ofSeconds(duration);
-            default:
-                return Duration.ofMinutes(duration);
-        }
+    public Boolean getAllowNullValues() {
+        return allowNullValues;
+    }
+
+    public void setAllowNullValues(Boolean allowNullValues) {
+        this.allowNullValues = allowNullValues;
+    }
+
+    public Map<String, Expire> getExpires() {
+        return expires;
+    }
+
+    public void setExpires(Map<String, Expire> expires) {
+        this.expires = expires;
+    }
+
+    public String getSeparator() {
+        return separator;
+    }
+
+    public void setSeparator(String separator) {
+        this.separator = separator;
     }
 
     @Override
@@ -153,9 +120,7 @@ public class CacheProperties {
                 .add("desensitization", desensitization)
                 .add("clearRemoteOnExit", clearRemoteOnExit)
                 .add("allowNullValues", allowNullValues)
-                .add("duration", duration)
-                .add("unit", unit)
-                .add("ttl", ttl)
+                .add("separator", separator)
                 .toString();
     }
 }

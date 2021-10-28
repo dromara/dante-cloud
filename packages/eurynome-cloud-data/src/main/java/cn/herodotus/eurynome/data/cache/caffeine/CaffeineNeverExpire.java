@@ -17,10 +17,10 @@
  * Module Name: eurynome-cloud-data
  * File Name: CaffeineNeverExpire.java
  * Author: gengwei.zheng
- * Date: 2021/08/01 23:14:01
+ * Date: 2021/08/05 18:32:05
  */
 
-package cn.herodotus.eurynome.data.cache;
+package cn.herodotus.eurynome.data.cache.caffeine;
 
 import com.github.benmanes.caffeine.cache.Expiry;
 import org.checkerframework.checker.index.qual.NonNegative;

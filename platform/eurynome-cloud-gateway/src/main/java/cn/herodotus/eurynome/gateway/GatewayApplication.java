@@ -39,7 +39,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableRedisStorage
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JetCacheAutoConfiguration.class, IdentifierGeneratorAutoConfiguration.class, MybatisPlusAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, IdentifierGeneratorAutoConfiguration.class, MybatisPlusAutoConfiguration.class})
 public class GatewayApplication {
 
     public static void main(String[] args) {

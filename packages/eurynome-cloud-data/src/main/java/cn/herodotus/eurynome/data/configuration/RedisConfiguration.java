@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
+import cn.herodotus.eurynome.data.cache.layer.HerodotusRedisCacheManager;
 import cn.herodotus.eurynome.data.properties.CacheProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,24 +111,21 @@ public class RedisConfiguration {
     @Bean
     @ConditionalOnMissingBean(RedisCacheManager.class)
     public RedisCacheManager redisCacheManager() {
-
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(lettuceConnectionFactory);
 
-        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
-//                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
-//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))
-        redisCacheConfiguration.entryTtl(cacheProperties.getTtl());
+        // 注意：这里 RedisCacheConfiguration 每一个方法调用之后，都会返回一个新的 RedisCacheConfiguration 对象，所以要注意对象的引用关系。
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig().entryTtl(cacheProperties.getTtl());
 
         boolean allowNullValues = cacheProperties.getAllowNullValues();
         if (!allowNullValues) {
-            redisCacheConfiguration.disableCachingNullValues();
+            // 注意：这里 RedisCacheConfiguration 每一个方法调用之后，都会返回一个新的 RedisCacheConfiguration 对象，所以要注意对象的引用关系。
+            redisCacheConfiguration = redisCacheConfiguration.disableCachingNullValues();
         }
 
-        RedisCacheManager redisCacheManager = new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
-        redisCacheManager.setTransactionAware(false);
-        redisCacheManager.afterPropertiesSet();
-
+        HerodotusRedisCacheManager herodotusRedisCacheManager = new HerodotusRedisCacheManager(redisCacheWriter, redisCacheConfiguration, cacheProperties);
+        herodotusRedisCacheManager.setTransactionAware(false);
+        herodotusRedisCacheManager.afterPropertiesSet();
         log.trace("[Herodotus] |- Bean [Redis Cache Manager] Auto Configure.");
-        return redisCacheManager;
+        return herodotusRedisCacheManager;
     }
 }

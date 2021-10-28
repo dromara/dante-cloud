@@ -22,9 +22,11 @@
 
 package cn.herodotus.eurynome.data.configuration;
 
+import cn.herodotus.eurynome.data.cache.jetcache.JetCacheBuilder;
 import cn.herodotus.eurynome.data.cache.layer.HerodotusCacheManager;
 import cn.herodotus.eurynome.data.properties.CacheProperties;
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.support.SpringConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -69,5 +71,12 @@ public class CacheConfiguration {
         log.trace("[Herodotus] |- Bean [Herodotus Cache Manager] Auto Configure.");
 
         return herodotusCacheManager;
+    }
+
+    @Bean
+    public JetCacheBuilder jetCacheBuilder(SpringConfigProvider springConfigProvider) {
+        JetCacheBuilder jetCacheBuilder = new JetCacheBuilder(springConfigProvider);
+        log.trace("[Herodotus] |- Bean [Jet Cache Builder] Auto Configure.");
+        return jetCacheBuilder;
     }
 }
