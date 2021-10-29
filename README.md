@@ -20,7 +20,7 @@
 <p align="center">
     <a href="https://github.com/herodotus-cloud/eurynome-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/herodotus/eurynome-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
-    <a href="https://herodotus.gitee.io/eurynome-cloud">文档</a>
+    <a href="https://www.herodotus.cn">文档</a>
 </p>
 
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
@@ -58,7 +58,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ## [2]、功能介绍
 
-<a href="https://herodotus.gitee.io/eurynome-cloud">详情见在线文档</a>
+<a href="https://www.herodotus.cn">详情见在线文档</a>
 
 ## [3]、技术栈和版本说明
 
