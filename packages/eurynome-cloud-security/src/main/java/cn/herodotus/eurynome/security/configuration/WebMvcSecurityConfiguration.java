@@ -79,8 +79,11 @@ public class WebMvcSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/plugins/**",
                 "/favicon.ico",
                 "/swagger-ui.html",
+                "/swagger-ui/**",
                 "/swagger-resources/**",
-                "/v3/api-docs");
+                "/v3/api-docs",
+                "/v3/api-docs/**",
+                "/openapi.json");
 
         List<String> customIgnored = securityProperties.getInterceptor().getStaticResource();
 
