@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.5.6.10</version>
+    <version>2.5.6.20</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -79,7 +79,7 @@
 
         <!-- 应用开发辅助工具组件 -->
         <lombok.version>1.18.20</lombok.version>
-        <redisson.version>3.16.3</redisson.version>
+        <redisson.version>3.16.4</redisson.version>
         <p6spy.version>3.9.1</p6spy.version>
         <springdoc.version>1.5.12</springdoc.version>
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
@@ -91,7 +91,7 @@
 
         <!-- 国内开源通用组件 -->
         <hutool.version>5.7.15</hutool.version>
-        <okhttps.version>3.2.0</okhttps.version>
+        <okhttps.version>3.3.0</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>

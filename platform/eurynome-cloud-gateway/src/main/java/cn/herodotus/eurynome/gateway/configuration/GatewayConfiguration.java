@@ -22,11 +22,19 @@
 
 package cn.herodotus.eurynome.gateway.configuration;
 
+import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnSwaggerEnabled;
+import cn.herodotus.eurynome.gateway.handler.RefreshRoutesListener;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springdoc.core.SwaggerUiConfigParameters;
+import org.springdoc.core.SwaggerUiConfigProperties;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -47,9 +55,16 @@ import reactor.core.publisher.Mono;
 import java.util.Collections;
 import java.util.List;
 
-@Slf4j
+/**
+ * <p>Description: Gateway 服务网关配置 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/11/4 11:46
+ */
 @Configuration
 public class GatewayConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(GatewayConfiguration.class);
 
     private static final String MAX_AGE = "18000L";
 
@@ -72,6 +87,28 @@ public class GatewayConfiguration {
     @ConditionalOnMissingBean(SentinelGatewayFilter.class)
     public SentinelGatewayFilter sentinelGatewayFilter() {
         return new SentinelGatewayFilter();
+    }
+
+    @Configuration
+    @ConditionalOnSwaggerEnabled
+    static class GatewaySwaggerConfiguration {
+
+        @Autowired
+        private RouteLocator routeLocator;
+        @Autowired
+        private SwaggerUiConfigParameters swaggerUiConfigParameters;
+        @Autowired
+        private SwaggerUiConfigProperties swaggerUiConfigProperties;
+
+        @Bean
+        public RefreshRoutesListener refreshRoutesListener() {
+            RefreshRoutesListener refreshRoutesListener = new RefreshRoutesListener();
+            refreshRoutesListener.setRouteLocator(routeLocator);
+            refreshRoutesListener.setSwaggerUiConfigParameters(swaggerUiConfigParameters);
+            refreshRoutesListener.setSwaggerUiConfigProperties(swaggerUiConfigProperties);
+            log.trace("[Herodotus] |- Bean [Refresh Routes Listener] in AliyunScanConfiguration Auto Configure.");
+            return refreshRoutesListener;
+        }
     }
 
     /**

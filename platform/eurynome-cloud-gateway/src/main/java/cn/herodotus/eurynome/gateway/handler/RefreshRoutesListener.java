@@ -29,12 +29,10 @@ import org.slf4j.LoggerFactory;
 import org.springdoc.core.AbstractSwaggerUiConfigProperties;
 import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springdoc.core.SwaggerUiConfigProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.context.ApplicationListener;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +46,6 @@ import java.util.stream.Collectors;
  * @author : gengwei.zheng
  * @date : 2021/9/11 10:14
  */
-@Component
 public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(RefreshRoutesListener.class);
@@ -60,12 +57,21 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
      */
     @Value("${spring.application.name}")
     private String self;
-    @Autowired
     private RouteLocator routeLocator;
-    @Autowired
     private SwaggerUiConfigParameters swaggerUiConfigParameters;
-    @Autowired
     private SwaggerUiConfigProperties swaggerUiConfigProperties;
+
+    public void setRouteLocator(RouteLocator routeLocator) {
+        this.routeLocator = routeLocator;
+    }
+
+    public void setSwaggerUiConfigParameters(SwaggerUiConfigParameters swaggerUiConfigParameters) {
+        this.swaggerUiConfigParameters = swaggerUiConfigParameters;
+    }
+
+    public void setSwaggerUiConfigProperties(SwaggerUiConfigProperties swaggerUiConfigProperties) {
+        this.swaggerUiConfigProperties = swaggerUiConfigProperties;
+    }
 
     @Override
     public void onApplicationEvent(RefreshRoutesEvent refreshRoutesEvent) {

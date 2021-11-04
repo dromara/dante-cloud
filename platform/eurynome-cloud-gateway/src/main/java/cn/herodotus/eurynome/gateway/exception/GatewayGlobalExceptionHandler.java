@@ -25,7 +25,8 @@ package cn.herodotus.eurynome.gateway.exception;
 import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -48,10 +49,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @classDesc: 统一异常处理
+ * <p>Description: 统一异常处理 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/11/4 11:48
  */
-@Slf4j
 public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GatewayGlobalExceptionHandler.class);
 
     public static final String FAVICON_ICO = "/favicon.ico";
     /**
