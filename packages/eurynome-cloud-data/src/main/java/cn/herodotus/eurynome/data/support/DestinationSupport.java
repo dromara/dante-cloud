@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-assistant
+ * Module Name: eurynome-cloud-data
  * File Name: DestinationResolver.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 20:40:26
+ * Date: 2021/10/19 21:35:19
  */
 
-package cn.herodotus.eurynome.assistant.resolver;
+package cn.herodotus.eurynome.data.support;
 
 import org.springframework.cloud.bus.event.Destination;
 import org.springframework.cloud.bus.event.PathDestinationFactory;
@@ -31,7 +31,7 @@ import org.springframework.cloud.bus.event.PathDestinationFactory;
  * @author : gengwei.zheng
  * @date : 2021/8/11 20:39
  */
-public class DestinationResolver {
+public class DestinationSupport {
 
     private static final PathDestinationFactory pathDestinationFactory = new PathDestinationFactory();
 

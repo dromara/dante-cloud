@@ -43,6 +43,7 @@ public class PropertyConstants {
     public static final String PROPERTY_HERODOTUS_MESSAGE = PROPERTY_PREFIX_HERODOTUS + ".message";
     public static final String PROPERTY_HERODOTUS_SOCIAL = PROPERTY_PREFIX_HERODOTUS + ".social";
     public static final String PROPERTY_HERODOTUS_WEBSOCKET = PROPERTY_PREFIX_HERODOTUS + ".websocket";
+    public static final String PROPERTY_HERODOTUS_OSS = PROPERTY_PREFIX_HERODOTUS + ".oss";
 
     public static final String PROPERTY_REDIS_REDISSON = PROPERTY_SPRING_REDIS + ".redisson";
 
@@ -71,6 +72,7 @@ public class PropertyConstants {
     public static final String PROPERTY_AUDIT_BAIDU = PROPERTY_HERODOTUS_AUDIT + ".baidu";
     public static final String PROPERTY_AUDIT_TIANYAN = PROPERTY_HERODOTUS_AUDIT + ".tianyan";
 
+    public static final String PROPERTY_OSS_MINIO = PROPERTY_HERODOTUS_OSS + ".minio";
 
     public static final String ITEM_SPRING_APPLICATION_NAME = "spring.application.name";
     public static final String ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
@@ -78,6 +80,9 @@ public class PropertyConstants {
 
     public static final String ITEM_PLATFORM_DATA_ACCESS_STRATEGY = PROPERTY_HERODOTUS_PLATFORM + ".data-access-strategy";
     public static final String ITEM_PLATFORM_ARCHITECTURE = PROPERTY_HERODOTUS_PLATFORM + ".architecture";
+    public static final String ITEM_MINIO_ENDPOINT = PROPERTY_OSS_MINIO + ".endpoint";
+    public static final String ITEM_MINIO_ACCESSKEY = PROPERTY_OSS_MINIO + ".accessKey";
+    public static final String ITEM_MINIO_SECRETKEY = PROPERTY_OSS_MINIO + ".secretKey";
 
     public static final String ITEM_SWAGGER_ENABLED = PROPERTY_PLATFORM_SWAGGER + PROPERTY_ENABLED;
     public static final String ITEM_REDISSON_ENABLED = PROPERTY_REDIS_REDISSON + PROPERTY_ENABLED;

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.service;
 
-import cn.herodotus.eurynome.assistant.resolver.DestinationResolver;
+import cn.herodotus.eurynome.data.support.DestinationSupport;
 import cn.herodotus.eurynome.assistant.constant.ServiceConstants;
 import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
@@ -72,7 +72,7 @@ public class RequestMappingGatherService {
         } else {
             String source = JSON.toJSONString(requestMappings);
             log.debug("[Herodotus] |- (3) Request mapping gather service trigger REMOTE event!");
-            applicationContext.publishEvent(new RemoteRequestMappingGatherEvent(source, serviceId, DestinationResolver.create(ServiceConstants.SERVICE_NAME_UPMS)));
+            applicationContext.publishEvent(new RemoteRequestMappingGatherEvent(source, serviceId, DestinationSupport.create(ServiceConstants.SERVICE_NAME_UPMS)));
         }
     }
 }

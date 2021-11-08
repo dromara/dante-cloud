@@ -24,6 +24,7 @@ package cn.herodotus.eurynome.assistant.resolver;
 
 import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
+import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Environment;
 
 /**
@@ -34,20 +35,28 @@ import org.springframework.core.env.Environment;
  */
 public class PropertyResolver {
 
-    private static String getProperty(Environment environment, String property) {
+    public static String getProperty(Environment environment, String property) {
         return environment.getProperty(property);
     }
 
-    private static String getProperty(Environment environment, String property, String defaultValue) {
+    public static String getProperty(Environment environment, String property, String defaultValue) {
         return environment.getProperty(property, defaultValue);
     }
 
+    public static String getProperty(ConditionContext conditionContext, String property) {
+        return getProperty(conditionContext.getEnvironment(), property);
+    }
+
+    public static String getProperty(ConditionContext conditionContext, String property, String defaultValue) {
+        return getProperty(conditionContext.getEnvironment(), property, defaultValue);
+    }
+
     public static String getDataAccessStrategy(Environment environment, String defaultValue) {
-        return environment.getProperty(PropertyConstants.ITEM_PLATFORM_DATA_ACCESS_STRATEGY, defaultValue);
+        return getProperty(environment, PropertyConstants.ITEM_PLATFORM_DATA_ACCESS_STRATEGY, defaultValue);
     }
 
     public static String getDataAccessStrategy(Environment environment) {
-        return environment.getProperty(PropertyConstants.ITEM_PLATFORM_DATA_ACCESS_STRATEGY);
+        return getProperty(environment, PropertyConstants.ITEM_PLATFORM_DATA_ACCESS_STRATEGY);
     }
 
     public static String getDdlAuto(Environment environment) {
@@ -55,10 +64,10 @@ public class PropertyResolver {
     }
 
     public static String getDdlAuto(Environment environment, String defaultValue) {
-        return environment.getProperty(PropertyConstants.ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO, defaultValue);
+        return getProperty(environment, PropertyConstants.ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO, defaultValue);
     }
 
     public static String getApplicationName(Environment environment) {
-        return environment.getProperty(PropertyConstants.ITEM_SPRING_APPLICATION_NAME);
+        return getProperty(environment, PropertyConstants.ITEM_SPRING_APPLICATION_NAME);
     }
 }
