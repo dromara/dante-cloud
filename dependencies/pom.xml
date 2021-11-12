@@ -65,7 +65,7 @@
         <spring-boot-admin.version>2.5.3</spring-boot-admin.version>
 
         <!--Maven Plugin 相关组件-->
-        <docker-maven-plugin.version>0.37.0</docker-maven-plugin.version>
+        <docker-maven-plugin.version>0.38.0</docker-maven-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
         <mapstruct-processor.version>1.4.2.Final</mapstruct-processor.version>
 
