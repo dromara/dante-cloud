@@ -28,3 +28,7 @@ spring:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
 
+management:
+  health:
+    redis:
+      enabled: false
