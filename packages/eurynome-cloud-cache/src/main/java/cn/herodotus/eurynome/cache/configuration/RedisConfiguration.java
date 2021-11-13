@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: RedisConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/10/28 10:13:28
  */
 
-package cn.herodotus.eurynome.data.configuration;
+package cn.herodotus.eurynome.cache.configuration;
 
-import cn.herodotus.eurynome.data.cache.layer.HerodotusRedisCacheManager;
-import cn.herodotus.eurynome.data.properties.CacheProperties;
+import cn.herodotus.eurynome.cache.enhance.layer.HerodotusRedisCacheManager;
+import cn.herodotus.eurynome.cache.properties.CacheProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

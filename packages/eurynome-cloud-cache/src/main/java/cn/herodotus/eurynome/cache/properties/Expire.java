@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: Expire.java
  * Author: gengwei.zheng
- * Date: 2021/10/28 10:08:28
+ * Date: 2021/10/28 10:09:28
  */
 
-package cn.herodotus.eurynome.data.properties;
+package cn.herodotus.eurynome.cache.properties;
 
 import org.apache.commons.lang3.ObjectUtils;
 

@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
- * File Name: RedissonConfiguration.java
+ * Module Name: eurynome-cloud-cache
+ * File Name: RedissonProperties.java
  * Author: gengwei.zheng
- * Date: 2021/10/24 21:05:24
+ * Date: 2021/10/24 21:34:24
  */
 
-package cn.herodotus.eurynome.data.properties;
+package cn.herodotus.eurynome.cache.properties;
 
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;

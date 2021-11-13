@@ -20,7 +20,7 @@
  * Date: 2021/06/29 15:58:29
  */
 
-package cn.herodotus.eurynome.data.cache.query;
+package cn.herodotus.eurynome.cache.enhance.query;
 
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import org.apache.commons.lang3.StringUtils;

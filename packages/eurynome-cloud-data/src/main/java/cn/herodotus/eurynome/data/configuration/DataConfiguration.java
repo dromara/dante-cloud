@@ -62,9 +62,9 @@ import javax.annotation.PostConstruct;
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
 @Import({
         SpringUtil.class,
-        CacheConfiguration.class,
         MybatisPlusConfiguration.class,
         QueueConfiguration.class,
+        StampConfiguration.class
 })
 public class DataConfiguration {
 

@@ -14,28 +14,28 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-assistant
- * File Name: ConditionalOnRedissonEnabled.java
+ * Module Name: eurynome-cloud-cache
+ * File Name: EnableHerodotusCache.java
  * Author: gengwei.zheng
- * Date: 2021/10/24 21:35:24
+ * Date: 2021/11/13 20:02:13
  */
 
-package cn.herodotus.eurynome.assistant.annotation.conditional;
+package cn.herodotus.eurynome.cache.annotation;
 
-import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import cn.herodotus.eurynome.cache.configuration.CacheConfiguration;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p>Description: Redisson是否开启条件注解 </p>
+ * <p>Description: 开启缓存和Redis支持 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/10/24 21:35
+ * @date : 2021/11/13 20:02
  */
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@ConditionalOnProperty(value = PropertyConstants.ITEM_REDISSON_ENABLED, havingValue = "true")
-public @interface ConditionalOnRedissonEnabled {
+@Import({CacheConfiguration.class})
+public @interface EnableHerodotusCache {
 }

@@ -20,7 +20,7 @@
  * Date: 2021/10/28 10:06:28
  */
 
-package cn.herodotus.eurynome.data.cache.jetcache;
+package cn.herodotus.eurynome.cache.enhance.jetcache;
 
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;

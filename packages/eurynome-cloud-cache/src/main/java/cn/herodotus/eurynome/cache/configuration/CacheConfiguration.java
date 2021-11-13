@@ -14,17 +14,17 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: CacheConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/10/24 21:04:24
+ * Date: 2021/10/28 10:12:28
  */
 
-package cn.herodotus.eurynome.data.configuration;
+package cn.herodotus.eurynome.cache.configuration;
 
-import cn.herodotus.eurynome.data.cache.jetcache.JetCacheBuilder;
-import cn.herodotus.eurynome.data.cache.layer.HerodotusCacheManager;
-import cn.herodotus.eurynome.data.properties.CacheProperties;
+import cn.herodotus.eurynome.cache.enhance.jetcache.JetCacheBuilder;
+import cn.herodotus.eurynome.cache.enhance.layer.HerodotusCacheManager;
+import cn.herodotus.eurynome.cache.properties.CacheProperties;
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.support.SpringConfigProvider;
 import org.slf4j.Logger;

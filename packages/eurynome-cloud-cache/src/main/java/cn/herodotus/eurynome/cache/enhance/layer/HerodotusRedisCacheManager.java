@@ -14,17 +14,17 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: HerodotusRedisCacheManager.java
  * Author: gengwei.zheng
- * Date: 2021/10/28 10:10:28
+ * Date: 2021/10/28 10:11:28
  */
 
-package cn.herodotus.eurynome.data.cache.layer;
+package cn.herodotus.eurynome.cache.enhance.layer;
 
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
-import cn.herodotus.eurynome.data.properties.CacheProperties;
-import cn.herodotus.eurynome.data.properties.Expire;
+import cn.herodotus.eurynome.cache.properties.CacheProperties;
+import cn.herodotus.eurynome.cache.properties.Expire;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

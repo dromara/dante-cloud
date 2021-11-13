@@ -14,23 +14,20 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: CacheProperties.java
  * Author: gengwei.zheng
- * Date: 2021/07/14 11:11:14
+ * Date: 2021/10/28 10:09:28
  */
 
-package cn.herodotus.eurynome.data.properties;
+package cn.herodotus.eurynome.cache.properties;
 
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import com.google.common.base.MoreObjects;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>Description: 缓存配置属性 </p>

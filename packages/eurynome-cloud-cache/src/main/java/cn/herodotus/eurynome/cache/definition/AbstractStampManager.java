@@ -20,7 +20,7 @@
  * Date: 2021/08/26 18:59:26
  */
 
-package cn.herodotus.eurynome.data.definition;
+package cn.herodotus.eurynome.cache.definition;
 
 import cn.herodotus.eurynome.assistant.exception.stamp.IllegalStampParameterException;
 import cn.herodotus.eurynome.assistant.exception.stamp.StampDeleteFailedException;

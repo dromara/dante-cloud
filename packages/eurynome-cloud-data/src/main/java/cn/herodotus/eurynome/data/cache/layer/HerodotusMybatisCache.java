@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.data.cache.layer;
 
-import cn.herodotus.eurynome.data.cache.jetcache.JetCacheBuilder;
+import cn.herodotus.eurynome.cache.enhance.jetcache.JetCacheBuilder;
 import cn.hutool.extra.spring.SpringUtil;
 import org.apache.ibatis.cache.Cache;
 import org.slf4j.Logger;

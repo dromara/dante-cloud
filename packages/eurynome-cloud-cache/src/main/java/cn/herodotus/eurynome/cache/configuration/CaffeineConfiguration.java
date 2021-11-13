@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: CaffeineConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/07/14 11:10:14
+ * Date: 2021/10/28 10:12:28
  */
 
-package cn.herodotus.eurynome.data.configuration;
+package cn.herodotus.eurynome.cache.configuration;
 
-import cn.herodotus.eurynome.data.cache.layer.HerodotusCaffeineCacheManager;
-import cn.herodotus.eurynome.data.properties.CacheProperties;
+import cn.herodotus.eurynome.cache.enhance.layer.HerodotusCaffeineCacheManager;
+import cn.herodotus.eurynome.cache.properties.CacheProperties;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

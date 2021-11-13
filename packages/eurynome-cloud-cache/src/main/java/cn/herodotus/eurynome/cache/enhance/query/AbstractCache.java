@@ -20,9 +20,9 @@
  * Date: 2021/06/29 15:58:29
  */
 
-package cn.herodotus.eurynome.data.cache.query;
+package cn.herodotus.eurynome.cache.enhance.query;
 
-import cn.herodotus.eurynome.assistant.constant.CacheConstants;
+import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import com.alicp.jetcache.Cache;

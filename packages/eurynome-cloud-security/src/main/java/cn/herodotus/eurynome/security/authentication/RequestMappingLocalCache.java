@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.authentication;
 
-import cn.herodotus.eurynome.data.cache.query.CacheTemplate;
+import cn.herodotus.eurynome.cache.enhance.query.CacheTemplate;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;

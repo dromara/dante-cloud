@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,35 +14,28 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
- * File Name: EnableRedisStorage.java
+ * Module Name: eurynome-cloud-cache
+ * File Name: ConditionalOnRedissonEnabled.java
  * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Date: 2021/10/24 21:35:24
  */
 
-package cn.herodotus.eurynome.data.annotation;
+package cn.herodotus.eurynome.cache.annotation;
 
-import cn.herodotus.eurynome.cache.configuration.CacheConfiguration;
-import cn.herodotus.eurynome.data.configuration.StampConfiguration;
-import org.springframework.context.annotation.Import;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.lang.annotation.*;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: EnableRedisStorage </p>
- *
- * <p>Description: 开启平台Redis存储 </p>
- * <p>
- * 目前主要功能：
- * 1.开启Redis配置
+ * <p>Description: Redisson是否开启条件注解 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/5/23 10:01
+ * @date : 2021/10/24 21:35
  */
-@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@Import({CacheConfiguration.class, StampConfiguration.class,})
-public @interface EnableRedisStorage {
+@ConditionalOnProperty(value = PropertyConstants.ITEM_REDISSON_ENABLED, havingValue = "true")
+public @interface ConditionalOnRedissonEnabled {
 }

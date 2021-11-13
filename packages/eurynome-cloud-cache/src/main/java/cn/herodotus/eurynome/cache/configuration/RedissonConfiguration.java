@@ -14,18 +14,18 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: RedissonConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/10/24 21:05:24
+ * Date: 2021/10/24 21:36:24
  */
 
-package cn.herodotus.eurynome.data.configuration;
+package cn.herodotus.eurynome.cache.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnRedissonEnabled;
+import cn.herodotus.eurynome.cache.annotation.ConditionalOnRedissonEnabled;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.assistant.utils.ResourceUtils;
-import cn.herodotus.eurynome.data.properties.RedissonProperties;
+import cn.herodotus.eurynome.cache.properties.RedissonProperties;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;

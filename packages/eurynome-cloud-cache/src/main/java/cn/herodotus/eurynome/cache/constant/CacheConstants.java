@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-assistant
+ * Module Name: eurynome-cloud-cache
  * File Name: CacheConstants.java
  * Author: gengwei.zheng
- * Date: 2021/10/17 22:56:17
+ * Date: 2021/10/19 21:35:19
  */
 
-package cn.herodotus.eurynome.assistant.constant;
+package cn.herodotus.eurynome.cache.constant;
 
 /**
  * <p>Description: 缓存相关常量 </p>

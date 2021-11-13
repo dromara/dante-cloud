@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.data.stamp;
 
-import cn.herodotus.eurynome.assistant.constant.CacheConstants;
-import cn.herodotus.eurynome.data.definition.AbstractStampManager;
+import cn.herodotus.eurynome.cache.constant.CacheConstants;
+import cn.herodotus.eurynome.cache.definition.AbstractStampManager;
 import cn.herodotus.eurynome.data.domain.SecretKey;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;

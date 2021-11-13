@@ -138,6 +138,11 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-data</artifactId>
                 <version>${project.version}</version>
             </dependency>

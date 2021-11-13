@@ -20,7 +20,7 @@
  * Date: 2021/08/05 18:32:05
  */
 
-package cn.herodotus.eurynome.data.cache.caffeine;
+package cn.herodotus.eurynome.cache.enhance.caffeine;
 
 import com.github.benmanes.caffeine.cache.Expiry;
 import org.checkerframework.checker.index.qual.NonNegative;
