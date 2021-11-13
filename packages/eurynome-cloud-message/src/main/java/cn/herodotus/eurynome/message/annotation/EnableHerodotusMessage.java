@@ -14,28 +14,28 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-assistant
- * File Name: ConditionalOnKafkaEnabled.java
+ * Module Name: eurynome-cloud-message
+ * File Name: EnableHerodotusMessage.java
  * Author: gengwei.zheng
- * Date: 2021/10/17 22:56:17
+ * Date: 2021/11/13 21:57:13
  */
 
-package cn.herodotus.eurynome.assistant.annotation.conditional;
+package cn.herodotus.eurynome.message.annotation;
 
-import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import cn.herodotus.eurynome.message.configuration.QueueConfiguration;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p>Description: kafka是否开启条件准基 </p>
+ * <p>Description: 开启消息支持 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/11 20:36
+ * @date : 2021/11/13 21:57
  */
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-@ConditionalOnProperty(value = PropertyConstants.ITEM_KAFKA_ENABLED)
-public @interface ConditionalOnKafkaEnabled {
+@Import({QueueConfiguration.class})
+public @interface EnableHerodotusMessage {
 }

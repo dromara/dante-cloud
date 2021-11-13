@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-message
  * File Name: KafkaConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/08/08 10:41:08
+ * Date: 2021/10/08 22:54:08
  */
 
-package cn.herodotus.eurynome.data.configuration;
+package cn.herodotus.eurynome.message.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnKafkaEnabled;
-import cn.herodotus.eurynome.data.properties.QueueProperties;
+import cn.herodotus.eurynome.message.annotation.ConditionalOnKafkaEnabled;
+import cn.herodotus.eurynome.message.properties.QueueProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

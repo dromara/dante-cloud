@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+  ~ Copyright (c) 2019-2021 Gengwei Zheng (herodotus@aliyun.com)
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -15,47 +15,35 @@
   ~ limitations under the License.
   ~
   ~ Project Name: eurynome-cloud
-  ~ Module Name: eurynome-cloud-security
+  ~ Module Name: packages
   ~ File Name: pom.xml
   ~ Author: gengwei.zheng
-  ~ Date: 2021/05/13 11:00:13
+  ~ Date: 2021/11/13 21:54:13
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>2.5.6.40</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>eurynome-cloud-security</artifactId>
+    <artifactId>eurynome-cloud-message</artifactId>
     <version>2.5.6.40</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-message</artifactId>
+            <artifactId>eurynome-cloud-assistant</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-rest</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-kafka</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-jose</artifactId>
-        </dependency>
-
     </dependencies>
 </project>

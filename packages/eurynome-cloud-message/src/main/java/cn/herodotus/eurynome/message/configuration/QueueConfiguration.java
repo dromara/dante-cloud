@@ -14,15 +14,15 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-message
  * File Name: QueueConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/10/24 21:36:24
+ * Date: 2021/10/24 21:37:24
  */
 
-package cn.herodotus.eurynome.data.configuration;
+package cn.herodotus.eurynome.message.configuration;
 
-import cn.herodotus.eurynome.data.properties.QueueProperties;
+import cn.herodotus.eurynome.message.properties.QueueProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

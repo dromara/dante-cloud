@@ -43,13 +43,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-data</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-cloud-starter-bus-kafka</artifactId>
-                    <groupId>org.springframework.cloud</groupId>
-                </exclusion>
-            </exclusions>
+            <artifactId>eurynome-cloud-cache</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

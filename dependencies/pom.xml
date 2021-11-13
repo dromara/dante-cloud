@@ -153,6 +153,11 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-cloud-message</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-security</artifactId>
                 <version>${project.version}</version>
             </dependency>

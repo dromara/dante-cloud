@@ -48,6 +48,7 @@
         <module>eurynome-cloud-assistant</module>
         <module>eurynome-cloud-websocket</module>
         <module>eurynome-cloud-cache</module>
+        <module>eurynome-cloud-message</module>
     </modules>
 
 </project>

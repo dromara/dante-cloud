@@ -14,28 +14,28 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
- * File Name: DestinationResolver.java
+ * Module Name: eurynome-cloud-message
+ * File Name: ConditionalOnKafkaEnabled.java
  * Author: gengwei.zheng
- * Date: 2021/10/19 21:35:19
+ * Date: 2021/10/24 21:11:24
  */
 
-package cn.herodotus.eurynome.data.support;
+package cn.herodotus.eurynome.message.annotation;
 
-import org.springframework.cloud.bus.event.Destination;
-import org.springframework.cloud.bus.event.PathDestinationFactory;
+import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+
+import java.lang.annotation.*;
 
 /**
- * <p>Description: Spring Cloud Bus Destination辅助类 </p>
+ * <p>Description: kafka是否开启条件准基 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/11 20:39
+ * @date : 2021/8/11 20:36
  */
-public class DestinationSupport {
-
-    private static final PathDestinationFactory pathDestinationFactory = new PathDestinationFactory();
-
-    public static Destination create(String serviceName) {
-        return pathDestinationFactory.getDestination(serviceName + ":**");
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Documented
+@ConditionalOnProperty(value = PropertyConstants.ITEM_KAFKA_ENABLED)
+public @interface ConditionalOnKafkaEnabled {
 }

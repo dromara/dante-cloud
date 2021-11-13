@@ -28,6 +28,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Import;
 
+/**
+ * <p>Description: 用户中心服务 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/11/13 22:10
+ */
 @EnableDiscoveryClient
 @SpringBootApplication
 @Import(UpmsAbilityConfiguration.class)

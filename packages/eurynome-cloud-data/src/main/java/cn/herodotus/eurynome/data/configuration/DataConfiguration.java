@@ -63,7 +63,6 @@ import javax.annotation.PostConstruct;
 @Import({
         SpringUtil.class,
         MybatisPlusConfiguration.class,
-        QueueConfiguration.class,
         StampConfiguration.class
 })
 public class DataConfiguration {

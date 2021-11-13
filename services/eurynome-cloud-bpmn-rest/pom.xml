@@ -42,7 +42,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-assistant</artifactId>
+            <artifactId>eurynome-cloud-message</artifactId>
         </dependency>
     </dependencies>
 

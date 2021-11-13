@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.service;
 
-import cn.herodotus.eurynome.data.support.DestinationSupport;
+import cn.herodotus.eurynome.message.support.DestinationSupport;
 import cn.herodotus.eurynome.assistant.constant.ServiceConstants;
 import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
