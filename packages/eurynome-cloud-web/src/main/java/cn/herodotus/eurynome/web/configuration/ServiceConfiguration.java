@@ -14,17 +14,18 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
+ * Module Name: eurynome-cloud-web
  * File Name: ServiceConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 20:40:26
+ * Date: 2021/11/13 23:08:13
  */
 
-package cn.herodotus.eurynome.rest.configuration;
+package cn.herodotus.eurynome.web.configuration;
 
 import cn.herodotus.eurynome.assistant.utils.EnvUtils;
-import cn.herodotus.eurynome.rest.properties.ServiceProperties;
-import lombok.extern.slf4j.Slf4j;
+import cn.herodotus.eurynome.web.properties.ServiceProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -38,10 +39,11 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2021/6/13 17:02
  */
-@Slf4j
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(ServiceProperties.class)
 public class ServiceConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(ServiceConfiguration.class);
 
     /**
      * 当前服务的端口

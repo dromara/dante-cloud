@@ -14,20 +14,20 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
- * File Name: OpenAPIConfiguration.java
+ * Module Name: eurynome-cloud-web
+ * File Name: OpenApiConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/09/12 01:51:12
+ * Date: 2021/11/13 23:08:13
  */
 
-package cn.herodotus.eurynome.rest.configuration;
+package cn.herodotus.eurynome.web.configuration;
 
 import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnSwaggerEnabled;
-import cn.herodotus.eurynome.assistant.enums.Architecture;
 import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
-import cn.herodotus.eurynome.rest.properties.PlatformProperties;
-import cn.herodotus.eurynome.rest.properties.ServiceProperties;
+import cn.herodotus.eurynome.assistant.enums.Architecture;
+import cn.herodotus.eurynome.web.properties.PlatformProperties;
+import cn.herodotus.eurynome.web.properties.ServiceProperties;
 import com.google.common.collect.ImmutableList;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.*;
@@ -36,7 +36,8 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
@@ -53,8 +54,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/3/31 11:54
  */
-@Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnSwaggerEnabled
 @AutoConfigureAfter(ServiceConfiguration.class)
 @SecuritySchemes({
@@ -65,6 +65,8 @@ import java.util.List;
                 )),
 })
 public class OpenApiConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(OpenApiConfiguration.class);
 
     @Autowired
     private PlatformProperties platformProperties;

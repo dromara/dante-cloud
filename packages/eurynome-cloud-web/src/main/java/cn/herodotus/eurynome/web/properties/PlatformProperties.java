@@ -20,7 +20,7 @@
  * Date: 2021/09/25 10:33:25
  */
 
-package cn.herodotus.eurynome.rest.properties;
+package cn.herodotus.eurynome.web.properties;
 
 import cn.herodotus.eurynome.assistant.enums.ProtocolType;
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;

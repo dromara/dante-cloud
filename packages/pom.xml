@@ -49,6 +49,7 @@
         <module>eurynome-cloud-websocket</module>
         <module>eurynome-cloud-cache</module>
         <module>eurynome-cloud-message</module>
+        <module>eurynome-cloud-web</module>
     </modules>
 
 </project>

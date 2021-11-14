@@ -55,7 +55,7 @@ public class CacheConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Plugin [Herodotus Cache] Auto Configure.");
+        log.info("[Herodotus] |- Component [Herodotus Cache] Auto Configure.");
     }
 
     @Bean

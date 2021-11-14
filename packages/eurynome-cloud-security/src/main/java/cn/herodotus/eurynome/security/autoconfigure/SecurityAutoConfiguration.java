@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
-import cn.herodotus.eurynome.rest.properties.PlatformProperties;
-import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.web.properties.PlatformProperties;
+import cn.herodotus.eurynome.web.properties.RestProperties;
 import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.authentication.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.HerodotusUserAuthenticationConverter;

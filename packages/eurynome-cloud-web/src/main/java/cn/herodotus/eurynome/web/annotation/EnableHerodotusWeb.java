@@ -14,38 +14,28 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
- * File Name: EnableHerodotusRest.java
+ * Module Name: eurynome-cloud-web
+ * File Name: EnableHerodotusWeb.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 20:40:26
+ * Date: 2021/11/13 23:05:13
  */
 
-package cn.herodotus.eurynome.rest.annotation;
+package cn.herodotus.eurynome.web.annotation;
 
-import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
-import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
-import cn.herodotus.eurynome.web.annotation.EnableHerodotusWeb;
+import cn.herodotus.eurynome.web.configuration.WebConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p>Description: 开启Herodotus REST核心注解 </p>
- * <p>
- * 目前主要功能：
- * 1.开启ApplicationProperties， RestProperties， SwaggerProperties
- * 2.启用RestTemplate配置
- * 3.启用Swagger配置
- * 4.解决Undertow启动警告问题
+ * <p>Description: 开启Web支持 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/2 11:01
+ * @date : 2021/11/13 23:05
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableHerodotusData
-@EnableHerodotusWeb
-@Import({RestConfiguration.class})
-public @interface EnableHerodotusRest {
+@Import(WebConfiguration.class)
+public @interface EnableHerodotusWeb {
 }

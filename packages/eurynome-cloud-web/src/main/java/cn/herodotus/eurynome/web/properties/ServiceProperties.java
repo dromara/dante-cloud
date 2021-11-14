@@ -20,7 +20,7 @@
  * Date: 2021/08/26 20:40:26
  */
 
-package cn.herodotus.eurynome.rest.properties;
+package cn.herodotus.eurynome.web.properties;
 
 import cn.herodotus.eurynome.assistant.utils.ConvertUtils;
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;

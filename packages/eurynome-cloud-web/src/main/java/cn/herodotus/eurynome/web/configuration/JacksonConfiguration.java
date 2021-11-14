@@ -14,17 +14,18 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
+ * Module Name: eurynome-cloud-web
  * File Name: JacksonConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 20:40:26
+ * Date: 2021/10/19 21:35:19
  */
 
-package cn.herodotus.eurynome.rest.configuration;
+package cn.herodotus.eurynome.web.configuration;
 
 import cn.herodotus.eurynome.assistant.utils.JacksonUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -40,10 +41,11 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2019/11/8 17:15
  */
-@Slf4j
 @Configuration
 @AutoConfigureAfter(org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration.class)
 public class JacksonConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(JacksonConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

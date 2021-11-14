@@ -14,17 +14,18 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
+ * Module Name: eurynome-cloud-web
  * File Name: UndertowWebServerFactoryCustomizer.java
  * Author: gengwei.zheng
- * Date: 2021/09/25 10:33:25
+ * Date: 2021/10/08 22:54:08
  */
 
-package cn.herodotus.eurynome.rest.configuration;
+package cn.herodotus.eurynome.web.configuration;
 
 import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.stereotype.Component;
@@ -37,9 +38,10 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2019/11/17 16:07
  */
-@Slf4j
 @Component
 public class UndertowWebServerFactoryCustomizer implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
+
+    private static final Logger log = LoggerFactory.getLogger(UndertowWebServerFactoryCustomizer.class);
 
     @PostConstruct
     public void postConstruct() {

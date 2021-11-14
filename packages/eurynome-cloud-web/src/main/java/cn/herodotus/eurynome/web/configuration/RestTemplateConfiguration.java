@@ -14,17 +14,18 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
+ * Module Name: eurynome-cloud-web
  * File Name: RestTemplateConfiguration.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 20:40:26
+ * Date: 2021/11/13 23:08:13
  */
 
-package cn.herodotus.eurynome.rest.configuration;
+package cn.herodotus.eurynome.web.configuration;
 
-import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.web.properties.RestProperties;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -45,10 +46,11 @@ import java.io.IOException;
  * @author : gengwei.zheng
  * @date : 2020/5/29 17:32
  */
-@Slf4j
 @Configuration
 @EnableConfigurationProperties(RestProperties.class)
 public class RestTemplateConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(RestTemplateConfiguration.class);
 
     @Autowired
     private RestProperties restProperties;
