@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.crypto;
 
-import cn.herodotus.eurynome.assistant.annotation.rest.Crypto;
+import cn.herodotus.eurynome.rest.annotation.Crypto;
 import cn.herodotus.eurynome.assistant.constant.HttpHeaders;
 import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import org.apache.commons.lang3.ObjectUtils;

@@ -22,9 +22,8 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.rest.properties.PlatformProperties;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -54,18 +53,13 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2020/3/2 14:54
  */
-@Slf4j
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties(PlatformProperties.class)
 @Import({
-        JacksonConfiguration.class,
-        RestTemplateConfiguration.class,
-        ServiceConfiguration.class,
-        OpenApiConfiguration.class,
-        UndertowWebServerFactoryCustomizer.class,
         InterfaceSecurityConfiguration.class
 })
 public class RestConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(RestConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.service.system;
 
 import cn.herodotus.eurynome.assistant.enums.AccountType;
-import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
+import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.core.SocialUserDetails;

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.service.oauth;
 
-import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
+import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
 import cn.herodotus.eurynome.upms.api.entity.oauth.OauthClientDetails;

@@ -22,11 +22,10 @@
 
 package cn.herodotus.eurynome.gateway.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnSwaggerEnabled;
+import cn.herodotus.eurynome.assistant.annotation.ConditionalOnSwaggerEnabled;
 import cn.herodotus.eurynome.gateway.handler.RefreshRoutesListener;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.SwaggerUiConfigParameters;

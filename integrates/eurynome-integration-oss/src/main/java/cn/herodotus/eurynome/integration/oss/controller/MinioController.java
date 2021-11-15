@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.integration.oss.controller;
 
-import cn.herodotus.eurynome.assistant.annotation.rest.AccessLimited;
-import cn.herodotus.eurynome.assistant.annotation.rest.Idempotent;
+import cn.herodotus.eurynome.rest.annotation.AccessLimited;
+import cn.herodotus.eurynome.rest.annotation.Idempotent;
 import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.integration.oss.core.MinioTemplate;
 import cn.herodotus.eurynome.integration.oss.domain.MinioItem;

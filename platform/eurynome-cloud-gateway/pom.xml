@@ -29,11 +29,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.5.6.40</version>
+        <version>2.5.6.50</version>
     </parent>
 
     <artifactId>eurynome-cloud-gateway</artifactId>
-    <version>2.5.6.40</version>
+    <version>2.5.6.50</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -43,13 +43,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-data</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-cloud-starter-bus-kafka</artifactId>
-                    <groupId>org.springframework.cloud</groupId>
-                </exclusion>
-            </exclusions>
+            <artifactId>eurynome-cloud-cache</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

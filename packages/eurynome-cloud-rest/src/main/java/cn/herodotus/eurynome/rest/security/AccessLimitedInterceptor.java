@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.security;
 
-import cn.herodotus.eurynome.assistant.annotation.rest.AccessLimited;
+import cn.herodotus.eurynome.rest.annotation.AccessLimited;
 import cn.herodotus.eurynome.assistant.exception.operation.FrequentRequestsException;
 import cn.herodotus.eurynome.data.stamp.AccessLimitedStampManager;
 import cn.hutool.crypto.SecureUtil;

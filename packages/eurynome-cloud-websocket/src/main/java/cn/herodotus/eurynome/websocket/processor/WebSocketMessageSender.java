@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.websocket.processor;
 
-import cn.herodotus.eurynome.assistant.exception.websocket.IllegalChannelException;
-import cn.herodotus.eurynome.assistant.exception.websocket.PrincipalNotFoundException;
+import cn.herodotus.eurynome.websocket.exception.IllegalChannelException;
+import cn.herodotus.eurynome.websocket.exception.PrincipalNotFoundException;
 import cn.herodotus.eurynome.websocket.domain.WebSocketChannel;
 import cn.herodotus.eurynome.websocket.domain.WebSocketMessage;
 import cn.herodotus.eurynome.websocket.properties.WebSocketProperties;

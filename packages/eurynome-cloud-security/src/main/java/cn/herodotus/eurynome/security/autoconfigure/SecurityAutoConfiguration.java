@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
-import cn.herodotus.eurynome.rest.properties.PlatformProperties;
-import cn.herodotus.eurynome.rest.properties.RestProperties;
+import cn.herodotus.eurynome.web.properties.PlatformProperties;
+import cn.herodotus.eurynome.web.properties.RestProperties;
 import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.authentication.RequestMappingScanner;
 import cn.herodotus.eurynome.security.authentication.HerodotusUserAuthenticationConverter;
@@ -40,6 +40,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 
 import javax.annotation.PostConstruct;
@@ -69,11 +70,9 @@ import javax.annotation.PostConstruct;
  * @date : 2020/3/2 16:00
  */
 @Configuration
+@EnableAsync
 @EnableConfigurationProperties({
         SecurityProperties.class
-})
-@ComponentScan(basePackages = {
-        "cn.hutool.extra.spring"
 })
 @Import({
         MethodSecurityMetadataConfiguration.class
