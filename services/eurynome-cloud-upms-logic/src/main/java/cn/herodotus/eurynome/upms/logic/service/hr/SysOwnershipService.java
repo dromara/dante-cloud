@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
+import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysOwnershipRepository;
 import org.slf4j.Logger;

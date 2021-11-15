@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.integration.oss.core;
 
-import cn.herodotus.eurynome.assistant.exception.oss.*;
 import cn.herodotus.eurynome.integration.oss.domain.MinioItem;
+import cn.herodotus.eurynome.integration.oss.exception.*;
 import io.minio.*;
 import io.minio.errors.*;
 import io.minio.messages.Bucket;

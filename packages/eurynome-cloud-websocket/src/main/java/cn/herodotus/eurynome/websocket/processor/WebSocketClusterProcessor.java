@@ -29,8 +29,8 @@ package cn.herodotus.eurynome.websocket.processor;
  * @date : 2021/10/24 21:44
  */
 
-import cn.herodotus.eurynome.assistant.exception.websocket.IllegalChannelException;
-import cn.herodotus.eurynome.assistant.exception.websocket.PrincipalNotFoundException;
+import cn.herodotus.eurynome.websocket.exception.IllegalChannelException;
+import cn.herodotus.eurynome.websocket.exception.PrincipalNotFoundException;
 import cn.herodotus.eurynome.websocket.domain.WebSocketMessage;
 import cn.herodotus.eurynome.websocket.properties.WebSocketProperties;
 import org.redisson.api.RTopic;

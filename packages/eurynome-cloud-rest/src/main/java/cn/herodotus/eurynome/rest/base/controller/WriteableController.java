@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.rest.base.controller;
 
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.assistant.domain.Result;
-import cn.herodotus.eurynome.rest.base.service.WriteableService;
+import cn.herodotus.eurynome.data.base.service.WriteableService;
 
 import java.io.Serializable;
 

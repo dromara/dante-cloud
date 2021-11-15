@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.base.controller;
 
-import cn.herodotus.eurynome.assistant.annotation.rest.AccessLimited;
+import cn.herodotus.eurynome.rest.annotation.AccessLimited;
 import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.assistant.domain.Result;

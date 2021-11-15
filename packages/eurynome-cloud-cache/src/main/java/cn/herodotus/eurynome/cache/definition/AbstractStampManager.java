@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.cache.definition;
 
-import cn.herodotus.eurynome.assistant.exception.stamp.IllegalStampParameterException;
-import cn.herodotus.eurynome.assistant.exception.stamp.StampDeleteFailedException;
-import cn.herodotus.eurynome.assistant.exception.stamp.StampHasExpiredException;
-import cn.herodotus.eurynome.assistant.exception.stamp.StampMismatchException;
+import cn.herodotus.eurynome.cache.exception.IllegalStampParameterException;
+import cn.herodotus.eurynome.cache.exception.StampDeleteFailedException;
+import cn.herodotus.eurynome.cache.exception.StampHasExpiredException;
+import cn.herodotus.eurynome.cache.exception.StampMismatchException;
 import com.alicp.jetcache.AutoReleaseLock;
 import com.alicp.jetcache.Cache;
 import org.apache.commons.lang3.ObjectUtils;

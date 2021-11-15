@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.web.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnSwaggerEnabled;
+import cn.herodotus.eurynome.assistant.annotation.ConditionalOnSwaggerEnabled;
 import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.assistant.enums.Architecture;
@@ -84,7 +84,7 @@ public class OpenApiConfiguration {
                 .servers(getServers())
                 .info(new Info().title("Eurynome Cloud")
                         .description("Eurynome Cloud Microservices Architecture")
-                        .version("2.5.6.40")
+                        .version("2.5.6.50")
                         .license(new License().name("Apache 2.0").url("http://www.apache.org/licenses/")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Eurynome Cloud Documentation")

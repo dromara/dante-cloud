@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.integration.oss.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.conditional.ConditionalOnMinioEnabled;
+import cn.herodotus.eurynome.integration.oss.annotation.ConditionalOnMinioEnabled;
 import cn.herodotus.eurynome.integration.oss.core.MinioClientPool;
 import cn.herodotus.eurynome.integration.oss.core.MinioManager;
 import cn.herodotus.eurynome.integration.oss.core.MinioTemplate;

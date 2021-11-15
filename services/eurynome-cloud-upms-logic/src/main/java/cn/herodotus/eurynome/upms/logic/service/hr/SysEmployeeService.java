@@ -26,7 +26,7 @@ import cn.herodotus.eurynome.assistant.exception.persistence.TransactionRollback
 import cn.herodotus.eurynome.assistant.enums.Gender;
 import cn.herodotus.eurynome.assistant.enums.Identity;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.rest.base.service.BaseLayeredService;
+import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;

@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
-import cn.herodotus.eurynome.rest.base.service.WriteableService;
+import cn.herodotus.eurynome.data.base.service.WriteableService;
 import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysOwnershipService;
 import io.swagger.v3.oas.annotations.tags.Tag;
