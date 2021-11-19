@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.5.6.50</version>
+    <version>2.5.6.60</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -76,6 +76,7 @@
         <commons-io.version>2.11.0</commons-io.version>
         <guava.version>31.0.1-jre</guava.version>
         <antisamy.version>1.6.4</antisamy.version>
+        <influxdb.version>2.22</influxdb.version>
 
         <!-- 应用开发辅助工具组件 -->
         <lombok.version>1.18.20</lombok.version>
@@ -89,6 +90,7 @@
         <alibaba-fastjson.version>1.2.75</alibaba-fastjson.version>
         <alibaba-jetcache.version>2.6.0</alibaba-jetcache.version>
         <alibaba-nacos.version>2.0.3</alibaba-nacos.version>
+        <sentinel.version>1.8.2</sentinel.version>
 
         <!-- 国内开源通用组件 -->
         <hutool.version>5.7.16</hutool.version>
@@ -288,6 +290,12 @@
                 <groupId>org.owasp.antisamy</groupId>
                 <artifactId>antisamy</artifactId>
                 <version>${antisamy.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.influxdb/influxdb-java -->
+            <dependency>
+                <groupId>org.influxdb</groupId>
+                <artifactId>influxdb-java</artifactId>
+                <version>${influxdb.version}</version>
             </dependency>
 
 
