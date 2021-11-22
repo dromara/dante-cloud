@@ -69,7 +69,10 @@ public enum ResultStatus {
     ACCOUNT_EXPIRED(40107, "账户过期"),
     CREDENTIALS_EXPIRED(40108, "凭证过期"),
     ACCOUNT_LOCKED(40109, "账户被锁定"),
-    USERNAME_NOT_FOUND(40110, "用户未找到"),
+    /**
+     * 本质是用户不存在，但是返回信息不应该太清晰，以防被攻击
+     */
+    USERNAME_NOT_FOUND(40110, "用户名或密码错误！"),
     USER_IS_DISABLED(40111, "用户被禁用"),
     /**
      * 403.** 禁止的请求，与403对应
@@ -96,7 +99,7 @@ public enum ResultStatus {
      * 412.* 未经授权 Precondition Failed 客户端请求信息的先决条件错误
      */
     INVALID_TOKEN(41201, "无法解析的Token，也许Token已经失效"),
-    INVALID_GRANT(41202, "认证信息错误！"),
+    INVALID_GRANT(41202, "用户名或密码错误！"),
     INVALID_SCOPE(41203, "授权范围错误"),
     INVALID_CLIENT(41204, "非法的客户端"),
     INVALID_REQUEST(41205, "无效的请求，参数使用错误或配置无效."),

@@ -84,15 +84,3 @@ services:
       - ${BPMN_SERVICE_PORT}:${BPMN_SERVICE_PORT}
     depends_on:
       - monitor
-
-  sentinel:
-    image: sentinel-dashboard:1.8.2
-    build:
-      context: ../../../context
-      dockerfile: production/Dockerfile-Monitor
-    container_name: sentinel-dashboard
-    environment:
-      SENTINEL_ADMIN_USERNAME: sentinel
-      SENTINEL_ADMIN_PASSWORD: sentinel
-    ports:
-      - "8858:8858"
