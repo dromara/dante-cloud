@@ -68,7 +68,7 @@ services:
         - VERSION=${VERSION}
         - SERVICE_NAME=${BPMN_SERVICE_NAME}
         - SERVICE_PORT=${BPMN_SERVICE_PORT}
-    container_name: gateway
+    container_name: bpmn
     environment:
       SW_AGENT_SERVICE_NAME: ${BPMN_SERVICE_NAME}
       SW_COLLECTOR_BACKEND_SERVICE: oap:11800
