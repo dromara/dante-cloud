@@ -49,6 +49,14 @@ spring:
 #        - classpath*:sqls/upms-data-mysql.sql
         - classpath*:sqls/upms-data-postgresql.sql
 
+herodotus:
+  platform:
+    security:
+      interceptor:
+        whitelist:
+          - '/authorize/client-details/*'
+          - '/user/sign-in/*'
+
 logging:
   file:
     name: logs/${spring.application.name}.log

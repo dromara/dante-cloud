@@ -69,6 +69,7 @@ public enum ResultStatus {
     ACCOUNT_EXPIRED(40107, "账户过期"),
     CREDENTIALS_EXPIRED(40108, "凭证过期"),
     ACCOUNT_LOCKED(40109, "账户被锁定"),
+    INTERNAL_AUTHENTICATION(40110, "内部调用未授权接口，请检查接口权限"),
     /**
      * 本质是用户不存在，但是返回信息不应该太清晰，以防被攻击
      */
@@ -119,7 +120,7 @@ public enum ResultStatus {
     HTTP_MESSAGE_NOT_READABLE_EXCEPTION(50003, "JSON转换为实体出错！"),
     TYPE_MISMATCH_EXCEPTION(50004, "类型不匹配"),
     MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION(50005, "接口参数使用错误或必要参数缺失，请查阅接口文档！"),
-    IllegalArgumentException(50006, "非法参数错误"),
+    ILLEGAL_ARGUMENT(50006, "非法参数错误"),
 
     SERVICE_UNAVAILABLE(50301, "Service Unavailable"),
     GATEWAY_TIMEOUT(50500, "Gateway Timeout"),

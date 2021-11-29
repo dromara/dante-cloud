@@ -22,11 +22,13 @@
 
 package cn.herodotus.eurynome.kernel.feign;
 
+import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.google.common.net.HttpHeaders;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -54,6 +56,20 @@ public class HerodotusFeignRequestInterceptor implements RequestInterceptor {
             Map<String, String> headers = ServletUtil.getHeaderMap(httpServletRequest);
             // 传递所有请求头,防止部分丢失
             for (Map.Entry<String, String> entry : headers.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+
+                // 跳过content-length值的复制。因为服务之间调用需要携带一些用户信息之类的 所以实现了Feign的RequestInterceptor拦截器复制请求头，复制的时候是所有头都复制的,可能导致Content-length长度跟body不一致
+                // @see https://blog.csdn.net/qq_39986681/article/details/107138740
+                if (StringUtils.equalsIgnoreCase(key, HttpHeaders.CONTENT_LENGTH)) {
+                    continue;
+                }
+
+                // 解决 UserAgent 信息被修改后，AppleWebKit/537.36 (KHTML,like Gecko)部分存在非法字符的问题
+                if (StringUtils.equalsIgnoreCase(key, HttpHeaders.USER_AGENT)) {
+                    value = StringUtils.replace(value, SymbolConstants.NEW_LINE, SymbolConstants.BLANK);
+                }
+
                 requestTemplate.header(entry.getKey(), entry.getValue());
             }
 

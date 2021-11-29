@@ -57,6 +57,7 @@ public class HerodotusExceptionHandler {
         EXCEPTION_DICTIONARY.put("DisabledException", getUnauthorizedResult(ResultStatus.ACCOUNT_DISABLED));
         EXCEPTION_DICTIONARY.put("CredentialsExpiredException", getUnauthorizedResult(ResultStatus.CREDENTIALS_EXPIRED));
         EXCEPTION_DICTIONARY.put("InsufficientAuthenticationException", getUnauthorizedResult(ResultStatus.UNAUTHORIZED));
+        EXCEPTION_DICTIONARY.put("InternalAuthenticationServiceException", getUnauthorizedResult(ResultStatus.INTERNAL_AUTHENTICATION));
         // 403.** 对应错误
         EXCEPTION_DICTIONARY.put("RepeatSubmissionException", getForbiddenResult(ResultStatus.REPEAT_SUBMISSION));
         EXCEPTION_DICTIONARY.put("FrequentRequestsException", getForbiddenResult(ResultStatus.FREQUENT_REQUESTS));
@@ -74,7 +75,7 @@ public class HerodotusExceptionHandler {
         EXCEPTION_DICTIONARY.put("InvalidClientException", getPreconditionFailedResult(ResultStatus.INVALID_GRANT));
         EXCEPTION_DICTIONARY.put("InvalidRequestException", getPreconditionFailedResult(ResultStatus.INVALID_REQUEST));
         EXCEPTION_DICTIONARY.put("RedirectMismatchException", getPreconditionFailedResult(ResultStatus.INVALID_REDIRECT_URI));
-        EXCEPTION_DICTIONARY.put("InvalidArgumentException", getPreconditionFailedResult(ResultStatus.INVALID_ARGUMENT));
+        EXCEPTION_DICTIONARY.put("IllegalAuthenticationArgumentException", getPreconditionFailedResult(ResultStatus.INVALID_ARGUMENT));
         // 415.** 对应错误
         EXCEPTION_DICTIONARY.put("HttpMediaTypeNotAcceptableException", getUnsupportedMediaTypeResult(ResultStatus.UNSUPPORTED_MEDIA_TYPE));
 
@@ -84,7 +85,7 @@ public class HerodotusExceptionHandler {
         EXCEPTION_DICTIONARY.put("HttpMessageNotReadableException", getInternalServerErrorResult(ResultStatus.HTTP_MESSAGE_NOT_READABLE_EXCEPTION));
         EXCEPTION_DICTIONARY.put("TypeMismatchException", getInternalServerErrorResult(ResultStatus.TYPE_MISMATCH_EXCEPTION));
         EXCEPTION_DICTIONARY.put("MissingServletRequestParameterException", getInternalServerErrorResult(ResultStatus.MISSING_SERVLET_REQUEST_PARAMETER_EXCEPTION));
-        EXCEPTION_DICTIONARY.put("IllegalArgumentException", getInternalServerErrorResult(ResultStatus.IllegalArgumentException));
+        EXCEPTION_DICTIONARY.put("IllegalArgumentException", getInternalServerErrorResult(ResultStatus.ILLEGAL_ARGUMENT));
 
         // 6*.** 对应错误
         EXCEPTION_DICTIONARY.put("BadSqlGrammarException", getInternalServerErrorResult(ResultStatus.BAD_SQL_GRAMMAR));

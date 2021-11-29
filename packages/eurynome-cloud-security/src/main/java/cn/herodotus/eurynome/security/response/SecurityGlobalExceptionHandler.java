@@ -151,7 +151,12 @@ public class SecurityGlobalExceptionHandler {
             OAuth2Exception aex = (OAuth2Exception) exception;
             reason = OAuth2Exception.create(aex.getOAuth2ErrorCode(), aex.getMessage());
         } else if (exception instanceof InsufficientAuthenticationException) {
-            reason = (Exception) exception.getCause();
+            Throwable throwable = exception.getCause();
+            if (ObjectUtils.isNotEmpty(throwable)) {
+                reason = new Exception(throwable);
+            } else {
+                reason = exception;
+            }
             log.debug("[Herodotus] |- InsufficientAuthenticationException cause content is [{}]", reason.getClass().getSimpleName());
         } else {
             reason = exception;
