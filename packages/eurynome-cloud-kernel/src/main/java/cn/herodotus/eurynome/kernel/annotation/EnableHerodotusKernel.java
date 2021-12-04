@@ -22,12 +22,12 @@
 
 package cn.herodotus.eurynome.kernel.annotation;
 
+import cn.herodotus.eurynome.kernel.configuration.SentinelConfiguration;
+import org.springframework.context.annotation.Import;
+
 import java.lang.annotation.*;
 
 /**
- * <p>Project: eurynome-cloud </p>
- * <p>File: EnableHerodotusFeign </p>
- *
  * <p>Description: 开启Kernel </p>
  * 目前主要功能：
  * 1.启用日志收集
@@ -40,5 +40,6 @@ import java.lang.annotation.*;
 @Documented
 @EnableLogCenter
 @EnableHerodotusFeign
+@Import({SentinelConfiguration.class})
 public @interface EnableHerodotusKernel {
 }

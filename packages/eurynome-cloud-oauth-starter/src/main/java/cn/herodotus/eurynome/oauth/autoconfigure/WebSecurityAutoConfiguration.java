@@ -46,7 +46,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
-import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -91,8 +90,6 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * {@link AuthorizationServerEndpointsConfiguration#defaultAuthorizationServerTokenServices()}
      */
-    @Autowired
-    private AuthorizationServerTokenServices defaultAuthorizationServerTokenServices;
 
     @PostConstruct
     public void postConstruct() {

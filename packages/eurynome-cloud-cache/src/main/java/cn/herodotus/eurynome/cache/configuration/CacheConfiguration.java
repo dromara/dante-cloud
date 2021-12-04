@@ -22,11 +22,9 @@
 
 package cn.herodotus.eurynome.cache.configuration;
 
-import cn.herodotus.eurynome.cache.enhance.jetcache.JetCacheBuilder;
 import cn.herodotus.eurynome.cache.enhance.layer.HerodotusCacheManager;
 import cn.herodotus.eurynome.cache.properties.CacheProperties;
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
-import com.alicp.jetcache.anno.support.SpringConfigProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -48,7 +46,7 @@ import javax.annotation.PostConstruct;
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(CacheProperties.class)
 @EnableCreateCacheAnnotation
-@Import({CaffeineConfiguration.class, RedisConfiguration.class, RedissonConfiguration.class})
+@Import({CaffeineConfiguration.class, RedisConfiguration.class, RedissonConfiguration.class, JetCacheConfiguration.class})
 public class CacheConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);
@@ -71,12 +69,5 @@ public class CacheConfiguration {
         log.trace("[Herodotus] |- Bean [Herodotus Cache Manager] Auto Configure.");
 
         return herodotusCacheManager;
-    }
-
-    @Bean
-    public JetCacheBuilder jetCacheBuilder(SpringConfigProvider springConfigProvider) {
-        JetCacheBuilder jetCacheBuilder = new JetCacheBuilder(springConfigProvider);
-        log.trace("[Herodotus] |- Bean [Jet Cache Builder] Auto Configure.");
-        return jetCacheBuilder;
     }
 }

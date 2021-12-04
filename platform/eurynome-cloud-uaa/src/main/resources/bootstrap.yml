@@ -57,4 +57,4 @@ logging:
     org.springframework.web: info
     com.alicp.jetcache: info
     org.springframework.cloud.bus: info
-    org.apache.kafka: warn
+    org.apache.kafka: error

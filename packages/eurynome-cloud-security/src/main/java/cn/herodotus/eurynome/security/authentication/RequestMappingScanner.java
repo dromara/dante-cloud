@@ -47,6 +47,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.condition.PathPatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -56,6 +57,7 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -225,8 +227,13 @@ public class RequestMappingScanner implements ApplicationListener<ApplicationRea
         String requestMethods = StringUtils.join(requestMethodsRequestCondition.getMethods(), SymbolConstants.COMMA);
 
         // 5.2.6、获取主机对应的请求路径
-        PatternsRequestCondition patternsRequestCondition = info.getPatternsCondition();
-        String urls = StringUtils.join(patternsRequestCondition.getPatterns(), SymbolConstants.COMMA);
+        PathPatternsRequestCondition pathPatternsCondition = info.getPathPatternsCondition();
+        Set<String> patternValues = pathPatternsCondition.getPatternValues();
+        if (CollectionUtils.isEmpty(patternValues)) {
+            return null;
+        }
+
+        String urls = StringUtils.join(patternValues, SymbolConstants.COMMA);
         // 对于单体架构路径一般都是menu，还是手动设置吧。
         if (!isDistributedArchitecture()) {
             if (StringUtils.contains(urls, "index")) {
