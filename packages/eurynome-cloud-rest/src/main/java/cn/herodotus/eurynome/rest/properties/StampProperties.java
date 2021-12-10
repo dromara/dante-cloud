@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-rest
  * File Name: StampProperties.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 18:56:26
+ * Date: 2021/10/24 21:09:24
  */
 
-package cn.herodotus.eurynome.data.properties;
+package cn.herodotus.eurynome.rest.properties;
 
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import com.google.common.base.MoreObjects;

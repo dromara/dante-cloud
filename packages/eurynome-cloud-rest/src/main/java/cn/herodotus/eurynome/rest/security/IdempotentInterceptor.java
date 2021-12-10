@@ -26,7 +26,7 @@ import cn.herodotus.eurynome.rest.annotation.Idempotent;
 import cn.herodotus.eurynome.assistant.exception.operation.RepeatSubmissionException;
 import cn.herodotus.eurynome.assistant.constant.HttpHeaders;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
-import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
+import cn.herodotus.eurynome.rest.stamp.IdempotentStampManager;
 import cn.hutool.crypto.SecureUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

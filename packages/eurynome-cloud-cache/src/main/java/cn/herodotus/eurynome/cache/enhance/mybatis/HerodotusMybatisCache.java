@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-cache
  * File Name: HerodotusMybatisCache.java
  * Author: gengwei.zheng
- * Date: 2021/11/13 20:13:13
+ * Date: 2021/11/15 15:31:15
  */
 
-package cn.herodotus.eurynome.data.mybatis;
+package cn.herodotus.eurynome.cache.enhance.mybatis;
 
 import cn.herodotus.eurynome.cache.enhance.jetcache.JetCacheBuilder;
 import cn.hutool.extra.spring.SpringUtil;

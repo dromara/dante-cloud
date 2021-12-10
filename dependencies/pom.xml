@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.6.1.0</version>
+    <version>2.6.2.0</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -80,21 +80,21 @@
 
         <!-- 应用开发辅助工具组件 -->
         <lombok.version>1.18.20</lombok.version>
-        <redisson.version>3.16.4</redisson.version>
+        <redisson.version>3.16.6</redisson.version>
         <p6spy.version>3.9.1</p6spy.version>
-        <springdoc.version>1.5.12</springdoc.version>
+        <springdoc.version>1.5.13</springdoc.version>
         <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
-        <minio.version>8.3.3</minio.version>
+        <minio.version>8.3.4</minio.version>
 
         <!-- 阿里巴巴开源工具依赖 -->
-        <fastjson.version>1.2.75</fastjson.version>
-        <jetcache.version>2.6.0</jetcache.version>
+        <fastjson.version>1.2.78</fastjson.version>
+        <jetcache.version>2.6.1</jetcache.version>
         <nacos.version>2.0.3</nacos.version>
         <sentinel.version>1.8.2</sentinel.version>
 
         <!-- 国内开源通用组件 -->
         <hutool.version>5.7.16</hutool.version>
-        <okhttps.version>3.3.1</okhttps.version>
+        <okhttps.version>3.4.1</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
@@ -104,6 +104,7 @@
         <camunda-bpm-spring-boot-starter-rest.version>7.16.0</camunda-bpm-spring-boot-starter-rest.version>
         <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
         <mybatis-plus-generator.version>3.5.1</mybatis-plus-generator.version>
+        <mybatis.version>3.5.7</mybatis.version>
         <velocity.version>2.3</velocity.version>
     </properties>
 
@@ -426,6 +427,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity-engine-core -->
             <dependency>

@@ -14,19 +14,20 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-rest
+ * Module Name: eurynome-cloud-cache
  * File Name: AbstractCacheService.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 20:40:26
+ * Date: 2021/11/15 15:31:15
  */
 
-package cn.herodotus.eurynome.data.base.service;
+package cn.herodotus.eurynome.cache.definition;
 
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.assistant.definition.entity.Entity;
 import cn.herodotus.eurynome.cache.enhance.query.AbstractCache;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -51,8 +52,9 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/2/19 21:43
  */
-@Slf4j
 public abstract class AbstractCacheService<E extends AbstractEntity, ID extends Serializable> extends AbstractCache<E> {
+
+    private static final Logger log = LoggerFactory.getLogger(AbstractCacheService.class);
 
     private static final String CACHE_NAME_PREFIX_PAGE = "page:";
     private static final String CACHE_NAME_PAGE_TOTAL = "total";

@@ -22,18 +22,20 @@
 
 package cn.herodotus.eurynome.rest.configuration;
 
-import cn.herodotus.eurynome.data.stamp.AccessLimitedStampManager;
-import cn.herodotus.eurynome.data.stamp.IdempotentStampManager;
-import cn.herodotus.eurynome.data.stamp.SecretKeyStampManager;
+import cn.herodotus.eurynome.rest.properties.StampProperties;
+import cn.herodotus.eurynome.rest.stamp.AccessLimitedStampManager;
+import cn.herodotus.eurynome.rest.stamp.IdempotentStampManager;
+import cn.herodotus.eurynome.rest.stamp.SecretKeyStampManager;
 import cn.herodotus.eurynome.rest.crypto.*;
 import cn.herodotus.eurynome.rest.security.AccessLimitedInterceptor;
 import cn.herodotus.eurynome.rest.security.IdempotentInterceptor;
 import cn.herodotus.eurynome.rest.security.XssHttpServletFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -43,21 +45,42 @@ import org.springframework.context.annotation.Configuration;
  * @author : gengwei.zheng
  * @date : 2021/10/8 19:13
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties({StampProperties.class})
 public class InterfaceSecurityConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(InterfaceSecurityConfiguration.class);
 
-    @Autowired
-    private IdempotentStampManager idempotentStampManager;
-    @Autowired
-    private AccessLimitedStampManager accessLimitedStampManager;
-    @Autowired
-    private SecretKeyStampManager secretKeyStampManager;
+    @Bean
+    @ConditionalOnMissingBean
+    public IdempotentStampManager idempotentStampManager(StampProperties stampProperties) {
+        IdempotentStampManager idempotentStampManager = new IdempotentStampManager();
+        idempotentStampManager.setStampProperties(stampProperties);
+        log.trace("[Herodotus] |- Bean [Idempotent Stamp Manager] Auto Configure.");
+        return idempotentStampManager;
+    }
 
     @Bean
     @ConditionalOnMissingBean
-    public IdempotentInterceptor idempotentInterceptor() {
+    public AccessLimitedStampManager accessLimitedStampManager(StampProperties stampProperties) {
+        AccessLimitedStampManager accessLimitedStampManager = new AccessLimitedStampManager();
+        accessLimitedStampManager.setStampProperties(stampProperties);
+        log.trace("[Herodotus] |- Bean [Access Limited Stamp Manager] Auto Configure.");
+        return accessLimitedStampManager;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public SecretKeyStampManager secretKeyStampManager() {
+        SecretKeyStampManager secretKeyStampManager = new SecretKeyStampManager();
+        log.trace("[Herodotus] |- Bean [Interface Security Stamp Manager] Auto Configure.");
+        return secretKeyStampManager;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnBean(IdempotentStampManager.class)
+    public IdempotentInterceptor idempotentInterceptor(IdempotentStampManager idempotentStampManager) {
         IdempotentInterceptor idempotentInterceptor = new IdempotentInterceptor();
         idempotentInterceptor.setIdempotentStampManager(idempotentStampManager);
         log.trace("[Herodotus] |- Bean [Idempotent Interceptor] Auto Configure.");
@@ -66,7 +89,8 @@ public class InterfaceSecurityConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public AccessLimitedInterceptor accessLimitedInterceptor() {
+    @ConditionalOnBean(AccessLimitedStampManager.class)
+    public AccessLimitedInterceptor accessLimitedInterceptor(AccessLimitedStampManager accessLimitedStampManager) {
         AccessLimitedInterceptor accessLimitedInterceptor = new AccessLimitedInterceptor();
         accessLimitedInterceptor.setAccessLimitedStampManager(accessLimitedStampManager);
         log.trace("[Herodotus] |- Bean [Access Limited Interceptor] Auto Configure.");
@@ -75,7 +99,8 @@ public class InterfaceSecurityConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public InterfaceCryptoProcessor interfaceCryptoProcessor() {
+    @ConditionalOnBean(SecretKeyStampManager.class)
+    public InterfaceCryptoProcessor interfaceCryptoProcessor(SecretKeyStampManager secretKeyStampManager) {
         InterfaceCryptoProcessor interfaceCryptoProcessor = new InterfaceCryptoProcessor();
         interfaceCryptoProcessor.setSecretKeyStampManager(secretKeyStampManager);
         log.trace("[Herodotus] |- Bean [Interface Crypto Processor] Auto Configure.");

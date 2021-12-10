@@ -14,17 +14,17 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-rest
  * File Name: AccessLimitedStampManager.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 19:01:26
+ * Date: 2021/11/15 15:31:15
  */
 
-package cn.herodotus.eurynome.data.stamp;
+package cn.herodotus.eurynome.rest.stamp;
 
 import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.cache.definition.AbstractStampManager;
-import cn.herodotus.eurynome.data.properties.StampProperties;
+import cn.herodotus.eurynome.rest.properties.StampProperties;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;

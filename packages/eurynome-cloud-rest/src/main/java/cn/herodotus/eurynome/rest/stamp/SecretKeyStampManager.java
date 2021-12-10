@@ -14,13 +14,13 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-data
+ * Module Name: eurynome-cloud-rest
  * File Name: SecretKeyStampManager.java
  * Author: gengwei.zheng
- * Date: 2021/10/08 19:05:08
+ * Date: 2021/11/15 15:31:15
  */
 
-package cn.herodotus.eurynome.data.stamp;
+package cn.herodotus.eurynome.rest.stamp;
 
 import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.cache.definition.AbstractStampManager;
