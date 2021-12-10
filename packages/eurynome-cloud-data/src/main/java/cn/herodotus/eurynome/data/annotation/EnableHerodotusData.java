@@ -22,7 +22,6 @@
 
 package cn.herodotus.eurynome.data.annotation;
 
-import cn.herodotus.eurynome.cache.annotation.EnableHerodotusCache;
 import cn.herodotus.eurynome.data.configuration.DataConfiguration;
 import org.springframework.context.annotation.Import;
 
@@ -45,7 +44,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableHerodotusCache
 @Import(DataConfiguration.class)
 public @interface EnableHerodotusData {
 }

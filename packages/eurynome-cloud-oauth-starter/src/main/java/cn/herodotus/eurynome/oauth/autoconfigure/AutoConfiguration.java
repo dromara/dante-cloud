@@ -30,6 +30,8 @@ import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsSer
 import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -89,12 +91,13 @@ import javax.annotation.PostConstruct;
  * @author : gengwei.zheng
  * @date : 2021/1/17 11:07
  */
-@Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableHerodotusRest
 @EnableUpmsInterface
 @EnableUpmsLogic
 public class AutoConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(AutoConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

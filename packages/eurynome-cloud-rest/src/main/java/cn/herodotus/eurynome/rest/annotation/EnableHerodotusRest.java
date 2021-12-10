@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.rest.annotation;
 
+import cn.herodotus.eurynome.cache.annotation.EnableHerodotusCache;
 import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
 import cn.herodotus.eurynome.web.annotation.EnableHerodotusWeb;
@@ -44,6 +45,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@EnableHerodotusCache
 @EnableHerodotusData
 @EnableHerodotusWeb
 @Import({RestConfiguration.class})
