@@ -83,7 +83,7 @@
         <redisson.version>3.16.6</redisson.version>
         <p6spy.version>3.9.1</p6spy.version>
         <springdoc.version>1.5.13</springdoc.version>
-        <logstash-logback-encoder.version>6.6</logstash-logback-encoder.version>
+        <logstash-logback-encoder.version>7.0.1</logstash-logback-encoder.version>
         <minio.version>8.3.4</minio.version>
 
         <!-- 阿里巴巴开源工具依赖 -->
@@ -93,7 +93,7 @@
         <sentinel.version>1.8.2</sentinel.version>
 
         <!-- 国内开源通用组件 -->
-        <hutool.version>5.7.16</hutool.version>
+        <hutool.version>5.7.17</hutool.version>
         <okhttps.version>3.4.1</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
@@ -106,6 +106,21 @@
         <mybatis-plus-generator.version>3.5.1</mybatis-plus-generator.version>
         <mybatis.version>3.5.7</mybatis.version>
         <velocity.version>2.3</velocity.version>
+
+        <!--以下为包依赖的特殊处理-->
+        <!--强制升级解决安全漏洞问题-->
+        <log4j2.version>2.15.0</log4j2.version>
+        <junit.version>4.13.2</junit.version>
+        <!--统一依赖版本-->
+        <!--很多包会被不同的包引用，而不同包使用的版本还不相同，导致工程中会有很多同名不同版本的包存在，可能还会存在冲突。-->
+        <!--在下方指定版本，通过这种方式，进行同名不同版本的包的统一。以下未必使用依赖包最新版本，而是以当前工程中最高版本为主。-->
+        <error_prone_annotations.version>2.7.1</error_prone_annotations.version>
+        <okio.version>1.17.5</okio.version>
+        <jaxb-impl.version>2.3.5</jaxb-impl.version>
+        <bcpkix-jdk15on.version>1.69</bcpkix-jdk15on.version>
+        <checker-qual.version>3.12.0</checker-qual.version>
+        <javassist.version>3.21.0-GA</javassist.version>
+        <objenesis.version>3.2</objenesis.version>
     </properties>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
@@ -439,6 +454,65 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+
+            <!--以下为包依赖的特殊处理-->
+            <!--强制升级解决安全漏洞问题-->
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-to-slf4j</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/junit/junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--统一依赖版本-->
+            <!-- https://mvnrepository.com/artifact/com.google.errorprone/error_prone_annotations -->
+            <dependency>
+                <groupId>com.google.errorprone</groupId>
+                <artifactId>error_prone_annotations</artifactId>
+                <version>${error_prone_annotations.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb-impl.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${bcpkix-jdk15on.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.checkerframework/checker-qual -->
+            <dependency>
+                <groupId>org.checkerframework</groupId>
+                <artifactId>checker-qual</artifactId>
+                <version>${checker-qual.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.objenesis/objenesis -->
+            <dependency>
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>${objenesis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
