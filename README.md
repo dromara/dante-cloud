@@ -60,11 +60,11 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 - 滑块拼图验证码
 
-![滑块拼图验证码](./documents/readme/captcha-jigsaw.png)
+![滑块拼图验证码](./readme/captcha-jigsaw.png)
 
 - 文字点选验证码
 
-![文字点选验证码](./documents/readme/captcha-word-click.png)
+![文字点选验证码](./readme/captcha-word-click.png)
 
 
 ## [2]、功能介绍
