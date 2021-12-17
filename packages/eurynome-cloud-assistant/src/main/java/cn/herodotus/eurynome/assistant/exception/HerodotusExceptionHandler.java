@@ -68,6 +68,15 @@ public class HerodotusExceptionHandler {
         // 406.** 对应错误
         EXCEPTION_DICTIONARY.put("UnsupportedGrantTypeException", getNotAcceptableResult(ResultStatus.UNSUPPORTED_GRANT_TYPE));
         EXCEPTION_DICTIONARY.put("UnsupportedResponseTypeException", getNotAcceptableResult(ResultStatus.UNSUPPORTED_RESPONSE_TYPE));
+        EXCEPTION_DICTIONARY.put("IllegalStampParameterException", getNotAcceptableResult(ResultStatus.ILLEGAL_STAMP_PARAMETER));
+        EXCEPTION_DICTIONARY.put("StampDeleteFailedException", getNotAcceptableResult(ResultStatus.STAMP_DELETE_FAILED));
+        EXCEPTION_DICTIONARY.put("StampHasExpiredException", getNotAcceptableResult(ResultStatus.STAMP_HAS_EXPIRED));
+        EXCEPTION_DICTIONARY.put("StampMismatchException", getNotAcceptableResult(ResultStatus.STAMP_MISSMATCH));
+        EXCEPTION_DICTIONARY.put("CaptchaCategoryIsIncorrectException", getNotAcceptableResult(ResultStatus.CAPTCHA_CATEGORY_INCORRECT));
+        EXCEPTION_DICTIONARY.put("CaptchaHandlerNotExistException", getNotAcceptableResult(ResultStatus.CAPTCHA_HANDLER_NOT_EXIST));
+        EXCEPTION_DICTIONARY.put("CaptchaHasExpiredException", getNotAcceptableResult(ResultStatus.CAPTCHA_HAS_EXPIRED));
+        EXCEPTION_DICTIONARY.put("CaptchaMismatchException", getNotAcceptableResult(ResultStatus.CAPTCHA_MISSMATCH));
+        EXCEPTION_DICTIONARY.put("CaptchaParameterIllegalException", getNotAcceptableResult(ResultStatus.ILLEGAL_CAPTCHA_PARAMETER));
         // 412.** 对应错误
         EXCEPTION_DICTIONARY.put("InvalidGrantException", getPreconditionFailedResult(ResultStatus.INVALID_GRANT));
         EXCEPTION_DICTIONARY.put("InvalidTokenException", getPreconditionFailedResult(ResultStatus.INVALID_TOKEN));

@@ -126,12 +126,6 @@ public class OauthScopes extends BaseSysEntity implements GrantedAuthority {
     }
 
     @Override
-    public String getLinkedProperty() {
-        return getScopeCode();
-    }
-
-
-    @Override
     public String getAuthority() {
         return this.getScopeCode();
     }

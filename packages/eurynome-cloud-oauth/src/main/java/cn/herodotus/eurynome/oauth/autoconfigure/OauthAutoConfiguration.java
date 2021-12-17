@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
+import cn.herodotus.eurynome.captcha.configuration.CaptchaConfiguration;
 import cn.herodotus.eurynome.oauth.configuration.AuthorizationServerConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,8 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.oauth.controller"
 })
 @Import({
-        AuthorizationServerConfiguration.class
+        AuthorizationServerConfiguration.class,
+        CaptchaConfiguration.class
 })
 public class OauthAutoConfiguration {
 

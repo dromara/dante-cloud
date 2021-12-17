@@ -109,11 +109,6 @@ public class Supplier extends BaseSysEntity {
     }
 
     @Override
-    public String getLinkedProperty() {
-        return this.getSupplierCode();
-    }
-
-    @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("supplierId", supplierId)

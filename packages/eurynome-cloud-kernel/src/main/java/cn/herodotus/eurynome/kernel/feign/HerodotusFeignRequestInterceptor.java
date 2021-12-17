@@ -68,6 +68,7 @@ public class HerodotusFeignRequestInterceptor implements RequestInterceptor {
                 // 解决 UserAgent 信息被修改后，AppleWebKit/537.36 (KHTML,like Gecko)部分存在非法字符的问题
                 if (StringUtils.equalsIgnoreCase(key, HttpHeaders.USER_AGENT)) {
                     value = StringUtils.replace(value, SymbolConstants.NEW_LINE, SymbolConstants.BLANK);
+                    entry.setValue(value);
                 }
 
                 requestTemplate.header(entry.getKey(), entry.getValue());

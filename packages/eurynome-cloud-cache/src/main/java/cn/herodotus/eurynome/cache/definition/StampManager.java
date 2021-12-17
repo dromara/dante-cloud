@@ -39,6 +39,8 @@ import java.util.concurrent.TimeUnit;
  * 此Stamp非OAuth2 Stamp。而是用于在特定条件下生成后，在一定时间就会消除的标记性Stamp。
  * 例如，幂等、短信验证码、Auth State等，用时生成，然后进行验证，之后再删除的标记Stamp。
  *
+ * @param <K> 签章缓存对应Key值的类型。
+ * @param <V> 签章缓存存储数据，对应的具体存储值的类型，
  * @author : gengwei.zheng
  * @date : 2021/8/26 18:58
  */
@@ -88,7 +90,7 @@ public interface StampManager<K, V> extends InitializingBean {
      * @param key 签章存储Key值
      * @return {@link String}
      */
-    V generate(K key);
+    V nextStamp(K key);
 
     /**
      * 创建具体的Stamp签章值，并存储至本地缓存
@@ -99,7 +101,7 @@ public interface StampManager<K, V> extends InitializingBean {
      * @return 创建的签章值
      */
     default V create(K key, long expireAfterWrite, TimeUnit timeUnit) {
-        V token = this.generate(key);
+        V token = this.nextStamp(key);
         this.put(key, token, expireAfterWrite, timeUnit);
         return token;
     }

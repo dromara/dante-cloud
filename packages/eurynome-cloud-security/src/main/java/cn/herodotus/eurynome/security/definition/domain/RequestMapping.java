@@ -24,6 +24,7 @@ package cn.herodotus.eurynome.security.definition.domain;
 
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.assistant.enums.AuthorityType;
+import cn.herodotus.eurynome.cache.definition.AbstractCacheEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
@@ -36,7 +37,7 @@ import com.google.common.base.MoreObjects;
  * @author : gengwei.zheng
  * @date : 2020/6/2 19:52
  */
-public class RequestMapping extends AbstractEntity {
+public class RequestMapping extends AbstractCacheEntity {
 
     @JsonProperty("authorityId")
     private String metadataId;
@@ -66,7 +67,7 @@ public class RequestMapping extends AbstractEntity {
 
     @Override
     public String getLinkedProperty() {
-        return getMetadataCode();
+        return serviceId;
     }
 
     @Override

@@ -123,11 +123,6 @@ public class OauthApplications extends BaseAppEntity {
     }
 
     @Override
-    public String getLinkedProperty() {
-        return null;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

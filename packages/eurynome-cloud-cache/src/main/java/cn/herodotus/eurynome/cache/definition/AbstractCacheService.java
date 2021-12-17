@@ -52,7 +52,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/2/19 21:43
  */
-public abstract class AbstractCacheService<E extends AbstractEntity, ID extends Serializable> extends AbstractCache<E> {
+public abstract class AbstractCacheService<E extends AbstractCacheEntity, ID extends Serializable> extends AbstractCache<E> {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractCacheService.class);
 

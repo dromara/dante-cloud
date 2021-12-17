@@ -22,16 +22,18 @@
 
 package cn.herodotus.eurynome.cache.enhance.query;
 
-import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.cache.constant.CacheConstants;
+import cn.herodotus.eurynome.cache.definition.AbstractCacheEntity;
 import com.alicp.jetcache.Cache;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
@@ -47,8 +49,9 @@ import java.util.*;
  * @author : gengwei.zheng
  * @date : 2020/6/3 10:09
  */
-@Slf4j
-public abstract class AbstractCache<E extends AbstractEntity> extends CacheConstants {
+public abstract class AbstractCache<E extends AbstractCacheEntity> extends CacheConstants {
+
+    private static final Logger log = LoggerFactory.getLogger(AbstractCache.class);
 
     private static final String CACHE_NAME_ENTIRE = "entire";
     private static final String CACHE_NAME_DELETE_INDEX_LINK = "delete:link";

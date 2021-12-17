@@ -90,11 +90,6 @@ public class SysDefaultRole extends BaseSysEntity {
     }
 
     @Override
-    public String getLinkedProperty() {
-        return this.getScene().getKey();
-    }
-
-    @Override
     public String getId() {
         return this.getDefaultId();
     }

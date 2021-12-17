@@ -163,11 +163,6 @@ public class SysEmployee extends BaseSysEntity implements SocialUserDetails {
         return getEmployeeId();
     }
 
-    @Override
-    public String getLinkedProperty() {
-        return null;
-    }
-
     public String getEmployeeId() {
         return employeeId;
     }

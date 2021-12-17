@@ -102,11 +102,6 @@ public class SysOrganization extends BaseSysEntity {
         return getOrganizationId();
     }
 
-    @Override
-    public String getLinkedProperty() {
-        return null;
-    }
-
     public String getOrganizationId() {
         return organizationId;
     }

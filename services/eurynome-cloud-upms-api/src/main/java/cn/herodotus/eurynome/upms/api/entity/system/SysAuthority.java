@@ -104,11 +104,6 @@ public class SysAuthority extends BaseSysEntity {
         return getAuthorityId();
     }
 
-    @Override
-    public String getLinkedProperty() {
-        return null;
-    }
-
     public String getAuthorityId() {
         return authorityId;
     }

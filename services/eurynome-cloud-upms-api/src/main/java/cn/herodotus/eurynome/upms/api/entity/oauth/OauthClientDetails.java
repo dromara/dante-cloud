@@ -181,11 +181,6 @@ public class OauthClientDetails extends AbstractEntity {
     }
 
     @Override
-    public String getLinkedProperty() {
-        return null;
-    }
-
-    @Override
     public String toString() {
         return "SysClientDetail{" +
                 "clientId='" + clientId + '\'' +

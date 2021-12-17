@@ -23,10 +23,13 @@
 package cn.herodotus.eurynome.assistant.utils;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,10 +49,10 @@ public class ResourceUtils {
 
     private static volatile ResourceUtils INSTANCE;
 
-    private final PathMatchingResourcePatternResolver resolver;
+    private final PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver;
 
     private ResourceUtils() {
-        this.resolver = new PathMatchingResourcePatternResolver();
+        this.pathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver();
     }
 
     private static ResourceUtils getInstance() {
@@ -64,24 +67,24 @@ public class ResourceUtils {
         return INSTANCE;
     }
 
-    private PathMatchingResourcePatternResolver getResolver() {
-        return this.resolver;
+    private PathMatchingResourcePatternResolver getPathMatchingResourcePatternResolver() {
+        return this.pathMatchingResourcePatternResolver;
+    }
+
+    private static PathMatchingResourcePatternResolver getResolver() {
+        return getInstance().getPathMatchingResourcePatternResolver();
     }
 
     public static Resource getResource(String location) {
-        return ResourceUtils.getInstance().getResolver().getResource(location);
-    }
-
-    public static Resource[] getResources(String locationPattern) throws IOException {
-        return ResourceUtils.getInstance().getResolver().getResources(locationPattern);
+        return getResolver().getResource(location);
     }
 
     public static File getFile(String location) throws IOException {
-        return ResourceUtils.getResource(location).getFile();
+        return getResource(location).getFile();
     }
 
     public static InputStream getInputStream(String location) throws IOException {
-        return ResourceUtils.getResource(location).getInputStream();
+        return getResource(location).getInputStream();
     }
 
     public static String getFilename(String location) {
@@ -89,34 +92,58 @@ public class ResourceUtils {
     }
 
     public static URI getURI(String location) throws IOException {
-        return ResourceUtils.getResource(location).getURI();
+        return getResource(location).getURI();
     }
 
     public static URL getURL(String location) throws IOException {
-        return ResourceUtils.getResource(location).getURL();
+        return getResource(location).getURL();
     }
 
     public static long contentLength(String location) throws IOException {
-        return ResourceUtils.getResource(location).contentLength();
+        return getResource(location).contentLength();
     }
 
     public static long lastModified(String location) throws IOException {
-        return ResourceUtils.getResource(location).lastModified();
+        return getResource(location).lastModified();
     }
 
     public static boolean exists(String location) {
-        return ResourceUtils.getResource(location).exists();
+        return getResource(location).exists();
     }
 
     public static boolean isFile(String location) {
-        return ResourceUtils.getResource(location).isFile();
+        return getResource(location).isFile();
     }
 
     public static boolean isReadable(String location) {
-        return ResourceUtils.getResource(location).isReadable();
+        return getResource(location).isReadable();
     }
 
     public static boolean isOpen(String location) {
         return ResourceUtils.getResource(location).isOpen();
+    }
+
+    public static Resource[] getResources(String locationPattern) throws IOException {
+        return getResolver().getResources(locationPattern);
+    }
+
+    public static boolean isUrl(String location) {
+        return org.springframework.util.ResourceUtils.isUrl(location);
+    }
+
+    public static boolean isClasspathUrl(String location) {
+        return StringUtils.startsWith(location, ResourceLoader.CLASSPATH_URL_PREFIX);
+    }
+
+    public static boolean isClasspathAllUrl(String location) {
+        return StringUtils.startsWith(location, ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX);
+    }
+
+    public static boolean isJarUrl(URL url) {
+        return org.springframework.util.ResourceUtils.isJarURL(url);
+    }
+
+    public static boolean isFileUrl(URL url) {
+        return org.springframework.util.ResourceUtils.isFileURL(url);
     }
 }

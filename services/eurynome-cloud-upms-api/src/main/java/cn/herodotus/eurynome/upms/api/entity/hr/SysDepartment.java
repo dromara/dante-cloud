@@ -104,11 +104,6 @@ public class SysDepartment extends BaseSysEntity {
         return getDepartmentId();
     }
 
-    @Override
-    public String getLinkedProperty() {
-        return null;
-    }
-
     public String getDepartmentId() {
         return departmentId;
     }

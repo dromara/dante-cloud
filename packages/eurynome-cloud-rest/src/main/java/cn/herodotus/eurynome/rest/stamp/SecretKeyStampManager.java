@@ -53,7 +53,7 @@ public class SecretKeyStampManager extends AbstractStampManager<String, SecretKe
     }
 
     @Override
-    public SecretKey generate(String key) {
+    public SecretKey nextStamp(String key) {
         // 生成 AES 秘钥
         String aesKey = RandomUtil.randomStringUpper(16);
 

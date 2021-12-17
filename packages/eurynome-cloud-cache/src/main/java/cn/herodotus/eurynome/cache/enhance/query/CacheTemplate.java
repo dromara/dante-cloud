@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.cache.enhance.query;
 
-import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.eurynome.cache.definition.AbstractCacheEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
@@ -38,7 +38,7 @@ import java.util.*;
  * @author : gengwei.zheng
  * @date : 2020/6/3 16:09
  */
-public class CacheTemplate <D extends AbstractEntity> implements Serializable {
+public class CacheTemplate <D extends AbstractCacheEntity> implements Serializable {
 
     private final Set<String> queryIndexes = new LinkedHashSet<>();
     private final Map<String, D> domains = new LinkedHashMap<>();

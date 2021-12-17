@@ -23,14 +23,18 @@
 package cn.herodotus.eurynome.assistant.definition.dto;
 
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * <p>Description: DTO基类定义 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/12/17 21:29
+ */
 public abstract class BaseDTO extends AbstractEntity {
 
-    @Override
-    public String getLinkedProperty() {
-        return null;
-    }
 
+    @JsonIgnore
     @Override
     public String getId() {
         return null;

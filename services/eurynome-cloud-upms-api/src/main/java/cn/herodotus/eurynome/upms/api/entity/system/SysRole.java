@@ -88,11 +88,6 @@ public class SysRole extends BaseSysEntity {
         return getRoleId();
     }
 
-    @Override
-    public String getLinkedProperty() {
-        return getRoleCode();
-    }
-
     public String getRoleId() {
         return roleId;
     }

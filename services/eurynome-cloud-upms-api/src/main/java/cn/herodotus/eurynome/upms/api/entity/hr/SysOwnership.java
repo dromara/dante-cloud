@@ -100,11 +100,6 @@ public class SysOwnership extends BaseSysEntity {
     }
 
     @Override
-    public String getLinkedProperty() {
-        return this.getDepartmentId();
-    }
-
-    @Override
     public String getId() {
         return this.ownershipId;
     }

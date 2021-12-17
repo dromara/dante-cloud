@@ -80,7 +80,8 @@ public enum ResultStatus {
      */
     REPEAT_SUBMISSION(40301, "请不要重复提交"),
     FREQUENT_REQUESTS(40302, "请求过于频繁请稍后再试"),
-    SQL_INJECTION_REQUEST(40603, "疑似SQL注入请求"),
+    SQL_INJECTION_REQUEST(40303, "疑似SQL注入请求"),
+
     /**
      *
      */
@@ -96,6 +97,16 @@ public enum ResultStatus {
      */
     UNSUPPORTED_GRANT_TYPE(40601, "不支持的 Grant Type"),
     UNSUPPORTED_RESPONSE_TYPE(40602, "不支持的 Response Type"),
+    ILLEGAL_STAMP_PARAMETER(40603, "缺少签章身份标记参数"),
+    STAMP_DELETE_FAILED(40604, "从缓存中删除签章失败"),
+    STAMP_HAS_EXPIRED(40605, "签章已过期"),
+    STAMP_MISSMATCH(40606, "签章信息无法匹配"),
+    ILLEGAL_CAPTCHA_PARAMETER(40607, "验证码参数格式错误"),
+    CAPTCHA_CATEGORY_INCORRECT(40608, "验证码分类错误"),
+    CAPTCHA_HANDLER_NOT_EXIST(40609, "验证码处理器不存在"),
+    CAPTCHA_MISSMATCH(40610, "验证码不匹配"),
+    CAPTCHA_HAS_EXPIRED(40611, "验证码已过期"),
+
     /**
      * 412.* 未经授权 Precondition Failed 客户端请求信息的先决条件错误
      */

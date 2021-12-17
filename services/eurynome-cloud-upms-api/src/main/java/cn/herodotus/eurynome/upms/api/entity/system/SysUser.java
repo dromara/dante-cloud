@@ -141,11 +141,6 @@ public class SysUser extends BaseSysEntity {
         return getUserId();
     }
 
-    @Override
-    public String getLinkedProperty() {
-        return getUserName();
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }

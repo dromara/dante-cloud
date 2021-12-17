@@ -30,6 +30,8 @@ package cn.herodotus.eurynome.assistant.constant;
  */
 public class PropertyConstants {
 
+    /* ---------- 通用配置属性 ---------- */
+
     public static final String PROPERTY_ENABLED = ".enabled";
 
     public static final String PROPERTY_PREFIX_SPRING = "spring";
@@ -38,52 +40,81 @@ public class PropertyConstants {
     public static final String PROPERTY_SPRING_CLOUD = PROPERTY_PREFIX_SPRING + ".cloud";
     public static final String PROPERTY_SPRING_REDIS = PROPERTY_PREFIX_SPRING + ".redis";
 
+
+    /* ---------- Herodotus 基础配置属性（第一层） ---------- */
+
     public static final String PROPERTY_HERODOTUS_PLATFORM = PROPERTY_PREFIX_HERODOTUS + ".platform";
-    public static final String PROPERTY_HERODOTUS_AUDIT = PROPERTY_PREFIX_HERODOTUS + ".audit";
     public static final String PROPERTY_HERODOTUS_MANAGEMENT = PROPERTY_PREFIX_HERODOTUS + ".management";
-    public static final String PROPERTY_HERODOTUS_MESSAGE = PROPERTY_PREFIX_HERODOTUS + ".message";
     public static final String PROPERTY_HERODOTUS_SOCIAL = PROPERTY_PREFIX_HERODOTUS + ".social";
+    public static final String PROPERTY_HERODOTUS_INTEGRATION = PROPERTY_PREFIX_HERODOTUS + ".integration";
+    public static final String PROPERTY_HERODOTUS_MESSAGE = PROPERTY_PREFIX_HERODOTUS + ".message";
     public static final String PROPERTY_HERODOTUS_WEBSOCKET = PROPERTY_PREFIX_HERODOTUS + ".websocket";
-    public static final String PROPERTY_HERODOTUS_OSS = PROPERTY_PREFIX_HERODOTUS + ".oss";
-
-    public static final String PROPERTY_HERODOTUS_INTEGRATION= PROPERTY_PREFIX_HERODOTUS + ".integration";
 
 
-    public static final String PROPERTY_REDIS_REDISSON = PROPERTY_SPRING_REDIS + ".redisson";
-    public static final String PROPERTY_NACOS_CONFIG = PROPERTY_SPRING_CLOUD+ ".nacos.config";
+    /* ---------- Herodotus 配置属性（第二层） ---------- */
 
+    /**
+     * platform
+     */
     public static final String PROPERTY_PLATFORM_CACHE = PROPERTY_HERODOTUS_PLATFORM + ".cache";
     public static final String PROPERTY_PLATFORM_REST = PROPERTY_HERODOTUS_PLATFORM + ".rest";
     public static final String PROPERTY_PLATFORM_SECURITY = PROPERTY_HERODOTUS_PLATFORM + ".security";
     public static final String PROPERTY_PLATFORM_SWAGGER = PROPERTY_HERODOTUS_PLATFORM + ".swagger";
     public static final String PROPERTY_PLATFORM_STAMP = PROPERTY_HERODOTUS_PLATFORM + ".stamp";
-
+    /**
+     * management
+     */
     public static final String PROPERTY_MANAGEMENT_NACOS = PROPERTY_HERODOTUS_MANAGEMENT + ".nacos";
     public static final String PROPERTY_MANAGEMENT_QUEUE = PROPERTY_HERODOTUS_MANAGEMENT + ".queue";
     public static final String PROPERTY_MANAGEMENT_LOG_CENTER = PROPERTY_HERODOTUS_MANAGEMENT + ".log-center";
     public static final String PROPERTY_MANAGEMENT_SERVICE = PROPERTY_HERODOTUS_MANAGEMENT + ".service";
-
+    /**
+     * social
+     */
     public static final String PROPERTY_SOCIAL_JUSTAUTH = PROPERTY_HERODOTUS_SOCIAL + ".justauth";
     public static final String PROPERTY_SOCIAL_EASEMOB = PROPERTY_HERODOTUS_SOCIAL + ".easemob";
     public static final String PROPERTY_SOCIAL_WXAPP = PROPERTY_HERODOTUS_SOCIAL + ".wxapp";
     public static final String PROPERTY_SOCIAL_WXMPP = PROPERTY_HERODOTUS_SOCIAL + ".wxmpp";
-
+    /**
+     * integration
+     */
+    public static final String PROPERTY_INTEGRATION_AUDIT = PROPERTY_HERODOTUS_INTEGRATION + ".audit";
+    public static final String PROPERTY_INTEGRATION_OSS = PROPERTY_HERODOTUS_INTEGRATION + ".oss";
+    public static final String PROPERTY_INTEGRATION_INFLUXDB = PROPERTY_HERODOTUS_INTEGRATION + ".influxdb";
+    /**
+     * message
+     */
     public static final String PROPERTY_MESSAGE_SMS = PROPERTY_HERODOTUS_MESSAGE + ".sms";
     public static final String PROPERTY_MESSAGE_SMS_VERIFICATION_CODE = PROPERTY_MESSAGE_SMS + ".verification-code";
     public static final String PROPERTY_MESSAGE_PUSH_APNS = PROPERTY_HERODOTUS_MESSAGE + ".push.apns";
     public static final String PROPERTY_MESSAGE_PUSH_JPUSH = PROPERTY_HERODOTUS_MESSAGE + ".push.jpush";
 
-    public static final String PROPERTY_AUDIT_ALIYUN = PROPERTY_HERODOTUS_AUDIT + ".aliyun";
-    public static final String PROPERTY_AUDIT_BAIDU = PROPERTY_HERODOTUS_AUDIT + ".baidu";
-    public static final String PROPERTY_AUDIT_TIANYAN = PROPERTY_HERODOTUS_AUDIT + ".tianyan";
 
-    public static final String PROPERTY_OSS_MINIO = PROPERTY_HERODOTUS_OSS + ".minio";
+    /* ---------- Herodotus 详细配置属性（第三层） ---------- */
 
-    public static final String PROPERTY_INTEGRATION_INFLUXDB = PROPERTY_HERODOTUS_INTEGRATION + ".influxdb";
+    /**
+     * security
+     */
+    public static final String PROPERTY_SECURITY_CAPTCHA = PROPERTY_PLATFORM_SECURITY + ".captcha";
+    /**
+     * audit
+     */
+    public static final String PROPERTY_AUDIT_ALIYUN = PROPERTY_INTEGRATION_AUDIT + ".aliyun";
+    public static final String PROPERTY_AUDIT_BAIDU = PROPERTY_INTEGRATION_AUDIT + ".baidu";
+    public static final String PROPERTY_AUDIT_TIANYAN = PROPERTY_INTEGRATION_AUDIT + ".tianyan";
+    /**
+     * oss
+     */
+    public static final String PROPERTY_OSS_MINIO = PROPERTY_INTEGRATION_OSS + ".minio";
 
-    public static final String ITEM_SPRING_APPLICATION_NAME = "spring.application.name";
-    public static final String ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
-    public static final String ITEM_SPRING_SQL_INIT_PLATFORM = "spring.sql.init.platform";
+
+    /* ---------- Spring 相关基础配置属性（第一层） ---------- */
+
+    public static final String PROPERTY_REDIS_REDISSON = PROPERTY_SPRING_REDIS + ".redisson";
+    public static final String PROPERTY_NACOS_CONFIG = PROPERTY_SPRING_CLOUD + ".nacos.config";
+
+
+    /* ---------- Herodotus 详细配置属性路径 ---------- */
 
     public static final String ITEM_PLATFORM_DATA_ACCESS_STRATEGY = PROPERTY_HERODOTUS_PLATFORM + ".data-access-strategy";
     public static final String ITEM_PLATFORM_ARCHITECTURE = PROPERTY_HERODOTUS_PLATFORM + ".architecture";
@@ -103,9 +134,18 @@ public class PropertyConstants {
     public static final String ITEM_LOG_CENTER_ENABLED = PROPERTY_MANAGEMENT_LOG_CENTER + ".server-addr";
     public static final String ITEM_NACOS_ENABLED = PROPERTY_NACOS_CONFIG + ".server-addr";
 
+
+    /* ---------- Spring 详细配置属性路径 ---------- */
+
+    public static final String ITEM_SPRING_APPLICATION_NAME = "spring.application.name";
+    public static final String ITEM_SPRING_JPA_HIBERNATE_DDL_AUTO = "spring.jpa.hibernate.ddl-auto";
+    public static final String ITEM_SPRING_SQL_INIT_PLATFORM = "spring.sql.init.platform";
+
+
+    /* ---------- 注解属性通用值 ---------- */
+
     public static final String ANNOTATION_PREFIX = "${";
     public static final String ANNOTATION_SUFFIX = "}";
-
 
     public static final String ANNOTATION_APPLICATION_NAME = ANNOTATION_PREFIX + ITEM_SPRING_APPLICATION_NAME + ANNOTATION_SUFFIX;
     public static final String ANNOTATION_SQL_INIT_PLATFORM = ANNOTATION_PREFIX + ITEM_SPRING_SQL_INIT_PLATFORM + ANNOTATION_SUFFIX;

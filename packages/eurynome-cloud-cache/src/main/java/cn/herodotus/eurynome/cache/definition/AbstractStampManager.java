@@ -36,6 +36,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * <p>Description: 抽象Stamp管理 </p>
  *
+ * @param <K> 签章缓存对应Key值的类型。
+ * @param <V> 签章缓存存储数据，对应的具体存储值的类型，
  * @author : gengwei.zheng
  * @date : 2021/8/26 18:59
  */
