@@ -25,7 +25,7 @@ package cn.herodotus.eurynome.upms.logic.service.system;
 import cn.herodotus.eurynome.assistant.enums.AuthorityType;
 import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
+import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysAuthorityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -27,9 +27,7 @@ import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthUserDetai
 import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.upms.api.annotation.EnableUpmsInterface;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -93,7 +91,6 @@ import javax.annotation.PostConstruct;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableHerodotusRest
-@EnableUpmsInterface
 @EnableUpmsLogic
 public class AutoConfiguration {
 

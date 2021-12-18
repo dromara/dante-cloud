@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.upms.logic.processor;
 
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
-import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
-import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
+import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
+import cn.herodotus.eurynome.upms.logic.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;

@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.upms.logic.repository.hr;
 
 import cn.herodotus.eurynome.assistant.enums.OrganizationCategory;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysOrganization;
 
 import java.util.List;
 

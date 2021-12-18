@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.upms.logic.repository.hr;
 
 import cn.herodotus.eurynome.assistant.exception.persistence.TransactionRollbackException;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysOwnership;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;

@@ -24,8 +24,8 @@ package cn.herodotus.eurynome.upms.logic.service.oauth;
 
 import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthScopes;
-import cn.herodotus.eurynome.upms.api.entity.system.SysAuthority;
+import cn.herodotus.eurynome.upms.logic.entity.oauth.OauthScopes;
+import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.repository.oauth.OauthScopesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

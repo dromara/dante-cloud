@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.oauth;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.oauth.OauthApplications;
+import cn.herodotus.eurynome.upms.logic.entity.oauth.OauthApplications;
 
 /**
  * <p> Description : OauthApplicationRepository </p>

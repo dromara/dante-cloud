@@ -26,8 +26,8 @@ import cn.herodotus.eurynome.assistant.exception.persistence.TransactionRollback
 import cn.herodotus.eurynome.assistant.enums.OrganizationCategory;
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysOrganization;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysDepartment;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysOrganization;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysOrganizationRepository;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;

@@ -24,6 +24,7 @@ package cn.herodotus.eurynome.upms.logic.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -55,6 +56,18 @@ import javax.annotation.PostConstruct;
  * @date : 2020/2/3 17:13
  */
 @Configuration
+@EntityScan(basePackages = {
+        "cn.herodotus.eurynome.upms.logic.entity.system",
+        "cn.herodotus.eurynome.upms.logic.entity.hr",
+        "cn.herodotus.eurynome.upms.logic.entity.oauth",
+        "cn.herodotus.eurynome.upms.logic.entity.development",
+})
+@EnableJpaRepositories(basePackages = {
+        "cn.herodotus.eurynome.upms.logic.repository.system",
+        "cn.herodotus.eurynome.upms.logic.repository.hr",
+        "cn.herodotus.eurynome.upms.logic.repository.oauth",
+        "cn.herodotus.eurynome.upms.logic.repository.development",
+})
 @ComponentScan(basePackages = {
         "cn.herodotus.eurynome.upms.logic.service.system",
         "cn.herodotus.eurynome.upms.logic.service.hr",
@@ -62,12 +75,6 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.logic.service.development",
         "cn.herodotus.eurynome.upms.logic.listener",
         "cn.herodotus.eurynome.upms.logic.processor",
-})
-@EnableJpaRepositories(basePackages = {
-        "cn.herodotus.eurynome.upms.logic.repository.system",
-        "cn.herodotus.eurynome.upms.logic.repository.hr",
-        "cn.herodotus.eurynome.upms.logic.repository.oauth",
-        "cn.herodotus.eurynome.upms.logic.repository.development",
 })
 public class UpmsLogicConfiguration {
 

@@ -1,4 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  cn.herodotus.eurynome.upms.api.configuration.UpmsApiConfiguration,\
   cn.herodotus.eurynome.upms.logic.configuration.UpmsLogicConfiguration,\
   cn.herodotus.eurynome.upms.rest.configuration.UpmsRestConfiguration

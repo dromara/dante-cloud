@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.hr;
 
 import cn.herodotus.eurynome.data.base.repository.BaseRepository;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysDepartment;
 import org.springframework.data.jpa.repository.QueryHints;
 
 import javax.persistence.QueryHint;

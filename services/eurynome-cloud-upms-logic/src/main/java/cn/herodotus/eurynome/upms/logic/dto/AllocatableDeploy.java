@@ -23,9 +23,9 @@
 package cn.herodotus.eurynome.upms.logic.dto;
 
 import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysDepartment;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysEmployee;
-import cn.herodotus.eurynome.upms.api.entity.hr.SysOwnership;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysDepartment;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysEmployee;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysOwnership;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.collections4.CollectionUtils;

@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.rest.controller;
 
 import cn.herodotus.eurynome.assistant.domain.Result;
-import cn.herodotus.eurynome.upms.api.constants.UpmsConstants;
+import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.web.bind.annotation.GetMapping;

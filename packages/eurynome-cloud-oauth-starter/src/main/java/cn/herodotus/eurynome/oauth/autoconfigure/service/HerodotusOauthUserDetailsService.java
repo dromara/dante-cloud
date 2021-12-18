@@ -24,8 +24,8 @@ package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.upms.api.entity.system.SysUser;
-import cn.herodotus.eurynome.upms.api.helper.UpmsHelper;
+import cn.herodotus.eurynome.upms.logic.entity.system.SysUser;
+import cn.herodotus.eurynome.upms.logic.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
