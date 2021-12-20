@@ -127,7 +127,7 @@ eurynome-cloud
 ├── packages -- 基础通用依赖包
 ├    ├── eurynome-cloud-assistant -- Spring相关公共辅助工具、注解相关工具代码组件
 ├    ├── eurynome-cloud-cache -- Cache和Redis工具模块组件
-├    ├── eurynome-cloud-cache -- 验证码模块组件
+├    ├── eurynome-cloud-captcha -- 验证码模块组件
 ├    ├── eurynome-cloud-data -- 数据持久化等数据处理相关代码组件
 ├    ├── eurynome-cloud-kernel -- 微服务接入平台必备组件
 ├    ├── eurynome-cloud-message -- 消息处理相关代码组件
