@@ -80,7 +80,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 Spring Boot | 2.6.1
 Spring Cloud | 2021.0.0 
 Spring Cloud Alibaba | 2021.1
-Spring Boot Admin | 2.5.4
+Spring Boot Admin | 2.5.5
 Nacos | 2.0.3 
 Sentinel | 1.8.2 
 Seata | 1.3.0 
