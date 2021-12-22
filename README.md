@@ -197,3 +197,9 @@ eurynome-cloud
         <td><img src="./readme/skywalking2.png" alt="Skywalking 效果示例2"/></td>
     </tr>
 </table>
+
+## [10]、鸣谢
+
+- 感谢 JetBrains 提供的免费开源 License：
+
+![https://jb.gg/OpenSourceSupport](./readme/jb_beam.svg)
