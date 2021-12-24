@@ -22,9 +22,6 @@
 
 package cn.herodotus.eurynome.security.properties;
 
-import cn.herodotus.eurynome.assistant.enums.captcha.CaptchaFont;
-import cn.herodotus.eurynome.assistant.enums.captcha.CaptchaLetterType;
-import cn.herodotus.eurynome.assistant.enums.captcha.CaptchaType;
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -56,7 +53,7 @@ public class SecurityProperties implements Serializable {
 
     private RememberMe rememberMe = new RememberMe();
 
-    private VerificationCode verificationCode = new VerificationCode();
+    private Captcha captcha = new Captcha();
 
     private Interceptor interceptor = new Interceptor();
 
@@ -92,12 +89,12 @@ public class SecurityProperties implements Serializable {
         this.rememberMe = rememberMe;
     }
 
-    public VerificationCode getVerificationCode() {
-        return verificationCode;
+    public Captcha getCaptcha() {
+        return captcha;
     }
 
-    public void setVerificationCode(VerificationCode verificationCode) {
-        this.verificationCode = verificationCode;
+    public void setCaptcha(Captcha captcha) {
+        this.captcha = captcha;
     }
 
     public Interceptor getInterceptor() {
@@ -204,17 +201,23 @@ public class SecurityProperties implements Serializable {
         }
     }
 
-    public static class VerificationCode implements Serializable {
-
+    public static class Captcha implements Serializable {
+        /**
+         * 数据存入Session的Key值
+         */
         private String sessionAttribute = "captcha";
+        /**
+         * 是否关闭 OAuth2 验证码
+         */
         private boolean closed = false;
-        private String verificationCodeParameter = sessionAttribute;
-        private int width = 130;
-        private int height = 48;
-        private int length = 5;
-        private CaptchaFont captchaFont = CaptchaFont.FONT_5;
-        private CaptchaLetterType captchaLetterType = CaptchaLetterType.DEFAULT;
-        private CaptchaType captchaType = CaptchaType.LETTERS;
+        /**
+         * 前端存储验证码参数名
+         */
+        private String captchaParameter = sessionAttribute;
+        /**
+         * 验证码分类
+         */
+        private String category = "HUTOOL_GIF";
 
         public String getSessionAttribute() {
             return sessionAttribute;
@@ -224,12 +227,12 @@ public class SecurityProperties implements Serializable {
             this.sessionAttribute = sessionAttribute;
         }
 
-        public String getVerificationCodeParameter() {
-            return verificationCodeParameter;
+        public String getCaptchaParameter() {
+            return captchaParameter;
         }
 
-        public void setVerificationCodeParameter(String verificationCodeParameter) {
-            this.verificationCodeParameter = verificationCodeParameter;
+        public void setCaptchaParameter(String captchaParameter) {
+            this.captchaParameter = captchaParameter;
         }
 
         public boolean isClosed() {
@@ -240,52 +243,12 @@ public class SecurityProperties implements Serializable {
             this.closed = closed;
         }
 
-        public int getWidth() {
-            return width;
+        public String getCategory() {
+            return category;
         }
 
-        public void setWidth(int width) {
-            this.width = width;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public void setHeight(int height) {
-            this.height = height;
-        }
-
-        public int getLength() {
-            return length;
-        }
-
-        public void setLength(int length) {
-            this.length = length;
-        }
-
-        public CaptchaFont getCaptchaFont() {
-            return captchaFont;
-        }
-
-        public void setCaptchaFont(CaptchaFont captchaFont) {
-            this.captchaFont = captchaFont;
-        }
-
-        public CaptchaLetterType getCaptchaLetterType() {
-            return captchaLetterType;
-        }
-
-        public void setCaptchaLetterType(CaptchaLetterType captchaLetterType) {
-            this.captchaLetterType = captchaLetterType;
-        }
-
-        public CaptchaType getCaptchaType() {
-            return captchaType;
-        }
-
-        public void setCaptchaType(CaptchaType captchaType) {
-            this.captchaType = captchaType;
+        public void setCategory(String category) {
+            this.category = category;
         }
     }
 

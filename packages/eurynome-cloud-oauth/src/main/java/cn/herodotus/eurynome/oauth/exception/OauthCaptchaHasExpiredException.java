@@ -14,27 +14,29 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
- * File Name: VerificationCodeIsEmptyException.java
+ * Module Name: eurynome-cloud-oauth
+ * File Name: OauthCaptchaHasExpiredException.java
  * Author: gengwei.zheng
- * Date: 2021/10/16 16:08:16
+ * Date: 2021/12/24 21:00:24
  */
 
-package cn.herodotus.eurynome.security.exception;
+package cn.herodotus.eurynome.oauth.exception;
+
+import cn.herodotus.eurynome.security.exception.PlatformAuthenticationException;
 
 /**
- * <p> Description : 验证码为空Exception </p>
+ * <p>Description: Oauth2 使用的验证码不匹配错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/1/26 18:11
+ * @date : 2021/12/24 21:00
  */
-public class VerificationCodeIsEmptyException extends VerificationCodeException {
+public class OauthCaptchaHasExpiredException extends PlatformAuthenticationException {
 
-    public VerificationCodeIsEmptyException(String msg, Throwable cause) {
+    public OauthCaptchaHasExpiredException(String msg, Throwable cause) {
         super(msg, cause);
     }
 
-    public VerificationCodeIsEmptyException(String msg) {
+    public OauthCaptchaHasExpiredException(String msg) {
         super(msg);
     }
 }

@@ -46,8 +46,9 @@ public class CacheConstants {
     public static final String CACHE_NAME_TOKEN_EASEMOB = CACHE_TOKEN_BASE_PREFIX + "easemob:";
     public static final String CACHE_NAME_TOKEN_JUSTAUTH_STATE = CACHE_TOKEN_BASE_PREFIX + "justauth_state:";
 
-    public static final String CACHE_NAME_CAPTCHA_JIGSAW = CACHE_TOKEN_BASE_PREFIX + "jigsaw:";
-    public static final String CACHE_NAME_CAPTCHA_WORD_CLICK = CACHE_TOKEN_BASE_PREFIX + "word_click:";
+    public static final String CACHE_NAME_CAPTCHA_JIGSAW = CACHE_NAME_TOKEN_CAPTCHA + "jigsaw:";
+    public static final String CACHE_NAME_CAPTCHA_WORD_CLICK = CACHE_NAME_TOKEN_CAPTCHA + "word_click:";
+    public static final String CACHE_NAME_CAPTCHA_GRAPHIC = CACHE_NAME_TOKEN_CAPTCHA + "graphic:";
 
     public static final String CACHE_NAME_SECURITY_METADATA_ATTRIBUTES = CACHE_SECURITY_METADATA_PREFIX + "attributes:";
     public static final String CACHE_NAME_SECURITY_METADATA_INDEXABLE = CACHE_SECURITY_METADATA_PREFIX + "indexable:";

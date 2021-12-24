@@ -33,10 +33,6 @@ import java.util.List;
 public class Metadata {
 
     /**
-     * 验证码身份区分信息
-     */
-    private String identity;
-    /**
      * 滑块拼图验证码生成的带抠图背景图Base64
      */
     private String originalImageBase64;
@@ -60,14 +56,14 @@ public class Metadata {
      * 文字点选验证码校验文字
      */
     private List<String> words;
-
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
+    /**
+     * 图形验证码生成的图片
+     */
+    private String graphicImageBase64;
+    /**
+     * 图形验证码校验内容
+     */
+    private String characters;
 
     public String getOriginalImageBase64() {
         return originalImageBase64;
@@ -115,5 +111,21 @@ public class Metadata {
 
     public void setWords(List<String> words) {
         this.words = words;
+    }
+
+    public String getGraphicImageBase64() {
+        return graphicImageBase64;
+    }
+
+    public void setGraphicImageBase64(String graphicImageBase64) {
+        this.graphicImageBase64 = graphicImageBase64;
+    }
+
+    public String getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(String characters) {
+        this.characters = characters;
     }
 }

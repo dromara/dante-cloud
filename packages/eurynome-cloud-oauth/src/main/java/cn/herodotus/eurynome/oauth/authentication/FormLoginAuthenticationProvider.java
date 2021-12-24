@@ -22,10 +22,17 @@
 
 package cn.herodotus.eurynome.oauth.authentication;
 
-import cn.herodotus.eurynome.security.exception.VerificationCodeIsEmptyException;
-import cn.herodotus.eurynome.security.exception.VerificationCodeIsNotExistException;
-import cn.herodotus.eurynome.security.exception.VerificationCodeIsNotRightException;
+import cn.herodotus.eurynome.captcha.dto.Verification;
+import cn.herodotus.eurynome.captcha.exception.CaptchaHasExpiredException;
+import cn.herodotus.eurynome.captcha.exception.CaptchaMismatchException;
+import cn.herodotus.eurynome.captcha.exception.CaptchaParameterIllegalException;
+import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaArgumentIllegalException;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaHasExpiredException;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaIsEmptyException;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaMismatchException;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -39,6 +46,12 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class FormLoginAuthenticationProvider extends DaoAuthenticationProvider {
 
+    private CaptchaRendererFactory captchaRendererFactory;
+
+    public void setCaptchaRendererFactory(CaptchaRendererFactory captchaRendererFactory) {
+        this.captchaRendererFactory = captchaRendererFactory;
+    }
+
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
 
@@ -49,16 +62,26 @@ public class FormLoginAuthenticationProvider extends DaoAuthenticationProvider {
 
             if (!formLoginWebAuthenticationDetails.isClose()) {
 
-                if (formLoginWebAuthenticationDetails.isCodeEmpty()) {
-                    throw new VerificationCodeIsEmptyException("Please Input Verification Code");
+                String code = formLoginWebAuthenticationDetails.getCode();
+                String category = formLoginWebAuthenticationDetails.getCategory();
+                String identity = formLoginWebAuthenticationDetails.getIdentity();
+
+                if (StringUtils.isBlank(code)) {
+                    throw new OauthCaptchaIsEmptyException("Captcha is empty.");
                 }
 
-                if (formLoginWebAuthenticationDetails.isCodeNotExist()) {
-                    throw new VerificationCodeIsNotExistException("Verification Code is Not Exist, Please Check The Session Storage Operation");
-                }
-
-                if (!formLoginWebAuthenticationDetails.isCodeRight()) {
-                    throw new VerificationCodeIsNotRightException("Verification Code is Not Right, Please Retry!");
+                try {
+                    Verification verification = new Verification();
+                    verification.setCharacters(code);
+                    verification.setCategory(category);
+                    verification.setIdentity(identity);
+                    captchaRendererFactory.verify(verification);
+                } catch (CaptchaParameterIllegalException e) {
+                    throw new OauthCaptchaArgumentIllegalException("Captcha argument is illegal");
+                } catch (CaptchaHasExpiredException e) {
+                    throw new OauthCaptchaHasExpiredException("Captcha is expired!");
+                } catch (CaptchaMismatchException e) {
+                    throw new OauthCaptchaMismatchException("Captcha is mismatch!");
                 }
             }
         }

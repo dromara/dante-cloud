@@ -25,8 +25,8 @@ package cn.herodotus.eurynome.oauth.controller;
 import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.oauth.utils.SymmetricUtils;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
-import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
@@ -94,9 +94,11 @@ public class IndexController {
         // 登录可配置密码参数
         modelAndView.addObject("beast", securityProperties.getLogin().getPasswordParameter());
         // 登录可配置验证码参数
-        modelAndView.addObject("graphic", securityProperties.getVerificationCode().getVerificationCodeParameter());
+        modelAndView.addObject("graphic", securityProperties.getCaptcha().getCaptchaParameter());
         // 登录可配置是否启用验证码参数
-        modelAndView.addObject("hide_verification_code", securityProperties.getVerificationCode().isClosed());
+        modelAndView.addObject("hide_verification_code", securityProperties.getCaptcha().isClosed());
+        // 验证码类别
+        modelAndView.addObject("verification_category", securityProperties.getCaptcha().getCategory());
 
         return modelAndView;
     }

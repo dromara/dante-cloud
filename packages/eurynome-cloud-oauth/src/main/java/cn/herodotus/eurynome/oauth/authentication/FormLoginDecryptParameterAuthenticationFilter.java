@@ -23,8 +23,9 @@
 package cn.herodotus.eurynome.oauth.authentication;
 
 import cn.herodotus.eurynome.oauth.utils.SymmetricUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,11 +45,12 @@ import java.io.IOException;
  * @author : gengwei.zheng
  * @date : 2020/1/27 17:38
  */
-@Slf4j
 public class FormLoginDecryptParameterAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    private static final Logger log = LoggerFactory.getLogger(FormLoginDecryptParameterAuthenticationFilter.class);
+
     public FormLoginDecryptParameterAuthenticationFilter() {
         super();
-
     }
 
     @Override
@@ -95,10 +97,11 @@ public class FormLoginDecryptParameterAuthenticationFilter extends UsernamePassw
 
     /**
      * 重写该方法，避免在日志Debug级别会输出错误信息的问题。
-     * @param request 请求
+     *
+     * @param request  请求
      * @param response 响应
-     * @param failed 失败内容
-     * @throws IOException IOException
+     * @param failed   失败内容
+     * @throws IOException      IOException
      * @throws ServletException ServletException
      */
     @Override

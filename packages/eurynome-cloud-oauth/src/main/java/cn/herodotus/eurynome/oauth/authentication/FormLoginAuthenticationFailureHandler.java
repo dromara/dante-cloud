@@ -22,12 +22,14 @@
 
 package cn.herodotus.eurynome.oauth.authentication;
 
-import cn.herodotus.eurynome.security.exception.VerificationCodeIsEmptyException;
-import cn.herodotus.eurynome.security.exception.VerificationCodeIsNotExistException;
-import cn.herodotus.eurynome.security.exception.VerificationCodeIsNotRightException;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaArgumentIllegalException;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaHasExpiredException;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaIsEmptyException;
+import cn.herodotus.eurynome.oauth.exception.OauthCaptchaMismatchException;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -45,21 +47,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p> Description : TODO </p>
+ * <p> Description : Oauth 表单登录失败处理器 </p>
  *
  * @author : gengwei.zheng
  * @date : 2020/1/26 18:08
  */
-@Slf4j
 public class FormLoginAuthenticationFailureHandler extends ExceptionMappingAuthenticationFailureHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(FormLoginAuthenticationFailureHandler.class);
 
     public static final String ERROR_MESSAGE_KEY = "SPRING_SECURITY_LAST_EXCEPTION_CUSTOM_MESSAGE";
 
     private Map<String, String> exceptionDictionary;
-    private SecurityProperties securityProperties;
 
     public FormLoginAuthenticationFailureHandler(SecurityProperties securityProperties) {
-        this.securityProperties = securityProperties;
         this.initExceptionMappings(securityProperties.getLogin().getFailureUrl());
         this.initExceptionDictionary();
     }
@@ -71,9 +72,10 @@ public class FormLoginAuthenticationFailureHandler extends ExceptionMappingAuthe
         exceptionMappings.put(AccountExpiredException.class.getName(), failureUrl);
         exceptionMappings.put(CredentialsExpiredException.class.getName(), failureUrl);
         exceptionMappings.put(BadCredentialsException.class.getName(), failureUrl);
-        exceptionMappings.put(VerificationCodeIsEmptyException.class.getName(), failureUrl);
-        exceptionMappings.put(VerificationCodeIsNotExistException.class.getName(), failureUrl);
-        exceptionMappings.put(VerificationCodeIsNotRightException.class.getName(), failureUrl);
+        exceptionMappings.put(OauthCaptchaArgumentIllegalException.class.getName(), failureUrl);
+        exceptionMappings.put(OauthCaptchaHasExpiredException.class.getName(), failureUrl);
+        exceptionMappings.put(OauthCaptchaMismatchException.class.getName(), failureUrl);
+        exceptionMappings.put(OauthCaptchaIsEmptyException.class.getName(), failureUrl);
         this.setExceptionMappings(exceptionMappings);
     }
 
@@ -84,9 +86,10 @@ public class FormLoginAuthenticationFailureHandler extends ExceptionMappingAuthe
         exceptionDictionary.put("AccountExpiredException", "账号已过期");
         exceptionDictionary.put("CredentialsExpiredException", "凭证已过期");
         exceptionDictionary.put("BadCredentialsException", "用户名/密码无效");
-        exceptionDictionary.put("VerificationCodeIsEmptyException", "请输入验证码！");
-        exceptionDictionary.put("VerificationCodeIsNotExistException", "验证码不存在！请刷新重试");
-        exceptionDictionary.put("VerificationCodeIsNotRightException", "验证码输入错误！");
+        exceptionDictionary.put("OauthCaptchaArgumentIllegalException", "请输入验证码！");
+        exceptionDictionary.put("OauthCaptchaHasExpiredException", "验证码已过期！请刷新重试");
+        exceptionDictionary.put("OauthCaptchaMismatchException", "验证码输入错误！");
+        exceptionDictionary.put("OauthCaptchaIsEmptyException", "请输入验证码！");
     }
 
     @Override

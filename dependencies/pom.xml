@@ -97,7 +97,6 @@
         <okhttps.version>3.4.1</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
-        <easy-captcha.version>1.6.2</easy-captcha.version>
 
         <!--第三方starter-->
         <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
@@ -400,12 +399,6 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-springdoc-ui</artifactId>
                 <version>${knife4j.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.whvcse/easy-captcha -->
-            <dependency>
-                <groupId>com.github.whvcse</groupId>
-                <artifactId>easy-captcha</artifactId>
-                <version>${easy-captcha.version}</version>
             </dependency>
 
 

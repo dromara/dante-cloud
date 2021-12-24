@@ -14,41 +14,29 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-assistant
- * File Name: CaptchaLetterType.java
+ * Module Name: eurynome-cloud-oauth
+ * File Name: OauthCaptchaIsEmptyException.java
  * Author: gengwei.zheng
- * Date: 2021/10/17 22:53:17
+ * Date: 2021/12/24 21:01:24
  */
 
-package cn.herodotus.eurynome.assistant.enums.captcha;
+package cn.herodotus.eurynome.oauth.exception;
 
-import com.wf.captcha.base.Captcha;
+import cn.herodotus.eurynome.security.exception.PlatformAuthenticationException;
 
 /**
- * <p> Description : HappyCaptcha字幕类型Enum </p>
+ * <p>Description: 验证码为空 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/2/25 14:53
+ * @date : 2021/12/24 21:01
  */
-public enum CaptchaLetterType {
+public class OauthCaptchaIsEmptyException extends PlatformAuthenticationException {
 
-    /**
-     * enum
-     */
-    DEFAULT(Captcha.TYPE_DEFAULT),
-    ONLY_NUMBER(Captcha.TYPE_ONLY_NUMBER),
-    ONLY_CHAR(Captcha.TYPE_ONLY_CHAR),
-    ONLY_UPPER(Captcha.TYPE_ONLY_UPPER),
-    ONLY_LOWER(Captcha.TYPE_ONLY_LOWER),
-    NUM_AND_UPPER(Captcha.TYPE_NUM_AND_UPPER);
-
-    private int type;
-
-    CaptchaLetterType(int type) {
-        this.type = type;
+    public OauthCaptchaIsEmptyException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
-    public int getType() {
-        return type;
+    public OauthCaptchaIsEmptyException(String msg) {
+        super(msg);
     }
 }

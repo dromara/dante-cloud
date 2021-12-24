@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.oauth.authentication;
 
-import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import cn.herodotus.eurynome.oauth.utils.SymmetricUtils;
+import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
@@ -38,11 +38,10 @@ import javax.servlet.http.HttpSession;
  */
 public class FormLoginWebAuthenticationDetails extends WebAuthenticationDetails {
 
-    private boolean codeRight = true;
-    private boolean codeEmpty = false;
-    private boolean codeNotExist = false;
-
-    private SecurityProperties securityProperties;
+    private final SecurityProperties securityProperties;
+    private String code = null;
+    private String identity = null;
+    private String category = null;
 
     /**
      * Records the remote address and will also set the session Id if a session already
@@ -53,52 +52,37 @@ public class FormLoginWebAuthenticationDetails extends WebAuthenticationDetails 
     public FormLoginWebAuthenticationDetails(HttpServletRequest request, SecurityProperties securityProperties) {
         super(request);
         this.securityProperties = securityProperties;
-        checkVerificationCode(request);
+        init(request);
     }
 
-    private void checkVerificationCode(HttpServletRequest request) {
-        String encryptedCode = request.getParameter(securityProperties.getVerificationCode().getVerificationCodeParameter());
-
+    private void init(HttpServletRequest request) {
+        String encryptedCode = request.getParameter(securityProperties.getCaptcha().getCaptchaParameter());
         String key = request.getParameter("symmetric");
 
         HttpSession session = request.getSession();
-        String savedCode = (String) session.getAttribute(securityProperties.getVerificationCode().getSessionAttribute());
+        this.identity = session.getId();
 
-        if (!checkCodeExist(savedCode) && !checkCodeEmpty(encryptedCode)) {
-            checkCodeRight(encryptedCode, savedCode, key);
+        this.category = securityProperties.getCaptcha().getCategory();
+
+        if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(encryptedCode)) {
+            byte[] byteKey = SymmetricUtils.getDecryptedSymmetricKey(key);
+            this.code = SymmetricUtils.decrypt(encryptedCode, byteKey);
         }
     }
 
-    private boolean checkCodeExist(String savedCode) {
-        codeNotExist = StringUtils.isEmpty(savedCode);
-        return codeNotExist;
+    public String getCode() {
+        return code;
     }
 
-    private boolean checkCodeEmpty(String code) {
-        codeEmpty = StringUtils.isEmpty(code);
-        return codeEmpty;
+    public String getIdentity() {
+        return identity;
     }
 
-    private boolean checkCodeRight(String encryptedCode, String savedCode, String key) {
-        byte[] byteKey = SymmetricUtils.getDecryptedSymmetricKey(key);
-        String code = SymmetricUtils.decrypt(encryptedCode, byteKey);
-        codeRight = StringUtils.equals(code, savedCode);
-        return codeRight;
-    }
-
-    public boolean isCodeRight() {
-        return codeRight;
-    }
-
-    public boolean isCodeEmpty() {
-        return codeEmpty;
-    }
-
-    public boolean isCodeNotExist() {
-        return codeNotExist;
+    public String getCategory() {
+        return category;
     }
 
     public boolean isClose() {
-        return securityProperties.getVerificationCode().isClosed();
+        return securityProperties.getCaptcha().isClosed();
     }
 }

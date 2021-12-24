@@ -15,36 +15,32 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-captcha
- * File Name: CaptchaHandler.java
+ * File Name: GraphicCaptcha.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:40:17
+ * Date: 2021/12/24 21:09:24
  */
 
-package cn.herodotus.eurynome.captcha.handler;
-
-import cn.herodotus.eurynome.captcha.dto.Captcha;
-import cn.herodotus.eurynome.captcha.dto.Verification;
+package cn.herodotus.eurynome.captcha.dto;
 
 /**
- * <p>Description: Captcha 处理器 </p>
+ * <p>Description: 图形验证码 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/12/17 21:40
+ * @date : 2021/12/24 21:09
  */
-public interface CaptchaHandler {
+public class GraphicCaptcha extends Captcha {
 
     /**
-     * 创建验证码
-     *
-     * @param key 验证码标识，用于标记在缓存中的存储
-     * @return 验证码数据 {@link Captcha}
+     * 图形验证码成的图。
      */
-    Captcha getCapcha(String key);
+    private String graphicImageBase64;
 
-    /**
-     * 验证码校验
-     * @param verification 前端传入的验证值
-     * @return true 验证成功，返回错误信息
-     */
-    boolean verify(Verification verification);
+
+    public String getGraphicImageBase64() {
+        return graphicImageBase64;
+    }
+
+    public void setGraphicImageBase64(String graphicImageBase64) {
+        this.graphicImageBase64 = graphicImageBase64;
+    }
 }

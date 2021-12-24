@@ -23,10 +23,8 @@
 package cn.herodotus.eurynome.oauth.authentication;
 
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class FormLoginWebAuthenticationDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> {
 
-    private SecurityProperties securityProperties;
+    private final SecurityProperties securityProperties;
 
     public FormLoginWebAuthenticationDetailsSource(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;

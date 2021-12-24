@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
+import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationFailureHandler;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationProvider;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginDecryptParameterAuthenticationFilter;
@@ -87,6 +88,9 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
     private HerodotusClientDetailsService herodotusClientDetailsService;
     @Autowired
     private SecurityProperties securityProperties;
+    @Autowired
+    private CaptchaRendererFactory captchaRendererFactory;
+
     /**
      * {@link AuthorizationServerEndpointsConfiguration#defaultAuthorizationServerTokenServices()}
      */
@@ -132,6 +136,7 @@ public class WebSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationProvider authenticationProvider() {
         FormLoginAuthenticationProvider provider = new FormLoginAuthenticationProvider();
         provider.setUserDetailsService(herodotusUserDetailsService);
+        provider.setCaptchaRendererFactory(captchaRendererFactory);
         provider.setPasswordEncoder(passwordEncoder());
         provider.setHideUserNotFoundExceptions(false);
         return provider;

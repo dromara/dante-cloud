@@ -29,6 +29,7 @@ import cn.herodotus.eurynome.captcha.provider.ResourceProvider;
 import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
 import cn.herodotus.eurynome.captcha.renderer.behavior.JigsawCaptchaRenderer;
 import cn.herodotus.eurynome.captcha.renderer.behavior.WordClickCaptchaRenderer;
+import cn.herodotus.eurynome.captcha.renderer.hutool.GifCaptchaRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -82,10 +83,19 @@ public class CaptchaConfiguration {
         return wordClickCaptchaRenderer;
     }
 
+    @Bean(CaptchaCategory.HUTOOL_GIF_CAPTCHA)
+    @ConditionalOnBean(ResourceProvider.class)
+    public GifCaptchaRenderer gifCaptchaRenderer(ResourceProvider resourceProvider) {
+        GifCaptchaRenderer gifCaptchaRenderer = new GifCaptchaRenderer();
+        gifCaptchaRenderer.setResourceProvider(resourceProvider);
+        log.trace("[Herodotus] |- Bean [Hutool Gif Captcha Renderer] Auto Configure.");
+        return gifCaptchaRenderer;
+    }
+
     @Bean
-    public CaptchaRendererFactory captchaFactory() {
+    public CaptchaRendererFactory captchaRendererFactory() {
         CaptchaRendererFactory captchaRendererFactory = new CaptchaRendererFactory();
-        log.trace("[Herodotus] |- Bean [Captcha Factory] Auto Configure.");
+        log.trace("[Herodotus] |- Bean Captcha Renderer Factory] Auto Configure.");
         return captchaRendererFactory;
     }
 }

@@ -14,27 +14,29 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-security
- * File Name: VerificationCodeException.java
+ * Module Name: eurynome-cloud-oauth
+ * File Name: OauthCaptchaArgumentIllegalException.java
  * Author: gengwei.zheng
- * Date: 2021/10/16 16:30:16
+ * Date: 2021/12/24 20:59:24
  */
 
-package cn.herodotus.eurynome.security.exception;
+package cn.herodotus.eurynome.oauth.exception;
+
+import cn.herodotus.eurynome.security.exception.PlatformAuthenticationException;
 
 /**
- * <p> Description : 验证码Exception </p>
+ * <p>Description: Oauth2 使用的验证码参数错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2019/11/29 13:46
+ * @date : 2021/12/24 20:59
  */
-public class VerificationCodeException extends SocialAuthenticationException {
+public class OauthCaptchaArgumentIllegalException extends PlatformAuthenticationException {
 
-    public VerificationCodeException(String msg, Throwable cause) {
+    public OauthCaptchaArgumentIllegalException(String msg, Throwable cause) {
         super(msg, cause);
     }
 
-    public VerificationCodeException(String msg) {
+    public OauthCaptchaArgumentIllegalException(String msg) {
         super(msg);
     }
 }

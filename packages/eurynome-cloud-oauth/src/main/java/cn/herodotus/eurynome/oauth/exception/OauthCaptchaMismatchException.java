@@ -14,28 +14,29 @@
  * limitations under the License.
  *
  * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-assistant
- * File Name: CaptchaType.java
+ * Module Name: eurynome-cloud-oauth
+ * File Name: OauthCaptchaMismatchException.java
  * Author: gengwei.zheng
- * Date: 2021/10/17 22:53:17
+ * Date: 2021/12/24 21:02:24
  */
 
-package cn.herodotus.eurynome.assistant.enums.captcha;
+package cn.herodotus.eurynome.oauth.exception;
+
+import cn.herodotus.eurynome.security.exception.PlatformAuthenticationException;
 
 /**
- * <p> Description : CaptchaType </p>
+ * <p>Description: Oauth2 使用的验证码不匹配错误 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/2/25 14:57
+ * @date : 2021/12/24 21:02
  */
-public enum CaptchaType {
+public class OauthCaptchaMismatchException extends PlatformAuthenticationException {
 
-    /**
-     * enum
-     */
-    LETTERS,
-    LETTERS_GIF,
-    CHINESE,
-    CHINESE_GIF,
-    ARITHMETIC;
+    public OauthCaptchaMismatchException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
+
+    public OauthCaptchaMismatchException(String msg) {
+        super(msg);
+    }
 }

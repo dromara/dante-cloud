@@ -22,12 +22,12 @@
 
 package cn.herodotus.eurynome.captcha.renderer;
 
+import cn.herodotus.eurynome.captcha.definition.Renderer;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaCategory;
 import cn.herodotus.eurynome.captcha.dto.Captcha;
 import cn.herodotus.eurynome.captcha.dto.Verification;
-import cn.herodotus.eurynome.captcha.definition.enums.CaptchaCategory;
 import cn.herodotus.eurynome.captcha.exception.CaptchaCategoryIsIncorrectException;
 import cn.herodotus.eurynome.captcha.exception.CaptchaHandlerNotExistException;
-import cn.herodotus.eurynome.captcha.handler.CaptchaHandler;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -45,16 +45,16 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CaptchaRendererFactory {
 
     @Autowired
-    private final Map<String, CaptchaHandler> handlers = new ConcurrentHashMap<>(8);
+    private final Map<String, Renderer> handlers = new ConcurrentHashMap<>(8);
 
-    public CaptchaHandler getCaptchaHandler(String category) {
+    public Renderer getRenderer(String category) {
         CaptchaCategory captchaCategory = CaptchaCategory.getCaptchaCategory(category);
 
         if (ObjectUtils.isEmpty(captchaCategory)) {
             throw new CaptchaCategoryIsIncorrectException("Captcha category is incorrect.");
         }
 
-        CaptchaHandler captchaHandler = handlers.get(captchaCategory.getConstant());
+        Renderer captchaHandler = handlers.get(captchaCategory.getConstant());
         if (ObjectUtils.isEmpty(captchaHandler)) {
             throw new CaptchaHandlerNotExistException();
         }
@@ -63,12 +63,12 @@ public class CaptchaRendererFactory {
     }
 
     public Captcha getCaptcha(String identity, String category) {
-        CaptchaHandler captchaHandler = getCaptchaHandler(category);
-        return captchaHandler.getCapcha(identity);
+        Renderer renderer = getRenderer(category);
+        return renderer.getCapcha(identity);
     }
 
     public boolean verify(Verification verification) {
-        CaptchaHandler captchaHandler = getCaptchaHandler(verification.getCategory());
-        return captchaHandler.verify(verification);
+        Renderer renderer = getRenderer(verification.getCategory());
+        return renderer.verify(verification);
     }
 }
