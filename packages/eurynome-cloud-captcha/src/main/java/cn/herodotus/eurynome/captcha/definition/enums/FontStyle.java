@@ -15,41 +15,41 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-captcha
- * File Name: CaptchaResource.java
+ * File Name: FontStyle.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:36:17
+ * Date: 2021/12/24 09:31:24
  */
 
-package cn.herodotus.eurynome.captcha.enums;
+package cn.herodotus.eurynome.captcha.definition.enums;
+
+import java.awt.*;
 
 /**
- * <p>Description: 验证码资源 </p>
+ * <p>Description: 字体风格 </p>
+ *
+ * 定义此类的目的：
+ * 1. 设置字体风格和字体大小，最初都是使用int类型参数，很容混淆出错，增加个枚举类型以示区别
+ * 2. 枚举类型让配置参数配置更便捷。
  *
  * @author : gengwei.zheng
- * @date : 2021/12/17 21:36
+ * @date : 2021/12/24 9:31
  */
-public enum CaptchaResource {
+public enum FontStyle {
 
     /**
-     * 验证码资源类型
+     * 字体风格
      */
-    JIGSAW_ORIGINAL("Jigsaw original image","滑动拼图底图"),
-    JIGSAW_TEMPLATE("Jigsaw template image","滑动拼图滑块底图"),
-    WORD_CLICK("Word click image","文字点选底图");
+    PLAIN(Font.PLAIN),
+    BOLD(Font.BOLD),
+    ITALIC(Font.ITALIC);
 
-    private final String content;
-    private final String description;
+    private final int mapping;
 
-    CaptchaResource(String type, String description) {
-        this.content = type;
-        this.description = description;
+    FontStyle(int mapping) {
+        this.mapping = mapping;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public String getDescription() {
-        return description;
+    public int getMapping() {
+        return mapping;
     }
 }

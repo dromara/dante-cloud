@@ -15,18 +15,19 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-captcha
- * File Name: CaptchaFactory.java
+ * File Name: CaptchaRendererFactory.java
  * Author: gengwei.zheng
  * Date: 2021/12/17 21:43:17
  */
 
-package cn.herodotus.eurynome.captcha.handler;
+package cn.herodotus.eurynome.captcha.renderer;
 
 import cn.herodotus.eurynome.captcha.dto.Captcha;
 import cn.herodotus.eurynome.captcha.dto.Verification;
-import cn.herodotus.eurynome.captcha.enums.CaptchaCategory;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaCategory;
 import cn.herodotus.eurynome.captcha.exception.CaptchaCategoryIsIncorrectException;
 import cn.herodotus.eurynome.captcha.exception.CaptchaHandlerNotExistException;
+import cn.herodotus.eurynome.captcha.handler.CaptchaHandler;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,7 +42,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date : 2021/12/17 21:43
  */
 @Component
-public class CaptchaFactory {
+public class CaptchaRendererFactory {
 
     @Autowired
     private final Map<String, CaptchaHandler> handlers = new ConcurrentHashMap<>(8);

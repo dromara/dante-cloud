@@ -17,23 +17,24 @@
  * Module Name: eurynome-cloud-captcha
  * File Name: WordClickCaptchaHandler.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:49:17
+ * Date: 2021/12/24 09:11:24
  */
 
-package cn.herodotus.eurynome.captcha.handler;
+package cn.herodotus.eurynome.captcha.renderer.behavior;
 
 import cn.herodotus.eurynome.cache.constant.CacheConstants;
-import cn.herodotus.eurynome.captcha.domain.CaptchaMetadata;
-import cn.herodotus.eurynome.captcha.domain.Coordinate;
+import cn.herodotus.eurynome.captcha.definition.AbstractBehaviorRenderer;
+import cn.herodotus.eurynome.captcha.definition.domain.Coordinate;
+import cn.herodotus.eurynome.captcha.definition.domain.Metadata;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaCategory;
+import cn.herodotus.eurynome.captcha.definition.enums.FontStyle;
 import cn.herodotus.eurynome.captcha.dto.Captcha;
 import cn.herodotus.eurynome.captcha.dto.Verification;
 import cn.herodotus.eurynome.captcha.dto.WordClickCaptcha;
-import cn.herodotus.eurynome.captcha.enums.CaptchaResource;
 import cn.herodotus.eurynome.captcha.exception.CaptchaHasExpiredException;
 import cn.herodotus.eurynome.captcha.exception.CaptchaMismatchException;
 import cn.herodotus.eurynome.captcha.exception.CaptchaParameterIllegalException;
-import cn.herodotus.eurynome.captcha.utils.CaptchaRandomUtils;
-import cn.herodotus.eurynome.captcha.utils.CaptchaResourceUtils;
+import cn.herodotus.eurynome.captcha.provider.RandomProvider;
 import cn.hutool.core.util.IdUtil;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
@@ -41,15 +42,12 @@ import com.alicp.jetcache.anno.CreateCache;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -59,14 +57,10 @@ import java.util.stream.IntStream;
  * @author : gengwei.zheng
  * @date : 2021/12/17 21:49
  */
-public class WordClickCaptchaHandler extends AbstractCaptchaHandler<String, List<Coordinate>> {
-
-    private static final Logger log = LoggerFactory.getLogger(WordClickCaptchaHandler.class);
-
-    private final Map<String, String> wordClickImages = new ConcurrentHashMap<>();
+@Component
+public class WordClickCaptchaRenderer extends AbstractBehaviorRenderer<String, List<Coordinate>> {
 
     private WordClickCaptcha wordClickCaptcha;
-    private Font wordClickFont;
 
     @CreateCache(name = CacheConstants.CACHE_NAME_CAPTCHA_WORD_CLICK, cacheType = CacheType.BOTH)
     protected Cache<String, List<Coordinate>> cache;
@@ -76,19 +70,30 @@ public class WordClickCaptchaHandler extends AbstractCaptchaHandler<String, List
         return this.cache;
     }
 
+    private Font getFont() {
+        int fontSize = this.getCaptchaProperties().getWordClick().getFontSize();
+        String fontName = this.getCaptchaProperties().getWordClick().getFontName();
+        FontStyle fontStyle = this.getCaptchaProperties().getWordClick().getFontStyle();
+        return this.getResourceProvider().getFont(fontName, fontSize, fontStyle);
+    }
+
+    @Override
+    public String getCategory() {
+        return CaptchaCategory.WORD_CLICK.getConstant();
+    }
+
     @Override
     public List<Coordinate> nextStamp(String key) {
 
-        CaptchaMetadata captchaMetadata = draw();
-        captchaMetadata.setIdentity(key);
+        Metadata metadata = draw();
 
-        WordClickObfuscator wordClickObfuscator = new WordClickObfuscator(captchaMetadata.getWords(), captchaMetadata.getCoordinates());
+        WordClickObfuscator wordClickObfuscator = new WordClickObfuscator(metadata.getWords(), metadata.getCoordinates());
 
         WordClickCaptcha wordClickCaptcha = new WordClickCaptcha();
         wordClickCaptcha.setIdentity(key);
-        wordClickCaptcha.setWordClickImageBase64(captchaMetadata.getWordClickImageBase64());
+        wordClickCaptcha.setWordClickImageBase64(metadata.getWordClickImageBase64());
         wordClickCaptcha.setWords(wordClickObfuscator.getWordString());
-        wordClickCaptcha.setWordsCount(captchaMetadata.getWords().size());
+        wordClickCaptcha.setWordsCount(metadata.getWords().size());
         this.wordClickCaptcha = wordClickCaptcha;
         return wordClickObfuscator.getCoordinates();
     }
@@ -129,37 +134,14 @@ public class WordClickCaptchaHandler extends AbstractCaptchaHandler<String, List
         return true;
     }
 
-
     @Override
-    public void afterPropertiesSet() throws Exception {
-        log.info("[Herodotus] |- Word click captcha resource loading is BEGIN！");
+    public Metadata draw() {
 
-        super.afterPropertiesSet();
-
-        loadImages(wordClickImages, getCaptchaProperties().getWordClick().getImageResource(), CaptchaResource.WORD_CLICK);
-
-        loadFont();
-
-        log.info("[Herodotus] |- Word click captcha resource loading isEND！");
-    }
-
-    private void loadFont() {
-        if (ObjectUtils.isEmpty(this.wordClickFont)) {
-            int fontSize = this.getCaptchaProperties().getWordClick().getFontSize();
-            String fontName = this.getCaptchaProperties().getWordClick().getFontName();
-            String fontPath = this.getCaptchaProperties().getWordClick().getFontPath();
-            Integer fontStyle = this.getCaptchaProperties().getWordClick().getFontStyle();
-            this.wordClickFont = CaptchaResourceUtils.getFont(fontName, fontSize, fontStyle, fontPath);
-        }
-    }
-
-    private CaptchaMetadata draw() {
-
-        BufferedImage backgroundImage = getRandomImage();
+        BufferedImage backgroundImage = this.getResourceProvider().getRandomWordClickImage();
 
         int wordCount = getCaptchaProperties().getWordClick().getWordCount();
 
-        List<String> words = CaptchaRandomUtils.randomWords(wordCount);
+        List<String> words = RandomProvider.randomWords(wordCount);
 
         Graphics backgroundGraphics = backgroundImage.getGraphics();
         int backgroundImageWidth = backgroundImage.getWidth();
@@ -176,15 +158,15 @@ public class WordClickCaptchaHandler extends AbstractCaptchaHandler<String, List
         combinedGraphics.drawImage(backgroundImage, 0, 0, null);
 
         //定义随机1到arr.length某一个字不参与校验
-        int excludeWordIndex = CaptchaRandomUtils.randomInt(1, wordCount) - 1;
+        int excludeWordIndex = RandomProvider.randomInt(1, wordCount) - 1;
         words.remove(excludeWordIndex);
         coordinates.remove(excludeWordIndex);
 
-        CaptchaMetadata captchaMetadata = new CaptchaMetadata();
-        captchaMetadata.setWordClickImageBase64(CaptchaResourceUtils.imageToBase64(backgroundImage));
-        captchaMetadata.setCoordinates(coordinates);
-        captchaMetadata.setWords(words);
-        return captchaMetadata;
+        Metadata metadata = new Metadata();
+        metadata.setWordClickImageBase64(toBase64(backgroundImage));
+        metadata.setCoordinates(coordinates);
+        metadata.setWords(words);
+        return metadata;
     }
 
     private Coordinate drawWord(Graphics graphics, int width, int height, int index, int wordCount, String word) {
@@ -192,15 +174,15 @@ public class WordClickCaptchaHandler extends AbstractCaptchaHandler<String, List
 
         //随机字体颜色
         if (getCaptchaProperties().getWordClick().isRandomColor()) {
-            graphics.setColor(new Color(CaptchaRandomUtils.randomInt(1, 255), CaptchaRandomUtils.randomInt(1, 255), CaptchaRandomUtils.randomInt(1, 255)));
+            graphics.setColor(new Color(RandomProvider.randomInt(1, 255), RandomProvider.randomInt(1, 255), RandomProvider.randomInt(1, 255)));
         } else {
             graphics.setColor(Color.BLACK);
         }
 
         // 设置角度
         AffineTransform affineTransform = new AffineTransform();
-        affineTransform.rotate(Math.toRadians(CaptchaRandomUtils.randomInt(-45, 45)), 0, 0);
-        Font rotatedFont = this.wordClickFont.deriveFont(affineTransform);
+        affineTransform.rotate(Math.toRadians(RandomProvider.randomInt(-45, 45)), 0, 0);
+        Font rotatedFont = this.getFont().deriveFont(affineTransform);
         graphics.setFont(rotatedFont);
         graphics.drawString(word, coordinate.getX(), coordinate.getY());
         return coordinate;
@@ -230,15 +212,15 @@ public class WordClickCaptchaHandler extends AbstractCaptchaHandler<String, List
         int averageWidth = backgroundImageWidth / (wordCount + 1);
         int x, y;
         if (averageWidth < halfWordSize) {
-            x = CaptchaRandomUtils.randomInt(getStartInclusive(halfWordSize), backgroundImageWidth);
+            x = RandomProvider.randomInt(getStartInclusive(halfWordSize), backgroundImageWidth);
         } else {
             if (wordIndex == 0) {
-                x = CaptchaRandomUtils.randomInt(getStartInclusive(halfWordSize), getEndExclusive(wordIndex, averageWidth, halfWordSize));
+                x = RandomProvider.randomInt(getStartInclusive(halfWordSize), getEndExclusive(wordIndex, averageWidth, halfWordSize));
             } else {
-                x = CaptchaRandomUtils.randomInt(averageWidth * wordIndex + halfWordSize, getEndExclusive(wordIndex, averageWidth, halfWordSize));
+                x = RandomProvider.randomInt(averageWidth * wordIndex + halfWordSize, getEndExclusive(wordIndex, averageWidth, halfWordSize));
             }
         }
-        y = CaptchaRandomUtils.randomInt(wordSize, backgroundImageHeight - wordSize);
+        y = RandomProvider.randomInt(wordSize, backgroundImageHeight - wordSize);
         return new Coordinate(x, y);
     }
 
@@ -262,9 +244,5 @@ public class WordClickCaptchaHandler extends AbstractCaptchaHandler<String, List
      */
     private int getEndExclusive(int wordIndex, int averageWidth, int halfWordSize) {
         return averageWidth * (wordIndex + 1) - halfWordSize;
-    }
-
-    private BufferedImage getRandomImage() {
-        return getRandomImage(wordClickImages, CaptchaResource.WORD_CLICK);
     }
 }

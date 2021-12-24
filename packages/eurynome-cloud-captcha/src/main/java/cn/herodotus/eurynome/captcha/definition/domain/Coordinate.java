@@ -17,10 +17,10 @@
  * Module Name: eurynome-cloud-captcha
  * File Name: Coordinate.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:22:17
+ * Date: 2021/12/17 21:23:17
  */
 
-package cn.herodotus.eurynome.captcha.domain;
+package cn.herodotus.eurynome.captcha.definition.domain;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

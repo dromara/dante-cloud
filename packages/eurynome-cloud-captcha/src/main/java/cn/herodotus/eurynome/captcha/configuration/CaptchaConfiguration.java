@@ -23,14 +23,16 @@
 package cn.herodotus.eurynome.captcha.configuration;
 
 import cn.herodotus.eurynome.cache.configuration.CacheConfiguration;
-import cn.herodotus.eurynome.captcha.enums.CaptchaCategory;
-import cn.herodotus.eurynome.captcha.handler.CaptchaFactory;
-import cn.herodotus.eurynome.captcha.handler.JigsawCaptchaHandler;
-import cn.herodotus.eurynome.captcha.handler.WordClickCaptchaHandler;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaCategory;
 import cn.herodotus.eurynome.captcha.properties.CaptchaProperties;
+import cn.herodotus.eurynome.captcha.provider.ResourceProvider;
+import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
+import cn.herodotus.eurynome.captcha.renderer.behavior.JigsawCaptchaRenderer;
+import cn.herodotus.eurynome.captcha.renderer.behavior.WordClickCaptchaRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,26 +57,35 @@ public class CaptchaConfiguration {
         log.info("[Herodotus] |- Component [Herodotus Captcha] Auto Configure.");
     }
 
+    @Bean
+    public ResourceProvider resourceProvider(CaptchaProperties captchaProperties) {
+        ResourceProvider resourceProvider = new ResourceProvider(captchaProperties);
+        log.trace("[Herodotus] |- Bean [Resource Provider] Auto Configure.");
+        return resourceProvider;
+    }
+
     @Bean(CaptchaCategory.JIGSAW_CAPTCHA)
-    public JigsawCaptchaHandler jigsawCaptchaHandler(CaptchaProperties captchaProperties) {
-        JigsawCaptchaHandler jigsawCaptchaHandler = new JigsawCaptchaHandler();
-        jigsawCaptchaHandler.setCaptchaProperties(captchaProperties);
-        log.trace("[Herodotus] |- Bean [Jigsaw Captcha Handler] Auto Configure.");
-        return jigsawCaptchaHandler;
+    @ConditionalOnBean(ResourceProvider.class)
+    public JigsawCaptchaRenderer jigsawCaptchaRenderer(ResourceProvider resourceProvider) {
+        JigsawCaptchaRenderer jigsawCaptchaRenderer = new JigsawCaptchaRenderer();
+        jigsawCaptchaRenderer.setResourceProvider(resourceProvider);
+        log.trace("[Herodotus] |- Bean [Jigsaw Captcha Renderer] Auto Configure.");
+        return jigsawCaptchaRenderer;
     }
 
     @Bean(CaptchaCategory.WORD_CLICK_CAPTCHA)
-    public WordClickCaptchaHandler wordClickCaptchaHandler(CaptchaProperties captchaProperties) {
-        WordClickCaptchaHandler wordClickCaptchaHandler = new WordClickCaptchaHandler();
-        wordClickCaptchaHandler.setCaptchaProperties(captchaProperties);
-        log.trace("[Herodotus] |- Bean [Word Click Captcha Handler] Auto Configure.");
-        return wordClickCaptchaHandler;
+    @ConditionalOnBean(ResourceProvider.class)
+    public WordClickCaptchaRenderer wordClickCaptchaRenderer(ResourceProvider resourceProvider) {
+        WordClickCaptchaRenderer wordClickCaptchaRenderer = new WordClickCaptchaRenderer();
+        wordClickCaptchaRenderer.setResourceProvider(resourceProvider);
+        log.trace("[Herodotus] |- Bean [Word Click Captcha Renderer] Auto Configure.");
+        return wordClickCaptchaRenderer;
     }
 
     @Bean
-    public CaptchaFactory captchaFactory() {
-        CaptchaFactory captchaFactory = new CaptchaFactory();
+    public CaptchaRendererFactory captchaFactory() {
+        CaptchaRendererFactory captchaRendererFactory = new CaptchaRendererFactory();
         log.trace("[Herodotus] |- Bean [Captcha Factory] Auto Configure.");
-        return captchaFactory;
+        return captchaRendererFactory;
     }
 }

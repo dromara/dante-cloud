@@ -15,43 +15,42 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-captcha
- * File Name: Delivery.java
+ * File Name: CaptchaFont.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:32:17
+ * Date: 2021/12/24 09:34:24
  */
 
-package cn.herodotus.eurynome.captcha.dto;
-
-import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
-import io.swagger.v3.oas.annotations.media.Schema;
+package cn.herodotus.eurynome.captcha.definition.enums;
 
 /**
- * <p>Description: 验证码数据传输 </p>
+ * <p>Description: 字体资源 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/12/17 21:32
+ * @date : 2021/12/24 9:34
  */
-public abstract class Delivery extends BaseDTO {
+public enum CaptchaFont {
 
-    @Schema(title = "验证码身份")
-    private String identity;
+    /**
+     * 内置字体类型
+     */
+    ACTION("Action.ttf"),
+    BEATAE("Beatae.ttf"),
+    EPILOG("Epilog.ttf"),
+    FRESNEL("Fresnel.ttf"),
+    HEADACHE("Headache.ttf"),
+    LEXOGRAPHER("Lexographer.ttf"),
+    PREFIX("Prefix"),
+    PROG_BOT("ProgBot"),
+    ROBOT_TEACHER("RobotTeacher.ttf"),
+    SCANDAL("Scandal.ttf");
 
-    @Schema(title = "验证码类别")
-    private String category;
+    private final String fontName;
 
-    public String getIdentity() {
-        return identity;
+    CaptchaFont(String fontName) {
+        this.fontName = fontName;
     }
 
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public String getFontName() {
+        return fontName;
     }
 }

@@ -20,10 +20,10 @@
  * Date: 2021/12/17 21:42:17
  */
 
-package cn.herodotus.eurynome.captcha.handler;
+package cn.herodotus.eurynome.captcha.renderer.behavior;
 
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
-import cn.herodotus.eurynome.captcha.domain.Coordinate;
+import cn.herodotus.eurynome.captcha.definition.domain.Coordinate;
 import cn.hutool.core.util.RandomUtil;
 import org.apache.commons.lang3.StringUtils;
 

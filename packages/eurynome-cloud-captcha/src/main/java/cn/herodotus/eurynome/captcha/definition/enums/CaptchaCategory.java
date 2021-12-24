@@ -20,7 +20,7 @@
  * Date: 2021/12/17 21:35:17
  */
 
-package cn.herodotus.eurynome.captcha.enums;
+package cn.herodotus.eurynome.captcha.definition.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.collect.ImmutableMap;

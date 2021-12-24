@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.captcha.dto;
 
-import cn.herodotus.eurynome.captcha.domain.Coordinate;
+import cn.herodotus.eurynome.captcha.definition.domain.Coordinate;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/12/17 21:34
  */
-public class Verification extends Delivery {
+public class Verification extends Captcha {
 
     /**
      * 滑块拼图验证参数
@@ -42,6 +42,10 @@ public class Verification extends Delivery {
      * 文字点选验证参数
      */
     private List<Coordinate> coordinates;
+    /**
+     * 图形验证码验证参数
+     */
+    private String characters;
 
     public Coordinate getCoordinate() {
         return coordinate;
@@ -57,5 +61,13 @@ public class Verification extends Delivery {
 
     public void setCoordinates(List<Coordinate> coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public String getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(String characters) {
+        this.characters = characters;
     }
 }

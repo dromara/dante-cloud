@@ -25,7 +25,7 @@ package cn.herodotus.eurynome.oauth.controller;
 import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.captcha.dto.Captcha;
 import cn.herodotus.eurynome.captcha.dto.Verification;
-import cn.herodotus.eurynome.captcha.handler.CaptchaFactory;
+import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
 import cn.herodotus.eurynome.rest.annotation.AccessLimited;
 import cn.herodotus.eurynome.rest.annotation.Crypto;
 import cn.herodotus.eurynome.rest.annotation.Idempotent;
@@ -58,7 +58,7 @@ import java.util.Map;
 public class CaptchaController implements Controller {
 
     @Autowired
-    private CaptchaFactory captchaFactory;
+    private CaptchaRendererFactory captchaRendererFactory;
 
     @AccessLimited
     @Operation(summary = "获取验证码", description = "通过传递身份信息（类似于Session标识）",
@@ -69,7 +69,7 @@ public class CaptchaController implements Controller {
     })
     @GetMapping
     public Result<Captcha> create(@NotBlank(message = "身份信息不能为空") String identity, @NotBlank(message = "验证码类型不能为空")String category) {
-        Captcha captcha = captchaFactory.getCaptcha(identity, category);
+        Captcha captcha = captchaRendererFactory.getCaptcha(identity, category);
         if (ObjectUtils.isNotEmpty(captcha)) {
             return Result.success("验证码创建成功", captcha);
         } else {
@@ -87,7 +87,7 @@ public class CaptchaController implements Controller {
     })
     @PostMapping
     public Result<Boolean> check(@Valid @RequestBody Verification verification) {
-        boolean isSuccess = captchaFactory.verify(verification);
+        boolean isSuccess = captchaRendererFactory.verify(verification);
         if (isSuccess) {
             return Result.success("验证码创建成功", true);
         }

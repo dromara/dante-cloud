@@ -89,7 +89,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
             return redisValue;
         }
 
-        log.debug("[Herodotus] |- CACHE - Lookup the cache for key: [{}], value is null", secure);
+        log.trace("[Herodotus] |- CACHE - Lookup the cache for key: [{}], value is null", secure);
 
         return null;
     }
@@ -125,7 +125,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
 
         T value = (T) caffeineCache.getNativeCache().get(secure, k -> getRedisStoreValue(k, valueLoader));
         if (value instanceof NullValue) {
-            log.debug("[Herodotus] |- CACHE - Get <T> with type form valueLoader Cache for key: [{}], value is null", secure);
+            log.trace("[Herodotus] |- CACHE - Get <T> with type form valueLoader Cache for key: [{}], value is null", secure);
             return null;
         }
 
@@ -144,7 +144,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
             caffeineCache.put(secure, value);
             redisCache.put(secure, value);
 
-            log.debug("[Herodotus] |- CACHE - Put data into Herodotus Cache, with key: [{}] and value: [{}]", secure, value);
+            log.trace("[Herodotus] |- CACHE - Put data into Herodotus Cache, with key: [{}] and value: [{}]", secure, value);
         }
     }
 
@@ -152,7 +152,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
     public void evict(Object key) {
         String secure = secure(key);
 
-        log.debug("[Herodotus] |- CACHE - Evict Herodotus Cache for key: {}", secure);
+        log.trace("[Herodotus] |- CACHE - Evict Herodotus Cache for key: {}", secure);
 
         // 删除的时候要先删除二级缓存再删除一级缓存，否则有并发问题
         redisCache.evict(secure);
@@ -192,7 +192,7 @@ public class HerodotusCache extends AbstractValueAdaptingCache {
             return redisValue;
         }
 
-        log.debug("[Herodotus] |- CACHE - Get ValueWrapper data form Herodotus Cache for key: [{}], value is null", secure);
+        log.trace("[Herodotus] |- CACHE - Get ValueWrapper data form Herodotus Cache for key: [{}], value is null", secure);
 
         return null;
     }

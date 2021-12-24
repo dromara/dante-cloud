@@ -15,12 +15,12 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-captcha
- * File Name: CaptchaMetadata.java
+ * File Name: Metadata.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:22:17
+ * Date: 2021/12/24 09:11:24
  */
 
-package cn.herodotus.eurynome.captcha.domain;
+package cn.herodotus.eurynome.captcha.definition.domain;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/12/17 21:22
  */
-public class CaptchaMetadata {
+public class Metadata {
 
     /**
      * 验证码身份区分信息

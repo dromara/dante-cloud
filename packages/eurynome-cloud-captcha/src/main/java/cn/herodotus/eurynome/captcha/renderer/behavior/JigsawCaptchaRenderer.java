@@ -17,24 +17,28 @@
  * Module Name: eurynome-cloud-captcha
  * File Name: JigsawCaptchaHandler.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:44:17
+ * Date: 2021/12/24 09:11:24
  */
 
-package cn.herodotus.eurynome.captcha.handler;
+package cn.herodotus.eurynome.captcha.renderer.behavior;
 
 import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.captcha.algorithm.GaussianBlur;
-import cn.herodotus.eurynome.captcha.domain.CaptchaMetadata;
-import cn.herodotus.eurynome.captcha.domain.Coordinate;
+import cn.herodotus.eurynome.captcha.definition.AbstractBehaviorRenderer;
+import cn.herodotus.eurynome.captcha.definition.domain.Metadata;
+import cn.herodotus.eurynome.captcha.definition.domain.Coordinate;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaCategory;
 import cn.herodotus.eurynome.captcha.dto.Captcha;
 import cn.herodotus.eurynome.captcha.dto.JigsawCaptcha;
 import cn.herodotus.eurynome.captcha.dto.Verification;
-import cn.herodotus.eurynome.captcha.enums.CaptchaResource;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaResource;
 import cn.herodotus.eurynome.captcha.exception.CaptchaHasExpiredException;
 import cn.herodotus.eurynome.captcha.exception.CaptchaMismatchException;
 import cn.herodotus.eurynome.captcha.exception.CaptchaParameterIllegalException;
-import cn.herodotus.eurynome.captcha.utils.CaptchaRandomUtils;
-import cn.herodotus.eurynome.captcha.utils.CaptchaResourceUtils;
+import cn.herodotus.eurynome.captcha.definition.AbstractRenderer;
+import cn.herodotus.eurynome.captcha.provider.RandomProvider;
+import cn.herodotus.eurynome.captcha.provider.ResourceProvider;
+import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.util.IdUtil;
 import com.alicp.jetcache.Cache;
 import com.alicp.jetcache.anno.CacheType;
@@ -43,6 +47,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -56,9 +61,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author : gengwei.zheng
  * @date : 2021/12/17 21:44
  */
-public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordinate> {
+@Component
+public class JigsawCaptchaRenderer extends AbstractBehaviorRenderer<String, Coordinate> {
 
-    private static final Logger log = LoggerFactory.getLogger(JigsawCaptchaHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(JigsawCaptchaRenderer.class);
 
     private static final int AREA_SIZE = 3;
     private static final int AREA_ARRAY_SIZE = AREA_SIZE * AREA_SIZE;
@@ -74,6 +80,11 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
     @Override
     protected Cache<String, Coordinate> getCache() {
         return this.cache;
+    }
+
+    @Override
+    public String getCategory() {
+        return CaptchaCategory.JIGSAW.getConstant();
     }
 
     private JigsawCaptcha jigsawCaptcha;
@@ -92,17 +103,16 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
     @Override
     public Coordinate nextStamp(String key) {
 
-        CaptchaMetadata captchaMetadata = draw();
-        captchaMetadata.setIdentity(key);
+        Metadata metadata = draw();
 
         JigsawCaptcha jigsawCaptcha = new JigsawCaptcha();
         jigsawCaptcha.setIdentity(key);
-        jigsawCaptcha.setOriginalImageBase64(captchaMetadata.getOriginalImageBase64());
-        jigsawCaptcha.setSliderImageBase64(captchaMetadata.getSliderImageBase64());
+        jigsawCaptcha.setOriginalImageBase64(metadata.getOriginalImageBase64());
+        jigsawCaptcha.setSliderImageBase64(metadata.getSliderImageBase64());
 
         this.jigsawCaptcha = jigsawCaptcha;
 
-        return captchaMetadata.getCoordinate();
+        return metadata.getCoordinate();
     }
 
     @Override
@@ -129,22 +139,10 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
-        log.info("[Herodotus] |- Jigsaw captcha resource loading is BEGIN！");
-
-        super.afterPropertiesSet();
-
-        loadImages(jigsawOriginalImages, getCaptchaProperties().getJigsaw().getOriginalResource(), CaptchaResource.JIGSAW_ORIGINAL);
-
-        loadImages(jigsawTemplateImages, getCaptchaProperties().getJigsaw().getTemplateResource(), CaptchaResource.JIGSAW_TEMPLATE);
-
-        log.info("[Herodotus] |- Jigsaw captcha resource loading isEND！");
-    }
-
-    private CaptchaMetadata draw() {
+    public Metadata draw() {
 
         // 原生图片
-        BufferedImage originalImage = getRandomOriginalImage();
+        BufferedImage originalImage = this.getResourceProvider().getRandomOriginalImage();
 
         // 设置水印
         Graphics backgroundGraphics = originalImage.getGraphics();
@@ -153,8 +151,8 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
         addWatermark(backgroundGraphics, width, height);
 
         // 抠图图片
-        String sliderImageBase64 = getRandomBase64TemplateImage();
-        BufferedImage templateImage = CaptchaResourceUtils.base64ToImage(sliderImageBase64);
+        String sliderImageBase64 = this.getResourceProvider().getRandomBase64TemplateImage();
+        BufferedImage templateImage = ImgUtil.toImage(sliderImageBase64);
 
         return draw(originalImage, templateImage, sliderImageBase64);
     }
@@ -167,7 +165,7 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
      * @param sliderImageBase64 滑块拼图图片Base64
      * @return 滑块拼图验证码数据
      */
-    private CaptchaMetadata draw(BufferedImage originalImage, BufferedImage templateImage, String sliderImageBase64) {
+    private Metadata draw(BufferedImage originalImage, BufferedImage templateImage, String sliderImageBase64) {
 
         int originalImageWidth = originalImage.getWidth();
         int originalImageHeight = originalImage.getHeight();
@@ -206,12 +204,12 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
 
         log.trace("[Herodotus] |- Jigsaw captcha jigsaw image width is [{}], height is [{}].", jigsawImage.getWidth(), jigsawImage.getHeight());
 
-        CaptchaMetadata captchaMetadata = new CaptchaMetadata();
-        captchaMetadata.setOriginalImageBase64(CaptchaResourceUtils.imageToBase64(originalImage));
-        captchaMetadata.setSliderImageBase64(CaptchaResourceUtils.imageToBase64(jigsawImage));
-        captchaMetadata.setCoordinate(coordinate);
+        Metadata metadata = new Metadata();
+        metadata.setOriginalImageBase64(toBase64(originalImage));
+        metadata.setSliderImageBase64(toBase64(jigsawImage));
+        metadata.setCoordinate(coordinate);
 
-        return captchaMetadata;
+        return metadata;
     }
 
     /**
@@ -232,11 +230,11 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
         int y = BOLD;
 
         if (availableWidth > 0) {
-            x = CaptchaRandomUtils.randomInt(availableWidth - OFFSET) + OFFSET;
+            x = RandomProvider.randomInt(availableWidth - OFFSET) + OFFSET;
         }
 
         if (availableHeight > 0) {
-            y = CaptchaRandomUtils.randomInt(availableHeight) + BOLD;
+            y = RandomProvider.randomInt(availableHeight) + BOLD;
         }
 
         log.debug("[Herodotus] |- Jigsaw captcha image matting coordinate is x: [{}], y: [{}].", x, y);
@@ -344,15 +342,15 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
         if (interferenceOptions > 0) {
             if (originalImageWidth - x - BOLD > templateImageWidth * 2) {
                 // 在原扣图右边插入干扰图
-                position = CaptchaRandomUtils.randomInt(x + templateImageWidth + BOLD, originalImageWidth - templateImageWidth);
+                position = RandomProvider.randomInt(x + templateImageWidth + BOLD, originalImageWidth - templateImageWidth);
             } else {
                 // 在原扣图左边插入干扰图
-                position = CaptchaRandomUtils.randomInt(OFFSET, x - templateImageWidth - BOLD);
+                position = RandomProvider.randomInt(OFFSET, x - templateImageWidth - BOLD);
             }
         }
 
         if (interferenceOptions > 1) {
-            position = CaptchaRandomUtils.randomInt(templateImageWidth, OFFSET - templateImageWidth);
+            position = RandomProvider.randomInt(templateImageWidth, OFFSET - templateImageWidth);
         }
 
         return position;
@@ -360,9 +358,9 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
 
     private void addInterference(BufferedImage originalImage, String sliderImageBase64, int position) {
         while (true) {
-            String data = getRandomBase64TemplateImage();
+            String data = this.getResourceProvider().getRandomBase64TemplateImage();
             if (!sliderImageBase64.equals(data)) {
-                interferenceByTemplate(originalImage, Objects.requireNonNull(CaptchaResourceUtils.base64ToImage(data)), position, 0);
+                interferenceByTemplate(originalImage, Objects.requireNonNull(ImgUtil.toImage(data)), position, 0);
                 break;
             }
         }
@@ -409,21 +407,5 @@ public class JigsawCaptchaHandler extends AbstractCaptchaHandler<String, Coordin
                 }
             }
         }
-    }
-
-    private String getRandomBase64OriginalImage() {
-        return getRandomBase64Image(jigsawOriginalImages, CaptchaResource.JIGSAW_ORIGINAL);
-    }
-
-    private String getRandomBase64TemplateImage() {
-        return getRandomBase64Image(jigsawTemplateImages, CaptchaResource.JIGSAW_TEMPLATE);
-    }
-
-    private BufferedImage getRandomOriginalImage() {
-        return getRandomImage(jigsawOriginalImages, CaptchaResource.JIGSAW_ORIGINAL);
-    }
-
-    private BufferedImage getRandomTemplateImage() {
-        return getRandomImage(jigsawOriginalImages, CaptchaResource.JIGSAW_ORIGINAL);
     }
 }

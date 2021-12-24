@@ -15,43 +15,41 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-captcha
- * File Name: Captcha.java
+ * File Name: CaptchaResource.java
  * Author: gengwei.zheng
- * Date: 2021/12/17 21:33:17
+ * Date: 2021/12/17 21:36:17
  */
 
-package cn.herodotus.eurynome.captcha.dto;
-
-import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
-import io.swagger.v3.oas.annotations.media.Schema;
+package cn.herodotus.eurynome.captcha.definition.enums;
 
 /**
- * <p>Description: 验证码返回数据基础类 </p>
+ * <p>Description: 验证码资源 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/12/17 21:33
+ * @date : 2021/12/17 21:36
  */
-public abstract class Captcha extends BaseDTO {
+public enum CaptchaResource {
 
-    @Schema(title = "验证码身份")
-    private String identity;
+    /**
+     * 验证码资源类型
+     */
+    JIGSAW_ORIGINAL("Jigsaw original image","滑动拼图底图"),
+    JIGSAW_TEMPLATE("Jigsaw template image","滑动拼图滑块底图"),
+    WORD_CLICK("Word click image","文字点选底图");
 
-    @Schema(title = "验证码类别")
-    private String category;
+    private final String content;
+    private final String description;
 
-    public String getIdentity() {
-        return identity;
+    CaptchaResource(String type, String description) {
+        this.content = type;
+        this.description = description;
     }
 
-    public void setIdentity(String identity) {
-        this.identity = identity;
+    public String getContent() {
+        return content;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public String getDescription() {
+        return description;
     }
 }

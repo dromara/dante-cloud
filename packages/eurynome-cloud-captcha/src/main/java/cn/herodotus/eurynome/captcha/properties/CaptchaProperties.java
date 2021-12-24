@@ -23,6 +23,9 @@
 package cn.herodotus.eurynome.captcha.properties;
 
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaCharacter;
+import cn.herodotus.eurynome.captcha.definition.enums.CaptchaFont;
+import cn.herodotus.eurynome.captcha.definition.enums.FontStyle;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -34,6 +37,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = PropertyConstants.PROPERTY_SECURITY_CAPTCHA)
 public class CaptchaProperties {
 
+    private Graphics graphics = new Graphics();
     /**
      * 水印配置
      */
@@ -46,6 +50,14 @@ public class CaptchaProperties {
      * 文字点选验证码配置
      */
     private WordClick wordClick = new WordClick();
+
+    public Graphics getGraphics() {
+        return graphics;
+    }
+
+    public void setGraphics(Graphics graphics) {
+        this.graphics = graphics;
+    }
 
     public Watermark getWatermark() {
         return watermark;
@@ -71,14 +83,83 @@ public class CaptchaProperties {
         this.wordClick = wordClick;
     }
 
+    public static class Graphics {
+        /**
+         * 验证码字符个数
+         */
+        private int length = 5;
+        /**
+         * 验证码显示宽度
+         */
+        private int width = 130;
+        /**
+         * 验证码显示高度
+         */
+        private int height = 48;
+        /**
+         * 算数类型验证码算法复杂度
+         */
+        private int complexity = 2;
+        /**
+         * 字符类型
+         */
+        private CaptchaCharacter letter = CaptchaCharacter.NUM_AND_CHAR;
+
+        private CaptchaFont font = CaptchaFont.LEXOGRAPHER;
+
+        public int getLength() {
+            return length;
+        }
+
+        public void setLength(int length) {
+            this.length = length;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public CaptchaFont getFont() {
+            return font;
+        }
+
+        public void setFont(CaptchaFont captchaFont) {
+            this.font = captchaFont;
+        }
+
+        public CaptchaCharacter getLetter() {
+            return letter;
+        }
+
+        public void setLetter(CaptchaCharacter letter) {
+            this.letter = letter;
+        }
+
+        public int getComplexity() {
+            return complexity;
+        }
+
+        public void setComplexity(int complexity) {
+            this.complexity = complexity;
+        }
+    }
+
     /**
      * 右下角水印文字(我的水印)
      */
     public static class Watermark {
-        /**
-         * 字体路径，格式：classpath:/xxx
-         */
-        private String fontPath = "classpath*:/fonts";
         /**
          * 水印内容
          */
@@ -90,7 +171,7 @@ public class CaptchaProperties {
         /**
          * 字体样式： 0:PLAIN; 1:BOLD; 2:ITALI；
          */
-        private Integer fontStyle = 1;
+        private FontStyle fontStyle = FontStyle.BOLD;
 
         /**
          * 水印文字中，汉字的大小，默认：25
@@ -121,19 +202,11 @@ public class CaptchaProperties {
             this.fontSize = fontSize;
         }
 
-        public String getFontPath() {
-            return fontPath;
-        }
-
-        public void setFontPath(String fontPath) {
-            this.fontPath = fontPath;
-        }
-
-        public Integer getFontStyle() {
+        public FontStyle getFontStyle() {
             return fontStyle;
         }
 
-        public void setFontStyle(Integer fontStyle) {
+        public void setFontStyle(FontStyle fontStyle) {
             this.fontStyle = fontStyle;
         }
     }
@@ -203,10 +276,7 @@ public class CaptchaProperties {
          * 文字点选验证码资源路径，格式：classpath:/xxx
          */
         private String imageResource = "classpath*:images/word-click/*.png";
-        /**
-         * 字体路径，格式：classpath:/xxx
-         */
-        private String fontPath = "classpath*:/fonts";
+
         /**
          * 文字点选验证码文字个数
          */
@@ -218,7 +288,7 @@ public class CaptchaProperties {
         /**
          * 字体样式： 0:PLAIN; 1:BOLD; 2:ITALI；
          */
-        private Integer fontStyle = 1;
+        private FontStyle fontStyle = FontStyle.BOLD;
         /**
          * 水印字体
          */
@@ -260,14 +330,6 @@ public class CaptchaProperties {
             this.randomColor = randomColor;
         }
 
-        public String getFontPath() {
-            return fontPath;
-        }
-
-        public void setFontPath(String fontPath) {
-            this.fontPath = fontPath;
-        }
-
         public String getFontName() {
             return fontName;
         }
@@ -276,11 +338,11 @@ public class CaptchaProperties {
             this.fontName = fontName;
         }
 
-        public Integer getFontStyle() {
+        public FontStyle getFontStyle() {
             return fontStyle;
         }
 
-        public void setFontStyle(Integer fontStyle) {
+        public void setFontStyle(FontStyle fontStyle) {
             this.fontStyle = fontStyle;
         }
     }

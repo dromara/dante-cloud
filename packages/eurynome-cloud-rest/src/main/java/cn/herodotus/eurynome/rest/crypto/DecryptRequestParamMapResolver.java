@@ -77,7 +77,7 @@ public class DecryptRequestParamMapResolver implements HandlerMethodArgumentReso
         String methodName = methodParameter.getMethod().getName();
         boolean isSupports = requestParamMapMethodArgumentResolver.supportsParameter(methodParameter);
 
-        log.debug("[Herodotus] |- Is DecryptRequestParamMapResolver supports method [{}] ? Status is [{}].", methodName, isSupports);
+        log.trace("[Herodotus] |- Is DecryptRequestParamMapResolver supports method [{}] ? Status is [{}].", methodName, isSupports);
         return isSupports;
     }
 

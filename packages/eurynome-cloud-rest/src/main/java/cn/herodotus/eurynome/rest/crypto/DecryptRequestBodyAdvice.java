@@ -65,7 +65,7 @@ public class DecryptRequestBodyAdvice implements RequestBodyAdvice {
 
         boolean isSupports = ObjectUtils.isNotEmpty(crypto) && crypto.requestDecrypt();
 
-        log.debug("[Herodotus] |- Is DecryptRequestBodyAdvice supports method [{}] ? Status is [{}].", methodName, isSupports);
+        log.trace("[Herodotus] |- Is DecryptRequestBodyAdvice supports method [{}] ? Status is [{}].", methodName, isSupports);
         return isSupports;
     }
 

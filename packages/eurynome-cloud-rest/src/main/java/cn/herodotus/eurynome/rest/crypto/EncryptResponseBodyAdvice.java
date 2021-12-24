@@ -63,7 +63,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
         boolean isSupports = ObjectUtils.isNotEmpty(crypto) && crypto.responseEncrypt();
 
-        log.debug("[Herodotus] |- Is EncryptResponseBodyAdvice supports method [{}] ? Status is [{}].", methodName, isSupports);
+        log.trace("[Herodotus] |- Is EncryptResponseBodyAdvice supports method [{}] ? Status is [{}].", methodName, isSupports);
         return isSupports;
     }
 
