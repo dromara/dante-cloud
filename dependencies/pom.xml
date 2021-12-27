@@ -62,7 +62,7 @@
         <spring-boot-dependencies.version>2.6.2</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2021.0.0</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.5.5</spring-boot-admin.version>
+        <spring-boot-admin.version>2.5.4</spring-boot-admin.version>
 
         <!--Maven Plugin 相关组件-->
         <docker-maven-plugin.version>0.38.1</docker-maven-plugin.version>
@@ -80,14 +80,14 @@
 
         <!-- 应用开发辅助工具组件 -->
         <lombok.version>1.18.22</lombok.version>
-        <redisson.version>3.16.6</redisson.version>
+        <redisson.version>3.16.7</redisson.version>
         <p6spy.version>3.9.1</p6spy.version>
-        <springdoc.version>1.6.1</springdoc.version>
+        <springdoc.version>1.6.2</springdoc.version>
         <logstash-logback-encoder.version>7.0.1</logstash-logback-encoder.version>
         <minio.version>8.3.4</minio.version>
 
         <!-- 阿里巴巴开源工具依赖 -->
-        <fastjson.version>1.2.78</fastjson.version>
+        <fastjson.version>1.2.79</fastjson.version>
         <jetcache.version>2.6.2</jetcache.version>
         <nacos.version>2.0.3</nacos.version>
         <sentinel.version>1.8.2</sentinel.version>
@@ -109,6 +109,7 @@
         <!--以下为包依赖的特殊处理-->
         <!--强制升级解决安全漏洞问题-->
         <log4j2.version>2.17.0</log4j2.version>
+        <logback.version>1.2.10</logback.version>
 
     </properties>
 
