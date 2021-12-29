@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.0.3-brightgreen" alt="Nacos 2.0.3"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.6.2.50-red" alt="Version 2.6.2.50"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.6.2.60-red" alt="Version 2.6.2.60"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -121,9 +121,6 @@ Seata | 1.3.0
 eurynome-cloud
 ├── configurations -- 配置文件脚本和统一Docker build上下文目录
 ├── dependencies -- 工程Maven顶级依赖，统一控制版本和依赖
-├── integrates -- 外部工具组件集成代码包
-├    ├── eurynome-integration-oss -- 对象存储模块
-├    └── eurynome-integration-influxdb -- 时序数据储模块
 ├── packages -- 基础通用依赖包
 ├    ├── eurynome-cloud-assistant -- Spring相关公共辅助工具、注解相关工具代码组件
 ├    ├── eurynome-cloud-cache -- Cache和Redis工具模块组件

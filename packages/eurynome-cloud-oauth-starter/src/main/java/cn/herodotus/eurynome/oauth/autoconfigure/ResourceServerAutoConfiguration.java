@@ -75,7 +75,6 @@ public class ResourceServerAutoConfiguration extends ResourceServerConfigurerAda
 
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/defaultKaptcha").permitAll()
                 .antMatchers(SecurityUtils.whitelistToAntMatchers(securityProperties.getInterceptor().getWhitelist())).permitAll()
                 // 指定监控访问权限
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
