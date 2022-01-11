@@ -81,6 +81,8 @@ public class PropertyConstants {
     public static final String PROPERTY_INTEGRATION_AUDIT = PROPERTY_HERODOTUS_INTEGRATION + ".audit";
     public static final String PROPERTY_INTEGRATION_OSS = PROPERTY_HERODOTUS_INTEGRATION + ".oss";
     public static final String PROPERTY_INTEGRATION_INFLUXDB = PROPERTY_HERODOTUS_INTEGRATION + ".influxdb";
+    public static final String PROPERTY_INTEGRATION_MAVEN = PROPERTY_HERODOTUS_INTEGRATION + ".maven";
+    public static final String PROPERTY_INTEGRATION_PAY = PROPERTY_HERODOTUS_INTEGRATION + ".pay";
     /**
      * message
      */
@@ -106,6 +108,8 @@ public class PropertyConstants {
      * oss
      */
     public static final String PROPERTY_OSS_MINIO = PROPERTY_INTEGRATION_OSS + ".minio";
+    public static final String PROPERTY_PAY_ALIPAY = PROPERTY_INTEGRATION_PAY + ".alipay";
+    public static final String PROPERTY_PAY_WXIPAY = PROPERTY_INTEGRATION_PAY + ".wxpay";
 
 
     /* ---------- Spring 相关基础配置属性（第一层） ---------- */
@@ -123,10 +127,16 @@ public class PropertyConstants {
     public static final String ITEM_MINIO_ACCESSKEY = PROPERTY_OSS_MINIO + ".accessKey";
     public static final String ITEM_MINIO_SECRETKEY = PROPERTY_OSS_MINIO + ".secretKey";
 
+    public static final String ITEM_ALIPAY_STORAGE = PROPERTY_PAY_ALIPAY + ".storage";
+    public static final String ITEM_ALIPAY_ENABLED = PROPERTY_PAY_ALIPAY + PROPERTY_ENABLED;
+    public static final String ITEM_WXPAY_ENABLED = PROPERTY_PAY_WXIPAY + PROPERTY_ENABLED;
+
     public static final String ITEM_INFLUXDB_URL = PROPERTY_INTEGRATION_INFLUXDB + ".url";
     public static final String ITEM_INFLUXDB_DATABASE = PROPERTY_INTEGRATION_INFLUXDB + ".database";
     public static final String ITEM_INFLUXDB_USERNAME = PROPERTY_INTEGRATION_INFLUXDB + ".username";
     public static final String ITEM_INFLUXDB_PASSWORD = PROPERTY_INTEGRATION_INFLUXDB + ".password";
+
+
 
     public static final String ITEM_SWAGGER_ENABLED = PROPERTY_PLATFORM_SWAGGER + PROPERTY_ENABLED;
     public static final String ITEM_REDISSON_ENABLED = PROPERTY_REDIS_REDISSON + PROPERTY_ENABLED;

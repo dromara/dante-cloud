@@ -59,6 +59,14 @@ public class PropertyResolver {
         return getProperty(environment, PropertyConstants.ITEM_PLATFORM_DATA_ACCESS_STRATEGY);
     }
 
+    public static String getArchitecture(Environment environment, String defaultValue) {
+        return getProperty(environment, PropertyConstants.ITEM_PLATFORM_ARCHITECTURE, defaultValue);
+    }
+
+    public static String getArchitecture(Environment environment) {
+        return getProperty(environment, PropertyConstants.ITEM_PLATFORM_ARCHITECTURE);
+    }
+
     public static String getDdlAuto(Environment environment) {
         return getDdlAuto(environment, PlatformConstants.NONE);
     }

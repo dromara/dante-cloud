@@ -25,13 +25,15 @@ package cn.herodotus.eurynome.captcha.definition.domain;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import java.io.Serializable;
+
 /**
  * <p>Description: 坐标 </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/12/17 21:22
  */
-public class Coordinate {
+public class Coordinate implements Serializable {
 
     private int x;
     private int y;

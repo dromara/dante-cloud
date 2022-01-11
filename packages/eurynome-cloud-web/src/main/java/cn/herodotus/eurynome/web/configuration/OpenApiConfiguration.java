@@ -84,7 +84,7 @@ public class OpenApiConfiguration {
                 .servers(getServers())
                 .info(new Info().title("Eurynome Cloud")
                         .description("Eurynome Cloud Microservices Architecture")
-                        .version("2.6.2.70")
+                        .version("2.6.2.80")
                         .license(new License().name("Apache 2.0").url("http://www.apache.org/licenses/")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Eurynome Cloud Documentation")
