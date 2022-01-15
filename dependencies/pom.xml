@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.6.2.80</version>
+    <version>2.6.2.90</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -62,7 +62,7 @@
         <spring-boot-dependencies.version>2.6.2</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2021.0.0</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.6.0</spring-boot-admin.version>
+        <spring-boot-admin.version>2.6.1</spring-boot-admin.version>
 
         <!--Maven Plugin 相关组件-->
         <docker-maven-plugin.version>0.38.1</docker-maven-plugin.version>
