@@ -22,19 +22,15 @@
 
 package cn.herodotus.eurynome.security.authentication;
 
-import cn.herodotus.eurynome.cache.enhance.query.CacheTemplate;
-import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
+import cn.herodotus.engine.web.core.domain.RequestMapping;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -56,26 +52,26 @@ public class RequestMappingLocalCache {
     private final Cache<String, Set<String>> indexCache = Caffeine.newBuilder().maximumSize(10_000).build();
 
     public void save(List<RequestMapping> requestMappings) {
-        if (CollectionUtils.isNotEmpty(requestMappings)) {
-            CacheTemplate<RequestMapping> cacheTemplate = new CacheTemplate<>();
-            cacheTemplate.append(requestMappings);
-            dataCache.putAll(cacheTemplate.getDomains());
-            indexCache.put(ALL, cacheTemplate.getQueryIndexes());
-            log.debug("[Herodotus] |- Local Storage batch save the request mappings");
-        }
+//        if (CollectionUtils.isNotEmpty(requestMappings)) {
+//            CacheTemplate<RequestMapping> cacheTemplate = new CacheTemplate<>();
+//            cacheTemplate.append(requestMappings);
+//            dataCache.putAll(cacheTemplate.getDomains());
+//            indexCache.put(ALL, cacheTemplate.getQueryIndexes());
+//            log.debug("[Herodotus] |- Local Storage batch save the request mappings");
+//        }
     }
 
     public List<RequestMapping> findAll() {
-        Set<String> indexes = indexCache.getIfPresent(ALL);
-        if (CollectionUtils.isNotEmpty(indexes)) {
-            Map<String, RequestMapping> result = dataCache.getAllPresent(indexes);
-            if (MapUtils.isNotEmpty(result)) {
-                log.debug("[Herodotus] |- Get the request mappings from local storage SUCCESS!");
-                return new ArrayList<>(result.values());
-            }
-        }
-
-        log.warn("[Herodotus] |- Cannot Get the request mappings from local storage, or the result is empty!");
+//        Set<String> indexes = indexCache.getIfPresent(ALL);
+//        if (CollectionUtils.isNotEmpty(indexes)) {
+//            Map<String, RequestMapping> result = dataCache.getAllPresent(indexes);
+//            if (MapUtils.isNotEmpty(result)) {
+//                log.debug("[Herodotus] |- Get the request mappings from local storage SUCCESS!");
+//                return new ArrayList<>(result.values());
+//            }
+//        }
+//
+//        log.warn("[Herodotus] |- Cannot Get the request mappings from local storage, or the result is empty!");
         return new ArrayList<>();
     }
 }

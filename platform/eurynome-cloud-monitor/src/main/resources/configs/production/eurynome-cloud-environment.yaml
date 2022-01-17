@@ -24,6 +24,12 @@ herodotus:
       generate-statistics: false
     swagger:
       enabled: false
+    redisson:
+      enabled: false
+    rest:
+      scan:
+        enabled: true
+
 
   management:
     log-center:

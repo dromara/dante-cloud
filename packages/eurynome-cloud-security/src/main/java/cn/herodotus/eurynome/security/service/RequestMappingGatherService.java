@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.security.service;
 
-import cn.herodotus.eurynome.message.support.DestinationSupport;
+import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.assistant.constant.ServiceConstants;
+import cn.herodotus.eurynome.message.support.DestinationSupport;
 import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
-import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.event.LocalRequestMappingGatherEvent;
 import cn.herodotus.eurynome.security.event.remote.RemoteRequestMappingGatherEvent;
 import com.alibaba.fastjson.JSON;

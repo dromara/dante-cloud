@@ -22,7 +22,6 @@
 
 package cn.herodotus.eurynome.gateway;
 
-import cn.herodotus.eurynome.cache.annotation.EnableHerodotusCache;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -33,7 +32,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author : gengwei.zheng
  * @date : 2020/6/9 14:41
  */
-@EnableHerodotusCache
 @EnableDiscoveryClient
 @SpringBootApplication
 public class GatewayApplication {

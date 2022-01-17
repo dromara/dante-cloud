@@ -22,14 +22,13 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
-import cn.herodotus.eurynome.web.properties.PlatformProperties;
-import cn.herodotus.eurynome.web.properties.RestProperties;
-import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
-import cn.herodotus.eurynome.security.authentication.RequestMappingScanner;
+import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
+import cn.herodotus.eurynome.security.authentication.HerodotusRequestMappingScanManager;
 import cn.herodotus.eurynome.security.authentication.HerodotusUserAuthenticationConverter;
+import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
-import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
 import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,17 +120,11 @@ public class SecurityAutoConfiguration {
         return requestMappingGatherService;
     }
 
-    /**
-     * 自定义注解扫描器
-     * <p>
-     * 服务权限验证逻辑
-     * 2、根据配置扫描服务注解，并存入服务本地Security Metadata存储
-     */
     @Bean
-    @ConditionalOnMissingBean(RequestMappingScanner.class)
-    public RequestMappingScanner requestMappingScanner(RestProperties restProperties, PlatformProperties platformProperties, RequestMappingGatherService requestMappingGatherService) {
-        RequestMappingScanner requestMappingScanner = new RequestMappingScanner(restProperties, platformProperties, requestMappingGatherService);
-        log.trace("[Herodotus] |- Bean [Request Mapping Scanner] Auto Configure.");
-        return requestMappingScanner;
+    @ConditionalOnMissingBean
+    public RequestMappingScanManager requestMappingScanManager(RequestMappingGatherService requestMappingGatherService) {
+        HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager(requestMappingGatherService);
+        log.trace("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
+        return herodotusRequestMappingScanManager;
     }
 }

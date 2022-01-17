@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.listener;
 
-import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
+import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.security.event.remote.RemoteRequestMappingGatherEvent;
 import cn.herodotus.eurynome.upms.logic.processor.RequestMappingStoreProcessor;
 import com.alibaba.fastjson.JSON;

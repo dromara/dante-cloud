@@ -10,3 +10,6 @@ herodotus:
       user-info-uri: ${herodotus.platform.endpoint.uaa-service-uri}/identity/profile
     swagger:
       enabled: ${herodotus.switch.swagger.enabled}
+    rest:
+      scan:
+        enabled: ${herodotus.switch.rest.scan.enabled}

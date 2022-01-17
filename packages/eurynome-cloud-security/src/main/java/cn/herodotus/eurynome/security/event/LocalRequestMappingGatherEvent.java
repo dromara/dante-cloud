@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.event;
 
-import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
+import cn.herodotus.engine.web.core.domain.RequestMapping;
 import org.springframework.context.ApplicationEvent;
 
 import java.util.List;

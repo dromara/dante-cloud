@@ -29,11 +29,11 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.6.2.80</version>
+        <version>2.7.0.0</version>
     </parent>
 
     <artifactId>eurynome-cloud-rest</artifactId>
-    <version>2.6.2.80</version>
+    <version>2.7.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -43,13 +43,18 @@
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-data</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>cache-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>web-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-web</artifactId>
+            <artifactId>eurynome-cloud-data</artifactId>
         </dependency>
 
     </dependencies>
