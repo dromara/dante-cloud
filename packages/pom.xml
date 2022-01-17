@@ -49,7 +49,6 @@
         <module>eurynome-cloud-websocket</module>
         <module>eurynome-cloud-cache</module>
         <module>eurynome-cloud-message</module>
-        <module>eurynome-cloud-web</module>
         <module>eurynome-cloud-captcha</module>
         <module>eurynome-cloud-pay</module>
     </modules>

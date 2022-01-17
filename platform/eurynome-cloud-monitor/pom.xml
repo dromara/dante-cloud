@@ -38,8 +38,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-web</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>web-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

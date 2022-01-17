@@ -227,11 +227,6 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-web</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
