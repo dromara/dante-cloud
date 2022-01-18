@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
-import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
+import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationFailureHandler;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationProvider;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginDecryptParameterAuthenticationFilter;

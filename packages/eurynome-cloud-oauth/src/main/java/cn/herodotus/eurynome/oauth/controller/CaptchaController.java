@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.oauth.controller;
 
+import cn.herodotus.engine.captcha.core.dto.Captcha;
+import cn.herodotus.engine.captcha.core.dto.Verification;
+import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.eurynome.assistant.domain.Result;
-import cn.herodotus.eurynome.captcha.dto.Captcha;
-import cn.herodotus.eurynome.captcha.dto.Verification;
-import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
 import cn.herodotus.eurynome.rest.annotation.AccessLimited;
 import cn.herodotus.eurynome.rest.annotation.Crypto;
 import cn.herodotus.eurynome.rest.annotation.Idempotent;

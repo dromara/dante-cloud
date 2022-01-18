@@ -39,8 +39,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-captcha</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>captcha-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

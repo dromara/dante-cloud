@@ -22,11 +22,11 @@
 
 package cn.herodotus.eurynome.oauth.authentication;
 
-import cn.herodotus.eurynome.captcha.dto.Verification;
-import cn.herodotus.eurynome.captcha.exception.CaptchaHasExpiredException;
-import cn.herodotus.eurynome.captcha.exception.CaptchaMismatchException;
-import cn.herodotus.eurynome.captcha.exception.CaptchaParameterIllegalException;
-import cn.herodotus.eurynome.captcha.renderer.CaptchaRendererFactory;
+import cn.herodotus.engine.captcha.core.dto.Verification;
+import cn.herodotus.engine.captcha.core.exception.CaptchaHasExpiredException;
+import cn.herodotus.engine.captcha.core.exception.CaptchaMismatchException;
+import cn.herodotus.engine.captcha.core.exception.CaptchaParameterIllegalException;
+import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.eurynome.oauth.exception.OauthCaptchaArgumentIllegalException;
 import cn.herodotus.eurynome.oauth.exception.OauthCaptchaHasExpiredException;
 import cn.herodotus.eurynome.oauth.exception.OauthCaptchaIsEmptyException;
