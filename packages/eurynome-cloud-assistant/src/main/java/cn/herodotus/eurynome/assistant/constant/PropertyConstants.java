@@ -80,7 +80,6 @@ public class PropertyConstants {
      */
     public static final String PROPERTY_INTEGRATION_AUDIT = PROPERTY_HERODOTUS_INTEGRATION + ".audit";
     public static final String PROPERTY_INTEGRATION_OSS = PROPERTY_HERODOTUS_INTEGRATION + ".oss";
-    public static final String PROPERTY_INTEGRATION_INFLUXDB = PROPERTY_HERODOTUS_INTEGRATION + ".influxdb";
     public static final String PROPERTY_INTEGRATION_MAVEN = PROPERTY_HERODOTUS_INTEGRATION + ".maven";
     public static final String PROPERTY_INTEGRATION_PAY = PROPERTY_HERODOTUS_INTEGRATION + ".pay";
     /**
@@ -130,11 +129,6 @@ public class PropertyConstants {
     public static final String ITEM_ALIPAY_STORAGE = PROPERTY_PAY_ALIPAY + ".storage";
     public static final String ITEM_ALIPAY_ENABLED = PROPERTY_PAY_ALIPAY + PROPERTY_ENABLED;
     public static final String ITEM_WXPAY_ENABLED = PROPERTY_PAY_WXIPAY + PROPERTY_ENABLED;
-
-    public static final String ITEM_INFLUXDB_URL = PROPERTY_INTEGRATION_INFLUXDB + ".url";
-    public static final String ITEM_INFLUXDB_DATABASE = PROPERTY_INTEGRATION_INFLUXDB + ".database";
-    public static final String ITEM_INFLUXDB_USERNAME = PROPERTY_INTEGRATION_INFLUXDB + ".username";
-    public static final String ITEM_INFLUXDB_PASSWORD = PROPERTY_INTEGRATION_INFLUXDB + ".password";
 
 
 
