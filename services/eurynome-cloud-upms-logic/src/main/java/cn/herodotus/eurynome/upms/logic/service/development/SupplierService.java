@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.upms.logic.service.development;
 
-import cn.herodotus.eurynome.data.base.service.BaseLayeredService;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.engine.data.core.service.BaseLayeredService;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.logic.entity.development.Supplier;
 import cn.herodotus.eurynome.upms.logic.repository.development.SupplierRepository;
 import org.slf4j.Logger;

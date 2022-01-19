@@ -163,6 +163,7 @@
                 <artifactId>assistant-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>cache-core</artifactId>
@@ -193,6 +194,7 @@
                 <artifactId>cache-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>captcha-core</artifactId>
@@ -218,6 +220,33 @@
                 <artifactId>captcha-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>data-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>data-sdk-jpa</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>data-sdk-p6spy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>data-sdk-mybatis-plus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>data-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>oss-core</artifactId>
@@ -233,6 +262,7 @@
                 <artifactId>oss-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>pay-core</artifactId>
@@ -253,6 +283,7 @@
                 <artifactId>pay-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>temporal-core</artifactId>
@@ -268,6 +299,7 @@
                 <artifactId>temporal-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>web-core</artifactId>
@@ -288,6 +320,7 @@
                 <artifactId>web-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>websocket-core</artifactId>

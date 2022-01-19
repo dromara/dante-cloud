@@ -20,7 +20,7 @@
  * Date: 2021/09/25 10:33:25
  */
 
-package cn.herodotus.eurynome.data.base.service;
+package cn.herodotus.engine.data.core.service;
 
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;

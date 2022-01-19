@@ -53,8 +53,8 @@
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-data</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>data-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>

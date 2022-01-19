@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.repository.system;
 
 import cn.herodotus.eurynome.assistant.enums.AuthorityType;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
 import org.springframework.data.jpa.repository.QueryHints;
 

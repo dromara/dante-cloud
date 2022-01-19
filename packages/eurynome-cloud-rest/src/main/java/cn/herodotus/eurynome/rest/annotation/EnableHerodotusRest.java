@@ -22,7 +22,6 @@
 
 package cn.herodotus.eurynome.rest.annotation;
 
-import cn.herodotus.eurynome.data.annotation.EnableHerodotusData;
 import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
 import org.springframework.context.annotation.Import;
 
@@ -43,7 +42,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableHerodotusData
 @Import({RestConfiguration.class})
 public @interface EnableHerodotusRest {
 }

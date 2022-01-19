@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.entity.hr;
 
 import cn.herodotus.eurynome.assistant.enums.OrganizationCategory;
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -96,11 +96,6 @@ public class SysOrganization extends BaseSysEntity {
     @Column(name = "category")
     @Enumerated(EnumType.ORDINAL)
     private OrganizationCategory category = OrganizationCategory.ENTERPRISE;
-
-    @Override
-    public String getId() {
-        return getOrganizationId();
-    }
 
     public String getOrganizationId() {
         return organizationId;

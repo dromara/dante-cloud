@@ -25,7 +25,7 @@ package cn.herodotus.eurynome.upms.logic.entity.hr;
 import cn.herodotus.eurynome.assistant.enums.AccountType;
 import cn.herodotus.eurynome.assistant.enums.Gender;
 import cn.herodotus.eurynome.assistant.enums.Identity;
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.security.definition.core.SocialUserDetails;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.logic.deserializer.SysUserEmptyToNull;
@@ -156,11 +156,6 @@ public class SysEmployee extends BaseSysEntity implements SocialUserDetails {
 
     public void setUser(SysUser user) {
         this.user = user;
-    }
-
-    @Override
-    public String getId() {
-        return getEmployeeId();
     }
 
     public String getEmployeeId() {

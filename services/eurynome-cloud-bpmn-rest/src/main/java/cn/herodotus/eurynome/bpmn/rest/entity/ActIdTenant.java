@@ -61,7 +61,6 @@ public class ActIdTenant extends BaseEntity {
     @Column(name = "name_")
     private String name;
 
-    @Override
     public String getId() {
         return id;
     }

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.definition.core;
 
-import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
+import cn.herodotus.engine.assistant.core.domain.dto.BaseDto;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,7 +41,7 @@ import java.util.*;
 
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HerodotusClientDetails extends BaseDTO implements ClientDetails {
+public class HerodotusClientDetails extends BaseDto implements ClientDetails {
 
     @JsonProperty("client_id")
     private String clientId;

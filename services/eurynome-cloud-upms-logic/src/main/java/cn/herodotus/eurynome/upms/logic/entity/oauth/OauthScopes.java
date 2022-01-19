@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.entity.oauth;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
 import com.google.common.base.MoreObjects;
@@ -118,11 +118,6 @@ public class OauthScopes extends BaseSysEntity implements GrantedAuthority {
 
     public void setAuthorities(Set<SysAuthority> authorities) {
         this.authorities = authorities;
-    }
-
-    @Override
-    public String getId() {
-        return this.getScopeId();
     }
 
     @Override

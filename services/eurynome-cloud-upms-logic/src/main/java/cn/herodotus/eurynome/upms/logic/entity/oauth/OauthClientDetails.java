@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.upms.logic.entity.oauth;
 
+import cn.herodotus.engine.assistant.core.domain.entity.AbstractEntity;
 import cn.herodotus.eurynome.assistant.enums.StatusEnum;
-import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import com.alibaba.fastjson.JSON;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -173,11 +173,6 @@ public class OauthClientDetails extends AbstractEntity {
 
     public void setAutoApprove(String autoApprove) {
         this.autoApprove = autoApprove;
-    }
-
-    @Override
-    public String getId() {
-        return this.getClientId();
     }
 
     @Override

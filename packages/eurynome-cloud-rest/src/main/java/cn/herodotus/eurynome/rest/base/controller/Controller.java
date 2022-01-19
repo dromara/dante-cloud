@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.base.controller;
 
-import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.engine.assistant.core.domain.entity.AbstractEntity;
 import cn.herodotus.eurynome.assistant.domain.Result;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;

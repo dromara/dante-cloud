@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.eurynome.assistant.domain.Result;
 import cn.herodotus.eurynome.rest.base.controller.BaseController;
-import cn.herodotus.eurynome.data.base.service.WriteableService;
+import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.upms.logic.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.logic.helper.UpmsHelper;

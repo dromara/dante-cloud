@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.oauth.service;
 
-import cn.herodotus.eurynome.rest.exception.SessionInvalidException;
-import cn.herodotus.eurynome.data.domain.SecretKey;
 import cn.herodotus.eurynome.rest.crypto.InterfaceCryptoProcessor;
+import cn.herodotus.eurynome.rest.domain.SecretKey;
+import cn.herodotus.eurynome.rest.exception.SessionInvalidException;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
 import org.apache.commons.lang3.ObjectUtils;

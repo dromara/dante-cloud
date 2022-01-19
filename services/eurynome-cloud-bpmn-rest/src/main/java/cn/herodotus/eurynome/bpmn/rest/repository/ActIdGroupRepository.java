@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.bpmn.rest.repository;
 
 import cn.herodotus.eurynome.bpmn.rest.entity.ActIdGroup;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
 
 /**
  * <p>Description: 工作流组Repository </p>

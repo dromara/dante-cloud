@@ -20,7 +20,7 @@
  * Date: 2021/10/08 19:08:08
  */
 
-package cn.herodotus.eurynome.data.domain;
+package cn.herodotus.eurynome.rest.domain;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

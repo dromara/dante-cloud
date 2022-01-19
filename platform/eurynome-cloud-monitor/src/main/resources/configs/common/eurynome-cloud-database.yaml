@@ -13,7 +13,7 @@ spring:
       #update 如果启动时表格式不一致则更新表，原有数据保留
       #validate 项目启动表结构进行校验 如果不一致则报错
       naming:
-        physical-strategy: cn.herodotus.eurynome.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       javax:
         persistence:
@@ -28,7 +28,7 @@ spring:
           use_query_cache: true
           use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
           region:
-            factory_class: cn.herodotus.eurynome.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
+            factory_class: cn.herodotus.engine.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
         javax:
           cache:
             missing_cache_strategy: create

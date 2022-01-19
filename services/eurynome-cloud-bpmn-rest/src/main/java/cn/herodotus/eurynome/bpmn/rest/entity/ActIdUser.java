@@ -101,7 +101,6 @@ public class ActIdUser extends BaseEntity {
     @Column(name = "picture_id_")
     private String pictureId;
 
-    @Override
     public String getId() {
         return id;
     }

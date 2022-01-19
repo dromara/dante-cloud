@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.entity.system;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -82,11 +82,6 @@ public class SysRole extends BaseSysEntity {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"role_id", "authority_id"})},
             indexes = {@Index(name = "sys_role_authority_rid_idx", columnList = "role_id"), @Index(name = "sys_role_authority_aid_idx", columnList = "authority_id")})
     private Set<SysAuthority> authorities = new HashSet<>();
-
-    @Override
-    public String getId() {
-        return getRoleId();
-    }
 
     public String getRoleId() {
         return roleId;

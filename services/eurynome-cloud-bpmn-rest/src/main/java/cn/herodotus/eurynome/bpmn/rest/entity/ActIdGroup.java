@@ -71,7 +71,6 @@ public class ActIdGroup extends BaseEntity {
     @Column(name = "type_")
     private String type;
 
-    @Override
     public String getId() {
         return id;
     }

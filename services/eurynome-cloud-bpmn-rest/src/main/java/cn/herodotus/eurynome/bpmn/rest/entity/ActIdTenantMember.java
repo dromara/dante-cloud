@@ -73,7 +73,6 @@ public class ActIdTenantMember extends BaseEntity {
     @Column(name = "user_id_", length = 64)
     private String userId;
 
-    @Override
     public String getId() {
         return id;
     }

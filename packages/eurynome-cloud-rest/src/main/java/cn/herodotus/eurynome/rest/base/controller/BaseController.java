@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.rest.base.controller;
 
-import cn.herodotus.eurynome.assistant.definition.entity.AbstractEntity;
+import cn.herodotus.engine.assistant.core.domain.entity.AbstractEntity;
+import cn.herodotus.engine.data.core.service.ReadableService;
 import cn.herodotus.eurynome.assistant.domain.Result;
-import cn.herodotus.eurynome.data.base.service.ReadableService;
 
 import java.io.Serializable;
 

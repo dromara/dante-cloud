@@ -30,7 +30,7 @@
  */
 package cn.herodotus.eurynome.upms.logic.entity.system;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.deserializer.SysEmployeeEmptyToNull;
@@ -135,11 +135,6 @@ public class SysUser extends BaseSysEntity {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "employee_id"})},
             indexes = {@Index(name = "sys_user_employee_sid_idx", columnList = "user_id"), @Index(name = "sys_user_employee_eid_idx", columnList = "employee_id")})
     private SysEmployee employee;
-
-    @Override
-    public String getId() {
-        return getUserId();
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;

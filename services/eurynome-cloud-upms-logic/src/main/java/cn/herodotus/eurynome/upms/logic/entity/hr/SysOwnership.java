@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.entity.hr;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -97,11 +97,6 @@ public class SysOwnership extends BaseSysEntity {
 
     public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
-    }
-
-    @Override
-    public String getId() {
-        return this.ownershipId;
     }
 
     @Override

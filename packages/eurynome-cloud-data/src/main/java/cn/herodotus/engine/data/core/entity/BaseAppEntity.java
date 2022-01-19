@@ -20,7 +20,7 @@
  * Date: 2021/05/07 11:28:07
  */
 
-package cn.herodotus.eurynome.data.base.entity;
+package cn.herodotus.engine.data.core.entity;
 
 import cn.herodotus.eurynome.assistant.enums.ApplicationType;
 import cn.hutool.core.util.IdUtil;

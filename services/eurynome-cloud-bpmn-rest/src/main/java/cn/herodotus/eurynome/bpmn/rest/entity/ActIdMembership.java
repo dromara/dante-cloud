@@ -83,7 +83,6 @@ public class ActIdMembership extends BaseEntity {
         this.groupId = groupId;
     }
 
-    @Override
     public String getId() {
         return this.getUserId() + this.getGroupId();
     }

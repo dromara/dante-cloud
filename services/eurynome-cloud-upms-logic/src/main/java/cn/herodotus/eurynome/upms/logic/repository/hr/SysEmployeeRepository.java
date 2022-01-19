@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.repository.hr;
 
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysEmployee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

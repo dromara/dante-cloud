@@ -20,10 +20,10 @@
  * Date: 2021/09/23 15:08:23
  */
 
-package cn.herodotus.eurynome.data.base.service;
+package cn.herodotus.engine.data.core.service;
 
+import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.eurynome.assistant.definition.entity.Entity;
-import cn.herodotus.eurynome.data.base.repository.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

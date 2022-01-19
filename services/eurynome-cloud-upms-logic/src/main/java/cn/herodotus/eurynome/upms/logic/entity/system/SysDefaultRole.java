@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.entity.system;
 
 import cn.herodotus.eurynome.assistant.enums.AccountType;
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -87,11 +87,6 @@ public class SysDefaultRole extends BaseSysEntity {
 
     public void setRole(SysRole role) {
         this.role = role;
-    }
-
-    @Override
-    public String getId() {
-        return this.getDefaultId();
     }
 
     @Override

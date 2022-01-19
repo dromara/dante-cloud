@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.entity.development;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.logic.constants.enums.SupplierType;
 import com.google.common.base.MoreObjects;
@@ -101,11 +101,6 @@ public class Supplier extends BaseSysEntity {
 
     public void setParentId(String parentId) {
         this.parentId = parentId;
-    }
-
-    @Override
-    public String getId() {
-        return this.getSupplierId();
     }
 
     @Override

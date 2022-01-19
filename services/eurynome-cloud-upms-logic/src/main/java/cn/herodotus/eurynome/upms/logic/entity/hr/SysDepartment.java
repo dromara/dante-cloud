@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.entity.hr;
 
-import cn.herodotus.eurynome.data.base.entity.BaseSysEntity;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -98,11 +98,6 @@ public class SysDepartment extends BaseSysEntity {
     @Schema(title = "所属单位ID")
     @Column(name = "organization_id", length = 64)
     private String organizationId;
-
-    @Override
-    public String getId() {
-        return getDepartmentId();
-    }
 
     public String getDepartmentId() {
         return departmentId;

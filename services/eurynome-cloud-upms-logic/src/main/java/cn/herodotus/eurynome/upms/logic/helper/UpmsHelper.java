@@ -23,9 +23,9 @@
 package cn.herodotus.eurynome.upms.logic.helper;
 
 
+import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
-import cn.herodotus.eurynome.assistant.enums.StatusEnum;
 import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.utils.SecurityUtils;
@@ -100,9 +100,9 @@ public class UpmsHelper {
         herodotusUserDetails.setUsername(sysUser.getUserName());
         herodotusUserDetails.setPassword(sysUser.getPassword());
         herodotusUserDetails.setNickName(sysUser.getNickName());
-        herodotusUserDetails.setAccountNonExpired(sysUser.getStatus() != StatusEnum.EXPIRED);
-        herodotusUserDetails.setAccountNonLocked(sysUser.getStatus() != StatusEnum.LOCKING);
-        herodotusUserDetails.setEnabled(sysUser.getStatus() == StatusEnum.ENABLE);
+        herodotusUserDetails.setAccountNonExpired(sysUser.getStatus() != DataItemStatus.EXPIRED);
+        herodotusUserDetails.setAccountNonLocked(sysUser.getStatus() != DataItemStatus.LOCKING);
+        herodotusUserDetails.setEnabled(sysUser.getStatus() == DataItemStatus.ENABLE);
 
         Collection<SimpleGrantedAuthority> authorities = new LinkedHashSet<>();
 
