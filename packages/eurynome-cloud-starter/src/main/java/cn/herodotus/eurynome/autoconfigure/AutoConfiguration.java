@@ -23,7 +23,6 @@
 package cn.herodotus.eurynome.autoconfigure;
 
 import cn.herodotus.eurynome.kernel.annotation.EnableHerodotusKernel;
-import cn.herodotus.eurynome.rest.annotation.EnableHerodotusRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +33,6 @@ import javax.annotation.PostConstruct;
  * @author gengwei.zheng
  */
 @Configuration
-@EnableHerodotusRest
 @EnableHerodotusKernel
 public class AutoConfiguration {
 

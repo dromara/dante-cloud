@@ -20,7 +20,7 @@
  * Date: 2021/09/12 01:56:12
  */
 
-package cn.herodotus.eurynome.rest.base.business;
+package cn.herodotus.engine.rest.core.dto;
 
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;

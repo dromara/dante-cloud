@@ -15,33 +15,33 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-rest
- * File Name: EnableHerodotusRest.java
+ * File Name: Idempotent.java
  * Author: gengwei.zheng
- * Date: 2021/08/26 20:40:26
+ * Date: 2021/10/19 21:35:19
  */
 
-package cn.herodotus.eurynome.rest.annotation;
-
-import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
-import org.springframework.context.annotation.Import;
+package cn.herodotus.engine.rest.core.annotation;
 
 import java.lang.annotation.*;
 
 /**
- * <p>Description: 开启Herodotus REST核心注解 </p>
- * <p>
- * 目前主要功能：
- * 1.开启ApplicationProperties， RestProperties， SwaggerProperties
- * 2.启用RestTemplate配置
- * 3.启用Swagger配置
- * 4.解决Undertow启动警告问题
+ * <p>Description: 幂等标识注解 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/2 11:01
+ * @date : 2021/8/26 18:39
  */
-@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD})
 @Documented
-@Import({RestConfiguration.class})
-public @interface EnableHerodotusRest {
+public @interface Idempotent {
+
+    /**
+     * 过期时间，即幂等签章有效时间。使用Duration格式配置。。
+     * <p>
+     * 默认为：空，即不设置该属性。那么就使用StampProperies中的配置进行设置。
+     * 如果设置了该值，就以该值进行设置。
+     *
+     * @return {@link Long}
+     */
+    String expire() default "";
 }

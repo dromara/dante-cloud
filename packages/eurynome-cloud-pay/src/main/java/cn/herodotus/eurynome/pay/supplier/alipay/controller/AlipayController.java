@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.pay.supplier.alipay.controller;
 
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.eurynome.pay.supplier.alipay.definition.AlipayPaymentTemplate;
 import cn.herodotus.eurynome.pay.supplier.alipay.domain.PagePayDetails;
 import com.alipay.api.domain.AlipayTradePagePayModel;

@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.rest.stamp;
 
 import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.cache.definition.AbstractStampManager;
-import cn.herodotus.eurynome.rest.domain.SecretKey;
+import cn.herodotus.engine.rest.crypto.domain.SecretKey;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.RSA;

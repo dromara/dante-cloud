@@ -43,8 +43,8 @@
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-rest</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>rest-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>

@@ -20,9 +20,10 @@
  * Date: 2021/10/17 22:53:17
  */
 
-package cn.herodotus.eurynome.assistant.domain;
+package cn.herodotus.engine.assistant.core.domain;
 
 
+import cn.herodotus.eurynome.assistant.domain.Error;
 import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.common.base.MoreObjects;

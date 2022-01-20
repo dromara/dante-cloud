@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
-import cn.herodotus.eurynome.rest.crypto.DecryptRequestParamMapResolver;
-import cn.herodotus.eurynome.rest.crypto.DecryptRequestParamResolver;
-import cn.herodotus.eurynome.rest.security.AccessLimitedInterceptor;
-import cn.herodotus.eurynome.rest.security.IdempotentInterceptor;
+import cn.herodotus.engine.rest.crypto.enhance.DecryptRequestParamMapResolver;
+import cn.herodotus.engine.rest.crypto.enhance.DecryptRequestParamResolver;
+import cn.herodotus.engine.rest.secure.interceptor.AccessLimitedInterceptor;
+import cn.herodotus.engine.rest.secure.interceptor.IdempotentInterceptor;
 import cn.herodotus.eurynome.security.configuration.WebMvcSecurityConfiguration;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;

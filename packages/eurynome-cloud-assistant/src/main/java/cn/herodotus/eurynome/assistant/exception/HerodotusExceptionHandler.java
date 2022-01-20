@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.assistant.exception;
 
 import cn.herodotus.eurynome.assistant.enums.ResultStatus;
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;

@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
-import cn.herodotus.eurynome.rest.annotation.Crypto;
-import cn.herodotus.eurynome.assistant.domain.Result;
-import cn.herodotus.eurynome.rest.base.controller.BaseWriteableRestController;
+import cn.herodotus.engine.rest.core.annotation.Crypto;
+import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.service.system.SysUserService;

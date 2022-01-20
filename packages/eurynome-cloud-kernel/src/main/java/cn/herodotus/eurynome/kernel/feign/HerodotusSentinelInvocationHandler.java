@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.kernel.feign;
 
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import com.alibaba.cloud.sentinel.feign.SentinelContractHolder;
 import com.alibaba.cloud.sentinel.feign.SentinelInvocationHandler;
 import com.alibaba.csp.sentinel.Entry;

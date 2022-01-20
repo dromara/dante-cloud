@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.configuration;
 
-import cn.herodotus.eurynome.rest.security.XssHttpServletFilter;
+import cn.herodotus.engine.rest.secure.interceptor.XssHttpServletFilter;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;

@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.gateway.exception;
 
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
 import org.slf4j.Logger;

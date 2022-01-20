@@ -20,11 +20,11 @@
  * Date: 2021/09/25 10:33:25
  */
 
-package cn.herodotus.eurynome.rest.base.controller;
+package cn.herodotus.engine.rest.core.controller;
 
 import cn.herodotus.engine.assistant.core.domain.entity.AbstractEntity;
 import cn.herodotus.engine.data.core.service.ReadableService;
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import org.springframework.data.domain.Page;
 
 import java.io.Serializable;

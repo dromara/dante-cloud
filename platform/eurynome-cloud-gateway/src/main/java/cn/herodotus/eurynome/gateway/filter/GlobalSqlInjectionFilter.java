@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.gateway.filter;
 
 import cn.herodotus.eurynome.assistant.enums.ResultStatus;
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.eurynome.assistant.utils.SQLInjectionUtils;
 import cn.herodotus.eurynome.gateway.utils.WebFluxUtils;
 import io.netty.buffer.ByteBufAllocator;

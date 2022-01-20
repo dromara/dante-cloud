@@ -20,13 +20,13 @@
  * Date: 2021/09/25 10:31:25
  */
 
-package cn.herodotus.eurynome.rest.base.controller;
+package cn.herodotus.engine.rest.core.controller;
 
 import cn.herodotus.engine.assistant.core.domain.entity.AbstractEntity;
+import cn.herodotus.engine.rest.core.annotation.AccessLimited;
 import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
-import cn.herodotus.eurynome.assistant.domain.Result;
-import cn.herodotus.eurynome.rest.annotation.AccessLimited;
-import cn.herodotus.eurynome.rest.base.business.Pager;
+import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.rest.core.dto.Pager;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;

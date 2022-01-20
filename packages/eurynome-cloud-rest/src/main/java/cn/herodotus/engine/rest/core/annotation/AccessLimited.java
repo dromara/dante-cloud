@@ -15,17 +15,18 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-rest
- * File Name: Idempotent.java
+ * File Name: AccessLimited.java
  * Author: gengwei.zheng
  * Date: 2021/10/19 21:35:19
  */
 
-package cn.herodotus.eurynome.rest.annotation;
+package cn.herodotus.engine.rest.core.annotation;
 
 import java.lang.annotation.*;
+import java.time.Duration;
 
 /**
- * <p>Description: 幂等标识注解 </p>
+ * <p>Description: 接口防刷注解 </p>
  *
  * @author : gengwei.zheng
  * @date : 2021/8/26 18:39
@@ -33,15 +34,22 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 @Documented
-public @interface Idempotent {
+public @interface AccessLimited {
 
     /**
-     * 过期时间，即幂等签章有效时间。使用Duration格式配置。。
-     * <p>
-     * 默认为：空，即不设置该属性。那么就使用StampProperies中的配置进行设置。
-     * 如果设置了该值，就以该值进行设置。
+     * 单位时间内同一个接口可以访问的次数
      *
-     * @return {@link Long}
+     * @return int
      */
-    String expire() default "";
+    int maxTimes() default 5;
+
+    /**
+     * 持续时间，即在多长时间内，限制访问多少次。具体单位根据TimeUnit的设置而定。
+     * <p>
+     * 使用Duration格式{@link Duration}
+     * <p>
+     * 默认为：0，即不设置该属性。那么就使用StampProperies中的配置进行设置。
+     * 如果设置了该值，就以该值进行设置。
+     */
+    String duration() default "";
 }

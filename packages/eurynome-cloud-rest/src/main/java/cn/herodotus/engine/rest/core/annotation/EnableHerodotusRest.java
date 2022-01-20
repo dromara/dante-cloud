@@ -15,40 +15,33 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-rest
- * File Name: Crypto.java
+ * File Name: EnableHerodotusRest.java
  * Author: gengwei.zheng
- * Date: 2021/10/19 21:35:19
+ * Date: 2021/08/26 20:40:26
  */
 
-package cn.herodotus.eurynome.rest.annotation;
+package cn.herodotus.engine.rest.core.annotation;
 
-import org.springframework.web.bind.annotation.Mapping;
+import cn.herodotus.eurynome.rest.configuration.RestConfiguration;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p>Description: 加密解密标记注解 </p>
+ * <p>Description: 开启Herodotus REST核心注解 </p>
+ * <p>
+ * 目前主要功能：
+ * 1.开启ApplicationProperties， RestProperties， SwaggerProperties
+ * 2.启用RestTemplate配置
+ * 3.启用Swagger配置
+ * 4.解决Undertow启动警告问题
  *
  * @author : gengwei.zheng
- * @date : 2021/10/8 19:12
+ * @date : 2020/3/2 11:01
  */
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Mapping
-public @interface Crypto {
-
-    /**
-     * 请求参数记否解密，默认值 true
-     *
-     * @return true 请求参数解密；false 请求参数不解密
-     */
-    boolean requestDecrypt() default true;
-
-    /**
-     * 响应体是否加密，默认值 true
-     *
-     * @return true 响应体加密；false 响应体不加密
-     */
-    boolean responseEncrypt() default true;
+@Import({RestConfiguration.class})
+public @interface EnableHerodotusRest {
 }

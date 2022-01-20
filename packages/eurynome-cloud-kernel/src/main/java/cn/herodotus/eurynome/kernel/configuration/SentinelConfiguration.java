@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.kernel.configuration;
 
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.eurynome.kernel.feign.HerodotusFeignSentinel;
 import com.alibaba.cloud.sentinel.SentinelProperties;
 import com.alibaba.cloud.sentinel.feign.SentinelFeignAutoConfiguration;

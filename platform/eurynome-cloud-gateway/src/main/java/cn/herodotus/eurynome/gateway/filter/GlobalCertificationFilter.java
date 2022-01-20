@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.gateway.filter;
 
 import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import cn.herodotus.eurynome.gateway.properties.GatewaySecurityProperties;
 import cn.herodotus.eurynome.gateway.utils.WebFluxUtils;

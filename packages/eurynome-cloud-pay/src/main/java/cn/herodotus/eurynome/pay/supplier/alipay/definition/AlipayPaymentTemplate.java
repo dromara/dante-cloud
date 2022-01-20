@@ -25,7 +25,6 @@ package cn.herodotus.eurynome.pay.supplier.alipay.definition;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import cn.herodotus.eurynome.assistant.enums.Architecture;
 import cn.herodotus.eurynome.assistant.resolver.PropertyResolver;
-import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.message.event.RemotePaymentNotifyEvent;
 import cn.herodotus.eurynome.message.event.RemotePaymentReturnEvent;
 import cn.herodotus.eurynome.message.support.DestinationSupport;
@@ -63,7 +62,13 @@ public class AlipayPaymentTemplate implements ApplicationListener<ApplicationRea
 
     private static final Logger log = LoggerFactory.getLogger(AlipayPaymentTemplate.class);
 
-    @CreateCache(name = CacheConstants.CACHE_NAME_TOKEN_PAY, cacheType = CacheType.BOTH)
+    public static final String CACHE_PREFIX = "cache:";
+
+    public static final String CACHE_SIMPLE_BASE_PREFIX = CACHE_PREFIX + "simple:";
+    public static final String CACHE_TOKEN_BASE_PREFIX = CACHE_PREFIX + "token:";
+    public static final String CACHE_NAME_TOKEN_PAY = CACHE_TOKEN_BASE_PREFIX + "pay:";
+
+    @CreateCache(name = CACHE_NAME_TOKEN_PAY, cacheType = CacheType.BOTH)
     private Cache<String, String> cache;
 
     private final AlipayProfileStorage alipayProfileStorage;

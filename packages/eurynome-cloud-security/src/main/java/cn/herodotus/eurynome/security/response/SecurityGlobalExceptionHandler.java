@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.security.response;
 
 import cn.herodotus.eurynome.assistant.exception.HerodotusExceptionHandler;
 import cn.herodotus.eurynome.assistant.exception.platform.PlatformException;
-import cn.herodotus.eurynome.assistant.domain.Result;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

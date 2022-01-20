@@ -15,41 +15,40 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-rest
- * File Name: AccessLimited.java
+ * File Name: Crypto.java
  * Author: gengwei.zheng
  * Date: 2021/10/19 21:35:19
  */
 
-package cn.herodotus.eurynome.rest.annotation;
+package cn.herodotus.engine.rest.core.annotation;
+
+import org.springframework.web.bind.annotation.Mapping;
 
 import java.lang.annotation.*;
-import java.time.Duration;
 
 /**
- * <p>Description: 接口防刷注解 </p>
+ * <p>Description: 加密解密标记注解 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/26 18:39
+ * @date : 2021/10/8 19:12
  */
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
 @Documented
-public @interface AccessLimited {
+@Mapping
+public @interface Crypto {
 
     /**
-     * 单位时间内同一个接口可以访问的次数
+     * 请求参数记否解密，默认值 true
      *
-     * @return int
+     * @return true 请求参数解密；false 请求参数不解密
      */
-    int maxTimes() default 5;
+    boolean requestDecrypt() default true;
 
     /**
-     * 持续时间，即在多长时间内，限制访问多少次。具体单位根据TimeUnit的设置而定。
-     * <p>
-     * 使用Duration格式{@link Duration}
-     * <p>
-     * 默认为：0，即不设置该属性。那么就使用StampProperies中的配置进行设置。
-     * 如果设置了该值，就以该值进行设置。
+     * 响应体是否加密，默认值 true
+     *
+     * @return true 响应体加密；false 响应体不加密
      */
-    String duration() default "";
+    boolean responseEncrypt() default true;
 }

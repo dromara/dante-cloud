@@ -23,7 +23,6 @@
 package cn.herodotus.eurynome.upms.logic.constants;
 
 import cn.herodotus.eurynome.assistant.enums.*;
-import cn.herodotus.eurynome.cache.constant.CacheConstants;
 import cn.herodotus.eurynome.upms.logic.constants.enums.SupplierType;
 import cn.herodotus.eurynome.upms.logic.constants.enums.TechnologyType;
 
@@ -37,7 +36,7 @@ import java.util.Map;
  * @author : gengwei.zheng
  * @date : 2020/2/19 20:06
  */
-public class UpmsConstants extends CacheConstants {
+public class UpmsConstants {
 
     /**
      * 服务名称

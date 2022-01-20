@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.rest.security;
 
-import cn.herodotus.eurynome.rest.annotation.Idempotent;
+import cn.herodotus.engine.rest.core.annotation.Idempotent;
 import cn.herodotus.eurynome.assistant.exception.operation.RepeatSubmissionException;
 import cn.herodotus.eurynome.assistant.constant.HttpHeaders;
 import cn.herodotus.eurynome.assistant.constant.SymbolConstants;

@@ -286,6 +286,27 @@
 
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
+                <artifactId>rest-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>rest-sdk-crypto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>rest-sdk-secure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>rest-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
                 <artifactId>temporal-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
