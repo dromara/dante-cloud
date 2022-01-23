@@ -15,3 +15,7 @@ spring:
         max-idle: 10
         # 最小空闲连接数 默认0
         min-idle: 5
+    redisson:
+      enabled: ${herodotus.switch.redisson.enabled}
+      single-server-config:
+        address: redis://${spring.redis.password}@${spring.redis.host}:${spring.redis.port}

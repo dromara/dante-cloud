@@ -23,20 +23,17 @@
 package cn.herodotus.eurynome.security.autoconfigure;
 
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
+import cn.herodotus.engine.web.scan.configuration.ScanConfiguration;
 import cn.herodotus.eurynome.security.authentication.HerodotusRequestMappingScanManager;
 import cn.herodotus.eurynome.security.authentication.HerodotusUserAuthenticationConverter;
-import cn.herodotus.eurynome.security.authentication.RequestMappingLocalCache;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
-import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
-import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cloud.bus.jackson.RemoteApplicationEventScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -76,10 +73,6 @@ import javax.annotation.PostConstruct;
 @Import({
         MethodSecurityMetadataConfiguration.class
 })
-@ComponentScan(basePackageClasses = SecurityGlobalExceptionHandler.class)
-@RemoteApplicationEventScan({
-        "cn.herodotus.eurynome.security.event.remote"
-})
 public class SecurityAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityAutoConfiguration.class);
@@ -104,27 +97,10 @@ public class SecurityAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(RequestMappingLocalCache.class)
-    public RequestMappingLocalCache requestMappingLocalCache() {
-        RequestMappingLocalCache requestMappingLocalCache = new RequestMappingLocalCache();
-        log.trace("[Herodotus] |- Bean [Request Mapping Local Cache] Auto Configure.");
-        return requestMappingLocalCache;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(RequestMappingGatherService.class)
-    public RequestMappingGatherService requestMappingGatherService(RequestMappingLocalCache requestMappingLocalCache) {
-        RequestMappingGatherService requestMappingGatherService = new RequestMappingGatherService();
-        requestMappingGatherService.setRequestMappingLocalCache(requestMappingLocalCache);
-        log.trace("[Herodotus] |- Bean [Request Mapping Gather Service] Auto Configure.");
-        return requestMappingGatherService;
-    }
-
-    @Bean
     @ConditionalOnMissingBean
-    public RequestMappingScanManager requestMappingScanManager(RequestMappingGatherService requestMappingGatherService) {
-        HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager(requestMappingGatherService);
-        log.trace("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
+    public RequestMappingScanManager requestMappingScanManager() {
+        HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager();
+        log.debug("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
         return herodotusRequestMappingScanManager;
     }
 }

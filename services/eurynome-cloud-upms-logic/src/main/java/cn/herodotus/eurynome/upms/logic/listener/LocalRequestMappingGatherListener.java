@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.upms.logic.listener;
 
+import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
-import cn.herodotus.eurynome.security.event.LocalRequestMappingGatherEvent;
 import cn.herodotus.eurynome.upms.logic.processor.RequestMappingStoreProcessor;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;

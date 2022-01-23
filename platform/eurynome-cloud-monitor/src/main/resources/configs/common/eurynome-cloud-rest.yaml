@@ -57,3 +57,9 @@ ribbon:
     enabled: true
   nacos:
     enabled: false
+
+herodotus:
+  platform:
+    rest:
+      scan:
+        enabled: ${herodotus.switch.rest.scan.enabled}

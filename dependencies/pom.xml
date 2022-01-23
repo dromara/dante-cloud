@@ -29,7 +29,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.2</version>
+        <version>2.6.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -59,10 +59,11 @@
 
     <properties>
         <!--Spring 家族-->
-        <spring-boot-dependencies.version>2.6.2</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>2.6.3</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2021.0.0</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.6.1</spring-boot-admin.version>
+        <spring-boot-admin.version>2.6.2</spring-boot-admin.version>
+        <spring-security-oauth2.version>2.3.4.RELEASE</spring-security-oauth2.version>
 
         <!--Maven Plugin 相关组件-->
         <docker-maven-plugin.version>0.38.1</docker-maven-plugin.version>
@@ -88,12 +89,12 @@
         <!-- 阿里巴巴开源工具依赖 -->
         <fastjson.version>1.2.79</fastjson.version>
         <jetcache.version>2.6.2</jetcache.version>
-        <nacos.version>2.0.3</nacos.version>
+        <nacos.version>2.0.4</nacos.version>
         <sentinel.version>1.8.3</sentinel.version>
 
         <!-- 国内开源通用组件 -->
         <hutool.version>5.7.19</hutool.version>
-        <okhttps.version>3.4.1</okhttps.version>
+        <okhttps.version>3.4.2</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
         <weixin-java-sdk.version>4.2.4.B</weixin-java-sdk.version>
@@ -143,6 +144,7 @@
             </dependency>
 
             <!-- Herodotus Engine -->
+            <!-- assistant -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>assistant-core</artifactId>
@@ -164,6 +166,7 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- cache -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>cache-core</artifactId>
@@ -195,6 +198,7 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- captcha -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>captcha-core</artifactId>
@@ -221,6 +225,7 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- data -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>data-core</artifactId>
@@ -247,6 +252,41 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- event -->
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>event-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>event-sdk-pay</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>event-sdk-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>event-pay-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>event-security-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- message -->
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>message-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- oss -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>oss-core</artifactId>
@@ -263,6 +303,7 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- pay -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>pay-core</artifactId>
@@ -275,7 +316,12 @@
             </dependency>
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
-                <artifactId>pay-sdk-wechat</artifactId>
+                <artifactId>pay-sdk-wxpay</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>pay-sdk-all</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -284,6 +330,7 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- rest -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>rest-core</artifactId>
@@ -305,6 +352,19 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- security -->
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>security-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>security-sdk-accelerator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- temporal -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>temporal-core</artifactId>
@@ -321,6 +381,7 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- web -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>web-core</artifactId>
@@ -342,6 +403,7 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- websocket -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
                 <artifactId>websocket-core</artifactId>
@@ -703,6 +765,7 @@
                 <version>${velocity.version}</version>
             </dependency>
 
+            <!-- 依赖包特殊处理 -->
             <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on -->
             <dependency>
                 <groupId>org.bouncycastle</groupId>
@@ -713,6 +776,13 @@
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcpkix-jdk15on</artifactId>
                 <version>${bcpkix-jdk15on.version}</version>
+            </dependency>
+
+            <!-- 后期改版需要删除的依赖 -->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${spring-security-oauth2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

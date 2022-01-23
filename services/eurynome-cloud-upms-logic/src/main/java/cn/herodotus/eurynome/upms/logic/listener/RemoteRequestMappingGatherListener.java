@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.upms.logic.listener;
 
+import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
-import cn.herodotus.eurynome.security.event.remote.RemoteRequestMappingGatherEvent;
 import cn.herodotus.eurynome.upms.logic.processor.RequestMappingStoreProcessor;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections.CollectionUtils;

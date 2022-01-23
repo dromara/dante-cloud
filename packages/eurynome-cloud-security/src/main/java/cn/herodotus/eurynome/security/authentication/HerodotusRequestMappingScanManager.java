@@ -1,10 +1,13 @@
 package cn.herodotus.eurynome.security.authentication;
 
+import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
+import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
+import cn.herodotus.engine.message.core.processor.DestinationResolver;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.engine.web.core.support.ServiceContext;
-import cn.herodotus.eurynome.security.service.RequestMappingGatherService;
-import org.springframework.context.ApplicationContext;
+import cn.herodotus.eurynome.assistant.constant.ServiceConstants;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import java.lang.annotation.Annotation;
@@ -18,11 +21,6 @@ import java.util.List;
  */
 public class HerodotusRequestMappingScanManager implements RequestMappingScanManager {
 
-    private final RequestMappingGatherService requestMappingGatherService;
-
-    public HerodotusRequestMappingScanManager(RequestMappingGatherService requestMappingGatherService) {
-        this.requestMappingGatherService = requestMappingGatherService;
-    }
 
     @Override
     public Class<? extends Annotation> getScanAnnotationClass() {
@@ -35,7 +33,22 @@ public class HerodotusRequestMappingScanManager implements RequestMappingScanMan
     }
 
     @Override
-    public void postProcess(List<RequestMapping> requestMappings, ApplicationContext applicationContext, String serviceId, boolean isDistributedArchitecture) {
-        requestMappingGatherService.postProcess(requestMappings, applicationContext, serviceId, isDistributedArchitecture);
+    public String getDestinationServiceName() {
+        return ServiceConstants.SERVICE_NAME_UPMS;
+    }
+
+    @Override
+    public void postLocalStorage(List<RequestMapping> requestMappings) {
+
+    }
+
+    @Override
+    public ApplicationEvent createLocalGatherEvent(List<RequestMapping> requestMappings) {
+        return new LocalRequestMappingGatherEvent(requestMappings);
+    }
+
+    @Override
+    public ApplicationEvent createRemoteGatherEvent(String source, String originService, String destinationService) {
+        return new RemoteRequestMappingGatherEvent(source, originService, DestinationResolver.create(destinationService));
     }
 }

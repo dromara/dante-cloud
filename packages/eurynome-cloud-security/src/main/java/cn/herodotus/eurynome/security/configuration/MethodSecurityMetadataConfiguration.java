@@ -22,8 +22,12 @@
 
 package cn.herodotus.eurynome.security.configuration;
 
+import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
+import cn.herodotus.eurynome.security.authentication.HerodotusRequestMappingScanManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -36,7 +40,7 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
  * @author : gengwei.zheng
  * @date : 2021/7/28 18:11
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
 public class MethodSecurityMetadataConfiguration extends GlobalMethodSecurityConfiguration {
 
