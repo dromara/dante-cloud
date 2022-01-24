@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.oauth.provider;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.eurynome.security.response.SecurityGlobalExceptionHandler;
+import cn.herodotus.engine.security.core.exception.SecurityGlobalExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;

@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
+import cn.herodotus.engine.security.core.definition.domain.HerodotusClientDetails;
 import cn.herodotus.eurynome.assistant.enums.StatusEnum;
-import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.upms.logic.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.logic.helper.UpmsHelper;

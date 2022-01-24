@@ -22,6 +22,9 @@
 
 package cn.herodotus.eurynome.security.exception;
 
+
+import cn.herodotus.engine.security.core.exception.PlatformAuthenticationException;
+
 /**
  * <p>File: IllegalAuthenticationArgumentException </p>
  *

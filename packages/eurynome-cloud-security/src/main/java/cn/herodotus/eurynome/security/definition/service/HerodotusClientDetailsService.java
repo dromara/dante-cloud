@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.security.definition.service;
 
-import cn.herodotus.eurynome.security.definition.core.HerodotusClientDetails;
+import cn.herodotus.engine.security.core.definition.domain.HerodotusClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 
 /**

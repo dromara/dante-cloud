@@ -22,15 +22,13 @@
 
 package cn.herodotus.eurynome.security.autoconfigure;
 
+import cn.herodotus.engine.security.accelerator.enhance.HerodotusUserAuthenticationConverter;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
-import cn.herodotus.engine.web.scan.configuration.ScanConfiguration;
 import cn.herodotus.eurynome.security.authentication.HerodotusRequestMappingScanManager;
-import cn.herodotus.eurynome.security.authentication.HerodotusUserAuthenticationConverter;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

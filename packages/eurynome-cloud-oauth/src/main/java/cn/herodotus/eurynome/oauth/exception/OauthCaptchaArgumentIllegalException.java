@@ -22,7 +22,8 @@
 
 package cn.herodotus.eurynome.oauth.exception;
 
-import cn.herodotus.eurynome.security.exception.PlatformAuthenticationException;
+
+import cn.herodotus.engine.security.core.exception.PlatformAuthenticationException;
 
 /**
  * <p>Description: Oauth2 使用的验证码参数错误 </p>

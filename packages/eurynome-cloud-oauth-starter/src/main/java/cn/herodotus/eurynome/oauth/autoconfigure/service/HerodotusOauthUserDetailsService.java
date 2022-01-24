@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
-import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
+import cn.herodotus.engine.security.core.definition.domain.HerodotusUserDetails;
 import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysUser;
 import cn.herodotus.eurynome.upms.logic.helper.UpmsHelper;

@@ -22,6 +22,9 @@
 
 package cn.herodotus.eurynome.security.exception;
 
+
+import cn.herodotus.engine.security.core.exception.PlatformAuthenticationException;
+
 /**
  * <p>Description: 社交化认证基础Exception </p>
  *

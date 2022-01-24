@@ -22,7 +22,8 @@
 
 package cn.herodotus.eurynome.oauth.exception;
 
-import cn.herodotus.eurynome.security.exception.PlatformAuthenticationException;
+
+import cn.herodotus.engine.security.core.exception.PlatformAuthenticationException;
 
 /**
  * <p>Description: 验证码为空 </p>
