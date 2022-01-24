@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.dto;
 
-import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
+import cn.herodotus.engine.assistant.core.domain.dto.BaseDto;
 import com.google.common.base.MoreObjects;
 
 /**
@@ -31,7 +31,7 @@ import com.google.common.base.MoreObjects;
  * @author : gengwei.zheng
  * @date : 2021/10/8 19:29
  */
-public class Session extends BaseDTO {
+public class Session extends BaseDto {
 
     /**
      * 前端未登录时，唯一身份标识。如果由前端生成，则直接返回；如果由后端生成，则返回后端生成值

@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.gateway.filter;
 
-import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.eurynome.assistant.utils.SQLInjectionUtils;
+import cn.herodotus.engine.assistant.secure.utils.SqlInjectionUtils;
+import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import cn.herodotus.eurynome.gateway.utils.WebFluxUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;
@@ -87,7 +87,7 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
 
             log.debug("[Herodotus] |- The original request parameter is [{}]", rawQuery);
             // 执行XSS清理
-            boolean isSQLInjection = SQLInjectionUtils.checkForGet(rawQuery);
+            boolean isSQLInjection = SqlInjectionUtils.checkForGet(rawQuery);
 
             // 如果存在sql注入,直接拦截请求
             if (isSQLInjection) {
@@ -109,10 +109,10 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
                 boolean isSQLInjection;
                 if (WebFluxUtils.isJsonMediaType(contentType)) {
                     //如果MediaType是json才执行json方式验证
-                    isSQLInjection = SQLInjectionUtils.checkForPost(bodyString);
+                    isSQLInjection = SqlInjectionUtils.checkForPost(bodyString);
                 } else {
                     //form表单方式，需要走get请求
-                    isSQLInjection = SQLInjectionUtils.checkForGet(bodyString);
+                    isSQLInjection = SqlInjectionUtils.checkForGet(bodyString);
                 }
 
                 //  如果存在sql注入,直接拦截请求

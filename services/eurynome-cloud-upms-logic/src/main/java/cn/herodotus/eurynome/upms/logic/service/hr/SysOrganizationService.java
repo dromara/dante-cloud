@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.upms.logic.service.hr;
 
-import cn.herodotus.eurynome.assistant.exception.persistence.TransactionRollbackException;
-import cn.herodotus.eurynome.assistant.enums.OrganizationCategory;
+import cn.herodotus.engine.assistant.core.exception.TransactionRollbackException;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
+import cn.herodotus.eurynome.assistant.enums.OrganizationCategory;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysOrganization;
 import cn.herodotus.eurynome.upms.logic.repository.hr.SysOrganizationRepository;

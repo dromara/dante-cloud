@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.oauth.dto;
 
-import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
+import cn.herodotus.engine.assistant.core.domain.dto.BaseDto;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -35,7 +35,7 @@ import javax.validation.constraints.NotBlank;
  * @date : 2021/10/8 19:30
  */
 @Schema(title = "加密创建请求")
-public class SessionCreate extends BaseDTO {
+public class SessionCreate extends BaseDto {
 
     @NotBlank(message = "客户端ID不能为空")
     @Schema(title = "客户端ID")

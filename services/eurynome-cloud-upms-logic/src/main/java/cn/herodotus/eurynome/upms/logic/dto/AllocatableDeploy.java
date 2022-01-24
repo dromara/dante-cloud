@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.dto;
 
-import cn.herodotus.eurynome.assistant.definition.dto.BaseDTO;
+import cn.herodotus.engine.assistant.core.domain.dto.BaseDto;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysOwnership;
@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
  * @date : 2021/9/25 10:24
  */
 @Schema(description = "增加人员归属参数BO对象")
-public class AllocatableDeploy extends BaseDTO {
+public class AllocatableDeploy extends BaseDto {
 
     @NotNull(message = "单位ID不能为空")
     @Schema(description = "单位ID")
