@@ -26,6 +26,12 @@ ENV SW_COLLECTOR_BACKEND_SERVICE=""
 # 声明一个挂载点，容器内此路径会对应宿主机的某个文件夹
 VOLUME /tmp
 
+# 修改源
+RUN echo "http://mirrors.aliyun.com/alpine/v3.8/main" > /etc/apk/repositories
+#增加字体，解决验证码没有字体报空指针问题
+RUN set -xe && apk --no-cache add ttf-dejavu fontconfig
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
+
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
 ADD ./target/${SERVICE_NAME}-${VERSION}.jar /usr/local/app.jar
 COPY ./agent/skywalking-agent-8.8.0.jar /usr/local/sw/agent.jar

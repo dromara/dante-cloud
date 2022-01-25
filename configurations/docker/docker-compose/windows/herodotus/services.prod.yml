@@ -1,5 +1,8 @@
 version: "3.8"
 services:
+  jdk:
+    image: openjdk:8-jdk-alpine
+
   monitor:
     image: ${MONITOR_SERVICE_NAME}:${VERSION}
     build:
@@ -12,6 +15,8 @@ services:
     container_name: monitor
     ports:
       - ${MONITOR_SERVICE_PORT}:${MONITOR_SERVICE_PORT}
+    depends_on:
+      - jdk
 
   upms:
     image: ${UPMS_SERVICE_NAME}:${VERSION}
