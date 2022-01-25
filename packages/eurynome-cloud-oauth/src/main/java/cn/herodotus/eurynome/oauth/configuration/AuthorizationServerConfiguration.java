@@ -22,11 +22,11 @@
 
 package cn.herodotus.eurynome.oauth.configuration;
 
-import cn.herodotus.eurynome.oauth.provider.token.HerodotusJwtTokenEnhancer;
-import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
-import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.engine.security.core.definition.service.HerodotusClientDetailsService;
+import cn.herodotus.engine.security.core.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.oauth.provider.HerodotusWebResponseExceptionTranslator;
+import cn.herodotus.eurynome.oauth.provider.token.HerodotusJwtTokenEnhancer;
+import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

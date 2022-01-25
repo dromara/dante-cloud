@@ -26,6 +26,7 @@ import cn.herodotus.engine.security.accelerator.enhance.HerodotusUserAuthenticat
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.eurynome.security.authentication.HerodotusRequestMappingScanManager;
 import cn.herodotus.eurynome.security.configuration.MethodSecurityMetadataConfiguration;
+import cn.herodotus.eurynome.security.configuration.WebMvcSecurityConfiguration;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +70,7 @@ import javax.annotation.PostConstruct;
         SecurityProperties.class
 })
 @Import({
+        WebMvcSecurityConfiguration.class,
         MethodSecurityMetadataConfiguration.class
 })
 public class SecurityAutoConfiguration {

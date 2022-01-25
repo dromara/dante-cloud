@@ -22,11 +22,11 @@
 
 package cn.herodotus.eurynome.upms.logic.entity.hr;
 
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
+import cn.herodotus.engine.security.core.definition.domain.SocialUserDetails;
 import cn.herodotus.eurynome.assistant.enums.AccountType;
 import cn.herodotus.eurynome.assistant.enums.Gender;
 import cn.herodotus.eurynome.assistant.enums.Identity;
-import cn.herodotus.engine.data.core.entity.BaseSysEntity;
-import cn.herodotus.eurynome.security.definition.core.SocialUserDetails;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import cn.herodotus.eurynome.upms.logic.deserializer.SysUserEmptyToNull;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysUser;
