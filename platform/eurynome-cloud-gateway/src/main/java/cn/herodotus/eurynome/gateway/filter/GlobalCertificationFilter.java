@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.gateway.filter;
 
-import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.eurynome.assistant.enums.ResultStatus;
+import cn.herodotus.engine.assistant.core.enums.ResultStatus;
+import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
 import cn.herodotus.eurynome.gateway.properties.GatewaySecurityProperties;
 import cn.herodotus.eurynome.gateway.utils.WebFluxUtils;
 import lombok.extern.slf4j.Slf4j;

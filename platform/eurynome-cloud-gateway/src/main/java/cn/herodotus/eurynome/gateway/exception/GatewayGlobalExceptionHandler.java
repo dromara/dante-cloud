@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.gateway.exception;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.assistant.core.enums.ResultStatus;
 import cn.herodotus.engine.assistant.core.exception.HerodotusExceptionHandler;
-import cn.herodotus.eurynome.assistant.enums.ResultStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;

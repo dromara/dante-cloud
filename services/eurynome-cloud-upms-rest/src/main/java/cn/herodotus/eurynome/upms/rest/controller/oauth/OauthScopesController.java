@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.oauth;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.upms.logic.entity.oauth.OauthScopes;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthScopesService;
 import io.swagger.v3.oas.annotations.Operation;

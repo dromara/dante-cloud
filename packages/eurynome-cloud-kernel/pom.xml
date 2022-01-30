@@ -138,5 +138,10 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>assistant-core</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

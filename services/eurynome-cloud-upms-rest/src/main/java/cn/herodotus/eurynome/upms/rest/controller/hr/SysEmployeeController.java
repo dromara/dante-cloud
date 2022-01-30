@@ -23,13 +23,13 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.assistant.enums.Gender;
 import cn.herodotus.eurynome.assistant.enums.Identity;
-import cn.herodotus.eurynome.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.dto.AllocatableDeploy;
 import cn.herodotus.eurynome.upms.logic.dto.AllocatableRemove;
+import cn.herodotus.eurynome.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysEmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

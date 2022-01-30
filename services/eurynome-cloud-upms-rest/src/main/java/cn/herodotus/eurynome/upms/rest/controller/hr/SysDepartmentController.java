@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysDepartmentService;
 import cn.hutool.core.lang.tree.Tree;
