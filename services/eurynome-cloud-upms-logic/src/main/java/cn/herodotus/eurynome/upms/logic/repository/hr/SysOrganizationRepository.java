@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.repository.hr;
 
-import cn.herodotus.eurynome.assistant.enums.OrganizationCategory;
+import cn.herodotus.eurynome.upms.logic.constants.enums.OrganizationCategory;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysOrganization;
 

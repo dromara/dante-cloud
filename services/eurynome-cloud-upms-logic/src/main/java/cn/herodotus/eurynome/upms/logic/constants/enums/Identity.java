@@ -15,12 +15,12 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-assistant
- * File Name: AuthorityType.java
+ * File Name: Identity.java
  * Author: gengwei.zheng
  * Date: 2021/10/17 22:53:17
  */
 
-package cn.herodotus.eurynome.assistant.enums;
+package cn.herodotus.eurynome.upms.logic.constants.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -33,44 +33,42 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Description: 权限资源类型 </p>
+ * <p>Description: 人员身份</p>
  *
- * @author : gengwei.zheng
- * @date : 2019/11/25 15:10
+ * @author gengwei.zheng
+ * @date 2019/2/15
  */
-@Schema(name = "权限类型")
+@Schema(name = "人员身份")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum AuthorityType {
-
+public enum Identity {
     /**
      * enum
      */
-    API(0, "REST API"),
-    MENU(1, "功能菜单"),
-    PAGE(2, "Web Page"),
-    MINI_PAGE(3, "小程序页面");
+    STAFF(0, "员工"),
+    SECTION_LEADER(1, "部门负责人"),
+    LEADERSHIP(2, "领导");
 
     @Schema(title =  "索引")
     private final Integer index;
     @Schema(title =  "文字")
-    private final String text;
+    private String text;
 
-    private static final Map<Integer, AuthorityType> indexMap = new HashMap<>();
+    private static final Map<Integer, Identity> indexMap = new HashMap<>();
     private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
 
     static {
-        for (AuthorityType authorityType : AuthorityType.values()) {
-            indexMap.put(authorityType.getIndex(), authorityType);
-            toJsonStruct.add(authorityType.getIndex(),
+        for (Identity identity : Identity.values()) {
+            indexMap.put(identity.getIndex(), identity);
+            toJsonStruct.add(identity.getIndex(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", authorityType.getIndex())
-                            .put("key", authorityType.name())
-                            .put("text", authorityType.getText())
+                            .put("value", identity.getIndex())
+                            .put("key", identity.name())
+                            .put("text", identity.getText())
                             .build());
         }
     }
 
-    AuthorityType(Integer index, String text) {
+    Identity(Integer index, String text) {
         this.index = index;
         this.text = text;
     }
@@ -89,11 +87,11 @@ public enum AuthorityType {
     }
 
     public String getText() {
-        return this.text;
+        return text;
     }
 
-    public static AuthorityType getAuthorityType(Integer index) {
-        return indexMap.get(index);
+    public static Identity getIdentity(Integer status) {
+        return indexMap.get(status);
     }
 
     public static List<Map<String, Object>> getToJsonStruct() {

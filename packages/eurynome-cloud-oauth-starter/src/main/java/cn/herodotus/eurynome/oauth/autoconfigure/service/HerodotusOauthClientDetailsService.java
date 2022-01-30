@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure.service;
 
+import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.security.core.definition.domain.HerodotusClientDetails;
-import cn.herodotus.eurynome.assistant.enums.StatusEnum;
-import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
+import cn.herodotus.engine.security.core.definition.service.HerodotusClientDetailsService;
 import cn.herodotus.eurynome.upms.logic.entity.oauth.OauthClientDetails;
 import cn.herodotus.eurynome.upms.logic.helper.UpmsHelper;
 import cn.herodotus.eurynome.upms.logic.service.oauth.OauthClientDetailsService;
@@ -74,7 +74,7 @@ public class HerodotusOauthClientDetailsService implements HerodotusClientDetail
         HerodotusClientDetails herodotusClientDetails = getOauthClientDetails(clientId);
         if (herodotusClientDetails != null && herodotusClientDetails.getAdditionalInformation() != null) {
             String status = herodotusClientDetails.getAdditionalInformation().getOrDefault("status", "0").toString();
-            if (String.valueOf(StatusEnum.FORBIDDEN.getIndex()).equals(status)) {
+            if (String.valueOf(DataItemStatus.FORBIDDEN.getIndex()).equals(status)) {
                 log.warn("[Herodotus] |- Client [{}] has been Forbidden! ", herodotusClientDetails.getClientId());
                 throw new ClientRegistrationException("客户端已被禁用");
             }

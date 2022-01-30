@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
+import cn.herodotus.engine.security.core.definition.service.HerodotusClientDetailsService;
+import cn.herodotus.engine.security.core.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthClientDetailsService;
 import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthUserDetailsService;
-import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
-import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.security.properties;
 
+import cn.herodotus.engine.assistant.core.constants.SymbolConstants;
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
-import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.io.Serializable;

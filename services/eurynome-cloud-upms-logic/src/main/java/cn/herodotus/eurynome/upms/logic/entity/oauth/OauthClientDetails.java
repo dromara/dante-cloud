@@ -23,7 +23,7 @@
 package cn.herodotus.eurynome.upms.logic.entity.oauth;
 
 import cn.herodotus.engine.assistant.core.domain.entity.AbstractEntity;
-import cn.herodotus.eurynome.assistant.enums.StatusEnum;
+import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.eurynome.upms.logic.constants.UpmsConstants;
 import com.alibaba.fastjson.JSON;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -83,7 +83,7 @@ public class OauthClientDetails extends AbstractEntity {
 
     public OauthClientDetails() {
         Map<String, Object> defaultAdditionalInformation = new HashMap<>();
-        defaultAdditionalInformation.put("status", StatusEnum.ENABLE);
+        defaultAdditionalInformation.put("status", DataItemStatus.ENABLE);
         setAdditionalInformation(JSON.toJSONString(defaultAdditionalInformation));
     }
 

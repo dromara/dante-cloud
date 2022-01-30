@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.upms.logic.service.system;
 
-import cn.herodotus.engine.data.core.service.BaseLayeredService;
+import cn.herodotus.engine.assistant.core.enums.AccountType;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.eurynome.assistant.enums.AccountType;
+import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysDefaultRole;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysRole;
 import cn.herodotus.eurynome.upms.logic.repository.system.SysDefaultRoleRepository;

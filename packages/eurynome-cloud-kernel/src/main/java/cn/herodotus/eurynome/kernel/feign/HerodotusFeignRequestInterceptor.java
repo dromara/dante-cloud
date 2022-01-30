@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.kernel.feign;
 
-import cn.herodotus.eurynome.assistant.constant.SymbolConstants;
+import cn.herodotus.engine.assistant.core.constants.SymbolConstants;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.google.common.net.HttpHeaders;
 import feign.RequestInterceptor;

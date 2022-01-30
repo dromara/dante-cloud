@@ -15,14 +15,13 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-assistant
- * File Name: Gender.java
+ * File Name: ApplicationType.java
  * Author: gengwei.zheng
  * Date: 2021/10/17 22:53:17
  */
 
-package cn.herodotus.eurynome.assistant.enums;
+package cn.herodotus.eurynome.upms.logic.constants.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -33,39 +32,44 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author gengwei.zheng
+ * <p>Description: 应用类别 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2020/5/4 12:01
  */
-@Schema(name = "性别")
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum Gender {
+@Schema(name = "应用类型")
+public enum ApplicationType {
+
     /**
-     * enum
+     * 应用类型
      */
-    MAN(0, "男"),
-    WOMAN(1, "女"),
-    OTHERS(2, "其它");
+    WEB(0, "PC网页应用"),
+    SERVICE(1, "服务应用"),
+    APP(2, "手机应用"),
+    WAP(3, "手机网页应用"),
+    MINI(4, "小程序应用");
 
     @Schema(title =  "索引")
     private final Integer index;
     @Schema(title =  "文字")
     private final String text;
 
-    private static final Map<Integer, Gender> indexMap = new HashMap<>();
+    private static final Map<Integer, ApplicationType> indexMap = new HashMap<>();
     private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
 
     static {
-        for (Gender gender : Gender.values()) {
-            indexMap.put(gender.getIndex(), gender);
-            toJsonStruct.add(gender.getIndex(),
+        for (ApplicationType applicationType : ApplicationType.values()) {
+            indexMap.put(applicationType.getIndex(), applicationType);
+            toJsonStruct.add(applicationType.getIndex(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", gender.getIndex())
-                            .put("key", gender.name())
-                            .put("text", gender.getText())
+                            .put("value", applicationType.getIndex())
+                            .put("key", applicationType.name())
+                            .put("text", applicationType.getText())
                             .build());
         }
     }
 
-    Gender(Integer index, String text) {
+    ApplicationType(Integer index, String text) {
         this.index = index;
         this.text = text;
     }
@@ -84,11 +88,11 @@ public enum Gender {
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
-    public static Gender getGender(Integer status) {
-        return indexMap.get(status);
+    public static ApplicationType getApplicationType(Integer index) {
+        return indexMap.get(index);
     }
 
     public static List<Map<String, Object>> getToJsonStruct() {

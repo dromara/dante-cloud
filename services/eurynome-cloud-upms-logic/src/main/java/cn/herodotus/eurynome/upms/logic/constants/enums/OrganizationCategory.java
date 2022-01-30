@@ -15,12 +15,12 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-assistant
- * File Name: Identity.java
+ * File Name: OrganizationCategory.java
  * Author: gengwei.zheng
  * Date: 2021/10/17 22:53:17
  */
 
-package cn.herodotus.eurynome.assistant.enums;
+package cn.herodotus.eurynome.upms.logic.constants.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -33,42 +33,43 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Description: 人员身份</p>
+ * <p>Description: 机构类别 </p>
  *
- * @author gengwei.zheng
- * @date 2019/2/15
+ * @author : gengwei.zheng
+ * @date : 2021/9/22 17:12
  */
-@Schema(name = "人员身份")
+@Schema(title =  "机构类别")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum Identity {
+public enum OrganizationCategory {
+
     /**
      * enum
      */
-    STAFF(0, "员工"),
-    SECTION_LEADER(1, "部门负责人"),
-    LEADERSHIP(2, "领导");
+    ENTERPRISE(0, "企业机构"),
+    PARTY(1, "党组机构"),
+    LEAGUE(2, "团青机构");
 
-    @Schema(title =  "索引")
+    @Schema(title = "索引")
     private final Integer index;
-    @Schema(title =  "文字")
-    private String text;
+    @Schema(title = "文字")
+    private final String text;
 
-    private static final Map<Integer, Identity> indexMap = new HashMap<>();
-    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+    private static final Map<Integer, OrganizationCategory> INDEX_MAP = new HashMap<>();
+    private static final List<Map<String, Object>> TO_JSON_STRUCT = new ArrayList<>();
 
     static {
-        for (Identity identity : Identity.values()) {
-            indexMap.put(identity.getIndex(), identity);
-            toJsonStruct.add(identity.getIndex(),
+        for (OrganizationCategory organizationCategory : OrganizationCategory.values()) {
+            INDEX_MAP.put(organizationCategory.getIndex(), organizationCategory);
+            TO_JSON_STRUCT.add(organizationCategory.getIndex(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", identity.getIndex())
-                            .put("key", identity.name())
-                            .put("text", identity.getText())
+                            .put("value", organizationCategory.getIndex())
+                            .put("key", organizationCategory.name())
+                            .put("text", organizationCategory.getText())
                             .build());
         }
     }
 
-    Identity(Integer index, String text) {
+    OrganizationCategory(Integer index, String text) {
         this.index = index;
         this.text = text;
     }
@@ -87,14 +88,14 @@ public enum Identity {
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
-    public static Identity getIdentity(Integer status) {
-        return indexMap.get(status);
+    public static OrganizationCategory getOrganizationCategory(Integer index) {
+        return INDEX_MAP.get(index);
     }
 
     public static List<Map<String, Object>> getToJsonStruct() {
-        return toJsonStruct;
+        return TO_JSON_STRUCT;
     }
 }

@@ -15,12 +15,12 @@
  *
  * Project Name: eurynome-cloud
  * Module Name: eurynome-cloud-assistant
- * File Name: StatusEnum.java
+ * File Name: AuthorityType.java
  * Author: gengwei.zheng
  * Date: 2021/10/17 22:53:17
  */
 
-package cn.herodotus.eurynome.assistant.enums;
+package cn.herodotus.eurynome.upms.logic.constants.enums;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -33,50 +33,44 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author gengwei.zheng
+ * <p>Description: 权限资源类型 </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2019/11/25 15:10
  */
-@Schema(name = "ResultStatus", title = "响应结果状态", description = "自定义错误码以及对应的、友好的错误信息")
+@Schema(name = "权限类型")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum StatusEnum {
+public enum AuthorityType {
 
     /**
-     * 启用
+     * enum
      */
-    ENABLE(0, "启用"),
-    /**
-     * 禁用
-     */
-    FORBIDDEN(1, "禁用"),
-    /**
-     * 锁定
-     */
-    LOCKING(2, "锁定"),
-    /**
-     * 过期
-     */
-    EXPIRED(3, "过期");
+    API(0, "REST API"),
+    MENU(1, "功能菜单"),
+    PAGE(2, "Web Page"),
+    MINI_PAGE(3, "小程序页面");
 
     @Schema(title =  "索引")
     private final Integer index;
     @Schema(title =  "文字")
     private final String text;
 
-    private static final Map<Integer, StatusEnum> indexMap = new HashMap<>();
+    private static final Map<Integer, AuthorityType> indexMap = new HashMap<>();
     private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
 
     static {
-        for (StatusEnum statusEnum : StatusEnum.values()) {
-            indexMap.put(statusEnum.getIndex(), statusEnum);
-            toJsonStruct.add(statusEnum.getIndex(),
+        for (AuthorityType authorityType : AuthorityType.values()) {
+            indexMap.put(authorityType.getIndex(), authorityType);
+            toJsonStruct.add(authorityType.getIndex(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", statusEnum.getIndex())
-                            .put("key", statusEnum.name())
-                            .put("text", statusEnum.getText())
+                            .put("value", authorityType.getIndex())
+                            .put("key", authorityType.name())
+                            .put("text", authorityType.getText())
                             .build());
         }
     }
 
-    StatusEnum(Integer index, String text) {
+    AuthorityType(Integer index, String text) {
         this.index = index;
         this.text = text;
     }
@@ -98,8 +92,8 @@ public enum StatusEnum {
         return this.text;
     }
 
-    public static StatusEnum getStatus(Integer status) {
-        return indexMap.get(status);
+    public static AuthorityType getAuthorityType(Integer index) {
+        return indexMap.get(index);
     }
 
     public static List<Map<String, Object>> getToJsonStruct() {

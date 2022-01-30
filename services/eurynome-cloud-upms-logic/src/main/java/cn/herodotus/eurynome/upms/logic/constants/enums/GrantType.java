@@ -20,9 +20,9 @@
  * Date: 2021/10/17 22:56:17
  */
 
-package cn.herodotus.eurynome.assistant.enums;
+package cn.herodotus.eurynome.upms.logic.constants.enums;
 
-import cn.herodotus.eurynome.assistant.constant.SecurityConstants;
+import cn.herodotus.engine.assistant.core.constants.SecurityConstants;
 import com.google.common.collect.ImmutableMap;
 
 import java.util.ArrayList;

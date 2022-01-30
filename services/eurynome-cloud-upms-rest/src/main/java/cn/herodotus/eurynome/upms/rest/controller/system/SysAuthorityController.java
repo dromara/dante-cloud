@@ -26,7 +26,7 @@ import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
-import cn.herodotus.eurynome.assistant.enums.AuthorityType;
+import cn.herodotus.eurynome.upms.logic.constants.enums.AuthorityType;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
 import cn.hutool.core.lang.tree.Tree;

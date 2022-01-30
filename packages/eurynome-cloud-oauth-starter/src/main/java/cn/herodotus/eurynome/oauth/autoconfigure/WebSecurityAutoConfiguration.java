@@ -23,13 +23,13 @@
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
 import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
+import cn.herodotus.engine.security.core.definition.service.HerodotusClientDetailsService;
+import cn.herodotus.engine.security.core.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.engine.security.core.utils.SecurityUtils;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationFailureHandler;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginAuthenticationProvider;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginDecryptParameterAuthenticationFilter;
 import cn.herodotus.eurynome.oauth.authentication.FormLoginWebAuthenticationDetailsSource;
-import cn.herodotus.eurynome.security.definition.service.HerodotusClientDetailsService;
-import cn.herodotus.eurynome.security.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.security.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

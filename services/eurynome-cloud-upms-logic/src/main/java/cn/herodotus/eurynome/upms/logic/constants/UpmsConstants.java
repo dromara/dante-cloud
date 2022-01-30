@@ -22,9 +22,8 @@
 
 package cn.herodotus.eurynome.upms.logic.constants;
 
-import cn.herodotus.eurynome.assistant.enums.*;
-import cn.herodotus.eurynome.upms.logic.constants.enums.SupplierType;
-import cn.herodotus.eurynome.upms.logic.constants.enums.TechnologyType;
+import cn.herodotus.engine.data.core.enums.DataItemStatus;
+import cn.herodotus.eurynome.upms.logic.constants.enums.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +69,7 @@ public class UpmsConstants {
     public static final String REGION_SYS_ORGANIZATION = AREA_PREFIX + "sys:organization";
     public static final String REGION_SYS_POSITION = AREA_PREFIX + "sys:position";
 
-    private static final List<Map<String, Object>> STATUS_ENUM = StatusEnum.getToJsonStruct();
+    private static final List<Map<String, Object>> STATUS_ENUM = DataItemStatus.getToJsonStruct();
     private static final List<Map<String, Object>> APPLICATION_TYPE_ENUM = ApplicationType.getToJsonStruct();
     private static final List<Map<String, Object>> OAUTH2_GRANT_TYPE_ENUM = GrantType.getToJsonStruct();
     private static final List<Map<String, Object>> TECHNOLOGY_TYPE_ENUM = TechnologyType.getToJsonStruct();
