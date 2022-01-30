@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.system;
 
+import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
-import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
 import cn.herodotus.eurynome.upms.logic.constants.enums.AuthorityType;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.service.system.SysAuthorityService;
@@ -80,7 +80,7 @@ public class SysAuthorityController extends BaseWriteableRestController<SysAutho
                 treeNode.setParentId(sysAuthority.getParentId());
                 return treeNode;
             }).collect(Collectors.toList());
-            return result.data(TreeUtil.build(treeNodes, PlatformConstants.DEFAULT_TREE_ROOT_ID));
+            return result.data(TreeUtil.build(treeNodes, BaseConstants.DEFAULT_TREE_ROOT_ID));
         } else {
             return result.message("获取数据失败");
         }

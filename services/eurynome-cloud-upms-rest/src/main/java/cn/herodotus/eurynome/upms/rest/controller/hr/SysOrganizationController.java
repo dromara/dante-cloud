@@ -22,10 +22,10 @@
 
 package cn.herodotus.eurynome.upms.rest.controller.hr;
 
+import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
-import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
 import cn.herodotus.eurynome.upms.logic.constants.enums.OrganizationCategory;
 import cn.herodotus.eurynome.upms.logic.entity.hr.SysOrganization;
 import cn.herodotus.eurynome.upms.logic.service.hr.SysOrganizationService;
@@ -130,7 +130,7 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
                 treeNode.setId(sysOrganization.getOrganizationId());
                 treeNode.setName(sysOrganization.getOrganizationName());
                 treeNode.setParentId(sysOrganization.getParentId());
-                if (StringUtils.isBlank(sysOrganization.getParentId()) || StringUtils.equals(sysOrganization.getParentId(), PlatformConstants.DEFAULT_TREE_ROOT_ID)) {
+                if (StringUtils.isBlank(sysOrganization.getParentId()) || StringUtils.equals(sysOrganization.getParentId(), BaseConstants.DEFAULT_TREE_ROOT_ID)) {
                     rootId[0] = sysOrganization.getParentId();
                 }
                 return treeNode;

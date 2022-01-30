@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.assistant.resolver;
 
-import cn.herodotus.eurynome.assistant.constant.PlatformConstants;
+import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.eurynome.assistant.constant.PropertyConstants;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Environment;
@@ -68,7 +68,7 @@ public class PropertyResolver {
     }
 
     public static String getDdlAuto(Environment environment) {
-        return getDdlAuto(environment, PlatformConstants.NONE);
+        return getDdlAuto(environment, BaseConstants.NONE);
     }
 
     public static String getDdlAuto(Environment environment, String defaultValue) {
