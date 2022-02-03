@@ -65,6 +65,7 @@
         <module>packages</module>
         <module>services</module>
         <module>platform</module>
+        <module>modules</module>
     </modules>
 
     <!-- 环境 -->

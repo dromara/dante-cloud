@@ -41,7 +41,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-security</artifactId>
+            <artifactId>eurynome-module-security</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

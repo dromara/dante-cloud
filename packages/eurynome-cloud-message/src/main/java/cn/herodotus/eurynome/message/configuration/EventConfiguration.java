@@ -22,7 +22,6 @@
 
 package cn.herodotus.eurynome.message.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.ConditionalOnDistributedArchitecture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.bus.jackson.RemoteApplicationEventScan;
@@ -37,7 +36,6 @@ import javax.annotation.PostConstruct;
  * @date : 2022/1/11 14:51
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnDistributedArchitecture
 @RemoteApplicationEventScan({
         "cn.herodotus.eurynome.message.event"
 })

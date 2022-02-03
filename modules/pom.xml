@@ -5,23 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>services</artifactId>
+        <artifactId>eurynome-cloud</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>2.7.0.0</version>
     </parent>
 
-    <artifactId>eurynome-cloud-upms-logic</artifactId>
+    <artifactId>modules</artifactId>
     <version>2.7.0.0</version>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>data-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>security-core</artifactId>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>eurynome-module-security</module>
+        <module>eurynome-module-oauth</module>
+    </modules>
 
 </project>

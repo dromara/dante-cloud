@@ -22,15 +22,9 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
-import cn.herodotus.engine.security.core.definition.service.HerodotusClientDetailsService;
-import cn.herodotus.engine.security.core.definition.service.HerodotusUserDetailsService;
-import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthClientDetailsService;
-import cn.herodotus.eurynome.oauth.autoconfigure.service.HerodotusOauthUserDetailsService;
 import cn.herodotus.eurynome.upms.logic.annotation.EnableUpmsLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -99,19 +93,5 @@ public class AutoConfiguration {
         log.info("[Herodotus] |- Starter [Herodotus OAuth Starter] Auto Configure.");
     }
 
-    @Bean
-    @ConditionalOnMissingBean(HerodotusUserDetailsService.class)
-    public HerodotusUserDetailsService herodotusUserDetailsService() {
-        HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService();
-        log.trace("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
-        return herodotusOauthUserDetailsService;
-    }
 
-    @Bean
-    @ConditionalOnMissingBean(HerodotusClientDetailsService.class)
-    public HerodotusClientDetailsService herodotusClientDetailsService() {
-        HerodotusOauthClientDetailsService herodotusOauthClientDetailsService = new HerodotusOauthClientDetailsService();
-        log.trace("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
-        return herodotusOauthClientDetailsService;
-    }
 }

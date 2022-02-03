@@ -5,22 +5,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>services</artifactId>
+        <artifactId>modules</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>2.7.0.0</version>
     </parent>
 
-    <artifactId>eurynome-cloud-upms-logic</artifactId>
+    <artifactId>eurynome-module-oauth</artifactId>
     <version>2.7.0.0</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>data-core</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-module-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-cloud-upms-logic</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>security-core</artifactId>
+            <artifactId>security-sdk-authorize</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>security-sdk-log</artifactId>
         </dependency>
     </dependencies>
 

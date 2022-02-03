@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.oauth.autoconfigure;
 
-import cn.herodotus.engine.security.accelerator.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.engine.security.core.properties.SecurityProperties;
 import cn.herodotus.engine.security.core.utils.SecurityUtils;
-import cn.herodotus.eurynome.security.properties.SecurityProperties;
+import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

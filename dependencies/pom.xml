@@ -144,6 +144,7 @@
             </dependency>
 
             <!-- Herodotus Engine -->
+
             <!-- assistant -->
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
@@ -360,7 +361,17 @@
             </dependency>
             <dependency>
                 <groupId>cn.herodotus.engine</groupId>
-                <artifactId>security-sdk-accelerator</artifactId>
+                <artifactId>security-sdk-authorize</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>security-sdk-extend</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.engine</groupId>
+                <artifactId>security-sdk-log</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -421,6 +432,17 @@
             </dependency>
 
             <!-- Eurynome Cloud -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-module-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-module-oauth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-assistant</artifactId>

@@ -40,11 +40,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-oauth</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-upms-logic</artifactId>
+            <artifactId>eurynome-module-oauth</artifactId>
         </dependency>
     </dependencies>
 

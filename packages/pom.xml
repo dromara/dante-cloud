@@ -38,10 +38,8 @@
     <name>eurynome-cloud-packages</name>
 
     <modules>
-        <module>eurynome-cloud-security</module>
         <module>eurynome-cloud-starter</module>
         <module>eurynome-cloud-kernel</module>
-        <module>eurynome-cloud-oauth</module>
         <module>eurynome-cloud-oauth-starter</module>
         <module>eurynome-cloud-assistant</module>
         <module>eurynome-cloud-message</module>
