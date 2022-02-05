@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.rest.listener;
 
-import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
+import cn.herodotus.engine.event.security.event.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.upms.rest.processor.RequestMappingStoreProcessor;
 import com.alibaba.fastjson.JSON;
@@ -58,7 +58,7 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
     public void onApplicationEvent(RemoteRequestMappingGatherEvent event) {
         log.info("[Herodotus] |- Request Mapping Gather REMOTE Listener, response event!");
 
-        String requestMapping = event.getRequestMapping();
+        String requestMapping = event.getData();
         if (ObjectUtils.isNotEmpty(requestMapping)) {
             List<RequestMapping> requestMappings = JSON.parseArray(requestMapping, RequestMapping.class);
             if (CollectionUtils.isNotEmpty(requestMappings)) {

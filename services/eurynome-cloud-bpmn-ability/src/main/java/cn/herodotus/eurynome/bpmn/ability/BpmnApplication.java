@@ -22,7 +22,6 @@
 
 package cn.herodotus.eurynome.bpmn.ability;
 
-import cn.herodotus.eurynome.message.annotation.EnableHerodotusMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -33,7 +32,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @author : gengwei.zheng
  * @date : 2021/11/13 22:11
  */
-@EnableHerodotusMessage
 @EnableDiscoveryClient
 @SpringBootApplication
 public class BpmnApplication {

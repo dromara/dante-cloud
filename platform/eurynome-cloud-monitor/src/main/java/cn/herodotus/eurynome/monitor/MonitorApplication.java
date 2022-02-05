@@ -22,7 +22,6 @@
 
 package cn.herodotus.eurynome.monitor;
 
-import cn.herodotus.eurynome.kernel.annotation.EnableLogCenter;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,7 +33,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date : 2020/5/3 16:08
  */
 @EnableAdminServer
-@EnableLogCenter
 @SpringBootApplication
 public class MonitorApplication {
 

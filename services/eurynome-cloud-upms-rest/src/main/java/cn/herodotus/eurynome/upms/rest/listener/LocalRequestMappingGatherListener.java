@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.rest.listener;
 
-import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
+import cn.herodotus.engine.event.core.local.event.LocalRequestMappingGatherEvent;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.upms.rest.processor.RequestMappingStoreProcessor;
 import org.apache.commons.collections.CollectionUtils;
@@ -59,7 +59,7 @@ public class LocalRequestMappingGatherListener implements ApplicationListener<Lo
 
         log.info("[Herodotus] |- Request mapping gather LOCAL listener, response event!");
 
-        List<RequestMapping> requestMappings = event.getRequestMappings();
+        List<RequestMapping> requestMappings = event.getData();
         if (CollectionUtils.isNotEmpty(requestMappings)) {
             requestMappingStoreProcessor.postProcess(requestMappings);
         }

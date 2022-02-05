@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-message</artifactId>
+            <artifactId>eurynome-module-common</artifactId>
         </dependency>
 
         <dependency>

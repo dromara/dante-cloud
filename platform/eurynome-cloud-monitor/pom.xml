@@ -42,8 +42,8 @@
             <artifactId>web-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-kernel</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>

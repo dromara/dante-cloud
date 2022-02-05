@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.gateway.configuration;
 
-import cn.herodotus.eurynome.assistant.annotation.ConditionalOnSwaggerEnabled;
+import cn.herodotus.engine.assistant.core.annotation.ConditionalOnSwaggerEnabled;
 import cn.herodotus.eurynome.gateway.handler.RefreshRoutesListener;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;

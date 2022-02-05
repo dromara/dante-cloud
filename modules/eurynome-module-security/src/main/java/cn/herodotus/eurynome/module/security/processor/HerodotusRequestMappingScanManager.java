@@ -1,12 +1,12 @@
 package cn.herodotus.eurynome.module.security.processor;
 
-import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
-import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
-import cn.herodotus.engine.message.core.processor.DestinationResolver;
+import cn.herodotus.engine.event.core.local.event.LocalRequestMappingGatherEvent;
+import cn.herodotus.engine.event.core.remote.processor.DestinationResolver;
+import cn.herodotus.engine.event.security.event.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.engine.web.core.support.ServiceContext;
-import cn.herodotus.eurynome.assistant.constant.ServiceConstants;
+import cn.herodotus.eurynome.module.common.ServiceNameConstants;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
@@ -33,7 +33,7 @@ public class HerodotusRequestMappingScanManager implements RequestMappingScanMan
 
     @Override
     public String getDestinationServiceName() {
-        return ServiceConstants.SERVICE_NAME_UPMS;
+        return ServiceNameConstants.SERVICE_NAME_UPMS;
     }
 
     @Override

@@ -41,8 +41,8 @@
             <artifactId>rest-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>eurynome-cloud-message</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>message-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
