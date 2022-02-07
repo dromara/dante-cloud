@@ -22,17 +22,22 @@
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
+            <artifactId>rest-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
             <artifactId>security-sdk-extend</artifactId>
         </dependency>
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>event-sdk-security</artifactId>
+            <artifactId>event-security-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>rest-spring-boot-starter</artifactId>
+            <artifactId>message-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
