@@ -44,6 +44,8 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.upms.rest.controller.development",
         "cn.herodotus.eurynome.upms.rest.controller.oauth",
         "cn.herodotus.eurynome.upms.rest.controller.system",
+        "cn.herodotus.eurynome.upms.rest.listener",
+        "cn.herodotus.eurynome.upms.rest.processor",
 })
 public class UpmsRestConfiguration {
 

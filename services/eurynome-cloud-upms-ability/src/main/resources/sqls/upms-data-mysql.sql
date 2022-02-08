@@ -47,7 +47,7 @@ INSERT INTO `sys_user`(`user_id`, `create_time`, `ranking`, `update_time`, `desc
 -- ----------------------------
 -- Table data for sys_role
 -- ----------------------------
-INSERT INTO `sys_role`(`role_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `status`, `role_code`, `role_name`, `reversion`) VALUES ('1', '2019-07-23 07:22:27', 1, '2019-09-11 12:04:52', '中台管理员角色', b'1', 0, 'ROLE_ADMINISTRATOR', '平台管理员角色', NULL);
+INSERT INTO `sys_role`(`role_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `status`, `role_code`, `role_name`, `reversion`) VALUES ('1', '2019-07-23 07:22:27', 1, '2019-09-11 12:04:52', '中台管理员角色', b'1', 0, 'ROLE_ADMINISTRATOR', '平台管理员角色', 0);
 
 -- ----------------------------
 -- Table data for sys_user_role

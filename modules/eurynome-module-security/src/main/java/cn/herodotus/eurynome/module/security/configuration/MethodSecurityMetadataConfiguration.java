@@ -55,7 +55,7 @@ public class MethodSecurityMetadataConfiguration extends GlobalMethodSecurityCon
     @ConditionalOnMissingBean
     public RequestMappingScanManager requestMappingScanManager() {
         HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager();
-        log.debug("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
+        log.trace("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
         return herodotusRequestMappingScanManager;
     }
 }

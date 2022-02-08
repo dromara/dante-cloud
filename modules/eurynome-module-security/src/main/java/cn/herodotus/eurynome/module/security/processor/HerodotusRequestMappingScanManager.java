@@ -9,6 +9,7 @@ import cn.herodotus.engine.web.core.support.ServiceContext;
 import cn.herodotus.eurynome.module.common.ServiceNameConstants;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2022/1/17 14:56
  */
+@Component
 public class HerodotusRequestMappingScanManager implements RequestMappingScanManager {
 
     @Override

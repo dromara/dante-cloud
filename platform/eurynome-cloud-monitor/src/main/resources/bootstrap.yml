@@ -11,19 +11,6 @@ spring:
         namespace: @config.namespace@
         server-addr: @config.server-addr@
         file-extension: yaml
-        shared-configs:
-          - data-id: eurynome-cloud-environment.yaml
-            group: @profile.name@
-          - data-id: eurynome-cloud-platform.yaml
-            group: common
-          - data-id: eurynome-cloud-database-@database.type@.yaml
-            group: common
-          - data-id: eurynome-cloud-database.yaml
-            group: common
-          - data-id: eurynome-cloud-redis.yaml
-            group: common
-          - data-id: eurynome-cloud-cache.yaml
-            group: common
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
