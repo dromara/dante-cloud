@@ -34,7 +34,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shangh
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
 ADD ./target/${SERVICE_NAME}-${VERSION}.jar /usr/local/app.jar
-COPY ./agent/skywalking-agent-8.8.0.jar /usr/local/sw/agent.jar
+COPY ./agent/skywalking-agent-8.9.0.jar /usr/local/sw/agent.jar
 
 # 声明运行时端口
 EXPOSE ${SERVICE_PORT}
