@@ -15,8 +15,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>eurynome-module-security</module>
-        <module>eurynome-module-oauth</module>
         <module>eurynome-module-common</module>
     </modules>
 

@@ -62,10 +62,9 @@
 
     <modules>
         <module>dependencies</module>
-        <module>packages</module>
-        <module>services</module>
-        <module>platform</module>
         <module>modules</module>
+        <module>packages</module>
+        <module>platform</module>
     </modules>
 
     <!-- 环境 -->

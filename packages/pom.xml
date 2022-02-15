@@ -38,8 +38,7 @@
     <name>eurynome-cloud-packages</name>
 
     <modules>
-        <module>eurynome-cloud-starter</module>
-        <module>eurynome-cloud-oauth-starter</module>
+
     </modules>
 
 </project>

@@ -41,7 +41,7 @@
     <modules>
         <module>eurynome-cloud-gateway</module>
         <module>eurynome-cloud-uaa</module>
-        <module>eurynome-cloud-monitor</module>
+        <module>eurynome-cloud-upms</module>
     </modules>
 
 

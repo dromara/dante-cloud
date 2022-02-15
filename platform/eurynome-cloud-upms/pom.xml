@@ -15,29 +15,26 @@
   ~ limitations under the License.
   ~
   ~ Project Name: eurynome-cloud
-  ~ Module Name: eurynome-cloud-uaa
+  ~ Module Name: eurynome-cloud-upms-ability
   ~ File Name: pom.xml
   ~ Author: gengwei.zheng
-  ~ Date: 2021/05/07 11:28:07
+  ~ Date: 2021/05/13 15:23:13
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
         <version>2.7.0.Beta2</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>eurynome-cloud-uaa</artifactId>
+    <artifactId>eurynome-cloud-upms</artifactId>
     <version>2.7.0.Beta2</version>
-    <packaging>jar</packaging>
 
     <dependencies>
-
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
             <artifactId>rest-spring-boot-starter</artifactId>
@@ -46,12 +43,6 @@
             <groupId>cn.herodotus.engine</groupId>
             <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-authorization-server</artifactId>
-        </dependency>
-
     </dependencies>
 
     <!-- 需要以服务方式运行的包，按照以下进行build plugin的配置，以便支持docker打包；-->
@@ -65,7 +56,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- docker打包插件 -->
+            <!-- docker 打包插件 -->
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -78,5 +69,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
