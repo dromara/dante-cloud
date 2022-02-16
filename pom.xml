@@ -7,12 +7,12 @@
     <parent>
         <groupId>cn.herodotus.eurynome</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.0.Beta1</version>
+        <version>2.7.0.Beta2</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>eurynome-cloud</artifactId>
-    <version>2.7.0.Beta1</version>
+    <version>2.7.0.Beta2</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud</name>
@@ -82,8 +82,6 @@
                 <profile.name>development</profile.name>
                 <database.type>postgresql</database.type>
                 <!--代码构建控制-->
-                <!--跳过构建源代码包-->
-                <skip.build.source.package>false</skip.build.source.package>
                 <!--不copy代码包到docker构建目录-->
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
@@ -105,8 +103,6 @@
                 <profile.name>production</profile.name>
                 <database.type>mysql8</database.type>
                 <!--代码构建控制-->
-                <!--跳过构建源代码包-->
-                <skip.build.source.package>false</skip.build.source.package>
                 <!--不copy代码包到docker构建目录-->
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
@@ -130,8 +126,6 @@
                 <!--数据库类型-->
                 <database.type>postgresql</database.type>
                 <!--代码构建控制-->
-                <!--跳过构建源代码包-->
-                <skip.build.source.package>false</skip.build.source.package>
                 <!--不copy代码包到docker构建目录-->
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
@@ -272,20 +266,8 @@
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
             <plugin>
-                <!--打包跳过测试-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <skipSource>${skip.build.source.package}</skipSource>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>pl.project13.maven</groupId>
