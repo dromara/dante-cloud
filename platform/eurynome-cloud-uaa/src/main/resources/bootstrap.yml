@@ -53,7 +53,7 @@ logging:
     com.ulisesbocchio: error
     # 开发、调试需要的日志
     cn.herodotus: info
-    org.springframework.security: info
+    org.springframework.security: trace
     org.springframework.web: info
     com.alicp.jetcache: info
     org.springframework.cloud.bus: info

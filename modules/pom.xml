@@ -16,6 +16,8 @@
 
     <modules>
         <module>eurynome-module-common</module>
+        <module>eurynome-module-upms</module>
+        <module>eurynome-module-oauth</module>
     </modules>
 
 </project>

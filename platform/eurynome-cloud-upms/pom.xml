@@ -43,6 +43,11 @@
             <groupId>cn.herodotus.engine</groupId>
             <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- 需要以服务方式运行的包，按照以下进行build plugin的配置，以便支持docker打包；-->

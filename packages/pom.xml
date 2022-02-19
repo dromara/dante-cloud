@@ -39,6 +39,7 @@
 
     <modules>
 
+        <module>oauth-spring-boot-starter</module>
     </modules>
 
 </project>

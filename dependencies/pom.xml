@@ -66,7 +66,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-module-security</artifactId>
+                <artifactId>eurynome-module-upms</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -74,6 +74,19 @@
                 <artifactId>eurynome-module-oauth</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>oauth-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>eurynome-module-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-cloud-oauth-starter</artifactId>
