@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.herodotus.eurynome.service.autoconfigure.AutoConfiguration,\
+  cn.herodotus.eurynome.module.security.autoconfigure.SecurityModuleAutoConfiguration,\
+  cn.herodotus.eurynome.service.autoconfigure.ResourceServerAutoConfiguration

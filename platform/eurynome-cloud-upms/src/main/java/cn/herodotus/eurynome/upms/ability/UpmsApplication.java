@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.upms.ability;
 
-import cn.herodotus.eurynome.upms.ability.configuration.UpmsAbilityConfiguration;
+import cn.herodotus.eurynome.upms.ability.configuration.UpmsConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -36,7 +36,7 @@ import org.springframework.context.annotation.Import;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-@Import(UpmsAbilityConfiguration.class)
+@Import(UpmsConfiguration.class)
 public class UpmsApplication {
 
     public static void main(String[] args) {

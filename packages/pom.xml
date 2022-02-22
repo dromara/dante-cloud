@@ -40,6 +40,7 @@
     <modules>
 
         <module>oauth-spring-boot-starter</module>
+        <module>service-spring-boot-starter</module>
     </modules>
 
 </project>

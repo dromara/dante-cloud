@@ -38,7 +38,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Configuration
-public class UpmsAbilityConfiguration {
+public class UpmsConfiguration {
 
     @PostConstruct
     public void postConstruct() {
