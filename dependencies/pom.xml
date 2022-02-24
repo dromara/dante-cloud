@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.6.3.20</version>
+    <version>2.6.3.30</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -60,7 +60,7 @@
     <properties>
         <!--Spring 家族-->
         <spring-boot-dependencies.version>2.6.3</spring-boot-dependencies.version>
-        <spring-cloud-dependencies.version>2021.0.0</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>2021.0.1</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.1</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.6.2</spring-boot-admin.version>
 
@@ -92,14 +92,14 @@
         <sentinel.version>1.8.3</sentinel.version>
 
         <!-- 国内开源通用组件 -->
-        <hutool.version>5.7.20</hutool.version>
+        <hutool.version>5.7.21</hutool.version>
         <okhttps.version>3.4.2</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
         <weixin-java-sdk.version>4.2.5.B</weixin-java-sdk.version>
 
         <!--支付 SDK-->
-        <alipay-sdk-java.version>4.22.32.ALL</alipay-sdk-java.version>
+        <alipay-sdk-java.version>4.22.37.ALL</alipay-sdk-java.version>
 
         <!--第三方starter-->
         <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
