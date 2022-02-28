@@ -42,7 +42,6 @@ import javax.annotation.PostConstruct;
 @Import({
         LogstashConfiguration.class,
         FeignConfiguration.class,
-        SentinelConfiguration.class
 })
 public class KernelAutoConfiguration {
 
