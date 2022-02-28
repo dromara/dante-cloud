@@ -1,0 +1,81 @@
+spring:
+  jpa:
+    database: ${herodotus.database-information.platform}
+    # spring boot2.+后默认使用的是MyISAM引擎,增加如下配置修改为InnoDB模式，
+    # 这样不会出现：Specified key was too long; max key length is 1000 bytes 问题
+    database-platform: ${herodotus.database-information.platform}
+    open-in-view: true
+    show-sql: ${herodotus.switch.database.show-sql}
+    hibernate:
+      ddl-auto: ${herodotus.switch.database.ddl-auto}
+      #create 启动时删数据库中的表，然后创建，退出时不删除数据表
+      #create-drop 启动时删数据库中的表，然后创建，退出时删除数据表 如果表不存在报错
+      #update 如果启动时表格式不一致则更新表，原有数据保留
+      #validate 项目启动表结构进行校验 如果不一致则报错
+      naming:
+        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+      hibernate:
+        dialect: ${herodotus.database-information.dialect}
+        format_sql: ${herodotus.switch.database.format-sql}
+        show_sql: ${herodotus.switch.database.show-sql}
+        generate_statistics: ${herodotus.switch.database.generate-statistics}
+        cache:
+          use_query_cache: true
+          use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
+          region:
+            factory_class: cn.herodotus.engine.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
+        javax:
+          cache:
+            missing_cache_strategy: create
+        temp:
+          use_jdbc_metadata_defaults: false
+  sql:
+    init:
+      mode: ${herodotus.switch.database.init-mode}
+      platform: ${herodotus.database-information.platform}
+      continue-on-error: true
+      encoding: UTF-8
+      username: ${herodotus.environment.database.username}
+      password: ${herodotus.environment.database.password}
+      # 第一种方式启动的时候 Jpa 会自动创建表，import.sql 只负责创建表单后的初始化数据。第二种方式启动的时候不会创建表，需要在初始化脚本中判断表是否存在，再初始化脚本的步骤
+      # refer: https://www.cnblogs.com/ityouknow/p/7089170.html
+      #      data-locations:
+      #      schema-locations:
+  datasource:
+    driver-class-name: ${herodotus.database-information.driver-class-name}
+    url: ${herodotus.database-information.url}
+    username: ${herodotus.environment.database.username}
+    password: ${herodotus.environment.database.password}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
+      connection-timeout: 5000
+      connection-test-query: SELECT 1
+      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
+      idle-timeout: 600000
+      minimum-idle: 5
+      maximum-pool-size: 50
+      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit.
+      # Default: 1800000 (30 minutes)
+      max-lifetime: 1800000
+      pool-name: Hikari
+      # Lowest acceptable validation timeout is 250 ms. Default: 5000
+      validation-timeout: 5000
+      data-source-properties:
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        cachePrepStmts: true
+
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+  configuration:
+    cache-enabled: ${herodotus.switch.database.use-second-level-cache}
+    map-underscore-to-camel-case: true

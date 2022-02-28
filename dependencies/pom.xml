@@ -29,13 +29,13 @@
     <parent>
         <groupId>cn.herodotus.engine</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.0.Beta2</version>
+        <version>2.7.0.Beta3</version>
         <relativePath/>
     </parent>
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.7.0.Beta2</version>
+    <version>2.7.0.Beta3</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -66,22 +66,17 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-module-upms</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>eurynome-module-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-module-oauth</artifactId>
+                <artifactId>eurynome-module-oauth2</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>oauth-spring-boot-starter</artifactId>
+                <artifactId>oauth2-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -89,32 +84,19 @@
                 <artifactId>service-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-
-
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-oauth-starter</artifactId>
+                <artifactId>eurynome-module-upms-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-starter</artifactId>
+                <artifactId>eurynome-module-upms-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-upms-logic</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-upms-rest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>eurynome-cloud-bpmn-rest</artifactId>
+                <artifactId>eurynome-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

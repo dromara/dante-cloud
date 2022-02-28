@@ -7,12 +7,12 @@
     <parent>
         <groupId>cn.herodotus.eurynome</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.0.Beta2</version>
+        <version>2.7.0.Beta3</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>eurynome-cloud</artifactId>
-    <version>2.7.0.Beta2</version>
+    <version>2.7.0.Beta3</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud</name>
@@ -65,6 +65,7 @@
         <module>modules</module>
         <module>packages</module>
         <module>platform</module>
+        <module>services</module>
     </modules>
 
     <!-- 环境 -->

@@ -7,18 +7,21 @@
     <parent>
         <artifactId>eurynome-cloud</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.7.0.Beta2</version>
+        <version>2.7.0.Beta3</version>
     </parent>
 
     <artifactId>modules</artifactId>
-    <version>2.7.0.Beta2</version>
+    <version>2.7.0.Beta3</version>
     <packaging>pom</packaging>
+
+    <name>eurynome-cloud-modules</name>
 
     <modules>
         <module>eurynome-module-common</module>
-        <module>eurynome-module-upms</module>
-        <module>eurynome-module-oauth</module>
         <module>eurynome-module-security</module>
+        <module>eurynome-module-oauth2</module>
+        <module>eurynome-module-upms-logic</module>
+        <module>eurynome-module-upms-rest</module>
     </modules>
 
 </project>

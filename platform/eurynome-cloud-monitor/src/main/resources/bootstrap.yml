@@ -1,0 +1,21 @@
+server:
+  port: 8845
+spring:
+  application:
+    name: @artifactId@ #拿到POM文件中的值
+  profiles:
+    active: @profile.name@
+  cloud:
+    nacos:
+      config:
+        namespace: @config.namespace@
+        server-addr: @config.server-addr@
+        file-extension: yaml
+      discovery:
+        namespace: @config.namespace@
+        server-addr: @discovery.server-addr@
+
+management:
+  health:
+    redis:
+      enabled: false

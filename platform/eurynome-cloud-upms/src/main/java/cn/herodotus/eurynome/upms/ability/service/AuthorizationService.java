@@ -56,7 +56,7 @@ public class AuthorizationService extends AbstractRest {
                 .addMsgConvertor(new FastjsonMsgConvertor())
                 .build();
 
-        String clientDetails = "articles-client:123456";
+        String clientDetails = "articles-client:{bcrypt}123456";
 
         return http.sync("/oauth2/token")
                 .bodyType(OkHttps.JSON)
