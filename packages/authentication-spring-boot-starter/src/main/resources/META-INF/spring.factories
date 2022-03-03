@@ -1,3 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  cn.herodotus.eurynome.oauth2.autoconfigure.AutoConfiguration,\
+  cn.herodotus.eurynome.authentication.autoconfigure.AutoConfiguration,\
   cn.herodotus.eurynome.module.oauth2.autoconfigure.OAuth2ModuleConfiguration

@@ -76,7 +76,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>oauth2-spring-boot-starter</artifactId>
+                <artifactId>authentication-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

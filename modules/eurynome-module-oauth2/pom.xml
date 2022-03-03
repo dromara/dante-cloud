@@ -57,17 +57,7 @@
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-sdk-granter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-sdk-identification</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-sdk-manager</artifactId>
+            <artifactId>oauth2-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

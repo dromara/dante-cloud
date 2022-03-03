@@ -25,7 +25,6 @@
 
 package cn.herodotus.eurynome.module.upms.logic.service.assistant;
 
-import cn.herodotus.engine.data.core.enums.ApplicationType;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.eurynome.module.upms.logic.enums.Gender;
 import cn.herodotus.eurynome.module.upms.logic.enums.Identity;
@@ -46,7 +45,6 @@ import java.util.Map;
 public class ConstantsService {
 
     private static final List<Map<String, Object>> STATUS_ENUM = DataItemStatus.getToJsonStruct();
-    private static final List<Map<String, Object>> APPLICATION_TYPE_ENUM = ApplicationType.getToJsonStruct();
     private static final List<Map<String, Object>> GENDER_ENUM = Gender.getToJsonStruct();
     private static final List<Map<String, Object>> IDENTITY_ENUM = Identity.getToJsonStruct();
     private static final List<Map<String, Object>> ORGANIZATION_CATEGORY_ENUM = OrganizationCategory.getToJsonStruct();
@@ -54,7 +52,6 @@ public class ConstantsService {
     public Map<String, Object> getAllEnums() {
         Map<String, Object> map = new HashMap<>(8);
         map.put("status", STATUS_ENUM);
-        map.put("applicationType", APPLICATION_TYPE_ENUM);
         map.put("gender", GENDER_ENUM);
         map.put("identity", IDENTITY_ENUM);
         map.put("organizationCategory", ORGANIZATION_CATEGORY_ENUM);

@@ -23,17 +23,27 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.eurynome.module.upms.logic.repository.system;
+package cn.herodotus.eurynome.authentication.autoconfigure;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.eurynome.module.upms.logic.entity.system.SysScope;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
 
 /**
- * <p> Description : OauthScopeRepository </p>
+ * <p>Description: TODO </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/19 16:57
+ * @date : 2022/2/18 12:23
  */
-public interface SysScopeRepository extends BaseRepository<SysScope, String> {
+@Configuration(proxyBeanMethods = false)
+public class AutoConfiguration {
 
+    private static final Logger log = LoggerFactory.getLogger(AutoConfiguration.class);
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Herodotus] |- Starter [Herodotus OAuth Starter] Auto Configure.");
+    }
 }

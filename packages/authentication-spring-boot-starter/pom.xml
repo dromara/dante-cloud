@@ -35,7 +35,7 @@
         <version>2.7.0.Beta3</version>
     </parent>
 
-    <artifactId>oauth2-spring-boot-starter</artifactId>
+    <artifactId>authentication-spring-boot-starter</artifactId>
     <version>2.7.0.Beta3</version>
     <packaging>jar</packaging>
 

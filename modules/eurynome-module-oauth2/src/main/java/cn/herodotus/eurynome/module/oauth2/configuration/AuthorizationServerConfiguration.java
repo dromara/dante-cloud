@@ -14,7 +14,6 @@ import cn.herodotus.engine.oauth2.granter.customizer.HerodotusTokenCustomizer;
 import cn.herodotus.engine.oauth2.granter.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import cn.herodotus.engine.oauth2.granter.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import cn.herodotus.engine.oauth2.granter.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.oauth2.manager.configuration.OAuth2ManagerConfiguration;
 import cn.herodotus.eurynome.module.oauth2.extend.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.eurynome.module.oauth2.properties.OauthProperties;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -27,12 +26,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
@@ -67,9 +64,6 @@ import java.util.UUID;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties({OauthProperties.class})
-@Import({
-        OAuth2ManagerConfiguration.class
-})
 public class AuthorizationServerConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);

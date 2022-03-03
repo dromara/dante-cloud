@@ -10,7 +10,6 @@
 
 package cn.herodotus.eurynome.module.oauth2.autoconfigure;
 
-import cn.herodotus.engine.oauth2.identification.configuration.OAuth2IdentificationConfiguration;
 import cn.herodotus.eurynome.module.oauth2.configuration.AuthorizationServerConfiguration;
 import cn.herodotus.eurynome.module.oauth2.configuration.DefaultSecurityConfiguration;
 import cn.herodotus.eurynome.module.upms.logic.configuration.UpmsLogicModuleConfiguration;
@@ -32,7 +31,6 @@ import javax.annotation.PostConstruct;
 @Configuration(proxyBeanMethods = false)
 @Import({
         UpmsLogicModuleConfiguration.class,
-        OAuth2IdentificationConfiguration.class,
         DefaultSecurityConfiguration.class,
         AuthorizationServerConfiguration.class,
 })

@@ -39,7 +39,7 @@
     <name>eurynome-cloud-packages</name>
 
     <modules>
-        <module>oauth2-spring-boot-starter</module>
+        <module>authentication-spring-boot-starter</module>
         <module>service-spring-boot-starter</module>
     </modules>
 
