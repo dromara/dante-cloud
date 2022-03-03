@@ -28,14 +28,19 @@ package cn.herodotus.eurynome.module.upms.logic.service.system;
 import cn.herodotus.engine.assistant.core.enums.AuthorityType;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
+import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.module.upms.logic.repository.system.SysAuthorityRepository;
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>Description: SysAuthorityService </p>
@@ -69,5 +74,31 @@ public class SysAuthorityService extends BaseLayeredService<SysAuthority, String
         List<SysAuthority> sysAuthorities = sysAuthorityRepository.findAllByAuthorityType(authorityType);
         log.debug("[Herodotus] |- SysAuthority Service findAllByAuthorityType.");
         return sysAuthorities;
+    }
+
+    public List<SysAuthority> storeRequestMappings(Collection<RequestMapping> requestMappings) {
+        List<SysAuthority> sysAuthorities = toSysAuthorities(requestMappings);
+        return batchSaveOrUpdate(sysAuthorities);
+    }
+
+    private List<SysAuthority> toSysAuthorities(Collection<RequestMapping> requestMappings) {
+        if (CollectionUtils.isNotEmpty(requestMappings)) {
+            return requestMappings.stream().map(this::toSysAuthority).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    private SysAuthority toSysAuthority(RequestMapping requestMapping) {
+        SysAuthority sysAuthority = new SysAuthority();
+        sysAuthority.setAuthorityId(requestMapping.getMetadataId());
+        sysAuthority.setAuthorityName(requestMapping.getMetadataName());
+        sysAuthority.setAuthorityCode(requestMapping.getMetadataCode());
+        sysAuthority.setRequestMethod(requestMapping.getRequestMethod());
+        sysAuthority.setServiceId(requestMapping.getServiceId());
+        sysAuthority.setUrl(requestMapping.getUrl());
+        sysAuthority.setParentId(requestMapping.getParentId());
+        sysAuthority.setClassName(requestMapping.getClassName());
+        sysAuthority.setMethodName(requestMapping.getMethodName());
+        return sysAuthority;
     }
 }

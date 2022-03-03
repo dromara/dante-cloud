@@ -29,15 +29,14 @@ package cn.herodotus.eurynome.module.upms.logic.helper;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.security.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.security.core.utils.SecurityUtils;
-import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysUser;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>Description: 实体转换帮助类 </p>
@@ -63,26 +62,5 @@ public class UpmsHelper {
                 sysUser.getStatus() != DataItemStatus.LOCKING,
                 sysUser.getStatus() != DataItemStatus.EXPIRED,
                 sysUser.getStatus() != DataItemStatus.EXPIRED, authorities);
-    }
-
-    public static List<SysAuthority> convertRequestMappingsToSysAuthorities(Collection<RequestMapping> requestMappings) {
-        if (CollectionUtils.isNotEmpty(requestMappings)) {
-            return requestMappings.stream().map(UpmsHelper::convertRequestMappingToSysAuthority).collect(Collectors.toList());
-        }
-        return new ArrayList<>();
-    }
-
-    private static SysAuthority convertRequestMappingToSysAuthority(RequestMapping requestMapping) {
-        SysAuthority sysAuthority = new SysAuthority();
-        sysAuthority.setAuthorityId(requestMapping.getMetadataId());
-        sysAuthority.setAuthorityName(requestMapping.getMetadataName());
-        sysAuthority.setAuthorityCode(requestMapping.getMetadataCode());
-        sysAuthority.setRequestMethod(requestMapping.getRequestMethod());
-        sysAuthority.setServiceId(requestMapping.getServiceId());
-        sysAuthority.setUrl(requestMapping.getUrl());
-        sysAuthority.setParentId(requestMapping.getParentId());
-        sysAuthority.setClassName(requestMapping.getClassName());
-        sysAuthority.setMethodName(requestMapping.getMethodName());
-        return sysAuthority;
     }
 }

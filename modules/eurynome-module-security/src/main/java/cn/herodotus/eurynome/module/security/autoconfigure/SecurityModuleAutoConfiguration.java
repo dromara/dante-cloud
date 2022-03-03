@@ -11,10 +11,14 @@
 package cn.herodotus.eurynome.module.security.autoconfigure;
 
 import cn.herodotus.engine.security.core.properties.SecurityProperties;
+import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.eurynome.module.security.configuration.WebMvcSecurityConfiguration;
+import cn.herodotus.eurynome.module.security.processor.HerodotusRequestMappingScanManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -42,5 +46,13 @@ public class SecurityModuleAutoConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.info("[Herodotus] |- SDK [Module Security] Auto Configure.");
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public RequestMappingScanManager requestMappingScanManager() {
+        HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager();
+        log.debug("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
+        return herodotusRequestMappingScanManager;
     }
 }

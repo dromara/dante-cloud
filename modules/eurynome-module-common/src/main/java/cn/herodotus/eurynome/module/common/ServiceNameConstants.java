@@ -20,5 +20,5 @@ public interface ServiceNameConstants {
 
     String SERVICE_NAME_UAA = "eurynome-cloud-uaa";
 
-    String SERVICE_NAME_UPMS = "eurynome-cloud-upms-ability";
+    String SERVICE_NAME_UPMS = "eurynome-cloud-upms";
 }

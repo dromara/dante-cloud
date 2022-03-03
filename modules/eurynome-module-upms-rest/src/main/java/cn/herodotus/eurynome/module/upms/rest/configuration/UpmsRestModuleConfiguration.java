@@ -28,6 +28,8 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.eurynome.module.upms.rest.controller.hr",
         "cn.herodotus.eurynome.module.upms.rest.controller.system",
         "cn.herodotus.eurynome.module.upms.rest.controller.assistant",
+        "cn.herodotus.eurynome.module.upms.rest.processor",
+        "cn.herodotus.eurynome.module.upms.rest.listener",
 })
 public class UpmsRestModuleConfiguration {
 

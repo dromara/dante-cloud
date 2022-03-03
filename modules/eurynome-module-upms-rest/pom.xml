@@ -46,8 +46,8 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>rest-spring-boot-starter</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>eurynome-module-security</artifactId>
         </dependency>
     </dependencies>
 
