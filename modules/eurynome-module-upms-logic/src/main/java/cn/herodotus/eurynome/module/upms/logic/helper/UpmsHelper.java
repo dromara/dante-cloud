@@ -27,13 +27,13 @@ package cn.herodotus.eurynome.module.upms.logic.helper;
 
 
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
+import cn.herodotus.engine.security.core.definition.domain.HerodotusGrantedAuthority;
 import cn.herodotus.engine.security.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.security.core.utils.SecurityUtils;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysUser;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -47,13 +47,13 @@ import java.util.Set;
 public class UpmsHelper {
 
     public static HerodotusUser convertSysUserToHerodotusUserDetails(SysUser sysUser) {
-        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        Set<HerodotusGrantedAuthority> authorities = new HashSet<>();
 
         for (SysRole sysRole : sysUser.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
+            authorities.add(new HerodotusGrantedAuthority(SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
             Set<SysAuthority> sysAuthorities = sysRole.getAuthorities();
             if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-                sysAuthorities.forEach(sysAuthority -> authorities.add(new SimpleGrantedAuthority((sysAuthority.getAuthorityCode()))));
+                sysAuthorities.forEach(sysAuthority -> authorities.add(new HerodotusGrantedAuthority((sysAuthority.getAuthorityCode()))));
             }
         }
 

@@ -120,8 +120,6 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
     })
     @GetMapping("/tree")
     public Result<List<Tree<String>>> findTree(@RequestParam(value = "category", required = false) Integer category) {
-        Result<List<Tree<String>>> result = new Result<>();
-
         List<SysOrganization> sysOrganizations = getSysOrganizations(category);
         if (ObjectUtils.isNotEmpty(sysOrganizations)) {
             final String[] rootId = {null};
@@ -135,9 +133,9 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
                 }
                 return treeNode;
             }).collect(Collectors.toList());
-            return result.ok().message("查询数据成功").data(TreeUtil.build(treeNodes, rootId[0]));
+            return Result.success("查询数据成功", TreeUtil.build(treeNodes, rootId[0]));
         } else {
-            return result.failed().message("查询数据失败");
+            return Result.failure("查询数据失败");
         }
     }
 
@@ -145,10 +143,10 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
     public Result<String> delete(@RequestBody String id) {
         boolean isInUse = sysOrganizationService.isInUse(id);
         if (isInUse) {
-            return new Result<String>().failed().message("该单位被部分部门引用，请删除关联关系后再删除！");
+            return Result.failure("该单位被部分部门引用，请删除关联关系后再删除！");
         } else {
             sysOrganizationService.deleteById(id);
-            return new Result<String>().ok().message("删除成功！");
+            return Result.success("删除成功！");
         }
     }
 }

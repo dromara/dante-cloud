@@ -117,9 +117,9 @@ public class SysDepartmentController extends BaseWriteableRestController<SysDepa
                 treeNode.setParentId(sysDepartment.getParentId());
                 return treeNode;
             }).collect(Collectors.toList());
-            return result.ok().message("查询数据成功").data(TreeUtil.build(treeNodes, null));
+            return Result.success("查询数据成功", TreeUtil.build(treeNodes, null));
         } else {
-            return result.failed().message("查询数据失败");
+            return Result.failure("查询数据失败");
         }
     }
 }

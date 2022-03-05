@@ -12,6 +12,7 @@ package cn.herodotus.eurynome.module.security.autoconfigure;
 
 import cn.herodotus.engine.security.core.properties.SecurityProperties;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
+import cn.herodotus.eurynome.module.security.configuration.MethodSecurityMetadataConfiguration;
 import cn.herodotus.eurynome.module.security.configuration.WebMvcSecurityConfiguration;
 import cn.herodotus.eurynome.module.security.processor.HerodotusRequestMappingScanManager;
 import org.slf4j.Logger;
@@ -36,7 +37,8 @@ import javax.annotation.PostConstruct;
         SecurityProperties.class,
 })
 @Import({
-        WebMvcSecurityConfiguration.class
+        WebMvcSecurityConfiguration.class,
+        MethodSecurityMetadataConfiguration.class
 })
 @EnableAsync
 public class SecurityModuleAutoConfiguration {
