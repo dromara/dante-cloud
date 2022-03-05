@@ -41,6 +41,7 @@ spring:
         port: 8719
         dashboard: @sentinel.server-addr@
 
+
 logging:
   file:
     name: logs/${spring.application.name}.log

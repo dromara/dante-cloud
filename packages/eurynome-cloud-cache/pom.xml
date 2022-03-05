@@ -27,12 +27,12 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.6.4.0</version>
+        <version>2.6.4.10</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>eurynome-cloud-cache</artifactId>
-    <version>2.6.4.0</version>
+    <version>2.6.4.10</version>
     <packaging>jar</packaging>
 
     <description>将Cache和Redis相关抽取出独立组件包。降低代码耦合性，提升代码包的独立性。解决依赖过多，使用过程中还需要进行排除的问题。</description>

@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.6.4.0</version>
+    <version>2.6.4.10</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -75,7 +75,7 @@
         <commons-text.version>1.9</commons-text.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.11.0</commons-io.version>
-        <guava.version>31.0.1-jre</guava.version>
+        <guava.version>31.1-jre</guava.version>
         <antisamy.version>1.6.5</antisamy.version>
 
         <!-- 应用开发辅助工具组件 -->
@@ -92,20 +92,20 @@
         <sentinel.version>1.8.3</sentinel.version>
 
         <!-- 国内开源通用组件 -->
-        <hutool.version>5.7.21</hutool.version>
+        <hutool.version>5.7.22</hutool.version>
         <okhttps.version>3.4.2</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
-        <weixin-java-sdk.version>4.2.5.B</weixin-java-sdk.version>
+        <weixin-java-sdk.version>4.2.7.B</weixin-java-sdk.version>
 
         <!--支付 SDK-->
-        <alipay-sdk-java.version>4.22.37.ALL</alipay-sdk-java.version>
+        <alipay-sdk-java.version>4.22.49.ALL</alipay-sdk-java.version>
 
         <!--第三方starter-->
         <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
         <camunda-bpm-spring-boot-starter-rest.version>7.16.0</camunda-bpm-spring-boot-starter-rest.version>
         <mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
-        <mybatis-plus-generator.version>3.5.1</mybatis-plus-generator.version>
+        <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
         <mybatis.version>3.5.9</mybatis.version>
         <velocity.version>2.3</velocity.version>
 

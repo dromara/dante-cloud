@@ -5,6 +5,8 @@ spring:
     prefix: classpath:/templates
 
 springdoc:
+  cache:
+    disabled: true
   api-docs:
     resolve-schema-properties: true
   swagger-ui:
@@ -14,7 +16,9 @@ springdoc:
     show-common-extensions: true
     show-extensions: true
     oauth:
-      use-pkce-with-authorization-code-grant: true
+      use-pkce-with-authorization-code-grant: false
+      client-id: 010e659a-4005-4610-98f6-00b822f4758e
+      client-secret: 04165a07-cffd-45cf-a20a-1c2a69f65fb1
       app-name: ${spring.application.name}
 
 management:
