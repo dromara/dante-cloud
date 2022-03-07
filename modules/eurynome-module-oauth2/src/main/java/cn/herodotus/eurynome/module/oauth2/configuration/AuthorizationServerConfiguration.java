@@ -10,24 +10,28 @@
 
 package cn.herodotus.eurynome.module.oauth2.configuration;
 
+import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
+import cn.herodotus.engine.oauth2.core.enums.Certificate;
+import cn.herodotus.engine.oauth2.core.properties.EndpointProperties;
+import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
 import cn.herodotus.engine.oauth2.granter.customizer.HerodotusTokenCustomizer;
 import cn.herodotus.engine.oauth2.granter.password.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import cn.herodotus.engine.oauth2.granter.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import cn.herodotus.engine.oauth2.granter.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.eurynome.module.oauth2.extend.HerodotusAuthenticationFailureHandler;
-import cn.herodotus.eurynome.module.oauth2.properties.OauthProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -43,11 +47,13 @@ import org.springframework.security.oauth2.server.authorization.web.authenticati
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
+import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -63,7 +69,6 @@ import java.util.UUID;
  * @date : 2022/2/12 20:57
  */
 @Configuration(proxyBeanMethods = false)
-@EnableConfigurationProperties({OauthProperties.class})
 public class AuthorizationServerConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
@@ -105,13 +110,13 @@ public class AuthorizationServerConfiguration {
 
         SecurityFilterChain securityFilterChain = httpSecurity.formLogin(Customizer.withDefaults()).build();
 
-        addOAuth2ResourceOwnerPasswordAuthenticationProvider(httpSecurity);
+        addAuthenticationProvider(httpSecurity);
 
         return securityFilterChain;
     }
 
     @NotNull
-    private OAuth2ResourceOwnerPasswordAuthenticationProvider addOAuth2ResourceOwnerPasswordAuthenticationProvider(HttpSecurity httpSecurity) {
+    private void addAuthenticationProvider(HttpSecurity httpSecurity) {
         AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
         OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = OAuth2ConfigurerUtils.getJwtCustomizer(httpSecurity);
         JwtEncoder jwtEncoder = OAuth2ConfigurerUtils.getJwtEncoder(httpSecurity);
@@ -124,14 +129,35 @@ public class AuthorizationServerConfiguration {
             resourceOwnerPasswordAuthenticationProvider.setJwtCustomizer(jwtCustomizer);
         }
         resourceOwnerPasswordAuthenticationProvider.setProviderSettings(providerSettings);
-        return resourceOwnerPasswordAuthenticationProvider;
+        httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        keyPairGenerator.initialize(2048);
-        KeyPair keyPair = keyPairGenerator.generateKeyPair();
+    public JWKSource<SecurityContext> jwkSource(OAuth2Properties oAuth2Properties) throws NoSuchAlgorithmException {
+
+        OAuth2Properties.Jwk jwk = oAuth2Properties.getJwk();
+
+        KeyPair keyPair = null;
+        if (jwk.getCertificate() == Certificate.CUSTOM) {
+
+            try {
+                Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
+                if (ArrayUtils.isNotEmpty(resource)) {
+                    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(resource[0], jwk.getJksStorePassword().toCharArray());
+                    keyPair = keyStoreKeyFactory.getKeyPair(jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            keyPairGenerator.initialize(2048);
+            keyPair = keyPairGenerator.generateKeyPair();
+        }
+
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
         RSAKey rsaKey = new RSAKey.Builder(publicKey)
@@ -150,17 +176,17 @@ public class AuthorizationServerConfiguration {
         return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
     }
 
-
-    @Bean
-    public ProviderSettings providerSettings(OauthProperties oauthProperties) {
-        return ProviderSettings.builder()
-                .issuer(oauthProperties.getIssuerUrl())
-                .build();
-    }
-
     @Bean
     public OAuth2TokenCustomizer<JwtEncodingContext> oAuth2TokenCustomizer() {
         HerodotusTokenCustomizer herodotusTokenCustomizer = new HerodotusTokenCustomizer();
+        log.trace("[Herodotus] |- Bean [OAuth2 Token Customizer] Auto Configure.");
         return herodotusTokenCustomizer;
+    }
+
+    @Bean
+    public ProviderSettings providerSettings(EndpointProperties endpointProperties) {
+        return ProviderSettings.builder()
+                .issuer(endpointProperties.getIssuerUri())
+                .build();
     }
 }

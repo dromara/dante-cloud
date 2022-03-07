@@ -59,7 +59,6 @@ ribbon:
     enabled: false
 
 herodotus:
-  platform:
-    rest:
-      scan:
-        enabled: ${herodotus.switch.rest.scan.enabled}
+  rest:
+    scan:
+      enabled: ${herodotus.switch.rest.scan.enabled}
