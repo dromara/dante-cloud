@@ -25,7 +25,7 @@
 
 package cn.herodotus.eurynome.module.upms.logic.service.hr;
 
-import cn.herodotus.engine.assistant.core.exception.TransactionRollbackException;
+import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import cn.herodotus.eurynome.module.upms.logic.dto.AllocatableDeploy;

@@ -25,7 +25,7 @@
 
 package cn.herodotus.eurynome.bpmn.logic.domain.base;
 
-import cn.herodotus.engine.assistant.core.domain.entity.Entity;
+import cn.herodotus.engine.assistant.core.definition.domain.Entity;
 
 import javax.persistence.MappedSuperclass;
 

@@ -22,6 +22,8 @@
 
 package cn.herodotus.eurynome.module.security.configuration;
 
+import cn.herodotus.engine.security.core.properties.SecurityProperties;
+import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.eurynome.module.security.processor.HerodotusRequestMappingScanManager;
 import org.slf4j.Logger;
@@ -50,5 +52,12 @@ public class MethodSecurityMetadataConfiguration extends GlobalMethodSecurityCon
         HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager();
         log.trace("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
         return herodotusRequestMappingScanManager;
+    }
+
+    @Bean
+    public HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler(SecurityProperties securityProperties) {
+        HerodotusSecurityConfigureHandler herodotusSecurityRequestMatcherHandler = new HerodotusSecurityConfigureHandler(securityProperties);
+        log.trace("[Herodotus] |- Bean [Herodotus Security Configure Handler] Auto Configure.");
+        return herodotusSecurityRequestMatcherHandler;
     }
 }

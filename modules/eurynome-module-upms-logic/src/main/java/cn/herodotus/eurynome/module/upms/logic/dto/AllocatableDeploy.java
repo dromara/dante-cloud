@@ -25,7 +25,7 @@
 
 package cn.herodotus.eurynome.module.upms.logic.dto;
 
-import cn.herodotus.engine.assistant.core.domain.dto.BaseDto;
+import cn.herodotus.engine.assistant.core.definition.dto.BaseDto;
 import cn.herodotus.eurynome.module.upms.logic.entity.hr.SysDepartment;
 import cn.herodotus.eurynome.module.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.eurynome.module.upms.logic.entity.hr.SysOwnership;

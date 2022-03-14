@@ -10,19 +10,26 @@
 
 package cn.herodotus.eurynome.module.oauth2.configuration;
 
+import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
+import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.module.oauth2.service.HerodotusOauthUserDetailsService;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 import javax.annotation.PostConstruct;
 
@@ -37,6 +44,9 @@ public class DefaultSecurityConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
 
+    @Autowired
+    private HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
+
     @PostConstruct
     public void postConstruct() {
         log.debug("[Herodotus] |- SDK [OAuth2 Default Security] Auto Configure.");
@@ -49,13 +59,22 @@ public class DefaultSecurityConfiguration {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+
+        // @formatter:off
         http.authorizeRequests()
-                .antMatchers("/open/**","/favicon.ico").permitAll()
+                .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
+                .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
+                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                .and()
                 .csrf().disable();
+        // @formatter:on
         return http.build();
     }
 
@@ -64,7 +83,7 @@ public class DefaultSecurityConfiguration {
     @ConditionalOnMissingBean
     UserDetailsService userDetailsService(SysUserService sysUserService) {
         HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService(sysUserService);
-        log.debug("[Herodotus] |- Core [Herodotus Oauth User Details Service] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Herodotus Oauth User Details Service] Auto Configure.");
         return herodotusOauthUserDetailsService;
     }
 }

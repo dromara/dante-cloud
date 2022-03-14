@@ -37,7 +37,7 @@ spring:
         shared-configs:
           - data-id: eurynome-cloud-environment.yaml
             group: @profile.name@
-          - data-id: herodotus-cloud-platform.yaml
+          - data-id: eurynome-cloud-platform.yaml
             group: common
           - data-id: eurynome-cloud-redis.yaml
             group: common

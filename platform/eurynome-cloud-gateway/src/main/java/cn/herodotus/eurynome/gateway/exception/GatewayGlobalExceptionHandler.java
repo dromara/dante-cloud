@@ -23,8 +23,8 @@
 package cn.herodotus.eurynome.gateway.exception;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.assistant.core.enums.ResultStatus;
-import cn.herodotus.engine.assistant.core.exception.HerodotusExceptionHandler;
+import cn.herodotus.engine.assistant.core.enums.ResultErrorCodes;
+import cn.herodotus.engine.assistant.core.exception.GlobalExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
@@ -120,20 +120,20 @@ public class GatewayGlobalExceptionHandler implements ErrorWebExceptionHandler {
 
         Result<String> result = new Result<String>().path(path);
         if (ex instanceof NotFoundException) {
-            result.type(ResultStatus.SERVICE_UNAVAILABLE).status(HttpStatus.SERVICE_UNAVAILABLE.value());
+            result.type(ResultErrorCodes.SERVER_ERROR).status(HttpStatus.SERVICE_UNAVAILABLE.value());
             log.error("[Herodotus] |- ERROR ==> Service Unavailable : {}", result);
         } else if (ex instanceof ResponseStatusException) {
             ResponseStatusException responseStatusException = (ResponseStatusException) ex;
             HttpStatus httpStatus = responseStatusException.getStatus();
             result.status(responseStatusException.getStatus().value());
 
-            ResultStatus resultType = ResultStatus.valueOf(httpStatus.name());
+            ResultErrorCodes resultType = ResultErrorCodes.valueOf(httpStatus.name());
 
             result.type(resultType);
 
             log.error("[Herodotus] |- ERROR ==> Response Status Exception : {}", result);
         } else {
-            result = HerodotusExceptionHandler.resolveException((Exception) ex, path);
+            result = GlobalExceptionHandler.resolveException((Exception) ex, path);
         }
 
         /**
