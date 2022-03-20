@@ -23,10 +23,10 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.eurynome.upms.ability.controller;
+package cn.herodotus.eurynome.upms.controller;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.eurynome.upms.ability.service.AuthorizationService;
+import cn.herodotus.eurynome.upms.service.AuthorizationService;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

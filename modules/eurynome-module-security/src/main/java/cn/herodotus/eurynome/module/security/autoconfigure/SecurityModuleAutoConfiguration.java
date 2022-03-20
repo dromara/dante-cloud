@@ -13,7 +13,6 @@ package cn.herodotus.eurynome.module.security.autoconfigure;
 import cn.herodotus.engine.security.core.properties.SecurityProperties;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.eurynome.module.security.configuration.MethodSecurityMetadataConfiguration;
-import cn.herodotus.eurynome.module.security.configuration.WebMvcSecurityConfiguration;
 import cn.herodotus.eurynome.module.security.processor.HerodotusRequestMappingScanManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +20,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -37,10 +37,10 @@ import javax.annotation.PostConstruct;
         SecurityProperties.class,
 })
 @Import({
-        WebMvcSecurityConfiguration.class,
         MethodSecurityMetadataConfiguration.class
 })
 @EnableAsync
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class SecurityModuleAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityModuleAutoConfiguration.class);

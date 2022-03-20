@@ -23,7 +23,7 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.eurynome.module.oauth2.service;
+package cn.herodotus.eurynome.authentication.service;
 
 import cn.herodotus.engine.assistant.core.domain.AccessPrincipal;
 import cn.herodotus.engine.security.core.definition.domain.HerodotusUser;

@@ -23,9 +23,9 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.eurynome.upms.ability.service;
+package cn.herodotus.eurynome.upms.service;
 
-import cn.herodotus.engine.assistant.core.definition.AbstractRest;
+import cn.herodotus.engine.assistant.core.definition.http.AbstractRest;
 import cn.hutool.core.codec.Base64;
 import com.ejlchina.data.TypeRef;
 import com.ejlchina.okhttps.HTTP;

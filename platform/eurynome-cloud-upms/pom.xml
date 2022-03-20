@@ -39,6 +39,10 @@
             <groupId>cn.herodotus.eurynome</groupId>
             <artifactId>service-spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.herodotus.eurynome</groupId>
+            <artifactId>eurynome-module-upms-rest</artifactId>
+        </dependency>
     </dependencies>
 
     <!-- 需要以服务方式运行的包，按照以下进行build plugin的配置，以便支持docker打包；-->

@@ -23,31 +23,36 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.eurynome.module.oauth2.extend;
+package cn.herodotus.eurynome.upms.configuration;
 
+import cn.herodotus.eurynome.module.upms.logic.configuration.UpmsLogicModuleConfiguration;
+import cn.herodotus.eurynome.module.upms.rest.configuration.UpmsRestModuleConfiguration;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import javax.annotation.PostConstruct;
 
 /**
- * <p>Description: 自定义 Security 认证成功处理器 </p>
+ *
+ * <p>Description: Upms 服务配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/25 16:53
+ * @date : 2021/1/19 15:24
  */
-public class HerodotusAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+@Configuration(proxyBeanMethods = false)
+@Import({
+        UpmsLogicModuleConfiguration.class,
+        UpmsRestModuleConfiguration.class
+})
+public class UpmsConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(HerodotusAuthenticationSuccessHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(UpmsConfiguration.class);
 
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
-        log.debug("[Herodotus] |- OAuth2 authentication success for [{}]", request.getRequestURI());
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Service [Upms Ability] Auto Configure.");
     }
 }

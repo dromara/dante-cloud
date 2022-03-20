@@ -22,7 +22,7 @@
 
 package cn.herodotus.eurynome.module.upms.rest.listener;
 
-import cn.herodotus.engine.event.core.local.event.LocalRequestMappingGatherEvent;
+import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.module.upms.rest.processor.RequestMappingStoreProcessor;
 import org.apache.commons.collections.CollectionUtils;

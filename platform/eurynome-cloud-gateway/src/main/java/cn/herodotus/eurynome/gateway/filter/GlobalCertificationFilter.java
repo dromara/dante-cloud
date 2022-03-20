@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.gateway.filter;
 
-import cn.herodotus.engine.assistant.core.constants.SecurityConstants;
+import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.assistant.core.enums.ResultStatus;
+import cn.herodotus.engine.assistant.core.enums.ResultErrorCodes;
 import cn.herodotus.eurynome.gateway.properties.GatewaySecurityProperties;
 import cn.herodotus.eurynome.gateway.utils.WebFluxUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -98,15 +98,15 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (!isTokenWellFormed(token)) {
             log.debug("[Herodotus] |- Token is not Well Formed!");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.UNAUTHORIZED).status(HttpStatus.SC_UNAUTHORIZED));
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_UNAUTHORIZED));
         }
 
         // 3. 非免登陆接口，同时也有格式正确的Token，那么就验证Token是否过期
         //    就看Redis中，是否有这个Token
-        String redisTokenKey = StringUtils.replace(token, SecurityConstants.BEARER_TOKEN, "access:");
+        String redisTokenKey = StringUtils.replace(token, BaseConstants.BEARER_TOKEN, "access:");
         if (!redisTemplate.hasKey(redisTokenKey)) {
             log.debug("[Herodotus] |- Token is Expired！");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultStatus.INVALID_TOKEN).status(HttpStatus.SC_PRECONDITION_FAILED));
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.INVALID_TOKEN).status(HttpStatus.SC_PRECONDITION_FAILED));
         } else {
             log.debug("[Herodotus] |- Token is OK！");
             return chain.filter(exchange);
@@ -119,6 +119,6 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
     }
 
     private boolean isTokenWellFormed(String token) {
-        return !StringUtils.isBlank(token) && !StringUtils.containsOnly(token, SecurityConstants.BEARER_TOKEN);
+        return !StringUtils.isBlank(token) && !StringUtils.containsOnly(token, BaseConstants.BEARER_TOKEN);
     }
 }

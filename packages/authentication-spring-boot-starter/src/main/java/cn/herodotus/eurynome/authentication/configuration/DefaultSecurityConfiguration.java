@@ -23,53 +23,82 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.eurynome.service.autoconfigure;
+package cn.herodotus.eurynome.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtGrantedAuthoritiesConverter;
 import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.eurynome.authentication.service.HerodotusOauthUserDetailsService;
+import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+import javax.annotation.PostConstruct;
+
 /**
- * <p>Description: 资源服务器通用配置 </p>
+ * <p>Description: 默认安全配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/1/21 23:56
+ * @date : 2022/2/12 20:53
  */
 @EnableWebSecurity
-public class ResourceServerAutoConfiguration {
+public class DefaultSecurityConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
 
     private final HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
     private final JwtDecoder jwtDecoder;
 
     @Autowired
-    public ResourceServerAutoConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder) {
+    public DefaultSecurityConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder) {
         this.herodotusSecurityConfigureHandler = herodotusSecurityConfigureHandler;
         this.jwtDecoder = jwtDecoder;
     }
 
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Herodotus] |- SDK [OAuth2 Default Security] Auto Configure.");
+    }
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+
+        // 禁用CSRF 开启跨域
+        http.csrf().disable().cors();
 
         // @formatter:off
-        http.authorizeRequests(authorizeRequests ->
+        http.authorizeRequests(authorizeRequests->
                         authorizeRequests
                                 .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
                                 .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
-                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                                 .anyRequest().authenticated())
+                .formLogin(Customizer.withDefaults())
+                .exceptionHandling()
+                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
+                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                .and()
                 .oauth2ResourceServer(configurer ->
                         configurer
                                 .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(jwtAuthenticationConverter()))
@@ -86,5 +115,14 @@ public class ResourceServerAutoConfiguration {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return jwtAuthenticationConverter;
+    }
+
+    @Bean
+    @ConditionalOnBean(SysUserService.class)
+    @ConditionalOnMissingBean
+    UserDetailsService userDetailsService(SysUserService sysUserService) {
+        HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService(sysUserService);
+        log.debug("[Herodotus] |- Core [Herodotus Oauth User Details Service] Auto Configure.");
+        return herodotusOauthUserDetailsService;
     }
 }

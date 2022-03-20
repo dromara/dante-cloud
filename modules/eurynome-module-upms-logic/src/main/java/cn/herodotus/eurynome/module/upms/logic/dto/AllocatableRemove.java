@@ -25,7 +25,7 @@
 
 package cn.herodotus.eurynome.module.upms.logic.dto;
 
-import cn.herodotus.engine.assistant.core.domain.dto.BaseDto;
+import cn.herodotus.engine.assistant.core.definition.domain.AbstractDto;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -38,7 +38,7 @@ import javax.validation.constraints.NotNull;
  * @date : 2021/9/25 10:25
  */
 @Schema(description = "删除人员归属参数BO对象")
-public class AllocatableRemove extends BaseDto {
+public class AllocatableRemove extends AbstractDto {
 
     @NotNull(message = "单位ID不能为空")
     @Schema(description = "单位ID")

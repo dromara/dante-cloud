@@ -10,13 +10,13 @@
 
 package cn.herodotus.eurynome.module.security.processor;
 
-import cn.herodotus.engine.event.core.local.event.LocalRequestMappingGatherEvent;
-import cn.herodotus.engine.event.core.remote.processor.DestinationResolver;
+import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
 import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
+import cn.herodotus.engine.web.core.context.ServiceContext;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
-import cn.herodotus.engine.web.core.support.ServiceContext;
 import cn.herodotus.eurynome.module.common.ServiceNameConstants;
+import org.springframework.cloud.bus.event.PathDestinationFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;
@@ -60,6 +60,6 @@ public class HerodotusRequestMappingScanManager implements RequestMappingScanMan
 
     @Override
     public ApplicationEvent createRemoteGatherEvent(String source, String originService, String destinationService) {
-        return new RemoteRequestMappingGatherEvent(source, originService, DestinationResolver.create(destinationService));
+        return new RemoteRequestMappingGatherEvent(source, originService, new PathDestinationFactory().getDestination(destinationService));
     }
 }
