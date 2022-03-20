@@ -1,7 +1,7 @@
 herodotus:
   endpoint:
-    uaa-service-name: herodotus-cloud-uaa
-    upms-service-name: herodotus-cloud-upms
+    uaa-service-name: eurynome-cloud-uaa
+    upms-service-name: eurynome-cloud-upms
     gateway-service-uri: ${herodotus.environment.gateway-server-addr}
     uaa-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.uaa-service-name}
     upms-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.upms-service-name}
