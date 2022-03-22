@@ -28,7 +28,6 @@ spring:
             group: common
           - data-id: eurynome-cloud-kafka.yaml
             group: common
-
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@

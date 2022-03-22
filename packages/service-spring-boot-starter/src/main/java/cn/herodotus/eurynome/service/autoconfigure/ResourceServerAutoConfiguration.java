@@ -25,22 +25,18 @@
 
 package cn.herodotus.eurynome.service.autoconfigure;
 
-import cn.herodotus.engine.assistant.core.constants.BaseConstants;
-import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtGrantedAuthoritiesConverter;
+import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
 import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
  * <p>Description: 资源服务器通用配置 </p>
@@ -72,19 +68,11 @@ public class ResourceServerAutoConfiguration {
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(configurer ->
                         configurer
-                                .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                                .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
+                                .bearerTokenResolver(new DefaultBearerTokenResolver())
                                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
         // @formatter:on
         return http.build();
-    }
-
-    private JwtAuthenticationConverter jwtAuthenticationConverter() {
-        HerodotusJwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new HerodotusJwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthoritiesClaimName(BaseConstants.AUTHORITIES);
-
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
-        return jwtAuthenticationConverter;
     }
 }

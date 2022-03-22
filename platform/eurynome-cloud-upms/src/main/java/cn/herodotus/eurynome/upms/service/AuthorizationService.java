@@ -29,14 +29,16 @@ import cn.herodotus.engine.assistant.core.definition.http.AbstractRest;
 import cn.hutool.core.codec.Base64;
 import com.ejlchina.data.TypeRef;
 import com.ejlchina.okhttps.HTTP;
+import com.ejlchina.okhttps.MsgConvertor;
 import com.ejlchina.okhttps.OkHttps;
 import com.ejlchina.okhttps.fastjson.FastjsonMsgConvertor;
+import com.ejlchina.okhttps.jackson.JacksonMsgConvertor;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: Spring Authorization Server 授权码模式回调测试接口 </p>
  *
  * @author : gengwei.zheng
  * @date : 2022/2/15 14:11
@@ -49,16 +51,16 @@ public class AuthorizationService extends AbstractRest {
         return "http://192.168.101.10:8847/eurynome-cloud-uaa";
     }
 
+    @Override
+    protected MsgConvertor getMsgConvertor() {
+        return new JacksonMsgConvertor();
+    }
+
     public Map<String, Object> authorized(String code, String state) {
 
-        HTTP http = HTTP.builder()
-                .baseUrl("http://192.168.101.10:8847/eurynome-cloud-uaa")
-                .addMsgConvertor(new FastjsonMsgConvertor())
-                .build();
+         String clientDetails = "14a9cf797931430896ad13a6b1855611:a05fe1fc50ed42a4990c6c6fc4bec398";
 
-        String clientDetails = "articles-client:{bcrypt}123456";
-
-        return http.sync("/oauth2/token")
+        return http().sync("/oauth2/token")
                 .bodyType(OkHttps.JSON)
                 .addHeader("Authorization", "Basic " + Base64.encode(clientDetails) )
                 .addUrlPara("grant_type", "authorization_code")

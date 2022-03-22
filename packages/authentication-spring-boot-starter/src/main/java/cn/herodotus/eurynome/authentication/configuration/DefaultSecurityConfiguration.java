@@ -25,30 +25,28 @@
 
 package cn.herodotus.eurynome.authentication.configuration;
 
-import cn.herodotus.engine.assistant.core.constants.BaseConstants;
-import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtGrantedAuthoritiesConverter;
+import cn.herodotus.engine.oauth2.authorization.ui.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
 import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.authentication.service.HerodotusOauthUserDetailsService;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 import javax.annotation.PostConstruct;
 
@@ -65,11 +63,13 @@ public class DefaultSecurityConfiguration {
 
     private final HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
     private final JwtDecoder jwtDecoder;
+    private final OAuth2UiProperties uiProperties;
 
     @Autowired
-    public DefaultSecurityConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder) {
+    public DefaultSecurityConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder, OAuth2UiProperties uiProperties) {
         this.herodotusSecurityConfigureHandler = herodotusSecurityConfigureHandler;
         this.jwtDecoder = jwtDecoder;
+        this.uiProperties = uiProperties;
     }
 
     @PostConstruct
@@ -93,28 +93,31 @@ public class DefaultSecurityConfiguration {
                         authorizeRequests
                                 .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
                                 .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                                 .anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> {
+                            form.loginPage(uiProperties.getLoginPageUrl()).permitAll()
+                                    .usernameParameter(uiProperties.getUsernameParameter())
+                                    .passwordParameter(uiProperties.getPasswordParameter());
+                            if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
+                                form.failureForwardUrl(uiProperties.getFailureForwardUrl());
+                            }
+                            if (StringUtils.isNotBlank(uiProperties.getSuccessForwardUrl())) {
+                                form.successForwardUrl(uiProperties.getSuccessForwardUrl());
+                            }
+                        }
+                )
                 .exceptionHandling()
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
                 .oauth2ResourceServer(configurer ->
                         configurer
-                                .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                                .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
                                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
         // @formatter:on
         return http.build();
-    }
-
-    private JwtAuthenticationConverter jwtAuthenticationConverter() {
-        HerodotusJwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new HerodotusJwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthoritiesClaimName(BaseConstants.AUTHORITIES);
-
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
-        return jwtAuthenticationConverter;
     }
 
     @Bean

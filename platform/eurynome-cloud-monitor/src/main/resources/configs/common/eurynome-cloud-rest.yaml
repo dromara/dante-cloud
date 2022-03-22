@@ -1,8 +1,13 @@
+server:
+  error:
+    include-exception: true
+    include-message: always
+    include-stacktrace: always
+    include-binding-errors: always
 spring:
   thymeleaf:
     mode: HTML
     cache: false
-    prefix: classpath:/templates
 
 springdoc:
   api-docs:

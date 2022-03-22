@@ -37,7 +37,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
- * <p>Description: TODO </p>
+ * <p>Description: Spring Authorization Server 授权码模式回调测试接口 </p>
  *
  * @author : gengwei.zheng
  * @date : 2022/2/15 14:13
