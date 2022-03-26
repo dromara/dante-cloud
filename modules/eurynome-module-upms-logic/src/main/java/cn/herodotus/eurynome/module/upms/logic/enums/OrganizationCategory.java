@@ -25,6 +25,7 @@
 
 package cn.herodotus.eurynome.module.upms.logic.enums;
 
+import cn.herodotus.engine.assistant.core.definition.enums.BaseUiEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
@@ -43,7 +44,7 @@ import java.util.Map;
  */
 @Schema(title =  "机构类别")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum OrganizationCategory {
+public enum OrganizationCategory implements BaseUiEnum<Integer> {
 
     /**
      * enum
@@ -52,29 +53,30 @@ public enum OrganizationCategory {
     PARTY(1, "党组机构"),
     LEAGUE(2, "团青机构");
 
-    @Schema(title = "索引")
-    private final Integer index;
+    @Schema(title = "枚举值")
+    private final Integer value;
     @Schema(title = "文字")
-    private final String text;
+    private final String description;
 
     private static final Map<Integer, OrganizationCategory> INDEX_MAP = new HashMap<>();
-    private static final List<Map<String, Object>> TO_JSON_STRUCT = new ArrayList<>();
+    private static final List<Map<String, Object>> JSON_STRUCTURE = new ArrayList<>();
 
     static {
         for (OrganizationCategory organizationCategory : OrganizationCategory.values()) {
-            INDEX_MAP.put(organizationCategory.getIndex(), organizationCategory);
-            TO_JSON_STRUCT.add(organizationCategory.getIndex(),
+            INDEX_MAP.put(organizationCategory.getValue(), organizationCategory);
+            JSON_STRUCTURE.add(organizationCategory.getValue(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", organizationCategory.getIndex())
+                            .put("value", organizationCategory.getValue())
                             .put("key", organizationCategory.name())
-                            .put("text", organizationCategory.getText())
+                            .put("text", organizationCategory.getDescription())
+                            .put("index", organizationCategory.getValue())
                             .build());
         }
     }
 
-    OrganizationCategory(Integer index, String text) {
-        this.index = index;
-        this.text = text;
+    OrganizationCategory(Integer value, String description) {
+        this.value = value;
+        this.description = description;
     }
 
     /**
@@ -86,19 +88,21 @@ public enum OrganizationCategory {
      * @return Enum索引
      */
     @JsonValue
-    public Integer getIndex() {
-        return index;
+    @Override
+    public Integer getValue() {
+        return value;
     }
 
-    public String getText() {
-        return this.text;
+    @Override
+    public String getDescription() {
+        return this.description;
     }
 
-    public static OrganizationCategory getOrganizationCategory(Integer index) {
+    public static OrganizationCategory get(Integer index) {
         return INDEX_MAP.get(index);
     }
 
-    public static List<Map<String, Object>> getToJsonStruct() {
-        return TO_JSON_STRUCT;
+    public static List<Map<String, Object>> getPreprocessedJsonStructure() {
+        return JSON_STRUCTURE;
     }
 }

@@ -79,7 +79,7 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
         if (ObjectUtils.isEmpty(category)) {
             return null;
         } else {
-            return OrganizationCategory.getOrganizationCategory(category);
+            return OrganizationCategory.get(category);
         }
     }
 

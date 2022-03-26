@@ -44,10 +44,10 @@ import java.util.Map;
 @Service
 public class ConstantsService {
 
-    private static final List<Map<String, Object>> STATUS_ENUM = DataItemStatus.getToJsonStruct();
-    private static final List<Map<String, Object>> GENDER_ENUM = Gender.getToJsonStruct();
-    private static final List<Map<String, Object>> IDENTITY_ENUM = Identity.getToJsonStruct();
-    private static final List<Map<String, Object>> ORGANIZATION_CATEGORY_ENUM = OrganizationCategory.getToJsonStruct();
+    private static final List<Map<String, Object>> STATUS_ENUM = DataItemStatus.getPreprocessedJsonStructure();
+    private static final List<Map<String, Object>> GENDER_ENUM = Gender.getPreprocessedJsonStructure();
+    private static final List<Map<String, Object>> IDENTITY_ENUM = Identity.getPreprocessedJsonStructure();
+    private static final List<Map<String, Object>> ORGANIZATION_CATEGORY_ENUM = OrganizationCategory.getPreprocessedJsonStructure();
 
     public Map<String, Object> getAllEnums() {
         Map<String, Object> map = new HashMap<>(8);

@@ -89,12 +89,11 @@ public class DefaultSecurityConfiguration {
         http.csrf().disable().cors();
 
         // @formatter:off
-        http.authorizeRequests(authorizeRequests->
-                        authorizeRequests
-                                .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                                .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
-                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                                .anyRequest().authenticated())
+        http.authorizeRequests(authorizeRequests -> authorizeRequests
+                        .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
+                        .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                        .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(form -> {
                             form.loginPage(uiProperties.getLoginPageUrl()).permitAll()
                                     .usernameParameter(uiProperties.getUsernameParameter())
@@ -111,11 +110,11 @@ public class DefaultSecurityConfiguration {
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(configurer ->
-                        configurer
-                                .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
-                                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+                .oauth2ResourceServer(configurer -> configurer
+                        .jwt(jwt -> jwt
+                                .decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
+                        .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                        .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
         // @formatter:on
         return http.build();
     }

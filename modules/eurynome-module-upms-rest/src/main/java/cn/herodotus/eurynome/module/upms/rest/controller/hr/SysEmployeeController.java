@@ -67,14 +67,14 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
 
     private Gender parseGender(Integer gender) {
         if (ObjectUtils.isNotEmpty(gender)) {
-            return Gender.getGender(gender);
+            return Gender.get(gender);
         }
         return null;
     }
 
     private Identity parseIdentity(Integer identity) {
         if (ObjectUtils.isNotEmpty(identity)) {
-            return Identity.getIdentity(identity);
+            return Identity.get(identity);
         }
         return null;
     }
