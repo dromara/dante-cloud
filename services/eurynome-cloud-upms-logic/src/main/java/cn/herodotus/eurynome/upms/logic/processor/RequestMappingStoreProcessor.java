@@ -22,6 +22,7 @@
 
 package cn.herodotus.eurynome.upms.logic.processor;
 
+import cn.herodotus.eurynome.assistant.exception.persistence.TransactionRollbackException;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.upms.logic.helper.UpmsHelper;
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class RequestMappingStoreProcessor {
         this.sysAuthorityService = sysAuthorityService;
     }
 
-    @Async
+    @Transactional(rollbackFor = TransactionRollbackException.class)
     public void postProcess(List<RequestMapping> requestMappings) {
         log.debug("[Herodotus] |- [Async] - Request Mapping Async Process Begin!");
 

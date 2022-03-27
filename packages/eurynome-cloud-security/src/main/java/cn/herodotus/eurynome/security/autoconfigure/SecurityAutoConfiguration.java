@@ -36,10 +36,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.bus.jackson.RemoteApplicationEventScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 
@@ -71,6 +68,7 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 @EnableAsync
+@EnableAspectJAutoProxy(exposeProxy = true)
 @EnableConfigurationProperties({
         SecurityProperties.class
 })
