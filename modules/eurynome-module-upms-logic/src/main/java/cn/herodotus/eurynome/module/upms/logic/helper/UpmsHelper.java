@@ -27,9 +27,9 @@ package cn.herodotus.eurynome.module.upms.logic.helper;
 
 
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
-import cn.herodotus.engine.security.core.definition.domain.HerodotusGrantedAuthority;
-import cn.herodotus.engine.security.core.definition.domain.HerodotusUser;
-import cn.herodotus.engine.security.core.utils.SecurityUtils;
+import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusGrantedAuthority;
+import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
+import cn.herodotus.engine.oauth2.core.utils.SecurityUtils;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysUser;

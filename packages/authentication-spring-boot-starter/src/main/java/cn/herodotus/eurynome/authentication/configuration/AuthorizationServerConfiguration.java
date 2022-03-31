@@ -28,13 +28,13 @@ package cn.herodotus.eurynome.authentication.configuration;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.oauth2.server.authorization.customizer.HerodotusTokenCustomizer;
 import cn.herodotus.engine.oauth2.server.authorization.granter.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import cn.herodotus.engine.oauth2.server.authorization.granter.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import cn.herodotus.engine.oauth2.server.authorization.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
-import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -53,7 +53,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -61,7 +60,6 @@ import org.springframework.security.oauth2.server.authorization.JwtEncodingConte
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
-import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationContext;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
@@ -84,7 +82,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.function.Function;
 
 /**
  * <p>Description: 认证服务器配置 </p>

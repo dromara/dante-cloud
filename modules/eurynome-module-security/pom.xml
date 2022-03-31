@@ -61,7 +61,7 @@
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>security-sdk-extend</artifactId>
+            <artifactId>oauth2-core</artifactId>
         </dependency>
 
         <dependency>

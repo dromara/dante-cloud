@@ -25,10 +25,10 @@
 
 package cn.herodotus.eurynome.service.autoconfigure;
 
+import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
-import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
-import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
-import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;

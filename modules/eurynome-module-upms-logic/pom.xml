@@ -47,7 +47,7 @@
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>security-core</artifactId>
+            <artifactId>oauth2-core</artifactId>
         </dependency>
     </dependencies>
 

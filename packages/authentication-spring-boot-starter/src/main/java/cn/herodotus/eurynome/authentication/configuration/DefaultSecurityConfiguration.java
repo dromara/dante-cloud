@@ -26,10 +26,10 @@
 package cn.herodotus.eurynome.authentication.configuration;
 
 import cn.herodotus.engine.oauth2.authorization.ui.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
-import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
-import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
-import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.eurynome.authentication.service.HerodotusOauthUserDetailsService;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
 import org.apache.commons.lang3.StringUtils;

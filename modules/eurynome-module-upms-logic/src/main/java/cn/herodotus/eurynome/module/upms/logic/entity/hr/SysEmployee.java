@@ -27,7 +27,7 @@ package cn.herodotus.eurynome.module.upms.logic.entity.hr;
 
 import cn.herodotus.engine.assistant.core.enums.AccountType;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
-import cn.herodotus.engine.security.core.definition.domain.SocialUserDetails;
+import cn.herodotus.engine.oauth2.core.definition.domain.SocialUserDetails;
 import cn.herodotus.eurynome.module.upms.logic.assistant.deserializer.SysUserEmptyToNull;
 import cn.herodotus.eurynome.module.upms.logic.constants.UpmsConstants;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysUser;

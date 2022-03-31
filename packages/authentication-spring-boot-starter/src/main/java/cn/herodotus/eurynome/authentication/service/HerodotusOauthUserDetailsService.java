@@ -26,8 +26,8 @@
 package cn.herodotus.eurynome.authentication.service;
 
 import cn.herodotus.engine.assistant.core.domain.AccessPrincipal;
-import cn.herodotus.engine.security.core.definition.domain.HerodotusUser;
-import cn.herodotus.engine.security.core.definition.service.HerodotusUserDetailsService;
+import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
+import cn.herodotus.engine.oauth2.core.definition.service.HerodotusUserDetailsService;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysUser;
 import cn.herodotus.eurynome.module.upms.logic.helper.UpmsHelper;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
