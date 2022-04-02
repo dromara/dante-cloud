@@ -2,7 +2,7 @@ spring:
   cloud:
     bus:
       destination: SecurityMetadata
-      id: ${spring.application.name}
+      id: ${spring.application.name}:${server.port}
     stream:
       kafka:
         binder:

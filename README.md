@@ -6,10 +6,10 @@
 
 <p align="center">
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://shields.io/badge/JDK-1.8%2B-green" alt="JDK 1.8+"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.6.4-blue" alt="Spring Boot 2.6.4"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.6.6-blue" alt="Spring Boot 2.6.6"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.1-blue" alt="Spring Cloud 2021.0.1"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.1.0-blue" alt="Spring Cloud Alibaba 2021.0.1.0"></a>
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.2.2-blue" alt="Spring Authorization Server 0.2.2"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.2.3-blue" alt="Spring Authorization Server 0.2.3"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.0.4-brightgreen" alt="Nacos 2.0.4"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -30,7 +30,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.6.4、Spring Cloud 2021.0.1、Spring Cloud Alibaba 2021.0.1.0、Nacos 2.0.4 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.6.6、Spring Cloud 2021.0.1、Spring Cloud Alibaba 2021.0.1.0、Spring Authorization Server 0.2.3、Nacos 2.0.4 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## 平台定位
 
@@ -39,11 +39,9 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 - 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
 - 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
 
-## Gitee Star趋势图
-
-[![Giteye chart](https://chart.giteye.net/gitee/herodotus/eurynome-cloud/254B32UX.png)](https://giteye.net/chart/254B32UX)
-
 ## 重要信息
+
+> 不一定非要捐赠或者参与编写代码，才是参与开源项目的正确方式。点个 `Star`、提个格式规范的 ISSUE，也是积极参与开源项目的方式，更是对作者莫大的支持和鼓励。
 
 > 开发新手在群内提问或新开Issue提问前，请先阅读 [【提问的智慧】](https://www.herodotus.cn/others/question/)，并确保认真、详细地查阅过本项目 [【在线文档】](https://www.herodotus.cn)，避免浪费大家的宝贵时间；
 
@@ -80,16 +78,16 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ### （1）Spring全家桶及核心技术版本
   
-组件 | 版本 
----|---
-Spring Boot | 2.6.4
-Spring Cloud | 2021.0.1 
-Spring Cloud Alibaba | 2021.0.1.0
-Spring Authorization Server | 0.2.2
-Spring Boot Admin | 2.6.2
-Nacos | 2.0.4 
-Sentinel | 1.8.3 
-Seata | 1.3.0 
+| 组件                          | 版本         |
+|-----------------------------|------------|
+| Spring Boot                 | 2.6.6      |
+| Spring Cloud                | 2021.0.1   |
+| Spring Cloud Alibaba        | 2021.0.1.0 |
+| Spring Authorization Server | 0.2.3      |
+| Spring Boot Admin           | 2.6.2      |
+| Nacos                       | 2.0.4      |
+| Sentinel                    | 1.8.3      |
+| Seata                       | 1.3.0      |
 
 > Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
@@ -127,30 +125,22 @@ Seata | 1.3.0
 eurynome-cloud
 ├── configurations -- 配置文件脚本和统一Docker build上下文目录
 ├── dependencies -- 工程Maven顶级依赖，统一控制版本和依赖
-├── packages -- 基础通用依赖包
-├    ├── eurynome-cloud-assistant -- Spring相关公共辅助工具、注解相关工具代码组件
-├    ├── eurynome-cloud-cache -- Cache和Redis工具模块组件
-├    ├── eurynome-cloud-captcha -- 验证码模块组件
-├    ├── eurynome-cloud-data -- 数据持久化等数据处理相关代码组件
-├    ├── eurynome-cloud-kernel -- 微服务接入平台必备组件
-├    ├── eurynome-cloud-message -- 消息处理相关代码组件
-├    ├── eurynome-cloud-oauth -- OAuth2通用代码
-├    ├── eurynome-cloud-oauth-starter -- 自定义OAuth2 Starter，Athena单体版核心Starter
-├    ├── eurynome-cloud-rest -- Rest相关代码组件
-├    ├── eurynome-cloud-sercurity -- Security通用代码
-├    ├── eurynome-cloud-starter -- 微服务核心Starter
-├    ├── eurynome-cloud-web -- Web 应用基础组件
-├    └── eurynome-cloud-websocket -- WebSocket核心代码包
+├── module -- 依赖组件半成品拼装工程
+├    ├── eurynome-module-common -- Module 相关模块公共辅助代码组件
+├    ├── eurynome-module-security -- Security 相关配置代码模块组件
+├    ├── eurynome-module-upms-logic -- UPMS 基础管理及共享代码模块组件
+├    └── eurynome-module-upms-rest -- UPMS 基础管理接口模块组件
+├── packages -- 基础核心Starter
+├    ├── authorization-spring-boot-starter -- OAuth2 认证基础Starter，主要用于 UAA 认证服务器以及单体版 Eurynome Cloud
+├    └── service-spring-boot-starter -- 平台接入应用服务通用 Starter
 ├── platform -- 平台核心服务
 ├    ├── eurynome-cloud-gateway -- 服务网关
 ├    ├── eurynome-cloud-monitor -- Spring Boot Admin 监控服务
-├    └── eurynome-cloud-uaa -- 统一认证模块
+├    ├── eurynome-cloud-upms -- 统一权限管理系统服务
+├    └── eurynome-cloud-uaa -- 账户管理和统一认证模块
 ├── services -- 平台业务服务
-├    ├── eurynome-cloud-upms-logic -- 通用用户权限service
-├    ├── eurynome-cloud-upms-rest -- 通用用户权限rest 接口
-├    ├── eurynome-cloud-upms-ability -- 通用用户权限服务
-├    ├── eurynome-cloud-upms-rest -- 工作流基础代码包
-└──  └── eurynome-cloud-bpmn-ability -- 工作流服务 
+├    ├── eurynome-cloud-bpmn-ability -- 工作流服务
+└──  └── eurynome-cloud-bpmn-logic -- 工作流基础代码包 
 ```
 
 ## [6]、项目地址

@@ -11,8 +11,8 @@ herodotus:
     token-introspection-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/introspect
     jwk-set-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/jwks
     issuer-uri: ${herodotus.endpoint.uaa-service-uri}
-    oidc-client-registration-uri: ${herodotus.platform.endpoint.uaa-service-uri}/connect/register
-    oidc-user-info-uri: ${herodotus.platform.endpoint.uaa-service-uri}/userinfo
+    oidc-client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/connect/register
+    oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo
   swagger:
     enabled: ${herodotus.switch.swagger.enabled}
 

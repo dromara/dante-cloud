@@ -31,7 +31,6 @@ herodotus:
       scan:
         enabled: true
 
-
   log-center:
     server-addr: ${herodotus.environment.logstash-server-addr}
     loggers:
