@@ -77,15 +77,15 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ### （1）Spring全家桶及核心技术版本
   
-组件 | 版本 
----|---
-Spring Boot | 2.6.6
-Spring Cloud | 2021.0.1 
-Spring Cloud Alibaba | 2021.0.1.0
-Spring Boot Admin | 2.6.3
-Nacos | 2.0.4 
-Sentinel | 1.8.3 
-Seata | 1.3.0 
+| 组件                   | 版本         |
+|----------------------|------------|
+| Spring Boot          | 2.6.6      |
+| Spring Cloud         | 2021.0.1   |
+| Spring Cloud Alibaba | 2021.0.1.0 |
+| Spring Boot Admin    | 2.6.3      |
+| Nacos                | 2.0.4      |
+| Sentinel             | 1.8.3      |
+| Seata                | 1.3.0      |
 
 > Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
