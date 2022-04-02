@@ -26,18 +26,20 @@
 package cn.herodotus.eurynome.authentication.configuration;
 
 import cn.herodotus.engine.oauth2.authorization.ui.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
-import cn.herodotus.eurynome.authentication.service.HerodotusOauthUserDetailsService;
+import cn.herodotus.eurynome.authentication.service.HerodotusAuthorityDetailsService;
+import cn.herodotus.eurynome.authentication.service.HerodotusUserDetailsService;
+import cn.herodotus.eurynome.module.upms.logic.service.system.SysAuthorityService;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -120,11 +122,18 @@ public class DefaultSecurityConfiguration {
     }
 
     @Bean
-    @ConditionalOnBean(SysUserService.class)
     @ConditionalOnMissingBean
     UserDetailsService userDetailsService(SysUserService sysUserService) {
-        HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService(sysUserService);
-        log.debug("[Herodotus] |- Core [Herodotus Oauth User Details Service] Auto Configure.");
-        return herodotusOauthUserDetailsService;
+        HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(sysUserService);
+        log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
+        return herodotusUserDetailsService;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    StrategyAuthorityDetailsService strategyAuthorityDetailsService(SysAuthorityService sysAuthorityService) {
+        HerodotusAuthorityDetailsService herodotusAuthorityDetailsService = new HerodotusAuthorityDetailsService(sysAuthorityService);
+        log.trace("[Herodotus] |- Bean [Herodotus Authority Details Service] Auto Configure.");
+        return herodotusAuthorityDetailsService;
     }
 }

@@ -26,15 +26,15 @@
 package cn.herodotus.eurynome.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
+import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationConverter;
+import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationProvider;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenCustomizer;
+import cn.herodotus.engine.oauth2.authorization.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
-import cn.herodotus.engine.oauth2.server.authorization.customizer.HerodotusTokenCustomizer;
-import cn.herodotus.engine.oauth2.server.authorization.granter.OAuth2ResourceOwnerPasswordAuthenticationConverter;
-import cn.herodotus.engine.oauth2.server.authorization.granter.OAuth2ResourceOwnerPasswordAuthenticationProvider;
-import cn.herodotus.engine.oauth2.server.authorization.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
