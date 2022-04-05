@@ -41,7 +41,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ## 重要信息
 
-> 不一定非要捐赠或者参与编写代码，才是参与开源项目的正确方式。点个 `Star`、提个格式规范的 ISSUE，也是积极参与开源项目的方式，更是对作者莫大的支持和鼓励。
+> 不一定非要捐赠或者参与编写代码，才是参与开源项目的正确方式。点个 `Star`、提个格式规范的 ISSUE，也是在积极参与开源项目，更是对作者莫大的支持和鼓励。
 
 > 开发新手在群内提问或新开Issue提问前，请先阅读 [【提问的智慧】](https://www.herodotus.cn/others/question/)，并确保认真、详细地查阅过本项目 [【在线文档】](https://www.herodotus.cn)，避免浪费大家的宝贵时间；
 
@@ -84,7 +84,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 | Spring Cloud                | 2021.0.1   |
 | Spring Cloud Alibaba        | 2021.0.1.0 |
 | Spring Authorization Server | 0.2.3      |
-| Spring Boot Admin           | 2.6.2      |
+| Spring Boot Admin           | 2.6.4      |
 | Nacos                       | 2.0.4      |
 | Sentinel                    | 1.8.3      |
 | Seata                       | 1.3.0      |
