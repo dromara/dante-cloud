@@ -25,6 +25,7 @@
 
 package cn.herodotus.eurynome.module.upms.logic.enums;
 
+import cn.herodotus.engine.assistant.core.definition.enums.BaseUiEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
@@ -38,63 +39,66 @@ import java.util.Map;
 /**
  * @author gengwei.zheng
  */
-@Schema(name = "性别")
+@Schema(title =  "性别")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum Gender {
+public enum Gender implements BaseUiEnum<Integer> {
     /**
      * enum
      */
-    MAN(0, "男"),
+    MAN( 0, "男"),
     WOMAN(1, "女"),
     OTHERS(2, "其它");
 
-    @Schema(title =  "索引")
-    private final Integer index;
+    @Schema(title = "枚举值")
+    private final Integer value;
     @Schema(title =  "文字")
-    private final String text;
+    private final String description;
 
-    private static final Map<Integer, Gender> indexMap = new HashMap<>();
-    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+    private static final Map<Integer, Gender> INDEX_MAP = new HashMap<>();
+    private static final List<Map<String, Object>> JSON_STRUCTURE = new ArrayList<>();
 
     static {
         for (Gender gender : Gender.values()) {
-            indexMap.put(gender.getIndex(), gender);
-            toJsonStruct.add(gender.getIndex(),
+            INDEX_MAP.put(gender.getValue(), gender);
+            JSON_STRUCTURE.add(gender.getValue(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", gender.getIndex())
+                            .put("value", gender.getValue())
                             .put("key", gender.name())
-                            .put("text", gender.getText())
+                            .put("text", gender.getDescription())
+                            .put("index", gender.getValue())
                             .build());
         }
     }
 
-    Gender(Integer index, String text) {
-        this.index = index;
-        this.text = text;
+    Gender(Integer value, String description) {
+        this.value = value;
+        this.description = description;
     }
 
     /**
      * 不加@JsonValue，转换的时候转换出完整的对象。
      * 加了@JsonValue，只会显示相应的属性的值
-     * <p>
+     *
      * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
      *
      * @return Enum索引
      */
     @JsonValue
-    public Integer getIndex() {
-        return index;
+    @Override
+    public Integer getValue() {
+        return value;
     }
 
-    public String getText() {
-        return text;
+    @Override
+    public String getDescription() {
+        return description;
     }
 
-    public static Gender getGender(Integer status) {
-        return indexMap.get(status);
+    public static Gender get(Integer index) {
+        return INDEX_MAP.get(index);
     }
 
-    public static List<Map<String, Object>> getToJsonStruct() {
-        return toJsonStruct;
+    public static List<Map<String, Object>> getPreprocessedJsonStructure() {
+        return JSON_STRUCTURE;
     }
 }

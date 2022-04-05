@@ -1,7 +1,7 @@
 herodotus:
   environment:
-    logstash-server-addr: 127.0.0.1:5044
-    gateway-server-addr: http://localhost:8847
+    logstash-server-addr: false
+    gateway-server-addr: http://192.168.101.10:8847
     database:
       host: 127.0.0.1
       port: 15432
@@ -10,14 +10,14 @@ herodotus:
       password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
     redis:
       host: 127.0.0.1
-      port: 6379
+      port: 16379
       password:
       database: 6
     kafka:
       bootstrap-servers: 127.0.0.1:9092
   switch:
     database:
-      ddl-auto: create
+      ddl-auto: update
       init-mode: never
       use-second-level-cache: true
       show-sql: false

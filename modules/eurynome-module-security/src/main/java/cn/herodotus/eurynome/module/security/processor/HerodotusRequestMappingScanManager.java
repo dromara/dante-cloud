@@ -16,8 +16,6 @@ import cn.herodotus.engine.web.core.context.ServiceContext;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.module.common.ServiceNameConstants;
-import org.springframework.cloud.bus.event.PathDestinationFactory;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;
 
@@ -39,11 +37,6 @@ public class HerodotusRequestMappingScanManager implements RequestMappingScanMan
     }
 
     @Override
-    public boolean isDistributedArchitecture() {
-        return ServiceContext.getInstance().isDistributedArchitecture();
-    }
-
-    @Override
     public String getDestinationServiceName() {
         return ServiceNameConstants.SERVICE_NAME_UPMS;
     }
@@ -54,12 +47,12 @@ public class HerodotusRequestMappingScanManager implements RequestMappingScanMan
     }
 
     @Override
-    public ApplicationEvent createLocalGatherEvent(List<RequestMapping> requestMappings) {
-        return new LocalRequestMappingGatherEvent(requestMappings);
+    public void postLocalProcess(List<RequestMapping> data) {
+        ServiceContext.getInstance().publishEvent(new LocalRequestMappingGatherEvent(data));
     }
 
     @Override
-    public ApplicationEvent createRemoteGatherEvent(String source, String originService, String destinationService) {
-        return new RemoteRequestMappingGatherEvent(source, originService, new PathDestinationFactory().getDestination(destinationService));
+    public void postRemoteProcess(String data, String originService, String destinationService) {
+        ServiceContext.getInstance().publishEvent(new RemoteRequestMappingGatherEvent(data, originService, destinationService));
     }
 }

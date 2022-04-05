@@ -22,8 +22,8 @@
 
 package cn.herodotus.eurynome.module.security.configuration;
 
-import cn.herodotus.engine.security.core.properties.SecurityProperties;
-import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.eurynome.module.security.processor.HerodotusRequestMappingScanManager;
 import org.slf4j.Logger;

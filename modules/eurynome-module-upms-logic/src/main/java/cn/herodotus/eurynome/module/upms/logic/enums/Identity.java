@@ -25,6 +25,7 @@
 
 package cn.herodotus.eurynome.module.upms.logic.enums;
 
+import cn.herodotus.engine.assistant.core.definition.enums.BaseUiEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
@@ -41,9 +42,9 @@ import java.util.Map;
  * @author gengwei.zheng
  * @date 2019/2/15
  */
-@Schema(name = "人员身份")
+@Schema(title = "人员身份")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum Identity {
+public enum Identity implements BaseUiEnum<Integer> {
     /**
      * enum
      */
@@ -51,29 +52,30 @@ public enum Identity {
     SECTION_LEADER(1, "部门负责人"),
     LEADERSHIP(2, "领导");
 
-    @Schema(title =  "索引")
-    private final Integer index;
-    @Schema(title =  "文字")
-    private String text;
+    @Schema(title = "索引")
+    private final Integer value;
+    @Schema(title = "文字")
+    private String description;
 
-    private static final Map<Integer, Identity> indexMap = new HashMap<>();
-    private static final List<Map<String, Object>> toJsonStruct = new ArrayList<>();
+    private static final Map<Integer, Identity> INDEX_MAP = new HashMap<>();
+    private static final List<Map<String, Object>> JSON_STRUCTURE = new ArrayList<>();
 
     static {
         for (Identity identity : Identity.values()) {
-            indexMap.put(identity.getIndex(), identity);
-            toJsonStruct.add(identity.getIndex(),
+            INDEX_MAP.put(identity.getValue(), identity);
+            JSON_STRUCTURE.add(identity.getValue(),
                     ImmutableMap.<String, Object>builder()
-                            .put("value", identity.getIndex())
+                            .put("value", identity.getValue())
                             .put("key", identity.name())
-                            .put("text", identity.getText())
+                            .put("text", identity.getDescription())
+                            .put("index", identity.getValue())
                             .build());
         }
     }
 
-    Identity(Integer index, String text) {
-        this.index = index;
-        this.text = text;
+    Identity(Integer value, String description) {
+        this.value = value;
+        this.description = description;
     }
 
     /**
@@ -85,19 +87,21 @@ public enum Identity {
      * @return Enum索引
      */
     @JsonValue
-    public Integer getIndex() {
-        return index;
+    @Override
+    public Integer getValue() {
+        return value;
     }
 
-    public String getText() {
-        return text;
+    @Override
+    public String getDescription() {
+        return description;
     }
 
-    public static Identity getIdentity(Integer status) {
-        return indexMap.get(status);
+    public static Identity get(Integer index) {
+        return INDEX_MAP.get(index);
     }
 
-    public static List<Map<String, Object>> getToJsonStruct() {
-        return toJsonStruct;
+    public static List<Map<String, Object>> getPreprocessedJsonStructure() {
+        return JSON_STRUCTURE;
     }
 }

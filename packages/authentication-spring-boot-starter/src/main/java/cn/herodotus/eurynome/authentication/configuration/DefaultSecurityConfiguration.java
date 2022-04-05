@@ -26,18 +26,20 @@
 package cn.herodotus.eurynome.authentication.configuration;
 
 import cn.herodotus.engine.oauth2.authorization.ui.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
+import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
-import cn.herodotus.engine.security.extend.processor.HerodotusSecurityConfigureHandler;
-import cn.herodotus.engine.security.extend.response.HerodotusAccessDeniedHandler;
-import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.eurynome.authentication.service.HerodotusOauthUserDetailsService;
+import cn.herodotus.eurynome.authentication.service.HerodotusAuthorityDetailsService;
+import cn.herodotus.eurynome.authentication.service.HerodotusUserDetailsService;
+import cn.herodotus.eurynome.module.upms.logic.service.system.SysAuthorityService;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -89,12 +91,11 @@ public class DefaultSecurityConfiguration {
         http.csrf().disable().cors();
 
         // @formatter:off
-        http.authorizeRequests(authorizeRequests->
-                        authorizeRequests
-                                .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                                .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
-                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                                .anyRequest().authenticated())
+        http.authorizeRequests(authorizeRequests -> authorizeRequests
+                        .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
+                        .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                        .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(form -> {
                             form.loginPage(uiProperties.getLoginPageUrl()).permitAll()
                                     .usernameParameter(uiProperties.getUsernameParameter())
@@ -111,21 +112,28 @@ public class DefaultSecurityConfiguration {
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(configurer ->
-                        configurer
-                                .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
-                                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+                .oauth2ResourceServer(configurer -> configurer
+                        .jwt(jwt -> jwt
+                                .decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
+                        .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                        .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
         // @formatter:on
         return http.build();
     }
 
     @Bean
-    @ConditionalOnBean(SysUserService.class)
     @ConditionalOnMissingBean
     UserDetailsService userDetailsService(SysUserService sysUserService) {
-        HerodotusOauthUserDetailsService herodotusOauthUserDetailsService = new HerodotusOauthUserDetailsService(sysUserService);
-        log.debug("[Herodotus] |- Core [Herodotus Oauth User Details Service] Auto Configure.");
-        return herodotusOauthUserDetailsService;
+        HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(sysUserService);
+        log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
+        return herodotusUserDetailsService;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    StrategyAuthorityDetailsService strategyAuthorityDetailsService(SysAuthorityService sysAuthorityService) {
+        HerodotusAuthorityDetailsService herodotusAuthorityDetailsService = new HerodotusAuthorityDetailsService(sysAuthorityService);
+        log.trace("[Herodotus] |- Bean [Herodotus Authority Details Service] Auto Configure.");
+        return herodotusAuthorityDetailsService;
     }
 }

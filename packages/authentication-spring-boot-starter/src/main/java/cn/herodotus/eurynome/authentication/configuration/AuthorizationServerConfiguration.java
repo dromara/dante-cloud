@@ -26,20 +26,21 @@
 package cn.herodotus.eurynome.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
+import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationConverter;
+import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationProvider;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenCustomizer;
+import cn.herodotus.engine.oauth2.authorization.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
-import cn.herodotus.engine.oauth2.server.authorization.customizer.HerodotusTokenCustomizer;
-import cn.herodotus.engine.oauth2.server.authorization.granter.OAuth2ResourceOwnerPasswordAuthenticationConverter;
-import cn.herodotus.engine.oauth2.server.authorization.granter.OAuth2ResourceOwnerPasswordAuthenticationProvider;
-import cn.herodotus.engine.oauth2.server.authorization.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.security.extend.response.HerodotusAuthenticationFailureHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.apache.commons.lang3.ArrayUtils;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -52,16 +53,21 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.core.OAuth2Token;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.server.authorization.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
+import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationConverter;
@@ -96,7 +102,7 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity, JwtDecoder jwtDecoder) throws Exception {
 
         OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
 
@@ -118,33 +124,35 @@ public class AuthorizationServerConfiguration {
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
-        httpSecurity.requestMatcher(endpointsMatcher)
+        httpSecurity
+                .requestMatcher(endpointsMatcher)
                 .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .apply(authorizationServerConfigurer);
+                .oauth2ResourceServer(configurer -> configurer
+                        .jwt(jwt -> jwt.decoder(jwtDecoder))
+                        .bearerTokenResolver(new DefaultBearerTokenResolver())
+                        .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                        .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()))
+                .apply(authorizationServerConfigurer)
+                .oidc(oidc -> oidc
+                        .userInfoEndpoint(userInfo -> userInfo
+                                .userInfoMapper(context -> {
+                                    OidcUserInfoAuthenticationToken authentication = context.getAuthentication();
+                                    JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
+                                    return new OidcUserInfo(principal.getToken().getClaims());
+                                })));
 
         SecurityFilterChain securityFilterChain = httpSecurity.formLogin(Customizer.withDefaults()).build();
 
-        addAuthenticationProvider(httpSecurity);
-
-        return securityFilterChain;
-    }
-
-    @NotNull
-    private void addAuthenticationProvider(HttpSecurity httpSecurity) {
         AuthenticationManager authenticationManager = httpSecurity.getSharedObject(AuthenticationManager.class);
-        OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer = OAuth2ConfigurerUtils.getJwtCustomizer(httpSecurity);
-        JwtEncoder jwtEncoder = OAuth2ConfigurerUtils.getJwtEncoder(httpSecurity);
-        ProviderSettings providerSettings = OAuth2ConfigurerUtils.getProviderSettings(httpSecurity);
         OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+        OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 
         OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
-                new OAuth2ResourceOwnerPasswordAuthenticationProvider(authenticationManager, authorizationService, jwtEncoder);
-        if (jwtCustomizer != null) {
-            resourceOwnerPasswordAuthenticationProvider.setJwtCustomizer(jwtCustomizer);
-        }
-        resourceOwnerPasswordAuthenticationProvider.setProviderSettings(providerSettings);
+                new OAuth2ResourceOwnerPasswordAuthenticationProvider(authorizationService, tokenGenerator, authenticationManager);
         httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
+
+        return securityFilterChain;
     }
 
     @Bean
@@ -161,7 +169,7 @@ public class AuthorizationServerConfiguration {
                     keyPair = keyStoreKeyFactory.getKeyPair(jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("[Herodotus] |- Read custom certificate under resource folder error!", e);
             }
 
         } else {
@@ -199,6 +207,13 @@ public class AuthorizationServerConfiguration {
     public ProviderSettings providerSettings(EndpointProperties endpointProperties) {
         return ProviderSettings.builder()
                 .issuer(endpointProperties.getIssuerUri())
+                .authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())
+                .tokenEndpoint(endpointProperties.getAccessTokenEndpoint())
+                .tokenRevocationEndpoint(endpointProperties.getTokenRevocationEndpoint())
+                .tokenIntrospectionEndpoint(endpointProperties.getTokenIntrospectionEndpoint())
+                .jwkSetEndpoint(endpointProperties.getJwkSetEndpoint())
+                .oidcUserInfoEndpoint(endpointProperties.getOidcUserInfoEndpoint())
+                .oidcClientRegistrationEndpoint(endpointProperties.getOidcClientRegistrationEndpoint())
                 .build();
     }
 }

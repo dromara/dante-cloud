@@ -25,15 +25,9 @@
 
 package cn.herodotus.eurynome.authentication.autoconfigure;
 
-import cn.herodotus.engine.oauth2.server.authorization.configuration.OAuth2AuthorizationServerConfiguration;
-import cn.herodotus.eurynome.authentication.configuration.AuthorizationServerConfiguration;
-import cn.herodotus.eurynome.authentication.configuration.DefaultSecurityConfiguration;
-import cn.herodotus.eurynome.module.security.autoconfigure.SecurityModuleAutoConfiguration;
-import cn.herodotus.eurynome.module.upms.logic.configuration.UpmsLogicModuleConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 import javax.annotation.PostConstruct;
 
@@ -44,13 +38,6 @@ import javax.annotation.PostConstruct;
  * @date : 2022/2/18 12:23
  */
 @Configuration(proxyBeanMethods = false)
-@Import({
-        SecurityModuleAutoConfiguration.class,
-        UpmsLogicModuleConfiguration.class,
-        OAuth2AuthorizationServerConfiguration.class,
-        DefaultSecurityConfiguration.class,
-        AuthorizationServerConfiguration.class,
-})
 public class AutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(AutoConfiguration.class);
