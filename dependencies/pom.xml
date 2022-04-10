@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.6.6.0</version>
+    <version>2.6.6.10</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -62,7 +62,7 @@
         <spring-boot-dependencies.version>2.6.6</spring-boot-dependencies.version>
         <spring-cloud-dependencies.version>2021.0.1</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.0.1.0</spring-cloud-alibaba-dependencies.version>
-        <spring-boot-admin.version>2.6.3</spring-boot-admin.version>
+        <spring-boot-admin.version>2.6.5</spring-boot-admin.version>
 
         <!--Maven Plugin 相关组件-->
         <docker-maven-plugin.version>0.39.1</docker-maven-plugin.version>
@@ -71,7 +71,7 @@
         <maven-archetype-plugin>3.2.1</maven-archetype-plugin>
 
         <!--开源通用工具包-->
-        <antisamy.version>1.6.5</antisamy.version>
+        <antisamy.version>1.6.6.1</antisamy.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-text.version>1.9</commons-text.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
@@ -83,7 +83,7 @@
         <lombok.version>1.18.22</lombok.version>
         <redisson.version>3.17.0</redisson.version>
         <p6spy.version>3.9.1</p6spy.version>
-        <springdoc.version>1.6.6</springdoc.version>
+        <springdoc.version>1.6.7</springdoc.version>
         <logstash-logback-encoder.version>7.0.1</logstash-logback-encoder.version>
 
         <!-- 阿里巴巴开源工具依赖 -->
@@ -93,7 +93,7 @@
 
         <!-- 国内开源通用组件 -->
         <hutool.version>5.7.22</hutool.version>
-        <okhttps.version>3.4.5</okhttps.version>
+        <okhttps.version>3.4.6</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
         <weixin-java-sdk.version>4.2.9.B</weixin-java-sdk.version>
@@ -103,7 +103,7 @@
 
         <!--第三方starter-->
         <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
-        <camunda-bpm-spring-boot-starter-rest.version>7.16.0</camunda-bpm-spring-boot-starter-rest.version>
+        <camunda-bpm-spring-boot-starter-rest.version>7.17.0</camunda-bpm-spring-boot-starter-rest.version>
         <mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
         <mybatis-plus-generator.version>3.5.2</mybatis-plus-generator.version>
         <mybatis.version>3.5.9</mybatis.version>
