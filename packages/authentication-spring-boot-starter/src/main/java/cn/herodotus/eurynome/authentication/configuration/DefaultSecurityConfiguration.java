@@ -25,7 +25,9 @@
 
 package cn.herodotus.eurynome.authentication.configuration;
 
-import cn.herodotus.engine.oauth2.authorization.ui.properties.OAuth2UiProperties;
+import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
+import cn.herodotus.engine.oauth2.authorization.authorization.OAuth2FormLoginConfigurer;
+import cn.herodotus.engine.oauth2.authorization.properties.OAuth2UiProperties;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
@@ -66,12 +68,14 @@ public class DefaultSecurityConfiguration {
     private final HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
     private final JwtDecoder jwtDecoder;
     private final OAuth2UiProperties uiProperties;
+    private final CaptchaRendererFactory captchaRendererFactory;
 
     @Autowired
-    public DefaultSecurityConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder, OAuth2UiProperties uiProperties) {
+    public DefaultSecurityConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder, OAuth2UiProperties uiProperties, CaptchaRendererFactory captchaRendererFactory) {
         this.herodotusSecurityConfigureHandler = herodotusSecurityConfigureHandler;
         this.jwtDecoder = jwtDecoder;
         this.uiProperties = uiProperties;
+        this.captchaRendererFactory = captchaRendererFactory;
     }
 
     @PostConstruct
@@ -85,13 +89,13 @@ public class DefaultSecurityConfiguration {
     }
 
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity, UserDetailsService userDetailsService) throws Exception {
 
         // 禁用CSRF 开启跨域
-        http.csrf().disable().cors();
+        httpSecurity.csrf().disable().cors();
 
         // @formatter:off
-        http.authorizeRequests(authorizeRequests -> authorizeRequests
+        httpSecurity.authorizeRequests(authorizeRequests -> authorizeRequests
                         .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
                         .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
@@ -116,9 +120,10 @@ public class DefaultSecurityConfiguration {
                         .jwt(jwt -> jwt
                                 .decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
                         .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                        .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+                        .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()))
+                .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
         // @formatter:on
-        return http.build();
+        return httpSecurity.build();
     }
 
     @Bean
