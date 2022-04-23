@@ -2,6 +2,32 @@
 
 
 <!--
+  ~ Copyright (c) 2020-2030 ZHENGGENGWEI(???)<herodotus@aliyun.com>
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  ~ Eurynome Cloud ??APACHE LICENSE 2.0??????????????????????
+  ~
+  ~ 1.?????????????LICENSE???
+  ~ 2.???????? Eurynome Cloud ??????????
+  ~ 3.????????????????????????
+  ~ 4.?????????????? https://gitee.com/herodotus/eurynome-cloud
+  ~ 5.????????????????????????? https://gitee.com/herodotus/eurynome-cloud
+  ~ 6.?????????????????????
+  -->
+
+
+<!--
 W3C rules retrieved from:
 http://www.w3.org/TR/html401/struct/global.html
 -->
@@ -16,6 +42,7 @@ http://www.w3.org/TR/html401/struct/global.html
 		<directive name="maxInputSize" value="200000"/>
 		<directive name="useXHTML" value="true"/>
 		<directive name="formatOutput" value="true"/>
+		<directive name="noopenerAndNoreferrerAnchors" value="true"/>
 
 		<!--
 		remember, this won't work for relative URIs - AntiSamy doesn't
@@ -99,11 +126,11 @@ http://www.w3.org/TR/html401/struct/global.html
 		<regexp name="integer" value="(-|\+)?[0-9]+"/>
 		<regexp name="positiveInteger" value="(\+)?[0-9]+"/>
 		<regexp name="number" value="(-|\+)?([0-9]+(\.[0-9]+)?)"/>
-		<regexp name="angle" value="(-|\+)?([0-9]+(\.[0-9]+)?)(deg|grads|rad)"/>
+		<regexp name="angle" value="(-|\+)?([0-9]+(\.[0-9]+)?)(deg|grad|rad)"/>
 		<regexp name="time" value="([0-9]+(\.[0-9]+)?)(ms|s)"/>
 		<regexp name="frequency" value="([0-9]+(\.[0-9]+)?)(hz|khz)"/>
-		<regexp name="length" value="((-|\+)?0|(-|\+)?([0-9]+(\.[0-9]+)?)(em|ex|px|in|cm|mm|pt|pc))"/>
-		<regexp name="positiveLength" value="((\+)?0|(\+)?([0-9]+(\.[0-9]+)?)(em|ex|px|in|cm|mm|pt|pc))"/>
+		<regexp name="length" value="((-|\+)?0|(-|\+)?([0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?)(rem|vw|vh|em|ex|px|in|cm|mm|pt|pc))"/>
+		<regexp name="positiveLength" value="((\+)?0|(\+)?([0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?)(rem|vw|vh|em|ex|px|in|cm|mm|pt|pc))"/>
 		<regexp name="percentage" value="(-|\+)?([0-9]+(\.[0-9]+)?)%"/>
 		<regexp name="positivePercentage" value="(\+)?([0-9]+(\.[0-9]+)?)%"/>
 
@@ -152,7 +179,7 @@ http://www.w3.org/TR/html401/struct/global.html
 
 		<attribute name="lang" description="The 'lang' attribute tells the browser what language the element's attribute values and content are written in">
 		 	<regexp-list>
-		 		<regexp value="[a-zA-Z]{2,20}"/>
+		 		<regexp value="[a-zA-Z0-9-]{2,20}"/>
 		 	</regexp-list>
 		 </attribute>
 		 <attribute name="title" description="The 'title' attribute provides text that shows up in a 'tooltip' when a user hovers their mouse over the element">

@@ -13,7 +13,8 @@
 				<xsd:element name="tags-to-encode" type="TagsToEncodeList" minOccurs="0"/>
 				<xsd:element name="tag-rules" type="TagRules"/>
 				<xsd:element name="css-rules" type="CSSRules"/>
-	        	<xsd:element name="allowed-empty-tags" type="AllowedEmptyTags" minOccurs="0"/>
+				<xsd:element name="allowed-empty-tags" type="LiteralListTag" minOccurs="0"/>
+				<xsd:element name="require-closing-tags" type="LiteralListTag" minOccurs="0"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -65,7 +66,7 @@
 		<xsd:attribute name="action" use="required"/>
 	</xsd:complexType>
 
-    <xsd:complexType name="AllowedEmptyTags">
+    <xsd:complexType name="LiteralListTag">
         <xsd:sequence>
             <xsd:element name="literal-list" type="LiteralList" minOccurs="0"/>
         </xsd:sequence>
