@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.6.7.0</version>
+    <version>2.6.7.10</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -60,7 +60,7 @@
     <properties>
         <!--Spring 家族-->
         <spring-boot-dependencies.version>2.6.7</spring-boot-dependencies.version>
-        <spring-cloud-dependencies.version>2021.0.1</spring-cloud-dependencies.version>
+        <spring-cloud-dependencies.version>2021.0.2</spring-cloud-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2021.0.1.0</spring-cloud-alibaba-dependencies.version>
         <spring-boot-admin.version>2.6.6</spring-boot-admin.version>
 
@@ -71,7 +71,7 @@
         <maven-archetype-plugin>3.2.1</maven-archetype-plugin>
 
         <!--开源通用工具包-->
-        <antisamy.version>1.6.7</antisamy.version>
+        <antisamy.version>1.6.8</antisamy.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-text.version>1.9</commons-text.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
@@ -81,7 +81,7 @@
 
         <!-- 应用开发辅助工具组件 -->
         <lombok.version>1.18.24</lombok.version>
-        <redisson.version>3.17.0</redisson.version>
+        <redisson.version>3.17.1</redisson.version>
         <p6spy.version>3.9.1</p6spy.version>
         <springdoc.version>1.6.8</springdoc.version>
         <logstash-logback-encoder.version>7.1.1</logstash-logback-encoder.version>
@@ -96,10 +96,10 @@
         <okhttps.version>3.5.0</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
-        <weixin-java-sdk.version>4.3.1.B</weixin-java-sdk.version>
+        <weixin-java-sdk.version>4.3.2.B</weixin-java-sdk.version>
 
         <!--支付 SDK-->
-        <alipay-sdk-java.version>4.22.110.ALL</alipay-sdk-java.version>
+        <alipay-sdk-java.version>4.22.113.ALL</alipay-sdk-java.version>
 
         <!--第三方starter-->
         <jasypt-spring-boot-starter.version>3.0.4</jasypt-spring-boot-starter.version>
