@@ -35,7 +35,7 @@
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.6.7.10</version>
+    <version>2.6.7.20</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -74,7 +74,6 @@
         <antisamy.version>1.6.8</antisamy.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-text.version>1.9</commons-text.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-io.version>2.11.0</commons-io.version>
         <guava.version>31.1-jre</guava.version>
         <jackson-component.version>2.13.2</jackson-component.version>
@@ -89,11 +88,11 @@
         <!-- 阿里巴巴开源工具依赖 -->
         <fastjson.version>1.2.80</fastjson.version>
         <jetcache.version>2.6.4</jetcache.version>
-        <nacos.version>2.0.4</nacos.version>
+        <nacos.version>2.1.0</nacos.version>
 
         <!-- 国内开源通用组件 -->
         <hutool.version>5.7.22</hutool.version>
-        <okhttps.version>3.5.0</okhttps.version>
+        <okhttps.version>3.5.1</okhttps.version>
         <just-auth.verison>1.16.5</just-auth.verison>
         <knife4j.version>3.0.3</knife4j.version>
         <weixin-java-sdk.version>4.3.2.B</weixin-java-sdk.version>
@@ -222,11 +221,6 @@
 
 
             <!-- 开源通用工具包 -->
-            <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>${commons-beanutils.version}</version>
-            </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
             <dependency>
                 <groupId>org.apache.commons</groupId>

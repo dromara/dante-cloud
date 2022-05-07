@@ -22,9 +22,9 @@
 
 package cn.herodotus.eurynome.security.utils;
 
-import cn.herodotus.eurynome.assistant.utils.BeanUtils;
 import cn.herodotus.eurynome.security.definition.core.HerodotusUserDetails;
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -98,7 +98,7 @@ public class SecurityUtils {
             }
             if (authentication.getPrincipal() instanceof Map) {
                 Map<String, Object> principal = (Map<String, Object>) authentication.getPrincipal();
-                return BeanUtils.mapToBean(principal, HerodotusUserDetails.class);
+                return BeanUtil.mapToBean(principal, HerodotusUserDetails.class, true, new CopyOptions());
             }
         }
 

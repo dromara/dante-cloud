@@ -25,7 +25,7 @@ package cn.herodotus.eurynome.upms.logic.listener;
 import cn.herodotus.eurynome.security.definition.domain.RequestMapping;
 import cn.herodotus.eurynome.security.event.LocalRequestMappingGatherEvent;
 import cn.herodotus.eurynome.upms.logic.processor.RequestMappingStoreProcessor;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
