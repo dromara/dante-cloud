@@ -35,6 +35,7 @@ import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
+import cn.herodotus.engine.protect.web.crypto.processor.HttpCryptoProcessor;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -102,7 +103,7 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity, JwtDecoder jwtDecoder) throws Exception {
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity, JwtDecoder jwtDecoder, HttpCryptoProcessor httpCryptoProcessor) throws Exception {
 
         OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
 
@@ -116,7 +117,7 @@ public class AuthorizationServerConfiguration {
                             new OAuth2AuthorizationCodeAuthenticationConverter(),
                             new OAuth2RefreshTokenAuthenticationConverter(),
                             new OAuth2ClientCredentialsAuthenticationConverter(),
-                            new OAuth2ResourceOwnerPasswordAuthenticationConverter()));
+                            new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor)));
 
             endpoint.accessTokenRequestConverter(authenticationConverter);
             endpoint.errorResponseHandler(failureHandler);

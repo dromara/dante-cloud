@@ -7,13 +7,13 @@
 <p align="center">
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://shields.io/badge/JDK-1.8%2B-green" alt="JDK 1.8+"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.6.6-blue" alt="Spring Boot 2.6.6"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.1-blue" alt="Spring Cloud 2021.0.1"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.2-blue" alt="Spring Cloud 2021.0.2"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.1.0-blue" alt="Spring Cloud Alibaba 2021.0.1.0"></a>
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.2.3-blue" alt="Spring Authorization Server 0.2.3"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.0.4-brightgreen" alt="Nacos 2.0.4"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.0.Beta5-red" alt="Version 2.7.0.Beta5"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.0.RC1-red" alt="Version 2.7.0.RC1"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -30,7 +30,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.6.6、Spring Cloud 2021.0.1、Spring Cloud Alibaba 2021.0.1.0、Spring Authorization Server 0.2.3、Nacos 2.0.4 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.6.7、Spring Cloud 2021.0.2、Spring Cloud Alibaba 2021.0.1.0、Spring Authorization Server 0.2.3、Nacos 2.0.4 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## 平台定位
 
@@ -38,6 +38,47 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 - 面向企业级应用和互联网应用设计开发，既兼顾传统项目的微服务化，又满足互联网应用开发建设、快速迭代的使用需求。
 - 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
 - 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
+
+## 升级说明
+
+在 `Spring Security OAuth2` 彻底停止维护、Spring Boot 2.7.0 正式发布之时，又恰逢 `Eurynome Cloud` 开源一周年之际，推出基于Spring Authorization Server 0.2.3、Spring Boot 2.6.7、Spring Cloud 2021.0.2、Spring Cloud Alibaba 2021.0.1.0 和 Nacos 2.0.4 的全新版本。
+
+## 新版特点
+
+- 基于 `Spring Authorization Server` 深度定制:
+  - 基于 `Spring Data JPA`，重新构建 `Spring Authorization Server` 基础数据存储代码，替代原有 JDBC 数据访问方式，破除 `Spring Authorization Server` 原有数据存储局限，扩展为更符合实际应用的方式和设计。
+  - 基于 `Spring Authorization Server`，在 OAuth 2.1 规范基础之上，增加自定义“密码”认证模式，以兼容现有基于 OAuth 2 规范的、前后端分离的应用。
+  - 基于 `Spring Authorization Server`，在 OAuth 2.1 规范基础之上，增加自定义Social Credentials 认证模式，支持手机短信验证码、微信小程序、第三方应用登录。
+  - 完全遵照 `Spring Security 5` 以及 `Spring Authorization Server` 的代码规范，进行 OAuth2 认证服务器核心代码的开发，遵照其使用 Jackson 反序列化的方式， 增加大量自定义 Jackson Module。
+  - 除支持 `Spring Authorization Server` 的标准的Token加密校验方式外，还了增加支持自定义证书的 Token 加密方式，可通过配置动态修改
+  - 支持 OAuth2 OIDC 认证模式，补充前端 OIDC 认证相关配置操作，以及对应的 /userinfo 接口调用支持 和 客户端注册支持 
+  - 支持 OAuth2 Authorization Code PKCE 认证模式
+  - 扩展 `Spring Authorization Server` 默认的 `Client Credentials` 模式，实现 Refresh Token 的创建。 
+  - 扩展 `Spring Authorization Server` 默认的 `Client Credentials` 模式，实现真正的使用 Scope 权限对接口进行验证。 增加客户端 Scope 的权限配置功能，并与已有的用户权限体系解耦
+  - 自定义 `Spring Authorization Server` 授权码模式登录认证页面和授权确认页面，授权码模式登录采用数据加密传输。支持多种验证码类型，暂不支持行为验证码。
+
+- 代码结构的大规模调整和优化：
+  - 对原有代码进行了深度的“庖丁解牛”，严格遵照“单一职责”原则，根据各个组件的职责以及用途，将整个工程拆解细化为多个各自独立组件模块，在最大程度上降低代码间的耦合，也更容易聚焦和定位问题。
+  - 将通用化组件提取为独立工程，独立编译、按需选用，极大的降低系统主工程代码量。相关组件也已上传至 Maven 中央仓库，降低系统主工程工程代码编译耗时，改进和提升 CICD 效率，
+  - 原有主工程代码结构也进行了深化调整，代码分包更加合理，代码逻辑也更加清晰。
+
+## 细节品鉴
+
+俗话说：不看“广告”，看“疗效”。本项目除了将微服务应用涉及的“标准动作”实现之外，也尽可能的“推陈出新”，增加大量细节内容，不仅更加“包容兼顾”，也更利于开发使用。加之本着不重复“造轮子”的原则，在能使用成熟组件代码的情况下，绝不重复实现相关代码，代码实现简洁、可读性高。本项目后端代码最为闪耀，细节满满，值得品鉴。
+
+- 完全按照 Spring Boot 标准化的方式，装配模块和相关代码。大量使用自定义 @ConditionOnXXX、@EnableXXX 注解，实现配置的动态、灵活的注入。
+- 大量使用 Spring 和 Spring Boot 自身的事件驱动、InitializingBean等机制，实现相关代码逻辑，代码更加清晰、逻辑更加简洁、维护更加方便。
+- 大量使用基于 Spring Boot 的策略模式和工厂模式，让同质的功能可以条件化、策略化的注入，便于根据使用者自身需求动态变更支持代码。
+- 集成较多同质组件或代码实现的可选择化使用，选择更丰富，使用更灵活：
+  - 默认使用 `Spring Data JPA` 作为数据访问层，支持同时使用 `Mybatis Plus` 编写数据访问代码。（注：是同时使用，不是切换）
+  - 默认使用 `Spring Data Redis` 作为Redis的操作客户端，同时集成 Redisson，可通过配置动态开启或关闭。
+  - 集成阿里，百度，中国移动，华为，京东，极光，网易，七牛，腾讯，又拍，云片等平台短信发送通道，可通过配置动态开启或关闭。
+  - 支持滑块拼图、文字点选、算数类型、中文类型、字母类型、GIF类型，以及 Hutool 圆圈干扰、扭曲干扰、线段干扰等多种类型验证码
+  - 基于 JustAuth 和 自定义 OAuth2 认证模式，支持机构人员、手机验证码、微信小程序、QQ、微博、百度、微信开放平台、微信公众号、企业微信二维码、企业微信网页、钉钉、钉钉账号、阿里云、淘宝、支付宝、Teambition、华为、飞书、京东、抖音、今日头条、小米、人人、美团、饿了么、酷家乐、喜马拉雅、码云、开源中国、Github、Gitlab、Stackoverflow、Coding、谷歌、微软、脸书、领英、推特、亚马逊、Slack、Line、Okta、Pinterest等多种途径或第三方登录
+- 自定义多级缓存，与 `Spring Data JPA` 有机整合，有效解决 `Spring Cache` 等缓存对条件查询、分页查询支持不够便捷的问题。
+- 基于数字信封原理，综合使用对称和非对称加密算法，实现前后端数据加密传输。支持国密算法 SM2 和 SM4 混合以及标准的 RSA 和 AES 混合。可通过配置文件配置进行切换。
+- 基于自定义 Session 实现秘钥动态生成、加密传输、一人一钥的安全机制，可通过配置动态开启和关闭。不是使用传统 Filter 方式进行加密处理，而是扩展 @RequestParam 等注解实现逻辑实现数据加解密。支持使用自定义注解灵活配置加密策略以及数据缓存策略。
+- 
 
 ## 重要信息
 
@@ -81,7 +122,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 | 组件                          | 版本         |
 |-----------------------------|------------|
 | Spring Boot                 | 2.6.6      |
-| Spring Cloud                | 2021.0.1   |
+| Spring Cloud                | 2021.0.2   |
 | Spring Cloud Alibaba        | 2021.0.1.0 |
 | Spring Authorization Server | 0.2.3      |
 | Spring Boot Admin           | 2.6.5      |

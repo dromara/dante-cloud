@@ -65,7 +65,7 @@ public class SysAuthority extends BaseSysEntity {
     private String requestMethod;
 
     @Column(name = "authority_type")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private AuthorityType authorityType = AuthorityType.API;
 
     @Column(name = "service_id", length = 128)

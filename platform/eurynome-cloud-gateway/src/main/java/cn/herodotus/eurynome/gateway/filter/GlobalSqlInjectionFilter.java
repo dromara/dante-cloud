@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.gateway.filter;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.assistant.core.enums.ResultErrorCodes;
-import cn.herodotus.engine.assistant.secure.utils.SqlInjectionUtils;
+import cn.herodotus.engine.assistant.core.utils.SqlInjectionUtils;
 import cn.herodotus.eurynome.gateway.utils.WebFluxUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;

@@ -26,7 +26,7 @@ import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent
 import cn.herodotus.engine.web.core.domain.RequestMapping;
 import cn.herodotus.eurynome.module.upms.rest.processor.RequestMappingStoreProcessor;
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
