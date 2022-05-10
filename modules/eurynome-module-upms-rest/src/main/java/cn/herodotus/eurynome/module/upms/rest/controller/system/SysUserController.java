@@ -24,7 +24,7 @@ package cn.herodotus.eurynome.module.upms.rest.controller.system;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
-import cn.herodotus.engine.rest.core.annotation.Crypto;
+import cn.herodotus.engine.protect.core.annotation.Crypto;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysUser;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysUserService;
