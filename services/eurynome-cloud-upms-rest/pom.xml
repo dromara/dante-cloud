@@ -6,11 +6,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.6.7.20</version>
+        <version>2.6.7.30</version>
     </parent>
 
     <artifactId>eurynome-cloud-upms-rest</artifactId>
-    <version>2.6.7.20</version>
+    <version>2.6.7.30</version>
 
     <name>eurynome-cloud-upms-rest</name>
     <description>通用权限，人员信息服务供应商</description>
