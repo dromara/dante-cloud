@@ -91,7 +91,7 @@
                 <!--Nacos配置中心地址-->
                 <config.server-addr>192.168.101.10:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <config.namespace>ba8e16c0-1f83-451b-89c4-52adc3da4b8b</config.namespace>
+                <config.namespace></config.namespace>
                 <!--Nacos服务发现地址-->
                 <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
                 <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
