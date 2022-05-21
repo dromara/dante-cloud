@@ -8,6 +8,10 @@ spring:
   thymeleaf:
     mode: HTML
     cache: false
+  cloud:
+    httpclientfactories:
+      ok:
+        enabled: false
 
 springdoc:
   api-docs:

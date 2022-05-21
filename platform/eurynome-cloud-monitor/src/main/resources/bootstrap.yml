@@ -6,6 +6,9 @@ spring:
   profiles:
     active: @profile.name@
   cloud:
+    httpclientfactories:
+      ok:
+        enabled: false
     nacos:
       config:
         namespace: @config.namespace@
