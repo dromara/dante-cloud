@@ -28,10 +28,8 @@ package cn.herodotus.eurynome.upms.service;
 import cn.herodotus.engine.assistant.core.definition.http.AbstractRest;
 import cn.hutool.core.codec.Base64;
 import com.ejlchina.data.TypeRef;
-import com.ejlchina.okhttps.HTTP;
 import com.ejlchina.okhttps.MsgConvertor;
 import com.ejlchina.okhttps.OkHttps;
-import com.ejlchina.okhttps.fastjson.FastjsonMsgConvertor;
 import com.ejlchina.okhttps.jackson.JacksonMsgConvertor;
 import org.springframework.stereotype.Service;
 

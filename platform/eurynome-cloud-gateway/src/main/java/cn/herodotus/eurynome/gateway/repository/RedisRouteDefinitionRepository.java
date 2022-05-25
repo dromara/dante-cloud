@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2019-2021 Gengwei Zheng(herodotus@aliyun.com)
+ * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Project Name: eurynome-cloud
- * Module Name: eurynome-cloud-gateway
- * File Name: RedisRouteDefinitionRepository.java
- * Author: gengwei.zheng
- * Date: 2021/05/07 11:28:07
+ * Eurynome Cloud 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+ *
+ * 1.请不要删除和修改根目录下的LICENSE文件。
+ * 2.请不要删除和修改 Eurynome Cloud 源码头部的版权声明。
+ * 3.请保留源码和相关描述文件的项目出处，作者声明等。
+ * 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/eurynome-cloud
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/eurynome-cloud
+ * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package cn.herodotus.eurynome.gateway.repository;
 
-import com.alibaba.fastjson.JSON;
-import lombok.extern.slf4j.Slf4j;
+import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinitionRepository;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -47,9 +51,10 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/3/3 17:23
  */
-@Slf4j
 @Component
 public class RedisRouteDefinitionRepository implements RouteDefinitionRepository {
+
+    private static final Logger log = LoggerFactory.getLogger(RedisRouteDefinitionRepository.class);
 
     public static final String GATEWAY_ROUTES = "gateway:routes";
 
@@ -59,7 +64,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
         List<RouteDefinition> routeDefinitions = new ArrayList<>();
-        redisTemplate.opsForHash().entries(GATEWAY_ROUTES).values().forEach(routeDefinition -> routeDefinitions.add(JSON.parseObject(routeDefinition.toString(), RouteDefinition.class)));
+        redisTemplate.opsForHash().entries(GATEWAY_ROUTES).values().forEach(routeDefinition -> routeDefinitions.add(JacksonUtils.toObject(routeDefinition.toString(), RouteDefinition.class)));
         log.trace("[Herodotus] |- Get all gateway route definition from redis!");
         return Flux.fromIterable(routeDefinitions);
     }
@@ -67,7 +72,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Mono<Void> save(Mono<RouteDefinition> routeDefinition) {
         return routeDefinition.flatMap(route -> {
-            redisTemplate.opsForHash().put(GATEWAY_ROUTES, route.getId(), JSON.toJSONString(route));
+            redisTemplate.opsForHash().put(GATEWAY_ROUTES, route.getId(), JacksonUtils.toJson(route));
             log.debug("[Herodotus] |- Redis cache the new gateway route definition.");
             return Mono.empty();
         });

@@ -54,7 +54,7 @@ public class ActIdTenantProcessor extends AbstractProcessor<ActIdTenant> {
     @KafkaListener(topics = {"herodotus.public.sys_department"}, groupId = "herodotus.debezium", containerFactory = "concurrentKafkaListenerContainerFactory")
     public void received(String body) {
         log.info("[Herodotus] |- Recived Debezium event message from [sys_department], content is : [{}]", body);
-        this.execute(body);
+        this.execute(body, ActIdTenant.class);
     }
 
     @Override
