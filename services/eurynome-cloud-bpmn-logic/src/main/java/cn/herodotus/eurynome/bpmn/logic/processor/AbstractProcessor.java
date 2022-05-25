@@ -25,11 +25,12 @@
 
 package cn.herodotus.eurynome.bpmn.logic.processor;
 
+import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
 import cn.herodotus.eurynome.bpmn.logic.domain.base.BaseEntity;
 import cn.herodotus.eurynome.bpmn.logic.domain.debezium.Message;
 import cn.herodotus.eurynome.bpmn.logic.domain.enums.DebeziumEvent;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -45,8 +46,8 @@ public abstract class AbstractProcessor<T extends BaseEntity> {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractProcessor.class);
 
-    protected boolean execute(String body) {
-        Message<T> response = this.convert(body);
+    protected boolean execute(String body, Class<T> clazz) {
+        Message<T> response = this.convert(body, clazz);
         if (ObjectUtils.isNotEmpty(response)) {
             DebeziumEvent event = this.parseEvent(response);
             if (ObjectUtils.isNotEmpty(event)) {
@@ -61,10 +62,13 @@ public abstract class AbstractProcessor<T extends BaseEntity> {
         return false;
     }
 
-    private Message<T> convert(String body) {
+    private Message<T> convert(String body, Class<T> clazz) {
         if (StringUtils.isNotBlank(body)) {
-            Message<T> response = JSON.parseObject(body, new TypeReference<Message<T>>() {
-            });
+
+            TypeFactory typeFactory = JacksonUtils.getTypeFactory();
+            JavaType javaType = typeFactory.constructParametricType(Message.class, clazz);
+            Message<T> response = JacksonUtils.toObject(body, javaType);
+
             if (ObjectUtils.isNotEmpty(response)) {
                 log.debug("[Herodotus] |- Convert Object is : [{}]", response);
                 return response;
