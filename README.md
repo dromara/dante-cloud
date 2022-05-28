@@ -5,15 +5,15 @@
 ---
 
 <p align="center">
-    <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://shields.io/badge/JDK-1.8%2B-green" alt="JDK 1.8+"></a>
+    <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://shields.io/badge/JDK-17%2B-green" alt="JDK 17+"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.7.0-blue" alt="Spring Boot 2.7.0"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.2-blue" alt="Spring Cloud 2021.0.2"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.3-blue" alt="Spring Cloud 2021.0.3"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.1.0-blue" alt="Spring Cloud Alibaba 2021.0.1.0"></a>
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.2.3-blue" alt="Spring Authorization Server 0.2.3"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.3.0-blue" alt="Spring Authorization Server 0.3.0"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.1.0-brightgreen" alt="Nacos 2.1.0"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.0.10-red" alt="Version 2.7.0.10"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.0.20-red" alt="Version 2.7.0.20"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -30,7 +30,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.7.0、Spring Cloud 2021.0.2、Spring Cloud Alibaba 2021.0.1.0、Spring Authorization Server 0.2.3、Nacos 2.1.0 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基于Spring Boot 2.7.0、Spring Cloud 2021.0.3、Spring Cloud Alibaba 2021.0.1.0、Spring Authorization Server 0.3.0、Nacos 2.1.0 等最新版本开发，遵循SpringBoot编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## 平台定位
 
@@ -39,9 +39,18 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 - 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
 - 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
 
+## 重要说明
+
+Eurynome Cloud 自 v2.7.0.20 版本，开始全面使用 JDK 17。自该版本以后，系统代码将不再兼容 JDK 8，敬请悉知！
+
+升级使用 JDK 17 的主要原因：
+
+1. Spring Authorization Server 0.3.0 版本，已经开始使用 JDK 11 进行代码编译。该版本在 JDK 8 下已无法编译成功，想要使用必须要升级 JDK 版本。
+2. 2022 年 11 月，Spring Boot 3 将会发布，最低版本要求 JDK 17。因此，直接将 JDK 版本升级至 17，同时为升级至 Spring Boot 3 提前做铺垫准备。
+
 ## 升级说明
 
-在 `Spring Security OAuth2` 彻底停止维护、Spring Boot 2.7.0 正式发布之时，又恰逢 `Eurynome Cloud` 开源一周年之际，推出基于Spring Authorization Server 0.2.3、Spring Boot 2.7.0、Spring Cloud 2021.0.2、Spring Cloud Alibaba 2021.0.1.0 和 Nacos 2.1.0 的全新正式版本。
+在 `Spring Security OAuth2` 彻底停止维护、Spring Boot 2.7.0 正式发布之时，又恰逢 `Eurynome Cloud` 开源一周年之际，推出基于Spring Authorization Server 0.3.0、Spring Boot 2.7.0、Spring Cloud 2021.0.3、Spring Cloud Alibaba 2021.0.1.0 和 Nacos 2.1.0 的全新正式版本。
 
 ## 新版特点
 
@@ -136,9 +145,9 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 | 组件                          | 版本         |
 |-----------------------------|------------|
 | Spring Boot                 | 2.7.0      |
-| Spring Cloud                | 2021.0.2   |
+| Spring Cloud                | 2021.0.3   |
 | Spring Cloud Alibaba        | 2021.0.1.0 |
-| Spring Authorization Server | 0.2.3      |
+| Spring Authorization Server | 0.3.0      |
 | Spring Boot Admin           | 2.6.7      |
 | Nacos                       | 2.1.0      |
 | Sentinel                    | 1.8.3      |
