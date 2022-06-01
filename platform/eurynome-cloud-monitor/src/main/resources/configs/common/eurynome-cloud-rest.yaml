@@ -8,10 +8,6 @@ spring:
   thymeleaf:
     mode: HTML
     cache: false
-  cloud:
-    httpclientfactories:
-      ok:
-        enabled: false
 
 springdoc:
   api-docs:
@@ -38,9 +34,27 @@ management:
 feign:
   client:
     config:
+      # 服务名，填写 default 为所有服务，或者指定某服务
       default:
-        connectTimeout: 5000
-        readTimeout: 5000
+        # 连接超时，10秒
+        connectTimeout: 10000
+        # 读取超时，20秒
+        readTimeout: 20000
+  httpclient:
+    # 关闭 ApacheHttpClient
+    enabled: false
+    # 连接池连接最大连接数（缺省值 200）
+    max-connections: 50
+    # 连接最大闲置时间，单位为秒，600秒==10分钟（缺省值为 900秒==15分钟）
+    time-to-live: 600
+    # 开启压缩
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+  okhttp:
+    enabled: true
   sentinel:
     enabled: true
   hystrix:
