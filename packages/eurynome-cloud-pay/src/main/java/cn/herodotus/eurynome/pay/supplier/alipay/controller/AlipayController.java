@@ -59,7 +59,7 @@ public class AlipayController {
 
     @Operation(summary = "电脑网站支付", description = "支付宝电脑网站支付接口", responses = {@ApiResponse(description = "单位列表", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Result.class)))})
     @Parameters({
-            @Parameter(name = "details", required = true, description = "支付宝电网网站支付DTO", schema = @Schema(implementation = PagePayDetails.class))
+            @Parameter(name = "details", required = true, description = "支付宝电脑网站支付DTO", schema = @Schema(implementation = PagePayDetails.class))
     })
     @PostMapping("/pagepay")
     public Result<String> pagePay(@Validated PagePayDetails details) {
@@ -94,9 +94,9 @@ public class AlipayController {
         }
 
         if (ObjectUtils.isNotEmpty(response) && response.isSuccess()) {
-            return Result.success("调用支付宝电网网站支付成功！", response.getBody());
+            return Result.success("调用支付宝电脑网站支付成功！", response.getBody());
         } else {
-            return Result.failure("调用支付宝电网网站支付失败！");
+            return Result.failure("调用支付宝电脑网站支付失败！");
         }
     }
 }
