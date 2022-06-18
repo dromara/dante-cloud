@@ -41,6 +41,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/role")
 @Tag(name = "系统角色接口")
@@ -83,5 +85,12 @@ public class SysRoleController extends BaseWriteableRestController<SysRole, Stri
     public Result<SysRole> findByRoleCode(@PathVariable("roleCode") String roleCode) {
         SysRole sysRole = sysRoleService.findByRoleCode(roleCode);
         return result(sysRole);
+    }
+
+    @Operation(summary = "获取全部角色", description = "获取全部角色")
+    @GetMapping("/list")
+    public Result<List<SysRole>> findAll() {
+        List<SysRole> sysAuthorities = sysRoleService.findAll();
+        return result(sysAuthorities);
     }
 }

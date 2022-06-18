@@ -13,7 +13,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.1.0-brightgreen" alt="Nacos 2.1.0"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.0.40-red" alt="Version 2.7.0.40"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.0.50-red" alt="Version 2.7.0.50"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/herodotus/eurynome-cloud"><img src="https://gitee.com/herodotus/eurynome-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
@@ -41,7 +41,7 @@ Eurynome Cloud是一款企业级微服务架构和服务能力开发平台。基
 
 ## 重要说明
 
-Eurynome Cloud 自 v2.7.0.40 版本，开始全面使用 JDK 17。自该版本以后，系统代码将不再兼容 JDK 8，敬请悉知！
+Eurynome Cloud 自 v2.7.0.20 版本，开始全面使用 JDK 17。自该版本以后，系统代码将不再兼容 JDK 8，敬请悉知！
 
 升级使用 JDK 17 的主要原因：
 
@@ -148,7 +148,7 @@ Eurynome Cloud 自 v2.7.0.40 版本，开始全面使用 JDK 17。自该版本�
 | Spring Cloud                | 2021.0.3   |
 | Spring Cloud Alibaba        | 2021.0.1.0 |
 | Spring Authorization Server | 0.3.0      |
-| Spring Boot Admin           | 2.6.7      |
+| Spring Boot Admin           | 2.7.0      |
 | Nacos                       | 2.1.0      |
 | Sentinel                    | 1.8.3      |
 | Seata                       | 1.3.0      |
