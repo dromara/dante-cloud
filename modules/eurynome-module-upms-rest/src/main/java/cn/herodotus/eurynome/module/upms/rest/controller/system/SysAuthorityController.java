@@ -95,12 +95,4 @@ public class SysAuthorityController extends BaseWriteableRestController<SysAutho
         List<SysAuthority> sysAuthorities = sysAuthorityService.findAll();
         return result(sysAuthorities);
     }
-
-    @Operation(summary = "获取全部API接口", description = "获取全部API接口")
-    @GetMapping("/apis")
-    @Deprecated
-    public Result<List<SysAuthority>> findAllApis() {
-        List<SysAuthority> sysAuthorities = sysAuthorityService.findAllByAuthorityType(AuthorityType.API);
-        return result(sysAuthorities);
-    }
 }
