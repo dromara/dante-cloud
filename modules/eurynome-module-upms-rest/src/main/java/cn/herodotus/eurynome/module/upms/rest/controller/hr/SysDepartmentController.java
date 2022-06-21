@@ -25,6 +25,7 @@
 
 package cn.herodotus.eurynome.module.upms.rest.controller.hr;
 
+import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
@@ -41,6 +42,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
@@ -102,6 +104,14 @@ public class SysDepartmentController extends BaseWriteableRestController<SysDepa
         return result(sysDepartments);
     }
 
+    private String convertParentId(String parentId) {
+        if (StringUtils.isBlank(parentId)) {
+            return BaseConstants.DEFAULT_TREE_ROOT_ID;
+        } else {
+            return parentId;
+        }
+    }
+
     @Operation(summary = "获取部门树", description = "根据单位ID获取部门数据，转换为树形结构",
             responses = {@ApiResponse(description = "单位列表", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysDepartment.class)))})
     @Parameters({
@@ -109,18 +119,16 @@ public class SysDepartmentController extends BaseWriteableRestController<SysDepa
     })
     @GetMapping("/tree")
     public Result<List<Tree<String>>> findTree(@RequestParam(value = "organizationId", required = false) String organizationId) {
-        Result<List<Tree<String>>> result = new Result<>();
-
         List<SysDepartment> sysDepartments = getSysDepartments(organizationId);
         if (ObjectUtils.isNotEmpty(sysDepartments)) {
             List<TreeNode<String>> treeNodes = sysDepartments.stream().map(sysDepartment -> {
                 TreeNode<String> treeNode = new TreeNode<>();
                 treeNode.setId(sysDepartment.getDepartmentId());
                 treeNode.setName(sysDepartment.getDepartmentName());
-                treeNode.setParentId(sysDepartment.getParentId());
+                treeNode.setParentId(convertParentId(sysDepartment.getParentId()));
                 return treeNode;
             }).collect(Collectors.toList());
-            return Result.success("查询数据成功", TreeUtil.build(treeNodes, null));
+            return Result.success("查询数据成功", TreeUtil.build(treeNodes, BaseConstants.DEFAULT_TREE_ROOT_ID));
         } else {
             return Result.failure("查询数据失败");
         }

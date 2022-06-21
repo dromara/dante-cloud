@@ -116,6 +116,13 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
         return result(sysOrganizations);
     }
 
+    private String convertParentId(String parentId) {
+        if (StringUtils.isBlank(parentId)) {
+            return BaseConstants.DEFAULT_TREE_ROOT_ID;
+        } else {
+            return parentId;
+        }
+    }
     @Operation(summary = "获取单位树", description = "获取全部单位数据，转换为树形结构",
             responses = {@ApiResponse(description = "单位树", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysOrganization.class)))})
     @Parameters({
@@ -125,18 +132,14 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
     public Result<List<Tree<String>>> findTree(@RequestParam(value = "category", required = false) Integer category) {
         List<SysOrganization> sysOrganizations = getSysOrganizations(category);
         if (ObjectUtils.isNotEmpty(sysOrganizations)) {
-            final String[] rootId = {null};
             List<TreeNode<String>> treeNodes = sysOrganizations.stream().map(sysOrganization -> {
                 TreeNode<String> treeNode = new TreeNode<>();
                 treeNode.setId(sysOrganization.getOrganizationId());
                 treeNode.setName(sysOrganization.getOrganizationName());
-                treeNode.setParentId(sysOrganization.getParentId());
-                if (StringUtils.isBlank(sysOrganization.getParentId()) || StringUtils.equals(sysOrganization.getParentId(), BaseConstants.DEFAULT_TREE_ROOT_ID)) {
-                    rootId[0] = sysOrganization.getParentId();
-                }
+                treeNode.setParentId(convertParentId(sysOrganization.getParentId()));
                 return treeNode;
             }).collect(Collectors.toList());
-            return Result.success("查询数据成功", TreeUtil.build(treeNodes, rootId[0]));
+            return Result.success("查询数据成功", TreeUtil.build(treeNodes, BaseConstants.DEFAULT_TREE_ROOT_ID));
         } else {
             return Result.failure("查询数据失败");
         }
