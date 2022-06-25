@@ -17,7 +17,7 @@ services:
     image: ${UPMS_SERVICE_NAME}:${VERSION}
     build:
       context: ../../../context
-      dockerfile: production/Dockerfile
+      dockerfile: production/Dockerfile-Monitor
       args:
         - VERSION=${VERSION}
         - SERVICE_NAME=${UPMS_SERVICE_NAME}

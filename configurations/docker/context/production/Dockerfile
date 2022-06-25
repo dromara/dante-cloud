@@ -3,7 +3,8 @@
 # Author: gengwei.zheng
 
 ### 基础镜像，使用alpine操作系统，openjkd使用
-FROM bellsoft/liberica-openjdk-alpine:8
+FROM herodotus/oracle-jdk:8u331
+#FROM openjdk:17-jdk
 
 # 作者
 MAINTAINER 码匠君 <herodotus@aliyun.com>
@@ -28,7 +29,7 @@ VOLUME /tmp
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
 ADD ./target/${SERVICE_NAME}-${VERSION}.jar /usr/local/app.jar
-COPY ./agent/skywalking-agent-8.9.0.jar /usr/local/sw/agent.jar
+COPY ./agent/skywalking-agent-8.11.0.jar /usr/local/sw/agent.jar
 
 # 声明运行时端口
 EXPOSE ${SERVICE_PORT}
