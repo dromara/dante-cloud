@@ -3,7 +3,8 @@
 # Author: gengwei.zheng
 
 ### 基础镜像，使用alpine操作系统，openjkd使用
-FROM bellsoft/liberica-openjdk-alpine:8
+FROM herodotus/oracle-jdk:8u331
+#FROM openjdk:17-jdk
 
 # 作者
 MAINTAINER 码匠君 <herodotus@aliyun.com>
