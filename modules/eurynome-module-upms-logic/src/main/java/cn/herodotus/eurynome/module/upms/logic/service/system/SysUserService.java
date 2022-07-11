@@ -26,6 +26,7 @@
 package cn.herodotus.eurynome.module.upms.logic.service.system;
 
 import cn.herodotus.engine.assistant.core.enums.AccountType;
+import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
@@ -179,5 +180,14 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
 
         log.debug("[Herodotus] |- SysUser Service register UserDetails.");
         return UpmsHelper.convertSysUserToHerodotusUserDetails(newSysUser);
+    }
+
+    public void changeStatus(String userId, DataItemStatus status) {
+        SysUser sysUser = findByUserId(userId);
+        if (ObjectUtils.isNotEmpty(sysUser)) {
+            sysUser.setStatus(status);
+            log.debug("[Herodotus] |- Change user [{}] status to [{}]", sysUser.getUserName(), status.name());
+            save(sysUser);
+        }
     }
 }

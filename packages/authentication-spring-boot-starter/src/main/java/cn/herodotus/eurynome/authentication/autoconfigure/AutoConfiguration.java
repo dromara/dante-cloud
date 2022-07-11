@@ -25,8 +25,11 @@
 
 package cn.herodotus.eurynome.authentication.autoconfigure;
 
+import cn.herodotus.engine.oauth2.compliance.definition.AccountStatusChangeService;
+import cn.herodotus.eurynome.authentication.processor.HerodotusAccountStatusChangeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -45,5 +48,12 @@ public class AutoConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.debug("[Herodotus] |- Starter [Herodotus Authentication Starter] Auto Configure.");
+    }
+
+    @Bean
+    public AccountStatusChangeService accountStatusChangeService() {
+        HerodotusAccountStatusChangeService herodotusAccountStatusChangeService = new HerodotusAccountStatusChangeService();
+        log.trace("[Herodotus] |- Bean [Account Status Change Service] Auto Configure.");
+        return herodotusAccountStatusChangeService;
     }
 }
