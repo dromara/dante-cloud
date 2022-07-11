@@ -49,8 +49,8 @@ logging:
     com.alibaba.nacos.common.remote.client: error
     com.ulisesbocchio: error
     # 开发、调试需要的日志
-    cn.herodotus: info
-    org.springframework.security: trace
+    cn.herodotus: debug
+    org.springframework.security: info
     org.springframework.web: info
     com.alicp.jetcache: info
     org.springframework.cloud.bus: info

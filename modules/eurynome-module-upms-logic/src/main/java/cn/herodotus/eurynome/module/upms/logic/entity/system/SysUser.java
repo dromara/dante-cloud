@@ -48,6 +48,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -96,6 +97,14 @@ public class SysUser extends BaseSysEntity {
     @Schema(title = "EMAIL")
     @Column(name = "email", length = 100)
     private String email;
+
+    @Schema(title = "账户过期日期")
+    @Column(name = "account_expire_at")
+    private LocalDateTime accountExpireAt;
+
+    @Schema(title = "密码过期日期")
+    @Column(name = "credentials_expire_at")
+    private LocalDateTime credentialsExpireAt;
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
     @Schema(title = "用户角色")
@@ -209,6 +218,22 @@ public class SysUser extends BaseSysEntity {
 
     public void setEmployee(SysEmployee employee) {
         this.employee = employee;
+    }
+
+    public LocalDateTime getAccountExpireAt() {
+        return accountExpireAt;
+    }
+
+    public void setAccountExpireAt(LocalDateTime accountExpireAt) {
+        this.accountExpireAt = accountExpireAt;
+    }
+
+    public LocalDateTime getCredentialsExpireAt() {
+        return credentialsExpireAt;
+    }
+
+    public void setCredentialsExpireAt(LocalDateTime credentialsExpireAt) {
+        this.credentialsExpireAt = credentialsExpireAt;
     }
 
     @Override

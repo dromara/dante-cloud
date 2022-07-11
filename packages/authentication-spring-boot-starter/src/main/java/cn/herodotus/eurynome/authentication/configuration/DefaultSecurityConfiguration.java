@@ -30,6 +30,7 @@ import cn.herodotus.engine.oauth2.authorization.authorization.OAuth2FormLoginCon
 import cn.herodotus.engine.oauth2.authorization.properties.OAuth2UiProperties;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
@@ -43,7 +44,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -88,6 +91,12 @@ public class DefaultSecurityConfiguration {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    @Bean
+    @ConditionalOnMissingBean
+    public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
+        log.debug("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
+        return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
+    }
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity, UserDetailsService userDetailsService) throws Exception {
 

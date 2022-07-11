@@ -32,11 +32,11 @@
     <parent>
         <artifactId>eurynome-cloud</artifactId>
         <groupId>cn.herodotus.eurynome</groupId>
-        <version>2.7.1.1</version>
+        <version>2.7.1.2</version>
     </parent>
 
     <artifactId>modules</artifactId>
-    <version>2.7.1.1</version>
+    <version>2.7.1.2</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-modules</name>

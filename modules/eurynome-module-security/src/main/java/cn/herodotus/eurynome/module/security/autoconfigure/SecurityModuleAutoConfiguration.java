@@ -48,14 +48,15 @@ import javax.annotation.PostConstruct;
  * @date : 2022/2/21 18:02
  */
 @Configuration(proxyBeanMethods = false)
+@EnableAsync
+@EnableAspectJAutoProxy(exposeProxy = true)
 @EnableConfigurationProperties({
         SecurityProperties.class,
 })
 @Import({
         MethodSecurityMetadataConfiguration.class
 })
-@EnableAsync
-@EnableAspectJAutoProxy(exposeProxy = true)
+
 public class SecurityModuleAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityModuleAutoConfiguration.class);

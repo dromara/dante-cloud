@@ -34,7 +34,9 @@ import cn.herodotus.eurynome.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysUser;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,9 +60,46 @@ public class UpmsHelper {
         }
 
         return new HerodotusUser(sysUser.getUserId(), sysUser.getUserName(), sysUser.getPassword(),
-                sysUser.getStatus() == DataItemStatus.ENABLE,
-                sysUser.getStatus() != DataItemStatus.LOCKING,
-                sysUser.getStatus() != DataItemStatus.EXPIRED,
-                sysUser.getStatus() != DataItemStatus.EXPIRED, authorities);
+                isEnabled(sysUser),
+                isAccountNonExpired(sysUser),
+                isCredentialsNonExpired(sysUser),
+                isNonLocked(sysUser),
+                authorities);
+    }
+
+    private static boolean isEnabled(SysUser sysUser) {
+        if (sysUser.getStatus() == DataItemStatus.FORBIDDEN) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private static boolean isNonLocked(SysUser sysUser) {
+        return !(sysUser.getStatus() == DataItemStatus.LOCKING);
+    }
+
+    private static boolean isNonExpired(LocalDateTime localDateTime) {
+        if (ObjectUtils.isEmpty(localDateTime)) {
+            return true;
+        } else {
+            if (localDateTime.isAfter(LocalDateTime.now())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    private static boolean isAccountNonExpired(SysUser sysUser) {
+        if (sysUser.getStatus() == DataItemStatus.EXPIRED) {
+            return false;
+        }
+
+        return isNonExpired(sysUser.getAccountExpireAt());
+    }
+
+    private static boolean isCredentialsNonExpired(SysUser sysUser) {
+        return isNonExpired(sysUser.getAccountExpireAt());
     }
 }

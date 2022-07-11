@@ -29,16 +29,26 @@ import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.assistant.core.enums.AuthorityType;
 import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.protect.core.annotation.AccessLimited;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
+import cn.herodotus.engine.rest.core.definition.dto.Sorter;
 import cn.herodotus.eurynome.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.eurynome.module.upms.logic.service.system.SysAuthorityService;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,10 +99,16 @@ public class SysAuthorityController extends BaseWriteableRestController<SysAutho
         }
     }
 
-    @Operation(summary = "获取全部接口", description = "获取全部接口")
+    @AccessLimited
+    @Operation(summary = "获取全部接口", description = "获取全部接口",
+            responses = {@ApiResponse(description = "接口列表", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Result.class)))})
+    @Parameters({
+            @Parameter(name = "sorter", required = true, in = ParameterIn.PATH, description = "排序对象", schema = @Schema(implementation = Sorter.class))
+    })
     @GetMapping("/list")
-    public Result<List<SysAuthority>> findAll() {
-        List<SysAuthority> sysAuthorities = sysAuthorityService.findAll();
+    public Result<List<SysAuthority>> findAll(@Validated Sorter sorter) {
+        Sort.Direction direction = Sort.Direction.valueOf(sorter.getDirection());
+        List<SysAuthority> sysAuthorities = sysAuthorityService.findAll(Sort.by(direction, sorter.getProperties()));
         return result(sysAuthorities);
     }
 }
