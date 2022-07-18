@@ -23,31 +23,16 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.eurynome.module.upms.logic.constants;
+package cn.herodotus.eurynome.module.upms.logic.repository.system;
+
+import cn.herodotus.engine.data.core.repository.BaseRepository;
+import cn.herodotus.eurynome.module.upms.logic.entity.system.SysElement;
 
 /**
- * <p> Description : Upms服务常量 </p>
+ * <p>Description: SysMenuRepository </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/2/19 20:06
+ * @date : 2022/7/14 15:55
  */
-public interface UpmsConstants {
-
-    String AREA_PREFIX = "data:upms:";
-
-    String REGION_SYS_USER = AREA_PREFIX + "sys:user";
-    String REGION_SYS_ROLE = AREA_PREFIX + "sys:role";
-    String REGION_SYS_DEFAULT_ROLE = AREA_PREFIX + "sys:defaults:role";
-    String REGION_SYS_AUTHORITY = AREA_PREFIX + "sys:authority";
-    String REGION_SYS_SECURITY_ATTRIBUTE = AREA_PREFIX + "sys:security:attribute";
-    String REGION_SYS_OWNERSHIP = AREA_PREFIX + "sys:ownership";
-    String REGION_SYS_SCOPE = AREA_PREFIX + "sys:scope";
-
-    String REGION_SYS_ELEMENT = AREA_PREFIX + "sys:element";
-
-    String REGION_SYS_DEPARTMENT = AREA_PREFIX + "sys:department";
-    String REGION_SYS_EMPLOYEE = AREA_PREFIX + "sys:employee";
-    String REGION_SYS_EMPLOYEE_DEPARTMENT = AREA_PREFIX + "sys:employee:department";
-    String REGION_SYS_ORGANIZATION = AREA_PREFIX + "sys:organization";
-    String REGION_SYS_POSITION = AREA_PREFIX + "sys:position";
+public interface SysElementRepository extends BaseRepository<SysElement, String> {
 }

@@ -27,7 +27,6 @@ package cn.herodotus.eurynome.module.upms.rest.controller.system;
 
 import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.assistant.core.enums.AuthorityType;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.protect.core.annotation.AccessLimited;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
@@ -45,6 +44,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -64,7 +64,10 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/authority")
-@Tag(name = "系统权限接口")
+@Tags({
+        @Tag(name = "用户安全管理接口"),
+        @Tag(name = "系统接口管理接口")
+})
 public class SysAuthorityController extends BaseWriteableRestController<SysAuthority, String> {
 
     private final SysAuthorityService sysAuthorityService;

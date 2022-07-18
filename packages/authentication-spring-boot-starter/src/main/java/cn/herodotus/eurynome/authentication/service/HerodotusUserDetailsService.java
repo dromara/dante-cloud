@@ -83,7 +83,7 @@ public class HerodotusUserDetailsService implements EnhanceUserDetailsService {
 
         log.debug("[Herodotus] |- UserDetailsService loaded user : [{}]", username);
 
-        return UpmsHelper.convertSysUserToHerodotusUserDetails(sysUser);
+        return UpmsHelper.convertSysUserToHerodotusUser(sysUser);
     }
 
     @Override

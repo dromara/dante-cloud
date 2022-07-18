@@ -48,10 +48,13 @@ import java.util.Set;
  */
 public class UpmsHelper {
 
-    public static HerodotusUser convertSysUserToHerodotusUserDetails(SysUser sysUser) {
+    public static HerodotusUser convertSysUserToHerodotusUser(SysUser sysUser) {
+
         Set<HerodotusGrantedAuthority> authorities = new HashSet<>();
 
+        Set<String> roles = new HashSet<>();
         for (SysRole sysRole : sysUser.getRoles()) {
+            roles.add(sysRole.getRoleCode());
             authorities.add(new HerodotusGrantedAuthority(SecurityUtils.wellFormRolePrefix(sysRole.getRoleCode())));
             Set<SysAuthority> sysAuthorities = sysRole.getAuthorities();
             if (CollectionUtils.isNotEmpty(sysAuthorities)) {
@@ -64,15 +67,11 @@ public class UpmsHelper {
                 isAccountNonExpired(sysUser),
                 isCredentialsNonExpired(sysUser),
                 isNonLocked(sysUser),
-                authorities);
+                authorities, roles);
     }
 
     private static boolean isEnabled(SysUser sysUser) {
-        if (sysUser.getStatus() == DataItemStatus.FORBIDDEN) {
-            return false;
-        } else {
-            return true;
-        }
+        return sysUser.getStatus() != DataItemStatus.FORBIDDEN;
     }
 
     private static boolean isNonLocked(SysUser sysUser) {
@@ -83,11 +82,7 @@ public class UpmsHelper {
         if (ObjectUtils.isEmpty(localDateTime)) {
             return true;
         } else {
-            if (localDateTime.isAfter(LocalDateTime.now())) {
-                return true;
-            } else {
-                return false;
-            }
+            return localDateTime.isAfter(LocalDateTime.now());
         }
     }
 

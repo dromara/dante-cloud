@@ -179,7 +179,7 @@ public class SysUserService extends BaseLayeredService<SysUser, String> {
         SysUser newSysUser = register(socialUserDetails);
 
         log.debug("[Herodotus] |- SysUser Service register UserDetails.");
-        return UpmsHelper.convertSysUserToHerodotusUserDetails(newSysUser);
+        return UpmsHelper.convertSysUserToHerodotusUser(newSysUser);
     }
 
     public void changeStatus(String userId, DataItemStatus status) {
