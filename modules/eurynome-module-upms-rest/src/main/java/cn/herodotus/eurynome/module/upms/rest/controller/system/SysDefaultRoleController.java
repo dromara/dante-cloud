@@ -36,6 +36,7 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +53,10 @@ import javax.validation.constraints.NotBlank;
  */
 @RestController
 @RequestMapping("/default-role")
-@Tag(name = "系统默认角色管理")
+@Tags({
+        @Tag(name = "用户安全管理接口"),
+        @Tag(name = "系统默认角色管理接口")
+})
 public class SysDefaultRoleController extends BaseWriteableRestController<SysDefaultRole, String> {
 
     private final SysDefaultRoleService sysDefaultRoleService;

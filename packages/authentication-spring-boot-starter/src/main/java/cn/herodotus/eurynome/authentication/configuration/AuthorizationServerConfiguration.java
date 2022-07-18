@@ -29,6 +29,7 @@ import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
 import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenCustomizer;
+import cn.herodotus.engine.oauth2.authorization.response.HerodotusAuthenticationSuccessHandler;
 import cn.herodotus.engine.oauth2.authorization.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2ComplianceProperties;
@@ -127,6 +128,7 @@ public class AuthorizationServerConfiguration {
 
             endpoint.accessTokenRequestConverter(authenticationConverter);
             endpoint.errorResponseHandler(failureHandler);
+            endpoint.accessTokenResponseHandler(new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));
         });
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();

@@ -38,6 +38,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/role")
-@Tag(name = "系统角色接口")
+@Tags({
+        @Tag(name = "用户安全管理接口"),
+        @Tag(name = "系统角色管理接口")
+})
 public class SysRoleController extends BaseWriteableRestController<SysRole, String> {
 
     private final SysRoleService sysRoleService;
