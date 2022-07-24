@@ -95,6 +95,6 @@ public class UpmsHelper {
     }
 
     private static boolean isCredentialsNonExpired(SysUser sysUser) {
-        return isNonExpired(sysUser.getAccountExpireAt());
+        return isNonExpired(sysUser.getCredentialsExpireAt());
     }
 }
