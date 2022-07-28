@@ -241,8 +241,7 @@ WHERE NOT EXISTS(SELECT sa.authority_id FROM sys_role_authority sra WHERE sra.au
 -- ----------------------------
 -- Import all authority  for test role
 -- ----------------------------
-INSERT
-INTO sys_role_authority (role_id, authority_id)
+INSERT INTO sys_role_authority (role_id, authority_id)
 SELECT '7e43d37d-d045-445f-a1de-cb1259f7709c' role_id,
        sa.authority_id
 FROM "sys_authority" sa
@@ -252,4 +251,4 @@ WHERE sa.url = '/element/tree'
    OR sa.url LIKE '%employee%'
    OR sa.url LIKE '%department%'
    OR sa.url LIKE '%organization%'
-   OR sa.url LIKE '%ownership%'
+   OR sa.url LIKE '%ownership%';

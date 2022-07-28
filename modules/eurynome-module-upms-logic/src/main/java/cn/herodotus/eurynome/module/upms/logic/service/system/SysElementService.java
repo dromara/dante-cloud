@@ -168,6 +168,7 @@ public class SysElementService extends BaseLayeredService<SysElement, String> {
         TreeNode<String> treeNode = new TreeNode<>();
         treeNode.setId(sysMenu.getElementId());
         treeNode.setName(sysMenu.getPath());
+        treeNode.setWeight(sysMenu.getRanking());
         treeNode.setParentId(convertParentId(sysMenu.getParentId()));
         treeNode.setExtra(getExtra(sysMenu));
         return treeNode;

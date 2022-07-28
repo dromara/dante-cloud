@@ -32,13 +32,13 @@
     <parent>
         <groupId>cn.herodotus.engine</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.2.0</version>
+        <version>2.7.2.1</version>
         <relativePath/>
     </parent>
 
     <groupId>cn.herodotus.eurynome</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.7.2.0</version>
+    <version>2.7.2.1</version>
     <packaging>pom</packaging>
 
     <name>eurynome-cloud-dependencies</name>
@@ -63,42 +63,42 @@
         <dependencies>
             <!-- Eurynome Cloud -->
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>eurynome-module-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>eurynome-module-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>authentication-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>service-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>eurynome-module-upms-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>eurynome-module-upms-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>eurynome-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>cn.herodotus.eurynome</groupId>
                 <artifactId>eurynome-cloud-cmdb-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
