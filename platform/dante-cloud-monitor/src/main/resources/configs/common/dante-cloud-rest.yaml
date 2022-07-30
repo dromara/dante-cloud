@@ -1,0 +1,64 @@
+server:
+  error:
+    include-exception: true
+    include-message: always
+    include-stacktrace: always
+    include-binding-errors: always
+spring:
+  thymeleaf:
+    mode: HTML
+    cache: false
+
+springdoc:
+  api-docs:
+    resolve-schema-properties: true
+  swagger-ui:
+    enabled: ${herodotus.switch.swagger.enabled}
+    disable-swagger-default-url: true
+    operations-sorter: method
+    show-common-extensions: true
+    show-extensions: true
+    oauth:
+      use-pkce-with-authorization-code-grant: true
+      app-name: ${spring.application.name}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+  sentinel:
+    enabled: true
+  hystrix:
+    enabled: false
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 2000
+  MaxAutoRetries: 1
+  OkToRetryOnAllOperations: true
+  MaxAutoRetriesNextServer: 1
+  http:
+    client:
+      enabled: false
+  okhttp:
+    enabled: true
+  eager-load:
+    enabled: true
+  nacos:
+    enabled: false
+
+herodotus:
+  rest:
+    scan:
+      enabled: ${herodotus.switch.rest.scan.enabled}

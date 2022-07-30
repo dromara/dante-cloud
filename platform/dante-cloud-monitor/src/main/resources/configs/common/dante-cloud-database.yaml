@@ -1,0 +1,66 @@
+spring:
+  jpa:
+    database: ${herodotus.database-information.platform}
+    database-platform: ${herodotus.database-information.platform}
+    open-in-view: true
+    show-sql: ${herodotus.switch.database.show-sql}
+    hibernate:
+      ddl-auto: ${herodotus.switch.database.ddl-auto}
+      naming:
+        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+      hibernate:
+        dialect: ${herodotus.database-information.dialect}
+        format_sql: ${herodotus.switch.database.format-sql}
+        show_sql: ${herodotus.switch.database.show-sql}
+        generate_statistics: ${herodotus.switch.database.generate-statistics}
+        cache:
+          use_query_cache: true
+          use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
+          region:
+            factory_class: cn.herodotus.engine.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
+        javax:
+          cache:
+            missing_cache_strategy: create
+        temp:
+          use_jdbc_metadata_defaults: false
+  sql:
+    init:
+      mode: ${herodotus.switch.database.init-mode}
+      platform: ${herodotus.database-information.platform}
+      continue-on-error: true
+      encoding: UTF-8
+      username: ${herodotus.environment.database.username}
+      password: ${herodotus.environment.database.password}
+  datasource:
+    driver-class-name: ${herodotus.database-information.driver-class-name}
+    url: ${herodotus.database-information.url}
+    username: ${herodotus.environment.database.username}
+    password: ${herodotus.environment.database.password}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 5000
+      connection-test-query: SELECT 1
+      idle-timeout: 600000
+      minimum-idle: 5
+      maximum-pool-size: 50
+      max-lifetime: 1800000
+      pool-name: Hikari
+      validation-timeout: 5000
+      data-source-properties:
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        cachePrepStmts: true
+
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
+  configuration:
+    cache-enabled: ${herodotus.switch.database.use-second-level-cache}
+    map-underscore-to-camel-case: true

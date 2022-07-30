@@ -1,4 +1,4 @@
-# Docker image for eurynome-cloud application
+# Docker image for dante-cloud application
 # VERSION 1.0.0
 # Author: gengwei.zheng
 

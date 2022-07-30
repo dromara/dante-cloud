@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    bus:
+      destination: SecurityMetadata
+      id: ${spring.application.name}:${server.port}
+    stream:
+      kafka:
+        binder:
+          brokers: ${herodotus.environment.kafka.bootstrap-servers}
+          default-broker-port: 9092
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
+          configuration:
+            commit.interval.ms: 1000
+            default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+          producer-properties:
+            retries: 1
+            acks: 1
+            batch.size: 16384
+            buffer.memory: 33554432
+            linger.ms: 1
+          consumer-properties:
+            allow.auto.create.topics: true
+            auto.commit.interval.ms: 1000
+      function:
+        bindings:
+          busConsumer-out-0: springCloudBusOutput
+          busConsumer-in-0: springCloudBusInput
+      bindings:
+        springCloudBusOutput:
+          content-type: application/json
+        springCloudBusInput:
+          content-type: application/json
+          group: ${spring.application.name}
