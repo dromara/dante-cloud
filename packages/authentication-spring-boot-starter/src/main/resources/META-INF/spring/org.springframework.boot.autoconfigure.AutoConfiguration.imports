@@ -1,7 +1,7 @@
-cn.herodotus.eurynome.authentication.autoconfigure.AutoConfiguration
-cn.herodotus.eurynome.module.security.autoconfigure.SecurityModuleAutoConfiguration
-cn.herodotus.eurynome.module.upms.logic.configuration.UpmsLogicModuleConfiguration
+cn.herodotus.dante.authentication.autoconfigure.AutoConfiguration
+cn.herodotus.dante.module.security.autoconfigure.SecurityModuleAutoConfiguration
+cn.herodotus.dante.module.upms.logic.configuration.UpmsLogicModuleConfiguration
 cn.herodotus.engine.oauth2.server.authorization.configuration.OAuth2AuthorizationServerConfiguration
-cn.herodotus.eurynome.authentication.configuration.DefaultSecurityConfiguration
-cn.herodotus.eurynome.authentication.configuration.AuthorizationServerConfiguration
+cn.herodotus.dante.authentication.configuration.DefaultSecurityConfiguration
+cn.herodotus.dante.authentication.configuration.AuthorizationServerConfiguration
 cn.herodotus.engine.oauth2.compliance.configuration.OAuth2ComplianceConfiguration

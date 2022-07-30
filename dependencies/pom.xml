@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
   ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
@@ -14,13 +14,13 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   ~
-  ~ Eurynome Cloud 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+  ~ Dante Cloud 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
   ~
   ~ 1.请不要删除和修改根目录下的LICENSE文件。
-  ~ 2.请不要删除和修改 Eurynome Cloud 源码头部的版权声明。
+  ~ 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
   ~ 3.请保留源码和相关描述文件的项目出处，作者声明等。
-  ~ 4.分发源码时候，请注明软件出处 https://gitee.com/herodotus/eurynome-cloud
-  ~ 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/herodotus/eurynome-cloud
+  ~ 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
+  ~ 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
   ~ 6.若您的项目无法满足以上几点，可申请商业授权
   -->
 
@@ -32,17 +32,17 @@
     <parent>
         <groupId>cn.herodotus.engine</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.2.1</version>
+        <version>2.7.2.2</version>
         <relativePath/>
     </parent>
 
-    <groupId>cn.herodotus.eurynome</groupId>
+    <groupId>cn.herodotus.dante</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.7.2.1</version>
+    <version>2.7.2.2</version>
     <packaging>pom</packaging>
 
-    <name>eurynome-cloud-dependencies</name>
-    <description>Eurynome Dependencies</description>
+    <name>dante-cloud-dependencies</name>
+    <description>Dante Dependencies</description>
 
     <licenses>
         <license>
@@ -61,45 +61,45 @@
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
     <dependencyManagement>
         <dependencies>
-            <!-- Eurynome Cloud -->
+            <!-- Dante Cloud -->
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
-                <artifactId>eurynome-module-common</artifactId>
+                <groupId>cn.herodotus.dante</groupId>
+                <artifactId>dante-module-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
-                <artifactId>eurynome-module-security</artifactId>
+                <groupId>cn.herodotus.dante</groupId>
+                <artifactId>dante-module-security</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
+                <groupId>cn.herodotus.dante</groupId>
                 <artifactId>authentication-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
+                <groupId>cn.herodotus.dante</groupId>
                 <artifactId>service-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
-                <artifactId>eurynome-module-upms-logic</artifactId>
+                <groupId>cn.herodotus.dante</groupId>
+                <artifactId>dante-module-upms-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
-                <artifactId>eurynome-module-upms-rest</artifactId>
+                <groupId>cn.herodotus.dante</groupId>
+                <artifactId>dante-module-upms-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
-                <artifactId>eurynome-cloud-bpmn-logic</artifactId>
+                <groupId>cn.herodotus.dante</groupId>
+                <artifactId>dante-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.eurynome</groupId>
-                <artifactId>eurynome-cloud-cmdb-logic</artifactId>
+                <groupId>cn.herodotus.dante</groupId>
+                <artifactId>dante-cloud-cmdb-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

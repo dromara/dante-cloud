@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+  ~
+  ~ Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  ~ Dante Cloud 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
+  ~
+  ~ 1.请不要删除和修改根目录下的LICENSE文件。
+  ~ 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
+  ~ 3.请保留源码和相关描述文件的项目出处，作者声明等。
+  ~ 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
+  ~ 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
+  ~ 6.若您的项目无法满足以上几点，可申请商业授权
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.herodotus.eurynome</groupId>
+        <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.2.1</version>
+        <version>2.7.2.2</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>eurynome-cloud</artifactId>
-    <version>2.7.2.1</version>
+    <artifactId>dante-cloud</artifactId>
+    <version>2.7.2.2</version>
     <packaging>pom</packaging>
 
-    <name>eurynome-cloud</name>
-    <description>Top Eurynome project pom.xml file</description>
+    <name>dante-cloud</name>
+    <description>Top Dante project pom.xml file</description>
 
     <!-- ${basedir} 项目根目录 -->
     <!-- ${project.build.directory} 构建目录，缺省为target -->
@@ -37,10 +62,10 @@
         <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
         <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
         <docker.resource.name>${project.build.finalName}.${project.packaging}</docker.resource.name>
-        <docker.namespace>eurynome.cloud</docker.namespace>
+        <docker.namespace>dante.cloud</docker.namespace>
         <docker.host>http://192.168.101.10:2375</docker.host>
         <docker.registry>192.168.101.10</docker.registry>
-        <docker.namespace>eurynome.cloud</docker.namespace>
+        <docker.namespace>dante.cloud</docker.namespace>
         <docker.username>username</docker.username>
         <docker.password>password</docker.password>
     </properties>
