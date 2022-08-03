@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -26,12 +26,12 @@
 package cn.herodotus.dante.module.upms.logic.service.hr;
 
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOrganization;
 import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
 import cn.herodotus.dante.module.upms.logic.repository.hr.SysOrganizationRepository;
+import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
+import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
@@ -125,7 +125,6 @@ public class SysOrganizationService extends BaseLayeredService<SysOrganization, 
 
     /**
      * 检测某个组织机构是否被其它数据关联。
-     *
      * @param organizationId 单位ID
      * @return true 被其它数据使用，false 没有被使用。
      */

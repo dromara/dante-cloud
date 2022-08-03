@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,13 +25,13 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.hr;
 
+import cn.herodotus.dante.module.upms.logic.entity.hr.SysOrganization;
+import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
+import cn.herodotus.dante.module.upms.logic.service.hr.SysOrganizationService;
 import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
-import cn.herodotus.dante.module.upms.logic.entity.hr.SysOrganization;
-import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
-import cn.herodotus.dante.module.upms.logic.service.hr.SysOrganizationService;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
@@ -55,10 +55,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * <p>Description: SysOrganizationController </p>
+ * <p>Description: 单位管理接口 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/9/23 15:14
+ * @date : 2021/9/21 12:19
  */
 @RestController
 @RequestMapping("/organization")
@@ -84,11 +84,21 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
         } else {
             return OrganizationCategory.get(category);
         }
+
     }
 
     private List<SysOrganization> getSysOrganizations(Integer category) {
         return sysOrganizationService.findAll(parseOrganizationCategory(category));
     }
+
+    private String convertParentId(String parentId) {
+        if (StringUtils.isBlank(parentId)) {
+            return BaseConstants.DEFAULT_TREE_ROOT_ID;
+        } else {
+            return parentId;
+        }
+    }
+
 
     @Operation(summary = "条件分页查询单位", description = "根据动态输入的字段查询单位分页信息",
             responses = {@ApiResponse(description = "单位列表", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysOrganization.class)))})
@@ -116,13 +126,6 @@ public class SysOrganizationController extends BaseWriteableRestController<SysOr
         return result(sysOrganizations);
     }
 
-    private String convertParentId(String parentId) {
-        if (StringUtils.isBlank(parentId)) {
-            return BaseConstants.DEFAULT_TREE_ROOT_ID;
-        } else {
-            return parentId;
-        }
-    }
     @Operation(summary = "获取单位树", description = "获取全部单位数据，转换为树形结构",
             responses = {@ApiResponse(description = "单位树", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SysOrganization.class)))})
     @Parameters({

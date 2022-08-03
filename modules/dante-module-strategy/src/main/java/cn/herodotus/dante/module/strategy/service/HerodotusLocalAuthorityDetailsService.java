@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -23,30 +23,28 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.authentication.service;
+package cn.herodotus.dante.module.strategy.service;
 
-import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
+import cn.herodotus.dante.module.strategy.definition.AbstractStrategyAuthorityDetailsService;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
+import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * <p>Description: HerodotusAuthorityDetailsService </p>
+ * <p>Description: 本地权限服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/4/2 17:09
+ * @date : 2022/4/1 18:56
  */
-public class HerodotusAuthorityDetailsService implements StrategyAuthorityDetailsService {
-
+public class HerodotusLocalAuthorityDetailsService extends AbstractStrategyAuthorityDetailsService {
 
     private final SysAuthorityService sysAuthorityService;
 
-    public HerodotusAuthorityDetailsService(SysAuthorityService sysAuthorityService) {
+    public HerodotusLocalAuthorityDetailsService(SysAuthorityService sysAuthorityService) {
         this.sysAuthorityService = sysAuthorityService;
     }
 
@@ -58,19 +56,5 @@ public class HerodotusAuthorityDetailsService implements StrategyAuthorityDetail
         }
 
         return new ArrayList<>();
-    }
-
-    protected List<Authority> toEntities(List<SysAuthority> authorities) {
-        return authorities.stream().map(this::toEntity).collect(Collectors.toList());
-    }
-
-    protected Authority toEntity(SysAuthority object) {
-        Authority authority = new Authority();
-        authority.setAuthorityId(object.getAuthorityId());
-        authority.setAuthorityCode(object.getAuthorityCode());
-        authority.setServiceId(object.getServiceId());
-        authority.setRequestMethod(object.getRequestMethod());
-        authority.setUrl(object.getUrl());
-        return authority;
     }
 }

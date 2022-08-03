@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.oauth2.compliance.definition.AccountStatusChangeService;
 import cn.herodotus.dante.authentication.processor.HerodotusAccountStatusChangeService;
+import cn.herodotus.engine.oauth2.compliance.definition.AccountStatusChangeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -35,10 +35,10 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 /**
- * <p>Description: OAuth2 认证 Starter 自动注入配置 </p>
+ * <p>Description: OAuth Starter 自动注入配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/18 12:23
+ * @date : 2022/2/17 13:43
  */
 @Configuration(proxyBeanMethods = false)
 public class AutoConfiguration {
@@ -47,7 +47,7 @@ public class AutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Starter [Herodotus Authentication Starter] Auto Configure.");
+        log.debug("[Herodotus] |- Starter [Herodotus OAuth Starter] Auto Configure.");
     }
 
     @Bean

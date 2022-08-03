@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -42,7 +42,7 @@ import java.util.Map;
  * @author gengwei.zheng
  * @date 2019/2/15
  */
-@Schema(title = "人员身份")
+@Schema(title =  "人员身份")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Identity implements BaseUiEnum<Integer> {
     /**
@@ -52,9 +52,9 @@ public enum Identity implements BaseUiEnum<Integer> {
     SECTION_LEADER(1, "部门负责人"),
     LEADERSHIP(2, "领导");
 
-    @Schema(title = "索引")
+    @Schema(title =  "索引")
     private final Integer value;
-    @Schema(title = "文字")
+    @Schema(title =  "文字")
     private String description;
 
     private static final Map<Integer, Identity> INDEX_MAP = new HashMap<>();
@@ -81,7 +81,7 @@ public enum Identity implements BaseUiEnum<Integer> {
     /**
      * 不加@JsonValue，转换的时候转换出完整的对象。
      * 加了@JsonValue，只会显示相应的属性的值
-     * <p>
+     *
      * 不使用@JsonValue @JsonDeserializer类里面要做相应的处理
      *
      * @return Enum索引

@@ -43,6 +43,26 @@ spring:
 #        - classpath*:sqls/upms-data-mysql.sql
         - classpath*:sqls/upms-data-postgresql.sql
 
+herodotus:
+  access:
+    justauth:
+      enabled: true
+      GITEE:
+        - client-id: 7c1623d76f3909757912338688cae8a061e241b56070face6d54114
+        - client-secret: 8c343cad9ca732d54242f002d254239e17b68cab11c1d506a578
+        - redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
+  sms:
+    enabled: true
+    default-channel: aliyun
+    aliyun:
+      enabled: true
+      access-key-id: xxxxxx
+      access-key-secret: xxxxxxx
+      region-id: cn-shanghai
+      sign-name: helloword
+      version: 2017-05-25
+      templates: { "VERIFICATION_CODE": "SMS_222222222" }
+
 logging:
   file:
     name: logs/${spring.application.name}.log

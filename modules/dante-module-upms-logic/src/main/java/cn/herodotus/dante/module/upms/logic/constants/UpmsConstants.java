@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -26,10 +26,10 @@
 package cn.herodotus.dante.module.upms.logic.constants;
 
 /**
- * <p> Description : Upms服务常量 </p>
+ * <p>Description: Upms 模块常量 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/2/19 20:06
+ * @date : 2022/2/16 18:19
  */
 public interface UpmsConstants {
 
@@ -39,11 +39,12 @@ public interface UpmsConstants {
     String REGION_SYS_ROLE = AREA_PREFIX + "sys:role";
     String REGION_SYS_DEFAULT_ROLE = AREA_PREFIX + "sys:defaults:role";
     String REGION_SYS_AUTHORITY = AREA_PREFIX + "sys:authority";
+    String REGION_SYS_SCOPE = AREA_PREFIX + "sys:scope";
     String REGION_SYS_SECURITY_ATTRIBUTE = AREA_PREFIX + "sys:security:attribute";
     String REGION_SYS_OWNERSHIP = AREA_PREFIX + "sys:ownership";
-    String REGION_SYS_SCOPE = AREA_PREFIX + "sys:scope";
-
     String REGION_SYS_ELEMENT = AREA_PREFIX + "sys:element";
+    String REGION_SYS_SOCIAL_USER = AREA_PREFIX + "sys:social:user";
+    String REGION_SYS_CLIENT = AREA_PREFIX + "sys:client";
 
     String REGION_SYS_DEPARTMENT = AREA_PREFIX + "sys:department";
     String REGION_SYS_EMPLOYEE = AREA_PREFIX + "sys:employee";

@@ -261,7 +261,7 @@ INSERT INTO sys_role_authority (role_id, authority_id)
 SELECT '1' role_id,
        sa.authority_id
 FROM "sys_authority" sa
-WHERE NOT EXISTS(SELECT sa.authority_id FROM sys_role_authority sra WHERE sra.authority_id = sa.authority_id)
+WHERE NOT EXISTS(SELECT sa.authority_id FROM sys_role_authority sra WHERE sra.authority_id = sa.authority_id);
 
 -- ----------------------------
 -- Import all authority  for test role

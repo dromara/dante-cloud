@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,12 +25,12 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.system;
 
+import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
+import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.protect.core.annotation.Crypto;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
-import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -43,7 +43,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>Description: SysUserController </p>
+ * <p>Description: 系统用户接口 </p>
  *
  * @author : gengwei.zheng
  * @date : 2019/11/25 10:55

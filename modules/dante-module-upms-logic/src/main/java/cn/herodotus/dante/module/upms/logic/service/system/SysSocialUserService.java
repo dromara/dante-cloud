@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,52 +25,41 @@
 
 package cn.herodotus.dante.module.upms.logic.service.system;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysScope;
+import cn.herodotus.dante.module.upms.logic.entity.system.SysSocialUser;
+import cn.herodotus.dante.module.upms.logic.repository.system.SysSocialUserRepository;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
-import cn.herodotus.dante.module.upms.logic.repository.system.SysScopeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
- * <p> Description : OauthScopeService </p>
+ * <p>Description: 社会化登录用户服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/19 17:00
+ * @date : 2021/5/16 16:29
  */
 @Service
-public class SysScopeService extends BaseLayeredService<SysScope, String> {
+public class SysSocialUserService extends BaseLayeredService<SysSocialUser, String> {
 
-    private static final Logger log = LoggerFactory.getLogger(SysScopeService.class);
+    private static final Logger log = LoggerFactory.getLogger(SysSocialUserService.class);
+
+    private final SysSocialUserRepository sysSocialUserRepository;
 
     @Autowired
-    private SysScopeRepository sysScopeRepository;
-
-    @Override
-    public BaseRepository<SysScope, String> getRepository() {
-        return sysScopeRepository;
+    public SysSocialUserService(SysSocialUserRepository sysSocialUserRepository) {
+        this.sysSocialUserRepository = sysSocialUserRepository;
     }
 
-    public SysScope authorize(String scopeId, String[] authorities) {
+    @Override
+    public BaseRepository<SysSocialUser, String> getRepository() {
+        return sysSocialUserRepository;
+    }
 
-        Set<SysAuthority> sysAuthorities = new HashSet<>();
-        for (String authority : authorities) {
-            SysAuthority sysAuthority = new SysAuthority();
-            sysAuthority.setAuthorityId(authority);
-            sysAuthorities.add(sysAuthority);
-        }
-
-        SysScope sysScope = findById(scopeId);
-        sysScope.setAuthorities(sysAuthorities);
-
-        log.debug("[Herodotus] |- OauthScopes Service authorize.");
-
-        return saveOrUpdate(sysScope);
+    public SysSocialUser findByUuidAndSource(String uuid, String source) {
+        SysSocialUser sysSocialUser = sysSocialUserRepository.findSysSocialUserByUuidAndSource(uuid, source);
+        log.debug("[Herodotus] |- SysSocialSocial Service findByUuidAndSource.");
+        return sysSocialUser;
     }
 }

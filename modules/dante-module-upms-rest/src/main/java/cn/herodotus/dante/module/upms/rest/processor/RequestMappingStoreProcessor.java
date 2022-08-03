@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -26,14 +26,11 @@
 package cn.herodotus.dante.module.upms.rest.processor;
 
 import cn.herodotus.engine.web.core.domain.RequestMapping;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
-import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
-import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -41,29 +38,23 @@ import java.util.List;
  * <p>Description: RequestMapping存储服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/7 20:50
+ * @date : 2021/8/7 14:15
  */
-@Service
+@Component
 public class RequestMappingStoreProcessor {
 
     private static final Logger log = LoggerFactory.getLogger(RequestMappingStoreProcessor.class);
 
-    private final SysAuthorityService sysAuthorityService;
+    private final SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor;
 
     @Autowired
-    public RequestMappingStoreProcessor(SysAuthorityService sysAuthorityService) {
-        this.sysAuthorityService = sysAuthorityService;
+    public RequestMappingStoreProcessor(SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
+        this.securityMetadataDistributeProcessor = securityMetadataDistributeProcessor;
     }
 
     @Async
     public void postProcess(List<RequestMapping> requestMappings) {
-        log.debug("[Herodotus] |- [Async] - Request Mapping Async Process Begin!");
-
-        List<SysAuthority> result = sysAuthorityService.storeRequestMappings(requestMappings);
-        if (CollectionUtils.isNotEmpty(result)) {
-            log.info("[Herodotus] |- Store Service Resources Success!");
-        } else {
-            log.error("[Herodotus] |- Store Service Resources May Be Error, Please Check!");
-        }
+        log.debug("[Herodotus] |- [4] Async store request mapping process BEGIN!");
+        securityMetadataDistributeProcessor.postMetadataProcess(requestMappings);
     }
 }

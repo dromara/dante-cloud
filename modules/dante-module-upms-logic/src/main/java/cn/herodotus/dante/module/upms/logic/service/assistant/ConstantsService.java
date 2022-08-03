@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.upms.logic.service.assistant;
 
-import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.dante.module.upms.logic.enums.Gender;
 import cn.herodotus.dante.module.upms.logic.enums.Identity;
 import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
+import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>Description: 常量服务 </p>
+ * <p>Description: Upms 常量 服务 </p>
  *
  * @author : gengwei.zheng
  * @date : 2022/2/25 15:37

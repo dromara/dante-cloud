@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,9 +25,9 @@
 
 package cn.herodotus.dante.module.upms.logic.repository.hr;
 
+import cn.herodotus.dante.module.upms.logic.entity.hr.SysOwnership;
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.dante.module.upms.logic.entity.hr.SysOwnership;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,4 +86,5 @@ public interface SysOwnershipRepository extends BaseRepository<SysOwnership, Str
     @Modifying
     @Query(value = "delete from SysOwnership o where o.organizationId = :organizationId and o.departmentId = :departmentId and o.employeeId = :employeeId")
     void deleteByOrganizationIdAndDepartmentIdAndEmployeeId(String organizationId, String departmentId, String employeeId);
+
 }

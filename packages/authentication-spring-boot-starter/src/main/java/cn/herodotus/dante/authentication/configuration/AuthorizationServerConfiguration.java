@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -26,11 +26,11 @@
 package cn.herodotus.dante.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
-import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationConverter;
-import cn.herodotus.engine.oauth2.authorization.authentication.OAuth2ResourceOwnerPasswordAuthenticationProvider;
+import cn.herodotus.engine.oauth2.authorization.authentication.*;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenCustomizer;
 import cn.herodotus.engine.oauth2.authorization.response.HerodotusAuthenticationSuccessHandler;
 import cn.herodotus.engine.oauth2.authorization.utils.OAuth2ConfigurerUtils;
+import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2ComplianceProperties;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
@@ -53,7 +53,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
@@ -64,15 +66,14 @@ import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.ClientSecretPostAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.*;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
@@ -93,6 +94,10 @@ import java.util.UUID;
 /**
  * <p>Description: 认证服务器配置 </p>
  *
+ * 1. 权限核心处理 {@link org.springframework.security.web.access.intercept.FilterSecurityInterceptor}
+ * 2. 默认的权限判断 {@link org.springframework.security.access.vote.AffirmativeBased}
+ * 3. 模式决策 {@link org.springframework.security.authentication.ProviderManager}
+ *
  * @author : gengwei.zheng
  * @date : 2022/2/12 20:57
  */
@@ -106,17 +111,30 @@ public class AuthorizationServerConfiguration {
         log.debug("[Herodotus] |- SDK [OAuth2 Authorization Server] Auto Configure.");
     }
 
-
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity, JwtDecoder jwtDecoder, UserDetailsService userDetailsService,  PasswordEncoder passwordEncoder, HttpCryptoProcessor httpCryptoProcessor, OAuth2ComplianceProperties complianceProperties) throws Exception {
+    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity httpSecurity, JwtDecoder jwtDecoder, ClientDetailsService clientDetailsService, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, HttpCryptoProcessor httpCryptoProcessor, OAuth2ComplianceProperties complianceProperties) throws Exception {
+
+        log.debug("[Herodotus] |- Core [Authorization Server Security Filter Chain] Auto Configure.");
 
         OAuth2AuthorizationServerConfigurer<HttpSecurity> authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer<>();
 
         HerodotusAuthenticationFailureHandler failureHandler = new HerodotusAuthenticationFailureHandler();
-        authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(failureHandler));
-        authorizationServerConfigurer.authorizationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
+            endpoint.errorResponseHandler(failureHandler);
+            endpoint.consentPage("/oauth2/consent");
+        });
         authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.clientAuthentication(endpoint -> {
+            AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
+                    Arrays.asList(
+                            new JwtClientAssertionAuthenticationConverter(),
+                            new ClientSecretBasicAuthenticationConverter(),
+                            new ClientSecretPostAuthenticationConverter(),
+                            new PublicClientAuthenticationConverter()));
+            endpoint.authenticationConverter(authenticationConverter);
+            endpoint.errorResponseHandler(failureHandler);
+        });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
             AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
                     Arrays.asList(
@@ -124,23 +142,28 @@ public class AuthorizationServerConfiguration {
                             new OAuth2RefreshTokenAuthenticationConverter(),
                             new OAuth2ClientCredentialsAuthenticationConverter(),
                             new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor)));
-
             endpoint.accessTokenRequestConverter(authenticationConverter);
             endpoint.errorResponseHandler(failureHandler);
             endpoint.accessTokenResponseHandler(new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));
         });
 
+        authorizationServerConfigurer.oidc(oidc -> oidc.clientRegistrationEndpoint(Customizer.withDefaults()));
+
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
-        httpSecurity
-                .requestMatcher(endpointsMatcher)
+        // @formatter:off
+        // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
+        httpSecurity.requestMatcher(endpointsMatcher)
+                // 开启请求认证
                 .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+                // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
                 .oauth2ResourceServer(configurer -> configurer
                         .jwt(jwt -> jwt.decoder(jwtDecoder))
                         .bearerTokenResolver(new DefaultBearerTokenResolver())
                         .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                         .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()))
+                // 应用 OAuth2 相关设置
                 .apply(authorizationServerConfigurer)
                 .oidc(oidc -> oidc
                         .userInfoEndpoint(userInfo -> userInfo
@@ -148,7 +171,29 @@ public class AuthorizationServerConfiguration {
                                     OidcUserInfoAuthenticationToken authentication = context.getAuthentication();
                                     JwtAuthenticationToken principal = (JwtAuthenticationToken) authentication.getPrincipal();
                                     return new OidcUserInfo(principal.getToken().getClaims());
-                                })));
+                                })))
+                // 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
+                .withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
+                    @Override
+                    public <O extends AuthenticationProvider> O postProcess(O object) {
+                        OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
+
+                        if (org.springframework.security.oauth2.server.authorization.authentication.ClientSecretAuthenticationProvider.class.isAssignableFrom(object.getClass())) {
+                            RegisteredClientRepository registeredClientRepository = OAuth2ConfigurerUtils.getRegisteredClientRepository(httpSecurity);
+                            ClientSecretAuthenticationProvider provider = new ClientSecretAuthenticationProvider(registeredClientRepository, authorizationService, clientDetailsService);
+                            log.debug("[Herodotus] |- Custom ClientSecretAuthenticationProvider is in effect!");
+                            return (O) provider;
+                        }
+                        if (org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientCredentialsAuthenticationProvider.class.isAssignableFrom(object.getClass())) {
+                            OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
+                            OAuth2ClientCredentialsAuthenticationProvider provider = new OAuth2ClientCredentialsAuthenticationProvider(authorizationService, tokenGenerator);
+                            log.debug("[Herodotus] |- Custom OAuth2ClientCredentialsAuthenticationProvider is in effect!");
+                            return (O) provider;
+                        }
+                        return object;
+                    }
+                });
+        // @formatter:on
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
@@ -156,15 +201,21 @@ public class AuthorizationServerConfiguration {
         ApplicationContext applicationContext = httpSecurity.getSharedObject(ApplicationContext.class);
         authenticationManagerBuilder.authenticationEventPublisher(new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
 
+        // build() 方法会让以上所有的配置生效
         SecurityFilterChain securityFilterChain = httpSecurity.formLogin(Customizer.withDefaults()).build();
 
         OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
         OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 
+        // 增加新的 OAuth2 Granter
         OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
                 new OAuth2ResourceOwnerPasswordAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, complianceProperties);
         resourceOwnerPasswordAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
+
+        OAuth2SocialCredentialsAuthenticationProvider socialCredentialsAuthenticationProvider =
+                new OAuth2SocialCredentialsAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, complianceProperties);
+        httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
 
         return securityFilterChain;
     }

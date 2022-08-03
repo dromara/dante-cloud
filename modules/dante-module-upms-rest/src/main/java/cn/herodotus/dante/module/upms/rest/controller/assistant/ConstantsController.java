@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.assistant;
 
-import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.dante.module.upms.logic.service.assistant.ConstantsService;
+import cn.herodotus.engine.assistant.core.domain.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.collections4.MapUtils;

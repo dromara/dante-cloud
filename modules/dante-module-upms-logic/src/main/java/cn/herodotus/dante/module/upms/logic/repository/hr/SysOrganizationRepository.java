@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,9 +25,9 @@
 
 package cn.herodotus.dante.module.upms.logic.repository.hr;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOrganization;
 import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
 
 import java.util.List;
 
@@ -46,4 +46,5 @@ public interface SysOrganizationRepository extends BaseRepository<SysOrganizatio
      * @return 组织列表
      */
     List<SysOrganization> findByCategory(OrganizationCategory category);
+
 }

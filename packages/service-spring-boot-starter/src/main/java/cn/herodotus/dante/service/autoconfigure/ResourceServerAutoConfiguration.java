@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,21 +25,25 @@
 
 package cn.herodotus.dante.service.autoconfigure;
 
+import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.engine.oauth2.metadata.processor.ExpressionSecurityMetadataParser;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
- * <p>Description: 资源服务器通用配置 </p>
+ * <p>Description: 资源服务器配置 </p>
  *
  * @author : gengwei.zheng
  * @date : 2022/1/21 23:56
@@ -47,25 +51,34 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class ResourceServerAutoConfiguration {
 
-    private final HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
-    private final JwtDecoder jwtDecoder;
-
     @Autowired
-    public ResourceServerAutoConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder) {
-        this.herodotusSecurityConfigureHandler = herodotusSecurityConfigureHandler;
-        this.jwtDecoder = jwtDecoder;
-    }
+    private ExpressionSecurityMetadataParser securityMetadataExpressionParser;
+    @Autowired
+    private HerodotusSecurityMetadataSource herodotusSecurityMetadataSource;
+    @Autowired
+    private HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
+    @Autowired
+    private JwtDecoder jwtDecoder;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
+        http.cors().disable();
         // @formatter:off
         http.authorizeRequests(authorizeRequests ->
                         authorizeRequests
                                 .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
                                 .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
                                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                                .anyRequest().authenticated())
+                                .anyRequest().authenticated()
+                                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                                    @Override
+                                    public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
+                                        securityMetadataExpressionParser.setFilterInvocationSecurityMetadataSource(fsi.getSecurityMetadataSource());
+                                        fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
+                                        return fsi;
+                                    }
+                                }))
                 .oauth2ResourceServer(configurer ->
                         configurer
                                 .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))

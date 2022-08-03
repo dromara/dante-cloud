@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -57,6 +57,7 @@ import java.util.Set;
  * @date : 2020/1/19 16:41
  */
 @Schema(title = "人员")
+@Entity
 @NamedEntityGraph(
         name = "SysEmployeeWithSysUser.Graph",
         attributeNodes = {
@@ -71,7 +72,6 @@ import java.util.Set;
                 )
         }
 )
-@Entity
 @Table(name = "sys_employee", indexes = {@Index(name = "sys_employee_id_idx", columnList = "employee_id")})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "employeeId")
 @Cacheable
@@ -150,7 +150,7 @@ public class SysEmployee extends BaseSysEntity implements SocialUserDetails {
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_USER)
     @JsonDeserialize(using = SysUserEmptyToNull.class)
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private SysUser user;
 
     public SysUser getUser() {

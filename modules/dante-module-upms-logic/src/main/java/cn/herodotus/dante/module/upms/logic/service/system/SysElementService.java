@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -27,6 +27,7 @@ package cn.herodotus.dante.module.upms.logic.service.system;
 
 import cn.herodotus.dante.module.upms.logic.entity.system.SysElement;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
+import cn.herodotus.dante.module.upms.logic.repository.system.SysElementRepository;
 import cn.herodotus.engine.assistant.core.component.router.BaseMeta;
 import cn.herodotus.engine.assistant.core.component.router.ChildMeta;
 import cn.herodotus.engine.assistant.core.component.router.ParentMeta;
@@ -34,7 +35,6 @@ import cn.herodotus.engine.assistant.core.component.router.RootMeta;
 import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
-import cn.herodotus.dante.module.upms.logic.repository.system.SysElementRepository;
 import cn.hutool.core.lang.tree.TreeNode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;

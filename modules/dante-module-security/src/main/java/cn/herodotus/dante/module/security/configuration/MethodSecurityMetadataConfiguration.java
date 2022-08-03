@@ -1,58 +1,55 @@
 /*
- * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Copyright 2019-2022 ZHENGGENGWEI<码匠君>. All rights reserved.
  *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * Dante Cloud 采用APACHE LICENSE 2.0开源协议，您在使用过程中，需要注意以下几点：
- *
- * 1.请不要删除和修改根目录下的LICENSE文件。
- * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
- * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
- * 6.若您的项目无法满足以上几点，可申请商业授权
+ * - Author: ZHENGGENGWEI<码匠君>
+ * - Contact: herodotus@aliyun.com
+ * - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
  */
 
 package cn.herodotus.dante.module.security.configuration;
 
+import cn.herodotus.dante.module.security.processor.HerodotusRequestMappingScanManager;
+import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
+import cn.herodotus.engine.oauth2.metadata.configuration.SecurityMetadataConfiguration;
+import cn.herodotus.engine.oauth2.metadata.processor.SecurityMetadataAnalysisProcessor;
+import cn.herodotus.engine.oauth2.metadata.storage.SecurityMetadataLocalStorage;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
-import cn.herodotus.dante.module.security.processor.HerodotusRequestMappingScanManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+import org.springframework.context.annotation.Import;
+
+import javax.annotation.PostConstruct;
 
 /**
- * <p>Description: 全局方法级安全配置 </p>
+ * <p>Description: Security 权限配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/28 18:11
+ * @date : 2022/1/23 17:00
  */
 @Configuration(proxyBeanMethods = false)
-@EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
-public class MethodSecurityMetadataConfiguration extends GlobalMethodSecurityConfiguration {
+@Import({
+        SecurityMetadataConfiguration.class
+})
+public class MethodSecurityMetadataConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(MethodSecurityMetadataConfiguration.class);
 
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Module [Method Security Metadata] Auto Configure.");
+    }
+
     @Bean
     @ConditionalOnMissingBean
-    public RequestMappingScanManager requestMappingScanManager() {
-        HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager();
+    public RequestMappingScanManager requestMappingScanManager(SecurityMetadataAnalysisProcessor securityMetadataAnalysisProcessor) {
+        HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager(securityMetadataAnalysisProcessor);
         log.trace("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
         return herodotusRequestMappingScanManager;
     }
@@ -62,5 +59,18 @@ public class MethodSecurityMetadataConfiguration extends GlobalMethodSecurityCon
         HerodotusSecurityConfigureHandler herodotusSecurityRequestMatcherHandler = new HerodotusSecurityConfigureHandler(securityProperties);
         log.trace("[Herodotus] |- Bean [Herodotus Security Configure Handler] Auto Configure.");
         return herodotusSecurityRequestMatcherHandler;
+    }
+
+    /**
+     * 权限信息存储器
+     */
+    @Bean
+    @ConditionalOnMissingBean(HerodotusSecurityMetadataSource.class)
+    public HerodotusSecurityMetadataSource herodotusSecurityMetadataSource(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, SecurityMetadataLocalStorage securityMetadataLocalStorage) {
+        HerodotusSecurityMetadataSource herodotusSecurityMetadataSource = new HerodotusSecurityMetadataSource();
+        herodotusSecurityMetadataSource.setSecurityMetadataLocalStorage(securityMetadataLocalStorage);
+        herodotusSecurityMetadataSource.setHerodotusSecurityConfigureHandler(herodotusSecurityConfigureHandler);
+        log.trace("[Herodotus] |- Bean [Herodotus Security Metadata Source] Auto Configure.");
+        return herodotusSecurityMetadataSource;
     }
 }

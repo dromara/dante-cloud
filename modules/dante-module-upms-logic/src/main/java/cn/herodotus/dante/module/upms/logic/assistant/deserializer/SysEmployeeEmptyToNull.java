@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -39,7 +39,7 @@ import java.io.IOException;
  * <p>Description: SysEmployee 反序列化 空对象 '{}' 转 为 null </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/10/10 21:47
+ * @date : 2021/10/10 20:19
  */
 public class SysEmployeeEmptyToNull extends JsonDeserializer<SysEmployee> {
 

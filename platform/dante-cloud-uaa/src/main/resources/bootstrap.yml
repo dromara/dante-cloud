@@ -38,6 +38,13 @@ spring:
         port: 8719
         dashboard: @sentinel.server-addr@
 
+herodotus:
+  platform:
+    data-access-strategy: remote
+  oauth2:
+    jwk:
+      certificate: standard
+
 logging:
   file:
     name: logs/${spring.application.name}.log

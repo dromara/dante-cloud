@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -23,17 +23,26 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.upms.logic.repository.system;
+package cn.herodotus.dante.module.upms.logic.assistant.event;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysScope;
-import cn.herodotus.engine.data.core.repository.BaseRepository;
+import cn.herodotus.engine.event.core.definition.LocalApplicationEvent;
+
+import java.time.Clock;
+import java.util.List;
 
 /**
- * <p> Description : OauthScopeRepository </p>
+ * <p>Description: SysSecurityAttribute数据变更Event </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/19 16:57
+ * @date : 2021/8/4 15:57
  */
-public interface SysScopeRepository extends BaseRepository<SysScope, String> {
+public class SysSecurityAttributeRelationChangeEvent extends LocalApplicationEvent<List<String>> {
 
+    public SysSecurityAttributeRelationChangeEvent(List<String> data) {
+        super(data);
+    }
+
+    public SysSecurityAttributeRelationChangeEvent(List<String> data, Clock clock) {
+        super(data, clock);
+    }
 }

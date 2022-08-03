@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -27,12 +27,12 @@ package cn.herodotus.dante.module.upms.logic.helper;
 
 
 import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
+import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusGrantedAuthority;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.oauth2.core.utils.SecurityUtils;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 

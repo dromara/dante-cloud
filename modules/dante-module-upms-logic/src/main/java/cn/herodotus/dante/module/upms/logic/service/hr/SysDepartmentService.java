@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -26,9 +26,9 @@
 package cn.herodotus.dante.module.upms.logic.service.hr;
 
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
+import cn.herodotus.dante.module.upms.logic.repository.hr.SysDepartmentRepository;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
-import cn.herodotus.dante.module.upms.logic.repository.hr.SysDepartmentRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,7 +88,7 @@ public class SysDepartmentService extends BaseLayeredService<SysDepartment, Stri
         return this.findByPage(specification, pageable);
     }
 
-    public List<SysDepartment> findAll(String organizationId) {
+    public List<SysDepartment> findAll(String  organizationId) {
         if (ObjectUtils.isNotEmpty(organizationId)) {
             return sysDepartmentRepository.findByOrganizationId(organizationId);
         } else {

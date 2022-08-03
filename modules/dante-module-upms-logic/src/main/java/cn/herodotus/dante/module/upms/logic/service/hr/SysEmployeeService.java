@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,19 +25,19 @@
 
 package cn.herodotus.dante.module.upms.logic.service.hr;
 
-import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import cn.herodotus.dante.module.upms.logic.dto.AllocatableDeploy;
 import cn.herodotus.dante.module.upms.logic.dto.AllocatableRemove;
+import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOwnership;
+import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
 import cn.herodotus.dante.module.upms.logic.enums.Gender;
 import cn.herodotus.dante.module.upms.logic.enums.Identity;
 import cn.herodotus.dante.module.upms.logic.repository.hr.SysEmployeeRepository;
 import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
+import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
+import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -233,7 +233,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         return this.findByPage(specification, pageable);
     }
 
-    public Page<SysEmployee> findByDeparmentId(int pageNumber, int pageSize, String departmentId) {
+    public Page<SysEmployee> findByDepartmentId(int pageNumber, int pageSize, String departmentId) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         Specification<SysEmployee> specification = (root, criteriaQuery, criteriaBuilder) -> {
@@ -307,4 +307,5 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         log.debug("[Herodotus] |- SysEmployee Service findByEmployeName.");
         return sysEmployee;
     }
+
 }

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -26,9 +26,9 @@
 package cn.herodotus.dante.module.upms.logic.dto;
 
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
-import cn.herodotus.engine.assistant.core.definition.domain.AbstractDto;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOwnership;
+import cn.herodotus.engine.assistant.core.definition.domain.AbstractDto;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,10 +41,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * <p>Description: 增加人员归属参数BO对象 </p>
+ * <p>Description: 设置人员归属参数BO对象 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/9/25 10:24
+ * @date : 2021/9/24 17:31
  */
 @Schema(description = "增加人员归属参数BO对象")
 public class AllocatableDeploy extends AbstractDto {
@@ -102,7 +102,7 @@ public class AllocatableDeploy extends AbstractDto {
     }
 
     public List<SysOwnership> getOwnerships() {
-        if (CollectionUtils.isNotEmpty(this.employees)) {
+        if (CollectionUtils.isNotEmpty(this.employees) ) {
             return this.employees.stream().map(employee -> {
                 SysOwnership sysOwnership = new SysOwnership();
                 sysOwnership.setEmployeeId(employee.getEmployeeId());
