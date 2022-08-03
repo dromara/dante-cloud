@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -35,7 +35,7 @@ import javax.persistence.QueryHint;
  * <p>Description: SysRoleRepository </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/10/12 22:55
+ * @date : 2021/10/11 21:27
  */
 public interface SysRoleRepository extends BaseRepository<SysRole, String> {
 

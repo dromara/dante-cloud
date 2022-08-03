@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.upms.rest.listener;
 
+import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.event.core.local.LocalChangeUserStatusEvent;
 import cn.herodotus.engine.web.core.domain.UserStatus;
-import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -27,10 +27,10 @@ package cn.herodotus.dante.module.upms.logic.service.system;
 
 import cn.herodotus.dante.module.upms.logic.entity.system.SysDefaultRole;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
+import cn.herodotus.dante.module.upms.logic.repository.system.SysDefaultRoleRepository;
 import cn.herodotus.engine.assistant.core.enums.AccountType;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
-import cn.herodotus.dante.module.upms.logic.repository.system.SysDefaultRoleRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,10 +38,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>Description: SysDefaultRoleService </p>
+ * <p>Description: 系统默认角色Service </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/5 17:53
+ * @date : 2021/7/21 16:09
  */
 @Service
 public class SysDefaultRoleService extends BaseLayeredService<SysDefaultRole, String> {
@@ -67,6 +67,7 @@ public class SysDefaultRoleService extends BaseLayeredService<SysDefaultRole, St
         log.debug("[Herodotus] |- SysDefaultRole Service findBySource.");
         return sysDefaultRole;
     }
+
 
     public SysDefaultRole assign(String defaultId, String roleId) {
         SysRole sysRole = sysRoleService.findByRoleId(roleId);

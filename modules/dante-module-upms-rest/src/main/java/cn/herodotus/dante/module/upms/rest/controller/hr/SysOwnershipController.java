@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.hr;
 
-import cn.herodotus.engine.data.core.service.WriteableService;
-import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOwnership;
 import cn.herodotus.dante.module.upms.logic.service.hr.SysOwnershipService;
+import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

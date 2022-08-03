@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -43,7 +43,7 @@ import java.util.List;
  * <p>Description: SecurityMetadata远程变更事件监听 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/7 20:49
+ * @date : 2021/8/5 16:16
  */
 @Component
 public class RemoteRequestMappingGatherListener implements ApplicationListener<RemoteRequestMappingGatherEvent> {
@@ -59,9 +59,11 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
 
     @Override
     public void onApplicationEvent(RemoteRequestMappingGatherEvent event) {
-        log.info("[Herodotus] |- Request Mapping Gather REMOTE Listener, response event!");
+
+        log.info("[Herodotus] |- Request mapping gather REMOTE listener, response event!");
 
         String requestMapping = event.getData();
+        log.debug("[Herodotus] |- Fetch data [{}]", requestMapping);
         if (ObjectUtils.isNotEmpty(requestMapping)) {
             List<RequestMapping> requestMappings = JacksonUtils.toList(requestMapping, RequestMapping.class);
             if (CollectionUtils.isNotEmpty(requestMappings)) {

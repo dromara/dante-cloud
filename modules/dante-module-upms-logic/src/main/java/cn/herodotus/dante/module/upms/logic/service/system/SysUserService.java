@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -29,6 +29,7 @@ import cn.herodotus.dante.module.upms.logic.entity.system.SysDefaultRole;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
 import cn.herodotus.dante.module.upms.logic.helper.UpmsHelper;
+import cn.herodotus.dante.module.upms.logic.repository.system.SysUserRepository;
 import cn.herodotus.engine.assistant.core.enums.AccountType;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
@@ -36,7 +37,6 @@ import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.oauth2.core.definition.domain.SocialUserDetails;
 import cn.herodotus.engine.oauth2.core.utils.SecurityUtils;
-import cn.herodotus.dante.module.upms.logic.repository.system.SysUserRepository;
 import cn.hutool.core.util.IdUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;

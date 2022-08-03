@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -33,10 +33,10 @@
  */
 package cn.herodotus.dante.module.upms.logic.entity.system;
 
-import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.dante.module.upms.logic.assistant.deserializer.SysEmployeeEmptyToNull;
 import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

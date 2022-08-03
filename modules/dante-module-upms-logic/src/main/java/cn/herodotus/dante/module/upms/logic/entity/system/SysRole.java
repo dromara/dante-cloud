@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,8 +25,9 @@
 
 package cn.herodotus.dante.module.upms.logic.entity.system;
 
-import cn.herodotus.engine.data.core.entity.BaseSysEntity;
+import cn.herodotus.dante.module.upms.logic.assistant.listener.SysRoleEntityListener;
 import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
+import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -39,17 +40,12 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * <p>Description: SysRole </p>
- *
- * @author : gengwei.zheng
- * @date : 2021/10/12 22:58
- */
 @Entity
 @Table(name = "sys_role", uniqueConstraints = {@UniqueConstraint(columnNames = {"role_code"})},
         indexes = {@Index(name = "sys_role_rid_idx", columnList = "role_id"), @Index(name = "sys_role_rcd_idx", columnList = "role_code")})
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
+@EntityListeners({SysRoleEntityListener.class})
 public class SysRole extends BaseSysEntity {
 
     @Id
@@ -85,6 +81,7 @@ public class SysRole extends BaseSysEntity {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"role_id", "authority_id"})},
             indexes = {@Index(name = "sys_role_authority_rid_idx", columnList = "role_id"), @Index(name = "sys_role_authority_aid_idx", columnList = "authority_id")})
     private Set<SysAuthority> authorities = new HashSet<>();
+
 
     public String getRoleId() {
         return roleId;

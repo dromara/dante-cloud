@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,19 +25,21 @@
 
 package cn.herodotus.dante.authentication.configuration;
 
-import cn.herodotus.dante.authentication.service.HerodotusAuthorityDetailsService;
+import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
 import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.engine.oauth2.authorization.authorization.OAuth2FormLoginConfigurer;
 import cn.herodotus.engine.oauth2.authorization.properties.OAuth2UiProperties;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
+import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
+import cn.herodotus.engine.oauth2.metadata.processor.ExpressionSecurityMetadataParser;
+import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusClientDetailsService;
+import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusUserDetailsService;
+import cn.herodotus.engine.oauth2.server.authorization.service.OAuth2ApplicationService;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
-import cn.herodotus.dante.authentication.service.HerodotusUserDetailsService;
-import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
-import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,15 +49,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.web.SecurityFilterChain;
-
-import javax.annotation.PostConstruct;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -68,49 +71,47 @@ public class DefaultSecurityConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
 
+    private final ExpressionSecurityMetadataParser securityMetadataExpressionParser;
+    private final HerodotusSecurityMetadataSource herodotusSecurityMetadataSource;
     private final HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
     private final JwtDecoder jwtDecoder;
     private final OAuth2UiProperties uiProperties;
     private final CaptchaRendererFactory captchaRendererFactory;
 
     @Autowired
-    public DefaultSecurityConfiguration(HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder, OAuth2UiProperties uiProperties, CaptchaRendererFactory captchaRendererFactory) {
+    public DefaultSecurityConfiguration(ExpressionSecurityMetadataParser securityMetadataExpressionParser, HerodotusSecurityMetadataSource herodotusSecurityMetadataSource, HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder, OAuth2UiProperties uiProperties, CaptchaRendererFactory captchaRendererFactory) {
+        this.securityMetadataExpressionParser = securityMetadataExpressionParser;
+        this.herodotusSecurityMetadataSource = herodotusSecurityMetadataSource;
         this.herodotusSecurityConfigureHandler = herodotusSecurityConfigureHandler;
         this.jwtDecoder = jwtDecoder;
         this.uiProperties = uiProperties;
         this.captchaRendererFactory = captchaRendererFactory;
     }
 
-    @PostConstruct
-    public void postConstruct() {
-        log.debug("[Herodotus] |- SDK [OAuth2 Default Security] Auto Configure.");
-    }
-
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
 
-    @Bean
-    @ConditionalOnMissingBean
-    public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
-        log.debug("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
-        return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
-    }
-    @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity, UserDetailsService userDetailsService) throws Exception {
-
+        log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
         // 禁用CSRF 开启跨域
-        httpSecurity.csrf().disable().cors();
+        http.csrf().disable().cors();
 
         // @formatter:off
-        httpSecurity.authorizeRequests(authorizeRequests -> authorizeRequests
-                        .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                        .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
-                        .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                        .anyRequest().authenticated())
+        http.authorizeRequests(authorizeRequests ->
+                        authorizeRequests
+                                .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
+                                .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                                .anyRequest().authenticated()
+                                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                                    @Override
+                                    public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
+                                        securityMetadataExpressionParser.setFilterInvocationSecurityMetadataSource(fsi.getSecurityMetadataSource());
+                                        fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
+                                        return fsi;
+                                    }
+                                }))
                 .formLogin(form -> {
-                            form.loginPage(uiProperties.getLoginPageUrl()).permitAll()
+                            form.loginPage(uiProperties.getLoginPageUrl())
                                     .usernameParameter(uiProperties.getUsernameParameter())
                                     .passwordParameter(uiProperties.getPasswordParameter());
                             if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
@@ -126,28 +127,40 @@ public class DefaultSecurityConfiguration {
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
                 .oauth2ResourceServer(configurer -> configurer
-                        .jwt(jwt -> jwt
-                                .decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
+                        .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
+                        .bearerTokenResolver(new DefaultBearerTokenResolver())
                         .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                         .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()))
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
         // @formatter:on
-        return httpSecurity.build();
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    UserDetailsService userDetailsService(SysUserService sysUserService) {
-        HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(sysUserService);
+    public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
+        log.debug("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
+        return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
+        HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(strategyUserDetailsService);
         log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
         return herodotusUserDetailsService;
     }
 
     @Bean
     @ConditionalOnMissingBean
-    StrategyAuthorityDetailsService strategyAuthorityDetailsService(SysAuthorityService sysAuthorityService) {
-        HerodotusAuthorityDetailsService herodotusAuthorityDetailsService = new HerodotusAuthorityDetailsService(sysAuthorityService);
-        log.trace("[Herodotus] |- Bean [Herodotus Authority Details Service] Auto Configure.");
-        return herodotusAuthorityDetailsService;
+    public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
+        HerodotusClientDetailsService herodotusClientDetailsService = new HerodotusClientDetailsService(applicationService);
+        log.debug("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
+        return herodotusClientDetailsService;
     }
 }

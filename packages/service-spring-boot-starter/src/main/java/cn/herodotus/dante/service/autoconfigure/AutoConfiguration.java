@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -35,7 +35,7 @@ import javax.annotation.PostConstruct;
  * <p>Description: 服务通用Starter自动配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/22 11:27
+ * @date : 2022/2/17 13:44
  */
 @Configuration(proxyBeanMethods = false)
 public class AutoConfiguration {

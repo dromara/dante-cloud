@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -40,7 +40,7 @@ import java.util.Map;
  * <p>Description: 机构类别 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/9/22 17:12
+ * @date : 2021/9/21 11:39
  */
 @Schema(title =  "机构类别")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)

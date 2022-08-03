@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,13 +25,13 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.system;
 
+import cn.herodotus.dante.module.upms.logic.entity.system.SysElement;
+import cn.herodotus.dante.module.upms.logic.service.system.SysElementService;
 import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.protect.core.annotation.AccessLimited;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysElement;
-import cn.herodotus.dante.module.upms.logic.service.system.SysElementService;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -42,7 +42,7 @@ public interface SysUserRepository extends BaseRepository<SysUser, String> {
      * 根据用户名查找SysUser
      *
      * @param userName 用户名
-     * @return SysUser
+     * @return {@link SysUser}
      */
     @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
     SysUser findByUserName(String userName);

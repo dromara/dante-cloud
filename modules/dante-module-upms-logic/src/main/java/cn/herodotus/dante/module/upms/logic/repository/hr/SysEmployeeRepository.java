@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.module.upms.logic.repository.hr;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
+import cn.herodotus.engine.data.core.repository.BaseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -56,4 +56,6 @@ public interface SysEmployeeRepository extends BaseRepository<SysEmployee, Strin
     @EntityGraph(value = "SysEmployeeWithSysUser.Graph", type = EntityGraph.EntityGraphType.FETCH)
     @Override
     Page<SysEmployee> findAll(Pageable pageable);
+
+
 }

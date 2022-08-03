@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,11 +25,12 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.system;
 
-import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.data.core.service.WriteableService;
-import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.dante.module.upms.logic.service.system.SysRoleService;
+import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.protect.core.annotation.AccessLimited;
+import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -44,6 +45,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * <p>Description: SysRoleController </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/10/11 21:27
+ */
 @RestController
 @RequestMapping("/role")
 @Tags({
@@ -91,6 +98,7 @@ public class SysRoleController extends BaseWriteableRestController<SysRole, Stri
         return result(sysRole);
     }
 
+    @AccessLimited
     @Operation(summary = "获取全部角色", description = "获取全部角色")
     @GetMapping("/list")
     public Result<List<SysRole>> findAll() {

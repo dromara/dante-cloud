@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,12 +25,12 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.hr;
 
+import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
+import cn.herodotus.dante.module.upms.logic.service.hr.SysDepartmentService;
 import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
-import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
-import cn.herodotus.dante.module.upms.logic.service.hr.SysDepartmentService;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeNode;
 import cn.hutool.core.lang.tree.TreeUtil;
@@ -56,6 +56,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * <p>Description: SysDepartmentController </p>
+ *
+ * @author : gengwei.zheng
+ * @date : 2021/9/23 23:13
+ */
 @RestController
 @RequestMapping("/department")
 @Tag(name = "部门管理接口")
@@ -76,6 +82,14 @@ public class SysDepartmentController extends BaseWriteableRestController<SysDepa
 
     private List<SysDepartment> getSysDepartments(String organizationId) {
         return sysDepartmentService.findAll(organizationId);
+    }
+
+    private String convertParentId(String parentId) {
+        if (StringUtils.isBlank(parentId)) {
+            return BaseConstants.DEFAULT_TREE_ROOT_ID;
+        } else {
+            return parentId;
+        }
     }
 
     @Operation(summary = "条件查询部门分页数据", description = "根据输入的字段条件查询部门信息",
@@ -102,14 +116,6 @@ public class SysDepartmentController extends BaseWriteableRestController<SysDepa
     public Result<List<SysDepartment>> findAllByOrganizationId(@RequestParam(value = "organizationId", required = false) String organizationId) {
         List<SysDepartment> sysDepartments = getSysDepartments(organizationId);
         return result(sysDepartments);
-    }
-
-    private String convertParentId(String parentId) {
-        if (StringUtils.isBlank(parentId)) {
-            return BaseConstants.DEFAULT_TREE_ROOT_ID;
-        } else {
-            return parentId;
-        }
     }
 
     @Operation(summary = "获取部门树", description = "根据单位ID获取部门数据，转换为树形结构",

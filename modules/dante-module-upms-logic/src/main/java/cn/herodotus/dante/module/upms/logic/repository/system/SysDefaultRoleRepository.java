@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -36,7 +36,7 @@ import javax.persistence.QueryHint;
  * <p>Description: 默认角色管理Repository </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/5 17:47
+ * @date : 2021/7/21 16:08
  */
 public interface SysDefaultRoleRepository extends BaseRepository<SysDefaultRole, String> {
 

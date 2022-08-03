@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,9 +25,9 @@
 
 package cn.herodotus.dante.module.upms.logic.entity.system;
 
+import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
 import cn.herodotus.engine.assistant.core.enums.AccountType;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
-import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -39,7 +39,7 @@ import javax.persistence.*;
  * <p>Description: 系统默认角色 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/5 17:32
+ * @date : 2021/7/16 17:01
  */
 @Entity
 @Table(name = "sys_default_role", uniqueConstraints = {@UniqueConstraint(columnNames = {"default_id", "scene"})},
@@ -57,13 +57,13 @@ public class SysDefaultRole extends BaseSysEntity {
     @Column(name = "default_id", length = 64)
     private String defaultId;
 
-    @Schema(title = "场景")
+    @Schema(title =  "场景")
     @Column(name = "scene", unique = true)
     @Enumerated(EnumType.STRING)
     private AccountType scene = AccountType.INSTITUTION;
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_ROLE)
-    @Schema(title = "角色ID")
+    @Schema(title =  "角色ID")
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private SysRole role;

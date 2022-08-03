@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -35,7 +35,7 @@ import javax.validation.constraints.NotNull;
  * <p>Description: 删除人员归属参数BO对象 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/9/25 10:25
+ * @date : 2021/9/24 21:48
  */
 @Schema(description = "删除人员归属参数BO对象")
 public class AllocatableRemove extends AbstractDto {

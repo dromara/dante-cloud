@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,52 +25,39 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.system;
 
-import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.dante.module.upms.logic.entity.system.SysSecurityAttribute;
+import cn.herodotus.dante.module.upms.logic.service.system.SysSecurityAttributeService;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysScope;
-import cn.herodotus.dante.module.upms.logic.service.system.SysScopeService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p> Description : OauthScopesController </p>
+ * <p>Description: SysSecurityAttributeController </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/3/25 17:10
+ * @date : 2022/6/20 18:12
  */
 @RestController
-@RequestMapping("/scope")
-@Tag(name = "权限范围管理接口")
-public class SysScopeController extends BaseWriteableRestController<SysScope, String> {
+@RequestMapping("/security-attribute")
+@Tags({
+        @Tag(name = "用户安全管理接口"),
+        @Tag(name = "系统元数据管理接口")
+})
+public class SysSecurityAttributeController extends BaseWriteableRestController<SysSecurityAttribute, String> {
 
-    private final SysScopeService sysScopeService;
+    private final SysSecurityAttributeService sysSecurityAttributeService;
 
     @Autowired
-    public SysScopeController(SysScopeService sysScopeService) {
-        this.sysScopeService = sysScopeService;
+    public SysSecurityAttributeController(SysSecurityAttributeService sysSecurityAttributeService) {
+        this.sysSecurityAttributeService = sysSecurityAttributeService;
     }
 
     @Override
-    public WriteableService<SysScope, String> getWriteableService() {
-        return this.sysScopeService;
-    }
-
-    @Operation(summary = "给OauthScopes授权", description = "为OauthScopes分配接口权限")
-    @Parameters({
-            @Parameter(name = "scopeId", required = true, description = "ScopeID"),
-            @Parameter(name = "authorities[]", required = true, description = "权限对象组成的数组")
-    })
-    @PutMapping
-    public Result<SysScope> authorize(@RequestParam(name = "scopeId") String scopeId, @RequestParam(name = "authorities[]") String[] authorities) {
-        SysScope sysScope = sysScopeService.authorize(scopeId, authorities);
-        return result(sysScope);
+    public WriteableService<SysSecurityAttribute, String> getWriteableService() {
+        return this.sysSecurityAttributeService;
     }
 }

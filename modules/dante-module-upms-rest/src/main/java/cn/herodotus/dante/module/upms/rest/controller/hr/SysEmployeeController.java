@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,15 +25,15 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.hr;
 
-import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.data.core.service.WriteableService;
-import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.dante.module.upms.logic.dto.AllocatableDeploy;
 import cn.herodotus.dante.module.upms.logic.dto.AllocatableRemove;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.dante.module.upms.logic.enums.Gender;
 import cn.herodotus.dante.module.upms.logic.enums.Identity;
 import cn.herodotus.dante.module.upms.logic.service.hr.SysEmployeeService;
+import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -163,7 +163,7 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
     public Result<Map<String, Object>> findAssigned(@NotBlank @RequestParam("pageNumber") Integer pageNumber,
                                                     @NotBlank @RequestParam("pageSize") Integer pageSize,
                                                     @NotBlank @RequestParam("departmentId") String departmentId) {
-        Page<SysEmployee> pages = sysEmployeeService.findByDeparmentId(pageNumber, pageSize, departmentId);
+        Page<SysEmployee> pages = sysEmployeeService.findByDepartmentId(pageNumber, pageSize, departmentId);
         return result(pages);
     }
 
