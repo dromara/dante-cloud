@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.1.0-brightgreen" alt="Nacos 2.1.0"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.2.3-red" alt="Version 2.7.2.3"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.2.4-red" alt="Version 2.7.2.4"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -85,6 +85,19 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 1. 本项目以后将主要维护 `Spring Authorization Server` 版本，原有基于 `Spring Security OAuth2` 的版本已经移至 spring-security-oauth2 分支，可以从该分支或发行版页面获取历史版本继续使用。后期会根据 ISSUE 以及使用用户反馈情况，再行决定是否继续维护 `Spring Security OAuth2` 版本。
 2. 基于 Vue3、Vite3、Vuetify3、Pinia 等新版前端已发布，原有基于 Vue2、Vuetify2、Typescript 开发的前端代码已移至 vue2+vuetify2+typescript 分支
+3. 自 2.7.2.3 版本起，Dante Cloud 所有核心代码全部开源。
+
+- 新开放内容包括：
+
+  - 接口权限鉴权：全面整合 `@PreAuthorize` 注解权限与 `URL` 权限，通过后端动态配置，无须在代码中配置 `Spring Security` 权限注解以及权限方法，即可实现接口鉴权以及权限的动态修改。采用分布式鉴权方案，规避 Gateway 统一鉴权的压力以及重复鉴权问题
+  - 动态权限数据分发：采用分布式服务独立鉴权方案，`Spring Security` `@PreAuthorize` 的权限注解、权限方法以及 `URL` 权限，通过后端动态配置后，实时动态分发至对应服务。
+  - User 数据策略访问：`OAuth2` `UserDetails` 核心数据支持直连数据库获取和 `Feign` 远程调用两种模式。`OAuth2` 直连数据库模式性能更优，`Feign` 访问远程调用可扩展性更强。可通过配置动态修改采用策略方式。
+  - 手机短信验证码注册认证：采用自定义 `OAuth2` 授权模式，使用统一 `Token` 接口，实现手机验证码登录认证，与平台为统一体系，统一返回`OAuth2` Token，支持服务接口鉴权
+  - 第三方系统社交注册认证：集成 `JustAuth`，采用自定义 `OAuth2` 授权模式，使用统一 `Token` 接口，实现基于 `JustAuth` 实现第三方系统社交登录认证，与平台为统一体系，统一返回 `OAuth2` Token，支持服务接口鉴权。所有 `JustAuth` 支持的第三方系统均支持。
+  - 微信小程序注册认证：采用自定义 `OAuth2` 授权模式，使用统一 `Token` 接口，实现支持微信小程序登录认证，与平台为统一体系，统一返回 `OAuth2` Token，支持服务接口鉴权。
+  - 其它方式注册认证：采用策略模式对外部系登录认证和用户注册进行接入支持，采用 `OAuth2` 默认认证接口。目前未集成的外部系统，可参考标准，适当增减参数，即可支持接入。
+  - 多通道 SMS 集成：集成阿里，百度，中国移动，华为，京东，极光，网易，七牛，腾讯，又拍，云片等平台短信发送通道。可通过配置动态选择具体使用通道。支持多模版定义以及模版参数顺序控制
+  - 微信小程序订阅消息：支持微信小程序订阅消息发送。提供订阅消息模版工厂，可根据自身业务需求，编写少量代码既可以拓展支持新订阅消息模版。
 
 ## 重要信息
 
@@ -130,7 +143,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | Spring Cloud                | 2021.0.3   |
 | Spring Cloud Alibaba        | 2021.0.1.0 |
 | Spring Authorization Server | 0.3.1      |
-| Spring Boot Admin           | 2.7.3      |
+| Spring Boot Admin           | 2.7.4      |
 | Nacos                       | 2.1.0      |
 | Sentinel                    | 1.8.3      |
 | Seata                       | 1.3.0      |
