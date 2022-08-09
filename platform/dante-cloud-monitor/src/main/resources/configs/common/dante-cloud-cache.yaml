@@ -4,12 +4,13 @@ jetcache:
   local:
     default:
       type: caffeine
-      keyConvertor: fastjson
-      limit: 1000
+      keyConvertor: fastjson2
+      limit: 10000
   remote:
     default:
       type: redis.lettuce
-      keyConvertor: fastjson
+      keyConvertor: fastjson2
+      broadcastChannel: herodotus
       valueEncoder: java
       valueDecoder: java
       poolConfig:
