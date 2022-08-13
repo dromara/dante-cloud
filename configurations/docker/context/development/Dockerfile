@@ -31,4 +31,4 @@ ADD ./target/${SERVICE_NAME}-${VERSION}.jar app.jar
 EXPOSE ${SERVICE_PORT}
 
 # 启动容器时的进程
-ENTRYPOINT java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+ENTRYPOINT java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar -Dfile.encoding=utf-8 /app.jar

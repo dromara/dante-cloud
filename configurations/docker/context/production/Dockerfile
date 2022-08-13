@@ -35,4 +35,4 @@ COPY ./agent/skywalking-agent-8.11.0.jar /usr/local/sw/agent.jar
 EXPOSE ${SERVICE_PORT}
 
 # 启动容器时的进程
-ENTRYPOINT java -javaagent:/usr/local/sw/agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar /usr/local/app.jar
+ENTRYPOINT java -javaagent:/usr/local/sw/agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar -Dfile.encoding=utf-8 /usr/local/app.jar
