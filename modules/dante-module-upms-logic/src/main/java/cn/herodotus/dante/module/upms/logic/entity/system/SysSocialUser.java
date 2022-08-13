@@ -85,7 +85,7 @@ public class SysSocialUser extends BaseSysEntity implements SocialUserDetails {
     private String nickName;
 
     @Schema(title = "用户头像")
-    @Column(name = "avatar", length = 2000)
+    @Column(name = "avatar", length = 1000)
     private String avatar;
 
     @Schema(title = "用户网址")
@@ -121,7 +121,7 @@ public class SysSocialUser extends BaseSysEntity implements SocialUserDetails {
 
 
     @Schema(title = "用户的授权令牌")
-    @Column(name = "access_token", length = 4000)
+    @Column(name = "access_token", columnDefinition="TEXT")
     private String accessToken;
 
     @Schema(title = "第三方用户的授权令牌的有效期", description = "部分平台可能没有")
@@ -129,7 +129,7 @@ public class SysSocialUser extends BaseSysEntity implements SocialUserDetails {
     private Integer expireIn;
 
     @Schema(title = "刷新令牌", description = "部分平台可能没有")
-    @Column(name = "refresh_token", length = 4000)
+    @Column(name = "refresh_token", columnDefinition="TEXT")
     private String refreshToken;
 
     @Schema(title = "第三方用户的刷新令牌的有效期", description = "部分平台可能没有")
@@ -137,11 +137,11 @@ public class SysSocialUser extends BaseSysEntity implements SocialUserDetails {
     private Integer refreshTokenExpireIn;
 
     @Schema(title = "第三方用户授予的权限", description = "部分平台可能没有")
-    @Column(name = "scope", length = 4000)
+    @Column(name = "scope", length = 1200)
     private String scope;
 
     @Schema(title = "个别平台的授权信息", description = "部分平台可能没有")
-    @Column(name = "token_type", length = 4000)
+    @Column(name = "token_type", length = 100)
     private String tokenType;
 
     @Schema(title = "第三方用户的 ID", description = "部分平台可能没有")
@@ -165,7 +165,7 @@ public class SysSocialUser extends BaseSysEntity implements SocialUserDetails {
     private String appId;
 
     @Schema(title = "手机号码", description = "部分平台可能没有")
-    @Column(name = "phone_number", length = 256)
+    @Column(name = "phone_number", length = 50)
     private String phoneNumber;
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = UpmsConstants.REGION_SYS_USER)
