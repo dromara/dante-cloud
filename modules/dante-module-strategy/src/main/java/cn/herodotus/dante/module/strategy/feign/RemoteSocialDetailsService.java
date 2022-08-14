@@ -31,9 +31,9 @@ import cn.herodotus.engine.assistant.core.domain.AccessPrincipal;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * <p>Description: SysSocialUser Feign Service </p>
@@ -45,6 +45,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface RemoteSocialDetailsService {
 
     @Inner
-    @PostMapping("/social/sign-in/{source}")
-    Result<HerodotusUser> findUserDetailsBySocial(@PathVariable("source") String source, @RequestBody AccessPrincipal accessPrincipal);
+    @RequestMapping("/social/sign-in/{source}")
+    Result<HerodotusUser> findUserDetailsBySocial(@PathVariable("source") String source, @SpringQueryMap AccessPrincipal accessPrincipal);
 }
