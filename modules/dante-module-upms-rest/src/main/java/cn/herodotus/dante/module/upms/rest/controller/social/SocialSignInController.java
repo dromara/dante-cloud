@@ -36,7 +36,9 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>Description: 社交用户登录接口 </p>
@@ -58,10 +60,10 @@ public class SocialSignInController {
 
     @Operation(summary = "社交登录用户信息查询", description = "根据不同的source查询对应社交用户的信息")
     @Parameters({
-            @Parameter(name = "socialDetails", required = true, description = "系统用户名", in = ParameterIn.PATH),
+            @Parameter(name = "source", required = true, description = "系统用户名", in = ParameterIn.PATH),
     })
-    @PostMapping("/sign-in/{source}")
-    public Result<HerodotusUser> findUserDetailsBySocial(@PathVariable("source") String source, @RequestBody AccessPrincipal accessPrincipal) {
+    @RequestMapping("/sign-in/{source}")
+    public Result<HerodotusUser> findUserDetailsBySocial(@PathVariable("source") String source, AccessPrincipal accessPrincipal) {
         HerodotusUser herodotusUser = this.socialAuthenticationHandler.authentication(source, accessPrincipal);
         if (ObjectUtils.isNotEmpty(herodotusUser)) {
             return Result.success("社交登录成功", herodotusUser);

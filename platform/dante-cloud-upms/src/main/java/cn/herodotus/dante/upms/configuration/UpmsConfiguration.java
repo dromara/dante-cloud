@@ -26,6 +26,7 @@
 package cn.herodotus.dante.upms.configuration;
 
 import cn.herodotus.dante.module.upms.logic.configuration.UpmsLogicModuleConfiguration;
+import cn.herodotus.dante.module.upms.logic.configuration.UpmsSocialConfiguration;
 import cn.herodotus.dante.module.upms.rest.configuration.UpmsRestModuleConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,7 @@ import javax.annotation.PostConstruct;
 @Configuration(proxyBeanMethods = false)
 @Import({
         UpmsLogicModuleConfiguration.class,
+        UpmsSocialConfiguration.class,
         UpmsRestModuleConfiguration.class
 })
 public class UpmsConfiguration {

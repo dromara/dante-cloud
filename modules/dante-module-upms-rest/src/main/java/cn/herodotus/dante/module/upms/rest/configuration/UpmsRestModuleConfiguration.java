@@ -43,6 +43,7 @@ import javax.annotation.PostConstruct;
         "cn.herodotus.dante.module.upms.rest.controller.hr",
         "cn.herodotus.dante.module.upms.rest.controller.system",
         "cn.herodotus.dante.module.upms.rest.controller.assistant",
+        "cn.herodotus.dante.module.upms.rest.controller.social",
         "cn.herodotus.dante.module.upms.rest.processor",
         "cn.herodotus.dante.module.upms.rest.listener",
 })

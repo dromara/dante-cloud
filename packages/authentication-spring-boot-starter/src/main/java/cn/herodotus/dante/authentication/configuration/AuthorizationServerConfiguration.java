@@ -141,7 +141,8 @@ public class AuthorizationServerConfiguration {
                             new OAuth2AuthorizationCodeAuthenticationConverter(),
                             new OAuth2RefreshTokenAuthenticationConverter(),
                             new OAuth2ClientCredentialsAuthenticationConverter(),
-                            new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor)));
+                            new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
+                            new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
             endpoint.accessTokenRequestConverter(authenticationConverter);
             endpoint.errorResponseHandler(failureHandler);
             endpoint.accessTokenResponseHandler(new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));

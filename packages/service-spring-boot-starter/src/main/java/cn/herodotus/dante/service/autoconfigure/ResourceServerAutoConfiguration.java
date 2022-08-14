@@ -63,7 +63,7 @@ public class ResourceServerAutoConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.cors().disable();
+        http.csrf().disable().cors();
         // @formatter:off
         http.authorizeRequests(authorizeRequests ->
                         authorizeRequests
