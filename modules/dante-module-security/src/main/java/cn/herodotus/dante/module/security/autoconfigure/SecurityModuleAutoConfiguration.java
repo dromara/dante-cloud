@@ -32,7 +32,7 @@ import javax.annotation.PostConstruct;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableAsync
-@EnableAspectJAutoProxy(exposeProxy = true)
+@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 @EnableConfigurationProperties({
         SecurityProperties.class,
 })
