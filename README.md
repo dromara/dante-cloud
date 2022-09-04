@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.1.1-brightgreen" alt="Nacos 2.1.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.3.2-red" alt="Version 2.7.3.2"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.3.3-red" alt="Version 2.7.3.3"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -209,9 +209,7 @@ dante-cloud
 ├    └── dante-cloud-uaa -- 账户管理和统一认证模块
 ├── services -- 平台业务服务
 ├    ├── dante-cloud-bpmn-ability -- 工作流服务
-├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
-├    ├── dante-cloud-cmdb-ability -- 简约CMDB管理服务
-└──  └── dante-cloud-cmdb-logic -- 简约CMDB基础代码包
+└──  └── dante-cloud-bpmn-logic -- 工作流基础代码包
 ```
 
 ## [6]、项目地址
