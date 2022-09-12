@@ -39,6 +39,7 @@ import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.protect.web.crypto.processor.HttpCryptoProcessor;
+import cn.herodotus.engine.protect.web.tenant.interceptor.MultiTenancyFilter;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -78,6 +79,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -151,6 +153,8 @@ public class AuthorizationServerConfiguration {
         authorizationServerConfigurer.oidc(oidc -> oidc.clientRegistrationEndpoint(Customizer.withDefaults()));
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
+
+        httpSecurity.addFilterBefore(new MultiTenancyFilter(), FilterSecurityInterceptor.class);
 
         // @formatter:off
         // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
