@@ -30,6 +30,8 @@ spring:
             group: common
           - data-id: dante-cloud-kafka.yaml
             group: common
+          - data-id: dante-cloud-multi-tenancy.yaml
+            group: common
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
