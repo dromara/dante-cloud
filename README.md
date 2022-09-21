@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.1.1-brightgreen" alt="Nacos 2.1.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.3.5-red" alt="Version 2.7.3.5"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.3.6-red" alt="Version 2.7.3.6"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -143,7 +143,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | Spring Cloud                | 2021.0.4   |
 | Spring Cloud Alibaba        | 2021.0.4.0 |
 | Spring Authorization Server | 0.3.1      |
-| Spring Boot Admin           | 2.7.4      |
+| Spring Boot Admin           | 2.7.5      |
 | Nacos                       | 2.1.1      |
 | Sentinel                    | 1.8.5      |
 | Seata                       | 1.5.2      |
