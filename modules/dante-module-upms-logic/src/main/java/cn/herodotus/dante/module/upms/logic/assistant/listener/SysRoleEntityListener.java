@@ -64,21 +64,21 @@ public class SysRoleEntityListener extends AbstractRelationListener {
 
     @PreUpdate
     protected void preUpdate(SysRole entity) {
-        log.debug("[Herodotus] |- SysRoleEntityListener @PreUpdate actived, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
+        log.debug("[Herodotus] |- SysRoleEntityListener @PreUpdate active, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
         this.setAfter(clone(entity));
     }
 
     @PostUpdate
     protected void postUpdate(SysRole entity) {
-        log.debug("[Herodotus] |- SysRoleEntityListener @PostUpdate actived, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
-        this.getApplicationContext().publishEvent(new SysSecurityAttributeRelationChangeEvent(this.getChangedItems()));
+        log.debug("[Herodotus] |- SysRoleEntityListener @PostUpdate active, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
+        this.publishEvent(new SysSecurityAttributeRelationChangeEvent(this.getChangedItems()));
     }
 
     @PostRemove
     protected void postRemove(SysRole entity) {
-        log.debug("[Herodotus] |- SysRoleEntityListener @PostRemove actived, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
+        log.debug("[Herodotus] |- SysRoleEntityListener @PostRemove active, value is : [{}]. Trigger SysSecurityAttribute relation change event.", entity.toString());
         if (CollectionUtils.isNotEmpty(entity.getAuthorities())) {
-            this.getApplicationContext().publishEvent(new SysSecurityAttributeRelationChangeEvent(clone(entity)));
+            this.publishEvent(new SysSecurityAttributeRelationChangeEvent(clone(entity)));
         }
     }
 }
