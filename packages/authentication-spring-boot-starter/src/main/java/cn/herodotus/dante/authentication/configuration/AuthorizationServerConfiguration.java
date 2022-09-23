@@ -67,14 +67,15 @@ import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-import org.springframework.security.oauth2.server.authorization.web.authentication.ClientSecretPostAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.*;
+import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
@@ -128,13 +129,6 @@ public class AuthorizationServerConfiguration {
         });
         authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.clientAuthentication(endpoint -> {
-            AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
-                    Arrays.asList(
-                            new JwtClientAssertionAuthenticationConverter(),
-                            new ClientSecretBasicAuthenticationConverter(),
-                            new ClientSecretPostAuthenticationConverter(),
-                            new PublicClientAuthenticationConverter()));
-            endpoint.authenticationConverter(authenticationConverter);
             endpoint.errorResponseHandler(failureHandler);
         });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
@@ -183,15 +177,9 @@ public class AuthorizationServerConfiguration {
                     public <O extends AuthenticationProvider> O postProcess(O object) {
                         OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
 
-                        if (org.springframework.security.oauth2.server.authorization.authentication.ClientSecretAuthenticationProvider.class.isAssignableFrom(object.getClass())) {
-                            RegisteredClientRepository registeredClientRepository = OAuth2ConfigurerUtils.getRegisteredClientRepository(httpSecurity);
-                            ClientSecretAuthenticationProvider provider = new ClientSecretAuthenticationProvider(registeredClientRepository, authorizationService, clientDetailsService);
-                            log.debug("[Herodotus] |- Custom ClientSecretAuthenticationProvider is in effect!");
-                            return (O) provider;
-                        }
                         if (org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientCredentialsAuthenticationProvider.class.isAssignableFrom(object.getClass())) {
                             OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-                            OAuth2ClientCredentialsAuthenticationProvider provider = new OAuth2ClientCredentialsAuthenticationProvider(authorizationService, tokenGenerator);
+                            OAuth2ClientCredentialsAuthenticationProvider provider = new OAuth2ClientCredentialsAuthenticationProvider(authorizationService, tokenGenerator, clientDetailsService);
                             log.debug("[Herodotus] |- Custom OAuth2ClientCredentialsAuthenticationProvider is in effect!");
                             return (O) provider;
                         }
