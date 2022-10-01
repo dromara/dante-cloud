@@ -12,6 +12,7 @@ spring:
         max-idle: 10
         min-idle: 5
     redisson:
-      enabled: ${herodotus.switch.redisson.enabled}
+      enabled: false
       single-server-config:
-        address: redis://${spring.redis.password}@${spring.redis.host}:${spring.redis.port}
+        address: redis://${spring.redis.host}:${spring.redis.port}
+#        password: ${spring.redis.password}
