@@ -102,11 +102,6 @@
                 <artifactId>dante-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>cn.herodotus.dante</groupId>
-                <artifactId>dante-cloud-cmdb-logic</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
