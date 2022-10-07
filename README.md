@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.1.1-brightgreen" alt="Nacos 2.1.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.4.1-red" alt="Version 2.7.4.1"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.4.2-red" alt="Version 2.7.4.2"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -61,6 +61,17 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 7. 对生产模式下，对基于 Vite3 的工程打包进行深度性能优化。
 8. 提供以 docker-compose 方式，对工程生产代码进行容器化打包和部署。
 
+## 前端额外说明
+
+基于 pnpm 的 monorepo 模式新版前端应用，预览尝鲜版已发布
+
+- 该版本基于 pnpm，采用 monorepo 模式对前端工程进行重构。构建 monorepo 版本前端，是为扩展更多功能、增加应用级功能做铺垫
+- 抽取 utils、components、apis、bpmn-designer 等相关代码，形成共享模块。
+- 共享模块已进行优化配置，可编译成独立的组件，单独以组件形式进行发布。
+- 代码以共享模块的方式进行单独维护开发，降低现有工程代码复杂度，便于后续功能的扩展和代码的复用。
+
+> 想要尝鲜 pnpm monorepo 版本前端，请检出 dante-cloud-ui 工程中，monorepo 分支代码。
+
 ## 新版后端特点
 
 - 基于 `Spring Authorization Server` 深度定制:
@@ -81,7 +92,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
   - 将通用化组件提取为独立工程，独立编译、按需选用，极大的降低系统主工程代码量。相关组件也已上传至 Maven 中央仓库，降低系统主工程工程代码编译耗时，改进和提升 CICD 效率，
   - 原有主工程代码结构也进行了深化调整，代码分包更加合理，代码逻辑也更加清晰。
 
-## 额外说明
+## 后端额外说明
 
 1. 本项目以后将主要维护 `Spring Authorization Server` 版本，原有基于 `Spring Security OAuth2` 的版本已经移至 spring-security-oauth2 分支，可以从该分支或发行版页面获取历史版本继续使用。后期会根据 ISSUE 以及使用用户反馈情况，再行决定是否继续维护 `Spring Security OAuth2` 版本。
 2. 基于 Vue3、Vite3、Vuetify3、Pinia 等新版前端已发布，原有基于 Vue2、Vuetify2、Typescript 开发的前端代码已移至 vue2+vuetify2+typescript 分支
@@ -265,6 +276,7 @@ dante-cloud
 - [Soybean Admin](https://gitee.com/honghuangdc/soybean-admin)
 - [Vue Next Admin](https://gitee.com/lyt-top/vue-next-admin)
 - [Vue VBen Admin](https://gitee.com/annsion/vue-vben-admin)
+- [Quasar Admin Template](https://gitee.com/jinjinge/quasar-admin-template)
 
 - 感谢 JetBrains 提供的免费开源 License：
 
