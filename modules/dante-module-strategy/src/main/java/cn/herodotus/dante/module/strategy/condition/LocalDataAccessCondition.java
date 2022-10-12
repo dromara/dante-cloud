@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.strategy.condition;
 
 import cn.herodotus.dante.module.strategy.support.StrategyPropertyFinder;
-import cn.herodotus.engine.web.core.enums.DataAccessStrategy;
+import cn.herodotus.engine.assistant.core.enums.Target;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,8 +47,8 @@ public class LocalDataAccessCondition implements Condition {
     @SuppressWarnings("NullableProblems")
     @Override
     public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
-        String property = StrategyPropertyFinder.getDataAccessStrategy(conditionContext.getEnvironment(), DataAccessStrategy.LOCAL.name());
-        boolean result = StringUtils.isNotBlank(property) && StringUtils.equalsIgnoreCase(property, DataAccessStrategy.LOCAL.name());
+        String property = StrategyPropertyFinder.getDataAccessStrategy(conditionContext.getEnvironment(), Target.LOCAL.name());
+        boolean result = StringUtils.isNotBlank(property) && StringUtils.equalsIgnoreCase(property, Target.LOCAL.name());
         log.debug("[Herodotus] |- Condition [Local Data Access] value is [{}]", result);
         return result;
     }

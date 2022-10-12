@@ -26,13 +26,17 @@
 package cn.herodotus.dante.service.autoconfigure;
 
 import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
+import cn.herodotus.engine.assistant.core.enums.Target;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.metadata.processor.ExpressionSecurityMetadataParser;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.herodotus.engine.oauth2.server.resource.introspector.HerodotusOpaqueTokenIntrospector;
+import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -50,22 +54,19 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
  */
 @EnableWebSecurity
 public class ResourceServerAutoConfiguration {
-
-    @Autowired
-    private ExpressionSecurityMetadataParser securityMetadataExpressionParser;
-    @Autowired
-    private HerodotusSecurityMetadataSource herodotusSecurityMetadataSource;
-    @Autowired
-    private HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
-    @Autowired
-    private JwtDecoder jwtDecoder;
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
+                                                   HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler,
+                                                   ExpressionSecurityMetadataParser securityMetadataExpressionParser,
+                                                   HerodotusSecurityMetadataSource herodotusSecurityMetadataSource,
+                                                   JwtDecoder jwtDecoder,
+                                                   SecurityProperties securityProperties,
+                                                   OAuth2ResourceServerProperties resourceServerProperties,
+                                                   EndpointProperties endpointProperties) throws Exception {
 
-        http.csrf().disable().cors();
+        httpSecurity.csrf().disable().cors();
         // @formatter:off
-        http.authorizeRequests(authorizeRequests ->
+        httpSecurity.authorizeRequests(authorizeRequests ->
                         authorizeRequests
                                 .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
                                 .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
@@ -78,14 +79,21 @@ public class ResourceServerAutoConfiguration {
                                         fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
                                         return fsi;
                                     }
-                                }))
-                .oauth2ResourceServer(configurer ->
-                        configurer
-                                .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
-                                .bearerTokenResolver(new DefaultBearerTokenResolver())
-                                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+                                }));
+
+        if (securityProperties.getValidate() == Target.REMOTE) {
+            httpSecurity.oauth2ResourceServer(configurer -> configurer
+                    .opaqueToken(opaque -> opaque.introspector(new HerodotusOpaqueTokenIntrospector(endpointProperties, resourceServerProperties)))
+                    .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                    .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+        } else {
+            httpSecurity.oauth2ResourceServer(configurer -> configurer
+                    .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
+                    .bearerTokenResolver(new DefaultBearerTokenResolver())
+                    .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                    .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+        }
         // @formatter:on
-        return http.build();
+        return httpSecurity.build();
     }
 }

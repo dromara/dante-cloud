@@ -23,3 +23,6 @@ spring:
         jwt:
           issuer-uri: ${herodotus.endpoint.issuer-uri}
           jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
+        opaquetoken:
+          client-id: 14a9cf797931430896ad13a6b1855611
+          client-secret: a05fe1fc50ed42a4990c6c6fc4bec398
