@@ -26,12 +26,14 @@
 package cn.herodotus.dante.authentication.configuration;
 
 import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
+import cn.herodotus.engine.assistant.core.enums.Target;
 import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.engine.oauth2.authorization.authorization.OAuth2FormLoginConfigurer;
 import cn.herodotus.engine.oauth2.authorization.properties.OAuth2UiProperties;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
 import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
@@ -40,12 +42,14 @@ import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusClient
 import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusUserDetailsService;
 import cn.herodotus.engine.oauth2.server.authorization.service.OAuth2ApplicationService;
 import cn.herodotus.engine.oauth2.server.resource.converter.HerodotusJwtAuthenticationConverter;
+import cn.herodotus.engine.oauth2.server.resource.introspector.HerodotusOpaqueTokenIntrospector;
+import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
@@ -71,32 +75,25 @@ public class DefaultSecurityConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
 
-    private final ExpressionSecurityMetadataParser securityMetadataExpressionParser;
-    private final HerodotusSecurityMetadataSource herodotusSecurityMetadataSource;
-    private final HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler;
-    private final JwtDecoder jwtDecoder;
-    private final OAuth2UiProperties uiProperties;
-    private final CaptchaRendererFactory captchaRendererFactory;
-
-    @Autowired
-    public DefaultSecurityConfiguration(ExpressionSecurityMetadataParser securityMetadataExpressionParser, HerodotusSecurityMetadataSource herodotusSecurityMetadataSource, HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler, JwtDecoder jwtDecoder, OAuth2UiProperties uiProperties, CaptchaRendererFactory captchaRendererFactory) {
-        this.securityMetadataExpressionParser = securityMetadataExpressionParser;
-        this.herodotusSecurityMetadataSource = herodotusSecurityMetadataSource;
-        this.herodotusSecurityConfigureHandler = herodotusSecurityConfigureHandler;
-        this.jwtDecoder = jwtDecoder;
-        this.uiProperties = uiProperties;
-        this.captchaRendererFactory = captchaRendererFactory;
-    }
-
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, UserDetailsService userDetailsService) throws Exception {
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity,
+                                                   HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler,
+                                                   ExpressionSecurityMetadataParser securityMetadataExpressionParser,
+                                                   HerodotusSecurityMetadataSource herodotusSecurityMetadataSource,
+                                                   JwtDecoder jwtDecoder,
+                                                   OAuth2UiProperties uiProperties,
+                                                   SecurityProperties securityProperties,
+                                                   OAuth2ResourceServerProperties resourceServerProperties,
+                                                   UserDetailsService userDetailsService,
+                                                   CaptchaRendererFactory captchaRendererFactory,
+                                                   EndpointProperties endpointProperties) throws Exception {
 
         log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
         // 禁用CSRF 开启跨域
-        http.csrf().disable().cors();
+        httpSecurity.csrf().disable().cors();
 
         // @formatter:off
-        http.authorizeRequests(authorizeRequests ->
+        httpSecurity.authorizeRequests(authorizeRequests ->
                         authorizeRequests
                                 .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
                                 .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
@@ -126,14 +123,22 @@ public class DefaultSecurityConfiguration {
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(configurer -> configurer
-                        .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
-                        .bearerTokenResolver(new DefaultBearerTokenResolver())
-                        .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                        .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()))
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
+
+        if (securityProperties.getValidate() == Target.REMOTE) {
+            httpSecurity.oauth2ResourceServer(configurer -> configurer
+                    .opaqueToken(opaque -> opaque.introspector(new HerodotusOpaqueTokenIntrospector(endpointProperties, resourceServerProperties)))
+                    .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                    .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+        } else {
+            httpSecurity.oauth2ResourceServer(configurer -> configurer
+                    .jwt(jwt -> jwt.decoder(jwtDecoder).jwtAuthenticationConverter(new HerodotusJwtAuthenticationConverter()))
+                    .bearerTokenResolver(new DefaultBearerTokenResolver())
+                    .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                    .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()));
+        }
         // @formatter:on
-        return http.build();
+        return httpSecurity.build();
     }
 
     @Bean

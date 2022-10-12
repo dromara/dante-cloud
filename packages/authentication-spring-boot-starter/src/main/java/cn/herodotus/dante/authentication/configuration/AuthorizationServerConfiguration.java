@@ -27,7 +27,8 @@ package cn.herodotus.dante.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
 import cn.herodotus.engine.oauth2.authorization.authentication.*;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenCustomizer;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusJwtTokenCustomizer;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusOpaqueTokenCustomizer;
 import cn.herodotus.engine.oauth2.authorization.response.HerodotusAuthenticationSuccessHandler;
 import cn.herodotus.engine.oauth2.authorization.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
@@ -35,8 +36,6 @@ import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2ComplianceProperties;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
 import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
-import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
-import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.protect.web.crypto.processor.HttpCryptoProcessor;
 import cn.herodotus.engine.protect.web.tenant.interceptor.MultiTenancyFilter;
@@ -70,6 +69,7 @@ import org.springframework.security.oauth2.server.authorization.OAuth2Authorizat
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.oauth2.server.authorization.oidc.authentication.OidcUserInfoAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
@@ -77,7 +77,6 @@ import org.springframework.security.oauth2.server.authorization.web.authenticati
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.security.oauth2.server.resource.web.DefaultBearerTokenResolver;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
@@ -128,6 +127,7 @@ public class AuthorizationServerConfiguration {
             endpoint.consentPage("/oauth2/consent");
         });
         authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.clientAuthentication(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
         });
@@ -157,11 +157,6 @@ public class AuthorizationServerConfiguration {
                 .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .oauth2ResourceServer(configurer -> configurer
-                        .jwt(jwt -> jwt.decoder(jwtDecoder))
-                        .bearerTokenResolver(new DefaultBearerTokenResolver())
-                        .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                        .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint()))
                 // 应用 OAuth2 相关设置
                 .apply(authorizationServerConfigurer)
                 .oidc(oidc -> oidc
@@ -255,10 +250,17 @@ public class AuthorizationServerConfiguration {
     }
 
     @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> oAuth2TokenCustomizer() {
-        HerodotusTokenCustomizer herodotusTokenCustomizer = new HerodotusTokenCustomizer();
-        log.trace("[Herodotus] |- Bean [OAuth2 Token Customizer] Auto Configure.");
-        return herodotusTokenCustomizer;
+    public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
+        HerodotusJwtTokenCustomizer herodotusJwtTokenCustomizer = new HerodotusJwtTokenCustomizer();
+        log.trace("[Herodotus] |- Bean [OAuth2 Jwt Token Customizer] Auto Configure.");
+        return herodotusJwtTokenCustomizer;
+    }
+
+    @Bean
+    public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
+        HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer = new HerodotusOpaqueTokenCustomizer();
+        log.trace("[Herodotus] |- Bean [OAuth2 Opaque Token Customizer] Auto Configure.");
+        return herodotusOpaqueTokenCustomizer;
     }
 
     @Bean

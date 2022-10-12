@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.strategy.condition;
 
 import cn.herodotus.dante.module.strategy.support.StrategyPropertyFinder;
-import cn.herodotus.engine.web.core.enums.DataAccessStrategy;
+import cn.herodotus.engine.assistant.core.enums.Target;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class RemoteDataAccessCondition implements Condition {
     @Override
     public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
         String property = StrategyPropertyFinder.getDataAccessStrategy(conditionContext.getEnvironment());
-        boolean result = StringUtils.isNotBlank(property) && StringUtils.equalsIgnoreCase(property, DataAccessStrategy.REMOTE.name());
+        boolean result = StringUtils.isNotBlank(property) && StringUtils.equalsIgnoreCase(property, Target.REMOTE.name());
         log.debug("[Herodotus] |- Condition [Remote Data Access] value is [{}]", result);
         return result;
     }
