@@ -17,6 +17,8 @@ herodotus:
     enabled: ${herodotus.switch.swagger.enabled}
 
 spring:
+  session:
+    store-type: redis
   security:
     oauth2:
       resourceserver:

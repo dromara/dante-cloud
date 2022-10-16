@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.1.1-brightgreen" alt="Nacos 2.1.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.4.3-red" alt="Version 2.7.4.3"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.4.4-red" alt="Version 2.7.4.4"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -74,20 +74,25 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 ## 新版后端特点
 
-- 基于 `Spring Authorization Server` 深度定制:
+- 基于 `Spring Authorization Server` 深度定制和扩展:
 
+  - 基于 `Spring Authorization Server` 和 `Spring Data JPA` 实现多租户系统架构， 支持 Database 和 Schema 两种模式。
   - 基于 `Spring Data JPA`，重新构建 `Spring Authorization Server` 基础数据存储代码，替代原有 JDBC 数据访问方式，破除 `Spring Authorization Server` 原有数据存储局限，扩展为更符合实际应用的方式和设计。
-  - 基于 `Spring Authorization Server`，在 OAuth 2.1 规范基础之上，增加自定义“密码”认证模式，以兼容现有基于 OAuth 2 规范的、前后端分离的应用。
-  - 基于 `Spring Authorization Server`，在 OAuth 2.1 规范基础之上，增加自定义 Social Credentials 认证模式，支持手机短信验证码、微信小程序、第三方应用登录。
-  - 遵照 `Spring Security 5` 以及 `Spring Authorization Server` 的代码规范，进行 OAuth2 认证服务器核心代码的开发，遵照其使用 Jackson 反序列化的方式， 增加大量自定义 Jackson Module。
-  - 支持 `Spring Authorization Server` 的标准的 Token 加密校验方式外，还了增加支持自定义证书的 Token 加密方式，可通过配置动态修改
-  - 支持 OAuth2 OIDC 认证模式，补充前端 OIDC 认证相关配置操作，以及对应的 /userinfo 接口调用支持 和 客户端注册支持
-  - 支持 OAuth2 Authorization Code PKCE 认证模式
-  - 扩展 `Spring Authorization Server` 默认的 `Client Credentials` 模式，实现 Refresh Token 的创建。
+  - 基于 `Spring Authorization Server`，在 OAuth 2.1 规范基础之上，增加自定义 `Resource Ownership Password` (密码)认证模式，以兼容现有基于 OAuth 2 规范的、前后端分离的应用，支持 Refresh Token 的使用。
+  - 基于 `Spring Authorization Server`，在 OAuth 2.1 规范基础之上，增加自定义 `Social Credentials` (社会化登录)认证模式，支持手机短信验证码、微信小程序、基于JustAuth的第三方应用登录， 支持 Refresh Token 的使用。
+  - 扩展 `Spring Authorization Server` 默认的 `Client Credentials` 模式，实现 `Client Credentials` 模式支持 Refresh Token 的使用。
   - 扩展 `Spring Authorization Server` 默认的 `Client Credentials` 模式，实现真正的使用 Scope 权限对接口进行验证。 增加客户端 Scope 的权限配置功能，并与已有的用户权限体系解耦
+  - 支持 `Spring Authorization Server` `Authorization Code PKCE` 认证模式
+  - 支持 `Spring Authorization Server` 的标准的 JWT Token 加密校验方式外，新增基于自定义证书的 JWT Token 加密校验方式，可通过配置动态修改。
+  - 支持 Opaque Token (不透明令牌) 格式及校验方式，将低 JWT Token 被捕获解析的风险。可通过修改配置参数，设置默认Token 格式是采用 Opaque Token 格式还是 JWT Token 格式。
+  - 全面支持 OpenID Connect (OIDC) 协议, 系统使用时可根据使用需求，通过前端开关配置，快速切换 OIDC 模式和传统 OAuth2 模式
+  - 深度扩展 `Authorization Code`、`Resource Ownership Password`、`Social Credentials` 几种模式，全面融合 IdToken、Opaque Token、JWT Token 与现有权限体系，同时提供 IdToken 和 自定义Token 扩展两种无须二次请求的用户信息传递方式，减少用户信息的频繁请求。
+  - 遵照 `Spring Security 5` 以及 `Spring Authorization Server` 的代码规范，进行 OAuth2 认证服务器核心代码的开发，遵照其使用 Jackson 反序列化的方式， 增加大量自定义 Jackson Module。
   - 自定义 `Spring Authorization Server` 授权码模式登录认证页面和授权确认页面，授权码模式登录采用数据加密传输。支持多种验证码类型，暂不支持行为验证码。
+  - 基于 JetCache 的多级缓存支持，实现自定义 `Spring Data JPA` 二级缓存，有效解决 Spring Cache 查询缓存更新问题。
 
 - 代码结构的大规模调整和优化：
+
   - 对原有代码进行了深度的“庖丁解牛”，严格遵照“单一职责”原则，根据各个组件的职责以及用途，将整个工程拆解细化为多个各自独立组件模块，在最大程度上降低代码间的耦合，也更容易聚焦和定位问题。
   - 将通用化组件提取为独立工程，独立编译、按需选用，极大的降低系统主工程代码量。相关组件也已上传至 Maven 中央仓库，降低系统主工程工程代码编译耗时，改进和提升 CICD 效率，
   - 原有主工程代码结构也进行了深化调整，代码分包更加合理，代码逻辑也更加清晰。

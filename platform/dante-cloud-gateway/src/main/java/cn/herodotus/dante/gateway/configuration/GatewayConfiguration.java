@@ -27,6 +27,8 @@ package cn.herodotus.dante.gateway.configuration;
 
 import cn.herodotus.dante.gateway.handler.RefreshRoutesListener;
 import cn.herodotus.engine.assistant.core.annotation.ConditionalOnSwaggerEnabled;
+import cn.herodotus.engine.cache.redis.annotation.ConditionalOnRedisSessionSharing;
+import cn.herodotus.engine.cache.redis.session.HerodotusCookieWebSessionIdResolver;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
 import org.slf4j.Logger;
@@ -52,8 +54,10 @@ import org.springframework.web.reactive.result.view.ViewResolver;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
+import org.springframework.web.server.session.WebSessionIdResolver;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 
@@ -89,6 +93,15 @@ public class GatewayConfiguration {
     @ConditionalOnMissingBean(SentinelGatewayFilter.class)
     public SentinelGatewayFilter sentinelGatewayFilter() {
         return new SentinelGatewayFilter();
+    }
+
+    @Configuration(proxyBeanMethods = false)
+    @ConditionalOnRedisSessionSharing
+    public static class GatewayWebSessionConfiguration {
+        @Bean
+        public WebSessionIdResolver webSessionIdResolver() {
+            return new HerodotusCookieWebSessionIdResolver();
+        }
     }
 
     @Configuration
