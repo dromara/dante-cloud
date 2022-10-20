@@ -3,7 +3,7 @@
 # Author: gengwei.zheng
 
 ### 基础镜像，使用alpine操作系统，openjkd使用
-FROM herodotus/oracle-jdk:8u333
+FROM herodotus/oracle-jdk:8u341
 #FROM openjdk:17-jdk
 
 # 作者
