@@ -32,12 +32,12 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.4.4</version>
+        <version>2.7.4.5</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>dante-cloud</artifactId>
-    <version>2.7.4.4</version>
+    <version>2.7.4.5</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud</name>
