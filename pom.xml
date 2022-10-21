@@ -328,11 +328,15 @@
 
     <repositories>
         <repository>
-            <id>aliyun-maven</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>aliyun-repository</id>
+            <url>https://maven.aliyun.com/repository/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>huawei-repository</id>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -341,11 +345,15 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>aliyun-maven</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>aliyun-repository</id>
+            <url>https://maven.aliyun.com/repository/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>huawei-repository</id>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

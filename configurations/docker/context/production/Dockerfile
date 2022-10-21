@@ -2,8 +2,14 @@
 # VERSION 1.0.0
 # Author: gengwei.zheng
 
-### 基础镜像，使用alpine操作系统，openjkd使用
-FROM herodotus/oracle-jdk:8u341
+### 基础镜像，使用debian操作系统，使用 liberica-openjdk
+### 本系统涉及图形验证码，有字体需求，而且采用的是非系统字体。
+### 在 alpine 下，尝试了包括打包字体库、自己拷贝字体、重新封装JDK，更换读取字体等多种方式。
+### 不管是将字体打包进镜像直接读取，还是通过读取jar包中的 resources 目录，可以实现字体文件的读取。但是在 Font.createFont() 过程中，始终出现 sun.awt.FontConfiguration.getVersion NullPointerException 问题。
+### 在 debian 下则没有这问题。以目前了解的情况看，猜测 alpine 下，为了缩小体系，缺失的内容应该不只是字体库，还有其它内容。
+### 当然也可能是个人能力有限，一直没有找到正确解决的办法。如果你有更好的解决办法，欢迎提 ISSUE 和 PR。
+
+FROM bellsoft/liberica-openjdk-debian:8u352-8
 #FROM openjdk:17-jdk
 
 # 作者
