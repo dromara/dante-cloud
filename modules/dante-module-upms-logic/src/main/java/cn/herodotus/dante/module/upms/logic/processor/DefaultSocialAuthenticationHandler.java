@@ -34,10 +34,10 @@ import cn.herodotus.engine.access.business.processor.AccessHandlerStrategyFactor
 import cn.herodotus.engine.access.core.definition.AccessUserDetails;
 import cn.herodotus.engine.access.core.exception.AccessIdentityVerificationFailedException;
 import cn.herodotus.engine.assistant.core.domain.AccessPrincipal;
-import cn.herodotus.engine.oauth2.authorization.definition.AbstractSocialAuthenticationHandler;
-import cn.herodotus.engine.oauth2.authorization.exception.SocialCredentialsParameterBindingFailedException;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.oauth2.core.definition.domain.SocialUserDetails;
+import cn.herodotus.engine.oauth2.core.definition.handler.AbstractSocialAuthenticationHandler;
+import cn.herodotus.engine.oauth2.core.exception.SocialCredentialsParameterBindingFailedException;
 import cn.herodotus.engine.oauth2.core.exception.UsernameAlreadyExistsException;
 import cn.hutool.core.bean.BeanUtil;
 import com.google.common.collect.ImmutableSet;

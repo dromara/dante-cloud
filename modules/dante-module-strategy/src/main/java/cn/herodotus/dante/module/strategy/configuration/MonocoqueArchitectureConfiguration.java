@@ -32,7 +32,7 @@ import cn.herodotus.dante.module.upms.logic.configuration.UpmsLogicModuleConfigu
 import cn.herodotus.dante.module.upms.logic.configuration.UpmsSocialConfiguration;
 import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
 import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
-import cn.herodotus.engine.oauth2.authorization.definition.SocialAuthenticationHandler;
+import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import org.slf4j.Logger;
