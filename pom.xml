@@ -32,12 +32,12 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.4.5</version>
+        <version>2.7.5.0</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>dante-cloud</artifactId>
-    <version>2.7.4.5</version>
+    <version>2.7.5.0</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud</name>
@@ -328,11 +328,22 @@
 
     <repositories>
         <repository>
-            <id>aliyun-maven</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>ali-repository</id>
+            <url>https://maven.aliyun.com/repository/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>tencent-repository</id>
+            <url>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>huawei-repository</id>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
@@ -341,11 +352,22 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>aliyun-maven</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
+            <id>aliyun-repository</id>
+            <url>https://maven.aliyun.com/repository/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>tencent-repository</id>
+            <url>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>huawei-repository</id>
+            <url>https://repo.huaweicloud.com/repository/maven/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
