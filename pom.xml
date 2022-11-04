@@ -32,12 +32,12 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.5.1</version>
+        <version>3.0.0.Beta1</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>dante-cloud</artifactId>
-    <version>2.7.5.1</version>
+    <version>3.0.0.Beta1</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud</name>
@@ -51,7 +51,7 @@
     <!-- ${project.xxx} 当前pom文件的任意节点的内容 如project.artifactId -->
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <resource.delimiter>@</resource.delimiter>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
