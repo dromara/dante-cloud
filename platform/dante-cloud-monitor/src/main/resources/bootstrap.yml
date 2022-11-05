@@ -17,7 +17,9 @@ spring:
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
-
+    inetutils:
+      preferred-networks:
+        - 192.168
 management:
   health:
     redis:
