@@ -69,7 +69,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
-import org.springframework.security.oauth2.server.authorization.settings.ProviderSettings;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
@@ -285,8 +285,8 @@ public class AuthorizationServerConfiguration {
     }
 
     @Bean
-    public ProviderSettings providerSettings(EndpointProperties endpointProperties) {
-        return ProviderSettings.builder()
+    public AuthorizationServerSettings authorizationServerSettings(EndpointProperties endpointProperties) {
+        return AuthorizationServerSettings.builder()
                 .issuer(endpointProperties.getIssuerUri())
                 .authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())
                 .tokenEndpoint(endpointProperties.getAccessTokenEndpoint())
