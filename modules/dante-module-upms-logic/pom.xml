@@ -32,17 +32,17 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.0-M2</version>
+        <version>3.0.0-M3</version>
     </parent>
 
     <artifactId>dante-module-upms-logic</artifactId>
-    <version>3.0.0-M2</version>
+    <version>3.0.0-M3</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>data-core</artifactId>
+            <artifactId>data-sdk-jpa</artifactId>
         </dependency>
 
         <dependency>

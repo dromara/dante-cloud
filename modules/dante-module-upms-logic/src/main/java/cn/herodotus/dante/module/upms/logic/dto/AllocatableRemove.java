@@ -28,8 +28,7 @@ package cn.herodotus.dante.module.upms.logic.dto;
 import cn.herodotus.engine.assistant.core.definition.domain.AbstractDto;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * <p>Description: 删除人员归属参数BO对象 </p>

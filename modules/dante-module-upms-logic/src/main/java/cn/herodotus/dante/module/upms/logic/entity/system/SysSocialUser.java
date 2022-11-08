@@ -30,13 +30,13 @@ import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import cn.herodotus.engine.oauth2.core.definition.domain.SocialUserDetails;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import me.zhyd.oauth.enums.AuthUserGender;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,8 +55,7 @@ public class SysSocialUser extends BaseSysEntity implements SocialUserDetails {
 
     @Schema(title = "社会用户ID")
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @UuidGenerator
     @Column(name = "social_id", length = 64)
     private String socialId;
 

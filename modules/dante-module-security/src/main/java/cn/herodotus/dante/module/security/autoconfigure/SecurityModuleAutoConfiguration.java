@@ -13,6 +13,7 @@ package cn.herodotus.dante.module.security.autoconfigure;
 import cn.herodotus.dante.module.security.configuration.MethodSecurityMetadataConfiguration;
 import cn.herodotus.engine.oauth2.core.exception.SecurityGlobalExceptionHandler;
 import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,8 +22,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableAsync;
-
-import javax.annotation.PostConstruct;
 
 /**
  * <p>Description: 安全模块自动配置 </p>

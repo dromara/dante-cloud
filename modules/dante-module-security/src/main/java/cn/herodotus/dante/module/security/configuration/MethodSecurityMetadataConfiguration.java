@@ -18,14 +18,13 @@ import cn.herodotus.engine.oauth2.metadata.configuration.SecurityMetadataConfigu
 import cn.herodotus.engine.oauth2.metadata.processor.SecurityMetadataAnalysisProcessor;
 import cn.herodotus.engine.oauth2.metadata.storage.SecurityMetadataLocalStorage;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.annotation.PostConstruct;
 
 /**
  * <p>Description: Security 权限配置 </p>

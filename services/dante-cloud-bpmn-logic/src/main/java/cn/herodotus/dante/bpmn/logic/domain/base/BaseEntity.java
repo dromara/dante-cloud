@@ -26,8 +26,7 @@
 package cn.herodotus.dante.bpmn.logic.domain.base;
 
 import cn.herodotus.engine.assistant.core.definition.domain.Entity;
-
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 /**
  * <p>Description: Camunda 工作流应用基础实体 </p>

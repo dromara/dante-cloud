@@ -29,14 +29,14 @@ import cn.herodotus.dante.module.upms.logic.assistant.listener.SysRoleEntityList
 import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.google.common.base.MoreObjects;
+import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,8 +49,7 @@ import java.util.Set;
 public class SysRole extends BaseSysEntity {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @UuidGenerator
     @Column(name = "role_id", length = 64)
     private String roleId;
 

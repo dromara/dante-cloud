@@ -27,12 +27,11 @@ package cn.herodotus.dante.module.strategy.autoconfigure;
 
 import cn.herodotus.dante.module.strategy.configuration.DistributedArchitectureConfiguration;
 import cn.herodotus.dante.module.strategy.configuration.MonocoqueArchitectureConfiguration;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.annotation.PostConstruct;
 
 /**
  * <p>Description: 策略模块配置 </p>

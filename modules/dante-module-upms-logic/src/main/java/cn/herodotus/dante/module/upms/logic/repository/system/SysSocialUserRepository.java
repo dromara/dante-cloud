@@ -27,9 +27,9 @@ package cn.herodotus.dante.module.upms.logic.repository.system;
 
 import cn.herodotus.dante.module.upms.logic.entity.system.SysSocialUser;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
+import jakarta.persistence.QueryHint;
+import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.QueryHints;
-
-import javax.persistence.QueryHint;
 
 /**
  * <p>Description: 社交用户Repository </p>
@@ -46,6 +46,6 @@ public interface SysSocialUserRepository extends BaseRepository<SysSocialUser, S
      * @param source 第三方登录类型的字符串
      * @return SysSocialUser
      */
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     SysSocialUser findSysSocialUserByUuidAndSource(String uuid, String source);
 }

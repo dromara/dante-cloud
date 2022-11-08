@@ -29,10 +29,9 @@ import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * <p>Description: 人事归属 </p>
@@ -54,8 +53,7 @@ public class SysOwnership extends BaseSysEntity {
 
     @Schema(title = "人员ID")
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @UuidGenerator
     @Column(name = "ownership_id", length = 64)
     private String ownershipId;
 

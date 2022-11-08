@@ -57,7 +57,6 @@ import org.springframework.web.server.WebFilterChain;
 import org.springframework.web.server.session.WebSessionIdResolver;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 

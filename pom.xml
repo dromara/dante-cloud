@@ -32,12 +32,12 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.0.0-M2</version>
+        <version>3.0.0-M3</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>dante-cloud</artifactId>
-    <version>3.0.0-M2</version>
+    <version>3.0.0-M3</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud</name>
@@ -313,8 +313,8 @@
                 <artifactId>versions-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
                 <configuration>
                     <skip>${skip.build.git.commit.info}</skip>
                 </configuration>

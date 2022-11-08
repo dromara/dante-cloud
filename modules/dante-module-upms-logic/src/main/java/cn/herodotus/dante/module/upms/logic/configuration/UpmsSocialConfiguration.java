@@ -27,6 +27,7 @@ package cn.herodotus.dante.module.upms.logic.configuration;
 
 import cn.herodotus.dante.module.upms.logic.processor.DefaultSocialAuthenticationHandler;
 import cn.herodotus.engine.access.business.configuration.AccessAllConfiguration;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -34,7 +35,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import javax.annotation.PostConstruct;
 
 /**
  * <p>Description: UPMS 社交配置 </p>

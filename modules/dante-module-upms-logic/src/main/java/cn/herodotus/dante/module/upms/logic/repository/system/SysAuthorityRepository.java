@@ -28,13 +28,14 @@ package cn.herodotus.dante.module.upms.logic.repository.system;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.engine.assistant.core.enums.AuthorityType;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
+import jakarta.persistence.QueryHint;
+import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.QueryHints;
 
-import javax.persistence.QueryHint;
 import java.util.List;
 
 public interface SysAuthorityRepository extends BaseRepository<SysAuthority, String> {
 
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     List<SysAuthority> findAllByAuthorityType(AuthorityType authorityType);
 }

@@ -26,13 +26,12 @@
 package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
+import cn.herodotus.dante.bpmn.logic.generator.ActIdGroupUuid;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * <p>Description: 工作流组表 </p>
@@ -51,8 +50,7 @@ public class ActIdGroup extends BaseEntity {
     @JsonProperty("department_id")
     @Schema(title =  "部门ID")
     @Id
-    @GeneratedValue(generator = "act-group-uuid")
-    @GenericGenerator(name = "act-group-uuid", strategy = "cn.herodotus.dante.bpmn.rest.generator.ActIdGroupUUIDGenerator")
+    @ActIdGroupUuid
     @Column(name = "id_", length = 64)
     private String id;
 

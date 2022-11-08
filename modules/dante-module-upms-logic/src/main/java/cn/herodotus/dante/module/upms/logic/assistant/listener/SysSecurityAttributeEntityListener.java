@@ -28,10 +28,9 @@ package cn.herodotus.dante.module.upms.logic.assistant.listener;
 import cn.herodotus.dante.module.upms.logic.assistant.event.SysSecurityAttributeChangeEvent;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysSecurityAttribute;
 import cn.herodotus.engine.event.core.definition.AbstractEntityListener;
+import jakarta.persistence.PostUpdate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.persistence.PostUpdate;
 
 /**
  * <p>Description: SysSecurityAttribute实体数据变更监听 </p>

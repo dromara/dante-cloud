@@ -32,10 +32,9 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * <p>Description: 部门信息 </p>
@@ -53,8 +52,7 @@ public class SysDepartment extends BaseSysEntity {
 
     @Schema(title = "部门ID")
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @UuidGenerator
     @Column(name = "department_id", length = 64)
     private String departmentId;
 

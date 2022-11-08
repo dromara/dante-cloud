@@ -28,9 +28,9 @@ package cn.herodotus.dante.module.upms.logic.repository.system;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysDefaultRole;
 import cn.herodotus.engine.assistant.core.enums.AccountType;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
+import jakarta.persistence.QueryHint;
+import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.QueryHints;
-
-import javax.persistence.QueryHint;
 
 /**
  * <p>Description: 默认角色管理Repository </p>
@@ -46,7 +46,7 @@ public interface SysDefaultRoleRepository extends BaseRepository<SysDefaultRole,
      * @param scene 场景 {@link AccountType}
      * @return {@link SysDefaultRole}
      */
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     SysDefaultRole findByScene(AccountType scene);
 
     /**

@@ -15,6 +15,7 @@ import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandl
 import cn.herodotus.engine.oauth2.metadata.matcher.HerodotusRequestMatcher;
 import cn.herodotus.engine.oauth2.metadata.storage.SecurityMetadataLocalStorage;
 import cn.herodotus.engine.web.core.utils.WebUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +25,6 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;

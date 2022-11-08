@@ -1,33 +1,4 @@
 spring:
-  jpa:
-    database: ${herodotus.database-information.platform}
-    database-platform: ${herodotus.database-information.platform}
-    open-in-view: true
-    show-sql: ${herodotus.switch.database.show-sql}
-    hibernate:
-      ddl-auto: ${herodotus.switch.database.ddl-auto}
-      naming:
-        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
-    properties:
-      javax:
-        persistence:
-          sharedCache:
-            mode: ENABLE_SELECTIVE
-      hibernate:
-        dialect: ${herodotus.database-information.dialect}
-        format_sql: ${herodotus.switch.database.format-sql}
-        show_sql: ${herodotus.switch.database.show-sql}
-        generate_statistics: ${herodotus.switch.database.generate-statistics}
-        cache:
-          use_query_cache: true
-          use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
-          region:
-            factory_class: cn.herodotus.engine.data.jpa.hibernate.cache.spi.HerodotusRegionFactory
-        javax:
-          cache:
-            missing_cache_strategy: create
-        temp:
-          use_jdbc_metadata_defaults: false
   sql:
     init:
       mode: ${herodotus.switch.database.init-mode}
@@ -55,6 +26,35 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         cachePrepStmts: true
+  jpa:
+    database: ${herodotus.database-information.platform}
+    database-platform: ${herodotus.database-information.platform}
+    open-in-view: true
+    show-sql: ${herodotus.switch.database.show-sql}
+    hibernate:
+      ddl-auto: ${herodotus.switch.database.ddl-auto}
+      naming:
+        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+      hibernate:
+        dialect: ${herodotus.database-information.dialect}
+        format_sql: ${herodotus.switch.database.format-sql}
+        show_sql: ${herodotus.switch.database.show-sql}
+        generate_statistics: ${herodotus.switch.database.generate-statistics}
+        cache:
+          use_query_cache: true
+          use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
+          region:
+            factory_class: cn.herodotus.engine.data.jpa.hibernate.spi.cache.HerodotusRegionFactory
+        javax:
+          cache:
+            missing_cache_strategy: create
+        temp:
+          use_jdbc_metadata_defaults: true
 
 mybatis-plus:
   global-config:

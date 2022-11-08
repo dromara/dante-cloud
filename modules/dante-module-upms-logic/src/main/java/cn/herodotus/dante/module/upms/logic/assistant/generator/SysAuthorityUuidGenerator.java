@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -23,37 +23,41 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.bpmn.logic.generator;
+package cn.herodotus.dante.module.upms.logic.assistant.generator;
 
-import cn.herodotus.dante.bpmn.logic.entity.ActIdGroup;
+import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
+import cn.herodotus.engine.data.jpa.hibernate.identifier.AbstractUuidGenerator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.UUIDGenerator;
+import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
-import java.io.Serializable;
+import java.lang.reflect.Member;
 
 /**
- * <p>Description: Camunda 组表 UUID 生成器 </p>
+ * 自定义UUID生成器，使得保存实体类时可以在保留主键生成策略的情况下自定义表的主键
  *
- * @author : gengwei.zheng
- * @date : 2021/7/20 12:57
+ * @author gengwei.zheng
  */
-public class ActIdGroupUUIDGenerator extends UUIDGenerator {
+public class SysAuthorityUuidGenerator extends AbstractUuidGenerator {
+
+    public SysAuthorityUuidGenerator(SysAuthorityUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
+        super(idMember);
+    }
 
     @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         if (ObjectUtils.isEmpty(object)) {
             throw new HibernateException(new NullPointerException());
         }
 
-        ActIdGroup actIdGroup = (ActIdGroup) object;
+        SysAuthority sysAuthority = (SysAuthority) object;
 
-        if (StringUtils.isEmpty(actIdGroup.getId())) {
+        if (StringUtils.isEmpty(sysAuthority.getAuthorityId())) {
             return super.generate(session, object);
         } else {
-            return actIdGroup.getId();
+            return sysAuthority.getAuthorityId();
         }
     }
 }

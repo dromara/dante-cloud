@@ -2,5 +2,5 @@ herodotus:
   database-information:
     platform: postgresql
     driver-class-name: org.postgresql.Driver
-    dialect: org.hibernate.dialect.PostgreSQL10Dialect
+    dialect: org.hibernate.dialect.PostgreSQLDialect
     url: jdbc:postgresql://${herodotus.environment.database.host}:${herodotus.environment.database.port}/${herodotus.environment.database.name}

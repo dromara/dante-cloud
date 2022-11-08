@@ -26,13 +26,13 @@
 package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
+import cn.herodotus.dante.bpmn.logic.generator.ActIdUserUuid;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.hibernate.annotations.GenericGenerator;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -52,8 +52,7 @@ public class ActIdUser extends BaseEntity {
     @JsonProperty("employee_id")
     @Schema(title =  "人员ID")
     @Id
-    @GeneratedValue(generator = "act-user-uuid")
-    @GenericGenerator(name = "act-user-uuid", strategy = "cn.herodotus.dante.bpmn.rest.generator.ActUserUUIDGenerator")
+    @ActIdUserUuid
     @Column(name = "id_", length = 64)
     private String id;
 

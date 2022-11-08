@@ -25,17 +25,17 @@
 
 package cn.herodotus.dante.module.upms.logic.entity.system;
 
+import cn.herodotus.dante.module.upms.logic.assistant.generator.SysSecurityAttributeUuid;
 import cn.herodotus.dante.module.upms.logic.assistant.listener.SysSecurityAttributeEntityListener;
 import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,8 +55,7 @@ public class SysSecurityAttribute extends BaseSysEntity {
 
     @Schema(title = "元数据ID")
     @Id
-    @GeneratedValue(generator = "attribute-uuid")
-    @GenericGenerator(name = "attribute-uuid", strategy = "cn.herodotus.dante.module.upms.logic.assistant.generator.SysSecurityAttributeUUIDGenerator")
+    @SysSecurityAttributeUuid
     @Column(name = "attribute_id", length = 64)
     private String attributeId;
 

@@ -27,15 +27,15 @@ package cn.herodotus.dante.module.upms.logic.assistant.listener;
 
 import cn.herodotus.dante.module.upms.logic.assistant.event.SysSecurityAttributeRelationChangeEvent;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.PostRemove;
+import jakarta.persistence.PostUpdate;
+import jakarta.persistence.PreUpdate;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.PostLoad;
-import javax.persistence.PostRemove;
-import javax.persistence.PostUpdate;
-import javax.persistence.PreUpdate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -26,13 +26,12 @@
 package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
+import cn.herodotus.dante.bpmn.logic.generator.ActIdTenantUuid;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * <p>Description: Camunda租户 </p>
@@ -49,8 +48,7 @@ public class ActIdTenant extends BaseEntity {
     @JsonProperty("organization_id")
     @Schema(title =  "租户ID")
     @Id
-    @GeneratedValue(generator = "act-tenant-uuid")
-    @GenericGenerator(name = "act-tenant-uuid", strategy = "cn.herodotus.dante.bpmn.rest.generator.ActIdTenantUUIDGenerator")
+    @ActIdTenantUuid
     @Column(name = "id_", length = 64)
     private String id;
 

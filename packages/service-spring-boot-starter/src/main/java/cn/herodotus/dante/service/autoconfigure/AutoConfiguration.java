@@ -25,11 +25,10 @@
 
 package cn.herodotus.dante.service.autoconfigure;
 
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
 
 /**
  * <p>Description: 服务通用Starter自动配置 </p>

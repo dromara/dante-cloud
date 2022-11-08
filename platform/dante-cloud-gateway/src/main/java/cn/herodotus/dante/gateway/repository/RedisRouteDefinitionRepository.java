@@ -26,6 +26,7 @@
 package cn.herodotus.dante.gateway.repository;
 
 import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.route.RouteDefinition;
@@ -35,7 +36,6 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 

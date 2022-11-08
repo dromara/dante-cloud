@@ -27,9 +27,9 @@ package cn.herodotus.dante.module.upms.logic.repository.system;
 
 import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
+import jakarta.persistence.QueryHint;
+import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.QueryHints;
-
-import javax.persistence.QueryHint;
 
 /**
  * <p>Description: SysUserRepository </p>
@@ -44,7 +44,7 @@ public interface SysUserRepository extends BaseRepository<SysUser, String> {
      * @param userName 用户名
      * @return {@link SysUser}
      */
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     SysUser findByUserName(String userName);
 
     /**

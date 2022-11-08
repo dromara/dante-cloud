@@ -23,37 +23,42 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.upms.rest.configuration;
+package cn.herodotus.dante.bpmn.logic.generator;
 
-import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import cn.herodotus.dante.bpmn.logic.entity.ActIdTenant;
+import cn.herodotus.engine.data.jpa.hibernate.identifier.AbstractUuidGenerator;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
+
+import java.lang.reflect.Member;
 
 /**
- * <p>Description: UpmsRest配置类 </p>
+ * <p>Description: Camunda 租户表 UUID 生成器 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/1/5 11:58
+ * @date : 2021/7/20 13:01
  */
-@Configuration(proxyBeanMethods = false)
-@ComponentScan(basePackages = {
-        "cn.herodotus.dante.module.upms.rest.controller.hr",
-        "cn.herodotus.dante.module.upms.rest.controller.system",
-        "cn.herodotus.dante.module.upms.rest.controller.assistant",
-        "cn.herodotus.dante.module.upms.rest.controller.social",
-        "cn.herodotus.dante.module.upms.rest.processor",
-        "cn.herodotus.dante.module.upms.rest.listener",
-})
-public class UpmsRestModuleConfiguration {
+public class ActIdTenantUuidGenerator extends AbstractUuidGenerator {
 
-    private static final Logger log = LoggerFactory.getLogger(UpmsRestModuleConfiguration.class);
-
-    @PostConstruct
-    public void postConstruct() {
-        log.info("[Herodotus] |- SDK [Module Upms Rest] Auto Configure.");
+    public ActIdTenantUuidGenerator(ActIdTenantUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
+        super(idMember);
     }
 
+    @Override
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+        if (ObjectUtils.isEmpty(object)) {
+            throw new HibernateException(new NullPointerException());
+        }
 
+        ActIdTenant actIdTenant = (ActIdTenant) object;
+
+        if (StringUtils.isEmpty(actIdTenant.getId())) {
+            return super.generate(session, object);
+        } else {
+            return actIdTenant.getId();
+        }
+    }
 }

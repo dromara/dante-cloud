@@ -27,12 +27,12 @@ package cn.herodotus.dante.module.upms.logic.repository.hr;
 
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
+import jakarta.persistence.QueryHint;
+import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.QueryHints;
-
-import javax.persistence.QueryHint;
 
 /**
  * <p>Description: 人员 Repository </p>
@@ -48,11 +48,11 @@ public interface SysEmployeeRepository extends BaseRepository<SysEmployee, Strin
      * @param employeeName 人员姓名
      * @return {@link SysEmployee}
      */
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     @EntityGraph(value = "SysEmployeeWithSysUser.Graph", type = EntityGraph.EntityGraphType.FETCH)
     SysEmployee findByEmployeeName(String employeeName);
 
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     @EntityGraph(value = "SysEmployeeWithSysUser.Graph", type = EntityGraph.EntityGraphType.FETCH)
     @Override
     Page<SysEmployee> findAll(Pageable pageable);

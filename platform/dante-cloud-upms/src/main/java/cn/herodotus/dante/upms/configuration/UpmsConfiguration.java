@@ -28,12 +28,11 @@ package cn.herodotus.dante.upms.configuration;
 import cn.herodotus.dante.module.upms.logic.configuration.UpmsLogicModuleConfiguration;
 import cn.herodotus.dante.module.upms.logic.configuration.UpmsSocialConfiguration;
 import cn.herodotus.dante.module.upms.rest.configuration.UpmsRestModuleConfiguration;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.annotation.PostConstruct;
 
 /**
  *

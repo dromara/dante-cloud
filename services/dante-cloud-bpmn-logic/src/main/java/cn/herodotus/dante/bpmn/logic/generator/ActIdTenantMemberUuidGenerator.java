@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -25,35 +25,40 @@
 
 package cn.herodotus.dante.bpmn.logic.generator;
 
-import cn.herodotus.dante.bpmn.logic.entity.ActIdUser;
+import cn.herodotus.dante.bpmn.logic.entity.ActIdTenantMember;
+import cn.herodotus.engine.data.jpa.hibernate.identifier.AbstractUuidGenerator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.UUIDGenerator;
+import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
-import java.io.Serializable;
+import java.lang.reflect.Member;
 
 /**
- * <p>Description: Camunda 用户表 UUID 生成器 </p>
+ * <p>Description: Camunda 租户成员 UUID 生成器 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/20 12:51
+ * @date : 2021/7/20 13:09
  */
-public class ActIdUserUUIDGenerator extends UUIDGenerator {
+public class ActIdTenantMemberUuidGenerator extends AbstractUuidGenerator {
+
+    public ActIdTenantMemberUuidGenerator(ActIdTenantMemberUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
+        super(idMember);
+    }
 
     @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         if (ObjectUtils.isEmpty(object)) {
             throw new HibernateException(new NullPointerException());
         }
 
-        ActIdUser actUser = (ActIdUser) object;
+        ActIdTenantMember actIdTenantMember = (ActIdTenantMember) object;
 
-        if (StringUtils.isEmpty(actUser.getId())) {
+        if (StringUtils.isEmpty(actIdTenantMember.getId())) {
             return super.generate(session, object);
         } else {
-            return actUser.getId();
+            return actIdTenantMember.getId();
         }
     }
 }

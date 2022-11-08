@@ -27,9 +27,9 @@ package cn.herodotus.dante.module.upms.logic.repository.system;
 
 import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
+import jakarta.persistence.QueryHint;
+import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.QueryHints;
-
-import javax.persistence.QueryHint;
 
 /**
  * <p>Description: SysRoleRepository </p>
@@ -45,7 +45,7 @@ public interface SysRoleRepository extends BaseRepository<SysRole, String> {
      * @param roleCode 角色代码
      * @return {@link SysRole}
      */
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     SysRole findByRoleCode(String roleCode);
 
     /**

@@ -25,16 +25,15 @@
 
 package cn.herodotus.dante.module.upms.logic.entity.system;
 
+import cn.herodotus.dante.module.upms.logic.assistant.generator.SysAuthorityUuid;
 import cn.herodotus.dante.module.upms.logic.constants.UpmsConstants;
 import cn.herodotus.engine.assistant.core.enums.AuthorityType;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.google.common.base.MoreObjects;
+import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 
 /**
  * <p>Description: 权限及菜单表 </p>
@@ -49,8 +48,7 @@ import javax.persistence.*;
 public class SysAuthority extends BaseSysEntity {
 
     @Id
-    @GeneratedValue(generator = "authority-uuid")
-    @GenericGenerator(name = "authority-uuid", strategy = "cn.herodotus.dante.module.upms.logic.assistant.generator.SysAuthorityUUIDGenerator")
+    @SysAuthorityUuid
     @Column(name = "authority_id", length = 64)
     private String authorityId;
 

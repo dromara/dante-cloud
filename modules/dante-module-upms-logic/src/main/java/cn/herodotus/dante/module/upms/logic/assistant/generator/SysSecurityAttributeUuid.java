@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -23,37 +23,25 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.bpmn.logic.generator;
+package cn.herodotus.dante.module.upms.logic.assistant.generator;
 
-import cn.herodotus.dante.bpmn.logic.entity.ActIdTenant;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.UUIDGenerator;
+import org.hibernate.annotations.IdGeneratorType;
 
-import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * <p>Description: Camunda 租户表 UUID 生成器 </p>
+ * <p>Description: SysSecurityAttributeUuid </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/20 13:01
+ * @date : 2022/11/7 17:42
  */
-public class ActIdTenantUUIDGenerator extends UUIDGenerator {
-
-    @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new HibernateException(new NullPointerException());
-        }
-
-        ActIdTenant actIdTenant = (ActIdTenant) object;
-
-        if (StringUtils.isEmpty(actIdTenant.getId())) {
-            return super.generate(session, object);
-        } else {
-            return actIdTenant.getId();
-        }
-    }
+@IdGeneratorType(SysSecurityAttributeUuidGenerator.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD, METHOD})
+public @interface SysSecurityAttributeUuid {
 }

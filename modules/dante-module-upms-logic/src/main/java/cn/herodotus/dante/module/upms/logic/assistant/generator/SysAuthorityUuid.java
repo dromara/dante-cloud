@@ -25,37 +25,23 @@
 
 package cn.herodotus.dante.module.upms.logic.assistant.generator;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysSecurityAttribute;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.UUIDGenerator;
+import org.hibernate.annotations.IdGeneratorType;
 
-import java.io.Serializable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * <p>Description: 自定义UUID生成器 </p>
- * <p>
- * 使得保存实体类时可以在保留主键生成策略的情况下自定义表的主键
+ * <p>Description: SysAuthorityUuid </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/8/4 3:20
+ * @date : 2022/11/7 17:38
  */
-public class SysSecurityAttributeUUIDGenerator extends UUIDGenerator {
-
-    @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new HibernateException(new NullPointerException());
-        }
-
-        SysSecurityAttribute sysSecurityAttribute = (SysSecurityAttribute) object;
-
-        if (StringUtils.isEmpty(sysSecurityAttribute.getAttributeId())) {
-            return super.generate(session, object);
-        } else {
-            return sysSecurityAttribute.getAttributeId();
-        }
-    }
+@IdGeneratorType(SysAuthorityUuidGenerator.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD, METHOD})
+public @interface SysAuthorityUuid {
 }

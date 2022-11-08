@@ -47,6 +47,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,7 +85,6 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -164,7 +164,7 @@ public class AuthorizationServerConfiguration {
 
         // @formatter:off
         // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
-        httpSecurity.requestMatcher(endpointsMatcher)
+        httpSecurity.securityMatcher(endpointsMatcher)
                 // 开启请求认证
                 .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御

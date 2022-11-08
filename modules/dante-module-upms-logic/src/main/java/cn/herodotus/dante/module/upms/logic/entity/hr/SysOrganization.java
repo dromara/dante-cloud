@@ -30,10 +30,9 @@ import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * <p>Description: 单位信息 </p>
@@ -50,8 +49,7 @@ public class SysOrganization extends BaseSysEntity {
 
     @Schema(title = "单位ID")
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @UuidGenerator
     @Column(name = "organization_id", length = 64)
     private String organizationId;
 

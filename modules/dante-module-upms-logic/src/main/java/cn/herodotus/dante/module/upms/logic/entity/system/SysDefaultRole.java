@@ -30,10 +30,9 @@ import cn.herodotus.engine.assistant.core.enums.AccountType;
 import cn.herodotus.engine.data.core.entity.BaseSysEntity;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * <p>Description: 系统默认角色 </p>
@@ -52,8 +51,7 @@ import javax.persistence.*;
 public class SysDefaultRole extends BaseSysEntity {
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @UuidGenerator
     @Column(name = "default_id", length = 64)
     private String defaultId;
 

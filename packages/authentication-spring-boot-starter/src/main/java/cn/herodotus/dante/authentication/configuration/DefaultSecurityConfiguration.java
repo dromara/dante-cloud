@@ -92,10 +92,10 @@ public class DefaultSecurityConfiguration {
         httpSecurity.csrf().disable().cors();
 
         // @formatter:off
-        httpSecurity.authorizeRequests(authorizeRequests ->
+        httpSecurity.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                                .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                                .requestMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
+                                .requestMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
                                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                                 .anyRequest().authenticated()
                                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {

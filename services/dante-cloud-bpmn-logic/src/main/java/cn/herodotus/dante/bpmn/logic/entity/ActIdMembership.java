@@ -31,8 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * <p>Description: 工作流人员和组关系 </p>

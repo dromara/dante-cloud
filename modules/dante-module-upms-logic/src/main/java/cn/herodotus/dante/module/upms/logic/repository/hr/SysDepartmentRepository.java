@@ -27,9 +27,10 @@ package cn.herodotus.dante.module.upms.logic.repository.hr;
 
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
+import jakarta.persistence.QueryHint;
+import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.QueryHints;
 
-import javax.persistence.QueryHint;
 import java.util.List;
 
 /**
@@ -40,6 +41,6 @@ import java.util.List;
  */
 public interface SysDepartmentRepository extends BaseRepository<SysDepartment, String> {
 
-    @QueryHints(@QueryHint(name = org.hibernate.annotations.QueryHints.CACHEABLE, value = "true"))
+    @QueryHints(@QueryHint(name = AvailableHints.HINT_CACHEABLE, value = "true"))
     List<SysDepartment> findByOrganizationId(String organizationId);
 }

@@ -25,34 +25,42 @@
 
 package cn.herodotus.dante.module.upms.logic.assistant.generator;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
+import cn.herodotus.dante.module.upms.logic.entity.system.SysSecurityAttribute;
+import cn.herodotus.engine.data.jpa.hibernate.identifier.AbstractUuidGenerator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.UUIDGenerator;
+import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
-import java.io.Serializable;
+import java.lang.reflect.Member;
 
 /**
- * 自定义UUID生成器，使得保存实体类时可以在保留主键生成策略的情况下自定义表的主键
+ * <p>Description: 自定义UUID生成器 </p>
+ * <p>
+ * 使得保存实体类时可以在保留主键生成策略的情况下自定义表的主键
  *
- * @author gengwei.zheng
+ * @author : gengwei.zheng
+ * @date : 2021/8/4 3:20
  */
-public class SysAuthorityUUIDGenerator extends UUIDGenerator {
+public class SysSecurityAttributeUuidGenerator extends AbstractUuidGenerator {
+
+    public SysSecurityAttributeUuidGenerator(SysSecurityAttributeUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
+        super(idMember);
+    }
 
     @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         if (ObjectUtils.isEmpty(object)) {
             throw new HibernateException(new NullPointerException());
         }
 
-        SysAuthority sysAuthority = (SysAuthority) object;
+        SysSecurityAttribute sysSecurityAttribute = (SysSecurityAttribute) object;
 
-        if (StringUtils.isEmpty(sysAuthority.getAuthorityId())) {
+        if (StringUtils.isEmpty(sysSecurityAttribute.getAttributeId())) {
             return super.generate(session, object);
         } else {
-            return sysAuthority.getAuthorityId();
+            return sysSecurityAttribute.getAttributeId();
         }
     }
 }

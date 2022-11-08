@@ -23,37 +23,25 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.upms.rest.configuration;
+package cn.herodotus.dante.bpmn.logic.generator;
 
-import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.hibernate.annotations.IdGeneratorType;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * <p>Description: UpmsRest配置类 </p>
+ * <p>Description: ActIdGroupUuid </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/1/5 11:58
+ * @date : 2022/11/7 17:38
  */
-@Configuration(proxyBeanMethods = false)
-@ComponentScan(basePackages = {
-        "cn.herodotus.dante.module.upms.rest.controller.hr",
-        "cn.herodotus.dante.module.upms.rest.controller.system",
-        "cn.herodotus.dante.module.upms.rest.controller.assistant",
-        "cn.herodotus.dante.module.upms.rest.controller.social",
-        "cn.herodotus.dante.module.upms.rest.processor",
-        "cn.herodotus.dante.module.upms.rest.listener",
-})
-public class UpmsRestModuleConfiguration {
-
-    private static final Logger log = LoggerFactory.getLogger(UpmsRestModuleConfiguration.class);
-
-    @PostConstruct
-    public void postConstruct() {
-        log.info("[Herodotus] |- SDK [Module Upms Rest] Auto Configure.");
-    }
-
-
+@IdGeneratorType(ActIdGroupUuidGenerator.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD, METHOD})
+public @interface ActIdGroupUuid {
 }
