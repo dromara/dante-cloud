@@ -25,22 +25,21 @@
 
 package cn.herodotus.dante.authentication.configuration;
 
-import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
 import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
-import cn.herodotus.engine.oauth2.authorization.authorization.OAuth2FormLoginConfigurer;
-import cn.herodotus.engine.oauth2.authorization.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginConfigurer;
+import cn.herodotus.engine.oauth2.authentication.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusAuthorizationManager;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusStrategyTokenConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
-import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.engine.oauth2.metadata.processor.ExpressionSecurityMetadataParser;
-import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusClientDetailsService;
-import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusUserDetailsService;
-import cn.herodotus.engine.oauth2.server.authorization.service.OAuth2ApplicationService;
-import cn.herodotus.engine.oauth2.server.resource.customizer.HerodotusStrategyTokenConfigurer;
+import cn.herodotus.engine.oauth2.server.authentication.processor.HerodotusClientDetailsService;
+import cn.herodotus.engine.oauth2.server.authentication.processor.HerodotusUserDetailsService;
+import cn.herodotus.engine.oauth2.server.authentication.service.OAuth2ApplicationService;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -51,7 +50,6 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2Res
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -59,7 +57,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -75,16 +72,15 @@ public class DefaultSecurityConfiguration {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
-            JwtDecoder jwtDecoder,
-            HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler,
-            ExpressionSecurityMetadataParser securityMetadataExpressionParser,
-            HerodotusSecurityMetadataSource herodotusSecurityMetadataSource,
             UserDetailsService userDetailsService,
+            JwtDecoder jwtDecoder,
             CaptchaRendererFactory captchaRendererFactory,
             EndpointProperties endpointProperties,
             SecurityProperties securityProperties,
+            OAuth2ResourceServerProperties resourceServerProperties,
             OAuth2UiProperties uiProperties,
-            OAuth2ResourceServerProperties resourceServerProperties
+            SecurityMatcherConfigurer securityMatcherConfigurer,
+            HerodotusAuthorizationManager herodotusAuthorizationManager
     ) throws Exception {
 
         log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
@@ -94,18 +90,10 @@ public class DefaultSecurityConfiguration {
         // @formatter:off
         httpSecurity.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                                .requestMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                                .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
+                                .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                                .anyRequest().authenticated()
-                                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                                    @Override
-                                    public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-                                        securityMetadataExpressionParser.setFilterInvocationSecurityMetadataSource(fsi.getSecurityMetadataSource());
-                                        fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
-                                        return fsi;
-                                    }
-                                }))
+                                .anyRequest().access(herodotusAuthorizationManager))
                 .formLogin(form -> {
                             form.loginPage(uiProperties.getLoginPageUrl())
                                     .usernameParameter(uiProperties.getUsernameParameter())

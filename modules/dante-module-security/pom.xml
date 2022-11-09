@@ -52,7 +52,7 @@
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-sdk-metadata</artifactId>
+            <artifactId>oauth2-sdk-authorization</artifactId>
         </dependency>
 
         <dependency>

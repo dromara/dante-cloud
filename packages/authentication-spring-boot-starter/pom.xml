@@ -54,11 +54,6 @@
             <groupId>cn.herodotus.engine</groupId>
             <artifactId>oauth2-sdk-compliance</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-sdk-resource-server</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

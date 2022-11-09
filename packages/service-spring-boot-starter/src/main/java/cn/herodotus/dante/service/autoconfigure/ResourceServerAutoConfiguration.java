@@ -25,21 +25,18 @@
 
 package cn.herodotus.dante.service.autoconfigure;
 
-import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
-import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusAuthorizationManager;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusStrategyTokenConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
 import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
-import cn.herodotus.engine.oauth2.metadata.processor.ExpressionSecurityMetadataParser;
-import cn.herodotus.engine.oauth2.server.resource.customizer.HerodotusStrategyTokenConfigurer;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
  * <p>Description: 资源服务器配置 </p>
@@ -53,35 +50,27 @@ public class ResourceServerAutoConfiguration {
     public SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
             JwtDecoder jwtDecoder,
-            HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler,
-            ExpressionSecurityMetadataParser securityMetadataExpressionParser,
-            HerodotusSecurityMetadataSource herodotusSecurityMetadataSource,
             EndpointProperties endpointProperties,
             SecurityProperties securityProperties,
-            OAuth2ResourceServerProperties resourceServerProperties
+            OAuth2ResourceServerProperties resourceServerProperties,
+            SecurityMatcherConfigurer securityMatcherConfigurer,
+            HerodotusAuthorizationManager herodotusAuthorizationManager
     ) throws Exception {
 
         httpSecurity.csrf().disable().cors();
 
         httpSecurity.authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
-                        .requestMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                        .requestMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
-                        .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                        .anyRequest().authenticated()
-                        .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                            @Override
-                            public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-                                securityMetadataExpressionParser.setFilterInvocationSecurityMetadataSource(fsi.getSecurityMetadataSource());
-                                fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
-                                return fsi;
-                            }
-                        })).oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
-                .jwtDecoder(jwtDecoder)
-                .securityProperties(securityProperties)
-                .endpointProperties(endpointProperties)
-                .resourceServerProperties(resourceServerProperties)
-                .build());
+                        authorizeRequests
+                                .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
+                                .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
+                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                                .anyRequest().access(herodotusAuthorizationManager))
+                .oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
+                        .jwtDecoder(jwtDecoder)
+                        .securityProperties(securityProperties)
+                        .endpointProperties(endpointProperties)
+                        .resourceServerProperties(resourceServerProperties)
+                        .build());
 
         return httpSecurity.build();
     }
