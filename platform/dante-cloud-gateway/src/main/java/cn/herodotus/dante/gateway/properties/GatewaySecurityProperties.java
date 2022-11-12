@@ -37,7 +37,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/3/6 15:31
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConfigurationProperties(prefix = "herodotus.gateway")
 public class GatewaySecurityProperties {
 

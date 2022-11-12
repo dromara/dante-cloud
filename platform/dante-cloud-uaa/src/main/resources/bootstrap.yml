@@ -54,9 +54,13 @@ herodotus:
     jwk:
       certificate: standard
 
+
+
 logging:
   file:
     name: logs/${spring.application.name}.log
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&tenant=${spring.cloud.nacos.config.namespace}&dataId=logback-spring.xml
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&dataId=logback-spring.xml
   level:
     root: INFO
     # 关闭不必要的日志

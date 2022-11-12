@@ -58,10 +58,7 @@ springdoc:
 herodotus:
   gateway:
     white-list:
-      - "/oauth/token"
-      - "/oauth/check_token"
-      - "/oauth/authorize"
-      - "/social/token/*"
+      - "/oauth2/**"
       - "/v3/api-docs/**"
       - "/openapi*"
       - "/open/**"
@@ -69,6 +66,8 @@ herodotus:
 logging:
   file:
     name: logs/${spring.application.name}.log
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&tenant=${spring.cloud.nacos.config.namespace}&dataId=logback-spring.xml
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&dataId=logback-spring.xml
   level:
     root: INFO
     # 关闭不必要的日志

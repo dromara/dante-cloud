@@ -67,7 +67,7 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2021/11/4 11:46
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class GatewayConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(GatewayConfiguration.class);
