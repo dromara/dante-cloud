@@ -26,18 +26,21 @@
 package cn.herodotus.dante.gateway.filter;
 
 import cn.herodotus.dante.gateway.properties.GatewaySecurityProperties;
+import cn.herodotus.dante.gateway.utils.WebFluxUtils;
 import cn.herodotus.engine.assistant.core.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.assistant.core.enums.ResultErrorCodes;
-import cn.herodotus.dante.gateway.utils.WebFluxUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -50,8 +53,10 @@ import java.util.List;
  * @author : gengwei.zheng
  * @date : 2020/3/4 18:36
  */
-@Slf4j
+@Component
 public class GlobalCertificationFilter implements GlobalFilter, Ordered {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalCertificationFilter.class);
 
     @Resource
     private GatewaySecurityProperties gatewaySecurityProperties;
@@ -97,23 +102,32 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
-        // 2.非免登陆地址，获取token 检查token，如果未空，或者不是 Bearer XXX形式，则认为未授权。
+        // 2.外部进入的请求，如果包含 X_HERODOTUS_FROM_IN 请求头，认为是非法请求，直接拦截。X_HERODOTUS_FROM_IN 只能用于内部 Feign 间忽略权限使用
+        String fromIn = exchange.getRequest().getHeaders().getFirst(cn.herodotus.engine.assistant.core.constants.HttpHeaders.X_HERODOTUS_FROM_IN);
+        if (ObjectUtils.isNotEmpty(fromIn)) {
+            log.warn("[Herodotus] |- Illegal request to disable access!");
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_FORBIDDEN));
+        }
+
+        // 3.非免登陆地址，获取token 检查token，如果未空，或者不是 Bearer XXX形式，则认为未授权。
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (!isTokenWellFormed(token)) {
             log.debug("[Herodotus] |- Token is not Well Formed!");
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_UNAUTHORIZED));
         }
 
-        // 3. 非免登陆接口，同时也有格式正确的Token，那么就验证Token是否过期
-        //    就看Redis中，是否有这个Token
-        String redisTokenKey = StringUtils.replace(token, BaseConstants.BEARER_TOKEN, "access:");
-        if (!redisTemplate.hasKey(redisTokenKey)) {
-            log.debug("[Herodotus] |- Token is Expired！");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.INVALID_TOKEN).status(HttpStatus.SC_PRECONDITION_FAILED));
-        } else {
-            log.debug("[Herodotus] |- Token is OK！");
-            return chain.filter(exchange);
-        }
+//        // 3. 非免登陆接口，同时也有格式正确的Token，那么就验证Token是否过期
+//        //    就看Redis中，是否有这个Token
+//        String redisTokenKey = StringUtils.replace(token, BaseConstants.BEARER_TOKEN, "access:");
+//        if (!redisTemplate.hasKey(redisTokenKey)) {
+//            log.debug("[Herodotus] |- Token is Expired！");
+//            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.INVALID_TOKEN).status(HttpStatus.SC_PRECONDITION_FAILED));
+//        } else {
+//            log.debug("[Herodotus] |- Token is OK！");
+//            return chain.filter(exchange);
+//        }
+
+        return chain.filter(exchange);
     }
 
     @Override
