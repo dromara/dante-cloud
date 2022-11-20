@@ -32,6 +32,11 @@ spring:
             group: common
           - data-id: dante-cloud-multi-tenancy.yaml
             group: common
+          # 本地存储模式必须要包含
+          # 远程存储：social 配置在 upms
+          # 本地存储：social 配置在 uaa
+          - data-id: herodotus-cloud-social.yaml
+            group: common
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@

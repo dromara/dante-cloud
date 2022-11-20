@@ -41,7 +41,7 @@ import cn.herodotus.engine.oauth2.core.properties.OAuth2ComplianceProperties;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
 import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
 import cn.herodotus.engine.protect.web.crypto.processor.HttpCryptoProcessor;
-import cn.herodotus.engine.protect.web.tenant.interceptor.MultiTenancyFilter;
+import cn.herodotus.engine.protect.web.tenant.MultiTenantFilter;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -81,7 +81,7 @@ import org.springframework.security.oauth2.server.authorization.web.authenticati
 import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -160,13 +160,13 @@ public class AuthorizationServerConfiguration {
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
-        httpSecurity.addFilterBefore(new MultiTenancyFilter(), FilterSecurityInterceptor.class);
+        httpSecurity.addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class);
 
         // @formatter:off
         // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
         httpSecurity.securityMatcher(endpointsMatcher)
                 // 开启请求认证
-                .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
                 .oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
