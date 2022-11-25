@@ -17,9 +17,9 @@ spring:
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
-    inetutils:
-      preferred-networks:
-        - 192.168
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}
 management:
   health:
     redis:

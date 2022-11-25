@@ -23,7 +23,7 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.service.autoconfigure;
+package cn.herodotus.dante.service.configuration;
 
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusAuthorizationManager;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusStrategyTokenConfigurer;
@@ -33,6 +33,7 @@ import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -45,7 +46,8 @@ import org.springframework.security.web.SecurityFilterChain;
  * @date : 2022/1/21 23:56
  */
 @EnableWebSecurity
-public class ResourceServerAutoConfiguration {
+@Configuration(proxyBeanMethods = false)
+public class ResourceServerConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,

@@ -23,10 +23,8 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.strategy.autoconfigure;
+package cn.herodotus.dante.module.strategy.configuration;
 
-import cn.herodotus.dante.module.strategy.configuration.DistributedArchitectureConfiguration;
-import cn.herodotus.dante.module.strategy.configuration.MonocoqueArchitectureConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,9 +42,9 @@ import org.springframework.context.annotation.Import;
         DistributedArchitectureConfiguration.class,
         MonocoqueArchitectureConfiguration.class
 })
-public class StrategyModuleAutoConfiguration {
+public class StrategyModuleConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(StrategyModuleAutoConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(StrategyModuleConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

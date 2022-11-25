@@ -43,6 +43,8 @@ spring:
             group: common
           - data-id: dante-cloud-rest.yaml
             group: common
+          - data-id: dante-cloud-cache.yaml
+            group: common
       discovery:
         namespace: @config.namespace@
         server-addr: @discovery.server-addr@
@@ -50,9 +52,9 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
-    inetutils:
-      preferred-networks:
-        - 192.168
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}
 springdoc:
   webjars:
     prefix: /document
@@ -60,10 +62,7 @@ springdoc:
 herodotus:
   gateway:
     white-list:
-      - "/oauth/token"
-      - "/oauth/check_token"
-      - "/oauth/authorize"
-      - "/social/token/*"
+      - "/oauth2/**"
       - "/v3/api-docs/**"
       - "/openapi*"
       - "/open/**"

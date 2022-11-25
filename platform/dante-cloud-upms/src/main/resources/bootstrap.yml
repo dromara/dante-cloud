@@ -39,9 +39,9 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
-    inetutils:
-      preferred-networks:
-        - 192.168
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}
 logging:
   file:
     name: logs/${spring.application.name}.log

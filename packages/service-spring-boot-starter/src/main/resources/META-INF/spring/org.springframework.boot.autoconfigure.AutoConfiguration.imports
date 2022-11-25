@@ -1,4 +1,4 @@
 cn.herodotus.dante.service.autoconfigure.AutoConfiguration
 cn.herodotus.engine.oauth2.authorization.configuration.OAuth2AuthorizationConfiguration
 cn.herodotus.dante.module.security.configuration.SecurityModuleConfiguration
-cn.herodotus.dante.service.autoconfigure.ResourceServerAutoConfiguration
+cn.herodotus.dante.service.configuration.ResourceServerConfiguration

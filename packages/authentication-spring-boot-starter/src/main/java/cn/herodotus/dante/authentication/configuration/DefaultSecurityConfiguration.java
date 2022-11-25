@@ -49,7 +49,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -65,6 +67,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * @date : 2022/2/12 20:53
  */
 @EnableWebSecurity
+@Configuration(proxyBeanMethods = false)
 public class DefaultSecurityConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
@@ -87,25 +90,24 @@ public class DefaultSecurityConfiguration {
         // 禁用CSRF 开启跨域
         httpSecurity.csrf().disable().cors();
 
-        // @formatter:off
-        httpSecurity.authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
-                                .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
-                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                                .anyRequest().access(herodotusAuthorizationManager))
+        httpSecurity
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
+                        .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
+                        .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+                        .anyRequest().access(herodotusAuthorizationManager))
                 .formLogin(form -> {
-                            form.loginPage(uiProperties.getLoginPageUrl())
-                                    .usernameParameter(uiProperties.getUsernameParameter())
-                                    .passwordParameter(uiProperties.getPasswordParameter());
-                            if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
-                                form.failureForwardUrl(uiProperties.getFailureForwardUrl());
-                            }
-                            if (StringUtils.isNotBlank(uiProperties.getSuccessForwardUrl())) {
-                                form.successForwardUrl(uiProperties.getSuccessForwardUrl());
-                            }
-                        }
-                )
+                    form.loginPage(uiProperties.getLoginPageUrl())
+                            .usernameParameter(uiProperties.getUsernameParameter())
+                            .passwordParameter(uiProperties.getPasswordParameter());
+                    if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
+                        form.failureForwardUrl(uiProperties.getFailureForwardUrl());
+                    }
+                    if (StringUtils.isNotBlank(uiProperties.getSuccessForwardUrl())) {
+                        form.successForwardUrl(uiProperties.getSuccessForwardUrl());
+                    }
+                })
+                .sessionManagement(Customizer.withDefaults())
                 .exceptionHandling()
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
@@ -117,7 +119,7 @@ public class DefaultSecurityConfiguration {
                         .resourceServerProperties(resourceServerProperties)
                         .build())
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
-        // @formatter:on
+
         return httpSecurity.build();
     }
 
