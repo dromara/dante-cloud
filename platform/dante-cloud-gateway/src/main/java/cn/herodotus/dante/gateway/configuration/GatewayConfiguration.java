@@ -34,7 +34,6 @@ import org.slf4j.LoggerFactory;
 import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springdoc.core.SwaggerUiConfigProperties;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.context.annotation.Bean;
@@ -91,28 +90,6 @@ public class GatewayConfiguration {
         return new SentinelGatewayFilter();
     }
 
-    @Configuration
-    @ConditionalOnSwaggerEnabled
-    static class GatewaySwaggerConfiguration {
-
-        @Autowired
-        private RouteLocator routeLocator;
-        @Autowired
-        private SwaggerUiConfigParameters swaggerUiConfigParameters;
-        @Autowired
-        private SwaggerUiConfigProperties swaggerUiConfigProperties;
-
-        @Bean
-        public RefreshRoutesListener refreshRoutesListener() {
-            RefreshRoutesListener refreshRoutesListener = new RefreshRoutesListener();
-            refreshRoutesListener.setRouteLocator(routeLocator);
-            refreshRoutesListener.setSwaggerUiConfigParameters(swaggerUiConfigParameters);
-            refreshRoutesListener.setSwaggerUiConfigProperties(swaggerUiConfigProperties);
-            log.trace("[Herodotus] |- Bean [Refresh Routes Listener] in AliyunScanConfiguration Auto Configure.");
-            return refreshRoutesListener;
-        }
-    }
-
     /**
      * Gateway 跨域处理
      * @return WebFilter
@@ -142,5 +119,20 @@ public class GatewayConfiguration {
             }
             return chain.filter(ctx);
         };
+    }
+
+    @Configuration(proxyBeanMethods = false)
+    @ConditionalOnSwaggerEnabled
+    static class GatewaySwaggerConfiguration {
+
+        @Bean
+        public RefreshRoutesListener refreshRoutesListener(RouteLocator routeLocator, SwaggerUiConfigParameters swaggerUiConfigParameters, SwaggerUiConfigProperties swaggerUiConfigProperties) {
+            RefreshRoutesListener refreshRoutesListener = new RefreshRoutesListener();
+            refreshRoutesListener.setRouteLocator(routeLocator);
+            refreshRoutesListener.setSwaggerUiConfigParameters(swaggerUiConfigParameters);
+            refreshRoutesListener.setSwaggerUiConfigProperties(swaggerUiConfigProperties);
+            log.trace("[Herodotus] |- Bean [Refresh Routes Listener] Auto Configure.");
+            return refreshRoutesListener;
+        }
     }
 }
