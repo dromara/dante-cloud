@@ -26,6 +26,8 @@ INSERT INTO "oauth2_registered_client" ("id", "authorization_grant_types", "clie
 -- ----------------------------
 INSERT INTO "oauth2_scope" ("scope_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "scope_code", "scope_name") VALUES ('bd344a2e-47d6-4b45-b77f-50ca8623f09f', '2022-03-24 11:58:19.517', 1, '2022-03-24 11:58:19.517', NULL, 't', 0, 0, 'openid', 'OIDC OpenId');
 INSERT INTO "oauth2_scope" ("scope_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "scope_code", "scope_name") VALUES ('bfc6105d9f0285e9550ef7aade04a2d3', '2022-04-01 22:07:23', 2, '2022-04-01 22:07:28', NULL, 't', 0, 0, 'read-user-by-page', '获取用户信息');
+INSERT INTO "oauth2_scope" ("scope_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "scope_code", "scope_name") VALUES ('725e5456-25fa-4d47-a8fc-eaff5770200e', '2022-11-26 16:46:04.778', 0, '2022-11-26 16:46:04', '客户端创建', 't', 0, 0, 'client.create', 'OIDC Client Registration');
+INSERT INTO "oauth2_scope" ("scope_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "scope_code", "scope_name") VALUES ('3b959f84-67ca-434c-907f-db1ab5456ffe', '2022-11-26 22:10:11.867', 0, '2022-11-26 22:10:11.867', '客户端信息读取', 't', 0, 0, 'client.read', 'OIDC Client Read');
 
 -- ----------------------------
 -- Table data for oauth2_authority
@@ -39,6 +41,8 @@ INSERT INTO "oauth2_application_scope" ("application_id", "scope_id") VALUES ('d
 INSERT INTO "oauth2_application_scope" ("application_id", "scope_id") VALUES ('dfe3e7bc-22e9-443f-a874-947494e20174', 'bd344a2e-47d6-4b45-b77f-50ca8623f09f');
 INSERT INTO "oauth2_application_scope" ("application_id", "scope_id") VALUES ('422baa83-505c-436f-87b5-2a599e6d2d28', 'bfc6105d9f0285e9550ef7aade04a2d3');
 INSERT INTO "oauth2_application_scope" ("application_id", "scope_id") VALUES ('422baa83-505c-436f-87b5-2a599e6d2d28', 'bd344a2e-47d6-4b45-b77f-50ca8623f09f');
+INSERT INTO "oauth2_application_scope" ("application_id", "scope_id") VALUES ('dfe3e7bc-22e9-443f-a874-947494e20174', '725e5456-25fa-4d47-a8fc-eaff5770200e');
+INSERT INTO "oauth2_application_scope" ("application_id", "scope_id") VALUES ('dfe3e7bc-22e9-443f-a874-947494e20174', '3b959f84-67ca-434c-907f-db1ab5456ffe');
 
 -- ----------------------------
 -- Table data for oauth2_scope_authority
