@@ -32,13 +32,13 @@
     <parent>
         <groupId>cn.herodotus.engine</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.0.0-RC1</version>
+        <version>3.0.0-RC2</version>
         <relativePath/>
     </parent>
 
     <groupId>cn.herodotus.dante</groupId>
     <artifactId>dependencies</artifactId>
-    <version>3.0.0-RC1</version>
+    <version>3.0.0-RC2</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud-dependencies</name>
@@ -87,6 +87,12 @@
                 <artifactId>service-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.herodotus.dante</groupId>
+                <artifactId>facility-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>cn.herodotus.dante</groupId>
                 <artifactId>dante-module-upms-logic</artifactId>

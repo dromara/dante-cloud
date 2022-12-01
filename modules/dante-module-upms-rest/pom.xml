@@ -32,11 +32,11 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.0-RC1</version>
+        <version>3.0.0-RC2</version>
     </parent>
 
     <artifactId>dante-module-upms-rest</artifactId>
-    <version>3.0.0-RC1</version>
+    <version>3.0.0-RC2</version>
     <packaging>jar</packaging>
 
     <dependencies>

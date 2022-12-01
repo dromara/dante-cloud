@@ -30,11 +30,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.0-RC1</version>
+        <version>3.0.0-RC2</version>
     </parent>
 
     <artifactId>dante-cloud-monitor</artifactId>
-    <version>3.0.0-RC1</version>
+    <version>3.0.0-RC2</version>
     <name>dante-cloud-monitor</name>
     <description>dante-cloud-monitor</description>
     <dependencies>
@@ -43,7 +43,7 @@
             <artifactId>web-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
 

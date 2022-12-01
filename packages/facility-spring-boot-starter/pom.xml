@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
   ~
-  ~ Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+  ~ Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
@@ -27,24 +27,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <artifactId>dante-cloud</artifactId>
+        <artifactId>packages</artifactId>
         <groupId>cn.herodotus.dante</groupId>
         <version>3.0.0-RC2</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>packages</artifactId>
-    <version>3.0.0-RC2</version>
-    <packaging>pom</packaging>
+    <artifactId>facility-spring-boot-starter</artifactId>
 
-    <name>dante-cloud-packages</name>
+    <dependencies>
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>facility-alibaba-spring-boot-starter</artifactId>
+        </dependency>
 
-    <modules>
-        <module>authentication-spring-boot-starter</module>
-        <module>service-spring-boot-starter</module>
-        <module>facility-spring-boot-starter</module>
-    </modules>
+        <!--        <dependency>-->
+        <!--            <groupId>cn.herodotus.engine</groupId>-->
+        <!--            <artifactId>facility-tencent-spring-boot-starter</artifactId>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>cn.herodotus.engine</groupId>-->
+        <!--            <artifactId>facility-orginal-spring-boot-starter</artifactId>-->
+        <!--        </dependency>-->
+    </dependencies>
 
 </project>

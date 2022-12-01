@@ -4,23 +4,64 @@ spring:
   application:
     name: @artifactId@ #拿到POM文件中的值
   profiles:
-    active: @profile.name@
-  cloud:
-    httpclientfactories:
-      ok:
-        enabled: false
-    nacos:
-      config:
-        namespace: @config.namespace@
-        server-addr: @config.server-addr@
-        file-extension: yaml
-      discovery:
-        namespace: @config.namespace@
-        server-addr: @discovery.server-addr@
-    zookeeper:
-      discovery:
-        instance-host: ${spring.cloud.client.ip-address}
+    active: @facility@
+
 management:
   health:
     redis:
       enabled: false
+herodotus:
+  platform:
+    architecture: monocoque
+
+---
+# spring cloud alibaba 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: alibaba
+  cloud:
+    nacos:
+      config:
+        namespace: @alibaba.config.namespace@
+        server-addr: @alibaba.config.server-addr@
+        file-extension: yaml
+      discovery:
+        namespace: @alibaba.config.namespace@
+        server-addr: @alibaba.discovery.server-addr@
+    httpclientfactories:
+      ok:
+        enabled: false
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}
+
+---
+# spring cloud tencent 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: tencent
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - eth0
+    polaris:
+      address: grpc://@tencent.polaris.server-addr@
+      namespace: @tencent.polaris.namespace@
+      discovery:
+        service: ${spring.application.name}
+        namespace: @tencent.polaris.namespace@
+---
+# spring 全家桶基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: spring
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - eth0
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}

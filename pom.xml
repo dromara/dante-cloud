@@ -32,12 +32,12 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.0.0-RC1</version>
+        <version>3.0.0-RC2</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>dante-cloud</artifactId>
-    <version>3.0.0-RC1</version>
+    <version>3.0.0-RC2</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud</name>
@@ -104,8 +104,10 @@
             </activation>
             <properties>
                 <!--当前环境-->
-                <profile.name>development</profile.name>
-                <database.type>postgresql</database.type>
+                <profile>development</profile>
+                <database>postgresql</database>
+                <!--基础设施：tencent、alibaba、spring-->
+                <facility>tencent</facility>
                 <!--代码构建控制-->
                 <!--跳过构建源代码包-->
                 <skip.build.source.package>false</skip.build.source.package>
@@ -113,13 +115,16 @@
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
-                <!--Nacos配置中心地址-->
-                <config.server-addr>192.168.101.10:8848</config.server-addr>
-                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <config.namespace>2e4f5cf6-2ac8-4fe0-99be-b0562659c120</config.namespace>
-                <!--Nacos服务发现地址-->
-                <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
-                <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
+                <!--Spring Cloud Alibaba配置中心地址-->
+                <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
+                <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <alibaba.config.namespace>2e4f5cf6-2ac8-4fe0-99be-b0562659c120</alibaba.config.namespace>
+                <!--Spring Cloud Alibaba服务发现地址-->
+                <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
+                <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
+                <!--Spring Cloud Tencent 配置-->
+                <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
+                <tencent.polaris.namespace>default</tencent.polaris.namespace>
             </properties>
         </profile>
         <!-- 生产 -->
@@ -127,8 +132,10 @@
             <id>production</id>
             <properties>
                 <!--当前环境-->
-                <profile.name>production</profile.name>
-                <database.type>mysql8</database.type>
+                <profile>production</profile>
+                <database>mysql8</database>
+                <!--基础设施：tencent、alibaba、spring-->
+                <facility>tencent</facility>
                 <!--代码构建控制-->
                 <!--跳过构建源代码包-->
                 <skip.build.source.package>false</skip.build.source.package>
@@ -136,14 +143,17 @@
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
-                <!--Nacos配置中心地址-->
-                <config.server-addr>192.168.101.10:8848</config.server-addr>
-                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <!--<config.namespace>8fdcc073-2e51-4722-8274-3f5b76362bb8</config.namespace>-->
-                <config.namespace></config.namespace>
-                <!--Nacos服务发现地址-->
-                <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
-                <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
+                <!--Spring Cloud Alibaba配置中心地址-->
+                <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
+                <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <!--<alibaba.config.namespace>8fdcc073-2e51-4722-8274-3f5b76362bb8</alibaba.config.namespace>-->
+                <alibaba.config.namespace></alibaba.config.namespace>
+                <!--Spring Cloud Alibaba服务发现地址-->
+                <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
+                <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
+                <!--Spring Cloud Tencent 配置-->
+                <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
+                <tencent.polaris.namespace>default</tencent.polaris.namespace>
             </properties>
         </profile>
         <!-- Docker -->
@@ -151,9 +161,11 @@
             <id>docker</id>
             <properties>
                 <!--当前环境-->
-                <profile.name>docker</profile.name>
+                <profile>docker</profile>
                 <!--数据库类型-->
-                <database.type>postgresql</database.type>
+                <database>postgresql</database>
+                <!--基础设施：tencent、alibaba、spring-->
+                <facility>tencent</facility>
                 <!--代码构建控制-->
                 <!--跳过构建源代码包-->
                 <skip.build.source.package>false</skip.build.source.package>
@@ -161,13 +173,16 @@
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
-                <!--Nacos配置中心地址-->
-                <config.server-addr>192.168.101.10:8848</config.server-addr>
-                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <config.namespace></config.namespace>
-                <!--Nacos服务发现地址-->
-                <discovery.server-addr>192.168.101.10:8848</discovery.server-addr>
-                <sentinel.server-addr>192.168.101.10:8858</sentinel.server-addr>
+                <!--Spring Cloud Alibaba配置中心地址-->
+                <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
+                <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <alibaba.config.namespace></alibaba.config.namespace>
+                <!--Spring Cloud Alibaba服务发现地址-->
+                <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
+                <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
+                <!--Spring Cloud Tencent 配置-->
+                <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
+                <tencent.polaris.namespace>default</tencent.polaris.namespace>
             </properties>
         </profile>
     </profiles>
