@@ -112,6 +112,7 @@ spring:
       ignored-interfaces:
         - eth0
     polaris:
+      enabled: true
       address: grpc://@tencent.polaris.server-addr@
       namespace: @tencent.polaris.namespace@
       discovery:

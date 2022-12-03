@@ -32,7 +32,7 @@ import cn.herodotus.engine.assistant.core.component.router.BaseMeta;
 import cn.herodotus.engine.assistant.core.component.router.ChildMeta;
 import cn.herodotus.engine.assistant.core.component.router.ParentMeta;
 import cn.herodotus.engine.assistant.core.component.router.RootMeta;
-import cn.herodotus.engine.assistant.core.constants.BaseConstants;
+import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import cn.hutool.core.lang.tree.TreeNode;
