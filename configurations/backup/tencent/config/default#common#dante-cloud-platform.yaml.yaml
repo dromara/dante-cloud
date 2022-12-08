@@ -1,0 +1,23 @@
+---
+namespace: "default"
+fileGroup: "common"
+fileName: "dante-cloud-platform.yaml"
+content: "herodotus:\r\n  endpoint:\r\n    uaa-service-name: dante-cloud-uaa\r\n \
+  \   upms-service-name: dante-cloud-upms\r\n    gateway-service-uri: ${herodotus.environment.gateway-server-addr}\r\
+  \n    uaa-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.uaa-service-name}\r\
+  \n    upms-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.upms-service-name}\r\
+  \n    access-token-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/token\r\n \
+  \   authorization-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/authorize\r\n\
+  \    token-revocation-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/revoke\r\
+  \n    token-introspection-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/introspect\r\
+  \n    jwk-set-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/jwks\r\n    issuer-uri:\
+  \ ${herodotus.endpoint.uaa-service-uri}\r\n    oidc-client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/connect/register\r\
+  \n    oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo\r\n  swagger:\r\
+  \n    enabled: ${herodotus.switch.swagger.enabled}\r\n\r\nspring:\r\n  session:\r\
+  \n    store-type: redis\r\n  security:\r\n    oauth2:\r\n      resourceserver:\r\
+  \n        jwt:\r\n          issuer-uri: ${herodotus.endpoint.issuer-uri}\r\n   \
+  \       jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}\r\n        opaquetoken:\r\
+  \n          client-id: 14a9cf797931430896ad13a6b1855611\r\n          client-secret:\
+  \ a05fe1fc50ed42a4990c6c6fc4bec398\r\n"
+version: 1
+md5: "700b967a6da3d702a2ab457b48c2ab5e"

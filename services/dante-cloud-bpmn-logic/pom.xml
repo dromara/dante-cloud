@@ -32,11 +32,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.0-RC2</version>
+        <version>3.0.0-RC3</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-logic</artifactId>
-    <version>3.0.0-RC2</version>
+    <version>3.0.0-RC3</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>message-spring-boot-starter</artifactId>
+            <artifactId>event-message-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

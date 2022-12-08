@@ -1,0 +1,46 @@
+---
+code: 200000
+info: "execute success"
+type: "INSTANCE"
+service:
+  name: "dante-cloud-upms"
+  namespace: "default"
+  metadata:
+    internal-auto-created: "true"
+  ports: ""
+  business: ""
+  department: ""
+  cmdb_mod1: ""
+  cmdb_mod2: ""
+  cmdb_mod3: ""
+  comment: ""
+  owners: "Polaris"
+  ctime: "2022-12-08 08:27:11"
+  mtime: "2022-12-08 08:27:11"
+  revision: "8f810b020accf82a4af299e0553a77702b49af04"
+  platform_id: ""
+instances:
+- id: "a7b719cddbcadde407822f3e5730a7fbca681a74"
+  service: "dante-cloud-upms"
+  namespace: "default"
+  host: "192.168.101.10"
+  port: 7070
+  protocol: "http"
+  weight: 100
+  healthCheck:
+    type: "HEARTBEAT"
+    heartbeat:
+      ttl: 5
+  healthy: true
+  isolate: false
+  location: {}
+  metadata:
+    campus: ""
+    internal-address: "192.168.101.10:7070"
+    internal-ip: "192.168.101.10"
+    protocol: "http"
+    region: ""
+    zone: ""
+  mtime: "2022-12-08 08:29:51"
+  revision: "cdc73f84df184150ac78f809a0ad0cee"
+  enableHealthCheck: true

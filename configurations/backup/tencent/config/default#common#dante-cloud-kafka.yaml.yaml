@@ -1,0 +1,21 @@
+---
+namespace: "default"
+fileGroup: "common"
+fileName: "dante-cloud-kafka.yaml"
+content: "spring:\r\n  cloud:\r\n    bus:\r\n      destination: SecurityMetadata\r\
+  \n      id: ${spring.application.name}:${server.port}\r\n    stream:\r\n      kafka:\r\
+  \n        binder:\r\n          brokers: ${herodotus.environment.kafka.bootstrap-servers}\r\
+  \n          default-broker-port: 9092\r\n          auto-add-partitions: true\r\n\
+  \          auto-create-topics: true\r\n          min-partition-count: 1\r\n    \
+  \      configuration:\r\n            commit.interval.ms: 1000\r\n            default.key.serde:\
+  \ org.apache.kafka.common.serialization.Serdes$StringSerde\r\n            default.value.serde:\
+  \ org.apache.kafka.common.serialization.Serdes$StringSerde\r\n          producer-properties:\r\
+  \n            retries: 1\r\n            acks: 1\r\n            batch.size: 16384\r\
+  \n            buffer.memory: 33554432\r\n            linger.ms: 1\r\n          consumer-properties:\r\
+  \n            allow.auto.create.topics: true\r\n            auto.commit.interval.ms:\
+  \ 1000\r\n      function:\r\n        bindings:\r\n          busConsumer-out-0: springCloudBusOutput\r\
+  \n          busConsumer-in-0: springCloudBusInput\r\n      bindings:\r\n       \
+  \ springCloudBusOutput:\r\n          content-type: application/json\r\n        springCloudBusInput:\r\
+  \n          content-type: application/json\r\n          group: ${spring.application.name}"
+version: 1
+md5: "67e9cdb50a2fdf32c70a0fed6f6983d9"

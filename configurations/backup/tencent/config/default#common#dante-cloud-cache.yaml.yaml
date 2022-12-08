@@ -1,0 +1,14 @@
+---
+namespace: "default"
+fileGroup: "common"
+fileName: "dante-cloud-cache.yaml"
+content: "jetcache:\r\n  statIntervalMinutes: 15\r\n  areaInCacheName: false\r\n \
+  \ local:\r\n    default:\r\n      type: caffeine\r\n      keyConvertor: fastjson2\r\
+  \n      limit: 10000\r\n  remote:\r\n    default:\r\n      type: redis.lettuce\r\
+  \n      keyConvertor: fastjson2\r\n      broadcastChannel: herodotus\r\n      valueEncoder:\
+  \ java\r\n      valueDecoder: java\r\n      poolConfig:\r\n        minIdle: ${spring.data.redis.lettuce.pool.min-idle}\r\
+  \n        maxIdle: ${spring.data.redis.lettuce.pool.max-idle}\r\n        maxTotal:\
+  \ ${spring.data.redis.lettuce.pool.max-active}\r\n        maxWait: ${spring.data.redis.lettuce.pool.max-wait}\r\
+  \n      uri:\r\n        - redis://${spring.data.redis.password}@${spring.data.redis.host}:${spring.data.redis.port}/${spring.data.redis.database}"
+version: 1
+md5: "933ff1dddd6c099657c1d7445c6435ef"

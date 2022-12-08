@@ -1,0 +1,7 @@
+---
+code: 200000
+info: "execute success"
+type: "RATE_LIMIT"
+service:
+  name: "dante-cloud-gateway"
+  namespace: "default"
