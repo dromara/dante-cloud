@@ -242,83 +242,18 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!-- docker打包插件 -->
-                <plugin>
-                    <groupId>io.fabric8</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>${docker-maven-plugin.version}</version>
-                    <!--全局配置-->
-                    <configuration>
-                        <!--这一部分是为了实现对远程docker容器的控制-->
-                        <!--docker主机地址,用于完成docker各项功能,注意是tcp不是http!-->
-                        <dockerHost>${docker.host}</dockerHost>
-                        <!--docker远程访问所需证书地址,如果docker远程主机没有启用TLS验证则不需要配证书-->
-                        <!--<certPath>${project.basedir}/docker/ssh</certPath>-->
-
-                        <!--这一部分是为了实现docker镜像的构建和推送-->
-                        <!--registry地址,用于推送,拉取镜像,我这里用的是阿里的registry-->
-                        <registry>${docker.registry}</registry>
-                        <!-- 认证信息-->
-                        <authConfig>
-                            <push>
-                                <username>${docker.username}</username>
-                                <password>${docker.password}</password>
-                            </push>
-                        </authConfig>
-                        <!--镜像相关配置,支持多镜像-->
-                        <images>
-                            <!-- 单个镜像配置 -->
-                            <image>
-                                <!--镜像名(含版本号) 命名空间/仓库名称:镜像版本号-->
-                                <name>命名空间/仓库名称:镜像版本号</name>
-                                <name>${docker.registry}/${docker.namespace}/${project.name}:${project.version}</name>
-                                <!--别名:用于容器命名和在docker-compose.yml文件只能找到对应名字的配置-->
-                                <alias>${project.name}</alias>
-                                <!--镜像build相关配置-->
-                                <build>
-                                    <!--使用dockerFile文件-->
-                                    <dockerFile>${project.basedir}/Dockerfile</dockerFile>
-                                </build>
-                            </image>
-                        </images>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <showWarnings>true</showWarnings>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${mapstruct-processor.version}</version>
-                        </path>
-                        <path>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-configuration-processor</artifactId>
-                            <version>${spring-boot-dependencies.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
             <plugin>
-                <!--打包跳过测试-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
@@ -328,21 +263,6 @@
                 <configuration>
                     <skipSource>${skip.build.source.package}</skipSource>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>io.github.git-commit-id</groupId>
-                <artifactId>git-commit-id-maven-plugin</artifactId>
-                <configuration>
-                    <skip>${skip.build.git.commit.info}</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-archetype-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
