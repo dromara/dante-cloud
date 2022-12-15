@@ -32,17 +32,19 @@
     <parent>
         <groupId>cn.herodotus.engine</groupId>
         <artifactId>dependencies</artifactId>
-        <version>2.7.6.0</version>
+        <version>2.7.6.1</version>
         <relativePath/>
     </parent>
 
     <groupId>cn.herodotus.dante</groupId>
     <artifactId>dependencies</artifactId>
-    <version>2.7.6.0</version>
+    <version>2.7.6.1</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud-dependencies</name>
     <description>Dante Dependencies</description>
+
+    <url>https://github.com/dromara/dante-cloud</url>
 
     <licenses>
         <license>
@@ -50,6 +52,10 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+    <organization>
+        <name>dromara</name>
+        <url>https://github.com/dromara</url>
+    </organization>
     <developers>
         <developer>
             <name>码匠君</name>
