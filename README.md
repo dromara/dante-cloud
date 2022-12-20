@@ -25,6 +25,7 @@
     <a href="https://github.com/herodotus-cloud/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/herodotus/dante-engine">核心组件仓库</a> &nbsp; | &nbsp;
+    <a href="https://gitee.com/dromara/dante-cloud/tree/3.0.0/">v3.0.0</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.cn">文档</a>
 </p>
 
@@ -34,11 +35,9 @@
 
 ## 重要说明
 
-本项目已经正式加入 `Dromara` 开源社区 【[Dromara 开源社区官网地址](https://dromara.org)】，同时项目名称也变更为 `Dante Cloud` (但丁)。因此项目地址产生了变更，需要对已检出代码的 Git 进行修改，以免影响代码的更新。如条件允许，建议使用新地址全新下载代码。给大家带来不便,敬请谅解！
+自11月24日，Spring Boot 3.0 以及 Spring Cloud 2022.0.0、Spring Cloud Tencent 等全新版本发布，整个Java 社区也步入的 Java 17 和 Spring Boot 3 的新时代。紧跟 Java 技术和 Spring 社区的发展，让更多质量更好、性能更优的新特性服务于实际的开发工作，Dante Cloud 也同步进行升级及适配，开发了全新的 3.0 版本。
 
-谢谢大家对 `Eurynome Cloud` 支持与厚爱，希望大家继续给与 `Dante Cloud` 关注与支持。
-
-> 项目涉及的代码包以及相关文档和说明，会在后续逐步进行变更和修改。
+基于 Spring Authorization Server 1.0.0、Spring Boot 3.0.0、Spring Cloud 2022.0.0、Spring Cloud Tencent 1.8.2-2022.0.0、Spring Cloud Alibaba 2021.0.4.0、Nacos 2.2.0 等主流技术栈开发的 Dante Cloud v3.0.0 已经正式发布，关注请移步 [v3.0.0 分支](https://gitee.com/dromara/dante-cloud/tree/3.0.0/)
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
