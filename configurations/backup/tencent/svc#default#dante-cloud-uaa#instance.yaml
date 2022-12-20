@@ -17,7 +17,7 @@ service:
   owners: "Polaris"
   ctime: "2022-12-08 08:37:34"
   mtime: "2022-12-08 08:37:34"
-  revision: "c48b8a373ab95b5759094ebd943d040ff7054874"
+  revision: "4303686dc6b31861f31122d92743ce6623e386c2"
   platform_id: ""
 instances:
 - id: "94b7c5b8208ae64b5dda3cf932307f805ba49de4"
@@ -41,6 +41,6 @@ instances:
     zone: ""
     campus: ""
     internal-address: "192.168.101.10:8846"
-  mtime: "2022-12-08 08:37:34"
-  revision: "da2840ca4f354897aa9c68afcf7e936b"
+  mtime: "2022-12-20 05:43:57"
+  revision: "34a92c60c80d485e8bc6d6eb39b49571"
   enableHealthCheck: true

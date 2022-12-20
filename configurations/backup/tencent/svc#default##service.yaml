@@ -9,7 +9,7 @@ service:
 services:
 - name: "dante-cloud-gateway"
   namespace: "default"
-- name: "dante-cloud-uaa"
-  namespace: "default"
 - name: "dante-cloud-upms"
+  namespace: "default"
+- name: "dante-cloud-uaa"
   namespace: "default"
