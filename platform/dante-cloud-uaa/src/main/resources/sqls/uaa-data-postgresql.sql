@@ -251,5 +251,8 @@ WHERE sa.url = '/element/tree'
    OR sa.url LIKE '%enum%'
    OR sa.url LIKE '%employee%'
    OR sa.url LIKE '%department%'
+   OR sa.url LIKE '%message%'
+   OR sa.url LIKE '%dialogue%'
+   OR sa.url LIKE '%notification%'
    OR sa.url LIKE '%organization%'
    OR sa.url LIKE '%ownership%';
