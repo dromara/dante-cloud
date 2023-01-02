@@ -1,0 +1,40 @@
+consumer:
+  #描述: 本地服务缓存相关配置
+  localCache:
+    #描述: 缓存插件名
+    type: inmemory
+    #描述: 是否启用服务数据缓存
+    serviceExpireEnable: true
+    #描述: 服务过期淘汰时间
+    serviceExpireTime: 24h
+    #描述: 服务定期同步刷新周期
+    serviceRefreshInterval: 2s
+    #描述: 拉取服务元信息列表定期同步刷新周期
+    serviceListRefreshInterval: 60s
+    #描述: 是否启用服务数据文件缓存
+    persistEnable: true
+    #描述: 服务缓存持久化目录，SDK在实例数据更新后，按照服务维度将数据持久化到磁盘
+    persistDir: @tencent.polaris.local.dir@
+    #描述: 缓存写盘失败的最大重试次数
+    persistMaxWriteRetry: 1
+    #描述: 缓存从磁盘读取失败的最大重试次数
+    persistMaxReadRetry: 0
+    #描述: 缓存读写磁盘的重试间隔
+    persistRetryInterval: 500ms
+config:
+  # 类型转化缓存的key数量
+  propertiesValueCacheSize: 100
+  # 类型转化缓存的过期时间，默认为1分钟
+  propertiesValueExpireTime: 60000
+  # 连接器配置，默认为北极星服务端
+  serverConnector:
+    # 本地缓存目录
+    persistDir: @tencent.polaris.local.dir@/config
+    #描述: 配置文件写盘失败的最大重试次数
+    persistMaxWriteRetry: 1
+    #描述: 配置文件从磁盘读取失败的最大重试次数
+    persistMaxReadRetry: 0
+    #描述: 缓存读写磁盘的重试间隔
+    persistRetryInterval: 500ms
+    #描述: polaris server获取配置文件失败是否允许回退到本地配置文件开关
+    fallbackToLocalCache: true

@@ -30,23 +30,20 @@ import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginConfigurer;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2UiProperties;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusAuthorizationManager;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusStrategyTokenConfigurer;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.engine.oauth2.server.authentication.processor.HerodotusClientDetailsService;
 import cn.herodotus.engine.oauth2.server.authentication.processor.HerodotusUserDetailsService;
 import cn.herodotus.engine.oauth2.server.authentication.service.OAuth2ApplicationService;
-import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,7 +54,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -76,14 +72,11 @@ public class DefaultSecurityConfiguration {
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
             UserDetailsService userDetailsService,
-            JwtDecoder jwtDecoder,
             CaptchaRendererFactory captchaRendererFactory,
-            EndpointProperties endpointProperties,
-            SecurityProperties securityProperties,
-            OAuth2ResourceServerProperties resourceServerProperties,
             OAuth2UiProperties uiProperties,
             SecurityMatcherConfigurer securityMatcherConfigurer,
-            HerodotusAuthorizationManager herodotusAuthorizationManager
+            HerodotusAuthorizationManager herodotusAuthorizationManager,
+            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
     ) throws Exception {
 
         log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
@@ -112,12 +105,7 @@ public class DefaultSecurityConfiguration {
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
-                        .jwtDecoder(jwtDecoder)
-                        .securityProperties(securityProperties)
-                        .endpointProperties(endpointProperties)
-                        .resourceServerProperties(resourceServerProperties)
-                        .build())
+                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer))
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
 
         return httpSecurity.build();

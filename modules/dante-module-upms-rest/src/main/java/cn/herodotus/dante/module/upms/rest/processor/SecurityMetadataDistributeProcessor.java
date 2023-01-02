@@ -30,7 +30,7 @@ import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.dante.module.upms.logic.entity.system.SysSecurityAttribute;
 import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
 import cn.herodotus.dante.module.upms.logic.service.system.SysSecurityAttributeService;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
+import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.event.security.remote.RemoteSecurityMetadataSyncEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusGrantedAuthority;
@@ -102,7 +102,7 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
     /**
      * 将SysAuthority表中存在，但是SysSecurityAttribute中不存在的数据同步至SysSecurityAttribute，保证两侧数据一致
      */
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     public void postMetadataProcess(List<RequestMapping> requestMappings) {
         List<SysAuthority> storeRequestMappings = sysAuthorityService.storeRequestMappings(requestMappings);
         if (CollectionUtils.isNotEmpty(storeRequestMappings)) {

@@ -2,7 +2,7 @@
 <!--
   ~ Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
   ~
-  ~ Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+  ~ Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
@@ -27,28 +27,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>platform</artifactId>
         <groupId>cn.herodotus.dante</groupId>
+        <artifactId>platform</artifactId>
         <version>3.0.1.0</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dante-cloud-upms</artifactId>
+    <artifactId>dante-cloud-message</artifactId>
     <version>3.0.1.0</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>service-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-upms-logic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-upms-rest</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>message-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
@@ -96,4 +93,5 @@
             </build>
         </profile>
     </profiles>
+
 </project>

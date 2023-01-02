@@ -34,14 +34,13 @@ import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2Authentic
 import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationSuccessHandler;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusStrategyTokenConfigurer;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2ComplianceProperties;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
-import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
-import cn.herodotus.engine.protect.web.crypto.processor.HttpCryptoProcessor;
-import cn.herodotus.engine.protect.web.tenant.MultiTenantFilter;
+import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
+import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -51,7 +50,6 @@ import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -118,15 +116,12 @@ public class AuthorizationServerConfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(
             HttpSecurity httpSecurity,
-            JwtDecoder jwtDecoder,
             ClientDetailsService clientDetailsService,
             UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder,
             HttpCryptoProcessor httpCryptoProcessor,
-            EndpointProperties endpointProperties,
-            SecurityProperties securityProperties,
             OAuth2ComplianceProperties complianceProperties,
-            OAuth2ResourceServerProperties resourceServerProperties
+            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
     ) throws Exception {
 
         log.debug("[Herodotus] |- Core [Authorization Server Security Filter Chain] Auto Configure.");
@@ -191,12 +186,7 @@ public class AuthorizationServerConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
-                        .jwtDecoder(jwtDecoder)
-                        .securityProperties(securityProperties)
-                        .endpointProperties(endpointProperties)
-                        .resourceServerProperties(resourceServerProperties)
-                        .build());
+                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer));
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。

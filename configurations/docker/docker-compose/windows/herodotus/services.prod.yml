@@ -67,6 +67,21 @@ services:
     depends_on:
       - monitor
 
+  msg:
+    image: ${MESSAGE_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${MESSAGE_SERVICE_NAME}
+        - SERVICE_PORT=${MESSAGE_SERVICE_PORT}
+    container_name: msg
+    ports:
+      - ${MESSAGE_SERVICE_PORT}:${MESSAGE_SERVICE_PORT}
+    depends_on:
+      - upms
+
   bpmn:
     image: ${BPMN_SERVICE_NAME}:${VERSION}
     build:

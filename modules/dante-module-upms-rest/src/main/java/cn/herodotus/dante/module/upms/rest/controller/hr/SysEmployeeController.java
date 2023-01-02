@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.module.upms.rest.controller.hr;
 
-import cn.herodotus.dante.module.upms.logic.dto.AllocatableDeploy;
-import cn.herodotus.dante.module.upms.logic.dto.AllocatableRemove;
+import cn.herodotus.dante.module.upms.rest.dto.AllocatableDeploy;
+import cn.herodotus.dante.module.upms.rest.dto.AllocatableRemove;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
 import cn.herodotus.dante.module.upms.logic.enums.Gender;
 import cn.herodotus.dante.module.upms.logic.enums.Identity;
@@ -177,7 +177,7 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
     public Result<String> saveAllocatable(@RequestBody AllocatableDeploy allocatableDeploy) {
         boolean isSuccess;
         if (ObjectUtils.isNotEmpty(allocatableDeploy)) {
-            isSuccess = sysEmployeeService.deployAllocatable(allocatableDeploy);
+            isSuccess = sysEmployeeService.deployAllocatable(allocatableDeploy.getEmployees(), allocatableDeploy.getOwnerships());
         } else {
             isSuccess = false;
         }
@@ -195,7 +195,7 @@ public class SysEmployeeController extends BaseWriteableRestController<SysEmploy
     public Result<String> deleteAllocatable(@RequestBody AllocatableRemove allocatableRemove) {
         boolean isSuccess;
         if (ObjectUtils.isNotEmpty(allocatableRemove)) {
-            isSuccess = sysEmployeeService.removeAllocatable(allocatableRemove);
+            isSuccess = sysEmployeeService.removeAllocatable(allocatableRemove.getOrganizationId(), allocatableRemove.getDepartmentId(), allocatableRemove.getEmployeeId());
         } else {
             isSuccess = false;
         }

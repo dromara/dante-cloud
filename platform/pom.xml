@@ -32,7 +32,7 @@
     <parent>
         <artifactId>dante-cloud</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.0.0</version>
+        <version>3.0.1.0</version>
     </parent>
 
     <artifactId>platform</artifactId>
@@ -45,6 +45,7 @@
         <module>dante-cloud-uaa</module>
         <module>dante-cloud-upms</module>
         <module>dante-cloud-monitor</module>
+        <module>dante-cloud-message</module>
     </modules>
 
 

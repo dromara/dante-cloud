@@ -1,5 +1,5 @@
 server:
-  port: 7071
+  port: 7072
 spring:
   application:
     name:  @artifactId@ #拿到POM文件中的值

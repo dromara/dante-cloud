@@ -32,12 +32,12 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.0.0.0</version>
+        <version>3.0.1.0</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>dante-cloud</artifactId>
-    <version>3.0.0.0</version>
+    <version>3.0.1.0</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud</name>
@@ -62,12 +62,6 @@
         <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
         <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
         <docker.resource.name>${project.build.finalName}.${project.packaging}</docker.resource.name>
-        <docker.namespace>dante.cloud</docker.namespace>
-        <docker.host>http://192.168.101.10:2375</docker.host>
-        <docker.registry>192.168.101.10</docker.registry>
-        <docker.namespace>dante.cloud</docker.namespace>
-        <docker.username>username</docker.username>
-        <docker.password>password</docker.password>
     </properties>
 
     <!-- 所有的子项目默认依赖 -->
@@ -107,7 +101,7 @@
                 <profile>development</profile>
                 <database>postgresql</database>
                 <!--基础设施：tencent、alibaba、spring-->
-                <facility>tencent</facility>
+                <facility>alibaba</facility>
                 <!--代码构建控制-->
                 <!--跳过构建源代码包-->
                 <skip.build.source.package>false</skip.build.source.package>

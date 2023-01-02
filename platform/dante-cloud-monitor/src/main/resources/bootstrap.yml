@@ -32,9 +32,6 @@ spring:
     httpclientfactories:
       ok:
         enabled: false
-    zookeeper:
-      discovery:
-        instance-host: ${spring.cloud.client.ip-address}
 
 ---
 # spring cloud tencent 基础设施配置

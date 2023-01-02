@@ -30,7 +30,7 @@ import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
 import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
-import cn.herodotus.engine.protect.core.annotation.AccessLimited;
+import cn.herodotus.engine.rest.core.annotation.AccessLimited;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import cn.herodotus.engine.rest.core.definition.dto.Sorter;
 import cn.hutool.core.lang.tree.Tree;

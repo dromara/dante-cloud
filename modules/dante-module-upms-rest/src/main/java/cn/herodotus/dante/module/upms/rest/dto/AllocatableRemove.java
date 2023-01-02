@@ -23,31 +23,21 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.upms.logic.dto;
+package cn.herodotus.dante.module.upms.rest.dto;
 
-import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
-import cn.herodotus.dante.module.upms.logic.entity.hr.SysEmployee;
-import cn.herodotus.dante.module.upms.logic.entity.hr.SysOwnership;
 import cn.herodotus.engine.assistant.core.definition.domain.AbstractDto;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
- * <p>Description: 设置人员归属参数BO对象 </p>
+ * <p>Description: 删除人员归属参数BO对象 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/9/24 17:31
+ * @date : 2021/9/24 21:48
  */
-@Schema(description = "增加人员归属参数BO对象")
-public class AllocatableDeploy extends AbstractDto {
+@Schema(description = "删除人员归属参数BO对象")
+public class AllocatableRemove extends AbstractDto {
 
     @NotNull(message = "单位ID不能为空")
     @Schema(description = "单位ID")
@@ -57,8 +47,9 @@ public class AllocatableDeploy extends AbstractDto {
     @Schema(description = "部门ID")
     private String departmentId;
 
-    @Schema(description = "配置的人员列表")
-    private List<SysEmployee> employees;
+    @NotNull(message = "人员ID不能为空")
+    @Schema(description = "人员ID")
+    private String employeeId;
 
     public String getOrganizationId() {
         return organizationId;
@@ -76,42 +67,12 @@ public class AllocatableDeploy extends AbstractDto {
         this.departmentId = departmentId;
     }
 
-    public List<SysEmployee> getEmployees() {
-        return employees;
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployees(List<SysEmployee> employees) {
-        this.employees = employees;
-    }
-
-    public List<SysEmployee> getAllocatable() {
-        if (CollectionUtils.isNotEmpty(this.employees)) {
-            return employees.stream().peek(employee -> {
-                SysDepartment sysDepartment = new SysDepartment();
-                sysDepartment.setDepartmentId(this.departmentId);
-                Set<SysDepartment> sysDepartments = employee.getDepartments();
-                if (CollectionUtils.isEmpty(sysDepartments)) {
-                    sysDepartments = new HashSet<>();
-                }
-                sysDepartments.add(sysDepartment);
-                employee.setDepartments(sysDepartments);
-            }).collect(Collectors.toList());
-        }
-
-        return new ArrayList<>();
-    }
-
-    public List<SysOwnership> getOwnerships() {
-        if (CollectionUtils.isNotEmpty(this.employees) ) {
-            return this.employees.stream().map(employee -> {
-                SysOwnership sysOwnership = new SysOwnership();
-                sysOwnership.setEmployeeId(employee.getEmployeeId());
-                sysOwnership.setDepartmentId(this.departmentId);
-                sysOwnership.setOrganizationId(this.organizationId);
-                return sysOwnership;
-            }).collect(Collectors.toList());
-        }
-        return new ArrayList<>();
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     @Override
@@ -119,6 +80,7 @@ public class AllocatableDeploy extends AbstractDto {
         return MoreObjects.toStringHelper(this)
                 .add("organizationId", organizationId)
                 .add("departmentId", departmentId)
+                .add("employeeId", employeeId)
                 .toString();
     }
 }

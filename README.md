@@ -6,14 +6,14 @@
 
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.0.0-blue" alt="Spring Authorization Server 1.0.0"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-3.0.0-blue" alt="Spring Boot 3.0.0"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-3.0.1-blue" alt="Spring Boot 3.0.1"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2022.0.0-blue" alt="Spring Cloud 2022.0.0"></a>
-    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.4.0-blue" alt="Spring Cloud Alibaba 2021.0.4.0"></a>
+    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2022.0.0.0-RC1-blue" alt="Spring Cloud Alibaba 2022.0.0.0-RC1"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.8.2--2022.0.0-blue" alt="Spring Cloud Tencent 1.8.2-2022.0.0"></a>
-    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.0-brightgreen" alt="Nacos 2.2.0"></a>
+    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.1-RC-brightgreen" alt="Nacos 2.2.1-RC"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.0.0-red" alt="Version 3.0.0.0"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.1.0-red" alt="Version 3.0.1.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -36,7 +36,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Authorization Server 1.0.0、Spring Boot 3.0.0、Spring Cloud 2022.0.0、Spring Cloud Tencent 1.8.2-2022.0.0、Spring Cloud Alibaba 2021.0.4.0、Nacos 2.2.0 等主流技术栈开发的多租户系统，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Authorization Server 1.0.0、Spring Boot 3.0.1、Spring Cloud 2022.0.0、Spring Cloud Tencent 1.8.2-2022.0.0、Spring Cloud Alibaba 2022.0.0.0-RC1、Nacos 2.2.1-RC 等主流技术栈开发的多租户系统，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
 ## 平台定位
 
@@ -68,7 +68,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 - 扩展 `Spring Authorization Server` 默认的 `Client Credentials` 模式，实现真正的使用 Scope 权限对接口进行验证。 增加客户端 Scope 的权限配置功能，并与已有的用户权限体系解耦
 - 支持 `Spring Authorization Server` `Authorization Code PKCE` 认证模式
 - 在 `Spring Authorization Server` 的标准的 `JWT Token` 加密校验方式外，支持基于自定义证书的 `JWT Token` 加密校验方式，可通过配置动态修改。
-- 支持 `Opaque Token` (不透明令牌) 格式及校验方式，将低 `JWT Token` 被捕获解析的风险。可通过修改配置参数，设置默认 Token 格式是采用 `Opaque Token` 格式还是 `JWT Token` 格式。
+- 支持 `Opaque Token` (不透明令牌) 格式及校验方式，降低 `JWT Token` 被捕获解析的风险。可通过修改配置参数，设置默认 Token 格式是采用 `Opaque Token` 格式还是 `JWT Token` 格式。
 - 全面支持 `OpenID Connect` (OIDC) 协议，系统使用时可根据使用需求，通过前端开关配置，快速切换 OIDC 模式和传统 OAuth2 模式
 - 深度扩展 `Authorization Code`、`Resource Ownership Password`、`Social Credentials` 几种模式，全面融合 `IdToken`、`Opaque Token`、`JWT Token` 与现有权限体系，同时提供 `IdToken` 和 自定义 Token 扩展两种无须二次请求的用户信息传递方式，减少用户信息的频繁请求。
 - 自定义 `Spring Authorization Server` 授权码模式登录认证页面和授权确认页面，授权码模式登录采用数据加密传输。支持多种验证码类型，暂不支持行为验证码。
@@ -131,13 +131,13 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 | 组件                          | 版本             |
 |-----------------------------|----------------|
-| Spring Boot                 | 3.0.0          |
+| Spring Boot                 | 3.0.1          |
 | Spring Cloud                | 2022.0.0       |
-| Spring Cloud Alibaba        | 2021.0.4.0     |
+| Spring Cloud Alibaba        | 2022.0.0.0-RC1     |
 | Spring Cloud Tencent        | 1.8.2-2022.0.0 |
 | Spring Authorization Server | 1.0.0          |
-| Spring Boot Admin           | 3.0.0-M6       |
-| Nacos                       | 2.2.0          |
+| Spring Boot Admin           | 3.0.0-M7       |
+| Nacos                       | 2.2.1-RC          |
 | Sentinel                    | 1.8.5          |
 | Seata                       | 1.5.2          |
 
@@ -216,14 +216,11 @@ dante-cloud
 ## [7]、用户权益
 
 - 允许免费用于学习、毕设、公司项目、私活等。
-- 遵循 Apache-2.0 开源协议
+- 遵循 Apache-2.0 开源协议 (保留代码中作者信息及版权说明即可)
 
 ## [8]、交流反馈
 
-- 欢迎提交[ISSUS](https://gitee.com/dromara/dante-cloud/issues) ，请写清楚问题的具体原因，重现步骤和环境(上下文)
-- 博客：https://blog.csdn.net/Pointer_v
-- 邮箱：herodotus@aliyun.com
-- QQ 群：922565573
+- 详见[【在线文档】](https://www.herodotus.cn) 交流反馈章节。
 
 ## [9]、界面预览
 
@@ -254,13 +251,30 @@ dante-cloud
     </tr>
 </table>
 
-## [10]、鸣谢
+## [10]、谁在使用 Dante Cloud
+
+| 序号 | 名称     | 官网                    |
+| ---- | -------- | ----------------------- |
+| 1    | 轻喜到家 | <https://qxdaojia.com/> |
+
+## [11]、鸣谢
+
+### 赞助人列表
+
+| 赞助人     | 赞助时间   |
+| ---------- | ---------- |
+| 偷土豆的人 | 2021-11-24 |
+| lorron     | 2022-04-04 |
+| 在云端     | 2022-12-26 |
+| 西晽       | 2022-12-27 |
+
+### 开源项目
 
 - [Soybean Admin](https://gitee.com/honghuangdc/soybean-admin)
 - [Vue Next Admin](https://gitee.com/lyt-top/vue-next-admin)
 - [Vue VBen Admin](https://gitee.com/annsion/vue-vben-admin)
 - [Quasar Admin Template](https://gitee.com/jinjinge/quasar-admin-template)
 
-- 感谢 JetBrains 提供的免费开源 License：
+### 感谢 JetBrains 提供的免费开源 License
 
 ![https://jb.gg/OpenSourceSupport](./readme/jb_beam.svg)

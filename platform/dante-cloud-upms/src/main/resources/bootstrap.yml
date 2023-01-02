@@ -42,17 +42,14 @@ spring:
             group: common
           - data-id: dante-cloud-multi-tenant.yaml
             group: common
-    #      discovery:
-    #        namespace: @alibaba.config.namespace@
-    #        server-addr: @alibaba.discovery.server-addr@
+      discovery:
+        namespace: @alibaba.config.namespace@
+        server-addr: @alibaba.discovery.server-addr@
     sentinel:
       transport:
         port: 8719
         dashboard: @alibaba.sentinel.server-addr@
       eager: true #服务注启动，直接注册到dashboard
-    zookeeper:
-      discovery:
-        instance-host: ${spring.cloud.client.ip-address}
 #      datasource:
 #        flow:
 #          nacos:
