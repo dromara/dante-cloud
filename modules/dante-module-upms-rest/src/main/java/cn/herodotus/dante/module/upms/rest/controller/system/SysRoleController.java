@@ -29,7 +29,7 @@ import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
 import cn.herodotus.dante.module.upms.logic.service.system.SysRoleService;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
-import cn.herodotus.engine.protect.core.annotation.AccessLimited;
+import cn.herodotus.engine.rest.core.annotation.AccessLimited;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
