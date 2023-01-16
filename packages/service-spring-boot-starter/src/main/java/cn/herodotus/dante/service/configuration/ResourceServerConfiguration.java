@@ -23,22 +23,18 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.service.autoconfigure;
+package cn.herodotus.dante.service.configuration;
 
-import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
-import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
-import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
-import cn.herodotus.engine.oauth2.metadata.processor.ExpressionSecurityMetadataParser;
-import cn.herodotus.engine.oauth2.server.resource.customizer.HerodotusStrategyTokenConfigurer;
-import cn.herodotus.engine.web.core.properties.EndpointProperties;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceParser;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
@@ -50,40 +46,33 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
  */
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
-public class ResourceServerAutoConfiguration {
+public class ResourceServerConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
-            JwtDecoder jwtDecoder,
-            HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler,
-            ExpressionSecurityMetadataParser securityMetadataExpressionParser,
-            HerodotusSecurityMetadataSource herodotusSecurityMetadataSource,
-            EndpointProperties endpointProperties,
-            SecurityProperties securityProperties,
-            OAuth2ResourceServerProperties resourceServerProperties
+            SecurityMatcherConfigurer securityMatcherConfigurer,
+            SecurityMetadataSourceParser securityMetadataExpressionParser,
+            SecurityAuthorizationManager securityAuthorizationManager,
+            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
     ) throws Exception {
 
         httpSecurity.csrf().disable().cors();
 
         httpSecurity.authorizeRequests(authorizeRequests ->
                 authorizeRequests
-                        .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                        .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                        .antMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
+                        .antMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                         .anyRequest().authenticated()
                         .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                             @Override
                             public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
                                 securityMetadataExpressionParser.setFilterInvocationSecurityMetadataSource(fsi.getSecurityMetadataSource());
-                                fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
+                                fsi.setSecurityMetadataSource(securityAuthorizationManager);
                                 return fsi;
                             }
-                        })).oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
-                .jwtDecoder(jwtDecoder)
-                .securityProperties(securityProperties)
-                .endpointProperties(endpointProperties)
-                .resourceServerProperties(resourceServerProperties)
-                .build());
+                        }))
+                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer));
 
         return httpSecurity.build();
     }

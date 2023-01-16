@@ -25,22 +25,22 @@
 
 package cn.herodotus.dante.authentication.configuration;
 
-import cn.herodotus.dante.module.security.processor.HerodotusSecurityMetadataSource;
 import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
-import cn.herodotus.engine.oauth2.authorization.authorization.OAuth2FormLoginConfigurer;
-import cn.herodotus.engine.oauth2.authorization.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginConfigurer;
+import cn.herodotus.engine.oauth2.authentication.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
+import cn.herodotus.engine.oauth2.authentication.server.processor.HerodotusClientDetailsService;
+import cn.herodotus.engine.oauth2.authentication.server.processor.HerodotusUserDetailsService;
+import cn.herodotus.engine.oauth2.authentication.server.service.OAuth2ApplicationService;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceParser;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.oauth2.core.processor.HerodotusSecurityConfigureHandler;
 import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
-import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.engine.oauth2.metadata.processor.ExpressionSecurityMetadataParser;
-import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusClientDetailsService;
-import cn.herodotus.engine.oauth2.server.authorization.processor.HerodotusUserDetailsService;
-import cn.herodotus.engine.oauth2.server.authorization.service.OAuth2ApplicationService;
-import cn.herodotus.engine.oauth2.server.resource.customizer.HerodotusStrategyTokenConfigurer;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -77,12 +77,14 @@ public class DefaultSecurityConfiguration {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
-            JwtDecoder jwtDecoder,
-            HerodotusSecurityConfigureHandler herodotusSecurityConfigureHandler,
-            ExpressionSecurityMetadataParser securityMetadataExpressionParser,
-            HerodotusSecurityMetadataSource herodotusSecurityMetadataSource,
-            UserDetailsService userDetailsService,
             CaptchaRendererFactory captchaRendererFactory,
+            JwtDecoder jwtDecoder,
+            SecurityMatcherConfigurer securityMatcherConfigurer,
+            SecurityMetadataSourceParser securityMetadataSourceParser,
+            SecurityAuthorizationManager securityAuthorizationManager,
+            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+            UserDetailsService userDetailsService,
+
             EndpointProperties endpointProperties,
             SecurityProperties securityProperties,
             OAuth2UiProperties uiProperties,
@@ -96,15 +98,15 @@ public class DefaultSecurityConfiguration {
         // @formatter:off
         httpSecurity.authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .antMatchers(herodotusSecurityConfigureHandler.getPermitAllArray()).permitAll()
-                                .antMatchers(herodotusSecurityConfigureHandler.getStaticResourceArray()).permitAll()
+                                .antMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
+                                .antMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                                 .anyRequest().authenticated()
                                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                                     @Override
                                     public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
-                                        securityMetadataExpressionParser.setFilterInvocationSecurityMetadataSource(fsi.getSecurityMetadataSource());
-                                        fsi.setSecurityMetadataSource(herodotusSecurityMetadataSource);
+                                        securityMetadataSourceParser.setFilterInvocationSecurityMetadataSource(fsi.getSecurityMetadataSource());
+                                        fsi.setSecurityMetadataSource(securityAuthorizationManager);
                                         return fsi;
                                     }
                                 }))
@@ -124,12 +126,7 @@ public class DefaultSecurityConfiguration {
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
-                        .jwtDecoder(jwtDecoder)
-                        .securityProperties(securityProperties)
-                        .endpointProperties(endpointProperties)
-                        .resourceServerProperties(resourceServerProperties)
-                        .build())
+                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer))
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
         // @formatter:on
         return httpSecurity.build();

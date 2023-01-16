@@ -1,7 +1,8 @@
 cn.herodotus.dante.authentication.autoconfigure.AutoConfiguration
-cn.herodotus.dante.module.security.autoconfigure.SecurityModuleAutoConfiguration
+cn.herodotus.engine.oauth2.authorization.configuration.OAuth2AuthorizationConfiguration
+cn.herodotus.dante.module.security.configuration.SecurityModuleAutoConfiguration
 cn.herodotus.dante.module.strategy.autoconfigure.StrategyModuleAutoConfiguration
-cn.herodotus.engine.oauth2.server.authorization.configuration.OAuth2AuthorizationServerConfiguration
+cn.herodotus.engine.oauth2.authentication.server.configuration.OAuth2AuthenticationServerConfiguration
 cn.herodotus.dante.authentication.configuration.DefaultSecurityConfiguration
 cn.herodotus.dante.authentication.configuration.AuthorizationServerConfiguration
 cn.herodotus.engine.oauth2.compliance.configuration.OAuth2ComplianceConfiguration

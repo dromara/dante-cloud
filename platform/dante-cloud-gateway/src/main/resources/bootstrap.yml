@@ -50,6 +50,10 @@ spring:
       transport:
         port: 8719
         dashboard: @sentinel.server-addr@
+    inetutils:
+      #      ignored-interfaces:
+      #        - eth0
+      preferred-networks: 192.*
 
 springdoc:
   webjars:

@@ -28,7 +28,7 @@ package cn.herodotus.dante.module.upms.rest.controller.hr;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOrganization;
 import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
 import cn.herodotus.dante.module.upms.logic.service.hr.SysOrganizationService;
-import cn.herodotus.engine.assistant.core.constants.BaseConstants;
+import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.controller.BaseWriteableRestController;

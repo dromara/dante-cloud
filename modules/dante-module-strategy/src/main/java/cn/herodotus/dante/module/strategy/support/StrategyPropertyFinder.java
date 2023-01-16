@@ -27,8 +27,8 @@ package cn.herodotus.dante.module.strategy.support;
 
 
 import cn.herodotus.dante.module.strategy.constants.StrategyModuleConstants;
-import cn.herodotus.engine.assistant.core.support.PropertyFinder;
-import cn.herodotus.engine.assistant.core.support.PropertyResolver;
+import cn.herodotus.engine.assistant.core.context.PropertyFinder;
+import cn.herodotus.engine.assistant.core.context.PropertyResolver;
 import org.springframework.core.env.Environment;
 
 /**
