@@ -62,12 +62,14 @@ public class UpmsHelper {
             }
         }
 
+        String employeeId = ObjectUtils.isNotEmpty(sysUser.getEmployee()) ? sysUser.getEmployee().getEmployeeId() : null;
+
         return new HerodotusUser(sysUser.getUserId(), sysUser.getUserName(), sysUser.getPassword(),
                 isEnabled(sysUser),
                 isAccountNonExpired(sysUser),
                 isCredentialsNonExpired(sysUser),
                 isNonLocked(sysUser),
-                authorities, roles);
+                authorities, roles, employeeId, sysUser.getAvatar());
     }
 
     private static boolean isEnabled(SysUser sysUser) {

@@ -40,8 +40,8 @@ import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
 import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.oauth2.server.resource.customizer.HerodotusStrategyTokenConfigurer;
-import cn.herodotus.engine.protect.web.crypto.processor.HttpCryptoProcessor;
-import cn.herodotus.engine.protect.web.tenant.interceptor.MultiTenancyFilter;
+import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
+import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -190,7 +190,7 @@ public class AuthorizationServerConfiguration {
                 .authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .addFilterBefore(new MultiTenancyFilter(), FilterSecurityInterceptor.class)
+                .addFilterBefore(new MultiTenantFilter(), FilterSecurityInterceptor.class)
                 .oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
                         .jwtDecoder(jwtDecoder)
                         .securityProperties(securityProperties)
