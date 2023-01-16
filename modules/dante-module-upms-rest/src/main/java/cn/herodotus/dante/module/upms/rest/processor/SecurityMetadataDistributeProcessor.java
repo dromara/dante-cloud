@@ -32,9 +32,9 @@ import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
 import cn.herodotus.dante.module.upms.logic.service.system.SysSecurityAttributeService;
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
 import cn.herodotus.engine.event.security.remote.RemoteSecurityMetadataSyncEvent;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusGrantedAuthority;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
-import cn.herodotus.engine.oauth2.metadata.processor.SecurityMetadataAnalysisProcessor;
 import cn.herodotus.engine.web.core.context.ServiceContext;
 import cn.herodotus.engine.web.core.definition.ApplicationStrategyEvent;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
@@ -62,18 +62,18 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
 
     private final SysSecurityAttributeService sysSecurityAttributeService;
     private final SysAuthorityService sysAuthorityService;
-    private final SecurityMetadataAnalysisProcessor securityMetadataAnalysisProcessor;
+    private final SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer;
 
     @Autowired
-    public SecurityMetadataDistributeProcessor(SysSecurityAttributeService sysSecurityAttributeService, SysAuthorityService sysAuthorityService, SecurityMetadataAnalysisProcessor securityMetadataAnalysisProcessor) {
+    public SecurityMetadataDistributeProcessor(SysSecurityAttributeService sysSecurityAttributeService, SysAuthorityService sysAuthorityService, SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
         this.sysSecurityAttributeService = sysSecurityAttributeService;
         this.sysAuthorityService = sysAuthorityService;
-        this.securityMetadataAnalysisProcessor = securityMetadataAnalysisProcessor;
+        this.securityMetadataSourceAnalyzer = securityMetadataSourceAnalyzer;
     }
 
     @Override
     public void postLocalProcess(List<SecurityAttribute> data) {
-        securityMetadataAnalysisProcessor.processSecurityMetadata(data);
+        securityMetadataSourceAnalyzer.processSecurityMetadata(data);
     }
 
     @Override

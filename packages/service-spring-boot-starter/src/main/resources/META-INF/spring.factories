@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  cn.herodotus.dante.service.autoconfigure.AutoConfiguration,\
-  cn.herodotus.dante.module.security.autoconfigure.SecurityModuleAutoConfiguration,\
-  cn.herodotus.dante.service.autoconfigure.ResourceServerAutoConfiguration

@@ -26,20 +26,20 @@
 package cn.herodotus.dante.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
-import cn.herodotus.engine.oauth2.authorization.authentication.*;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusJwtTokenCustomizer;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusOpaqueTokenCustomizer;
-import cn.herodotus.engine.oauth2.authorization.response.HerodotusAuthenticationSuccessHandler;
-import cn.herodotus.engine.oauth2.authorization.response.HerodotusOidcUserInfoMapper;
-import cn.herodotus.engine.oauth2.authorization.utils.OAuth2ConfigurerUtils;
+import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusJwtTokenCustomizer;
+import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusOpaqueTokenCustomizer;
+import cn.herodotus.engine.oauth2.authentication.oidc.HerodotusOidcUserInfoMapper;
+import cn.herodotus.engine.oauth2.authentication.provider.*;
+import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
+import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationFailureHandler;
+import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationSuccessHandler;
+import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
+import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2ComplianceProperties;
 import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
 import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
-import cn.herodotus.engine.oauth2.core.response.DefaultOAuth2AuthenticationEventPublisher;
-import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationFailureHandler;
-import cn.herodotus.engine.oauth2.server.resource.customizer.HerodotusStrategyTokenConfigurer;
 import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
 import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
 import cn.herodotus.engine.web.core.properties.EndpointProperties;
@@ -118,13 +118,13 @@ public class AuthorizationServerConfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(
             HttpSecurity httpSecurity,
-            JwtDecoder jwtDecoder,
-            ClientDetailsService clientDetailsService,
-            UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder,
+            UserDetailsService userDetailsService,
+            ClientDetailsService clientDetailsService,
             HttpCryptoProcessor httpCryptoProcessor,
             EndpointProperties endpointProperties,
             SecurityProperties securityProperties,
+            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
             OAuth2ComplianceProperties complianceProperties,
             OAuth2ResourceServerProperties resourceServerProperties
     ) throws Exception {
@@ -191,12 +191,7 @@ public class AuthorizationServerConfiguration {
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
                 .addFilterBefore(new MultiTenantFilter(), FilterSecurityInterceptor.class)
-                .oauth2ResourceServer(configurer -> HerodotusStrategyTokenConfigurer.from(configurer)
-                        .jwtDecoder(jwtDecoder)
-                        .securityProperties(securityProperties)
-                        .endpointProperties(endpointProperties)
-                        .resourceServerProperties(resourceServerProperties)
-                        .build());
+                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer));
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。

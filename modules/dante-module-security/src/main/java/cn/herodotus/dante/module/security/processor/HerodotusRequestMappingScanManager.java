@@ -13,7 +13,7 @@ package cn.herodotus.dante.module.security.processor;
 import cn.herodotus.dante.module.common.ServiceNameConstants;
 import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
 import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
-import cn.herodotus.engine.oauth2.metadata.processor.SecurityMetadataAnalysisProcessor;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.web.core.context.ServiceContext;
 import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
 import cn.herodotus.engine.web.core.domain.RequestMapping;
@@ -32,10 +32,10 @@ import java.util.List;
 @Component
 public class HerodotusRequestMappingScanManager implements RequestMappingScanManager{
 
-    private final SecurityMetadataAnalysisProcessor securityMetadataAnalysisProcessor;
+    private final SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer;
 
-    public HerodotusRequestMappingScanManager(SecurityMetadataAnalysisProcessor securityMetadataAnalysisProcessor) {
-        this.securityMetadataAnalysisProcessor = securityMetadataAnalysisProcessor;
+    public HerodotusRequestMappingScanManager(SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
+        this.securityMetadataSourceAnalyzer = securityMetadataSourceAnalyzer;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class HerodotusRequestMappingScanManager implements RequestMappingScanMan
 
     @Override
     public void postLocalStorage(List<RequestMapping> requestMappings) {
-        securityMetadataAnalysisProcessor.processSecurityRequestMapping();
+        securityMetadataSourceAnalyzer.processSecurityRequestMapping();
     }
 
     @Override

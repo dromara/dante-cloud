@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.upms.service;
 
-import cn.herodotus.engine.assistant.core.definition.http.AbstractRest;
+import cn.herodotus.engine.assistant.core.definition.AbstractRest;
 import cn.hutool.core.codec.Base64;
 import cn.zhxu.data.TypeRef;
 import cn.zhxu.okhttps.MsgConvertor;

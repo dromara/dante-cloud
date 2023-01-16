@@ -27,7 +27,7 @@ package cn.herodotus.dante.module.upms.rest.controller.system;
 
 import cn.herodotus.dante.module.upms.logic.entity.system.SysElement;
 import cn.herodotus.dante.module.upms.logic.service.system.SysElementService;
-import cn.herodotus.engine.assistant.core.constants.BaseConstants;
+import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.engine.rest.core.annotation.AccessLimited;

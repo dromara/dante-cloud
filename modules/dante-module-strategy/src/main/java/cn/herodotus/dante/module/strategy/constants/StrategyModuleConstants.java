@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.module.strategy.constants;
 
-import cn.herodotus.engine.assistant.core.constants.BaseConstants;
+import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 
 /**
  * <p>Description: 策略模块常量 </p>
