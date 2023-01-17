@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.upms.logic.repository.hr;
 
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOwnership;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
+import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -47,7 +47,7 @@ public interface SysOwnershipRepository extends BaseRepository<SysOwnership, Str
      *
      * @param organizationId 单位ID
      */
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     @Modifying
     @Query(value = "delete from SysOwnership o where o.organizationId = :organizationId")
     void deleteByOrganizationId(String organizationId);
@@ -59,7 +59,7 @@ public interface SysOwnershipRepository extends BaseRepository<SysOwnership, Str
      *
      * @param departmentId 部门ID
      */
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     @Modifying
     @Query(value = "delete from SysOwnership o where o.departmentId = :departmentId")
     void deleteByDepartmentId(String departmentId);
@@ -71,7 +71,7 @@ public interface SysOwnershipRepository extends BaseRepository<SysOwnership, Str
      *
      * @param employeeId 人员ID
      */
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     @Modifying
     @Query(value = "delete from SysOwnership o where o.employeeId = :employeeId")
     void deleteByEmployeeId(String employeeId);
@@ -82,7 +82,7 @@ public interface SysOwnershipRepository extends BaseRepository<SysOwnership, Str
      * @param departmentId 部门ID
      * @param employeeId 人员ID
      */
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     @Modifying
     @Query(value = "delete from SysOwnership o where o.organizationId = :organizationId and o.departmentId = :departmentId and o.employeeId = :employeeId")
     void deleteByOrganizationIdAndDepartmentIdAndEmployeeId(String organizationId, String departmentId, String employeeId);

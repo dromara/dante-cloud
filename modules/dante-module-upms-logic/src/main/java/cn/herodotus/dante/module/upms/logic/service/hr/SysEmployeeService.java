@@ -35,7 +35,7 @@ import cn.herodotus.dante.module.upms.logic.enums.Gender;
 import cn.herodotus.dante.module.upms.logic.enums.Identity;
 import cn.herodotus.dante.module.upms.logic.repository.hr.SysEmployeeRepository;
 import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
+import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -245,7 +245,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         return this.findByPage(specification, pageable);
     }
 
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     public SysEmployee authorize(String employeeId) {
         SysEmployee sysEmployee = this.findById(employeeId);
         SysUser sysUser = sysUserService.register(sysEmployee);
@@ -261,7 +261,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         return null;
     }
 
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     @Override
     public void deleteById(String employeeId) {
         sysOwnershipService.deleteByEmployeeId(employeeId);
@@ -269,7 +269,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         log.debug("[Herodotus] |- SysEmployee Service deleteById.");
     }
 
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     public boolean deployAllocatable(AllocatableDeploy allocatableDeploy) {
         List<SysEmployee> sysEmployees = allocatableDeploy.getAllocatable();
         List<SysOwnership> sysOwnerships = allocatableDeploy.getOwnerships();
@@ -285,7 +285,7 @@ public class SysEmployeeService extends BaseLayeredService<SysEmployee, String> 
         return false;
     }
 
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     public boolean removeAllocatable(AllocatableRemove allocatableRemove) {
         SysEmployee sysEmployee = super.findById(allocatableRemove.getEmployeeId());
         if (ObjectUtils.isNotEmpty(sysEmployee)) {

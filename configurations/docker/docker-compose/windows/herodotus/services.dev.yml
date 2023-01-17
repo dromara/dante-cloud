@@ -59,6 +59,19 @@ services:
       - upms
       - monitor
 
+  message:
+    image: ${MESSAGE_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: development/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${MESSAGE_SERVICE_NAME}
+        - SERVICE_PORT=${MESSAGE_SERVICE_PORT}
+    container_name: message
+    ports:
+      - ${MESSAGE_SERVICE_PORT}:${MESSAGE_SERVICE_PORT}
+
   bpmn:
     image: ${BPMN_SERVICE_NAME}:${VERSION}
     build:
