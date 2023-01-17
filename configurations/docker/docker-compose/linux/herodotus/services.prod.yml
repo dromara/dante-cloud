@@ -66,6 +66,21 @@ services:
       - ${UAA_SERVICE_PORT}:${UAA_SERVICE_PORT}
     depends_on:
       - monitor
+  message:
+    image: ${MESSAGE_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${MESSAGE_SERVICE_NAME}
+        - SERVICE_PORT=${MESSAGE_SERVICE_PORT}
+    container_name: message
+    environment:
+      SW_AGENT_SERVICE_NAME: ${MESSAGE_SERVICE_NAME}
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - ${MESSAGE_SERVICE_PORT}:${MESSAGE_SERVICE_PORT}
 
   bpmn:
     image: ${BPMN_SERVICE_NAME}:${VERSION}

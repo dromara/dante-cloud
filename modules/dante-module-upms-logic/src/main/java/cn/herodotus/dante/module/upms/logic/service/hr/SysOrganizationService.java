@@ -29,7 +29,7 @@ import cn.herodotus.dante.module.upms.logic.entity.hr.SysDepartment;
 import cn.herodotus.dante.module.upms.logic.entity.hr.SysOrganization;
 import cn.herodotus.dante.module.upms.logic.enums.OrganizationCategory;
 import cn.herodotus.dante.module.upms.logic.repository.hr.SysOrganizationRepository;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionRollbackException;
+import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.engine.data.core.service.BaseLayeredService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -115,7 +115,7 @@ public class SysOrganizationService extends BaseLayeredService<SysOrganization, 
      *
      * @param organizationId 单位ID
      */
-    @Transactional(rollbackFor = TransactionRollbackException.class)
+    @Transactional(rollbackFor = TransactionalRollbackException.class)
     @Override
     public void deleteById(String organizationId) {
         sysOwnershipService.deleteByOrganizationId(organizationId);
