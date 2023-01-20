@@ -6,13 +6,13 @@
 
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.4.0-blue" alt="Spring Authorization Server 0.4.0"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.7.7-blue" alt="Spring Boot 2.7.7"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.7.8-blue" alt="Spring Boot 2.7.8"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.5-blue" alt="Spring Cloud 2021.0.5"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.4.0-blue" alt="Spring Cloud Alibaba 2021.0.4.0"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.0-brightgreen" alt="Nacos 2.2.0"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.7.5-red" alt="Version 2.7.7.5"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.8.0-red" alt="Version 2.7.8.0"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -41,7 +41,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台。基于 Spring Boot 2.7.7、Spring Cloud 2021.0.5、Spring Cloud Alibaba 2021.0.4.0、Spring Authorization Server 0.4.0、Nacos 2.2.0 等最新版本开发，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流、多租户等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台。基于 Spring Boot 2.7.8、Spring Cloud 2021.0.5、Spring Cloud Alibaba 2021.0.4.0、Spring Authorization Server 0.4.0、Nacos 2.2.0 等最新版本开发，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流、多租户等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## 平台定位
 
@@ -155,7 +155,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 | 组件                        | 版本         |
 | --------------------------- |------------|
-| Spring Boot                 | 2.7.7      |
+| Spring Boot                 | 2.7.8      |
 | Spring Cloud                | 2021.0.5   |
 | Spring Cloud Alibaba        | 2021.0.4.0 |
 | Spring Authorization Server | 0.4.0      |
