@@ -233,7 +233,7 @@ INSERT INTO "sys_element_role" ("element_id", "role_id") VALUES ('b3e3cc74-a8cc-
 -- ----------------------------
 -- Import all authority which not exist in sys_authority for admin role
 -- ----------------------------
-INSERT INTO sys_role_authority (role_id, authority_id)
+INSERT INTO "sys_role_authority" (role_id, authority_id)
 SELECT '1' role_id,
        sa.authority_id
 FROM "sys_authority" sa
@@ -242,7 +242,7 @@ WHERE NOT EXISTS(SELECT sa.authority_id FROM sys_role_authority sra WHERE sra.au
 -- ----------------------------
 -- Import all authority  for test role
 -- ----------------------------
-INSERT INTO sys_role_authority (role_id, authority_id)
+INSERT INTO "sys_role_authority" (role_id, authority_id)
 SELECT '7e43d37d-d045-445f-a1de-cb1259f7709c' role_id,
        sa.authority_id
 FROM "sys_authority" sa

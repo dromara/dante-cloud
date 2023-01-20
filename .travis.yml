@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - openjdk8
+  - openjdk17
 
 script: mvn package -Dmaven.test.skip=true
 

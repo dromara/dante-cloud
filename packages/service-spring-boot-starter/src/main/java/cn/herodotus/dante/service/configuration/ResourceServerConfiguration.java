@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.service.configuration;
 
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusAuthorizationManager;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -48,7 +48,7 @@ public class ResourceServerConfiguration {
     public SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
             SecurityMatcherConfigurer securityMatcherConfigurer,
-            HerodotusAuthorizationManager herodotusAuthorizationManager,
+            SecurityAuthorizationManager securityAuthorizationManager,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
     ) throws Exception {
 
@@ -59,7 +59,7 @@ public class ResourceServerConfiguration {
                                 .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
                                 .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                                .anyRequest().access(herodotusAuthorizationManager))
+                                .anyRequest().access(securityAuthorizationManager))
                 .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer));
 
         return httpSecurity.build();

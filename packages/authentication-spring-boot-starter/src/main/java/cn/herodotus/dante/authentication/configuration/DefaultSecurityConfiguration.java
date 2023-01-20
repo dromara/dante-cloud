@@ -29,16 +29,16 @@ import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginConfigurer;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2UiProperties;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusAuthorizationManager;
+import cn.herodotus.engine.oauth2.authentication.server.processor.HerodotusClientDetailsService;
+import cn.herodotus.engine.oauth2.authentication.server.processor.HerodotusUserDetailsService;
+import cn.herodotus.engine.oauth2.authentication.server.service.OAuth2ApplicationService;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.engine.oauth2.server.authentication.processor.HerodotusClientDetailsService;
-import cn.herodotus.engine.oauth2.server.authentication.processor.HerodotusUserDetailsService;
-import cn.herodotus.engine.oauth2.server.authentication.service.OAuth2ApplicationService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +75,7 @@ public class DefaultSecurityConfiguration {
             CaptchaRendererFactory captchaRendererFactory,
             OAuth2UiProperties uiProperties,
             SecurityMatcherConfigurer securityMatcherConfigurer,
-            HerodotusAuthorizationManager herodotusAuthorizationManager,
+            SecurityAuthorizationManager securityAuthorizationManager,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
     ) throws Exception {
 
@@ -88,7 +88,7 @@ public class DefaultSecurityConfiguration {
                         .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
                         .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                        .anyRequest().access(herodotusAuthorizationManager))
+                        .anyRequest().access(securityAuthorizationManager))
                 .formLogin(form -> {
                     form.loginPage(uiProperties.getLoginPageUrl())
                             .usernameParameter(uiProperties.getUsernameParameter())
