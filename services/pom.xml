@@ -32,11 +32,11 @@
     <parent>
         <artifactId>dante-cloud</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.2.0</version>
+        <version>3.0.2.1</version>
     </parent>
 
     <artifactId>services</artifactId>
-    <version>3.0.2.0</version>
+    <version>3.0.2.1</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud-services</name>

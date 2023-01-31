@@ -7,13 +7,13 @@
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.0.0-blue" alt="Spring Authorization Server 1.0.0"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-3.0.2-blue" alt="Spring Boot 3.0.2"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2022.0.0-blue" alt="Spring Cloud 2022.0.0"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2022.0.1-blue" alt="Spring Cloud 2022.0.1"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2022.0.0.0-RC1-blue" alt="Spring Cloud Alibaba 2022.0.0.0-RC1"></a>
-    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.8.4--2022.0.0-blue" alt="Spring Cloud Tencent 1.8.4-2022.0.0"></a>
+    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.8.5--2022.0.1-blue" alt="Spring Cloud Tencent 1.8.5-2022.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.1-RC-brightgreen" alt="Nacos 2.2.1-RC"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.2.0-red" alt="Version 3.0.2.0"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.2.1-red" alt="Version 3.0.2.1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -36,7 +36,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Authorization Server 1.0.0、Spring Boot 3.0.2、Spring Cloud 2022.0.0、Spring Cloud Tencent 3.0.2-2022.0.0、Spring Cloud Alibaba 2022.0.0.0-RC1、Nacos 2.2.1-RC 等主流技术栈开发的多租户系统，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Authorization Server 1.0.0、Spring Boot 3.0.2、Spring Cloud 2022.0.1、Spring Cloud Tencent 1.8.5-2022.0.1、Spring Cloud Alibaba 2022.0.0.0-RC1、Nacos 2.2.1-RC 等主流技术栈开发的多租户系统，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
 ## 平台定位
 
@@ -47,7 +47,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 ## 发布背景
 
-自11月24日，Spring Boot 3.0 以及 Spring Cloud 2022.0.0、Spring Cloud Tencent 等全新版本发布，整个Java 社区也步入的 Java 17 和 Spring Boot 3 的新时代。紧跟 Java 技术和 Spring 社区的发展，让更多质量更好、性能更优的新特性服务于实际的开发工作，Dante Cloud 也同步进行升级及适配，开发了全新的 3.0 版本。
+自11月24日，Spring Boot 3.0 以及 Spring Cloud 2022.0.1、Spring Cloud Tencent 等全新版本发布，整个Java 社区也步入的 Java 17 和 Spring Boot 3 的新时代。紧跟 Java 技术和 Spring 社区的发展，让更多质量更好、性能更优的新特性服务于实际的开发工作，Dante Cloud 也同步进行升级及适配，开发了全新的 3.0 版本。
 
 ## Dante Cloud 3.0.0 新特性
 
@@ -132,12 +132,12 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | 组件                          | 版本             |
 |-----------------------------|----------------|
 | Spring Boot                 | 3.0.2          |
-| Spring Cloud                | 2022.0.0       |
-| Spring Cloud Alibaba        | 2022.0.0.0-RC1     |
-| Spring Cloud Tencent        | 1.8.4-2022.0.0 |
+| Spring Cloud                | 2022.0.1       |
+| Spring Cloud Alibaba        | 2022.0.0.0-RC1 |
+| Spring Cloud Tencent        | 1.8.5-2022.0.1 |
 | Spring Authorization Server | 1.0.0          |
-| Spring Boot Admin           | 3.0.0-M9       |
-| Nacos                       | 2.2.1-RC          |
+| Spring Boot Admin           | 3.0.0          |
+| Nacos                       | 2.2.1-RC       |
 | Sentinel                    | 1.8.5          |
 | Seata                       | 1.5.2          |
 
