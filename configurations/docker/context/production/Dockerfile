@@ -35,7 +35,7 @@ VOLUME /tmp
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
 ADD ./target/${SERVICE_NAME}-${VERSION}.jar /usr/local/app.jar
-COPY ./agent/skywalking-agent-8.13.0.jar /usr/local/sw/agent.jar
+COPY ./agent/skywalking-agent-8.14.0.jar /usr/local/sw/agent.jar
 
 # 声明运行时端口
 EXPOSE ${SERVICE_PORT}

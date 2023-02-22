@@ -5,14 +5,14 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.4.0-blue" alt="Spring Authorization Server 0.4.0"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.4.1-blue" alt="Spring Authorization Server 0.4.1"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.7.8-blue" alt="Spring Boot 2.7.8"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.5-blue" alt="Spring Cloud 2021.0.5"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.4.0-blue" alt="Spring Cloud Alibaba 2021.0.4.0"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.0-brightgreen" alt="Nacos 2.2.0"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.8.0-red" alt="Version 2.7.8.0"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.8.1-red" alt="Version 2.7.8.1"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -158,8 +158,8 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | Spring Boot                 | 2.7.8      |
 | Spring Cloud                | 2021.0.5   |
 | Spring Cloud Alibaba        | 2021.0.4.0 |
-| Spring Authorization Server | 0.4.0      |
-| Spring Boot Admin           | 2.7.9      |
+| Spring Authorization Server | 0.4.1      |
+| Spring Boot Admin           | 2.7.10      |
 | Nacos                       | 2.2.0      |
 | Sentinel                    | 1.8.5      |
 | Seata                       | 1.5.2      |
@@ -283,13 +283,14 @@ dante-cloud
 
 ### 赞助人列表
 
-| 赞助人     | 赞助时间   |
-| ---------- | ---------- |
-| 偷土豆的人 | 2021-11-24 |
-| lorron     | 2022-04-04 |
-| 在云端     | 2022-12-26 |
-| 西晽       | 2022-12-27 |
-| p911gt3rs  | 2023-01-03  |
+| 赞助人       | 赞助时间       |
+|-----------|------------|
+| 偷土豆的人     | 2021-11-24 |
+| lorron    | 2022-04-04 |
+| 在云端       | 2022-12-26 |
+| 西晽        | 2022-12-27 |
+| p911gt3rs | 2023-01-03 |
+| jacsty    | 2023-01-31 |
 
 ### 开源项目
 
