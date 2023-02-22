@@ -153,14 +153,14 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 ### （1）Spring 全家桶及核心技术版本
 
-| 组件                          | 版本                        |
-| ----------------------------- | --------------------------- |
+| 组件                          | 版本                          |
+| ----------------------------- |-----------------------------|
 | `Spring Boot`                 | 2.7.8 / 3.0.2               |
 | `Spring Cloud`                | 2021.0.5 / 2022.0.1         |
 | `Spring Cloud Alibaba`        | 2021.0.4.0 / 2022.0.0.0-RC1 |
-| `Spring Cloud Tencent`        |  - / 1.9.0-2022.0.1 |
-| `Spring Authorization Server` | 0.4.0 / 1.0.0               |
-| `Spring Boot Admin`           | 2.7.10 / 3.0.0         |
+| `Spring Cloud Tencent`        | - / 1.9.0-2022.0.1          |
+| `Spring Authorization Server` | 0.4.1 / 1.0.1               |
+| `Spring Boot Admin`           | 2.7.10 / 3.0.0              |
 | `Nacos`                       | 2.2.0 / 2.2.1-RC            |
 | `Sentinel`                    | 1.8.5                       |
 | `Seata`                       | 1.5.2                       |
