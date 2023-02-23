@@ -90,7 +90,7 @@ public class SysUser extends BaseSysEntity {
     @Column(name = "phone_number", length = 256)
     private String phoneNumber;
 
-    @Schema(title = "手机号码")
+    @Schema(title = "用户头像")
     @Column(name = "avatar", length = 1024)
     private String avatar;
 
