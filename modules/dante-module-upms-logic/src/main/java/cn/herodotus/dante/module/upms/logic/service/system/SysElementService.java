@@ -76,7 +76,7 @@ public class SysElementService extends BaseLayeredService<SysElement, String> {
         return sysElementRepository;
     }
 
-    public Page<SysElement> findByCondition(int pageNumber, int pageSize, String path) {
+    public Page<SysElement> findByCondition(int pageNumber, int pageSize, String path, String title) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
         Specification<SysElement> specification = (root, criteriaQuery, criteriaBuilder) -> {
@@ -85,6 +85,10 @@ public class SysElementService extends BaseLayeredService<SysElement, String> {
 
             if (ObjectUtils.isNotEmpty(path)) {
                 predicates.add(criteriaBuilder.like(root.get("path"), like(path)));
+            }
+
+            if (ObjectUtils.isNotEmpty(title)) {
+                predicates.add(criteriaBuilder.like(root.get("title"), like(title)));
             }
 
             Predicate[] predicateArray = new Predicate[predicates.size()];
