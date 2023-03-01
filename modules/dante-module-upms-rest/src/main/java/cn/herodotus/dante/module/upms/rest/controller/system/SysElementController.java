@@ -99,12 +99,14 @@ public class SysElementController extends BaseWriteableRestController<SysElement
             @Parameter(name = "pageNumber", required = true, description = "当前页码"),
             @Parameter(name = "pageSize", required = true, description = "每页显示数量"),
             @Parameter(name = "path", description = "组件路径"),
+            @Parameter(name = "title", description = "组件标题"),
     })
     @GetMapping("/condition")
     public Result<Map<String, Object>> findByCondition(@NotBlank @RequestParam("pageNumber") Integer pageNumber,
                                                        @NotBlank @RequestParam("pageSize") Integer pageSize,
-                                                       @RequestParam(value = "path", required = false) String path) {
-        Page<SysElement> pages = sysElementService.findByCondition(pageNumber, pageSize, path);
+                                                       @RequestParam(value = "path", required = false) String path,
+                                                       @RequestParam(value = "title", required = false) String title) {
+        Page<SysElement> pages = sysElementService.findByCondition(pageNumber, pageSize, path, title);
         return result(pages);
     }
 

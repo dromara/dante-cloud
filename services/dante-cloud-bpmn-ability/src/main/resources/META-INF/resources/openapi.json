@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.2",
+  "openapi": "3.0.3",
   "info": {
     "title": "Camunda Platform REST API",
     "description": "OpenApi Spec for Camunda Platform REST API.",
