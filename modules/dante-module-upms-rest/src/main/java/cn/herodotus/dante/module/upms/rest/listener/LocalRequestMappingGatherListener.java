@@ -27,7 +27,7 @@ package cn.herodotus.dante.module.upms.rest.listener;
 
 import cn.herodotus.dante.module.upms.rest.processor.RequestMappingStoreProcessor;
 import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
-import cn.herodotus.engine.web.core.domain.RequestMapping;
+import cn.herodotus.engine.rest.core.domain.RequestMapping;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

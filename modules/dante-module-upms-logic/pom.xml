@@ -42,22 +42,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>data-sdk-jpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>web-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>event-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-core</artifactId>
+            <artifactId>supplier-sdk-upms-logic</artifactId>
         </dependency>
 
         <dependency>

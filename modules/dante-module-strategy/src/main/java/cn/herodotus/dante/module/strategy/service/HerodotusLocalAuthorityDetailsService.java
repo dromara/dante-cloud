@@ -26,9 +26,9 @@
 package cn.herodotus.dante.module.strategy.service;
 
 import cn.herodotus.dante.module.strategy.definition.AbstractStrategyAuthorityDetailsService;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
-import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
 import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -42,15 +42,15 @@ import java.util.List;
  */
 public class HerodotusLocalAuthorityDetailsService extends AbstractStrategyAuthorityDetailsService {
 
-    private final SysAuthorityService sysAuthorityService;
+    private final SysPermissionService sysPermissionService;
 
-    public HerodotusLocalAuthorityDetailsService(SysAuthorityService sysAuthorityService) {
-        this.sysAuthorityService = sysAuthorityService;
+    public HerodotusLocalAuthorityDetailsService(SysPermissionService sysPermissionService) {
+        this.sysPermissionService = sysPermissionService;
     }
 
     @Override
     public List<Authority> findAll() {
-        List<SysAuthority> authorities = sysAuthorityService.findAll();;
+        List<SysPermission> authorities = sysPermissionService.findAll();;
         if (CollectionUtils.isNotEmpty(authorities)) {
             return toEntities(authorities);
         }

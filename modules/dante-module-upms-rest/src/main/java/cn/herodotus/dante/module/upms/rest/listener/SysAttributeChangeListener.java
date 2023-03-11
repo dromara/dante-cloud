@@ -23,36 +23,43 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.upms.rest.processor;
+package cn.herodotus.dante.module.upms.rest.listener;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import cn.herodotus.dante.module.upms.rest.processor.SecurityMetadataDistributeProcessor;
+import cn.herodotus.engine.supplier.upms.logic.domain.event.SysAttributeChangeEvent;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
+import org.apache.commons.lang3.ObjectUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 
 /**
- * <p>Description: SecurityAttribute 关系数据变化分发异步服务 </p>
- * <p>
- * 单独提取出异步操作，防止出现以下错误问题：
- * <p>
- * Consider injecting the bean as one of its interfaces or forcing the use of CGLib-based proxies by setting proxyTargetClass=true on @EnableAsync and/or @EnableCaching
+ * <p>Description: SysSecurityAttribute变更事件监听 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/3/30 12:19
+ * @date : 2021/8/4 22:18
  */
-@Service
-public class SecurityAttributeRelationChangedProcessor {
+@Component
+public class SysAttributeChangeListener implements ApplicationListener<SysAttributeChangeEvent> {
+
+    private static final Logger log = LoggerFactory.getLogger(SysAttributeChangeListener.class);
 
     private final SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor;
 
-    @Autowired
-    public SecurityAttributeRelationChangedProcessor(SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
+    public SysAttributeChangeListener(SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
         this.securityMetadataDistributeProcessor = securityMetadataDistributeProcessor;
     }
 
-    @Async
-    public void distributeRelationChangedSecurityAttribute(List<String> sysAuthorities) {
-        securityMetadataDistributeProcessor.distributeRelationChangedSecurityAttribute(sysAuthorities);
+    @Override
+    public void onApplicationEvent(SysAttributeChangeEvent event) {
+
+        log.debug("[Herodotus] |- SysAttribute Change Listener, response event!");
+
+        SysAttribute sysAttribute = event.getData();
+        if (ObjectUtils.isNotEmpty(sysAttribute)) {
+            log.debug("[Herodotus] |- Got SysAttribute, start to process SysAttribute change.");
+            securityMetadataDistributeProcessor.distributeChangedSecurityAttribute(sysAttribute);
+        }
     }
 }

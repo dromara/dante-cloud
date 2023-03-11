@@ -25,9 +25,9 @@
 
 package cn.herodotus.dante.module.strategy.definition;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,17 +40,15 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractStrategyAuthorityDetailsService implements StrategyAuthorityDetailsService {
 
-    protected List<Authority> toEntities(List<SysAuthority> authorities) {
-        return authorities.stream().map(this::toEntity).collect(Collectors.toList());
+    protected List<Authority> toEntities(List<SysPermission> permissions) {
+        return permissions.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    protected Authority toEntity(SysAuthority object) {
+    protected Authority toEntity(SysPermission object) {
         Authority authority = new Authority();
-        authority.setAuthorityId(object.getAuthorityId());
-        authority.setAuthorityCode(object.getAuthorityCode());
-        authority.setServiceId(object.getServiceId());
-        authority.setRequestMethod(object.getRequestMethod());
-        authority.setUrl(object.getUrl());
+        authority.setAuthorityId(object.getPermissionId());
+        authority.setAuthorityCode(object.getPermissionCode());
+        authority.setAuthorityName(object.getPermissionName());
         return authority;
     }
 }

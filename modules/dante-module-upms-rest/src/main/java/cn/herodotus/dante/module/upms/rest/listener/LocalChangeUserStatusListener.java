@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.upms.rest.listener;
 
-import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.event.core.local.LocalChangeUserStatusEvent;
-import cn.herodotus.engine.web.core.domain.UserStatus;
+import cn.herodotus.engine.rest.core.domain.UserStatus;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

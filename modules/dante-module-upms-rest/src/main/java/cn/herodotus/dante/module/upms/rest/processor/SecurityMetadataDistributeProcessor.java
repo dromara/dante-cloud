@@ -25,26 +25,25 @@
 
 package cn.herodotus.dante.module.upms.rest.processor;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysRole;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysSecurityAttribute;
-import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
-import cn.herodotus.dante.module.upms.logic.service.system.SysSecurityAttributeService;
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.event.security.remote.RemoteSecurityMetadataSyncEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
-import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusGrantedAuthority;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
-import cn.herodotus.engine.web.core.context.ServiceContext;
-import cn.herodotus.engine.web.core.definition.ApplicationStrategyEvent;
-import cn.herodotus.engine.web.core.domain.RequestMapping;
+import cn.herodotus.engine.rest.core.context.ServiceContext;
+import cn.herodotus.engine.rest.core.definition.event.ApplicationStrategyEvent;
+import cn.herodotus.engine.rest.core.domain.RequestMapping;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysInterfaceService;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -60,20 +59,19 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
 
     private static final Logger log = LoggerFactory.getLogger(SecurityMetadataDistributeProcessor.class);
 
-    private final SysSecurityAttributeService sysSecurityAttributeService;
-    private final SysAuthorityService sysAuthorityService;
+    private final SysAttributeService sysAttributeService;
+    private final SysInterfaceService sysInterfaceService;
     private final SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer;
 
-    @Autowired
-    public SecurityMetadataDistributeProcessor(SysSecurityAttributeService sysSecurityAttributeService, SysAuthorityService sysAuthorityService, SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
-        this.sysSecurityAttributeService = sysSecurityAttributeService;
-        this.sysAuthorityService = sysAuthorityService;
+    public SecurityMetadataDistributeProcessor(SysAttributeService sysAttributeService, SysInterfaceService sysInterfaceService, SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
+        this.sysAttributeService = sysAttributeService;
+        this.sysInterfaceService = sysInterfaceService;
         this.securityMetadataSourceAnalyzer = securityMetadataSourceAnalyzer;
     }
 
     @Override
     public void postLocalProcess(List<SecurityAttribute> data) {
-        securityMetadataSourceAnalyzer.processSecurityMetadata(data);
+        securityMetadataSourceAnalyzer.processSecurityAttribute(data);
     }
 
     @Override
@@ -81,92 +79,94 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
         ServiceContext.getInstance().publishEvent(new RemoteSecurityMetadataSyncEvent(data, originService, destinationService));
     }
 
-    private void postGroupProcess(List<SysSecurityAttribute> sysSecurityAttributes) {
-        if (CollectionUtils.isNotEmpty(sysSecurityAttributes)) {
-            Map<String, List<SecurityAttribute>> grouped = sysSecurityAttributes.stream().map(this::convertSysSecurityAttributeToSecurityAttribute).collect(Collectors.groupingBy(SecurityAttribute::getServiceId));
-            log.debug("[Herodotus] |- Grouping SysSecurityAttribute and distribute to every server.");
-            grouped.forEach(this::postProcess);
-        }
-    }
-
-    public void distributeChangedSecurityAttribute(SysSecurityAttribute sysSecurityAttribute) {
-        SecurityAttribute securityAttribute = convertSysSecurityAttributeToSecurityAttribute(sysSecurityAttribute);
-        postProcess(securityAttribute.getServiceId(), ImmutableList.of(securityAttribute));
-    }
-
-    public void distributeRelationChangedSecurityAttribute(List<String> sysAuthorities) {
-        List<SysSecurityAttribute> sysSecurityAttributes = sysSecurityAttributeService.findByAttributeIdIn(sysAuthorities);
-        this.postGroupProcess(sysSecurityAttributes);
-    }
-
     /**
      * 将SysAuthority表中存在，但是SysSecurityAttribute中不存在的数据同步至SysSecurityAttribute，保证两侧数据一致
      */
     @Transactional(rollbackFor = TransactionalRollbackException.class)
-    public void postMetadataProcess(List<RequestMapping> requestMappings) {
-        List<SysAuthority> storeRequestMappings = sysAuthorityService.storeRequestMappings(requestMappings);
-        if (CollectionUtils.isNotEmpty(storeRequestMappings)) {
+    public void postRequestMappings(List<RequestMapping> requestMappings) {
+        List<SysInterface> storedInterfaces = sysInterfaceService.storeRequestMappings(requestMappings);
+        if (CollectionUtils.isNotEmpty(storedInterfaces)) {
             log.debug("[Herodotus] |- [5] Request mapping store success, start to merge security metadata!");
 
-            List<SysAuthority> sysAuthorities = sysAuthorityService.findAllocatable();
-            if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-                List<SysSecurityAttribute> sysMetadata = this.convertSysAuthoritiesToSysSecurityAttributes(sysAuthorities);
-                List<SysSecurityAttribute> result = sysSecurityAttributeService.batchSaveOrUpdate(sysMetadata);
+            List<SysInterface> sysInterfaces = sysInterfaceService.findAllocatable();
+
+            if (CollectionUtils.isNotEmpty(sysInterfaces)) {
+                List<SysAttribute> elements = this.convertSysInterfacesToSysAttributes(sysInterfaces);
+                List<SysAttribute> result = sysAttributeService.batchSaveOrUpdate(elements);
                 if (CollectionUtils.isNotEmpty(result)) {
-                    log.debug("[Herodotus] |- [6] Merge security metadata SUCCESS and FINISHED!");
+                    log.debug("[Herodotus] |- [6] Merge security attribute SUCCESS and FINISHED!");
                 } else {
-                    log.error("[Herodotus] |- [6] Merge Security Metadata failed!, Please Check!");
+                    log.error("[Herodotus] |- [6] Merge Security attribute failed!, Please Check!");
                 }
             } else {
-                log.debug("[Herodotus] |- No security metadata requires merge, SKIP!");
+                log.debug("[Herodotus] |- No security attribute requires merge, SKIP!");
             }
 
-            log.debug("[Herodotus] |- [7] Synchronization current authorities to every service!");
-            List<SysSecurityAttribute> sysSecurityAttributes = sysSecurityAttributeService.findAll();
-            this.postGroupProcess(sysSecurityAttributes);
+            log.debug("[Herodotus] |- [7] Synchronization current permissions to every service!");
+
+            List<SysAttribute> sysAttributes = sysAttributeService.findAll();
+            this.postGroupProcess(sysAttributes);
         }
     }
 
-    private List<SysSecurityAttribute> convertSysAuthoritiesToSysSecurityAttributes(Collection<SysAuthority> sysAuthorities) {
-        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
-            return sysAuthorities.stream().map(this::convertSysAuthorityToSysSecurityAttribute).collect(Collectors.toList());
+    private void postGroupProcess(List<SysAttribute> sysAttributes) {
+        if (CollectionUtils.isNotEmpty(sysAttributes)) {
+            Map<String, List<SecurityAttribute>> grouped = sysAttributes.stream().map(this::convertSysAttributeToSecurityAttribute).collect(Collectors.groupingBy(SecurityAttribute::getServiceId));
+            log.debug("[Herodotus] |- Grouping SysInterface and distribute to every server.");
+            grouped.forEach(this::postProcess);
+        }
+    }
+
+    public void distributeChangedSecurityAttribute(SysAttribute sysAttribute) {
+        SecurityAttribute securityAttribute = convertSysAttributeToSecurityAttribute(sysAttribute);
+        postProcess(securityAttribute.getServiceId(), ImmutableList.of(securityAttribute));
+    }
+
+    private List<SysAttribute> convertSysInterfacesToSysAttributes(Collection<SysInterface> sysInterfaces) {
+        if (CollectionUtils.isNotEmpty(sysInterfaces)) {
+            return sysInterfaces.stream().map(this::convertSysInterfaceToSysAttribute).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    private SysSecurityAttribute convertSysAuthorityToSysSecurityAttribute(SysAuthority sysAuthority) {
-        SysSecurityAttribute sysSecurityAttribute = new SysSecurityAttribute();
-        sysSecurityAttribute.setAttributeId(sysAuthority.getAuthorityId());
-        sysSecurityAttribute.setAttributeCode(sysAuthority.getAuthorityCode());
-        sysSecurityAttribute.setUrl(sysAuthority.getUrl());
-        sysSecurityAttribute.setRequestMethod(sysAuthority.getRequestMethod());
-        sysSecurityAttribute.setServiceId(sysAuthority.getServiceId());
-        sysSecurityAttribute.setDescription(sysAuthority.getAuthorityName());
-        return sysSecurityAttribute;
+    private SysAttribute convertSysInterfaceToSysAttribute(SysInterface sysInterface) {
+        SysAttribute sysAttribute = new SysAttribute();
+        sysAttribute.setAttributeId(sysInterface.getInterfaceId());
+        sysAttribute.setAttributeCode(sysInterface.getInterfaceCode());
+        sysAttribute.setRequestMethod(sysInterface.getRequestMethod());
+        sysAttribute.setServiceId(sysInterface.getServiceId());
+        sysAttribute.setClassName(sysInterface.getClassName());
+        sysAttribute.setMethodName(sysInterface.getMethodName());
+        sysAttribute.setUrl(sysInterface.getUrl());
+        sysAttribute.setStatus(sysInterface.getStatus());
+        sysAttribute.setReserved(sysInterface.getReserved());
+        sysAttribute.setDescription(sysInterface.getDescription());
+        sysAttribute.setReversion(sysInterface.getReversion());
+        sysAttribute.setCreateTime(sysInterface.getCreateTime());
+        sysAttribute.setUpdateTime(sysInterface.getUpdateTime());
+        sysAttribute.setRanking(sysInterface.getRanking());
+        return sysAttribute;
     }
 
-    private SecurityAttribute convertSysSecurityAttributeToSecurityAttribute(SysSecurityAttribute sysSecurityAttribute) {
+    private SecurityAttribute convertSysAttributeToSecurityAttribute(SysAttribute sysAttribute) {
         SecurityAttribute securityAttribute = new SecurityAttribute();
-        securityAttribute.setAttributeId(sysSecurityAttribute.getAttributeId());
-        securityAttribute.setAttributeCode(sysSecurityAttribute.getAttributeCode());
-        securityAttribute.setExpression(sysSecurityAttribute.getExpression());
-        securityAttribute.setManualSetting(sysSecurityAttribute.getManualSetting());
-        securityAttribute.setIpAddress(sysSecurityAttribute.getIpAddress());
-        securityAttribute.setUrl(sysSecurityAttribute.getUrl());
-        securityAttribute.setRequestMethod(sysSecurityAttribute.getRequestMethod());
-        securityAttribute.setServiceId(sysSecurityAttribute.getServiceId());
-        securityAttribute.setAttributeName(sysSecurityAttribute.getDescription());
-        if (CollectionUtils.isNotEmpty(sysSecurityAttribute.getRoles())) {
-            securityAttribute.setRoles(convertSysRolesToHerodotusGrantedAuthorities(sysSecurityAttribute.getRoles()));
-        }
+        securityAttribute.setAttributeId(sysAttribute.getAttributeId());
+        securityAttribute.setAttributeCode(sysAttribute.getAttributeCode());
+        securityAttribute.setWebExpression(sysAttribute.getWebExpression());
+        securityAttribute.setPermissions(convertPermissionToCommaDelimitedString(sysAttribute.getPermissions()));
+        securityAttribute.setUrl(sysAttribute.getUrl());
+        securityAttribute.setRequestMethod(sysAttribute.getRequestMethod());
+        securityAttribute.setServiceId(sysAttribute.getServiceId());
+        securityAttribute.setAttributeName(sysAttribute.getDescription());
         return securityAttribute;
     }
 
-    private Set<HerodotusGrantedAuthority> convertSysRolesToHerodotusGrantedAuthorities(Set<SysRole> sysRoles) {
-        return sysRoles.stream().map(this::convertSysRoleToHerodotusGrantedAuthority).collect(Collectors.toSet());
-    }
-
-    private HerodotusGrantedAuthority convertSysRoleToHerodotusGrantedAuthority(SysRole sysRole) {
-        return new HerodotusGrantedAuthority(sysRole.getRoleCode());
+    private String convertPermissionToCommaDelimitedString(Set<SysPermission> sysAuthorities) {
+        if (CollectionUtils.isNotEmpty(sysAuthorities)) {
+            List<String> codes = sysAuthorities.stream().map(SysPermission::getPermissionCode).toList();
+            return StringUtils.collectionToCommaDelimitedString(codes);
+        } else {
+            return "";
+        }
     }
 }

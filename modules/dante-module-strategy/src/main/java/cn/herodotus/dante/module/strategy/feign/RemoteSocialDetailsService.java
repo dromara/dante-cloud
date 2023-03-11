@@ -45,6 +45,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface RemoteSocialDetailsService {
 
     @Inner
-    @RequestMapping("/social/sign-in/{source}")
+    @RequestMapping("/security/social/sign-in/{source}")
     Result<HerodotusUser> findUserDetailsBySocial(@PathVariable("source") String source, @SpringQueryMap AccessPrincipal accessPrincipal);
 }

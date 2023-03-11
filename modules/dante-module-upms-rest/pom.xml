@@ -46,6 +46,11 @@
         </dependency>
 
         <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>supplier-sdk-upms-rest</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>dante-module-security</artifactId>
         </dependency>

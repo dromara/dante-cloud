@@ -35,13 +35,13 @@ import cn.herodotus.dante.module.strategy.service.HerodotusLocalAuthorityDetails
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemoteAuthorityDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemoteUserDetailsService;
-import cn.herodotus.dante.module.upms.logic.configuration.UpmsLogicModuleConfiguration;
 import cn.herodotus.dante.module.upms.logic.configuration.UpmsSocialConfiguration;
-import cn.herodotus.dante.module.upms.logic.service.system.SysAuthorityService;
-import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
+import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +70,7 @@ public class DistributedArchitectureConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnLocalDataAccess
-    @Import({UpmsLogicModuleConfiguration.class, UpmsSocialConfiguration.class})
+    @Import({SupplierUpmsLogicConfiguration.class, UpmsSocialConfiguration.class})
     static class DataAccessStrategyLocalConfiguration {
 
         @Bean
@@ -82,8 +82,8 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyAuthorityDetailsService HerodotusLocalAuthorityDetailsService(SysAuthorityService sysAuthorityService) {
-            HerodotusLocalAuthorityDetailsService herodotusLocalAuthorityDetailsService = new HerodotusLocalAuthorityDetailsService(sysAuthorityService);
+        public StrategyAuthorityDetailsService HerodotusLocalAuthorityDetailsService(SysPermissionService sysPermissionService) {
+            HerodotusLocalAuthorityDetailsService herodotusLocalAuthorityDetailsService = new HerodotusLocalAuthorityDetailsService(sysPermissionService);
             log.debug("[Herodotus] |- Strategy [Local Authority Details Service] Auto Configure.");
             return herodotusLocalAuthorityDetailsService;
         }

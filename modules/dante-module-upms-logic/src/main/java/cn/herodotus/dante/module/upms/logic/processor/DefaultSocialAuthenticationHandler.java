@@ -25,11 +25,6 @@
 
 package cn.herodotus.dante.module.upms.logic.processor;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysSocialUser;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
-import cn.herodotus.dante.module.upms.logic.helper.UpmsHelper;
-import cn.herodotus.dante.module.upms.logic.service.system.SysSocialUserService;
-import cn.herodotus.dante.module.upms.logic.service.system.SysUserService;
 import cn.herodotus.engine.access.business.processor.AccessHandlerStrategyFactory;
 import cn.herodotus.engine.access.core.definition.AccessUserDetails;
 import cn.herodotus.engine.access.core.exception.AccessIdentityVerificationFailedException;
@@ -39,6 +34,11 @@ import cn.herodotus.engine.oauth2.core.definition.domain.SocialUserDetails;
 import cn.herodotus.engine.oauth2.core.definition.handler.AbstractSocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.exception.SocialCredentialsParameterBindingFailedException;
 import cn.herodotus.engine.oauth2.core.exception.UsernameAlreadyExistsException;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysSocialUser;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
+import cn.herodotus.engine.supplier.upms.logic.helper.UpmsHelper;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysSocialUserService;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import cn.hutool.core.bean.BeanUtil;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.ObjectUtils;

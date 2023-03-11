@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.module.upms.rest.processor;
 
-import cn.herodotus.engine.web.core.domain.RequestMapping;
+import cn.herodotus.engine.rest.core.domain.RequestMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +55,6 @@ public class RequestMappingStoreProcessor {
     @Async
     public void postProcess(List<RequestMapping> requestMappings) {
         log.debug("[Herodotus] |- [4] Async store request mapping process BEGIN!");
-        securityMetadataDistributeProcessor.postMetadataProcess(requestMappings);
+        securityMetadataDistributeProcessor.postRequestMappings(requestMappings);
     }
 }

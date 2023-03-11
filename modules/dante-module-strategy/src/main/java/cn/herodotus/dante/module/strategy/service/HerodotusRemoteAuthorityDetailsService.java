@@ -27,9 +27,9 @@ package cn.herodotus.dante.module.strategy.service;
 
 import cn.herodotus.dante.module.strategy.definition.AbstractStrategyAuthorityDetailsService;
 import cn.herodotus.dante.module.strategy.feign.RemoteAuthorityDetailsService;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -51,8 +51,8 @@ public class HerodotusRemoteAuthorityDetailsService extends AbstractStrategyAuth
 
     @Override
     public List<Authority> findAll() {
-        Result<List<SysAuthority>> result = remoteAuthorityDetailsService.findAll();
-        List<SysAuthority> authorities = result.getData();
+        Result<List<SysPermission>> result = remoteAuthorityDetailsService.findAll();
+        List<SysPermission> authorities = result.getData();
         if (CollectionUtils.isNotEmpty(authorities)) {
             return toEntities(authorities);
         }

@@ -29,8 +29,8 @@ import cn.herodotus.dante.module.common.ServiceNameConstants;
 import cn.herodotus.engine.event.core.local.LocalChangeUserStatusEvent;
 import cn.herodotus.engine.event.security.remote.RemoteChangeUserStatusEvent;
 import cn.herodotus.engine.oauth2.compliance.definition.AccountStatusChangeService;
-import cn.herodotus.engine.web.core.context.ServiceContext;
-import cn.herodotus.engine.web.core.domain.UserStatus;
+import cn.herodotus.engine.rest.core.context.ServiceContext;
+import cn.herodotus.engine.rest.core.domain.UserStatus;
 
 /**
  * <p>Description: 用户状态变更处理器 </p>

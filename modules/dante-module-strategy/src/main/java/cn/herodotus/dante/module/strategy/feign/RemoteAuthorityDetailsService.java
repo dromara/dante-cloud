@@ -26,8 +26,8 @@
 package cn.herodotus.dante.module.strategy.feign;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysAuthority;
 import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -42,6 +42,6 @@ import java.util.List;
 @FeignClient(contextId = "remoteAuthorityDetailsService", value = ServiceNameConstants.SERVICE_NAME_UPMS)
 public interface RemoteAuthorityDetailsService {
 
-    @GetMapping("/authority/all")
-    Result<List<SysAuthority>> findAll();
+    @GetMapping("/security/authority/all")
+    Result<List<SysPermission>> findAll();
 }

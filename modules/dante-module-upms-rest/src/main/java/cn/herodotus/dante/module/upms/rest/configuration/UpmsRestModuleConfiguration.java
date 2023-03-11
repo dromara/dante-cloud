@@ -25,11 +25,13 @@
 
 package cn.herodotus.dante.module.upms.rest.configuration;
 
+import cn.herodotus.engine.supplier.upms.rest.configuration.SupplierUpmsRestConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * <p>Description: UpmsRest配置类 </p>
@@ -39,12 +41,11 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @ComponentScan(basePackages = {
-        "cn.herodotus.dante.module.upms.rest.controller.hr",
-        "cn.herodotus.dante.module.upms.rest.controller.system",
-        "cn.herodotus.dante.module.upms.rest.controller.assistant",
-        "cn.herodotus.dante.module.upms.rest.controller.social",
         "cn.herodotus.dante.module.upms.rest.processor",
         "cn.herodotus.dante.module.upms.rest.listener",
+})
+@Import({
+        SupplierUpmsRestConfiguration.class
 })
 public class UpmsRestModuleConfiguration {
 
