@@ -23,31 +23,38 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.strategy.configuration;
+package cn.herodotus.dante.module.metadata.configuration;
 
+import cn.herodotus.engine.supplier.upms.rest.configuration.SupplierUpmsRestConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * <p>Description: 策略模块配置 </p>
+ * <p>Description: UpmsRest配置类 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/1 17:58
+ * @date : 2021/1/5 11:58
  */
 @Configuration(proxyBeanMethods = false)
-@Import({
-        DistributedArchitectureConfiguration.class,
-        MonocoqueArchitectureConfiguration.class
+@ComponentScan(basePackages = {
+        "cn.herodotus.dante.module.metadata.processor",
+        "cn.herodotus.dante.module.metadata.listener",
 })
-public class StrategyModuleConfiguration {
+@Import({
+        SupplierUpmsRestConfiguration.class
+})
+public class MetadataModuleConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(StrategyModuleConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(MetadataModuleConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- SDK [Strategy Module] Auto Configure.");
+        log.info("[Herodotus] |- SDK [Metadata Module] Auto Configure.");
     }
+
+
 }

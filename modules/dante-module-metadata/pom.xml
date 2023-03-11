@@ -30,47 +30,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>dante-cloud</artifactId>
+        <artifactId>modules</artifactId>
         <groupId>cn.herodotus.dante</groupId>
         <version>3.0.4.0</version>
     </parent>
 
-    <artifactId>modules</artifactId>
+    <artifactId>dante-module-metadata</artifactId>
     <version>3.0.4.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <name>dante-cloud-modules</name>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>dante-module-social</artifactId>
+        </dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <skipSource>${skip.build.source.package}</skipSource>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>supplier-sdk-upms-rest</artifactId>
+        </dependency>
 
-    <modules>
-        <module>dante-module-common</module>
-        <module>dante-module-security</module>
-        <module>dante-module-social</module>
-        <module>dante-module-metadata</module>
-        <module>dante-module-strategy</module>
-    </modules>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>dante-module-security</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

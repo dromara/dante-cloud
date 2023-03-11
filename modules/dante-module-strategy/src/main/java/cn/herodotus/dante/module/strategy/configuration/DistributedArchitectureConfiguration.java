@@ -25,6 +25,7 @@
 
 package cn.herodotus.dante.module.strategy.configuration;
 
+import cn.herodotus.dante.module.social.configuration.SocialModuleConfiguration;
 import cn.herodotus.dante.module.strategy.annotation.ConditionalOnDistributedArchitecture;
 import cn.herodotus.dante.module.strategy.annotation.ConditionalOnLocalDataAccess;
 import cn.herodotus.dante.module.strategy.annotation.ConditionalOnRemoteDataAccess;
@@ -35,7 +36,6 @@ import cn.herodotus.dante.module.strategy.service.HerodotusLocalAuthorityDetails
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemoteAuthorityDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemoteUserDetailsService;
-import cn.herodotus.dante.module.upms.logic.configuration.UpmsSocialConfiguration;
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
@@ -70,7 +70,7 @@ public class DistributedArchitectureConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnLocalDataAccess
-    @Import({SupplierUpmsLogicConfiguration.class, UpmsSocialConfiguration.class})
+    @Import({SupplierUpmsLogicConfiguration.class, SocialModuleConfiguration.class})
     static class DataAccessStrategyLocalConfiguration {
 
         @Bean

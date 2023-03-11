@@ -23,31 +23,38 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.strategy.configuration;
+package cn.herodotus.dante.module.metadata.processor;
 
-import jakarta.annotation.PostConstruct;
+import cn.herodotus.engine.rest.core.domain.RequestMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
- * <p>Description: 策略模块配置 </p>
+ * <p>Description: RequestMapping存储服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/1 17:58
+ * @date : 2021/8/7 14:15
  */
-@Configuration(proxyBeanMethods = false)
-@Import({
-        DistributedArchitectureConfiguration.class,
-        MonocoqueArchitectureConfiguration.class
-})
-public class StrategyModuleConfiguration {
+@Component
+public class RequestMappingStoreProcessor {
 
-    private static final Logger log = LoggerFactory.getLogger(StrategyModuleConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(RequestMappingStoreProcessor.class);
 
-    @PostConstruct
-    public void postConstruct() {
-        log.info("[Herodotus] |- SDK [Strategy Module] Auto Configure.");
+    private final SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor;
+
+    @Autowired
+    public RequestMappingStoreProcessor(SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
+        this.securityMetadataDistributeProcessor = securityMetadataDistributeProcessor;
+    }
+
+    @Async
+    public void postProcess(List<RequestMapping> requestMappings) {
+        log.debug("[Herodotus] |- [4] Async store request mapping process BEGIN!");
+        securityMetadataDistributeProcessor.postRequestMappings(requestMappings);
     }
 }

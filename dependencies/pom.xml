@@ -95,12 +95,12 @@
 
             <dependency>
                 <groupId>cn.herodotus.dante</groupId>
-                <artifactId>dante-module-upms-logic</artifactId>
+                <artifactId>dante-module-social</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.herodotus.dante</groupId>
-                <artifactId>dante-module-upms-rest</artifactId>
+                <artifactId>dante-module-metadata</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

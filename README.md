@@ -188,10 +188,11 @@ dante-cloud
 ├── configurations -- 配置文件脚本和统一Docker build上下文目录
 ├── dependencies -- 工程Maven顶级依赖，统一控制版本和依赖
 ├── module -- 依赖组件半成品拼装工程
-├    ├── dante-module-common -- Module 相关模块公共辅助代码组件
-├    ├── dante-module-security -- Security 相关配置代码模块组件
-├    ├── dante-module-upms-logic -- UPMS 基础管理及共享代码模块组件
-├    └── dante-module-upms-rest -- UPMS 基础管理接口模块组件
+├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
+├    ├── dante-module-metadata -- 权限元数据同步模块
+├    ├── dante-module-security -- Security 相关配置代码模块
+├    ├── dante-module-social -- 社交登录模块
+├    └── dante-module-strategy -- UAA 核心数据访问策略模块
 ├── packages -- 基础核心Starter
 ├    ├── authorization-spring-boot-starter -- OAuth2 认证基础Starter，主要用于 UAA 认证服务器以及单体版 Dante Cloud
 ├    ├── facility-spring-boot-starter -- 基础设施切换依赖starter

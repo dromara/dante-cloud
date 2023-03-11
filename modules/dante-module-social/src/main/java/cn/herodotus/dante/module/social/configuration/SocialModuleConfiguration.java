@@ -23,31 +23,41 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.strategy.configuration;
+package cn.herodotus.dante.module.social.configuration;
 
+import cn.herodotus.dante.module.social.processor.DefaultSocialAuthenticationHandler;
+import cn.herodotus.engine.access.business.configuration.AccessAllConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+
 /**
- * <p>Description: 策略模块配置 </p>
+ * <p>Description: UPMS 社交配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/1 17:58
+ * @date : 2022/2/2 17:05
  */
 @Configuration(proxyBeanMethods = false)
-@Import({
-        DistributedArchitectureConfiguration.class,
-        MonocoqueArchitectureConfiguration.class
-})
-public class StrategyModuleConfiguration {
+@Import({AccessAllConfiguration.class})
+public class SocialModuleConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(StrategyModuleConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(SocialModuleConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- SDK [Strategy Module] Auto Configure.");
+        log.info("[Herodotus] |- SDK [Module Upms Social] Auto Configure.");
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DefaultSocialAuthenticationHandler defaultSocialAuthenticationHandler() {
+        DefaultSocialAuthenticationHandler defaultSocialAuthenticationHandler = new DefaultSocialAuthenticationHandler();
+        log.trace("[Herodotus] |- Bean [Default Social Authentication Handler] Auto Configure.");
+        return defaultSocialAuthenticationHandler;
     }
 }

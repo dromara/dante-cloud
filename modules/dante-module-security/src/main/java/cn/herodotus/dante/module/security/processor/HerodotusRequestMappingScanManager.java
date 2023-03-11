@@ -14,9 +14,9 @@ import cn.herodotus.dante.module.common.ServiceNameConstants;
 import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
 import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
-import cn.herodotus.engine.web.core.context.ServiceContext;
-import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
-import cn.herodotus.engine.web.core.domain.RequestMapping;
+import cn.herodotus.engine.rest.core.context.ServiceContext;
+import cn.herodotus.engine.rest.core.domain.RequestMapping;
+import cn.herodotus.engine.rest.scan.definition.RequestMappingScanManager;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ import java.util.List;
  * @date : 2022/1/17 0:08
  */
 @Component
-public class HerodotusRequestMappingScanManager implements RequestMappingScanManager{
+public class HerodotusRequestMappingScanManager implements RequestMappingScanManager {
 
     private final SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer;
 
@@ -50,7 +50,7 @@ public class HerodotusRequestMappingScanManager implements RequestMappingScanMan
 
     @Override
     public void postLocalStorage(List<RequestMapping> requestMappings) {
-        securityMetadataSourceAnalyzer.processSecurityRequestMapping();
+        securityMetadataSourceAnalyzer.processRequestMatchers();
     }
 
     @Override
