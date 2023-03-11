@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>event-message-spring-boot-starter</artifactId>
+            <artifactId>message-kafka-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

@@ -25,6 +25,7 @@
 
 package cn.herodotus.dante.message;
 
+import cn.herodotus.engine.supplier.message.annotation.EnableHerodotusSupplierMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -37,6 +38,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableHerodotusSupplierMessage
 public class MessageApplication {
 
     public static void main(String[] args) {

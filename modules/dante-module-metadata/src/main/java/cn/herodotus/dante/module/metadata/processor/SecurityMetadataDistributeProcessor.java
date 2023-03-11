@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.metadata.processor;
 
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
-import cn.herodotus.engine.event.security.remote.RemoteSecurityMetadataSyncEvent;
+import cn.herodotus.engine.message.security.event.RemoteSecurityMetadataSyncEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
 import cn.herodotus.engine.rest.core.context.ServiceContext;

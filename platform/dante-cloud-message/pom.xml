@@ -47,6 +47,10 @@
             <groupId>cn.herodotus.engine</groupId>
             <artifactId>message-spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>supplier-sdk-message</artifactId>
+        </dependency>
     </dependencies>
 
     <profiles>
