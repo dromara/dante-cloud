@@ -23,32 +23,38 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.strategy.definition;
+package cn.herodotus.dante.module.strategy.service;
 
-import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
+import cn.herodotus.dante.module.strategy.definition.AbstractStrategyPermissionDetailsService;
+import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusPermission;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
+import org.apache.commons.collections4.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * <p>Description: 抽象的StrategyAuthorityDetailsService </p>
+ * <p>Description: 本地权限服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/4/1 19:09
+ * @date : 2022/4/1 18:56
  */
-public abstract class AbstractStrategyAuthorityDetailsService implements StrategyAuthorityDetailsService {
+public class HerodotusLocalPermissionDetailsService extends AbstractStrategyPermissionDetailsService {
 
-    protected List<Authority> toEntities(List<SysPermission> permissions) {
-        return permissions.stream().map(this::toEntity).collect(Collectors.toList());
+    private final SysPermissionService sysPermissionService;
+
+    public HerodotusLocalPermissionDetailsService(SysPermissionService sysPermissionService) {
+        this.sysPermissionService = sysPermissionService;
     }
 
-    protected Authority toEntity(SysPermission object) {
-        Authority authority = new Authority();
-        authority.setAuthorityId(object.getPermissionId());
-        authority.setAuthorityCode(object.getPermissionCode());
-        authority.setAuthorityName(object.getPermissionName());
-        return authority;
+    @Override
+    public List<HerodotusPermission> findAll() {
+        List<SysPermission> authorities = sysPermissionService.findAll();;
+        if (CollectionUtils.isNotEmpty(authorities)) {
+            return toEntities(authorities);
+        }
+
+        return new ArrayList<>();
     }
 }

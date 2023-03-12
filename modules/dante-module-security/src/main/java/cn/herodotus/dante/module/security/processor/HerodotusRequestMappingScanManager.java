@@ -11,8 +11,8 @@
 package cn.herodotus.dante.module.security.processor;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
-import cn.herodotus.engine.event.core.local.LocalRequestMappingGatherEvent;
-import cn.herodotus.engine.event.security.remote.RemoteRequestMappingGatherEvent;
+import cn.herodotus.engine.message.core.event.LocalRequestMappingGatherEvent;
+import cn.herodotus.engine.message.security.event.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.rest.core.context.ServiceContext;
 import cn.herodotus.engine.rest.core.domain.RequestMapping;

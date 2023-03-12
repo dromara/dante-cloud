@@ -27,10 +27,10 @@ package cn.herodotus.dante.module.strategy.configuration;
 
 import cn.herodotus.dante.module.social.configuration.SocialModuleConfiguration;
 import cn.herodotus.dante.module.strategy.annotation.ConditionalOnMonocoqueArchitecture;
-import cn.herodotus.dante.module.strategy.service.HerodotusLocalAuthorityDetailsService;
+import cn.herodotus.dante.module.strategy.service.HerodotusLocalPermissionDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
@@ -63,10 +63,10 @@ public class MonocoqueArchitectureConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public StrategyAuthorityDetailsService HerodotusLocalAuthorityDetailsService(SysPermissionService sysPermissionService) {
-        HerodotusLocalAuthorityDetailsService herodotusLocalAuthorityDetailsService = new HerodotusLocalAuthorityDetailsService(sysPermissionService);
-        log.debug("[Herodotus] |- Strategy [Local Authority Details Service] Auto Configure.");
-        return herodotusLocalAuthorityDetailsService;
+    public StrategyPermissionDetailsService herodotusLocalPermissionDetailsService(SysPermissionService sysPermissionService) {
+        HerodotusLocalPermissionDetailsService herodotusLocalPermissionDetailsService = new HerodotusLocalPermissionDetailsService(sysPermissionService);
+        log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
+        return herodotusLocalPermissionDetailsService;
     }
 
     @Bean

@@ -32,12 +32,12 @@ import cn.herodotus.dante.module.strategy.annotation.ConditionalOnRemoteDataAcce
 import cn.herodotus.dante.module.strategy.feign.RemoteAuthorityDetailsService;
 import cn.herodotus.dante.module.strategy.feign.RemoteSocialDetailsService;
 import cn.herodotus.dante.module.strategy.feign.RemoteUserDetailsService;
-import cn.herodotus.dante.module.strategy.service.HerodotusLocalAuthorityDetailsService;
+import cn.herodotus.dante.module.strategy.service.HerodotusLocalPermissionDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
-import cn.herodotus.dante.module.strategy.service.HerodotusRemoteAuthorityDetailsService;
+import cn.herodotus.dante.module.strategy.service.HerodotusRemotePermissionDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemoteUserDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyAuthorityDetailsService;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
@@ -82,10 +82,10 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyAuthorityDetailsService HerodotusLocalAuthorityDetailsService(SysPermissionService sysPermissionService) {
-            HerodotusLocalAuthorityDetailsService herodotusLocalAuthorityDetailsService = new HerodotusLocalAuthorityDetailsService(sysPermissionService);
-            log.debug("[Herodotus] |- Strategy [Local Authority Details Service] Auto Configure.");
-            return herodotusLocalAuthorityDetailsService;
+        public StrategyPermissionDetailsService herodotusLocalPermissionDetailsService(SysPermissionService sysPermissionService) {
+            HerodotusLocalPermissionDetailsService herodotusLocalPermissionDetailsService = new HerodotusLocalPermissionDetailsService(sysPermissionService);
+            log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
+            return herodotusLocalPermissionDetailsService;
         }
     }
 
@@ -103,10 +103,10 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyAuthorityDetailsService HerodotusRemoteAuthorityDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
-            HerodotusRemoteAuthorityDetailsService herodotusRemoteAuthorityDetailsService = new HerodotusRemoteAuthorityDetailsService(remoteAuthorityDetailsService);
-            log.debug("[Herodotus] |- Strategy [Remote Authority Details Service] Auto Configure.");
-            return herodotusRemoteAuthorityDetailsService;
+        public StrategyPermissionDetailsService HerodotusRemotePermissionDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
+            HerodotusRemotePermissionDetailsService herodotusRemotePermissionDetailsService = new HerodotusRemotePermissionDetailsService(remoteAuthorityDetailsService);
+            log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Auto Configure.");
+            return herodotusRemotePermissionDetailsService;
         }
     }
 }

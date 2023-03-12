@@ -25,36 +25,37 @@
 
 package cn.herodotus.dante.module.strategy.service;
 
-import cn.herodotus.dante.module.strategy.definition.AbstractStrategyAuthorityDetailsService;
-import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
+import cn.herodotus.dante.module.strategy.definition.AbstractStrategyPermissionDetailsService;
+import cn.herodotus.dante.module.strategy.feign.RemoteAuthorityDetailsService;
+import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusPermission;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>Description: 本地权限服务 </p>
+ * <p>Description: 远程权限服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/4/1 18:56
+ * @date : 2022/4/1 19:01
  */
-public class HerodotusLocalAuthorityDetailsService extends AbstractStrategyAuthorityDetailsService {
+public class HerodotusRemotePermissionDetailsService extends AbstractStrategyPermissionDetailsService {
 
-    private final SysPermissionService sysPermissionService;
+    private final RemoteAuthorityDetailsService remoteAuthorityDetailsService;
 
-    public HerodotusLocalAuthorityDetailsService(SysPermissionService sysPermissionService) {
-        this.sysPermissionService = sysPermissionService;
+    public HerodotusRemotePermissionDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
+        this.remoteAuthorityDetailsService = remoteAuthorityDetailsService;
     }
 
     @Override
-    public List<Authority> findAll() {
-        List<SysPermission> authorities = sysPermissionService.findAll();;
+    public List<HerodotusPermission> findAll() {
+        Result<List<SysPermission>> result = remoteAuthorityDetailsService.findAll();
+        List<SysPermission> authorities = result.getData();
         if (CollectionUtils.isNotEmpty(authorities)) {
             return toEntities(authorities);
         }
-
         return new ArrayList<>();
     }
 }

@@ -23,39 +23,32 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.module.strategy.service;
+package cn.herodotus.dante.module.strategy.definition;
 
-import cn.herodotus.dante.module.strategy.definition.AbstractStrategyAuthorityDetailsService;
-import cn.herodotus.dante.module.strategy.feign.RemoteAuthorityDetailsService;
-import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.oauth2.core.definition.domain.Authority;
+import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusPermission;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
-import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * <p>Description: 远程权限服务 </p>
+ * <p>Description: 抽象的StrategyAuthorityDetailsService </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/4/1 19:01
+ * @date : 2022/4/1 19:09
  */
-public class HerodotusRemoteAuthorityDetailsService extends AbstractStrategyAuthorityDetailsService {
+public abstract class AbstractStrategyPermissionDetailsService implements StrategyPermissionDetailsService {
 
-    private final RemoteAuthorityDetailsService remoteAuthorityDetailsService;
-
-    public HerodotusRemoteAuthorityDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
-        this.remoteAuthorityDetailsService = remoteAuthorityDetailsService;
+    protected List<HerodotusPermission> toEntities(List<SysPermission> permissions) {
+        return permissions.stream().map(this::toEntity).collect(Collectors.toList());
     }
 
-    @Override
-    public List<Authority> findAll() {
-        Result<List<SysPermission>> result = remoteAuthorityDetailsService.findAll();
-        List<SysPermission> authorities = result.getData();
-        if (CollectionUtils.isNotEmpty(authorities)) {
-            return toEntities(authorities);
-        }
-        return new ArrayList<>();
+    protected HerodotusPermission toEntity(SysPermission object) {
+        HerodotusPermission herodotusPermission = new HerodotusPermission();
+        herodotusPermission.setPermissionId(object.getPermissionId());
+        herodotusPermission.setPermissionCode(object.getPermissionCode());
+        herodotusPermission.setPermissionName(object.getPermissionName());
+        return herodotusPermission;
     }
 }
