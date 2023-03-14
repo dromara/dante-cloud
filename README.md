@@ -13,7 +13,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.1-brightgreen" alt="Nacos 2.2.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.4.0-red" alt="Version 3.0.4.0"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.4.1-red" alt="Version 3.0.4.1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -133,11 +133,11 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 |-----------------------------|----------------|
 | Spring Boot                 | 3.0.4          |
 | Spring Cloud                | 2022.0.1       |
-| Spring Cloud Alibaba        | 2022.0.0.0 |
+| Spring Cloud Alibaba        | 2022.0.0.0     |
 | Spring Cloud Tencent        | 1.9.0-2022.0.1 |
 | Spring Authorization Server | 1.1.0          |
-| Spring Boot Admin           | 3.0.0          |
-| Nacos                       | 2.2.1       |
+| Spring Boot Admin           | 3.0.1          |
+| Nacos                       | 2.2.1          |
 | Sentinel                    | 1.8.5          |
 | Seata                       | 1.5.2          |
 
@@ -166,7 +166,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 ### (3) 前端工程技术栈
 
 - Vue3
-- Vite2
+- Vite4
 - Pinia
 - Typescript
 - Quasar2
@@ -199,6 +199,7 @@ dante-cloud
 ├    └── service-spring-boot-starter -- 平台接入应用服务通用 Starter
 ├── platform -- 平台核心服务
 ├    ├── dante-cloud-gateway -- 服务网关
+├    ├── dante-cloud-message -- 消息服务
 ├    ├── dante-cloud-monitor -- Spring Boot Admin 监控服务
 ├    ├── dante-cloud-upms -- 统一权限管理系统服务
 ├    └── dante-cloud-uaa -- 账户管理和统一认证模块
