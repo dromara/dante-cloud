@@ -42,7 +42,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-upms-logic</artifactId>
+            <artifactId>dante-module-social</artifactId>
         </dependency>
 
         <dependency>

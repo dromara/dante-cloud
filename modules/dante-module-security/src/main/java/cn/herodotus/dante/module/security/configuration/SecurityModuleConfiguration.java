@@ -28,7 +28,7 @@ package cn.herodotus.dante.module.security.configuration;
 import cn.herodotus.dante.module.security.processor.HerodotusRequestMappingScanManager;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.exception.SecurityGlobalExceptionHandler;
-import cn.herodotus.engine.web.core.definition.RequestMappingScanManager;
+import cn.herodotus.engine.rest.scan.definition.RequestMappingScanManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class SecurityModuleConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- SDK [Module Security] Auto Configure.");
+        log.info("[Herodotus] |- SDK [Security Module] Auto Configure.");
     }
 
     @Bean

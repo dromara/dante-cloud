@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,10 +52,15 @@ import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.Session;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -83,31 +89,22 @@ public class DefaultSecurityConfiguration {
         // 禁用CSRF 开启跨域
         httpSecurity.csrf().disable().cors();
 
+        // @formatter:off
         httpSecurity
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
                         .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                         .anyRequest().access(securityAuthorizationManager))
-                .formLogin(form -> {
-                    form.loginPage(uiProperties.getLoginPageUrl())
-                            .usernameParameter(uiProperties.getUsernameParameter())
-                            .passwordParameter(uiProperties.getPasswordParameter());
-                    if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
-                        form.failureForwardUrl(uiProperties.getFailureForwardUrl());
-                    }
-                    if (StringUtils.isNotBlank(uiProperties.getSuccessForwardUrl())) {
-                        form.successForwardUrl(uiProperties.getSuccessForwardUrl());
-                    }
-                })
                 .sessionManagement(Customizer.withDefaults())
                 .exceptionHandling()
-                .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
-                .accessDeniedHandler(new HerodotusAccessDeniedHandler())
+                    .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
+                    .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer))
+                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
 
+        // @formatter:on
         return httpSecurity.build();
     }
 
@@ -137,5 +134,17 @@ public class DefaultSecurityConfiguration {
         HerodotusClientDetailsService herodotusClientDetailsService = new HerodotusClientDetailsService(applicationService);
         log.debug("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
         return herodotusClientDetailsService;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "spring.session.store-type", havingValue = "redis")
+    public <S extends Session> SessionRegistry sessionRegistry(
+            FindByIndexNameSessionRepository<S> sessionRepository) {
+        return new SpringSessionBackedSessionRegistry<S>(sessionRepository);
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 }

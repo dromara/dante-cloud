@@ -44,11 +44,11 @@
         </dependency>
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-upms-logic</artifactId>
+            <artifactId>dante-module-social</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-upms-rest</artifactId>
+            <artifactId>dante-module-metadata</artifactId>
         </dependency>
     </dependencies>
 

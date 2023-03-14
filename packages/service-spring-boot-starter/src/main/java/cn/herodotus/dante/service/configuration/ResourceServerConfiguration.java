@@ -56,11 +56,10 @@ public class ResourceServerConfiguration {
 
         httpSecurity.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
                                 .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                                 .anyRequest().access(securityAuthorizationManager))
-                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer));
+                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
 
         return httpSecurity.build();
     }

@@ -26,9 +26,9 @@
 package cn.herodotus.dante.module.strategy.feign;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
-import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
 import cn.herodotus.engine.assistant.core.annotation.Inner;
 import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +43,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface RemoteUserDetailsService {
 
     @Inner
-    @GetMapping("/user/sign-in/{userName}")
+    @GetMapping("/security/user/sign-in/{userName}")
     Result<SysUser> findByUserName(@PathVariable("userName") String userName);
 }

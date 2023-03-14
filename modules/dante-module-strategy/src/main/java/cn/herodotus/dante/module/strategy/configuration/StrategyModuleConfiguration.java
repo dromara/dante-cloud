@@ -48,6 +48,6 @@ public class StrategyModuleConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- SDK [Module Strategy] Auto Configure.");
+        log.info("[Herodotus] |- SDK [Strategy Module] Auto Configure.");
     }
 }

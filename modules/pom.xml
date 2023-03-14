@@ -68,8 +68,8 @@
     <modules>
         <module>dante-module-common</module>
         <module>dante-module-security</module>
-        <module>dante-module-upms-logic</module>
-        <module>dante-module-upms-rest</module>
+        <module>dante-module-social</module>
+        <module>dante-module-metadata</module>
         <module>dante-module-strategy</module>
     </modules>
 

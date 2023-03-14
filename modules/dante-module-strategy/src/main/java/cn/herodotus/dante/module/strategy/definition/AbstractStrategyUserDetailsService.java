@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.strategy.definition;
 
-import cn.herodotus.dante.module.upms.logic.entity.system.SysUser;
-import cn.herodotus.dante.module.upms.logic.helper.UpmsHelper;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
+import cn.herodotus.engine.supplier.upms.logic.helper.UpmsHelper;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
