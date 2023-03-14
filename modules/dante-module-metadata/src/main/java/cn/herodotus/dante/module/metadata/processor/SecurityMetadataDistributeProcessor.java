@@ -94,15 +94,15 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
                 List<SysAttribute> elements = this.convertSysInterfacesToSysAttributes(sysInterfaces);
                 List<SysAttribute> result = sysAttributeService.batchSaveOrUpdate(elements);
                 if (CollectionUtils.isNotEmpty(result)) {
-                    log.debug("[Herodotus] |- [6] Merge security attribute SUCCESS and FINISHED!");
+                    log.debug("[Herodotus] |- Merge security attribute SUCCESS and FINISHED!");
                 } else {
-                    log.error("[Herodotus] |- [6] Merge Security attribute failed!, Please Check!");
+                    log.error("[Herodotus] |- Merge Security attribute failed!, Please Check!");
                 }
             } else {
                 log.debug("[Herodotus] |- No security attribute requires merge, SKIP!");
             }
 
-            log.debug("[Herodotus] |- [7] Synchronization current permissions to every service!");
+            log.debug("[Herodotus] |- [6] Synchronization current permissions to every service!");
 
             List<SysAttribute> sysAttributes = sysAttributeService.findAll();
             this.postGroupProcess(sysAttributes);
