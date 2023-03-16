@@ -58,11 +58,6 @@ INSERT INTO `sys_role` (`role_id`, `create_time`, `ranking`, `update_time`, `des
 INSERT INTO `sys_role` (`role_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `role_code`, `role_name`) VALUES ('faccc981-7cd4-4333-9ef9-93752eb186bd', '2023-02-27 21:54:33.723', 0, '2023-02-27 21:54:33', '一般用户角色', b'1', 0, 0, 'ROLE_NORMAL', '普通用户角色');
 
 -- ----------------------------
--- Table data for sys_role
--- ----------------------------
-INSERT INTO `sys_role` (`role_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `role_code`, `role_name`) VALUES ('1', '2019-07-23 07:22:27', 1, '2019-09-11 12:04:52', '中台管理员角色', b'1', 0, 0, 'ROLE_ADMINISTRATOR', '平台管理员角色');
-INSERT INTO `sys_role` (`role_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `role_code`, `role_name`) VALUES ('7e43d37d-d045-445f-a1de-cb1259f7709c', '2022-07-18 20:27:46.536', 0, '2022-07-18 20:27:46.536', '人力资源管理角色', b'1', 0, 0, 'ROLE_HUMAN_RESOURCES', '人力资源管理');
--- ----------------------------
 -- Table data for sys_permission
 -- ----------------------------
 INSERT INTO `sys_permission` (`permission_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `permission_code`, `permission_name`) VALUES ('1', '2023-03-08 00:03:35.765', 1, '2023-03-08 00:03:35.765', '所有角色用户都需要用到的权限', b'1', 0, 0, 'general', '通用基础权限');
