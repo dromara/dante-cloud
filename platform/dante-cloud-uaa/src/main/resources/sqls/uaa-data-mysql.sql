@@ -304,7 +304,7 @@ FROM
     '1' AS permission_id,
     sa.attribute_id
     FROM
-    `sys_interface` sa
+    `sys_attribute` sa
     WHERE
     sa.url = '/security/element/tree'
     OR sa.url = '/oauth2/sign-out'
@@ -314,7 +314,7 @@ FROM
     '2' AS permission_id,
     sa.attribute_id
     FROM
-    `sys_interface` sa
+    `sys_attribute` sa
     WHERE
     sa.url LIKE'%authorize%'
     AND sa.url != '/authorize/constant/enums' UNION
@@ -322,7 +322,7 @@ FROM
     '3' AS permission_id,
     sa.attribute_id
     FROM
-    `sys_interface` sa
+    `sys_attribute` sa
     WHERE
     sa.url LIKE'%security%'
     AND sa.url != '/security/element/tree' UNION
@@ -330,21 +330,21 @@ FROM
     '4' AS permission_id,
     sa.attribute_id
     FROM
-    `sys_interface` sa
+    `sys_attribute` sa
     WHERE
     sa.url LIKE'%hr%' UNION
     SELECT
     '5' AS permission_id,
     sa.attribute_id
     FROM
-    `sys_interface` sa
+    `sys_attribute` sa
     WHERE
     sa.url LIKE'%camunda-extended%' UNION
     SELECT
     '6' AS permission_id,
     sa.attribute_id
     FROM
-    `sys_interface` sa
+    `sys_attribute` sa
     WHERE
     sa.url LIKE'%db%'
     OR sa.url LIKE'%asset%' UNION
@@ -352,7 +352,7 @@ FROM
     '7' AS permission_id,
     sa.attribute_id
     FROM
-    `sys_interface` sa
+    `sys_attribute` sa
     WHERE
     sa.url LIKE'%meteorology%'
     OR sa.url LIKE'%satellite%'
