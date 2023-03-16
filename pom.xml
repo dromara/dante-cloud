@@ -116,8 +116,10 @@
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
-                <!--Spring Cloud Tencent 配置-->
+                <!--Spring Cloud Tencent 配置 【(8091)grpc/tcp，默认注册中心端口;(8090)http/tcp，默认注册中心端口】-->
                 <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
+                <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
+                <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
                 <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
@@ -189,8 +191,10 @@
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
-                <!--Spring Cloud Tencent 配置-->
+                <!--Spring Cloud Tencent 配置 【(8091)grpc/tcp，默认注册中心端口;(8090)http/tcp，默认注册中心端口】-->
                 <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
+                <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
+                <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
                 <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
@@ -220,8 +224,10 @@
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
-                <!--Spring Cloud Tencent 配置-->
+                <!--Spring Cloud Tencent 配置 【(8091)grpc/tcp，默认注册中心端口;(8090)http/tcp，默认注册中心端口】-->
                 <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
+                <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
+                <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
                 <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>

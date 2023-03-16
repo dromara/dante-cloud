@@ -104,16 +104,17 @@ spring:
         - eth0
     polaris:
       enabled: true
-      address: grpc://@tencent.polaris.server-addr@
-      namespace: @tencent.polaris.namespace@
+      address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
+      namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
       discovery:
         service: ${spring.application.name}
-        namespace: @tencent.polaris.namespace@
+        namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
         heartbeat-interval: 30
       config:
-        local-file-root-path: ./configurations/configs/tencent/backup/config
+        address: ${TENCENT_POLARIS_CONFIG_ADDR:grpc://@tencent.polaris.config-addr@}
+        local-file-root-path: ${TENCENT_POLARIS_LOCAL_DIR:@tencent.polaris.local.dir@}
         groups:
-          - name: @profile@
+          - name: ${PROFILE:@profile@}
             files:
               - dante-cloud-environment.yaml
           - name: common
