@@ -10,15 +10,15 @@ spring:
   cloud:
     nacos:
       config:
-        namespace: @config.namespace@
-        server-addr: @config.server-addr@
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
         file-extension: yaml
         shared-configs:
           - data-id: dante-cloud-environment.yaml
-            group: @profile.name@
+            group: ${PROFILE:@profile@}
           - data-id: dante-cloud-platform.yaml
             group: common
-          - data-id: dante-cloud-database-@database.type@.yaml
+          - data-id: dante-cloud-database-${DATABASE:@database@}.yaml
             group: common
           - data-id: dante-cloud-database.yaml
             group: common
@@ -31,12 +31,12 @@ spring:
           - data-id: dante-cloud-kafka.yaml
             group: common
       discovery:
-        namespace: @config.namespace@
-        server-addr: @discovery.server-addr@
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
     sentinel:
       transport:
         port: 8719
-        dashboard: @sentinel.server-addr@
+        dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
 
 springdoc:
   swagger-ui:

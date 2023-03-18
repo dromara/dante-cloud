@@ -28,15 +28,15 @@ spring:
   cloud:
     nacos:
       config:
-        namespace: @alibaba.config.namespace@
-        server-addr: @alibaba.config.server-addr@
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
         file-extension: yaml
         shared-configs:
           - data-id: dante-cloud-environment.yaml
-            group: @profile@
+            group: ${PROFILE:@profile@}
           - data-id: dante-cloud-platform.yaml
             group: common
-          - data-id: dante-cloud-database-@database@.yaml
+          - data-id: dante-cloud-database-${DATABASE:@database@}.yaml
             group: common
           - data-id: dante-cloud-database.yaml
             group: common
@@ -56,12 +56,12 @@ spring:
           - data-id: dante-cloud-social.yaml
             group: common
       discovery:
-        namespace: @alibaba.config.namespace@
-        server-addr: @alibaba.discovery.server-addr@
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
       sentinel:
         transport:
           port: 8719
-          dashboard: @alibaba.sentinel.server-addr@
+          dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
         eager: true #服务注启动，直接注册到dashboard
     #      datasource:
     #        flow:
@@ -120,7 +120,7 @@ spring:
           - name: common
             files:
               - dante-cloud-platform.yaml
-              - dante-cloud-database-@database@.yaml
+              - dante-cloud-database-${DATABASE:@database@}.yaml
               - dante-cloud-database.yaml
               - dante-cloud-redis.yaml
               - dante-cloud-cache.yaml

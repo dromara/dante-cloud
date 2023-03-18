@@ -109,20 +109,20 @@
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <alibaba.namespace>2e4f5cf6-2ac8-4fe0-99be-b0562659c120</alibaba.namespace>
                 <!--Spring Cloud Alibaba配置中心地址-->
                 <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
-                <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <alibaba.config.namespace>2e4f5cf6-2ac8-4fe0-99be-b0562659c120</alibaba.config.namespace>
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
+                <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 配置 【(8091)grpc/tcp，默认注册中心端口;(8090)http/tcp，默认注册中心端口】-->
                 <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
                 <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
-                <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
-                <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
+                <tencent.polaris.local.dir>./configurations/configs/tencent/backup/config</tencent.polaris.local.dir>
             </properties>
             <build>
                 <pluginManagement>
@@ -183,21 +183,21 @@
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <!--<alibaba.namespace>8fdcc073-2e51-4722-8274-3f5b76362bb8</alibaba.namespace>-->
+                <alibaba.namespace></alibaba.namespace>
                 <!--Spring Cloud Alibaba配置中心地址-->
                 <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
-                <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <!--<alibaba.config.namespace>8fdcc073-2e51-4722-8274-3f5b76362bb8</alibaba.config.namespace>-->
-                <alibaba.config.namespace></alibaba.config.namespace>
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
+                <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 配置 【(8091)grpc/tcp，默认注册中心端口;(8090)http/tcp，默认注册中心端口】-->
                 <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
                 <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
-                <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
-                <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
+                <tencent.polaris.local.dir>./configurations/configs/tencent/backup/config</tencent.polaris.local.dir>
             </properties>
         </profile>
         <!-- Docker -->
@@ -220,7 +220,7 @@
                 <!--Spring Cloud Alibaba配置中心地址-->
                 <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
                 <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <alibaba.config.namespace></alibaba.config.namespace>
+                <alibaba.namespace></alibaba.namespace>
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
@@ -230,7 +230,7 @@
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
-                <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
+                <tencent.polaris.local.dir>./configurations/configs/tencent/backup/config</tencent.polaris.local.dir>
             </properties>
             <build>
                 <pluginManagement>

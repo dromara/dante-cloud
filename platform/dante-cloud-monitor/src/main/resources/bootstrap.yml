@@ -23,12 +23,12 @@ spring:
   cloud:
     nacos:
       config:
-        namespace: @alibaba.config.namespace@
-        server-addr: @alibaba.config.server-addr@
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
         file-extension: yaml
       discovery:
-        namespace: @alibaba.config.namespace@
-        server-addr: @alibaba.discovery.server-addr@
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
     httpclientfactories:
       ok:
         enabled: false
@@ -40,16 +40,17 @@ spring:
     activate:
       on-profile: tencent
   cloud:
-    inetutils:
-      ignored-interfaces:
-        - eth0
+#    inetutils:
+#      ignored-interfaces:
+#        - eth0
     polaris:
       enabled: true
-      address: grpc://@tencent.polaris.server-addr@
-      namespace: @tencent.polaris.namespace@
+      address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
+      namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
       discovery:
         service: ${spring.application.name}
-        namespace: @tencent.polaris.namespace@
+        namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
+        heartbeat-interval: 30
 ---
 # spring 全家桶基础设施配置
 spring:
