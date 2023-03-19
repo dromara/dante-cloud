@@ -9,10 +9,10 @@
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.7.9-blue" alt="Spring Boot 2.7.9"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.6-blue" alt="Spring Cloud 2021.0.6"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.4.0-blue" alt="Spring Cloud Alibaba 2021.0.4.0"></a>
-    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.0-brightgreen" alt="Nacos 2.2.0"></a>
+    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.1-brightgreen" alt="Nacos 2.2.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.9.1-red" alt="Version 2.7.9.1"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.9.2-red" alt="Version 2.7.9.2"></a>
     <a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -37,11 +37,11 @@
 
 自11月24日，Spring Boot 3.0 以及 Spring Cloud 2022.0.0、Spring Cloud Tencent 等全新版本发布，整个Java 社区也步入的 Java 17 和 Spring Boot 3 的新时代。紧跟 Java 技术和 Spring 社区的发展，让更多质量更好、性能更优的新特性服务于实际的开发工作，Dante Cloud 也同步进行升级及适配，开发了全新的 3.0 版本。
 
-基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.4、Spring Cloud 2022.0.1、Spring Cloud Tencent 1.9.0-2022.0.1、Spring Cloud Alibaba 2021.0.4.0、Nacos 2.2.0 等主流技术栈开发的 Dante Cloud v3.0.0 已经正式发布，关注请移步 [v3.0.0 分支](https://gitee.com/dromara/dante-cloud/tree/3.0.0/)
+基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.4、Spring Cloud 2022.0.1、Spring Cloud Tencent 1.9.0-2022.0.1、Spring Cloud Alibaba 2021.0.4.0、Nacos 2.2.1 等主流技术栈开发的 Dante Cloud v3.0.0 已经正式发布，关注请移步 [v3.0.0 分支](https://gitee.com/dromara/dante-cloud/tree/3.0.0/)
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Boot 2.7.9、Spring Cloud 2021.0.6、Spring Cloud Alibaba 2021.0.4.0、Spring Authorization Server 0.4.0、Nacos 2.2.0 等最新版本开发，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流、多租户等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Boot 2.7.9、Spring Cloud 2021.0.6、Spring Cloud Alibaba 2021.0.4.0、Spring Authorization Server 0.4.0、Nacos 2.2.1 等最新版本开发，遵循 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流、多租户等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## 平台定位
 
@@ -153,17 +153,17 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 ### （1）Spring 全家桶及核心技术版本
 
-| 组件                          | 版本                          |
-| ----------------------------- |-----------------------------|
-| `Spring Boot`                 | 2.7.9 / 3.0.4               |
-| `Spring Cloud`                | 2021.0.6 / 2022.0.1         |
+| 组件                          | 版本                         |
+| ----------------------------- |----------------------------|
+| `Spring Boot`                 | 2.7.9 / 3.0.4              |
+| `Spring Cloud`                | 2021.0.6 / 2022.0.1        |
 | `Spring Cloud Alibaba`        | 2021.0.4.0 / 2022.0.0.0-RC1 |
-| `Spring Cloud Tencent`        | - / 1.9.0-2022.0.1          |
-| `Spring Authorization Server` | 0.4.1 / 1.1.0               |
-| `Spring Boot Admin`           | 2.7.10 / 3.0.0              |
-| `Nacos`                       | 2.2.0 / 2.2.1-RC            |
-| `Sentinel`                    | 1.8.5                       |
-| `Seata`                       | 1.5.2                       |
+| `Spring Cloud Tencent`        | 1.9.0-2022.0.1         |
+| `Spring Authorization Server` | 0.4.1 / 1.1.0              |
+| `Spring Boot Admin`           | 2.7.10 / 3.0.0             |
+| `Nacos`                       | 2.2.1          |
+| `Sentinel`                    | 1.8.5                      |
+| `Seata`                       | 1.5.2                      |
 
 > Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
@@ -284,14 +284,16 @@ dante-cloud
 
 ### 赞助人列表
 
-| 赞助人       | 赞助时间       |
-|-----------|------------|
-| 偷土豆的人     | 2021-11-24 |
-| lorron    | 2022-04-04 |
-| 在云端       | 2022-12-26 |
+| 赞助人      | 赞助时间   |
+| ----------- | ---------- |
+| 偷土豆的人  | 2021-11-24 |
+| lorron      | 2022-04-04 |
+| 在云端      | 2022-12-26 |
 | 西晽        | 2022-12-27 |
-| p911gt3rs | 2023-01-03 |
-| jacsty    | 2023-01-31 |
+| p911gt3rs   | 2023-01-03 |
+| jacsty      | 2023-01-31 |
+| hubert_rust | 2023-03-16 |
+| Zkey Z      | 2023-03-18 |
 
 ### 开源项目
 
