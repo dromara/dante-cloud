@@ -63,6 +63,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.OAuth2Token;
@@ -75,10 +76,7 @@ import org.springframework.security.oauth2.server.authorization.token.JwtEncodin
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenClaimsContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-import org.springframework.security.oauth2.server.authorization.web.authentication.DelegatingAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2AuthorizationCodeAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2ClientCredentialsAuthenticationConverter;
-import org.springframework.security.oauth2.server.authorization.web.authentication.OAuth2RefreshTokenAuthenticationConverter;
+import org.springframework.security.oauth2.server.authorization.web.authentication.*;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
@@ -136,6 +134,8 @@ public class AuthorizationServerConfiguration {
         authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
             endpoint.consentPage("/oauth2/consent");
@@ -146,12 +146,15 @@ public class AuthorizationServerConfiguration {
                             new OAuth2AuthorizationCodeAuthenticationConverter(),
                             new OAuth2RefreshTokenAuthenticationConverter(),
                             new OAuth2ClientCredentialsAuthenticationConverter(),
+                            new OAuth2DeviceCodeAuthenticationConverter(),
                             new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
                             new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
             endpoint.accessTokenRequestConverter(authenticationConverter);
             endpoint.errorResponseHandler(failureHandler);
             endpoint.accessTokenResponseHandler(new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));
         });
+
+        SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getSessionRegistry(httpSecurity);
 
         // 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
         authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
@@ -162,6 +165,7 @@ public class AuthorizationServerConfiguration {
                 if (org.springframework.security.oauth2.server.authorization.authentication.OAuth2AuthorizationCodeAuthenticationProvider.class.isAssignableFrom(object.getClass())) {
                     OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
                     OAuth2AuthorizationCodeAuthenticationProvider provider = new OAuth2AuthorizationCodeAuthenticationProvider(authorizationService, tokenGenerator);
+                    provider.setSessionRegistry(sessionRegistry);
                     log.debug("[Herodotus] |- Custom OAuth2AuthorizationCodeAuthenticationProvider is in effect!");
                     return (O) provider;
                 }
@@ -222,10 +226,12 @@ public class AuthorizationServerConfiguration {
         OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
                 new OAuth2ResourceOwnerPasswordAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, complianceProperties);
         resourceOwnerPasswordAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        resourceOwnerPasswordAuthenticationProvider.setSessionRegistry(sessionRegistry);
         httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
 
         OAuth2SocialCredentialsAuthenticationProvider socialCredentialsAuthenticationProvider =
                 new OAuth2SocialCredentialsAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, complianceProperties);
+        socialCredentialsAuthenticationProvider.setSessionRegistry(sessionRegistry);
         httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
 
         return securityFilterChain;
