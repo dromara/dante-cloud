@@ -6,3 +6,4 @@ cn.herodotus.engine.oauth2.authentication.server.configuration.OAuth2Authenticat
 cn.herodotus.dante.authentication.configuration.DefaultSecurityConfiguration
 cn.herodotus.dante.authentication.configuration.AuthorizationServerConfiguration
 cn.herodotus.engine.oauth2.compliance.configuration.OAuth2ComplianceConfiguration
+cn.herodotus.engine.supplier.tenant.configuration.SupplierTenantConfiguration

@@ -32,11 +32,11 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.5.0</version>
+        <version>3.0.5.1</version>
     </parent>
 
     <artifactId>authentication-spring-boot-starter</artifactId>
-    <version>3.0.5.0</version>
+    <version>3.0.5.1</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -53,6 +53,11 @@
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
             <artifactId>oauth2-sdk-compliance</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>supplier-sdk-tenant</artifactId>
         </dependency>
     </dependencies>
 

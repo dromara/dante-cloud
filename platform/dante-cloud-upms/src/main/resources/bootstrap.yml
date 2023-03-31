@@ -40,8 +40,7 @@ spring:
             group: common
           - data-id: dante-cloud-social.yaml
             group: common
-          - data-id: dante-cloud-multi-tenant.yaml
-            group: common
+
       discovery:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
@@ -112,7 +111,6 @@ spring:
               - dante-cloud-rest.yaml
               - dante-cloud-kafka.yaml
               - dante-cloud-social.yaml
-              - dante-cloud-multi-tenant.yaml
 
 ---
 # spring 全家桶基础设施配置

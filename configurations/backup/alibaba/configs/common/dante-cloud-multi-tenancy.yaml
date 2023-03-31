@@ -1,9 +1,0 @@
-herodotus:
-  multi-tenancy:
-    enabled: false
-    data-sources:
-      TENANT01:
-        driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-        url: jdbc:p6spy:postgresql://localhost:15432/athena
-        username: athena
-        password: athena

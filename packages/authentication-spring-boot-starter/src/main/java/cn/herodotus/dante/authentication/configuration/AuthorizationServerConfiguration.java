@@ -134,7 +134,10 @@ public class AuthorizationServerConfiguration {
         authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(failureHandler));
-        authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> {
+            endpoint.errorResponseHandler(failureHandler);
+            endpoint.verificationUri("/activate");
+        });
         authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
@@ -301,8 +304,11 @@ public class AuthorizationServerConfiguration {
                 .tokenRevocationEndpoint(endpointProperties.getTokenRevocationEndpoint())
                 .tokenIntrospectionEndpoint(endpointProperties.getTokenIntrospectionEndpoint())
                 .jwkSetEndpoint(endpointProperties.getJwkSetEndpoint())
+                .deviceAuthorizationEndpoint(endpointProperties.getDeviceAuthorizationEndpoint())
+                .deviceVerificationEndpoint(endpointProperties.getDeviceVerificationEndpoint())
                 .oidcUserInfoEndpoint(endpointProperties.getOidcUserInfoEndpoint())
                 .oidcClientRegistrationEndpoint(endpointProperties.getOidcClientRegistrationEndpoint())
+                .oidcLogoutEndpoint(endpointProperties.getOidcLogoutEndpoint())
                 .build();
     }
 }
