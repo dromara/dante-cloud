@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.10.0-red.svg?logo=Spring" alt="Version 2.7.10.0"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.10.1-red.svg?logo=Spring" alt="Version 2.7.10.1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green.svg?logo=openjdk" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="License Apache 2.0"></a>
@@ -329,6 +329,7 @@ dante-cloud
 | Zkey Z      | 2023-03-18 |
 | 志国欧巴    | 2023-03-27 |
 | michael     | 2023-04-07 |
+| 大叔丨小巷  | 2023-04-11 |
 
 ### 开源项目
 

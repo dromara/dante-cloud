@@ -30,11 +30,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>2.7.10.0</version>
+        <version>2.7.10.1</version>
     </parent>
 
     <artifactId>dante-cloud-monitor</artifactId>
-    <version>2.7.10.0</version>
+    <version>2.7.10.1</version>
     <name>dante-cloud-monitor</name>
     <description>dante-cloud-monitor</description>
     <dependencies>

@@ -34,20 +34,17 @@ import cn.herodotus.engine.oauth2.authentication.server.processor.HerodotusUserD
 import cn.herodotus.engine.oauth2.authentication.server.service.OAuth2ApplicationService;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
-import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceParser;
+import cn.herodotus.engine.oauth2.core.configurer.SecurityMatcherConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.oauth2.core.properties.SecurityProperties;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.engine.web.core.properties.EndpointProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -58,7 +55,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
@@ -78,17 +74,12 @@ public class DefaultSecurityConfiguration {
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
             CaptchaRendererFactory captchaRendererFactory,
-            JwtDecoder jwtDecoder,
             SecurityMatcherConfigurer securityMatcherConfigurer,
             SecurityMetadataSourceParser securityMetadataSourceParser,
             SecurityAuthorizationManager securityAuthorizationManager,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
             UserDetailsService userDetailsService,
-
-            EndpointProperties endpointProperties,
-            SecurityProperties securityProperties,
-            OAuth2UiProperties uiProperties,
-            OAuth2ResourceServerProperties resourceServerProperties
+            OAuth2UiProperties uiProperties
     ) throws Exception {
 
         log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
@@ -126,7 +117,7 @@ public class DefaultSecurityConfiguration {
                 .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
                 .accessDeniedHandler(new HerodotusAccessDeniedHandler())
                 .and()
-                .oauth2ResourceServer(configurer -> herodotusTokenStrategyConfigurer.from(configurer))
+                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
         // @formatter:on
         return httpSecurity.build();
