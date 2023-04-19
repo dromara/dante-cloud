@@ -31,11 +31,11 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>platform</artifactId>
-        <version>3.0.5.4</version>
+        <version>3.0.5.5</version>
     </parent>
 
     <artifactId>dante-cloud-message</artifactId>
-    <version>3.0.5.4</version>
+    <version>3.0.5.5</version>
     <packaging>jar</packaging>
 
     <dependencies>
