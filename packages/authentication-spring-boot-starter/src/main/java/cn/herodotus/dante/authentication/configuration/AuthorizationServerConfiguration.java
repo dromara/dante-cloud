@@ -25,6 +25,7 @@
 
 package cn.herodotus.dante.authentication.configuration;
 
+import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusJwtTokenCustomizer;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusOpaqueTokenCustomizer;
@@ -131,17 +132,18 @@ public class AuthorizationServerConfiguration {
         httpSecurity.apply(authorizationServerConfigurer);
 
         HerodotusAuthenticationFailureHandler failureHandler = new HerodotusAuthenticationFailureHandler();
-        authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
-        authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(failureHandler));
-        authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> {
-            endpoint.errorResponseHandler(failureHandler);
-            endpoint.verificationUri("/activate");
-        });
-        authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
-            endpoint.consentPage("/oauth2/consent");
+            endpoint.consentPage(BaseConstants.DEFAULT_AUTHORIZATION_CONSENT_ENDPOINT);
+        });
+        authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> {
+            endpoint.errorResponseHandler(failureHandler);
+            endpoint.verificationUri(BaseConstants.DEFAULT_DEVICE_ACTIVATION_ENDPOINT);
+        });
+        authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> {
+            endpoint.errorResponseHandler(failureHandler);
+            endpoint.consentPage(BaseConstants.DEFAULT_AUTHORIZATION_CONSENT_ENDPOINT);
         });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
             AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
@@ -156,8 +158,15 @@ public class AuthorizationServerConfiguration {
             endpoint.errorResponseHandler(failureHandler);
             endpoint.accessTokenResponseHandler(new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));
         });
+        authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.oidc(oidc -> {
+            oidc.clientRegistrationEndpoint(Customizer.withDefaults());
+            oidc.userInfoEndpoint(userInfo -> userInfo
+                    .userInfoMapper(new HerodotusOidcUserInfoMapper()));
+        });
 
-        SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getSessionRegistry(httpSecurity);
+        SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
 
         // 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
         authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
@@ -181,12 +190,6 @@ public class AuthorizationServerConfiguration {
                 }
                 return object;
             }
-        });
-
-        authorizationServerConfigurer.oidc(oidc -> {
-            oidc.clientRegistrationEndpoint(Customizer.withDefaults());
-            oidc.userInfoEndpoint(userInfo -> userInfo
-                    .userInfoMapper(new HerodotusOidcUserInfoMapper()));
         });
 
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
@@ -300,15 +303,15 @@ public class AuthorizationServerConfiguration {
         return AuthorizationServerSettings.builder()
                 .issuer(endpointProperties.getIssuerUri())
                 .authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())
-                .tokenEndpoint(endpointProperties.getAccessTokenEndpoint())
-                .tokenRevocationEndpoint(endpointProperties.getTokenRevocationEndpoint())
-                .tokenIntrospectionEndpoint(endpointProperties.getTokenIntrospectionEndpoint())
-                .jwkSetEndpoint(endpointProperties.getJwkSetEndpoint())
                 .deviceAuthorizationEndpoint(endpointProperties.getDeviceAuthorizationEndpoint())
                 .deviceVerificationEndpoint(endpointProperties.getDeviceVerificationEndpoint())
+                .tokenEndpoint(endpointProperties.getAccessTokenEndpoint())
+                .tokenIntrospectionEndpoint(endpointProperties.getTokenIntrospectionEndpoint())
+                .tokenRevocationEndpoint(endpointProperties.getTokenRevocationEndpoint())
+                .jwkSetEndpoint(endpointProperties.getJwkSetEndpoint())
+                .oidcLogoutEndpoint(endpointProperties.getOidcLogoutEndpoint())
                 .oidcUserInfoEndpoint(endpointProperties.getOidcUserInfoEndpoint())
                 .oidcClientRegistrationEndpoint(endpointProperties.getOidcClientRegistrationEndpoint())
-                .oidcLogoutEndpoint(endpointProperties.getOidcLogoutEndpoint())
                 .build();
     }
 }

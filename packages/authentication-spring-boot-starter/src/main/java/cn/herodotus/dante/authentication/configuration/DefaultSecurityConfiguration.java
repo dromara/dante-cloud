@@ -51,6 +51,7 @@ import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -86,7 +87,7 @@ public class DefaultSecurityConfiguration {
 
         log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
         // 禁用CSRF 开启跨域
-        httpSecurity.csrf().disable().cors();
+        httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
 
         // @formatter:off
         httpSecurity
@@ -96,10 +97,10 @@ public class DefaultSecurityConfiguration {
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                         .anyRequest().access(securityAuthorizationManager))
                 .sessionManagement(Customizer.withDefaults())
-                .exceptionHandling()
-                    .authenticationEntryPoint(new HerodotusAuthenticationEntryPoint())
-                    .accessDeniedHandler(new HerodotusAccessDeniedHandler())
-                .and()
+                .exceptionHandling(exceptions -> {
+                    exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
+                    exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
+                })
                 .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
                 .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
 
