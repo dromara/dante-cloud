@@ -1,4 +1,5 @@
 server:
+  shutdown: graceful
   error:
     include-exception: true
     include-message: always
@@ -28,6 +29,8 @@ management:
       exposure:
         include: '*'
   endpoint:
+    shutdown:
+      enabled: true
     health:
       show-details: ALWAYS
 
