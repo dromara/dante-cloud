@@ -43,13 +43,6 @@ spring:
       #      ignored-interfaces:
       #        - eth0
       preferred-networks: 192.*
-  sql:
-    init:
-      # 第一种方式启动的时候 Jpa 会自动创建表，import.sql 只负责创建表单后的初始化数据。第二种方式启动的时候不会创建表，需要在初始化脚本中判断表是否存在，再初始化脚本的步骤
-      # refer: https://www.cnblogs.com/ityouknow/p/7089170.html
-      data-locations:
-        #        - classpath*:sqls/uaa-data-mysql.sql
-        - classpath*:sqls/uaa-data-postgresql.sql
 
 herodotus:
   platform:
