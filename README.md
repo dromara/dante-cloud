@@ -5,14 +5,14 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.4.1-blue.svg?logo=Spring" alt="Spring Authorization Server 0.4.1"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.7.10-blue.svg?logo=Spring" alt="Spring Boot 2.7.10"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-0.4.2-blue.svg?logo=Spring" alt="Spring Authorization Server 0.4.2"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-2.7.11-blue.svg?logo=Spring" alt="Spring Boot 2.7.11"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2021.0.6-blue.svg?logo=Spring" alt="Spring Cloud 2021.0.6"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2021.0.5.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2021.0.5.0"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.10.2-red.svg?logo=Spring" alt="Version 2.7.10.2"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.11.0-red.svg?logo=Spring" alt="Version 2.7.11.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green.svg?logo=openjdk" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="License Apache 2.0"></a>
@@ -42,15 +42,15 @@
 紧跟 Java 技术和 Spring 社区的发展，让更多质量更好、性能更优的新特性服务于实际的开发工作，Dante
 Cloud 也同步进行升级及适配，开发了全新的 3.0 版本。
 
-基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.5、Spring Cloud 2022.0.1、Spring Cloud Tencent
+基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.6、Spring Cloud 2022.0.2、Spring Cloud Tencent
 1.11.1-2022.0.1、Spring Cloud Alibaba 2021.0.5.0、Nacos 2.2.2 等主流技术栈开发的 Dante Cloud v3.0.0
 已经正式发布，关注请移步 [【v3.0.0 分支】](https://gitee.com/dromara/dante-cloud/tree/3.0.0/)
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
 Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动设计(DDD)的、全面拥抱 Spring
-Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Boot 2.7.10、Spring Cloud 2021.0.6、Spring Cloud
-Alibaba 2021.0.5.0、Spring Authorization Server 0.4.1、Nacos 2.2.2 等最新版本开发，遵循 SpringBoot
+Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Boot 2.7.11、Spring Cloud 2021.0.6、Spring Cloud
+Alibaba 2021.0.5.0、Spring Authorization Server 0.4.2、Nacos 2.2.2 等最新版本开发，遵循 SpringBoot
 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流、多租户等功能，代码简洁，架构清晰，非常适合学习和企业作为基础框架使用。
 
 ## 平台定位
@@ -179,11 +179,11 @@ Alibaba 2021.0.5.0、Spring Authorization Server 0.4.1、Nacos 2.2.2 等最新�
 
 | 组件                            | 版本                          |
 |-------------------------------|-----------------------------|
-| `Spring Boot`                 | 2.7.10 / 3.0.5              |
-| `Spring Cloud`                | 2021.0.6 / 2022.0.1         |
+| `Spring Boot`                 | 2.7.11 / 3.0.6              |
+| `Spring Cloud`                | 2021.0.6 / 2022.0.2         |
 | `Spring Cloud Alibaba`        | 2021.0.5.0 / 2022.0.0.0-RC1 |
 | `Spring Cloud Tencent`        | 1.11.1-2022.0.1             |
-| `Spring Authorization Server` | 0.4.1 / 1.1.0               |
+| `Spring Authorization Server` | 0.4.2 / 1.1.0               |
 | `Spring Boot Admin`           | 2.7.10 / 3.0.2              |
 | `Nacos`                       | 2.2.2                       |
 | `Sentinel`                    | 1.8.5                       |
@@ -316,20 +316,13 @@ dante-cloud
 
 ### 赞助人列表
 
-| 赞助人      | 赞助时间   |
-| ----------- | ---------- |
-| ご沉默菋噵  | 2021-10-25 |
-| 偷土豆的人  | 2021-11-24 |
-| lorron      | 2022-04-04 |
-| 在云端      | 2022-12-26 |
-| 西晽        | 2022-12-27 |
-| p911gt3rs   | 2023-01-03 |
-| jacsty      | 2023-01-31 |
-| hubert_rust | 2023-03-16 |
-| Zkey Z      | 2023-03-18 |
-| 志国欧巴    | 2023-03-27 |
-| michael     | 2023-04-07 |
-| 大叔丨小巷  | 2023-04-11 |
+| 序号 |   赞助人   | 赞助时间   | 序号  |   赞助人    | 赞助时间   | 序号  |   赞助人   | 赞助时间   |
+|:--:|:----------:| ---------- |:--:|:-----------:| ---------- |:--:|:----------:| ---------- |
+| 1  | ご沉默菋噵 | 2021-10-25 | 2  | 偷土豆的人  | 2021-11-24 | 3  |   lorron   | 2022-04-04 |
+| 4  |   在云端   | 2022-12-26 | 5  |    西晽     | 2022-12-27 | 6  | p911gt3rs  | 2023-01-03 |
+| 7  |   jacsty   | 2023-01-31 | 8  | hubert_rust | 2023-03-16 | 9  |   Zkey Z   | 2023-03-18 |
+| 10 |  志国欧巴  | 2023-03-27 | 11 |   michael   | 2023-04-07 | 12 | 大叔丨小巷 | 2023-04-11 |
+| 13 |  sun_left  | 2023-04-19 |
 
 ### 开源项目
 
