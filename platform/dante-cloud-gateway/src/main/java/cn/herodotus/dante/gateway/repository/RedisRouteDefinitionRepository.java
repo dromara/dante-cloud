@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.gateway.repository;
 
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
+import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +64,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
         List<RouteDefinition> routeDefinitions = new ArrayList<>();
-        redisTemplate.opsForHash().entries(GATEWAY_ROUTES).values().forEach(routeDefinition -> routeDefinitions.add(JacksonUtils.toObject(routeDefinition.toString(), RouteDefinition.class)));
+        redisTemplate.opsForHash().entries(GATEWAY_ROUTES).values().forEach(routeDefinition -> routeDefinitions.add(Jackson2Utils.toObject(routeDefinition.toString(), RouteDefinition.class)));
         log.trace("[Herodotus] |- Get all gateway route definition from redis!");
         return Flux.fromIterable(routeDefinitions);
     }
@@ -72,7 +72,7 @@ public class RedisRouteDefinitionRepository implements RouteDefinitionRepository
     @Override
     public Mono<Void> save(Mono<RouteDefinition> routeDefinition) {
         return routeDefinition.flatMap(route -> {
-            redisTemplate.opsForHash().put(GATEWAY_ROUTES, route.getId(), JacksonUtils.toJson(route));
+            redisTemplate.opsForHash().put(GATEWAY_ROUTES, route.getId(), Jackson2Utils.toJson(route));
             log.debug("[Herodotus] |- Redis cache the new gateway route definition.");
             return Mono.empty();
         });

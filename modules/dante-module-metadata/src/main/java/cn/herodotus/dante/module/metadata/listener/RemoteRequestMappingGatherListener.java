@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.metadata.listener;
 
 import cn.herodotus.dante.module.metadata.processor.RequestMappingStoreProcessor;
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
+import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
 import cn.herodotus.engine.message.security.event.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.rest.core.domain.RequestMapping;
 import org.apache.commons.collections4.CollectionUtils;
@@ -65,7 +65,7 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
         String requestMapping = event.getData();
         log.debug("[Herodotus] |- Fetch data [{}]", requestMapping);
         if (ObjectUtils.isNotEmpty(requestMapping)) {
-            List<RequestMapping> requestMappings = JacksonUtils.toList(requestMapping, RequestMapping.class);
+            List<RequestMapping> requestMappings = Jackson2Utils.toList(requestMapping, RequestMapping.class);
             if (CollectionUtils.isNotEmpty(requestMappings)) {
                 requestMappingStoreProcessor.postProcess(requestMappings);
             }

@@ -26,7 +26,7 @@
 package cn.herodotus.dante.gateway.utils;
 
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
+import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;
@@ -96,7 +96,7 @@ public class WebFluxUtils {
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.setStatusCode(HttpStatus.valueOf(result.getStatus()));
 
-        String jsonResult = JacksonUtils.toJson(result);
+        String jsonResult = Jackson2Utils.toJson(result);
         byte[] bytes = jsonResult.getBytes(StandardCharsets.UTF_8);
 
         DataBuffer buffer = response.bufferFactory().wrap(bytes);

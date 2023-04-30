@@ -1,7 +1,7 @@
 herodotus:
   endpoint:
-    uaa-service-name: dante-cloud-uaa
-    upms-service-name: dante-cloud-upms
+    uaa-service-name: herodotus-cloud-uaa
+    upms-service-name: herodotus-cloud-upms
     gateway-service-uri: ${herodotus.environment.gateway-server-addr}
     uaa-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.uaa-service-name}
     upms-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.upms-service-name}
@@ -15,10 +15,28 @@ herodotus:
     oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo
   swagger:
     enabled: ${herodotus.switch.swagger.enabled}
+  oauth2:
+    jwk:
+      certificate: standard
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: ALWAYS
+
+server:
+  shutdown: graceful
 
 spring:
   session:
-    store-type: redis
+    redis:
+      repository-type: indexed
   security:
     oauth2:
       resourceserver:

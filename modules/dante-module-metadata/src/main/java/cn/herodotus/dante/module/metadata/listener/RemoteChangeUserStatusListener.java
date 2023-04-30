@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.module.metadata.listener;
 
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
+import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.message.security.event.RemoteChangeUserStatusEvent;
 import cn.herodotus.engine.rest.core.domain.UserStatus;
@@ -63,7 +63,7 @@ public class RemoteChangeUserStatusListener implements ApplicationListener<Remot
         String data = event.getData();
         log.debug("[Herodotus] |- Fetch data [{}]", data);
         if (ObjectUtils.isNotEmpty(data)) {
-            UserStatus userStatus = JacksonUtils.toObject(data, UserStatus.class);
+            UserStatus userStatus = Jackson2Utils.toObject(data, UserStatus.class);
             if (ObjectUtils.isNotEmpty(userStatus)) {
                 DataItemStatus dataItemStatus = DataItemStatus.valueOf(userStatus.getStatus());
                 if (ObjectUtils.isNotEmpty(dataItemStatus)) {

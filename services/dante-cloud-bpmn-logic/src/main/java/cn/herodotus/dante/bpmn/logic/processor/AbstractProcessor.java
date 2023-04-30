@@ -28,7 +28,7 @@ package cn.herodotus.dante.bpmn.logic.processor;
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
 import cn.herodotus.dante.bpmn.logic.domain.debezium.Message;
 import cn.herodotus.dante.bpmn.logic.domain.enums.DebeziumEvent;
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.JacksonUtils;
+import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.apache.commons.lang3.ObjectUtils;
@@ -65,9 +65,9 @@ public abstract class AbstractProcessor<T extends BaseEntity> {
     private Message<T> convert(String body, Class<T> clazz) {
         if (StringUtils.isNotBlank(body)) {
 
-            TypeFactory typeFactory = JacksonUtils.getTypeFactory();
+            TypeFactory typeFactory = Jackson2Utils.getTypeFactory();
             JavaType javaType = typeFactory.constructParametricType(Message.class, clazz);
-            Message<T> response = JacksonUtils.toObject(body, javaType);
+            Message<T> response = Jackson2Utils.toObject(body, javaType);
 
             if (ObjectUtils.isNotEmpty(response)) {
                 log.debug("[Herodotus] |- Convert Object is : [{}]", response);

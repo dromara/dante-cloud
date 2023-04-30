@@ -135,15 +135,15 @@ public class AuthorizationServerConfiguration {
         authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(failureHandler));
         authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
-            endpoint.consentPage(BaseConstants.DEFAULT_AUTHORIZATION_CONSENT_ENDPOINT);
+            endpoint.consentPage(BaseConstants.CUSTOM_AUTHORIZATION_CONSENT_URI);
         });
         authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
-            endpoint.verificationUri(BaseConstants.DEFAULT_DEVICE_ACTIVATION_ENDPOINT);
+            endpoint.verificationUri(BaseConstants.CUSTOM_DEVICE_ACTIVATION_URI);
         });
         authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
-            endpoint.consentPage(BaseConstants.DEFAULT_AUTHORIZATION_CONSENT_ENDPOINT);
+            endpoint.consentPage(BaseConstants.CUSTOM_AUTHORIZATION_CONSENT_URI);
         });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
             AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
