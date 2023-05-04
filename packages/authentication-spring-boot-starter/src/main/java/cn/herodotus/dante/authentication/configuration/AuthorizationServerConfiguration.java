@@ -35,6 +35,7 @@ import cn.herodotus.engine.oauth2.authentication.provider.*;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationFailureHandler;
 import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationSuccessHandler;
+import cn.herodotus.engine.oauth2.authentication.response.OAuth2DeviceVerificationAuthenticationSuccessHandler;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
@@ -144,6 +145,7 @@ public class AuthorizationServerConfiguration {
         authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(failureHandler);
             endpoint.consentPage(BaseConstants.CUSTOM_AUTHORIZATION_CONSENT_URI);
+            endpoint.deviceVerificationResponseHandler(new OAuth2DeviceVerificationAuthenticationSuccessHandler());
         });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
             AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
