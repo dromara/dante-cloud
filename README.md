@@ -13,7 +13,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.6.1-red.svg?logo=spring" alt="Version 3.0.6.1"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.6.2-red.svg?logo=spring" alt="Version 3.0.6.2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -37,8 +37,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动设计(DDD)的、全面拥抱 Spring
-Authorization Server 的、基于 OAuth2.1 协议的微服务架构。基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.6、Spring
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.6、Spring
 Cloud 2022.0.2、Spring Cloud Tencent 1.11.2-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.2 等主流技术栈开发的多租户系统，遵循
 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
@@ -265,11 +264,17 @@ dante-cloud
         <td><img src="./readme/ui2.jpg" alt="前端界面2"/></td>
         <td><img src="./readme/ui3.jpg" alt="前端界面1"/></td>
     </tr>
+    <tr>
+        <td><img src="./readme/ui6.png" alt="前端界面6"/></td>
+        <td><img src="./readme/ui7.png" alt="前端界面7"/></td>
+        <td><img src="./readme/ui8.png" alt="前端界面8"/></td>
+    </tr>
+    <tr>
         <td><img src="./readme/ui4.jpg" alt="前端界面2"/></td>
         <td><img src="./readme/ui5.jpg" alt="前端界面3"/></td>
         <td><img src="./readme/oauth2-login1.png" alt="OAuth2 效果示例"/></td>
     </tr>
-        <tr>
+    <tr>
         <td><img src="./readme/oauth2-login2.png" alt="前端界面3"/></td>
         <td><img src="./readme/oauth2-login3.png" alt="OAuth2 效果示例"/></td>
         <td><img src="./readme/nacos.png" alt="Nacos示例界面"/></td>
