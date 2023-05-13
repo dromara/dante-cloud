@@ -9,7 +9,7 @@
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-3.0.6-blue.svg?logo=spring" alt="Spring Boot 3.0.6"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2022.0.2-blue.svg?logo=spring" alt="Spring Cloud 2022.0.2"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2022.0.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2022.0.0.0"></a>
-    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.11.2--2022.0.1-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.11.2-2022.0.1"></a>
+    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.11.4--2022.0.1-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.11.4-2022.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.2"></a>
 </p>
 <p align="center">
@@ -38,7 +38,7 @@
 ## 企业级技术中台微服务架构与服务能力开发平台
 
 Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.6、Spring
-Cloud 2022.0.2、Spring Cloud Tencent 1.11.2-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.2 等主流技术栈开发的多租户系统，遵循
+Cloud 2022.0.2、Spring Cloud Tencent 1.11.4-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.2 等主流技术栈开发的多租户系统，遵循
 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
 ## 平台定位
@@ -163,9 +163,9 @@ Dante Cloud 3.X 是“激进”尝鲜版本，周边生态的新技术、新特�
 | Spring Boot                 | 3.0.6           |
 | Spring Cloud                | 2022.0.2        |
 | Spring Cloud Alibaba        | 2022.0.0.0      |
-| Spring Cloud Tencent        | 1.11.2-2022.0.1 |
+| Spring Cloud Tencent        | 1.11.4-2022.0.1 |
 | Spring Authorization Server | 1.1.0           |
-| Spring Boot Admin           | 3.0.3           |
+| Spring Boot Admin           | 3.0.4           |
 | Nacos                       | 2.2.2           |
 | Sentinel                    | 1.8.5           |
 | Seata                       | 1.5.2           |
