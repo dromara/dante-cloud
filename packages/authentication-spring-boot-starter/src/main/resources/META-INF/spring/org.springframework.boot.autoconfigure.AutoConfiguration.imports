@@ -5,5 +5,4 @@ cn.herodotus.dante.module.strategy.configuration.StrategyModuleConfiguration
 cn.herodotus.engine.oauth2.management.configuration.OAuth2ManagementConfiguration
 cn.herodotus.dante.authentication.configuration.DefaultSecurityConfiguration
 cn.herodotus.dante.authentication.configuration.AuthorizationServerConfiguration
-cn.herodotus.engine.oauth2.compliance.configuration.OAuth2ComplianceConfiguration
 cn.herodotus.engine.supplier.tenant.configuration.SupplierTenantConfiguration

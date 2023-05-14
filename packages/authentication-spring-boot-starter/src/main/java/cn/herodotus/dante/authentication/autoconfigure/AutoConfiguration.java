@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.authentication.autoconfigure;
 
-import cn.herodotus.dante.authentication.processor.HerodotusAccountStatusChangeService;
-import cn.herodotus.engine.oauth2.compliance.definition.AccountStatusChangeService;
+import cn.herodotus.dante.authentication.processor.HerodotusAccountStatusChanger;
+import cn.herodotus.engine.oauth2.management.compliance.event.AccountStatusChanger;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,9 +50,9 @@ public class AutoConfiguration {
     }
 
     @Bean
-    public AccountStatusChangeService accountStatusChangeService() {
-        HerodotusAccountStatusChangeService herodotusAccountStatusChangeService = new HerodotusAccountStatusChangeService();
-        log.trace("[Herodotus] |- Bean [Account Status Change Service] Auto Configure.");
-        return herodotusAccountStatusChangeService;
+    public AccountStatusChanger accountStatusChanger() {
+        HerodotusAccountStatusChanger herodotusAccountStatusChanger = new HerodotusAccountStatusChanger();
+        log.trace("[Herodotus] |- Bean [Account Status Changer] Auto Configure.");
+        return herodotusAccountStatusChanger;
     }
 }

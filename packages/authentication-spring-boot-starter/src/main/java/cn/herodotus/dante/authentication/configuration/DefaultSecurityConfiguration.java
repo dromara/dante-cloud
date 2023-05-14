@@ -25,6 +25,9 @@
 
 package cn.herodotus.dante.authentication.configuration;
 
+import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
+import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginSecureConfigurer;
+import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
@@ -71,6 +74,9 @@ public class DefaultSecurityConfiguration {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
+            UserDetailsService userDetailsService,
+            OAuth2AuthenticationProperties authenticationProperties,
+            CaptchaRendererFactory captchaRendererFactory,
             SecurityMatcherConfigurer securityMatcherConfigurer,
             SecurityAuthorizationManager securityAuthorizationManager,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
@@ -92,7 +98,8 @@ public class DefaultSecurityConfiguration {
                     exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
                     exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
                 })
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
+                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
+                .apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory));
 
         // @formatter:on
         return httpSecurity.build();
