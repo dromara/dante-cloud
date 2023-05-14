@@ -25,13 +25,10 @@
 
 package cn.herodotus.dante.authentication.configuration;
 
-import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
-import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginConfigurer;
-import cn.herodotus.engine.oauth2.authentication.properties.OAuth2UiProperties;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
-import cn.herodotus.engine.oauth2.core.configurer.SecurityMatcherConfigurer;
+import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
@@ -74,9 +71,6 @@ public class DefaultSecurityConfiguration {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
-            UserDetailsService userDetailsService,
-            CaptchaRendererFactory captchaRendererFactory,
-            OAuth2UiProperties uiProperties,
             SecurityMatcherConfigurer securityMatcherConfigurer,
             SecurityAuthorizationManager securityAuthorizationManager,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
@@ -98,8 +92,7 @@ public class DefaultSecurityConfiguration {
                     exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
                     exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
                 })
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
-                .apply(new OAuth2FormLoginConfigurer(userDetailsService, uiProperties, captchaRendererFactory));
+                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
 
         // @formatter:on
         return httpSecurity.build();

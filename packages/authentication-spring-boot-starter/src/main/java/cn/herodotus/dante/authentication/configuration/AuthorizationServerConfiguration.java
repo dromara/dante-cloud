@@ -27,10 +27,13 @@ package cn.herodotus.dante.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
+import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusJwtTokenCustomizer;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusOpaqueTokenCustomizer;
+import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginSecureConfigurer;
+import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginUrlConfigurer;
 import cn.herodotus.engine.oauth2.authentication.oidc.HerodotusOidcUserInfoMapper;
-import cn.herodotus.engine.oauth2.authentication.properties.OAuth2UiProperties;
+import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.provider.*;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationFailureHandler;
@@ -38,10 +41,9 @@ import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticatio
 import cn.herodotus.engine.oauth2.authentication.response.OAuth2DeviceVerificationAuthenticationSuccessHandler;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
+import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationProperties;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
-import cn.herodotus.engine.oauth2.core.properties.OAuth2ComplianceProperties;
-import cn.herodotus.engine.oauth2.core.properties.OAuth2Properties;
 import cn.herodotus.engine.rest.core.properties.EndpointProperties;
 import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
 import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
@@ -51,7 +53,6 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -122,9 +123,10 @@ public class AuthorizationServerConfiguration {
             UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder,
             HttpCryptoProcessor httpCryptoProcessor,
-            OAuth2ComplianceProperties complianceProperties,
+            CaptchaRendererFactory captchaRendererFactory,
+            OAuth2AuthenticationProperties authenticationProperties,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-            OAuth2UiProperties uiProperties
+            OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer
     ) throws Exception {
 
         log.debug("[Herodotus] |- Core [Authorization Server Security Filter Chain] Auto Configure.");
@@ -201,7 +203,8 @@ public class AuthorizationServerConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
+                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
+                .apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory));
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
@@ -211,18 +214,7 @@ public class AuthorizationServerConfiguration {
 
         // build() 方法会让以上所有的配置生效
         SecurityFilterChain securityFilterChain = httpSecurity
-                .formLogin(form -> {
-                    form.loginPage(uiProperties.getLoginPageUrl())
-                            .usernameParameter(uiProperties.getUsernameParameter())
-                            .passwordParameter(uiProperties.getPasswordParameter());
-                    if (StringUtils.isNotBlank(uiProperties.getFailureForwardUrl())) {
-                        form.failureForwardUrl(uiProperties.getFailureForwardUrl());
-                    }
-                    if (StringUtils.isNotBlank(uiProperties.getSuccessForwardUrl())) {
-                        form.successForwardUrl(uiProperties.getSuccessForwardUrl());
-                    }
-                    form.permitAll();
-                })
+                .formLogin(formLoginUrlConfigurer::from)
                 .sessionManagement(Customizer.withDefaults())
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
                 .build();
@@ -232,13 +224,13 @@ public class AuthorizationServerConfiguration {
         OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
 
         OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
-                new OAuth2ResourceOwnerPasswordAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, complianceProperties);
+                new OAuth2ResourceOwnerPasswordAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
         resourceOwnerPasswordAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         resourceOwnerPasswordAuthenticationProvider.setSessionRegistry(sessionRegistry);
         httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
 
         OAuth2SocialCredentialsAuthenticationProvider socialCredentialsAuthenticationProvider =
-                new OAuth2SocialCredentialsAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, complianceProperties);
+                new OAuth2SocialCredentialsAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
         socialCredentialsAuthenticationProvider.setSessionRegistry(sessionRegistry);
         httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
 
@@ -246,9 +238,9 @@ public class AuthorizationServerConfiguration {
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource(OAuth2Properties oAuth2Properties) throws NoSuchAlgorithmException {
+    public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties) throws NoSuchAlgorithmException {
 
-        OAuth2Properties.Jwk jwk = oAuth2Properties.getJwk();
+        OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
 
         KeyPair keyPair = null;
         if (jwk.getCertificate() == Certificate.CUSTOM) {
