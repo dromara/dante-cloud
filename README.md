@@ -13,7 +13,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.6.3-red.svg?logo=spring" alt="Version 3.0.6.3"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.6.4-red.svg?logo=spring" alt="Version 3.0.6.4"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -27,7 +27,6 @@
     <a href="https://github.com/herodotus-cloud/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/herodotus/dante-engine">核心组件仓库</a> &nbsp; | &nbsp;
-    <a href="https://gitee.com/dromara/dante-cloud">v2.7.X</a> &nbsp; |
     <a href="https://www.herodotus.cn">文档</a>
 </p>
 
@@ -48,18 +47,13 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
 - 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
 - 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
 
-## 发布背景
+## 重要说明
 
-自11月24日，Spring Boot 3.0 以及 Spring Cloud 2022.0.2、Spring Cloud Tencent 等全新版本发布，整个Java 社区也步入的 Java 17
-和 Spring Boot 3 的新时代。
+随着 Spring Boot 3 周边生态组件的不断完善和新特性的加入，Dante Cloud 也同步的将 3.X 版本作为开发重心。
 
-紧跟 Java 技术和 Spring 社区的发展，让更多质量更好、性能更优的新特性服务于实际的开发工作，Dante Cloud 也同步进行升级及适配，开发了全新的
-3.0 版本。
+因此，Dante Cloud 3.X 版本代码将移动到 master 分支，作为主力版本开发。2.7.X 版本代码将移动到 2.7.X 分支，后续不会增加新特性和新功能，仅会结合 Spring Boot 2.X 版本发布情况，做低频例行更新。
 
-## 友情提示
-
-Dante Cloud 3.X 是“激进”尝鲜版本，周边生态的新技术、新特性、新功能都会在该版本上添加，加之 Spring Boot 3
-周边生态还没有完全适配完成，很多还处于非正式版本，所以是否选择使用 Dante Cloud 3.X 版本，还请谨慎评估后再做决定。
+请请悉知！
 
 ## Dante Cloud 3.0.0 新特性
 
