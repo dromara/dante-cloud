@@ -6,14 +6,14 @@
 
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.1.0-blue.svg?logo=spring" alt="Spring Authorization Server 1.1.0"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-3.0.6-blue.svg?logo=spring" alt="Spring Boot 3.0.6"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://shields.io/badge/Spring%20Boot-3.0.7-blue.svg?logo=spring" alt="Spring Boot 3.0.7"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud-2022.0.2-blue.svg?logo=spring" alt="Spring Cloud 2022.0.2"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://shields.io/badge/Spring%20Cloud%20Alibaba-2022.0.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2022.0.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.11.4--2022.0.1-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.11.4-2022.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.6.4-red.svg?logo=spring" alt="Version 3.0.6.4"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.0.7.0-red.svg?logo=spring" alt="Version 3.0.7.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -36,7 +36,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.6、Spring
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.0、Spring Boot 3.0.7、Spring
 Cloud 2022.0.2、Spring Cloud Tencent 1.11.4-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.2 等主流技术栈开发的多租户系统，遵循
 SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
@@ -53,7 +53,7 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
 
 因此，Dante Cloud 3.X 版本代码将移动到 master 分支，作为主力版本开发。2.7.X 版本代码将移动到 2.7.X 分支，后续不会增加新特性和新功能，仅会结合 Spring Boot 2.X 版本发布情况，做低频例行更新。
 
-请请悉知！
+敬请悉知！
 
 ## Dante Cloud 3.0.0 新特性
 
@@ -110,9 +110,6 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
 
 > 待 Spring Cloud Alibaba 完成适配，Dante Cloud 会马上进行更新升级。
 
-- 因 Spring Boot 3 周边内容全部成熟和适配还需要一段时间，所以 2.7.X 将继续维护。想要体验最新的 3.0.0 版本，请检出 3.0.0
-  分支代码。
-
 ## 重要信息
 
 > 不一定非要捐赠或者参与编写代码，才是参与开源项目的正确方式。点个 `Star`、提个格式规范的 ISSUE，也是在积极参与开源项目，更是对作者莫大的支持和鼓励。
@@ -154,7 +151,7 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
 
 | 组件                          | 版本              |
 |-----------------------------|-----------------|
-| Spring Boot                 | 3.0.6           |
+| Spring Boot                 | 3.0.7           |
 | Spring Cloud                | 2022.0.2        |
 | Spring Cloud Alibaba        | 2022.0.0.0      |
 | Spring Cloud Tencent        | 1.11.4-2022.0.1 |
