@@ -32,11 +32,11 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.0.7.0</version>
+        <version>3.1.0.0</version>
     </parent>
 
     <artifactId>dante-module-security</artifactId>
-    <version>3.0.7.0</version>
+    <version>3.1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>

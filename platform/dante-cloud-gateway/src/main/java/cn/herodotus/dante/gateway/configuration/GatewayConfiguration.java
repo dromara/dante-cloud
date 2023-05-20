@@ -27,19 +27,14 @@ package cn.herodotus.dante.gateway.configuration;
 
 import cn.herodotus.dante.gateway.handler.RefreshRoutesListener;
 import cn.herodotus.engine.assistant.core.annotation.ConditionalOnSwaggerEnabled;
-import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
-import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.properties.SwaggerUiConfigParameters;
 import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -77,18 +72,18 @@ public class GatewayConfiguration {
         this.serverCodecConfigurer = serverCodecConfigurer;
     }
 
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
-        // Register the block exception handler for Spring Cloud Gateway.
-        return new SentinelGatewayBlockExceptionHandler(viewResolvers, serverCodecConfigurer);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(SentinelGatewayFilter.class)
-    public SentinelGatewayFilter sentinelGatewayFilter() {
-        return new SentinelGatewayFilter();
-    }
+//    @Bean
+//    @Order(Ordered.HIGHEST_PRECEDENCE)
+//    public SentinelGatewayBlockExceptionHandler sentinelGatewayBlockExceptionHandler() {
+//        // Register the block exception handler for Spring Cloud Gateway.
+//        return new SentinelGatewayBlockExceptionHandler(viewResolvers, serverCodecConfigurer);
+//    }
+//
+//    @Bean
+//    @ConditionalOnMissingBean(SentinelGatewayFilter.class)
+//    public SentinelGatewayFilter sentinelGatewayFilter() {
+//        return new SentinelGatewayFilter();
+//    }
 
     /**
      * Gateway 跨域处理

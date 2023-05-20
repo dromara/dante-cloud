@@ -31,7 +31,7 @@ import cn.herodotus.engine.assistant.core.utils.SqlInjectionUtils;
 import cn.herodotus.dante.gateway.utils.WebFluxUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

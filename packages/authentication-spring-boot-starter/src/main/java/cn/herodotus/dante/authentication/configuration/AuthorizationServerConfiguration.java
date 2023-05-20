@@ -123,7 +123,6 @@ public class AuthorizationServerConfiguration {
             UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder,
             HttpCryptoProcessor httpCryptoProcessor,
-            CaptchaRendererFactory captchaRendererFactory,
             OAuth2AuthenticationProperties authenticationProperties,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
             OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer
@@ -174,6 +173,7 @@ public class AuthorizationServerConfiguration {
 
         // 使用自定义的 AuthenticationProvider 替换已有 AuthenticationProvider
         authorizationServerConfigurer.withObjectPostProcessor(new ObjectPostProcessor<AuthenticationProvider>() {
+            @SuppressWarnings("unchecked")
             @Override
             public <O extends AuthenticationProvider> O postProcess(O object) {
                 OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
