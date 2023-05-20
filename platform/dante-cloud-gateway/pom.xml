@@ -67,8 +67,8 @@
         </dependency>
 
 <!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>-->
+<!--            <groupId>cn.herodotus.engine</groupId>-->
+<!--            <artifactId>facility-gateway-spring-boot-starter</artifactId>-->
 <!--        </dependency>-->
 
         <dependency>
