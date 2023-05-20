@@ -8,6 +8,36 @@ spring:
   thymeleaf:
     mode: HTML
     cache: false
+  cloud:
+    openfeign:
+      okhttp:
+        enabled: true
+      httpclient:
+        enabled: false
+        time-to-live: 15
+        time-to-live-unit: seconds
+        connection-timeout: 30000
+        connection-timer-repeat: 3000
+        max-connections: 500
+        max-connections-per-route: 50
+        hc5:
+          connection-request-timeout: 15
+          connection-request-timeout-unit: seconds
+          socket-timeout: 15
+          socket-timeout-unit: seconds
+          pool-concurrency-policy: lax
+          pool-reuse-policy: lifo
+      compression:
+        request:
+          enabled: true
+        response:
+          enabled: true
+    loadbalancer:
+      nacos:
+        enabled: true
+feign:
+  sentinel:
+    enabled: true
 
 springdoc:
   api-docs:
@@ -21,51 +51,6 @@ springdoc:
     oauth:
       use-pkce-with-authorization-code-grant: true
       app-name: ${spring.application.name}
-
-feign:
-  client:
-    config:
-      # 服务名，填写 default 为所有服务，或者指定某服务
-      default:
-        # 连接超时，10秒
-        connectTimeout: 10000
-        # 读取超时，20秒
-        readTimeout: 20000
-  httpclient:
-    # 关闭 ApacheHttpClient
-    enabled: false
-    # 连接池连接最大连接数（缺省值 200）
-    max-connections: 50
-    # 连接最大闲置时间，单位为秒，600秒==10分钟（缺省值为 900秒==15分钟）
-    time-to-live: 600
-    # 开启压缩
-  compression:
-    request:
-      enabled: true
-    response:
-      enabled: true
-  okhttp:
-    enabled: true
-  sentinel:
-    enabled: true
-  hystrix:
-    enabled: false
-
-ribbon:
-  ReadTimeout: 5000
-  ConnectTimeout: 2000
-  MaxAutoRetries: 1
-  OkToRetryOnAllOperations: true
-  MaxAutoRetriesNextServer: 1
-  http:
-    client:
-      enabled: false
-  okhttp:
-    enabled: true
-  eager-load:
-    enabled: true
-  nacos:
-    enabled: false
 
 herodotus:
   rest:
