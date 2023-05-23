@@ -92,7 +92,7 @@ public class SecurityMetadataDistributeProcessor implements ApplicationStrategyE
 
             if (CollectionUtils.isNotEmpty(sysInterfaces)) {
                 List<SysAttribute> elements = this.convertSysInterfacesToSysAttributes(sysInterfaces);
-                List<SysAttribute> result = sysAttributeService.batchSaveOrUpdate(elements);
+                List<SysAttribute> result = sysAttributeService.saveAllAndFlush(elements);
                 if (CollectionUtils.isNotEmpty(result)) {
                     log.debug("[Herodotus] |- Merge security attribute SUCCESS and FINISHED!");
                 } else {

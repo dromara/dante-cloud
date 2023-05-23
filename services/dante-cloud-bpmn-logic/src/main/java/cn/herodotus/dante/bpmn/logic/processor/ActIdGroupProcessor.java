@@ -64,6 +64,6 @@ public class ActIdGroupProcessor extends AbstractProcessor<ActIdGroup> {
 
     @Override
     public ActIdGroup saveOrUpdate(ActIdGroup entity) {
-        return actIdGroupService.saveOrUpdate(entity);
+        return actIdGroupService.saveAndFlush(entity);
     }
 }

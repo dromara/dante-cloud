@@ -27,23 +27,22 @@ package cn.herodotus.dante.authentication.configuration;
 
 import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
-import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusJwtTokenCustomizer;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusOpaqueTokenCustomizer;
-import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginSecureConfigurer;
 import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginUrlConfigurer;
 import cn.herodotus.engine.oauth2.authentication.oidc.HerodotusOidcUserInfoMapper;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.provider.*;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
-import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationFailureHandler;
-import cn.herodotus.engine.oauth2.authentication.response.HerodotusAuthenticationSuccessHandler;
-import cn.herodotus.engine.oauth2.authentication.response.OAuth2DeviceVerificationAuthenticationSuccessHandler;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationProperties;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
+import cn.herodotus.engine.oauth2.management.response.OAuth2AccessTokenResponseHandler;
+import cn.herodotus.engine.oauth2.management.response.OAuth2AuthenticationFailureResponseHandler;
+import cn.herodotus.engine.oauth2.management.response.OAuth2DeviceVerificationResponseHandler;
+import cn.herodotus.engine.oauth2.management.response.OidcClientRegistrationResponseHandler;
 import cn.herodotus.engine.rest.core.properties.EndpointProperties;
 import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
 import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
@@ -119,13 +118,15 @@ public class AuthorizationServerConfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(
             HttpSecurity httpSecurity,
-            ClientDetailsService clientDetailsService,
-            UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder,
+            UserDetailsService userDetailsService,
+            ClientDetailsService clientDetailsService,
             HttpCryptoProcessor httpCryptoProcessor,
-            OAuth2AuthenticationProperties authenticationProperties,
             HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-            OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer
+            OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer,
+            OAuth2AuthenticationProperties authenticationProperties,
+            OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
+            OidcClientRegistrationResponseHandler clientRegistrationResponseHandler
     ) throws Exception {
 
         log.debug("[Herodotus] |- Core [Authorization Server Security Filter Chain] Auto Configure.");
@@ -133,20 +134,20 @@ public class AuthorizationServerConfiguration {
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
         httpSecurity.apply(authorizationServerConfigurer);
 
-        HerodotusAuthenticationFailureHandler failureHandler = new HerodotusAuthenticationFailureHandler();
-        authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        OAuth2AuthenticationFailureResponseHandler errorResponseHandler = new OAuth2AuthenticationFailureResponseHandler();
+        authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
         authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
-            endpoint.errorResponseHandler(failureHandler);
+            endpoint.errorResponseHandler(errorResponseHandler);
             endpoint.consentPage(BaseConstants.CUSTOM_AUTHORIZATION_CONSENT_URI);
         });
         authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> {
-            endpoint.errorResponseHandler(failureHandler);
+            endpoint.errorResponseHandler(errorResponseHandler);
             endpoint.verificationUri(BaseConstants.CUSTOM_DEVICE_ACTIVATION_URI);
         });
         authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> {
-            endpoint.errorResponseHandler(failureHandler);
+            endpoint.errorResponseHandler(errorResponseHandler);
             endpoint.consentPage(BaseConstants.CUSTOM_AUTHORIZATION_CONSENT_URI);
-            endpoint.deviceVerificationResponseHandler(new OAuth2DeviceVerificationAuthenticationSuccessHandler());
+            endpoint.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
         });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
             AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
@@ -158,13 +159,16 @@ public class AuthorizationServerConfiguration {
                             new OAuth2ResourceOwnerPasswordAuthenticationConverter(httpCryptoProcessor),
                             new OAuth2SocialCredentialsAuthenticationConverter(httpCryptoProcessor)));
             endpoint.accessTokenRequestConverter(authenticationConverter);
-            endpoint.errorResponseHandler(failureHandler);
-            endpoint.accessTokenResponseHandler(new HerodotusAuthenticationSuccessHandler(httpCryptoProcessor));
+            endpoint.errorResponseHandler(errorResponseHandler);
+            endpoint.accessTokenResponseHandler(new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
         });
-        authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
-        authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(failureHandler));
+        authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
+        authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
         authorizationServerConfigurer.oidc(oidc -> {
-            oidc.clientRegistrationEndpoint(Customizer.withDefaults());
+            oidc.clientRegistrationEndpoint(endpoint -> {
+                endpoint.errorResponseHandler(errorResponseHandler);
+                endpoint.clientRegistrationResponseHandler(clientRegistrationResponseHandler);
+            });
             oidc.userInfoEndpoint(userInfo -> userInfo
                     .userInfoMapper(new HerodotusOidcUserInfoMapper()));
         });

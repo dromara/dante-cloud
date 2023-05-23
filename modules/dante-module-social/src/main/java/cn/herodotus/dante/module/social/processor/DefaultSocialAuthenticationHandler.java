@@ -91,12 +91,11 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
 
     @Override
     public void binding(String userId, SocialUserDetails socialUserDetails) throws SocialCredentialsParameterBindingFailedException {
-        if (socialUserDetails instanceof SysSocialUser) {
-            SysSocialUser sysSocialUser = (SysSocialUser) socialUserDetails;
+        if (socialUserDetails instanceof SysSocialUser sysSocialUser) {
             SysUser sysUser = new SysUser();
             sysUser.setUserId(userId);
             sysSocialUser.setUsers(ImmutableSet.<SysUser>builder().add(sysUser).build());
-            sysSocialUserService.saveOrUpdate(sysSocialUser);
+            sysSocialUserService.saveAndFlush(sysSocialUser);
         }
     }
 
@@ -122,11 +121,9 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
 
     @Override
     public void additionalSignInOperation(HerodotusUser herodotusUserDetails, SocialUserDetails newSocialUserDetails, SocialUserDetails oldSocialUserDetails) {
-        if (newSocialUserDetails instanceof SysSocialUser && oldSocialUserDetails instanceof SysSocialUser) {
-            SysSocialUser newSysSocialUser = (SysSocialUser) newSocialUserDetails;
-            SysSocialUser oldSysSocialUser = (SysSocialUser) oldSocialUserDetails;
+        if (newSocialUserDetails instanceof SysSocialUser newSysSocialUser && oldSocialUserDetails instanceof SysSocialUser oldSysSocialUser) {
             setSocialUserInfo(oldSysSocialUser, newSysSocialUser.getAccessToken(), newSysSocialUser.getExpireIn(), newSysSocialUser.getRefreshToken(), newSysSocialUser.getRefreshTokenExpireIn(), newSysSocialUser.getScope(), newSysSocialUser.getTokenType(), newSysSocialUser.getUid(), newSysSocialUser.getOpenId(), newSysSocialUser.getAccessCode(), newSysSocialUser.getUnionId());
-            sysSocialUserService.saveOrUpdate(oldSysSocialUser);
+            sysSocialUserService.saveAndFlush(oldSysSocialUser);
         }
     }
 
