@@ -47,14 +47,6 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
 - 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
 - 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
 
-## 重要说明
-
-随着 Spring Boot 3 周边生态组件的不断完善和新特性的加入，Dante Cloud 也同步的将 3.X 版本作为开发重心。
-
-因此，Dante Cloud 3.X 版本代码将移动到 master 分支，作为主力版本开发。2.7.X 版本代码将移动到 2.7.X 分支，后续不会增加新特性和新功能，仅会结合 Spring Boot 2.X 版本发布情况，做低频例行更新。
-
-敬请悉知！
-
 ## Dante Cloud 3.0.0 新特性
 
 ### 1. 核心基础依赖便捷切换
@@ -89,6 +81,7 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
   几种模式，全面融合 `IdToken`、`Opaque Token`、`JWT Token` 与现有权限体系，同时提供 `IdToken` 和 自定义 Token
   扩展两种无须二次请求的用户信息传递方式，减少用户信息的频繁请求。
 - 自定义 `Spring Authorization Server` 授权码模式登录认证页面和授权确认页面，授权码模式登录采用数据加密传输。支持多种验证码类型，暂不支持行为验证码。
+- 新增基于 `Spring Authorization Server` 的、支持智能电视、IoT等物联网设备认证模式
 - 无须在代码中配置 `Spring Security` 权限注解以及权限方法，即可实现接口鉴权以及权限的动态修改。采用分布式鉴权方案，规避
   Gateway 统一鉴权的压力以及重复鉴权问题
 - OAuth2 UserDetails 核心数据支持直连数据库获取和 Feign 远程调用两种模式。OAuth2 直连数据库模式性能更优，Feign
@@ -103,19 +96,11 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
 - 共享模块已进行优化配置，利用 Vite 可编译成独立的组件，单独以组件形式进行发布
 - 代码以共享模块的方式进行单独维护开发，降低现有工程代码复杂度，便于后续功能的扩展和代码的复用。
 
-## 升级说明
+## 重要说明
 
-- 当前版本虽然仍旧集成了 Spring Cloud Alibaba，但目前仅能使用 Nacos 的配置中心功能，同时配合 Zookeeper
-  作为服务发现和注册使用。Sentinel 等相关功能暂时无法使用。建议现阶段先使用 Spring Cloud Tencent 作为基础设施支撑环境。
-
-> 待 Spring Cloud Alibaba 完成适配，Dante Cloud 会马上进行更新升级。
-
-## 重要信息
-
-> 不一定非要捐赠或者参与编写代码，才是参与开源项目的正确方式。点个 `Star`、提个格式规范的 ISSUE，也是在积极参与开源项目，更是对作者莫大的支持和鼓励。
-
-> 开发新手在群内提问或新开 Issue 提问前，请先阅读 [【提问的智慧】](https://www.herodotus.cn/others/question/)
-> ，并确保认真、详细地查阅过本项目 [【在线文档】](https://www.herodotus.cn)，特别是【常见问题】章节。避免浪费大家的宝贵时间；
+1. 随着 Spring Boot 3 周边生态组件的不断完善和新特性的加入，Dante Cloud 也同步的将 3.X 版本作为开发重心。 因此，Dante Cloud 3.X 版本代码将移动到 master 分支，作为主力版本开发。2.7.X 版本代码将移动到 2.7.X 分支，后续不会增加新特性和新功能，仅会结合 Spring Boot 2.X 版本发布情况，做低频例行更新。 敬请悉知！
+2. 不一定非要捐赠或者参与编写代码，才是参与开源项目的正确方式。点个 `Star`、提个格式规范的 ISSUE，也是在积极参与开源项目，更是对作者莫大的支持和鼓励。 
+3. 开发新手在群内提问或新开 Issue 提问前，请先阅读 [【提问的智慧】](https://www.herodotus.cn/others/question/)，并确保认真、详细地查阅过本项目 [【在线文档】](https://www.herodotus.cn)，特别是【常见问题】章节。避免浪费大家的宝贵时间；
 
 ## [1]、总体架构
 
@@ -161,8 +146,7 @@ SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、
 | Sentinel                    | 1.8.5           |
 | Seata                       | 1.5.2           |
 
-> Spring
-> 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
+> Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
 ### （2）所涉及的相关的技术：
 
