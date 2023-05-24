@@ -64,6 +64,6 @@ public class ActIdTenantProcessor extends AbstractProcessor<ActIdTenant> {
 
     @Override
     public ActIdTenant saveOrUpdate(ActIdTenant entity) {
-        return this.actIdTenantService.saveOrUpdate(entity);
+        return this.actIdTenantService.saveAndFlush(entity);
     }
 }

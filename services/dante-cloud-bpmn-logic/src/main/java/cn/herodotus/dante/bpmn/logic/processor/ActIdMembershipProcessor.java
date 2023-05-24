@@ -64,6 +64,6 @@ public class ActIdMembershipProcessor extends AbstractProcessor<ActIdMembership>
 
     @Override
     public ActIdMembership saveOrUpdate(ActIdMembership entity) {
-        return this.actIdMembershipService.saveOrUpdate(entity);
+        return this.actIdMembershipService.saveAndFlush(entity);
     }
 }
