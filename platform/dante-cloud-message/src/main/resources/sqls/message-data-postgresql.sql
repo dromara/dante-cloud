@@ -88,6 +88,7 @@ INSERT INTO "sys_permission" ("permission_id", "create_time", "ranking", "update
 INSERT INTO "sys_permission" ("permission_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "permission_code", "permission_name") VALUES ('5', '2023-03-08 00:03:35.765', 5, '2023-03-08 00:03:35.765', '工作流等管理相关全部权限，当前为全部权限可结合实际调整细化', 't', 0, 0, 'workflow:manage', '工作流程管理');
 INSERT INTO "sys_permission" ("permission_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "permission_code", "permission_name") VALUES ('6', '2023-03-08 00:03:35.765', 6, '2023-03-08 00:03:35.765', '运维配置管理相关全部权限，当前为全部权限可结合实际调整细化', 't', 0, 0, 'cmdb:manage', '运维配置应用');
 INSERT INTO "sys_permission" ("permission_id", "create_time", "ranking", "update_time", "description", "is_reserved", "reversion", "status", "permission_code", "permission_name") VALUES ('7', '2023-03-08 00:03:35.765', 7, '2023-03-08 00:03:35.765', '外部接入应用相关全部权限，当前为全部权限可结合实际调整细化', 't', 0, 0, 'external:manage', '外部接入应用');
+INSERT INTO "sys_permission" ("permission_id", "create_by", "create_time", "ranking", "update_by", "update_time", "description", "is_reserved", "reversion", "status", "permission_code", "permission_name") VALUES ('8', 'system', '2023-05-28 21:13:35', 8, 'system', '2023-05-28 21:13:49', '对象存储管理相关全部权限，当前为全部权限可结合实际调整细化', 't', 0, 0, 'oss:manage', '对象存储管理');
 
 -- ----------------------------
 -- Table data for sys_user_role
@@ -105,6 +106,7 @@ INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('1', '4')
 INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('1', '5');
 INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('1', '6');
 INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('1', '7');
+INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('1', '8');
 INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('7e43d37d-d045-445f-a1de-cb1259f7709c', '1');
 INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('7e43d37d-d045-445f-a1de-cb1259f7709c', '4');
 INSERT INTO "sys_role_permission" ("role_id", "permission_id") VALUES ('faccc981-7cd4-4333-9ef9-93752eb186bd', '1');
@@ -346,5 +348,12 @@ FROM
             "sys_attribute" sa
         WHERE
                 sa.url LIKE'%meteorology%'
-           OR sa.url LIKE'%satellite%'
+           OR sa.url LIKE'%satellite%' UNION
+        SELECT
+            '8' AS permission_id,
+            sa.attribute_id
+        FROM
+            "sys_attribute" sa
+        WHERE
+            sa.url LIKE'%oss%'
     ) AS st;
