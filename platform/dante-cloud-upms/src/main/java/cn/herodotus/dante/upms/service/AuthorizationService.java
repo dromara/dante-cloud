@@ -26,11 +26,11 @@
 package cn.herodotus.dante.upms.service;
 
 import cn.herodotus.engine.assistant.core.definition.AbstractRest;
-import cn.hutool.core.codec.Base64;
 import cn.zhxu.data.TypeRef;
 import cn.zhxu.okhttps.MsgConvertor;
 import cn.zhxu.okhttps.OkHttps;
 import cn.zhxu.okhttps.jackson.JacksonMsgConvertor;
+import org.dromara.hutool.core.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
