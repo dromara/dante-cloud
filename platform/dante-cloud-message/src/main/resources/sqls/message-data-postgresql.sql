@@ -215,6 +215,7 @@ INSERT INTO "sys_element" ("element_id", "create_time", "ranking", "update_time"
 INSERT INTO "sys_element" ("element_id", "create_by", "create_time", "ranking", "update_by", "update_time", "description", "is_reserved", "reversion", "status", "component", "detail_content", "have_child", "hide_all_child", "icon", "ignore_auth", "name", "not_keep_alive", "parent_id", "path", "redirect", "title", "type") VALUES ('f2ed95c1-7856-40db-9e5b-a7b014ffcb63', 'system', '2023-05-28 21:32:26.818', 8, 'system', '2023-05-28 21:37:08.235', NULL, 't', 0, 0, 'views/layouts/Index.vue', 'f', 't', 'f', 'mdi-cloud-upload', 'f', NULL, 'f', NULL, '/oss', '/oss/bucket', '对象存储管理', NULL);
 INSERT INTO "sys_element" ("element_id", "create_by", "create_time", "ranking", "update_by", "update_time", "description", "is_reserved", "reversion", "status", "component", "detail_content", "have_child", "hide_all_child", "icon", "ignore_auth", "name", "not_keep_alive", "parent_id", "path", "redirect", "title", "type") VALUES ('7934fb1f-c817-46bb-bd1c-6c849af7f292', 'system', '2023-05-28 21:33:50.411', 1, 'system', '2023-05-28 21:37:15.403', NULL, 't', 0, 0, 'views/pages/oss/bucket/Index.vue', 'f', 't', 't', 'mdi-bucket', 'f', 'OssBucket', 't', 'f2ed95c1-7856-40db-9e5b-a7b014ffcb63', '/oss/bucket', NULL, '存储桶管理', NULL);
 INSERT INTO "sys_element" ("element_id", "create_by", "create_time", "ranking", "update_by", "update_time", "description", "is_reserved", "reversion", "status", "component", "detail_content", "have_child", "hide_all_child", "icon", "ignore_auth", "name", "not_keep_alive", "parent_id", "path", "redirect", "title", "type") VALUES ('8ed3e85b-235c-4222-8d28-0c91ea177ac8', 'system', '2023-05-28 21:36:49.851', 0, 'system', '2023-05-28 21:37:26.726', NULL, 't', 0, 0, 'views/pages/oss/bucket/Content.vue', 't', 'f', 'f', 'mdi-bucket-outline', 'f', 'OssBucketContent', 't', '7934fb1f-c817-46bb-bd1c-6c849af7f292', '/oss/bucket/content', NULL, '存储桶详情', NULL);
+INSERT INTO "sys_element" ("element_id", "create_by", "create_time", "ranking", "update_by", "update_time", "description", "is_reserved", "reversion", "status", "component", "detail_content", "have_child", "hide_all_child", "icon", "ignore_auth", "name", "not_keep_alive", "parent_id", "path", "redirect", "title", "type") VALUES ('5b4ab829-1087-4ead-9368-83b388386c5c', 'system', '2023-05-31 23:07:27.146', 2, 'system', '2023-05-31 23:07:47.669', NULL, 't', 0, 0, 'views/pages/oss/object/Index.vue', 'f', 't', 't', 'mdi-file-cabinet', 'f', 'OssObject', 't', 'f2ed95c1-7856-40db-9e5b-a7b014ffcb63', '/oss/object', NULL, '存储对象管理', NULL);
 -- ----------------------------
 -- Table data for sys_element_role
 -- ----------------------------
@@ -288,7 +289,7 @@ INSERT INTO "sys_element_role" ("element_id", "role_id") VALUES ('3386cbab-7d57-
 INSERT INTO "sys_element_role" ("element_id", "role_id") VALUES ('f2ed95c1-7856-40db-9e5b-a7b014ffcb63', '1');
 INSERT INTO "sys_element_role" ("element_id", "role_id") VALUES ('7934fb1f-c817-46bb-bd1c-6c849af7f292', '1');
 INSERT INTO "sys_element_role" ("element_id", "role_id") VALUES ('8ed3e85b-235c-4222-8d28-0c91ea177ac8', '1');
-
+INSERT INTO "sys_element_role" ("element_id", "role_id") VALUES ('5b4ab829-1087-4ead-9368-83b388386c5c', '1');
 -- ----------------------------
 -- Table data for sys_interface_authority
 -- ----------------------------
