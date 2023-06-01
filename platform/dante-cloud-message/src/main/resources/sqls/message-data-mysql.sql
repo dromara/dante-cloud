@@ -87,6 +87,7 @@ INSERT INTO `sys_permission` (`permission_id`, `create_time`, `ranking`, `update
 INSERT INTO `sys_permission` (`permission_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `permission_code`, `permission_name`) VALUES ('5', '2023-03-08 00:03:35.765', 5, '2023-03-08 00:03:35.765', '工作流等管理相关全部权限，当前为全部权限可结合实际调整细化', b'1', 0, 0, 'workflow:manage', '工作流程管理');
 INSERT INTO `sys_permission` (`permission_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `permission_code`, `permission_name`) VALUES ('6', '2023-03-08 00:03:35.765', 6, '2023-03-08 00:03:35.765', '运维配置管理相关全部权限，当前为全部权限可结合实际调整细化', b'1', 0, 0, 'cmdb:manage', '运维配置应用');
 INSERT INTO `sys_permission` (`permission_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `permission_code`, `permission_name`) VALUES ('7', '2023-03-08 00:03:35.765', 7, '2023-03-08 00:03:35.765', '外部接入应用相关全部权限，当前为全部权限可结合实际调整细化', b'1', 0, 0, 'external:manage', '外部接入应用');
+INSERT INTO `sys_permission` (`permission_id`, `create_by`, `create_time`, `ranking`, `update_by`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `permission_code`, `permission_name`) VALUES ('8', 'system', '2023-05-28 21:13:35', 8, 'system', '2023-05-28 21:13:49', '对象存储管理相关全部权限，当前为全部权限可结合实际调整细化', b'1', 0, 0, 'oss:manage', '对象存储管理');
 
 -- ----------------------------
 -- Table data for sys_user_role
@@ -104,6 +105,7 @@ INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('1', '4')
 INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('1', '5');
 INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('1', '6');
 INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('1', '7');
+INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('1', '8');
 INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('7e43d37d-d045-445f-a1de-cb1259f7709c', '1');
 INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('7e43d37d-d045-445f-a1de-cb1259f7709c', '4');
 INSERT INTO `sys_role_permission` (`role_id`, `permission_id`) VALUES ('faccc981-7cd4-4333-9ef9-93752eb186bd', '1');
@@ -209,6 +211,10 @@ INSERT INTO `sys_element` (`element_id`, `create_time`, `ranking`, `update_time`
 INSERT INTO `sys_element` (`element_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `component`, `detail_content`, `have_child`, `hide_all_child`, `icon`, `ignore_auth`, `name`, `not_keep_alive`, `parent_id`, `path`, `redirect`, `title`, `type`, `create_by`, `update_by`) VALUES ('af9b18f0-fd16-4fd3-a9ee-328c34b6f3d7', '2023-05-24 17:47:25.108', 1, '2023-05-24 17:47:55.885', NULL, b'1', 0, 0, 'views/pages/authorize/product/Content.vue', b'1', b'0', b'0', 'mdi-folder-text', b'0', 'OAuth2ProductContent', b'1', 'c8ed388a-77e5-4257-93be-6362a3af2e23', '/authorize/product/content', NULL, '产品详情', NULL, 'system', 'system');
 INSERT INTO `sys_element` (`element_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `component`, `detail_content`, `have_child`, `hide_all_child`, `icon`, `ignore_auth`, `name`, `not_keep_alive`, `parent_id`, `path`, `redirect`, `title`, `type`, `create_by`, `update_by`) VALUES ('4cfafcff-a7a4-4bdd-b86d-9372f1666d88', '2023-05-24 17:49:12.855', 6, '2023-05-24 17:50:31.431', NULL, b'1', 0, 0, 'views/pages/authorize/device/Index.vue', b'0', b'1', b'1', 'mdi-devices', b'0', 'OAuth2Device', b'1', '2f2a5b9a-b7ac-438d-bcb0-f69b75bd009c', '/authorize/device', NULL, '设备管理', NULL, 'system', 'system');
 INSERT INTO `sys_element` (`element_id`, `create_time`, `ranking`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `component`, `detail_content`, `have_child`, `hide_all_child`, `icon`, `ignore_auth`, `name`, `not_keep_alive`, `parent_id`, `path`, `redirect`, `title`, `type`, `create_by`, `update_by`) VALUES ('3386cbab-7d57-4ae6-97f8-a0fc2d593879', '2023-05-24 17:50:25.477', 1, '2023-05-24 17:50:37.93', NULL, b'1', 0, 0, 'views/pages/authorize/device/Content.vue', b'1', b'0', b'0', 'mdi-lan-check', b'0', 'OAuth2DeviceContent', b'1', '4cfafcff-a7a4-4bdd-b86d-9372f1666d88', '/authorize/device/content', NULL, '设备详情', NULL, 'system', 'system');
+INSERT INTO `sys_element` (`element_id`, `create_by`, `create_time`, `ranking`, `update_by`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `component`, `detail_content`, `have_child`, `hide_all_child`, `icon`, `ignore_auth`, `name`, `not_keep_alive`, `parent_id`, `path`, `redirect`, `title`, `type`) VALUES ('f2ed95c1-7856-40db-9e5b-a7b014ffcb63', 'system', '2023-05-28 21:32:26.818', 8, 'system', '2023-05-28 21:37:08.235', NULL, b'1', 0, 0, 'views/layouts/Index.vue', b'0', b'1', b'0', 'mdi-cloud-upload', b'0', NULL, b'0', NULL, '/oss', '/oss/bucket', '对象存储管理', NULL);
+INSERT INTO `sys_element` (`element_id`, `create_by`, `create_time`, `ranking`, `update_by`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `component`, `detail_content`, `have_child`, `hide_all_child`, `icon`, `ignore_auth`, `name`, `not_keep_alive`, `parent_id`, `path`, `redirect`, `title`, `type`) VALUES ('7934fb1f-c817-46bb-bd1c-6c849af7f292', 'system', '2023-05-28 21:33:50.411', 1, 'system', '2023-05-28 21:37:15.403', NULL, b'1', 0, 0, 'views/pages/oss/bucket/Index.vue', b'0', b'1', b'1', 'mdi-bucket', b'0', 'OssBucket', b'1', 'f2ed95c1-7856-40db-9e5b-a7b014ffcb63', '/oss/bucket', NULL, '存储桶管理', NULL);
+INSERT INTO `sys_element` (`element_id`, `create_by`, `create_time`, `ranking`, `update_by`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `component`, `detail_content`, `have_child`, `hide_all_child`, `icon`, `ignore_auth`, `name`, `not_keep_alive`, `parent_id`, `path`, `redirect`, `title`, `type`) VALUES ('8ed3e85b-235c-4222-8d28-0c91ea177ac8', 'system', '2023-05-28 21:36:49.851', 0, 'system', '2023-05-28 21:37:26.726', NULL, b'1', 0, 0, 'views/pages/oss/bucket/Content.vue', b'1', b'0', b'0', 'mdi-bucket-outline', b'0', 'OssBucketContent', b'1', '7934fb1f-c817-46bb-bd1c-6c849af7f292', '/oss/bucket/content', NULL, '存储桶详情', NULL);
+INSERT INTO `sys_element` (`element_id`, `create_by`, `create_time`, `ranking`, `update_by`, `update_time`, `description`, `is_reserved`, `reversion`, `status`, `component`, `detail_content`, `have_child`, `hide_all_child`, `icon`, `ignore_auth`, `name`, `not_keep_alive`, `parent_id`, `path`, `redirect`, `title`, `type`) VALUES ('5b4ab829-1087-4ead-9368-83b388386c5c', 'system', '2023-05-31 23:07:27.146', 2, 'system', '2023-05-31 23:07:47.669', NULL, b'1', 0, 0, 'views/pages/oss/object/Index.vue', b'0', b'1', b'1', 'mdi-file-cabinet', b'0', 'OssObject', b'1', 'f2ed95c1-7856-40db-9e5b-a7b014ffcb63', '/oss/object', NULL, '存储对象管理', NULL);
 
 -- ----------------------------
 -- Table data for sys_element_role
@@ -280,7 +286,10 @@ INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('c8ed388a-77e5-
 INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('af9b18f0-fd16-4fd3-a9ee-328c34b6f3d7', '1');
 INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('4cfafcff-a7a4-4bdd-b86d-9372f1666d88', '1');
 INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('3386cbab-7d57-4ae6-97f8-a0fc2d593879', '1');
-
+INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('f2ed95c1-7856-40db-9e5b-a7b014ffcb63', '1');
+INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('7934fb1f-c817-46bb-bd1c-6c849af7f292', '1');
+INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('8ed3e85b-235c-4222-8d28-0c91ea177ac8', '1');
+INSERT INTO `sys_element_role` (`element_id`, `role_id`) VALUES ('5b4ab829-1087-4ead-9368-83b388386c5c', '1');
 -- ----------------------------
 -- Table data for sys_interface_authority
 -- ----------------------------
@@ -344,5 +353,12 @@ FROM
     `sys_attribute` sa
     WHERE
     sa.url LIKE'%meteorology%'
-    OR sa.url LIKE'%satellite%'
+    OR sa.url LIKE'%satellite%' UNION
+    SELECT
+        '8' AS permission_id,
+        sa.attribute_id
+    FROM
+        `sys_attribute` sa
+    WHERE
+        sa.url LIKE'%oss%'
     ) AS st;

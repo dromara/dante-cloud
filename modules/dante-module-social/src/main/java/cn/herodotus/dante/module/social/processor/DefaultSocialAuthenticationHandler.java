@@ -39,10 +39,10 @@ import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
 import cn.herodotus.engine.supplier.upms.logic.helper.UpmsHelper;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysSocialUserService;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
-import cn.hutool.core.bean.BeanUtil;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

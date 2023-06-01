@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.authentication.configuration;
 
-import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
+import cn.herodotus.engine.assistant.core.definition.constants.DefaultConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusJwtTokenCustomizer;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusOpaqueTokenCustomizer;
@@ -138,15 +138,15 @@ public class AuthorizationServerConfiguration {
         authorizationServerConfigurer.clientAuthentication(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
         authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(errorResponseHandler);
-            endpoint.consentPage(BaseConstants.CUSTOM_AUTHORIZATION_CONSENT_URI);
+            endpoint.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
         });
         authorizationServerConfigurer.deviceAuthorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(errorResponseHandler);
-            endpoint.verificationUri(BaseConstants.CUSTOM_DEVICE_ACTIVATION_URI);
+            endpoint.verificationUri(DefaultConstants.DEVICE_ACTIVATION_URI);
         });
         authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(errorResponseHandler);
-            endpoint.consentPage(BaseConstants.CUSTOM_AUTHORIZATION_CONSENT_URI);
+            endpoint.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
             endpoint.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
         });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
