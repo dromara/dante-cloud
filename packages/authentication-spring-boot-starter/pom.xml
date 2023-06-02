@@ -32,11 +32,11 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.0.2</version>
+        <version>3.1.0.3</version>
     </parent>
 
     <artifactId>authentication-spring-boot-starter</artifactId>
-    <version>3.1.0.2</version>
+    <version>3.1.0.3</version>
     <packaging>jar</packaging>
 
     <dependencies>
