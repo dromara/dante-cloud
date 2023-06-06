@@ -32,11 +32,11 @@
     <parent>
         <artifactId>dante-cloud</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.0.3</version>
+        <version>3.1.0.4</version>
     </parent>
 
     <artifactId>services</artifactId>
-    <version>3.1.0.3</version>
+    <version>3.1.0.4</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud-services</name>
@@ -44,6 +44,7 @@
     <modules>
         <module>dante-cloud-bpmn-logic</module>
         <module>dante-cloud-bpmn-ability</module>
+        <module>dante-cloud-oss-ability</module>
     </modules>
 
 </project>
