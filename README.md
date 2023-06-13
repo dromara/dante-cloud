@@ -13,7 +13,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.3"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.1.0.5-red.svg?logo=spring" alt="Version 3.1.0.5"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.1.0.6-red.svg?logo=spring" alt="Version 3.1.0.6"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -206,7 +206,8 @@ dante-cloud
 ├    └── dante-cloud-uaa -- 账户管理和统一认证模块
 ├── services -- 平台业务服务
 ├    ├── dante-cloud-bpmn-ability -- 工作流服务
-└──  └── dante-cloud-bpmn-logic -- 工作流基础代码包
+├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
+└──  └── dante-cloud-oss-ability -- 对象服务
 ```
 
 ## [6]、项目地址
