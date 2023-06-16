@@ -13,7 +13,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.3"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.1.0.6-red.svg?logo=spring" alt="Version 3.1.0.6"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-3.1.0.7-red.svg?logo=spring" alt="Version 3.1.0.7"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -33,6 +33,8 @@
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
 
 ---
+
+[![Security Status](https://www.murphysec.com/platform3/v31/badge/1669564444581117952.svg)](https://www.murphysec.com/console/report/1657950953842561024/1669564444581117952)
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
