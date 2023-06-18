@@ -9,8 +9,9 @@ spring:
     allow-bean-definition-overriding: true
 herodotus:
   oauth2:
-    jwk:
-      certificate: standard
+    authorization:
+      jwk:
+        certificate: standard
 
 ---
 # spring cloud alibaba 基础设施配置
