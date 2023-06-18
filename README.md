@@ -24,6 +24,9 @@
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
 <p align="center">
+  <a href="https://www.murphysec.com/console/report/1657950953842561024/1669557017360752640" alt="Security Status"><img src="https://www.murphysec.com/platform3/v31/badge/1669557017360752640.svg" /></a>
+</p>
+<p align="center">
     <a href="https://github.com/herodotus-cloud/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/herodotus/dante-engine">核心组件仓库</a> &nbsp; | &nbsp;
@@ -33,8 +36,6 @@
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
 
 ---
-
-[![Security Status](https://www.murphysec.com/platform3/v31/badge/1669564444581117952.svg)](https://www.murphysec.com/console/report/1657950953842561024/1669564444581117952)
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
