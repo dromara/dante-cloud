@@ -32,13 +32,13 @@
     <parent>
         <groupId>cn.herodotus.engine</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.1.0.7</version>
+        <version>3.1.0.8</version>
         <relativePath/>
     </parent>
 
     <groupId>cn.herodotus.dante</groupId>
     <artifactId>dependencies</artifactId>
-    <version>3.1.0.7</version>
+    <version>3.1.0.8</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud-dependencies</name>
@@ -58,7 +58,7 @@
     </developers>
 
     <properties>
-        <dante-oss-bom.version>0.6.0</dante-oss-bom.version>
+        <dante-oss-bom.version>0.7.0</dante-oss-bom.version>
     </properties>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
