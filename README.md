@@ -15,7 +15,7 @@
 <p align="center">
     <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.1.1-red.svg?logo=spring" alt="Version 3.1.1.1"></a>
     <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.1.1-red.svg?logo=spring" alt="Dante Engine 3.1.1.1"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.0.0-red.svg?logo=spring" alt="Dante OSS 3.1.1.1"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.0.0-red.svg?logo=spring" alt="Dante OSS 1.0.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -26,7 +26,7 @@
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
 <p align="center">
-  <a href="https://www.murphysec.com/console/report/1657950953842561024/1669557017360752640" alt="Security Status"><img src="https://www.murphysec.com/platform3/v31/badge/1669557017360752640.svg" /></a>
+  <a href="https://www.murphysec.com/console/report/1657950953842561024/1676584359397769216" alt="Security Status"><img src="https://www.murphysec.com/platform3/v31/badge/1676584359397769216.svg" /></a>
 </p>
 <p align="center">
     <a href="https://github.com/herodotus-cloud/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
