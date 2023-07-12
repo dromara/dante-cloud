@@ -2,11 +2,18 @@ server:
   port: 7072
 spring:
   application:
-    name:  @artifactId@ #拿到POM文件中的值
+    name: @artifactId@ #拿到POM文件中的值
   profiles:
     active: @facility@
   main:
     allow-bean-definition-overriding: true
+
+---
+# spring cloud alibaba 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: alibaba
   cloud:
     nacos:
       config:
@@ -14,21 +21,21 @@ spring:
         server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
         file-extension: yaml
         shared-configs:
-          - data-id: dante-cloud-environment.yaml
+          - data-id: herodotus-cloud-environment.yaml
             group: ${PROFILE:@profile@}
-          - data-id: dante-cloud-platform.yaml
+          - data-id: herodotus-cloud-platform.yaml
             group: common
-          - data-id: dante-cloud-database-${DATABASE:@database@}.yaml
+          - data-id: herodotus-cloud-database-${DATABASE:@database@}.yaml
             group: common
-          - data-id: dante-cloud-database.yaml
+          - data-id: herodotus-cloud-database.yaml
             group: common
-          - data-id: dante-cloud-redis.yaml
+          - data-id: herodotus-cloud-redis.yaml
             group: common
-          - data-id: dante-cloud-cache.yaml
+          - data-id: herodotus-cloud-cache.yaml
             group: common
-          - data-id: dante-cloud-rest.yaml
+          - data-id: herodotus-cloud-rest.yaml
             group: common
-          - data-id: dante-cloud-kafka.yaml
+          - data-id: herodotus-cloud-kafka.yaml
             group: common
       discovery:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
@@ -37,6 +44,15 @@ spring:
       transport:
         port: 8719
         dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
+      eager: true #服务注启动，直接注册到dashboard
+#      datasource:
+#        flow:
+#          nacos:
+#            server-addr: @alibaba.config.server-addr@
+#            data-id: ${spring.application.name}-sentienl-flow.json
+#            group-id: management
+#            data-type: json
+#            rule-type: flow
 
 springdoc:
   swagger-ui:
@@ -53,8 +69,7 @@ camunda:
       schema-update: true
     jpa:
       enabled: true
-    job-execution:
-      enabled: false
+
 
 logging:
   file:
@@ -72,4 +87,64 @@ logging:
     org.springframework.web: info
     com.alicp.jetcache: info
     org.springframework.cloud.bus: info
-    org.apache.kafka: error
+    org.apache.kafka: warn
+
+---
+# spring cloud tencent 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: tencent
+  cloud:
+    #    inetutils:
+    #      ignored-interfaces:
+    #        - eth0
+    polaris:
+      enabled: true
+      address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
+      namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
+      discovery:
+        service: ${spring.application.name}
+        namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
+      config:
+        address: ${TENCENT_POLARIS_CONFIG_ADDR:grpc://@tencent.polaris.config-addr@}
+        local-file-root-path: ${TENCENT_POLARIS_LOCAL_DIR:@tencent.polaris.local.dir@}
+        groups:
+          - name: ${PROFILE:@profile@}
+            files:
+              - herodotus-cloud-environment.yaml
+          - name: common
+            files:
+              - herodotus-cloud-platform.yaml
+              - herodotus-cloud-database-${DATABASE:@database@}.yaml
+              - herodotus-cloud-database.yaml
+              - herodotus-cloud-redis.yaml
+              - herodotus-cloud-cache.yaml
+              - herodotus-cloud-rest.yaml
+              - herodotus-cloud-kafka.yaml
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    urls-primary-name: CamundaRestAPI
+    urls:
+      - url: /openapi.json
+        name: CamundaRestAPI
+
+camunda:
+  bpm:
+    database:
+      type: postgres
+      schema-update: true
+    jpa:
+      enabled: true
+---
+# spring 全家桶基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: original
+  cloud:
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}

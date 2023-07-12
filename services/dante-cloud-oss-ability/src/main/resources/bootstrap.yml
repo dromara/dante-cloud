@@ -55,6 +55,16 @@ spring:
 #            group-id: management
 #            data-type: json
 #            rule-type: flow
+
+herodotus:
+  oss:
+    minio:
+      endpoint: http://127.0.0.1:9000
+      access-key: herodotus
+      secret-key: herodotus
+      use-proxy: true
+      proxy-source-endpoint: http://localhost:3000/api
+
 logging:
   file:
     name: logs/${spring.application.name}.log
