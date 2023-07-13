@@ -37,6 +37,8 @@ spring:
             group: common
           - data-id: herodotus-cloud-kafka.yaml
             group: common
+          - data-id: ${spring.application.name}.yaml
+            group: service
       discovery:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
@@ -53,23 +55,6 @@ spring:
 #            group-id: management
 #            data-type: json
 #            rule-type: flow
-
-springdoc:
-  swagger-ui:
-    disable-swagger-default-url: true
-    urls-primary-name: CamundaRestAPI
-    urls:
-      - url: /openapi.json
-        name: CamundaRestAPI
-
-camunda:
-  bpm:
-    database:
-      type: postgres
-      schema-update: true
-    jpa:
-      enabled: true
-
 
 logging:
   file:
@@ -122,22 +107,9 @@ spring:
               - herodotus-cloud-cache.yaml
               - herodotus-cloud-rest.yaml
               - herodotus-cloud-kafka.yaml
-
-springdoc:
-  swagger-ui:
-    disable-swagger-default-url: true
-    urls-primary-name: CamundaRestAPI
-    urls:
-      - url: /openapi.json
-        name: CamundaRestAPI
-
-camunda:
-  bpm:
-    database:
-      type: postgres
-      schema-update: true
-    jpa:
-      enabled: true
+          - name: service
+            files:
+              - ${spring.application.name}.yaml
 ---
 # spring 全家桶基础设施配置
 spring:

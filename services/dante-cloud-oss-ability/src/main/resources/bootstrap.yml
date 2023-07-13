@@ -39,6 +39,8 @@ spring:
             group: common
           - data-id: dante-cloud-social.yaml
             group: common
+          - data-id: ${spring.application.name}.yaml
+            group: service
       discovery:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
@@ -55,15 +57,6 @@ spring:
 #            group-id: management
 #            data-type: json
 #            rule-type: flow
-
-herodotus:
-  oss:
-    minio:
-      endpoint: http://127.0.0.1:9000
-      access-key: herodotus
-      secret-key: herodotus
-      use-proxy: true
-      proxy-source-endpoint: http://localhost:3000/api
 
 logging:
   file:
@@ -119,6 +112,9 @@ spring:
               - dante-cloud-rest.yaml
               - dante-cloud-kafka.yaml
               - dante-cloud-social.yaml
+          - name: service
+            files:
+              - ${spring.application.name}.yaml
 
 ---
 # spring 全家桶基础设施配置
