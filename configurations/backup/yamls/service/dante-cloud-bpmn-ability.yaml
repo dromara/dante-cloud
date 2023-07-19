@@ -1,0 +1,26 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${herodotus.endpoint.issuer-uri}
+          jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
+        opaquetoken:
+          client-id: 709776483077453b85b2af4f7949ed83
+          client-secret: a0307033c5544392922d3d87dac26528
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    urls-primary-name: CamundaRestAPI
+    urls:
+      - url: /openapi.json
+        name: CamundaRestAPI
+
+camunda:
+  bpm:
+    database:
+      type: postgres
+      schema-update: true
+    jpa:
+      enabled: true
