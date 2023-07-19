@@ -58,7 +58,7 @@
     </developers>
 
     <properties>
-        <dante-oss-bom.version>1.0.0</dante-oss-bom.version>
+        <dante-oss-bom.version>1.1.1</dante-oss-bom.version>
     </properties>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
