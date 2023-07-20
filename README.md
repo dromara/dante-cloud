@@ -6,16 +6,16 @@
 
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.1.1-blue.svg?logo=spring" alt="Spring Authorization Server 1.1.1"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.1.1-blue.svg?logo=spring" alt="Spring Boot 3.1.1"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.1.2-blue.svg?logo=spring" alt="Spring Boot 3.1.2"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2022.0.3-blue.svg?logo=spring" alt="Spring Cloud 2022.0.3"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2022.0.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2022.0.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.11.7--2022.0.1-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.11.7-2022.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.2.4-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.4"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.1.3-red.svg?logo=spring" alt="Version 3.1.1.3"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.1.3-red.svg?logo=spring" alt="Dante Engine 3.1.1.3"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.0.0-red.svg?logo=spring" alt="Dante OSS 1.0.0"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.2.0-red.svg?logo=spring" alt="Version 3.1.2.0"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.2.0-red.svg?logo=spring" alt="Dante Engine 3.1.2.0"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.1.2-red.svg?logo=spring" alt="Dante OSS 1.1.2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -41,7 +41,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.1、Spring Boot 3.1.1、Spring Cloud 2022.0.3、Spring Cloud Tencent 1.11.7-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.4 等主流技术栈开发的多租户系统，遵循SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.1、Spring Boot 3.1.2、Spring Cloud 2022.0.3、Spring Cloud Tencent 1.11.7-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.4 等主流技术栈开发的多租户系统，遵循SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
 ## 定位
 
@@ -140,12 +140,12 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 | 组件                          | 版本              |
 |-----------------------------|-----------------|
-| Spring Boot                 | 3.1.1           |
+| Spring Boot                 | 3.1.2           |
 | Spring Cloud                | 2022.0.3        |
 | Spring Cloud Alibaba        | 2022.0.0.0      |
 | Spring Cloud Tencent        | 1.11.7-2022.0.1 |
 | Spring Authorization Server | 1.1.1           |
-| Spring Boot Admin           | 3.1.1           |
+| Spring Boot Admin           | 3.1.2           |
 | Nacos                       | 2.2.4           |
 | Sentinel                    | 1.8.5           |
 | Seata                       | 1.5.2           |
@@ -232,11 +232,19 @@ dante-cloud
 - 允许免费用于学习、毕设、公司项目、私活等。
 - 遵循 Apache-2.0 开源协议 (保留代码中作者信息及版权说明即可)
 
-## [8]、交流反馈
+## [8]、免责声明
+
+- 本软件会不断更新，以便及时为用户提供新功能和修正软件中的 BUG。同时软件作者保证本软件在升级过程中也不含有任何旨在破坏用户计算机数据的恶意代码。
+- 本软件经过详细的测试，由于用户计算机软硬件环境的差异性和复杂性，本软件所提供的各项功能并不能保证在任何情况下都能正常执行或达到用户所期望的结果。如果出现不兼容及软件错误的情况，用户可登录软件代码托管平台将情况报告作者，获得技术支持。如果无法解决问题，用户可以删除本软件。
+- 使用本软件产品风险有用户自行承担，在适用法律允许的最大范围内，对因使用或不能使用本软件所产生的损害及风险，包括但不限于直接或间接的个人损害、商业盈利的丧失、贸易中断、商业信息的丢失或任何其它经济损失，作者不承担任何责任。
+- 您承诺秉着合法、合理的原则使用 Dante Cloud 开源微服务架构及其核心组件，不利用 Dante Cloud 开源微服务架构及其核心组件进行任何违法、侵害他人合法利益等恶意的行为，亦不将 Dante Cloud 开源微服务架构及其核心组件运用于任何违反我国法律法规的 Web 平台
+- 如果用户自行下载运行本软件，即表明用户信任软件作者，自愿选择安装本软件，并接受本协议所有条款。如果用户不接受本协议，请立即删除。
+
+## [9]、交流反馈
 
 - 详见[【在线文档】](https://www.herodotus.cn) 交流反馈章节。
 
-## [9]、界面预览
+## [10]、界面预览
 
 <table>
     <tr>
@@ -271,13 +279,13 @@ dante-cloud
     </tr>
 </table>
 
-## [10]、谁在使用 Dante Cloud
+## [11]、谁在使用 Dante Cloud
 
 | 序号 | 名称   | 官网                      |
 |----|------|-------------------------|
 | 1  | 轻喜到家 | <https://qxdaojia.com/> |
 
-## [11]、鸣谢
+## [12]、鸣谢
 
 ### 赞助人列表
 
