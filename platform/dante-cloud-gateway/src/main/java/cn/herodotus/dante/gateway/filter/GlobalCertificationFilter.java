@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -60,8 +59,6 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
 
     @Resource
     private GatewaySecurityProperties gatewaySecurityProperties;
-    @Resource
-    private RedisTemplate<Object, Object> redisTemplate;
 
     /**
      * 说明：目前所有请求均是通过Gateway进行访问。
