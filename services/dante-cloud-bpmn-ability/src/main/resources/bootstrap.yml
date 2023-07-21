@@ -21,21 +21,21 @@ spring:
         server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
         file-extension: yaml
         shared-configs:
-          - data-id: herodotus-cloud-environment.yaml
+          - data-id: dante-cloud-environment.yaml
             group: ${PROFILE:@profile@}
-          - data-id: herodotus-cloud-platform.yaml
+          - data-id: dante-cloud-platform.yaml
             group: common
-          - data-id: herodotus-cloud-database-${DATABASE:@database@}.yaml
+          - data-id: dante-cloud-database-${DATABASE:@database@}.yaml
             group: common
-          - data-id: herodotus-cloud-database.yaml
+          - data-id: dante-cloud-database.yaml
             group: common
-          - data-id: herodotus-cloud-redis.yaml
+          - data-id: dante-cloud-redis.yaml
             group: common
-          - data-id: herodotus-cloud-cache.yaml
+          - data-id: dante-cloud-cache.yaml
             group: common
-          - data-id: herodotus-cloud-rest.yaml
+          - data-id: dante-cloud-rest.yaml
             group: common
-          - data-id: herodotus-cloud-kafka.yaml
+          - data-id: dante-cloud-kafka.yaml
             group: common
           - data-id: ${spring.application.name}.yaml
             group: service
@@ -97,16 +97,16 @@ spring:
         groups:
           - name: ${PROFILE:@profile@}
             files:
-              - herodotus-cloud-environment.yaml
+              - dante-cloud-environment.yaml
           - name: common
             files:
-              - herodotus-cloud-platform.yaml
-              - herodotus-cloud-database-${DATABASE:@database@}.yaml
-              - herodotus-cloud-database.yaml
-              - herodotus-cloud-redis.yaml
-              - herodotus-cloud-cache.yaml
-              - herodotus-cloud-rest.yaml
-              - herodotus-cloud-kafka.yaml
+              - dante-cloud-platform.yaml
+              - dante-cloud-database-${DATABASE:@database@}.yaml
+              - dante-cloud-database.yaml
+              - dante-cloud-redis.yaml
+              - dante-cloud-cache.yaml
+              - dante-cloud-rest.yaml
+              - dante-cloud-kafka.yaml
           - name: service
             files:
               - ${spring.application.name}.yaml
