@@ -15,7 +15,7 @@
 <p align="center">
     <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.2.2-red.svg?logo=spring" alt="Version 3.1.2.2"></a>
     <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.2.2-red.svg?logo=spring" alt="Dante Engine 3.1.2.2"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.2.1-red.svg?logo=spring" alt="Dante OSS 1.2.1"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.2.8-red.svg?logo=spring" alt="Dante OSS 1.2.8"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -232,7 +232,16 @@ dante-cloud
 - 后端单体版示例工程地址：[https://gitee.com/herodotus/dante-cloud-athena](https://gitee.com/herodotus/dante-cloud-athena)
 - 前端工程地址：[https://gitee.com/herodotus/dante-cloud-ui](https://gitee.com/herodotus/dante-cloud-ui)
 
-## [7]、授权协议
+## [7]、技术解析
+
+**Dante Cloud 技术解析高级文档（Cookbook） 专栏【试行】**
+
+| 序号 | 文章标题                          | 付费 | 说明                                                                        | 扫码阅读                                                         |
+|:--:|-------------------------------|:--:|---------------------------------------------------------------------------|--------------------------------------------------------------|
+| 1  | Dante Cloud 及相关知识学习方法和学习路径的建议 | 免费 |                                                                           | ![Dante Cloud 及相关知识学习方法和学习路径的建议](./readme/cookbook/0001.png) |
+| 2  | OAuth 2 中的 Scope 与 Role 深度解析  | 付费 | 全网独家，深度解析 OAuth2 协议中和 Spring Security 生态各组件中 Scope 和 Role 概念与原理，以及在实战中的应用 | ![OAuth 2 中的 Scope 与 Role 深度解析](./readme/cookbook/0002.png)  |
+
+## [8]、授权协议
 
 本项目基于 Apache License Version 2.0 开源协议，可用于商业项目，但必须遵守以下补充条款。
 
@@ -243,7 +252,7 @@ dante-cloud
 - 如果你对本软件有改进，希望可以贡献给我们，双向奔赴互相成就才是王道。
 - 本项目已申请软件著作权，请尊重开源。
 
-## [8]、参与贡献
+## [9]、参与贡献
 
 1. 在 Gitee fork 项目到自己的 repo
 2. 把 fork 过去的项目也就是你的项目 clone 到你的本地
@@ -252,18 +261,18 @@ dante-cloud
 5. 登录 Gitee 在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
 6. 等待维护者合并
 
-## [9]、如何升级
+## [10]、如何升级
 
 尽量不修改 Dante Cloud 以外的项目源码，如 Dante Engine、Dante OSS。如果修改了，请 Pull Requests 上来，否则代码与官方不同步，可能会将对你的日后升级增加难度。
 
 每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/others/log/changelog.html。 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
 针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html。 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
 
-## [10]、交流反馈
+## [11]、交流反馈
 
 - 详见[【在线文档】](https://www.herodotus.cn) 交流反馈章节。
 
-## [11]、界面预览
+## [12]、界面预览
 
 <table>
     <tr>
@@ -298,13 +307,13 @@ dante-cloud
     </tr>
 </table>
 
-## [12]、谁在使用 Dante Cloud
+## [13]、谁在使用 Dante Cloud
 
 | 序号 | 名称   | 官网                      |
 |----|------|-------------------------|
 | 1  | 轻喜到家 | <https://qxdaojia.com/> |
 
-## [13]、鸣谢
+## [14]、鸣谢
 
 ### 赞助人列表
 
