@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.2.4-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.4"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.2.2-red.svg?logo=spring" alt="Version 3.1.2.2"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.2.2-red.svg?logo=spring" alt="Dante Engine 3.1.2.2"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.2.8-red.svg?logo=spring" alt="Dante OSS 1.2.8"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.2.3-red.svg?logo=spring" alt="Version 3.1.2.3"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.2.3-red.svg?logo=spring" alt="Dante Engine 3.1.2.3"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.3.0-red.svg?logo=spring" alt="Dante OSS 1.3.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -151,7 +151,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | Spring Cloud Alibaba        | 2022.0.0.0      |
 | Spring Cloud Tencent        | 1.11.8-2022.0.1 |
 | Spring Authorization Server | 1.1.1           |
-| Spring Boot Admin           | 3.1.4           |
+| Spring Boot Admin           | 3.1.5           |
 | Nacos                       | 2.2.4           |
 | Sentinel                    | 1.8.6           |
 | Seata                       | 1.7.0           |
