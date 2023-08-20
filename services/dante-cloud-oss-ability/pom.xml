@@ -31,11 +31,11 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>services</artifactId>
-        <version>3.1.2.2</version>
+        <version>3.1.2.3</version>
     </parent>
 
     <artifactId>dante-cloud-oss-ability</artifactId>
-    <version>3.1.2.2</version>
+    <version>3.1.2.3</version>
     <packaging>jar</packaging>
 
     <dependencies>
