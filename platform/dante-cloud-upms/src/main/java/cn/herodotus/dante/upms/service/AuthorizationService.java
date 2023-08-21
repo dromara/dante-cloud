@@ -56,11 +56,11 @@ public class AuthorizationService extends AbstractRest {
 
     public Map<String, Object> authorized(String code, String state) {
 
-         String clientDetails = "14a9cf797931430896ad13a6b1855611:a05fe1fc50ed42a4990c6c6fc4bec398";
+        String clientDetails = "14a9cf797931430896ad13a6b1855611:a05fe1fc50ed42a4990c6c6fc4bec398";
 
         return http().sync("/oauth2/token")
                 .bodyType(OkHttps.JSON)
-                .addHeader("Authorization", "Basic " + Base64.encode(clientDetails) )
+                .addHeader("Authorization", "Basic " + Base64.encode(clientDetails))
                 .addUrlPara("grant_type", "authorization_code")
                 .addUrlPara("code", code)
                 .addUrlPara("redirect_uri", "http://192.168.101.10:8847/dante-cloud-upms/open/authorized")

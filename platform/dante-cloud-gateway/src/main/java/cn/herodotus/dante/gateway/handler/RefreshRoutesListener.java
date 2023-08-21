@@ -98,7 +98,7 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
         String data = API_URI;
 
         if (StringUtils.containsIgnoreCase(service, "bpmn")) {
-            data =  "/openapi.json";
+            data = "/openapi.json";
         }
 
         String url = "/" + service.toLowerCase() + data;

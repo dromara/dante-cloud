@@ -5,14 +5,14 @@ herodotus:
     database:
       host: 127.0.0.1
       port: 15432
-      name: nherodotus
+      name: dante_cloud
       username: herodotus
       password: herodotus
     redis:
       host: 127.0.0.1
       port: 16379
       password:
-      database: 6
+      database: 3
     kafka:
       bootstrap-servers: 127.0.0.1:9092
   switch:

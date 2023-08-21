@@ -68,8 +68,9 @@ public class WebFluxUtils {
 
     /**
      * 判断路径是否与路径模式匹配
+     *
      * @param patterns 路径模式数组
-     * @param path url
+     * @param path     url
      * @return 是否匹配
      */
     public static boolean isPathMatch(String[] patterns, String path) {
@@ -78,8 +79,9 @@ public class WebFluxUtils {
 
     /**
      * 判断路径是否与路径模式匹配
+     *
      * @param patterns 路径模式字符串List
-     * @param path url
+     * @param path     url
      * @return 是否匹配
      */
     public static boolean isPathMatch(List<String> patterns, String path) {
@@ -109,6 +111,7 @@ public class WebFluxUtils {
 
     /**
      * 从Flux<DataBuffer>中获取字符串的方法
+     *
      * @return 请求体
      */
     public static String getRequestBody(ServerHttpRequest serverHttpRequest) {

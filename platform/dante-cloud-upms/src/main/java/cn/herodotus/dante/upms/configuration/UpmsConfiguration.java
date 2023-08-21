@@ -35,7 +35,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- *
  * <p>Description: Upms 服务配置 </p>
  *
  * @author : gengwei.zheng
