@@ -50,7 +50,8 @@ public class HerodotusLocalPermissionDetailsService extends AbstractStrategyPerm
 
     @Override
     public List<HerodotusPermission> findAll() {
-        List<SysPermission> authorities = sysPermissionService.findAll();;
+        List<SysPermission> authorities = sysPermissionService.findAll();
+        ;
         if (CollectionUtils.isNotEmpty(authorities)) {
             return toEntities(authorities);
         }

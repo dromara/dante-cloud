@@ -89,8 +89,8 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_FORBIDDEN));
         }
 
-        String webSocketToken =  exchange.getRequest().getHeaders().getFirst(com.google.common.net.HttpHeaders.SEC_WEBSOCKET_PROTOCOL);
-        if (StringUtils.isNotBlank(webSocketToken) && StringUtils.endsWith(webSocketToken,".stomp")) {
+        String webSocketToken = exchange.getRequest().getHeaders().getFirst(com.google.common.net.HttpHeaders.SEC_WEBSOCKET_PROTOCOL);
+        if (StringUtils.isNotBlank(webSocketToken) && StringUtils.endsWith(webSocketToken, ".stomp")) {
             return chain.filter(exchange);
         }
 

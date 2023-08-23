@@ -11,9 +11,15 @@ spring:
 
 herodotus:
   oss:
+    dialect: minio
+    proxy:
+      source: http://localhost:3000/api
+      destination: http://127.0.0.1:9000
     minio:
       endpoint: http://127.0.0.1:9000
       access-key: herodotus
       secret-key: herodotus
-      use-proxy: true
-      proxy-source-endpoint: http://localhost:3000/api
+    s3:
+      endpoint: http://127.0.0.1:9000
+      access-key: herodotus
+      secret-key: herodotus

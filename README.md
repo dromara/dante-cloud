@@ -5,17 +5,17 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.1.1-blue.svg?logo=spring" alt="Spring Authorization Server 1.1.1"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.1.2-blue.svg?logo=spring" alt="Spring Authorization Server 1.1.2"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.1.2-blue.svg?logo=spring" alt="Spring Boot 3.1.2"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2022.0.4-blue.svg?logo=spring" alt="Spring Cloud 2022.0.4"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2022.0.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2022.0.0.0"></a>
-    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.11.8--2022.0.1-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.11.8-2022.0.1"></a>
+    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.11.9--2022.0.1-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.11.9-2022.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.2.4-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.4"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.2.3-red.svg?logo=spring" alt="Version 3.1.2.3"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.2.3-red.svg?logo=spring" alt="Dante Engine 3.1.2.3"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.3.0-red.svg?logo=spring" alt="Dante OSS 1.3.0"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.2.4-red.svg?logo=spring" alt="Version 3.1.2.4"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.2.4-red.svg?logo=spring" alt="Dante Engine 3.1.2.4"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-1.3.1-red.svg?logo=spring" alt="Dante OSS 1.3.1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -41,7 +41,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.1、Spring Boot 3.1.2、Spring Cloud 2022.0.4、Spring Cloud Tencent 1.11.8-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.4 等主流技术栈开发的多租户系统，遵循SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.2、Spring Boot 3.1.2、Spring Cloud 2022.0.4、Spring Cloud Tencent 1.11.9-2022.0.1、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.2.4 等主流技术栈开发的多租户系统，遵循SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
 ## 定位
 
@@ -149,8 +149,8 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | Spring Boot                 | 3.1.2           |
 | Spring Cloud                | 2022.0.4        |
 | Spring Cloud Alibaba        | 2022.0.0.0      |
-| Spring Cloud Tencent        | 1.11.8-2022.0.1 |
-| Spring Authorization Server | 1.1.1           |
+| Spring Cloud Tencent        | 1.11.9-2022.0.1 |
+| Spring Authorization Server | 1.1.2           |
 | Spring Boot Admin           | 3.1.5           |
 | Nacos                       | 2.2.4           |
 | Sentinel                    | 1.8.6           |
@@ -236,10 +236,11 @@ dante-cloud
 
 **Dante Cloud 技术解析高级文档（Cookbook） 专栏【试行】**
 
-| 序号 | 文章标题                          | 付费 | 说明                                                                        | 扫码阅读                                                         |
-|:--:|-------------------------------|:--:|---------------------------------------------------------------------------|--------------------------------------------------------------|
-| 1  | Dante Cloud 及相关知识学习方法和学习路径的建议 | 免费 |                                                                           | ![Dante Cloud 及相关知识学习方法和学习路径的建议](./readme/cookbook/0001.png) |
-| 2  | OAuth 2 中的 Scope 与 Role 深度解析  | 付费 | 全网独家，深度解析 OAuth2 协议中和 Spring Security 生态各组件中 Scope 和 Role 概念与原理，以及在实战中的应用 | ![OAuth 2 中的 Scope 与 Role 深度解析](./readme/cookbook/0002.png)  |
+| 序号 | 文章标题                          | 付费 | 说明                                                                        | 扫码阅读                                                                   |
+|:--:|-------------------------------|:--:|---------------------------------------------------------------------------|------------------------------------------------------------------------|
+| 1  | Dante Cloud 及相关知识学习方法和学习路径的建议 | 免费 |                                                                           | ![Dante Cloud 及相关知识学习方法和学习路径的建议](./documents/readme/cookbook/0001.png) |
+| 2  | OAuth 2 中的 Scope 与 Role 深度解析  | 付费 | 全网独家，深度解析 OAuth2 协议中和 Spring Security 生态各组件中 Scope 和 Role 概念与原理，以及在实战中的应用 | ![OAuth 2 中的 Scope 与 Role 深度解析](./documents/readme/cookbook/0002.png)  |
+| 2  | Spring Boot 3 之自动配置与注入顺序控制    | 付费 | Spring 生态重要知识点，掌握步入微服务的关键开关                                               | ![Spring Boot 3 之自动配置与注入顺序控制](./documents/readme/cookbook/0003.png)    |
 
 ## [8]、授权协议
 
