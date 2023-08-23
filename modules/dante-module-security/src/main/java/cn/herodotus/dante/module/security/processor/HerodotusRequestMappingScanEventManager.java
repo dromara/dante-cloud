@@ -15,7 +15,7 @@ import cn.herodotus.engine.assistant.core.context.ServiceContext;
 import cn.herodotus.engine.message.core.definition.RequestMappingScanEventManager;
 import cn.herodotus.engine.message.core.domain.RequestMapping;
 import cn.herodotus.engine.message.core.event.LocalRequestMappingGatherEvent;
-import cn.herodotus.engine.message.security.event.RemoteRequestMappingGatherEvent;
+import cn.herodotus.engine.message.security.autoconfigure.event.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;

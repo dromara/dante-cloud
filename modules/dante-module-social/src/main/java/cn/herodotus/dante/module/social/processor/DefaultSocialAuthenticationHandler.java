@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.module.social.processor;
 
-import cn.herodotus.engine.access.business.processor.AccessHandlerStrategyFactory;
+import cn.herodotus.engine.access.all.processor.AccessHandlerStrategyFactory;
 import cn.herodotus.engine.access.core.definition.AccessUserDetails;
 import cn.herodotus.engine.access.core.exception.AccessIdentityVerificationFailedException;
 import cn.herodotus.engine.assistant.core.domain.AccessPrincipal;
@@ -34,9 +34,9 @@ import cn.herodotus.engine.oauth2.core.definition.domain.SocialUserDetails;
 import cn.herodotus.engine.oauth2.core.definition.handler.AbstractSocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.exception.SocialCredentialsParameterBindingFailedException;
 import cn.herodotus.engine.oauth2.core.exception.UsernameAlreadyExistsException;
+import cn.herodotus.engine.supplier.upms.logic.converter.SysUserToHerodotusUserConverter;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysSocialUser;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
-import cn.herodotus.engine.supplier.upms.logic.helper.UpmsHelper;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysSocialUserService;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import com.google.common.collect.ImmutableSet;
@@ -44,6 +44,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 
 /**
  * <p>Description: 社交登录默认处理器。 </p>
@@ -59,6 +60,12 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
     private SysSocialUserService sysSocialUserService;
     @Autowired
     private AccessHandlerStrategyFactory accessHandlerStrategyFactory;
+
+    private final Converter<SysUser, HerodotusUser> toUser;
+
+    public DefaultSocialAuthenticationHandler() {
+        this.toUser = new SysUserToHerodotusUserConverter();
+    }
 
     @Override
     public SocialUserDetails identity(String source, AccessPrincipal accessPrincipal) throws AccessIdentityVerificationFailedException {
@@ -106,11 +113,10 @@ public class DefaultSocialAuthenticationHandler extends AbstractSocialAuthentica
 
     @Override
     public HerodotusUser signIn(SocialUserDetails socialUserDetails) {
-        if (socialUserDetails instanceof SysSocialUser) {
-            SysSocialUser sysSocialUser = (SysSocialUser) socialUserDetails;
+        if (socialUserDetails instanceof SysSocialUser sysSocialUser) {
             SysUser sysUser = sysSocialUser.getUsers().stream().findFirst().orElse(null);
             if (ObjectUtils.isNotEmpty(sysUser)) {
-                return UpmsHelper.convertSysUserToHerodotusUser(sysUser);
+                return toUser.convert(sysUser);
             } else {
                 return null;
             }

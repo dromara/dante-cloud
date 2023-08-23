@@ -27,9 +27,10 @@ package cn.herodotus.dante.module.strategy.definition;
 
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
+import cn.herodotus.engine.supplier.upms.logic.converter.SysUserToHerodotusUserConverter;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
-import cn.herodotus.engine.supplier.upms.logic.helper.UpmsHelper;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -41,11 +42,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public abstract class AbstractStrategyUserDetailsService implements StrategyUserDetailsService {
 
+    private final Converter<SysUser, HerodotusUser> toUser = new SysUserToHerodotusUserConverter();
+
     protected HerodotusUser convertSysUser(SysUser sysUser, String userName) throws AuthenticationException {
         if (ObjectUtils.isEmpty(sysUser)) {
             throw new UsernameNotFoundException("系统用户 " + userName + " 不存在!");
         }
 
-        return UpmsHelper.convertSysUserToHerodotusUser(sysUser);
+        return toUser.convert(sysUser);
     }
 }

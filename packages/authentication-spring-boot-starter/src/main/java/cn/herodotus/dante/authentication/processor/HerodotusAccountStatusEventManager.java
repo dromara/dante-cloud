@@ -30,7 +30,7 @@ import cn.herodotus.engine.assistant.core.context.ServiceContext;
 import cn.herodotus.engine.message.core.definition.AccountStatusEventManager;
 import cn.herodotus.engine.message.core.domain.UserStatus;
 import cn.herodotus.engine.message.core.event.LocalChangeUserStatusEvent;
-import cn.herodotus.engine.message.security.event.RemoteChangeUserStatusEvent;
+import cn.herodotus.engine.message.security.autoconfigure.event.RemoteChangeUserStatusEvent;
 
 /**
  * <p>Description: 用户状态变更处理器 </p>
