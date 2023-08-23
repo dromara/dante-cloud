@@ -25,13 +25,13 @@
 
 package cn.herodotus.dante.module.metadata.processor;
 
+import cn.herodotus.engine.assistant.core.context.ServiceContext;
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
+import cn.herodotus.engine.message.core.definition.StrategyEventManager;
+import cn.herodotus.engine.message.core.domain.RequestMapping;
 import cn.herodotus.engine.message.security.event.RemoteSecurityMetadataSyncEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
-import cn.herodotus.engine.rest.core.context.ServiceContext;
-import cn.herodotus.engine.rest.core.definition.event.ApplicationStrategyEvent;
-import cn.herodotus.engine.rest.core.domain.RequestMapping;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
@@ -55,7 +55,7 @@ import java.util.stream.Collectors;
  * @date : 2021/8/8 14:00
  */
 @Component
-public class SecurityMetadataDistributeProcessor implements ApplicationStrategyEvent<List<SecurityAttribute>> {
+public class SecurityMetadataDistributeProcessor implements StrategyEventManager<List<SecurityAttribute>> {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityMetadataDistributeProcessor.class);
 

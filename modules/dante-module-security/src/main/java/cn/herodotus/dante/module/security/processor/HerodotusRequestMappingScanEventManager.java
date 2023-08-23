@@ -11,12 +11,12 @@
 package cn.herodotus.dante.module.security.processor;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
+import cn.herodotus.engine.assistant.core.context.ServiceContext;
+import cn.herodotus.engine.message.core.definition.RequestMappingScanEventManager;
+import cn.herodotus.engine.message.core.domain.RequestMapping;
 import cn.herodotus.engine.message.core.event.LocalRequestMappingGatherEvent;
 import cn.herodotus.engine.message.security.event.RemoteRequestMappingGatherEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
-import cn.herodotus.engine.rest.core.context.ServiceContext;
-import cn.herodotus.engine.rest.core.domain.RequestMapping;
-import cn.herodotus.engine.rest.scan.definition.RequestMappingScanManager;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Component;
 
@@ -30,11 +30,11 @@ import java.util.List;
  * @date : 2022/1/17 0:08
  */
 @Component
-public class HerodotusRequestMappingScanManager implements RequestMappingScanManager {
+public class HerodotusRequestMappingScanEventManager implements RequestMappingScanEventManager {
 
     private final SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer;
 
-    public HerodotusRequestMappingScanManager(SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
+    public HerodotusRequestMappingScanEventManager(SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
         this.securityMetadataSourceAnalyzer = securityMetadataSourceAnalyzer;
     }
 
