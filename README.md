@@ -240,7 +240,7 @@ dante-cloud
 |:--:|-------------------------------|:--:|---------------------------------------------------------------------------|------------------------------------------------------------------------|
 | 1  | Dante Cloud 及相关知识学习方法和学习路径的建议 | 免费 |                                                                           | ![Dante Cloud 及相关知识学习方法和学习路径的建议](./documents/readme/cookbook/0001.png) |
 | 2  | OAuth 2 中的 Scope 与 Role 深度解析  | 付费 | 全网独家，深度解析 OAuth2 协议中和 Spring Security 生态各组件中 Scope 和 Role 概念与原理，以及在实战中的应用 | ![OAuth 2 中的 Scope 与 Role 深度解析](./documents/readme/cookbook/0002.png)  |
-| 2  | Spring Boot 3 之自动配置与注入顺序控制    | 付费 | Spring 生态重要知识点，掌握步入微服务的关键开关                                               | ![Spring Boot 3 之自动配置与注入顺序控制](./documents/readme/cookbook/0003.png)    |
+| 3  | Spring Boot 3 之自动配置与注入顺序控制    | 付费 | Spring 生态重要知识点，掌握步入微服务的关键开关                                               | ![Spring Boot 3 之自动配置与注入顺序控制](./documents/readme/cookbook/0003.png)    |
 
 ## [8]、授权协议
 
