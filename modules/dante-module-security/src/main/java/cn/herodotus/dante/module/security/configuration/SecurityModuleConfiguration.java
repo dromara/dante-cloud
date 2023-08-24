@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.security.configuration;
 
-import cn.herodotus.dante.module.security.processor.HerodotusRequestMappingScanManager;
+import cn.herodotus.dante.module.security.processor.HerodotusRequestMappingScanEventManager;
+import cn.herodotus.engine.message.core.definition.RequestMappingScanEventManager;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.exception.SecurityGlobalExceptionHandler;
-import cn.herodotus.engine.rest.scan.definition.RequestMappingScanManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,9 +60,9 @@ public class SecurityModuleConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public RequestMappingScanManager requestMappingScanManager(SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
-        HerodotusRequestMappingScanManager herodotusRequestMappingScanManager = new HerodotusRequestMappingScanManager(securityMetadataSourceAnalyzer);
+    public RequestMappingScanEventManager requestMappingScanEventManager(SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
+        HerodotusRequestMappingScanEventManager herodotusRequestMappingScanEventManager = new HerodotusRequestMappingScanEventManager(securityMetadataSourceAnalyzer);
         log.trace("[Herodotus] |- Bean [Request Mapping Scan Manager] Auto Configure.");
-        return herodotusRequestMappingScanManager;
+        return herodotusRequestMappingScanEventManager;
     }
 }

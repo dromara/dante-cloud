@@ -26,11 +26,11 @@
 package cn.herodotus.dante.authentication.processor;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
+import cn.herodotus.engine.assistant.core.context.ServiceContext;
+import cn.herodotus.engine.message.core.definition.AccountStatusEventManager;
+import cn.herodotus.engine.message.core.domain.UserStatus;
 import cn.herodotus.engine.message.core.event.LocalChangeUserStatusEvent;
-import cn.herodotus.engine.message.security.event.RemoteChangeUserStatusEvent;
-import cn.herodotus.engine.oauth2.management.compliance.event.AccountStatusChanger;
-import cn.herodotus.engine.rest.core.context.ServiceContext;
-import cn.herodotus.engine.rest.core.domain.UserStatus;
+import cn.herodotus.engine.message.security.autoconfigure.event.RemoteChangeUserStatusEvent;
 
 /**
  * <p>Description: 用户状态变更处理器 </p>
@@ -38,7 +38,7 @@ import cn.herodotus.engine.rest.core.domain.UserStatus;
  * @author : gengwei.zheng
  * @date : 2022/7/10 17:25
  */
-public class HerodotusAccountStatusChanger implements AccountStatusChanger {
+public class HerodotusAccountStatusEventManager implements AccountStatusEventManager {
     @Override
     public String getDestinationServiceName() {
         return ServiceNameConstants.SERVICE_NAME_UPMS;

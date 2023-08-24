@@ -13,7 +13,7 @@ herodotus:
   oss:
     dialect: minio
     proxy:
-      source: http://localhost:3000/api
+      source: http://localhost:3000/api/${spring.application.name}
       destination: http://127.0.0.1:9000
     minio:
       endpoint: http://127.0.0.1:9000

@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.strategy.condition;
 
 import cn.herodotus.dante.module.strategy.support.StrategyPropertyFinder;
-import cn.herodotus.engine.rest.core.enums.Architecture;
+import cn.herodotus.engine.assistant.core.enums.Architecture;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
