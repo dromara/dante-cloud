@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * <http://www.apache.org/licenses/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,12 +18,12 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
+ * 4.分发源码时候，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.authentication.configuration;
+package cn.herodotus.dante.authentication.autoconfigure;
 
 import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginSecureConfigurer;
@@ -42,21 +42,21 @@ import cn.herodotus.engine.oauth2.management.service.OAuth2ApplicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
@@ -68,11 +68,11 @@ import org.springframework.session.security.SpringSessionBackedSessionRegistry;
  * @author : gengwei.zheng
  * @date : 2022/2/12 20:53
  */
+@AutoConfiguration
 @EnableWebSecurity
-@Configuration(proxyBeanMethods = false)
-public class DefaultSecurityConfiguration {
+public class DefaultSecurityAutoConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(DefaultSecurityConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultSecurityAutoConfiguration.class);
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(
@@ -82,10 +82,11 @@ public class DefaultSecurityConfiguration {
             CaptchaRendererFactory captchaRendererFactory,
             SecurityMatcherConfigurer securityMatcherConfigurer,
             SecurityAuthorizationManager securityAuthorizationManager,
-            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
+            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+            SessionAuthenticationStrategy sessionAuthenticationStrategy
     ) throws Exception {
 
-        log.debug("[Herodotus] |- Core [Default Security Filter Chain] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Default Security Filter Chain] Auto Configure.");
         // 禁用CSRF 开启跨域
         httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
 
@@ -96,7 +97,7 @@ public class DefaultSecurityConfiguration {
                         .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
                         .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                         .anyRequest().access(securityAuthorizationManager))
-                .sessionManagement(Customizer.withDefaults())
+                .sessionManagement(management -> management.sessionAuthenticationStrategy(sessionAuthenticationStrategy))
                 .exceptionHandling(exceptions -> {
                     exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
                     exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
@@ -134,15 +135,5 @@ public class DefaultSecurityConfiguration {
         HerodotusClientDetailsService herodotusClientDetailsService = new HerodotusClientDetailsService(applicationService);
         log.debug("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
         return herodotusClientDetailsService;
-    }
-
-    @Bean
-    public <S extends Session> SessionRegistry sessionRegistry(FindByIndexNameSessionRepository<S> sessionRepository) {
-        return new SpringSessionBackedSessionRegistry<>(sessionRepository);
-    }
-
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
     }
 }

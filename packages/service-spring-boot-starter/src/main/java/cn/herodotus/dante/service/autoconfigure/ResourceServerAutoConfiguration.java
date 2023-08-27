@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * <http://www.apache.org/licenses/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,23 +18,26 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
+ * 4.分发源码时候，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.service.configuration;
+package cn.herodotus.dante.service.autoconfigure;
 
 import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 /**
  * <p>Description: 资源服务器配置 </p>
@@ -42,18 +45,26 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author : gengwei.zheng
  * @date : 2022/1/21 23:56
  */
+@AutoConfiguration
 @EnableWebSecurity
-@Configuration(proxyBeanMethods = false)
-public class ResourceServerConfiguration {
+public class ResourceServerAutoConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(ResourceServerAutoConfiguration.class);
+
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
             SecurityMatcherConfigurer securityMatcherConfigurer,
             SecurityAuthorizationManager securityAuthorizationManager,
-            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer
+            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
+            SessionAuthenticationStrategy sessionAuthenticationStrategy
     ) throws Exception {
 
+        log.debug("[Herodotus] |- Bean [Resource Server Security Filter Chain] Auto Configure.");
+
         httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
+
+        httpSecurity.sessionManagement(management -> management.sessionAuthenticationStrategy(sessionAuthenticationStrategy));
 
         httpSecurity.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests

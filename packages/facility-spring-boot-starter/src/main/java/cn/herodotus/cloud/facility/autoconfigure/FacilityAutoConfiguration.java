@@ -23,24 +23,26 @@
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.gateway;
+package cn.herodotus.cloud.facility.autoconfigure;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
- * <p>Description: 服务网关服务 </p>
+ * <p>Description: OAuth Starter 自动注入配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2020/6/9 14:41
+ * @date : 2022/2/17 13:43
  */
-@EnableDiscoveryClient
-@SpringBootApplication
-public class GatewayApplication {
+@AutoConfiguration
+public class FacilityAutoConfiguration {
 
-    public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
+    private static final Logger log = LoggerFactory.getLogger(FacilityAutoConfiguration.class);
+
+    @PostConstruct
+    public void postConstruct() {
+        log.debug("[Herodotus] |- Starter [Herodotus Facility Starter] Auto Configure.");
     }
-
 }

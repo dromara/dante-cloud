@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * <http://www.apache.org/licenses/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,12 +18,12 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
+ * 4.分发源码时候，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dante.authentication.configuration;
+package cn.herodotus.dante.authentication.autoconfigure;
 
 import cn.herodotus.engine.assistant.core.definition.constants.DefaultConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
@@ -50,13 +50,12 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
@@ -83,6 +82,7 @@ import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.AuthenticationConverter;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.io.IOException;
@@ -104,15 +104,10 @@ import java.util.UUID;
  * @author : gengwei.zheng
  * @date : 2022/2/12 20:57
  */
-@Configuration(proxyBeanMethods = false)
-public class AuthorizationServerConfiguration {
+@AutoConfiguration
+public class AuthorizationServerAutoConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthorizationServerConfiguration.class);
-
-    @PostConstruct
-    public void postConstruct() {
-        log.debug("[Herodotus] |- SDK [OAuth2 Authorization Server] Auto Configure.");
-    }
+    private static final Logger log = LoggerFactory.getLogger(AuthorizationServerAutoConfiguration.class);
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -126,10 +121,11 @@ public class AuthorizationServerConfiguration {
             OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer,
             OAuth2AuthenticationProperties authenticationProperties,
             OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
-            OidcClientRegistrationResponseHandler clientRegistrationResponseHandler
+            OidcClientRegistrationResponseHandler clientRegistrationResponseHandler,
+            SessionAuthenticationStrategy sessionAuthenticationStrategy
     ) throws Exception {
 
-        log.debug("[Herodotus] |- Core [Authorization Server Security Filter Chain] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Authorization Server Security Filter Chain] Auto Configure.");
 
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
         httpSecurity.apply(authorizationServerConfigurer);
@@ -218,7 +214,7 @@ public class AuthorizationServerConfiguration {
         // build() 方法会让以上所有的配置生效
         SecurityFilterChain securityFilterChain = httpSecurity
                 .formLogin(formLoginUrlConfigurer::from)
-                .sessionManagement(Customizer.withDefaults())
+                .sessionManagement(management -> management.sessionAuthenticationStrategy(sessionAuthenticationStrategy))
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
                 .build();
 
