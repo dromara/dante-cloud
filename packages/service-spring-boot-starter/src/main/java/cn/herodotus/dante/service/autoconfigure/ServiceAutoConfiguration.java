@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * <http://www.apache.org/licenses/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,8 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
+ * 4.分发源码时候，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
@@ -28,7 +28,7 @@ package cn.herodotus.dante.service.autoconfigure;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
  * <p>Description: 服务通用Starter自动配置 </p>
@@ -36,13 +36,13 @@ import org.springframework.context.annotation.Configuration;
  * @author : gengwei.zheng
  * @date : 2022/2/17 13:44
  */
-@Configuration(proxyBeanMethods = false)
-public class AutoConfiguration {
+@AutoConfiguration
+public class ServiceAutoConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(AutoConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(ServiceAutoConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Starter [Herodotus Service Starter] Auto Configure.");
+        log.info("[Herodotus] |- Module [Herodotus Service Starter] Auto Configure.");
     }
 }

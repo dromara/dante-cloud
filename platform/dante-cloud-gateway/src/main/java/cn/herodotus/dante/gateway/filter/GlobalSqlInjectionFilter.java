@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2020-2030 ZHENGGENGWEI(码匠君)<herodotus@aliyun.com>
  *
- * Dante Cloud Licensed under the Apache License, Version 2.0 (the "License");
+ * Dante Cloud licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ * <http://www.apache.org/licenses/LICENSE-2.0>
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,20 +18,21 @@
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改 Dante Cloud 源码头部的版权声明。
  * 3.请保留源码和相关描述文件的项目出处，作者声明等。
- * 4.分发源码时候，请注明软件出处 https://gitee.com/dromara/dante-cloud
- * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 https://gitee.com/dromara/dante-cloud
+ * 4.分发源码时候，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
+ * 5.在修改包名，模块名称，项目代码等时，请注明软件出处 <https://gitee.com/dromara/dante-cloud>
  * 6.若您的项目无法满足以上几点，可申请商业授权
  */
 
 package cn.herodotus.dante.gateway.filter;
 
+import cn.herodotus.dante.gateway.utils.WebFluxUtils;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.assistant.core.enums.ResultErrorCodes;
 import cn.herodotus.engine.assistant.core.utils.SqlInjectionUtils;
-import cn.herodotus.dante.gateway.utils.WebFluxUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hc.core5.http.HttpStatus;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -51,7 +52,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -145,11 +145,13 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
 
                 // 由于post的body只能订阅一次，由于上面代码中已经订阅过一次body。所以要再次封装请求到request才行，不然会报错请求已经订阅过
                 request = new ServerHttpRequestDecorator(request) {
+                    @NotNull
                     @Override
                     public HttpHeaders getHeaders() {
                         return headers;
                     }
 
+                    @NotNull
                     @Override
                     public Flux<DataBuffer> getBody() {
                         return bodyFlux;
@@ -174,9 +176,10 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
         Flux<DataBuffer> body = serverHttpRequest.getBody();
         AtomicReference<String> bodyRef = new AtomicReference<>();
         body.subscribe(buffer -> {
-            CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer.asByteBuffer());
+            byte[] content = new byte[buffer.readableByteCount()];
+            buffer.read(content);
             DataBufferUtils.release(buffer);
-            bodyRef.set(charBuffer.toString());
+            bodyRef.set(new String(content, StandardCharsets.UTF_8));
         });
         //获取request body
         return bodyRef.get();
@@ -196,7 +199,7 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
     }
 
     private Mono<Void> sqlInjectionResponse(ServerWebExchange exchange, URI uri) {
-        log.error("[Herodotus] |- Paramters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
+        log.error("[Herodotus] |- Parameters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
         return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.SQL_INJECTION_REQUEST).status(HttpStatus.SC_FORBIDDEN));
     }
 
@@ -211,7 +214,7 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
     /**
      * 自定义过滤器执行的顺序，数值越大越靠后执行，越小就越先执行
      *
-     * @return
+     * @return order
      */
     @Override
     public int getOrder() {
