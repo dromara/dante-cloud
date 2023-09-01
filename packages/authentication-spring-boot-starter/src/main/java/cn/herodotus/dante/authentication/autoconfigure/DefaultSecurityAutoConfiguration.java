@@ -29,9 +29,9 @@ import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginSecureConfigurer;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
-import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
-import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2AuthorizeHttpRequestsConfigurerCustomer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
@@ -41,26 +41,18 @@ import cn.herodotus.engine.oauth2.management.processor.HerodotusUserDetailsServi
 import cn.herodotus.engine.oauth2.management.service.OAuth2ApplicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.session.FindByIndexNameSessionRepository;
-import org.springframework.session.Session;
-import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -80,10 +72,9 @@ public class DefaultSecurityAutoConfiguration {
             UserDetailsService userDetailsService,
             OAuth2AuthenticationProperties authenticationProperties,
             CaptchaRendererFactory captchaRendererFactory,
-            SecurityMatcherConfigurer securityMatcherConfigurer,
-            SecurityAuthorizationManager securityAuthorizationManager,
-            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-            SessionAuthenticationStrategy sessionAuthenticationStrategy
+            OAuth2SessionManagementConfigurerCustomer oauth2SessionManagementConfigurerCustomer,
+            OAuth2ResourceServerConfigurerCustomer oauth2ResourceServerConfigurerCustomer,
+            OAuth2AuthorizeHttpRequestsConfigurerCustomer oauth2AuthorizeHttpRequestsConfigurerCustomer
     ) throws Exception {
 
         log.debug("[Herodotus] |- Bean [Default Security Filter Chain] Auto Configure.");
@@ -92,17 +83,13 @@ public class DefaultSecurityAutoConfiguration {
 
         // @formatter:off
         httpSecurity
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
-                        .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
-                        .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                        .anyRequest().access(securityAuthorizationManager))
-                .sessionManagement(management -> management.sessionAuthenticationStrategy(sessionAuthenticationStrategy))
+                .authorizeHttpRequests(oauth2AuthorizeHttpRequestsConfigurerCustomer)
+                .sessionManagement(oauth2SessionManagementConfigurerCustomer)
                 .exceptionHandling(exceptions -> {
                     exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
                     exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
                 })
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from)
+                .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
                 .apply(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory));
 
         // @formatter:on

@@ -25,19 +25,17 @@
 
 package cn.herodotus.dante.service.autoconfigure;
 
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
-import cn.herodotus.engine.oauth2.authorization.processor.SecurityAuthorizationManager;
-import cn.herodotus.engine.oauth2.authorization.processor.SecurityMatcherConfigurer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2AuthorizeHttpRequestsConfigurerCustomer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
 /**
  * <p>Description: 资源服务器配置 </p>
@@ -54,25 +52,18 @@ public class ResourceServerAutoConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity httpSecurity,
-            SecurityMatcherConfigurer securityMatcherConfigurer,
-            SecurityAuthorizationManager securityAuthorizationManager,
-            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-            SessionAuthenticationStrategy sessionAuthenticationStrategy
+            OAuth2SessionManagementConfigurerCustomer oauth2SessionManagementConfigurerCustomer,
+            OAuth2ResourceServerConfigurerCustomer oauth2ResourceServerConfigurerCustomer,
+            OAuth2AuthorizeHttpRequestsConfigurerCustomer oauth2AuthorizeHttpRequestsConfigurerCustomer
     ) throws Exception {
 
         log.debug("[Herodotus] |- Bean [Resource Server Security Filter Chain] Auto Configure.");
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
 
-        httpSecurity.sessionManagement(management -> management.sessionAuthenticationStrategy(sessionAuthenticationStrategy));
-
-        httpSecurity.authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers(securityMatcherConfigurer.getPermitAllArray()).permitAll()
-                                .requestMatchers(securityMatcherConfigurer.getStaticResourceArray()).permitAll()
-                                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                                .anyRequest().access(securityAuthorizationManager))
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
+        httpSecurity.authorizeHttpRequests(oauth2AuthorizeHttpRequestsConfigurerCustomer)
+                .sessionManagement(oauth2SessionManagementConfigurerCustomer)
+                .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer);
 
         return httpSecurity.build();
     }
