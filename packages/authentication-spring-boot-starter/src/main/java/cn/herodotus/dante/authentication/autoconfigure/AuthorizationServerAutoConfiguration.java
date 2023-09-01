@@ -27,9 +27,10 @@ package cn.herodotus.dante.authentication.autoconfigure;
 
 import cn.herodotus.engine.assistant.core.definition.constants.DefaultConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
-import cn.herodotus.engine.oauth2.authentication.customizer.OAuth2AuthorizationCodeAuthenticationProviderCustomizer;
-import cn.herodotus.engine.oauth2.authentication.customizer.OAuth2ClientCredentialsAuthenticationProviderCustomizer;
-import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginConfigurerCustomer;
+import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
+import cn.herodotus.engine.oauth2.authentication.consumer.OAuth2AuthorizationCodeAuthenticationProviderConsumer;
+import cn.herodotus.engine.oauth2.authentication.consumer.OAuth2ClientCredentialsAuthenticationProviderConsumer;
+import cn.herodotus.engine.oauth2.authentication.customizer.OAuth2FormLoginConfigurerCustomizer;
 import cn.herodotus.engine.oauth2.authentication.oidc.HerodotusOidcUserInfoMapper;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.provider.OAuth2ResourceOwnerPasswordAuthenticationConverter;
@@ -37,6 +38,7 @@ import cn.herodotus.engine.oauth2.authentication.provider.OAuth2ResourceOwnerPas
 import cn.herodotus.engine.oauth2.authentication.provider.OAuth2SocialCredentialsAuthenticationConverter;
 import cn.herodotus.engine.oauth2.authentication.provider.OAuth2SocialCredentialsAuthenticationProvider;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
+import cn.herodotus.engine.oauth2.authentication.response.OAuth2AuthenticationFailureResponseHandler;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
 import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
@@ -44,7 +46,6 @@ import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationPr
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.management.response.OAuth2AccessTokenResponseHandler;
-import cn.herodotus.engine.oauth2.management.response.OAuth2AuthenticationFailureResponseHandler;
 import cn.herodotus.engine.oauth2.management.response.OAuth2DeviceVerificationResponseHandler;
 import cn.herodotus.engine.oauth2.management.response.OidcClientRegistrationResponseHandler;
 import cn.herodotus.engine.rest.core.properties.EndpointProperties;
@@ -114,10 +115,10 @@ public class AuthorizationServerAutoConfiguration {
             UserDetailsService userDetailsService,
             ClientDetailsService clientDetailsService,
             HttpCryptoProcessor httpCryptoProcessor,
-            OAuth2AuthenticationProperties authenticationProperties,
-            OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
-            OidcClientRegistrationResponseHandler clientRegistrationResponseHandler,
-            OAuth2FormLoginConfigurerCustomer oauth2FormLoginConfigurerCustomer,
+            OidcClientRegistrationResponseHandler oidcClientRegistrationResponseHandler,
+            OAuth2AuthenticationProperties oauth2AuthenticationProperties,
+            OAuth2DeviceVerificationResponseHandler oauth2DeviceVerificationResponseHandler,
+            OAuth2FormLoginConfigurerCustomizer oauth2FormLoginConfigurerCustomizer,
             OAuth2ResourceServerConfigurerCustomer oauth2ResourceServerConfigurerCustomer,
             OAuth2SessionManagementConfigurerCustomer oauth2sessionManagementConfigurerCustomer
     ) throws Exception {
@@ -132,7 +133,7 @@ public class AuthorizationServerAutoConfiguration {
         OAuth2AuthenticationFailureResponseHandler errorResponseHandler = new OAuth2AuthenticationFailureResponseHandler();
         authorizationServerConfigurer.clientAuthentication(endpoint -> {
             endpoint.errorResponseHandler(errorResponseHandler);
-            endpoint.authenticationProviders(new OAuth2ClientCredentialsAuthenticationProviderCustomizer(httpSecurity, clientDetailsService));
+            endpoint.authenticationProviders(new OAuth2ClientCredentialsAuthenticationProviderConsumer(httpSecurity, clientDetailsService));
         });
         authorizationServerConfigurer.authorizationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(errorResponseHandler);
@@ -145,7 +146,7 @@ public class AuthorizationServerAutoConfiguration {
         authorizationServerConfigurer.deviceVerificationEndpoint(endpoint -> {
             endpoint.errorResponseHandler(errorResponseHandler);
             endpoint.consentPage(DefaultConstants.AUTHORIZATION_CONSENT_URI);
-            endpoint.deviceVerificationResponseHandler(deviceVerificationResponseHandler);
+            endpoint.deviceVerificationResponseHandler(oauth2DeviceVerificationResponseHandler);
         });
         authorizationServerConfigurer.tokenEndpoint(endpoint -> {
             AuthenticationConverter authenticationConverter = new DelegatingAuthenticationConverter(
@@ -159,14 +160,14 @@ public class AuthorizationServerAutoConfiguration {
             endpoint.accessTokenRequestConverter(authenticationConverter);
             endpoint.errorResponseHandler(errorResponseHandler);
             endpoint.accessTokenResponseHandler(new OAuth2AccessTokenResponseHandler(httpCryptoProcessor));
-            endpoint.authenticationProviders(new OAuth2AuthorizationCodeAuthenticationProviderCustomizer(httpSecurity, sessionRegistry));
+            endpoint.authenticationProviders(new OAuth2AuthorizationCodeAuthenticationProviderConsumer(httpSecurity, sessionRegistry));
         });
         authorizationServerConfigurer.tokenIntrospectionEndpoint(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
         authorizationServerConfigurer.tokenRevocationEndpoint(endpoint -> endpoint.errorResponseHandler(errorResponseHandler));
         authorizationServerConfigurer.oidc(oidc -> {
             oidc.clientRegistrationEndpoint(endpoint -> {
                 endpoint.errorResponseHandler(errorResponseHandler);
-                endpoint.clientRegistrationResponseHandler(clientRegistrationResponseHandler);
+                endpoint.clientRegistrationResponseHandler(oidcClientRegistrationResponseHandler);
             });
             oidc.userInfoEndpoint(userInfo -> userInfo
                     .userInfoMapper(new HerodotusOidcUserInfoMapper()));
@@ -179,7 +180,11 @@ public class AuthorizationServerAutoConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer);
+                .formLogin(oauth2FormLoginConfigurerCustomizer)
+                .sessionManagement(oauth2sessionManagementConfigurerCustomer)
+                .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
+                .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
+                .apply(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, oauth2AuthenticationProperties));
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
@@ -188,28 +193,7 @@ public class AuthorizationServerAutoConfiguration {
         authenticationManagerBuilder.authenticationEventPublisher(new DefaultOAuth2AuthenticationEventPublisher(applicationContext));
 
         // build() 方法会让以上所有的配置生效
-        SecurityFilterChain securityFilterChain = httpSecurity
-                .formLogin(oauth2FormLoginConfigurerCustomer)
-                .sessionManagement(oauth2sessionManagementConfigurerCustomer)
-                .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
-                .build();
-
-        // 增加新的、自定义 OAuth2 Granter
-        OAuth2AuthorizationService authorizationService = OAuth2ConfigurerUtils.getAuthorizationService(httpSecurity);
-        OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(httpSecurity);
-
-        OAuth2ResourceOwnerPasswordAuthenticationProvider resourceOwnerPasswordAuthenticationProvider =
-                new OAuth2ResourceOwnerPasswordAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
-        resourceOwnerPasswordAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-        resourceOwnerPasswordAuthenticationProvider.setSessionRegistry(sessionRegistry);
-        httpSecurity.authenticationProvider(resourceOwnerPasswordAuthenticationProvider);
-
-        OAuth2SocialCredentialsAuthenticationProvider socialCredentialsAuthenticationProvider =
-                new OAuth2SocialCredentialsAuthenticationProvider(authorizationService, tokenGenerator, userDetailsService, authenticationProperties);
-        socialCredentialsAuthenticationProvider.setSessionRegistry(sessionRegistry);
-        httpSecurity.authenticationProvider(socialCredentialsAuthenticationProvider);
-
-        return securityFilterChain;
+        return httpSecurity.build();
     }
 
     @Bean

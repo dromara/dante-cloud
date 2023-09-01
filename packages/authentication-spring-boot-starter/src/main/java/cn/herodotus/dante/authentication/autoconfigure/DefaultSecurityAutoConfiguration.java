@@ -26,7 +26,7 @@
 package cn.herodotus.dante.authentication.autoconfigure;
 
 import cn.herodotus.engine.captcha.core.processor.CaptchaRendererFactory;
-import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginSecureConfigurer;
+import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2AuthorizeHttpRequestsConfigurerCustomer;
