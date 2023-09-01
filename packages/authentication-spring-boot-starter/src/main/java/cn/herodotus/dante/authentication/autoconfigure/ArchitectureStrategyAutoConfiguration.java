@@ -44,9 +44,9 @@ import org.springframework.context.annotation.Import;
         DistributedArchitectureConfiguration.class,
         MonocoqueArchitectureConfiguration.class
 })
-public class ArchitectureStrategyConfiguration {
+public class ArchitectureStrategyAutoConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(ArchitectureStrategyConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(ArchitectureStrategyAutoConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {

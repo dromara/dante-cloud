@@ -29,13 +29,14 @@ import cn.herodotus.engine.assistant.core.definition.constants.DefaultConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusJwtTokenCustomizer;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusOpaqueTokenCustomizer;
-import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginUrlConfigurer;
+import cn.herodotus.engine.oauth2.authentication.form.OAuth2FormLoginConfigurerCustomer;
 import cn.herodotus.engine.oauth2.authentication.oidc.HerodotusOidcUserInfoMapper;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.provider.*;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.oauth2.authorization.customizer.HerodotusTokenStrategyConfigurer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
+import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
 import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationProperties;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
@@ -60,7 +61,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -82,7 +82,6 @@ import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
 import org.springframework.security.web.authentication.AuthenticationConverter;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.io.IOException;
@@ -117,12 +116,12 @@ public class AuthorizationServerAutoConfiguration {
             UserDetailsService userDetailsService,
             ClientDetailsService clientDetailsService,
             HttpCryptoProcessor httpCryptoProcessor,
-            HerodotusTokenStrategyConfigurer herodotusTokenStrategyConfigurer,
-            OAuth2FormLoginUrlConfigurer formLoginUrlConfigurer,
             OAuth2AuthenticationProperties authenticationProperties,
             OAuth2DeviceVerificationResponseHandler deviceVerificationResponseHandler,
             OidcClientRegistrationResponseHandler clientRegistrationResponseHandler,
-            SessionAuthenticationStrategy sessionAuthenticationStrategy
+            OAuth2FormLoginConfigurerCustomer oauth2FormLoginConfigurerCustomer,
+            OAuth2ResourceServerConfigurerCustomer oauth2ResourceServerConfigurerCustomer,
+            OAuth2SessionManagementConfigurerCustomer oauth2sessionManagementConfigurerCustomer
     ) throws Exception {
 
         log.debug("[Herodotus] |- Bean [Authorization Server Security Filter Chain] Auto Configure.");
@@ -203,7 +202,7 @@ public class AuthorizationServerAutoConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 // 禁用对 OAuth2 Authorization Server 相关 endpoint 的 CSRF 防御
                 .csrf(csrf -> csrf.ignoringRequestMatchers(endpointsMatcher))
-                .oauth2ResourceServer(herodotusTokenStrategyConfigurer::from);
+                .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer);
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。
@@ -213,8 +212,8 @@ public class AuthorizationServerAutoConfiguration {
 
         // build() 方法会让以上所有的配置生效
         SecurityFilterChain securityFilterChain = httpSecurity
-                .formLogin(formLoginUrlConfigurer::from)
-                .sessionManagement(management -> management.sessionAuthenticationStrategy(sessionAuthenticationStrategy))
+                .formLogin(oauth2FormLoginConfigurerCustomer)
+                .sessionManagement(oauth2sessionManagementConfigurerCustomer)
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
                 .build();
 
@@ -275,20 +274,6 @@ public class AuthorizationServerAutoConfiguration {
     @Bean
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
         return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-    }
-
-    @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
-        HerodotusJwtTokenCustomizer herodotusJwtTokenCustomizer = new HerodotusJwtTokenCustomizer();
-        log.trace("[Herodotus] |- Bean [OAuth2 Jwt Token Customizer] Auto Configure.");
-        return herodotusJwtTokenCustomizer;
-    }
-
-    @Bean
-    public OAuth2TokenCustomizer<OAuth2TokenClaimsContext> opaqueTokenCustomizer() {
-        HerodotusOpaqueTokenCustomizer herodotusOpaqueTokenCustomizer = new HerodotusOpaqueTokenCustomizer();
-        log.trace("[Herodotus] |- Bean [OAuth2 Opaque Token Customizer] Auto Configure.");
-        return herodotusOpaqueTokenCustomizer;
     }
 
     @Bean
