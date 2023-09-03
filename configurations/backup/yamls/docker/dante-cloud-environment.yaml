@@ -28,7 +28,8 @@ herodotus:
     rest:
       scan:
         enabled: true
-
+  session:
+    timeout: 2h
   log-center:
     server-addr: ${herodotus.environment.logstash-server-addr}
     loggers:
