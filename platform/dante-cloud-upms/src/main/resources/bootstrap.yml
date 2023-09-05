@@ -71,7 +71,7 @@ logging:
     com.alibaba.nacos.common.remote.client: error
     com.ulisesbocchio: error
     # 开发、调试需要的日志
-    cn.dante: debug
+    cn.herodotus: debug
     org.springframework.security: info
     org.springframework.web: debug
     com.alicp.jetcache: debug
