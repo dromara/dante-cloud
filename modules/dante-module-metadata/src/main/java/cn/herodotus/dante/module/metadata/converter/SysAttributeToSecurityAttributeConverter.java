@@ -24,7 +24,7 @@ import java.util.Set;
  * <p>Description: SysAttribute 转 SecurityAttribute 转换器</p>
  *
  * @author : gengwei.zheng
- * @date : 3.1.3.3
+ * @date : 3.1.3.4
  */
 public class SysAttributeToSecurityAttributeConverter implements Converter<SysAttribute, SecurityAttribute> {
     @Override
