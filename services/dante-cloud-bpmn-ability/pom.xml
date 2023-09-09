@@ -42,11 +42,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>service-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-cloud-bpmn-logic</artifactId>
         </dependency>
         <dependency>

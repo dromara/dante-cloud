@@ -36,7 +36,6 @@
     </parent>
 
     <artifactId>packages</artifactId>
-    <version>3.1.3.5</version>
     <packaging>pom</packaging>
 
     <name>dante-cloud-packages</name>
