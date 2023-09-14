@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <p>Description: SysAttribute 转 SecurityAttribute 转换器</p>
+ * <p>Description: SysAttribute 转 SecurityAttribute 转换器 </p>
  *
  * @author : gengwei.zheng
- * @date : 3.1.3.5
+ * @date : 2023/9/15 0:29
  */
 public class SysAttributeToSecurityAttributeConverter implements Converter<SysAttribute, SecurityAttribute> {
     @Override
