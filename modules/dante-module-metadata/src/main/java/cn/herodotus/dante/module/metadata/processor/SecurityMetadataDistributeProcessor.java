@@ -47,8 +47,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * <p>Description: SecurityMetadata数据处理器 </p>
@@ -109,19 +107,20 @@ public class SecurityMetadataDistributeProcessor implements StrategyEventManager
                 log.debug("[Herodotus] |- No security attribute requires merge, SKIP!");
             }
 
-            log.debug("[Herodotus] |- [6] Synchronization current permissions to every service!");
-
-            List<SysAttribute> sysAttributes = sysAttributeService.findAll();
-            this.postGroupProcess(sysAttributes);
+            distributeServiceSecurityAttributes(storedInterfaces);
         }
     }
 
-    private void postGroupProcess(List<SysAttribute> sysAttributes) {
-        if (CollectionUtils.isNotEmpty(sysAttributes)) {
-            Map<String, List<SecurityAttribute>> grouped = sysAttributes.stream().map(toSecurityAttribute::convert).collect(Collectors.groupingBy(SecurityAttribute::getServiceId));
-            log.debug("[Herodotus] |- Grouping SysInterface and distribute to every server.");
-            grouped.forEach(this::postProcess);
-        }
+    private void distributeServiceSecurityAttributes(List<SysInterface> storedInterfaces) {
+        storedInterfaces.stream().findAny().ifPresent(item -> {
+            String serviceId = item.getServiceId();
+            List<SysAttribute> sysAttributes = sysAttributeService.findAllByServiceId(item.getServiceId());
+            if (CollectionUtils.isNotEmpty(sysAttributes)) {
+                List<SecurityAttribute> securityAttributes = sysAttributes.stream().map(toSecurityAttribute::convert).toList();
+                log.debug("[Herodotus] |- [6] Synchronization permissions to service [{}]", serviceId);
+                this.postProcess(serviceId, securityAttributes);
+            }
+        });
     }
 
     public void distributeChangedSecurityAttribute(SysAttribute sysAttribute) {
