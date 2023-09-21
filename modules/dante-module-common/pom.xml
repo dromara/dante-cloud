@@ -32,7 +32,7 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.3.6</version>
+        <version>3.1.4.0</version>
     </parent>
 
     <artifactId>dante-module-common</artifactId>
