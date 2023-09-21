@@ -12,7 +12,7 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://shields.io/badge/Nacos-2.2.4-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.4"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.15.0-red.svg?logo=Spring" alt="Version 2.7.15.0"></a>
+    <a href="#" target="_blank"><img src="https://shields.io/badge/Version-2.7.16.Final-red.svg?logo=Spring" alt="Version 2.7.16.Final"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-8%2C11%2C17-green.svg?logo=openjdk" alt="Java 8,11,17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="License Apache 2.0"></a>
@@ -184,7 +184,7 @@ Alibaba 2021.0.5.0、Spring Authorization Server 0.4.3、Nacos 2.2.4 等最新�
 | `Spring Cloud Alibaba`        | 2021.0.5.0 / 2022.0.0.0 |
 | `Spring Cloud Tencent`        | 1.11.9-2022.0.1         |
 | `Spring Authorization Server` | 0.4.3 / 1.1.2           |
-| `Spring Boot Admin`           | 2.7.10 / 3.1.5          |
+| `Spring Boot Admin`           | 2.7.11 / 3.1.5          |
 | `Nacos`                       | 2.2.4                   |
 | `Sentinel`                    | 1.8.6                   |
 | `Seata`                       | 1.5.2                   |
