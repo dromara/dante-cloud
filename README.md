@@ -152,7 +152,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | Spring Cloud Alibaba        | 2022.0.0.0      |
 | Spring Cloud Tencent        | 1.12.1-2022.0.4 |
 | Spring Authorization Server | 1.1.2           |
-| Spring Boot Admin           | 3.1.6           |
+| Spring Boot Admin           | 3.1.7           |
 | Nacos                       | 2.2.4           |
 | Sentinel                    | 1.8.6           |
 | Seata                       | 1.7.0           |
@@ -239,12 +239,13 @@ dante-cloud
 
 > 因目前所使用的阅读产品支持度有限，想要购买全文请点击对应文章链接，在电脑浏览器中打开后进行购买。
 
-| 序号 | 文章标题                                                                                |    付费    | 说明                                                                        | 扫码阅读                                                           |
-|:--:|-------------------------------------------------------------------------------------|:--------:|---------------------------------------------------------------------------|----------------------------------------------------------------|
-| 1  | [Dante Cloud 及相关知识学习方法和学习路径的建议](https://www.foxitsoftware.cn/bhds/read/qwcqbq)      |    免费    |                                                                           | ![Dante Cloud 及相关知识学习方法和学习路径的建议](./readme/cookbook/0001.png)   |
-| 2  | [OAuth 2 中的 Scope 与 Role 深度解析](https://www.foxitsoftware.cn/bhds/payRead/3nxj3r/)   | 付费，有试读章节 | 全网独家，深度解析 OAuth2 协议中和 Spring Security 生态各组件中 Scope 和 Role 概念与原理，以及在实战中的应用 | ![OAuth 2 中的 Scope 与 Role 深度解析](./readme/cookbook/0002.png)    |
-| 3  | [Spring Boot 3 之自动配置与注入顺序控制](https://www.foxitsoftware.cn/bhds/payRead/1vzfy1/)     | 付费，有试读章节 | Spring 生态重要知识点，掌握步入微服务的关键开关                                               | ![Spring Boot 3 之自动配置与注入顺序控制](./readme/cookbook/0003.png)      |
-| 4  | [Spring Cloud 之 Session 共享及一致性处理](https://www.foxitsoftware.cn/bhds/payRead/pmq4wy) | 付费，有试读章节 | 深入浅出剖析微服务架构 Session 共享技术难点                                                | ![Spring Cloud 之 Session 共享及一致性处理](./readme/cookbook/0004.png) |
+| 序号 | 文章标题                                                                                |    付费    | 说明                                                                               | 扫码阅读                                                           |
+|:--:|-------------------------------------------------------------------------------------|:--------:|----------------------------------------------------------------------------------|----------------------------------------------------------------|
+| 1  | [Dante Cloud 及相关知识学习方法和学习路径的建议](https://www.foxitsoftware.cn/bhds/read/qwcqbq)      |    免费    |                                                                                  | ![Dante Cloud 及相关知识学习方法和学习路径的建议](./readme/cookbook/0001.png)   |
+| 2  | [OAuth 2 中的 Scope 与 Role 深度解析](https://www.foxitsoftware.cn/bhds/payRead/3nxj3r/)   | 付费，有试读章节 | 全网独家，深度解析 OAuth2 协议中和 Spring Security 生态各组件中 Scope 和 Role 概念与原理，以及在实战中的应用        | ![OAuth 2 中的 Scope 与 Role 深度解析](./readme/cookbook/0002.png)    |
+| 3  | [Spring Boot 3 之自动配置与注入顺序控制](https://www.foxitsoftware.cn/bhds/payRead/1vzfy1/)     | 付费，有试读章节 | Spring 生态重要知识点，掌握步入微服务的关键开关                                                      | ![Spring Boot 3 之自动配置与注入顺序控制](./readme/cookbook/0003.png)      |
+| 4  | [Spring Cloud 之 Session 共享及一致性处理](https://www.foxitsoftware.cn/bhds/payRead/pmq4wy) | 付费，有试读章节 | 深入浅出剖析微服务架构 Session 共享技术难点                                                       | ![Spring Cloud 之 Session 共享及一致性处理](./readme/cookbook/0004.png) |
+| 5  | [OAuth 2 中的鉴权和动态接口鉴权](https://www.foxitsoftware.cn/bhds/payRead/uxq6fi)             | 付费，有试读章节 | 带您跟随 Dante Cloud 源代码，由浅入深全面掌握 Spring Security 5 & 6 以及基于 OAuth2 的微服务动态接口鉴权的原理与实现 | ![OAuth 2 中的鉴权和动态接口鉴权](./readme/cookbook/0005.png)             |
 
 ## [8]、授权协议
 
