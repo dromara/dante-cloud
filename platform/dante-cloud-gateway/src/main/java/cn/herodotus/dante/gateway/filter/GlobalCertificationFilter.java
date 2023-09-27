@@ -28,8 +28,8 @@ package cn.herodotus.dante.gateway.filter;
 import cn.herodotus.dante.gateway.properties.GatewaySecurityProperties;
 import cn.herodotus.dante.gateway.utils.WebFluxUtils;
 import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
+import cn.herodotus.engine.assistant.core.definition.constants.ErrorCodes;
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.assistant.core.enums.ResultErrorCodes;
 import cn.herodotus.engine.assistant.core.utils.HeadersUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.ObjectUtils;
@@ -87,7 +87,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         String fromIn = exchange.getRequest().getHeaders().getFirst(HeadersUtils.X_HERODOTUS_FROM_IN);
         if (ObjectUtils.isNotEmpty(fromIn)) {
             log.warn("[Herodotus] |- Illegal request to disable access!");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_FORBIDDEN));
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_FORBIDDEN));
         }
 
         String webSocketToken = exchange.getRequest().getHeaders().getFirst(com.google.common.net.HttpHeaders.SEC_WEBSOCKET_PROTOCOL);
@@ -99,7 +99,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (!isTokenWellFormed(token)) {
             log.warn("[Herodotus] |- Token is not Well Formed!");
-            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_UNAUTHORIZED));
+            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_UNAUTHORIZED));
         }
 
 //        // 4. 非免登陆接口，同时也有格式正确的Token，那么就验证Token是否过期

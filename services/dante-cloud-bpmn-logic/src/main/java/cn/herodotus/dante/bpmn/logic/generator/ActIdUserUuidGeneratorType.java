@@ -25,23 +25,40 @@
 
 package cn.herodotus.dante.bpmn.logic.generator;
 
-import org.hibernate.annotations.IdGeneratorType;
+import cn.herodotus.dante.bpmn.logic.entity.ActIdUser;
+import cn.herodotus.engine.data.core.identifier.AbstractUuidGenerator;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+import java.lang.reflect.Member;
 
 /**
- * <p>Description: ActIdTenantMemberUuid </p>
+ * <p>Description: Camunda 用户表 UUID 生成器 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/11/7 17:38
+ * @date : 2021/7/20 12:51
  */
-@IdGeneratorType(ActIdTenantMemberUuidGenerator.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, METHOD})
-public @interface ActIdTenantMemberUuid {
+public class ActIdUserUuidGeneratorType extends AbstractUuidGenerator {
+
+    public ActIdUserUuidGeneratorType(ActIdUserUuidGenerator config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
+        super(idMember);
+    }
+
+    @Override
+    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
+        if (ObjectUtils.isEmpty(object)) {
+            throw new HibernateException(new NullPointerException());
+        }
+
+        ActIdUser actUser = (ActIdUser) object;
+
+        if (StringUtils.isEmpty(actUser.getId())) {
+            return super.generate(session, object);
+        } else {
+            return actUser.getId();
+        }
+    }
 }

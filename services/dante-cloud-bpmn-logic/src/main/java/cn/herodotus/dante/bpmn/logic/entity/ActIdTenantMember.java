@@ -26,7 +26,7 @@
 package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
-import cn.herodotus.dante.bpmn.logic.generator.ActIdTenantMemberUuid;
+import cn.herodotus.dante.bpmn.logic.generator.ActIdTenantMemberUuidGenerator;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -55,7 +55,7 @@ public class ActIdTenantMember extends BaseEntity {
     @JsonProperty("ownership_id")
     @Schema(title =  "人员ID")
     @Id
-    @ActIdTenantMemberUuid
+    @ActIdTenantMemberUuidGenerator
     @Column(name = "id_", length = 64)
     private String id;
 
