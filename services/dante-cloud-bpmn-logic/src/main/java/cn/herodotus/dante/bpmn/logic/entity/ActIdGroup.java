@@ -26,7 +26,7 @@
 package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
-import cn.herodotus.dante.bpmn.logic.generator.ActIdGroupUuid;
+import cn.herodotus.dante.bpmn.logic.generator.ActIdGroupUuidGenerator;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -50,7 +50,7 @@ public class ActIdGroup extends BaseEntity {
     @JsonProperty("department_id")
     @Schema(title =  "部门ID")
     @Id
-    @ActIdGroupUuid
+    @ActIdGroupUuidGenerator
     @Column(name = "id_", length = 64)
     private String id;
 

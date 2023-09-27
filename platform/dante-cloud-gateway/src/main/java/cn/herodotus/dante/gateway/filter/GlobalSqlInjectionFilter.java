@@ -26,8 +26,8 @@
 package cn.herodotus.dante.gateway.filter;
 
 import cn.herodotus.dante.gateway.utils.WebFluxUtils;
+import cn.herodotus.engine.assistant.core.definition.constants.ErrorCodes;
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.assistant.core.enums.ResultErrorCodes;
 import cn.herodotus.engine.assistant.core.utils.SqlInjectionUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;
@@ -200,7 +200,7 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
 
     private Mono<Void> sqlInjectionResponse(ServerWebExchange exchange, URI uri) {
         log.error("[Herodotus] |- Parameters of Request [" + uri.getRawPath() + uri.getRawQuery() + "] contain illegal SQL keyword!");
-        return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.SQL_INJECTION_REQUEST).status(HttpStatus.SC_FORBIDDEN));
+        return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ErrorCodes.SQL_INJECTION_REQUEST).status(HttpStatus.SC_FORBIDDEN));
     }
 
     private boolean isGetRequest(HttpMethod method) {

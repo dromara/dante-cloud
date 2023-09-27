@@ -25,40 +25,23 @@
 
 package cn.herodotus.dante.bpmn.logic.generator;
 
-import cn.herodotus.dante.bpmn.logic.entity.ActIdTenant;
-import cn.herodotus.engine.data.jpa.hibernate.identifier.AbstractUuidGenerator;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
+import org.hibernate.annotations.IdGeneratorType;
 
-import java.lang.reflect.Member;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * <p>Description: Camunda 租户表 UUID 生成器 </p>
+ * <p>Description: ActIdTenantUuid </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/20 13:01
+ * @date : 2022/11/7 17:38
  */
-public class ActIdTenantUuidGenerator extends AbstractUuidGenerator {
-
-    public ActIdTenantUuidGenerator(ActIdTenantUuid config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
-        super(idMember);
-    }
-
-    @Override
-    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new HibernateException(new NullPointerException());
-        }
-
-        ActIdTenant actIdTenant = (ActIdTenant) object;
-
-        if (StringUtils.isEmpty(actIdTenant.getId())) {
-            return super.generate(session, object);
-        } else {
-            return actIdTenant.getId();
-        }
-    }
+@IdGeneratorType(ActIdTenantUuidGeneratorType.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD, METHOD})
+public @interface ActIdTenantUuidGenerator {
 }
