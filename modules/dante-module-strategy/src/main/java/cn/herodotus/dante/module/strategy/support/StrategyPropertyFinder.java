@@ -27,7 +27,6 @@ package cn.herodotus.dante.module.strategy.support;
 
 
 import cn.herodotus.dante.module.strategy.constants.StrategyModuleConstants;
-import cn.herodotus.engine.assistant.core.context.PropertyFinder;
 import cn.herodotus.engine.assistant.core.context.PropertyResolver;
 import org.springframework.core.env.Environment;
 
@@ -37,7 +36,7 @@ import org.springframework.core.env.Environment;
  * @author : gengwei.zheng
  * @date : 2022/2/1 19:23
  */
-public class StrategyPropertyFinder extends PropertyFinder {
+public class StrategyPropertyFinder {
 
     public static String getDataAccessStrategy(Environment environment, String defaultValue) {
         return PropertyResolver.getProperty(environment, StrategyModuleConstants.ITEM_PLATFORM_DATA_ACCESS_STRATEGY, defaultValue);

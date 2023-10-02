@@ -78,14 +78,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <modules>
-        <module>dependencies</module>
-        <module>modules</module>
-        <module>packages</module>
-        <module>platform</module>
-        <module>services</module>
-    </modules>
-
     <!-- 环境 -->
     <profiles>
         <!-- 开发 -->
@@ -290,4 +282,12 @@
             </build>
         </profile>
     </profiles>
+
+    <modules>
+        <module>dependencies</module>
+        <module>modules</module>
+        <module>packages</module>
+        <module>platform</module>
+        <module>services</module>
+    </modules>
 </project>
