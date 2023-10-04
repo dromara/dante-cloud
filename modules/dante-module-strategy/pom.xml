@@ -39,6 +39,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>rest-sdk-condition</artifactId>
+        </dependency>
+        <dependency>
             <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-module-social</artifactId>
         </dependency>

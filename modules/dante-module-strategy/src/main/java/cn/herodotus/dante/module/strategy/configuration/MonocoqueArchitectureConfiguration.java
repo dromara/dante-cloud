@@ -26,12 +26,12 @@
 package cn.herodotus.dante.module.strategy.configuration;
 
 import cn.herodotus.dante.module.social.configuration.SocialModuleConfiguration;
-import cn.herodotus.dante.module.strategy.annotation.ConditionalOnMonocoqueArchitecture;
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalPermissionDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
+import cn.herodotus.engine.rest.condition.annotation.ConditionalOnMonocoqueArchitecture;
 import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
