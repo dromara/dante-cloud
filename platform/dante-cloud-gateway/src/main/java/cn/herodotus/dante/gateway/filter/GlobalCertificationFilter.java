@@ -30,7 +30,7 @@ import cn.herodotus.dante.gateway.utils.WebFluxUtils;
 import cn.herodotus.engine.assistant.core.definition.constants.BaseConstants;
 import cn.herodotus.engine.assistant.core.definition.constants.ErrorCodes;
 import cn.herodotus.engine.assistant.core.domain.Result;
-import cn.herodotus.engine.assistant.core.utils.HeadersUtils;
+import cn.herodotus.engine.assistant.core.utils.http.HeaderUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -84,7 +84,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         }
 
         // 2.外部进入的请求，如果包含 X_HERODOTUS_FROM_IN 请求头，认为是非法请求，直接拦截。X_HERODOTUS_FROM_IN 只能用于内部 Feign 间忽略权限使用
-        String fromIn = exchange.getRequest().getHeaders().getFirst(HeadersUtils.X_HERODOTUS_FROM_IN);
+        String fromIn = exchange.getRequest().getHeaders().getFirst(HeaderUtils.X_HERODOTUS_FROM_IN);
         if (ObjectUtils.isNotEmpty(fromIn)) {
             log.warn("[Herodotus] |- Illegal request to disable access!");
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_FORBIDDEN));
@@ -102,16 +102,6 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_UNAUTHORIZED));
         }
 
-//        // 4. 非免登陆接口，同时也有格式正确的Token，那么就验证Token是否过期
-//        //    就看Redis中，是否有这个Token
-//        String redisTokenKey = StringUtils.replace(token, BaseConstants.BEARER_TOKEN, "access:");
-//        if (StringUtils.isNotBlank(redisTokenKey) && Boolean.TRUE.equals(redisTemplate.hasKey(redisTokenKey))) {
-//            log.debug("[Herodotus] |- Token is OK！");
-//            return chain.filter(exchange);
-//        } else {
-//            log.debug("[Herodotus] |- Token is Expired！");
-//            return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ResultErrorCodes.INVALID_TOKEN).status(HttpStatus.SC_PRECONDITION_FAILED));
-//        }
         return chain.filter(exchange);
     }
 

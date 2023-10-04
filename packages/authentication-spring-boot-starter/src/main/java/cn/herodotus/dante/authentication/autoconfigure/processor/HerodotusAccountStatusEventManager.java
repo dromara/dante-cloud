@@ -26,7 +26,7 @@
 package cn.herodotus.dante.authentication.autoconfigure.processor;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
-import cn.herodotus.engine.assistant.core.context.ServiceContext;
+import cn.herodotus.engine.assistant.core.context.ServiceContextHolder;
 import cn.herodotus.engine.message.core.definition.AccountStatusEventManager;
 import cn.herodotus.engine.message.core.domain.UserStatus;
 import cn.herodotus.engine.message.core.event.LocalChangeUserStatusEvent;
@@ -46,11 +46,11 @@ public class HerodotusAccountStatusEventManager implements AccountStatusEventMan
 
     @Override
     public void postLocalProcess(UserStatus data) {
-        ServiceContext.getInstance().publishEvent(new LocalChangeUserStatusEvent(data));
+        ServiceContextHolder.getInstance().publishEvent(new LocalChangeUserStatusEvent(data));
     }
 
     @Override
     public void postRemoteProcess(String data, String originService, String destinationService) {
-        ServiceContext.getInstance().publishEvent(new RemoteChangeUserStatusEvent(data, originService, destinationService));
+        ServiceContextHolder.getInstance().publishEvent(new RemoteChangeUserStatusEvent(data, originService, destinationService));
     }
 }

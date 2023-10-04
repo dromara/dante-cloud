@@ -32,7 +32,7 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.1.4.1</version>
+        <version>3.1.4.2</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
@@ -77,14 +77,6 @@
 
         </dependencies>
     </dependencyManagement>
-
-    <modules>
-        <module>dependencies</module>
-        <module>modules</module>
-        <module>packages</module>
-        <module>platform</module>
-        <module>services</module>
-    </modules>
 
     <!-- 环境 -->
     <profiles>
@@ -290,4 +282,12 @@
             </build>
         </profile>
     </profiles>
+
+    <modules>
+        <module>dependencies</module>
+        <module>modules</module>
+        <module>packages</module>
+        <module>platform</module>
+        <module>services</module>
+    </modules>
 </project>

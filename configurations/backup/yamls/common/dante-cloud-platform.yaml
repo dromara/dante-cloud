@@ -2,9 +2,13 @@ herodotus:
   endpoint:
     uaa-service-name: dante-cloud-uaa
     upms-service-name: dante-cloud-upms
+    message-service-name: dante-cloud-message
+    oss-service-name: dante-cloud-oss-ability
     gateway-service-uri: ${herodotus.environment.gateway-server-addr}
     uaa-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.uaa-service-name}
     upms-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.upms-service-name}
+    message-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.message-service-name}
+    oss-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.oss-service-name}
     access-token-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/token
     authorization-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/authorize
     token-revocation-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/revoke
