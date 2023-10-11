@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.2.4-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.2.4"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.4.2-red.svg?logo=spring" alt="Version 3.1.4.2"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.4.2-red.svg?logo=spring" alt="Dante Engine 3.1.4.2"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.1.4.2-red.svg?logo=spring" alt="Dante OSS 3.1.4.2"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.4.3-red.svg?logo=spring" alt="Version 3.1.4.3"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.4.3-red.svg?logo=spring" alt="Dante Engine 3.1.4.3"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.1.4.3-red.svg?logo=spring" alt="Dante OSS 3.1.4.3"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -61,18 +61,14 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 因 Spring Boot 2.7.X 和 3.0.X 将分别于 2023年11月18日 和 2023年11月24日 停止维护，考虑到技术发展趋势，决定停止 Dante Cloud 2.7.X 版本代码的维护，专注 3.1.X 维护及 3.2.X 开发。2.7.16.Final 版本是 Dante Cloud 2.7.X 系列最后一个版本，代码仍旧会保留，可在工程 2.7.X 分支中获取。
 
-## Dante Cloud 3.1.X 新特性
+## Dante Cloud 特性
 
 ### 1. 核心基础依赖便捷切换
 
 - 新增 `Spring Cloud Tencent` 和 `Spring Cloud` 原生微服务全家桶等两种基础设施支持。
 - 新增 `Spring Cloud Alibaba`、`Spring Cloud Tencent` 和 `Spring Cloud` 原生微服务全家桶三种基础设值切换能力，可以以相对便捷的方式切换使用 Alibaba、Tencent、Spring 等基础设施环境。可根据自身实际需求选择，不再局限于只能在某一种基础设施环境中运行。
 
-### 2. 支持 `GraalVM` 原生镜像
-
-- 整体调整各类模块 pom build 配置，适当增加冗余重复配置，以支持 `Spring Native` 或 `GraalVM` 编译需要。规避对所有模块进行Native 编译，而导致错误问题。
-
-### 3. `Spring Authorization Server` 全特性支持及扩展
+### 2. `Spring Authorization Server` 全特性支持及扩展
 
 - 基于 `Spring Authorization Server` 和 `Spring Data JPA` 实现多租户系统架构， 支持 Database 和 Schema 两种模式。
 - 基于 `Spring Data JPA`，重新构建 `Spring Authorization Server` 基础数据存储代码，替代原有 JDBC 数据访问方式，破除 `Spring Authorization Server` 原有数据存储局限，扩展为更符合实际应用的方式和设计。
@@ -88,7 +84,17 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 - 新增基于 `Spring Authorization Server` 的、支持智能电视、IoT等物联网设备认证模式
 - 无须在代码中配置 `Spring Security` 权限注解以及权限方法，即可实现接口鉴权以及权限的动态修改。采用分布式鉴权方案，规避 Gateway 统一鉴权的压力以及重复鉴权问题
 - OAuth2 UserDetails 核心数据支持直连数据库获取和 Feign 远程调用两种模式。OAuth2 直连数据库模式性能更优，Feign 访问远程调用可扩展性更强。可通过配置动态修改采用策略方式。
-- 基于自定义 Session，混合国密 `SM2` (非对称) 和 `SM4` (对称加密) 算法，实现基于数字信封技术的秘钥动态生成加密传输。利用“一人一码机制”，实现密码模式登录数据进行动态加密传输。配合 OAuth2 Client 验证，保护接口调用和前后端数据传输的合理性及安全性。
+
+### 3. 全体系化应用和开发特性集成
+
+- 微服务架构全体系 Session 共享，实现 Spring Authorization Server、多实例服务、WebSocket、自定义 Session 以及大前端 Session 的统一。`微服务架构下的 Session 可以选择不用，但是不能没有`。
+- 混合国密 `SM2` (非对称) 和 `SM4` (对称加密) 算法，实现基于数字信封技术的秘钥动态生成加密传输。利用“一人一码机制”，实现前后端数据进行动态加密传输与。Spring Authorization Server OAuth 2.1 授权模式深度融合，构建统一体系的数据传输加密。
+- 全面整合 `@PreAuthorize` 注解权限与 `URL` 权限，通过后端动态配置，无须在代码中配置 `Spring Security` 权限注解以及权限方法，可实现接口鉴权以及权限的统一管理和动态修改 
+- 融合 Spring Cloud Stream 和 WebSocket，以优雅的方式实现 WebSocket 服务多实例环境下，点对点、广播消息跨实例推送，在线用户实时统计，完美支持 WebSocket 集群化应用。 
+- 借鉴 JPA 标准化设计思想，提取和抽象 OSS 标准化操作，形成统一的 Java OSS API 规范。封装可操作任意厂商的、统一的 REST API，构建定义统一、动态实现的应用模式（类似于 Hibernate 是 JPA 的一种实现，Hibernate 以 Dialect 方式支持不同的数据库一样），在不修改代码的情况下通过修改配置实现 OSS 的无缝切换和迁移 
+- 自研基于 `JetCache` 分布式两级缓存，完美实现 JPA Hibernate 二级缓存，支持各类查询数据缓存以及 JPA `@ManyToMany`， `@ManyToOne`等关联查询。完美解决 Spring Cache 仅使用本地缓存、创建 Key 繁琐和分页数据无法更新的问题。支持多实例服务本地缓存和远程缓存数据同步，同时支持 Mybatis Plus 二级缓存
+- 平台统一错误处理，支持自定义错误码体系，有效集成 `OAuth2`、`Spring Validation` 等多方错误体系并有机整合 HTTP 状态码。采用 Customizer 模式，采用错误码自动计算和创建模式，支持代码模块级错误码灵活定义扩展。响应结果更加多样灵活，反馈结果也更加人性化，便于理解和定位问题。 
+- 全体系 OkHttp 、HttpClient 统一化集成，实现 OkHttp 、HttpClient 与 RestTemplate 、Openfeign 一体化融合。统一使用 Feign 配置参数，对 OkHttp 、HttpClient 进行参数设定，可策略化选择设置使用 OkHttp 或 HttpClient 作为 RestTemplate 、Openfeign 统一的基础 HttpClient
 
 ### 4. 采用 `pnpm monorepo` 重构前端
 
