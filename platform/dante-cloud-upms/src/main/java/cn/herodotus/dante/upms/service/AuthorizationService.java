@@ -25,11 +25,9 @@
 
 package cn.herodotus.dante.upms.service;
 
-import cn.herodotus.engine.assistant.core.definition.AbstractRest;
+import cn.herodotus.engine.assistant.core.definition.RestApiTemplate;
 import cn.zhxu.data.TypeRef;
-import cn.zhxu.okhttps.MsgConvertor;
 import cn.zhxu.okhttps.OkHttps;
-import cn.zhxu.okhttps.jackson.JacksonMsgConvertor;
 import org.dromara.hutool.core.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 
@@ -42,16 +40,11 @@ import java.util.Map;
  * @date : 2022/2/15 14:11
  */
 @Service
-public class AuthorizationService extends AbstractRest {
+public class AuthorizationService implements RestApiTemplate {
 
     @Override
-    protected String getBaseUrl() {
+    public String getBaseUrl() {
         return "http://192.168.101.10:8847/dante-cloud-uaa";
-    }
-
-    @Override
-    protected MsgConvertor getMsgConvertor() {
-        return new JacksonMsgConvertor();
     }
 
     public Map<String, Object> authorized(String code, String state) {
