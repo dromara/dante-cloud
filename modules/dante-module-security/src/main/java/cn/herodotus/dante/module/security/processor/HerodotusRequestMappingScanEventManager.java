@@ -11,7 +11,6 @@
 package cn.herodotus.dante.module.security.processor;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
-import cn.herodotus.engine.assistant.core.context.ServiceContextHolder;
 import cn.herodotus.engine.message.core.definition.RequestMappingScanEventManager;
 import cn.herodotus.engine.message.core.domain.RequestMapping;
 import cn.herodotus.engine.message.core.event.LocalRequestMappingGatherEvent;
@@ -55,11 +54,11 @@ public class HerodotusRequestMappingScanEventManager implements RequestMappingSc
 
     @Override
     public void postLocalProcess(List<RequestMapping> data) {
-        ServiceContextHolder.getInstance().publishEvent(new LocalRequestMappingGatherEvent(data));
+        publishEvent(new LocalRequestMappingGatherEvent(data));
     }
 
     @Override
     public void postRemoteProcess(String data, String originService, String destinationService) {
-        ServiceContextHolder.getInstance().publishEvent(new RemoteRequestMappingGatherEvent(data, originService, destinationService));
+        publishEvent(new RemoteRequestMappingGatherEvent(data, originService, destinationService));
     }
 }

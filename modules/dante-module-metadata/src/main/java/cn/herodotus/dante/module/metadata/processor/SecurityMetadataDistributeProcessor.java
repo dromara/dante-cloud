@@ -27,7 +27,6 @@ package cn.herodotus.dante.module.metadata.processor;
 
 import cn.herodotus.dante.module.metadata.converter.SysAttributeToSecurityAttributeConverter;
 import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
-import cn.herodotus.engine.assistant.core.context.ServiceContextHolder;
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.message.core.definition.StrategyEventManager;
 import cn.herodotus.engine.message.core.domain.RequestMapping;
@@ -81,7 +80,7 @@ public class SecurityMetadataDistributeProcessor implements StrategyEventManager
 
     @Override
     public void postRemoteProcess(String data, String originService, String destinationService) {
-        ServiceContextHolder.getInstance().publishEvent(new RemoteSecurityMetadataSyncEvent(data, originService, destinationService));
+        publishEvent(new RemoteSecurityMetadataSyncEvent(data, originService, destinationService));
     }
 
     /**
