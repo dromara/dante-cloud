@@ -45,17 +45,7 @@
 
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-resource-server-autoconfigure</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-sdk-management</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>supplier-sdk-tenant</artifactId>
+            <artifactId>oauth2-authorization-server-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 
