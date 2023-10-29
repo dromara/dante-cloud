@@ -44,8 +44,8 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-security</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>oauth2-resource-server-autoconfigure</artifactId>
         </dependency>
 
         <dependency>

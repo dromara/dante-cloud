@@ -30,9 +30,9 @@ import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributes
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.message.core.definition.StrategyEventManager;
 import cn.herodotus.engine.message.core.domain.RequestMapping;
-import cn.herodotus.engine.message.security.autoconfigure.event.RemoteSecurityMetadataSyncEvent;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
+import cn.herodotus.engine.oauth2.resource.autoconfigure.bus.RemoteSecurityMetadataSyncEvent;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;

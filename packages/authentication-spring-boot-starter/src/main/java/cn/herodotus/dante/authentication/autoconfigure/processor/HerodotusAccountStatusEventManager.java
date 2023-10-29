@@ -29,7 +29,7 @@ import cn.herodotus.dante.module.common.ServiceNameConstants;
 import cn.herodotus.engine.message.core.definition.AccountStatusEventManager;
 import cn.herodotus.engine.message.core.domain.UserStatus;
 import cn.herodotus.engine.message.core.event.LocalChangeUserStatusEvent;
-import cn.herodotus.engine.message.security.autoconfigure.event.RemoteChangeUserStatusEvent;
+import cn.herodotus.engine.oauth2.resource.autoconfigure.bus.RemoteChangeUserStatusEvent;
 
 /**
  * <p>Description: 用户状态变更处理器 </p>

@@ -213,7 +213,6 @@ dante-cloud
 ├── module -- 依赖组件半成品拼装工程
 ├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
 ├    ├── dante-module-metadata -- 权限元数据同步模块
-├    ├── dante-module-security -- Security 相关配置代码模块
 ├    ├── dante-module-social -- 社交登录模块
 ├    └── dante-module-strategy -- UAA 核心数据访问策略模块
 ├── packages -- 基础核心Starter
