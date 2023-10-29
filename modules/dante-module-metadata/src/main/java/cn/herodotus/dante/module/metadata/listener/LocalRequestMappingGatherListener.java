@@ -26,8 +26,8 @@
 package cn.herodotus.dante.module.metadata.listener;
 
 import cn.herodotus.dante.module.metadata.processor.RequestMappingStoreProcessor;
-import cn.herodotus.engine.message.core.domain.RequestMapping;
-import cn.herodotus.engine.message.core.event.LocalRequestMappingGatherEvent;
+import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
+import cn.herodotus.engine.message.core.logic.event.RequestMappingGatherEvent;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +46,7 @@ import java.util.List;
  * @date : 2021/8/8 22:02
  */
 @Component
-public class LocalRequestMappingGatherListener implements ApplicationListener<LocalRequestMappingGatherEvent> {
+public class LocalRequestMappingGatherListener implements ApplicationListener<RequestMappingGatherEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(LocalRequestMappingGatherListener.class);
 
@@ -58,7 +58,7 @@ public class LocalRequestMappingGatherListener implements ApplicationListener<Lo
     }
 
     @Override
-    public void onApplicationEvent(LocalRequestMappingGatherEvent event) {
+    public void onApplicationEvent(RequestMappingGatherEvent event) {
 
         log.info("[Herodotus] |- Request mapping gather LOCAL listener, response event!");
 

@@ -27,7 +27,7 @@ package cn.herodotus.dante.module.metadata.listener;
 
 import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
-import cn.herodotus.engine.message.core.domain.UserStatus;
+import cn.herodotus.engine.message.core.logic.domain.UserStatus;
 import cn.herodotus.engine.oauth2.resource.autoconfigure.bus.RemoteChangeUserStatusEvent;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import org.apache.commons.lang3.ObjectUtils;

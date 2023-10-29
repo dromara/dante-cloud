@@ -27,7 +27,7 @@ package cn.herodotus.dante.module.metadata.listener;
 
 import cn.herodotus.dante.module.metadata.processor.RequestMappingStoreProcessor;
 import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
-import cn.herodotus.engine.message.core.domain.RequestMapping;
+import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
 import cn.herodotus.engine.oauth2.resource.autoconfigure.bus.RemoteRequestMappingGatherEvent;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
