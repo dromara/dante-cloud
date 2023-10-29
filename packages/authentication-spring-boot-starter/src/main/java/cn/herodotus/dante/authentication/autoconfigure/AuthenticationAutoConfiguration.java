@@ -25,13 +25,10 @@
 
 package cn.herodotus.dante.authentication.autoconfigure;
 
-import cn.herodotus.dante.authentication.autoconfigure.processor.HerodotusAccountStatusEventManager;
-import cn.herodotus.engine.message.core.definition.AccountStatusEventManager;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.Bean;
 
 /**
  * <p>Description: OAuth Starter 自动注入配置 </p>
@@ -47,12 +44,5 @@ public class AuthenticationAutoConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.info("[Herodotus] |- Module [Herodotus OAuth Starter] Auto Configure.");
-    }
-
-    @Bean
-    public AccountStatusEventManager accountStatusEventManager() {
-        HerodotusAccountStatusEventManager herodotusAccountStatusEventManager = new HerodotusAccountStatusEventManager();
-        log.trace("[Herodotus] |- Bean [Account Status Changer] Auto Configure.");
-        return herodotusAccountStatusEventManager;
     }
 }

@@ -32,15 +32,15 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.5.1</version>
+        <version>3.1.5.2</version>
     </parent>
 
     <artifactId>service-spring-boot-starter</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-security</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>oauth2-resource-server-autoconfigure</artifactId>
         </dependency>
 
         <dependency>

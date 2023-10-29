@@ -32,7 +32,7 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.5.1</version>
+        <version>3.1.5.2</version>
     </parent>
 
     <artifactId>dante-module-metadata</artifactId>
@@ -49,8 +49,8 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-module-security</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>oauth2-resource-server-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 

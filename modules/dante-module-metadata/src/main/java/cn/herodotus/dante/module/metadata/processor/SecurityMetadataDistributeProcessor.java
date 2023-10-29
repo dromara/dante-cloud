@@ -27,13 +27,12 @@ package cn.herodotus.dante.module.metadata.processor;
 
 import cn.herodotus.dante.module.metadata.converter.SysAttributeToSecurityAttributeConverter;
 import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
-import cn.herodotus.engine.assistant.core.context.ServiceContextHolder;
 import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
-import cn.herodotus.engine.message.core.definition.StrategyEventManager;
-import cn.herodotus.engine.message.core.domain.RequestMapping;
-import cn.herodotus.engine.message.security.autoconfigure.event.RemoteSecurityMetadataSyncEvent;
+import cn.herodotus.engine.message.core.definition.strategy.StrategyEventManager;
+import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
+import cn.herodotus.engine.oauth2.resource.autoconfigure.bus.RemoteSecurityMetadataSyncEvent;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;
@@ -81,7 +80,7 @@ public class SecurityMetadataDistributeProcessor implements StrategyEventManager
 
     @Override
     public void postRemoteProcess(String data, String originService, String destinationService) {
-        ServiceContextHolder.getInstance().publishEvent(new RemoteSecurityMetadataSyncEvent(data, originService, destinationService));
+        publishEvent(new RemoteSecurityMetadataSyncEvent(data, originService, destinationService));
     }
 
     /**
