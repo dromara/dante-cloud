@@ -33,7 +33,6 @@ herodotus:
   log-center:
     server-addr: ${herodotus.environment.logstash-server-addr}
     loggers:
-      cn.herodotus: debug
       org.springframework.security: debug
       com.alibaba.nacos.client.naming: error
       com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.grpc.netty: error
