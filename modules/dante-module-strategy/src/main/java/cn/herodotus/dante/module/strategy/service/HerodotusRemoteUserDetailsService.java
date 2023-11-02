@@ -51,11 +51,11 @@ public class HerodotusRemoteUserDetailsService extends AbstractStrategyUserDetai
     }
 
     @Override
-    public HerodotusUser findUserDetailsByUsername(String userName) throws UsernameNotFoundException {
-        Result<SysUser> result = remoteUserDetailsService.findByUserName(userName);
+    public HerodotusUser findUserDetailsByUsername(String username) throws UsernameNotFoundException {
+        Result<SysUser> result = remoteUserDetailsService.findByUsername(username);
 
         SysUser sysUser = result.getData();
-        return this.convertSysUser(sysUser, userName);
+        return this.convertSysUser(sysUser, username);
     }
 
     @Override
