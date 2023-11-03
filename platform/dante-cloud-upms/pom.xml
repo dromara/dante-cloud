@@ -30,12 +30,12 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.5.2</version>
+        <version>3.1.5.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dante-cloud-upms</artifactId>
-    <version>3.1.5.2</version>
+    <version>3.1.5.3</version>
 
     <dependencies>
         <dependency>

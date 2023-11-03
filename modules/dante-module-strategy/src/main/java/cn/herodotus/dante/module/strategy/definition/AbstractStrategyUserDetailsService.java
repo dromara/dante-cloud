@@ -44,9 +44,9 @@ public abstract class AbstractStrategyUserDetailsService implements StrategyUser
 
     private final Converter<SysUser, HerodotusUser> toUser = new SysUserToHerodotusUserConverter();
 
-    protected HerodotusUser convertSysUser(SysUser sysUser, String userName) throws AuthenticationException {
+    protected HerodotusUser convertSysUser(SysUser sysUser, String username) throws AuthenticationException {
         if (ObjectUtils.isEmpty(sysUser)) {
-            throw new UsernameNotFoundException("系统用户 " + userName + " 不存在!");
+            throw new UsernameNotFoundException("系统用户 " + username + " 不存在!");
         }
 
         return toUser.convert(sysUser);

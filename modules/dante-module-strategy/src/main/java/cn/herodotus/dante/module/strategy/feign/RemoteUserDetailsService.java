@@ -43,6 +43,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface RemoteUserDetailsService {
 
     @Inner
-    @GetMapping("/security/user/sign-in/{userName}")
-    Result<SysUser> findByUserName(@PathVariable("userName") String userName);
+    @GetMapping("/security/user/sign-in/{username}")
+    Result<SysUser> findByUsername(@PathVariable("username") String username);
 }
