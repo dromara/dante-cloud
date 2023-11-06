@@ -26,7 +26,7 @@
 package cn.herodotus.dante.gateway.filter;
 
 import cn.herodotus.dante.gateway.utils.WebFluxUtils;
-import cn.herodotus.engine.assistant.core.definition.constants.ErrorCodes;
+import cn.herodotus.engine.assistant.core.constants.ErrorCodes;
 import cn.herodotus.engine.assistant.core.domain.Result;
 import cn.herodotus.engine.assistant.core.utils.protect.SqlInjectionUtils;
 import io.netty.buffer.ByteBufAllocator;
