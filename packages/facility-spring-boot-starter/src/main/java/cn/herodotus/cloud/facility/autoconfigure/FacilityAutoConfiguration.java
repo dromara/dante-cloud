@@ -43,6 +43,6 @@ public class FacilityAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Starter [Herodotus Facility Starter] Auto Configure.");
+        log.info("[Herodotus] |- Module [Herodotus Facility Starter] Auto Configure.");
     }
 }
