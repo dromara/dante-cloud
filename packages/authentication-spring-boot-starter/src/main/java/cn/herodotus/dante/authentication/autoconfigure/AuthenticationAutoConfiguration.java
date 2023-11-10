@@ -43,6 +43,6 @@ public class AuthenticationAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Module [Herodotus OAuth Starter] Auto Configure.");
+        log.info("[Herodotus] |- Module [Herodotus Authentication Starter] Auto Configure.");
     }
 }
