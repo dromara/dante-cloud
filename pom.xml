@@ -113,7 +113,7 @@
                 <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <!--Spring Cloud Tencent 本地缓存目录-->
-                <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
+                <tencent.polaris.local.dir>./configurations/backup/cache</tencent.polaris.local.dir>
             </properties>
         </profile>
         <!-- Docker -->
@@ -146,7 +146,7 @@
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
-                <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
+                <tencent.polaris.local.dir>./configurations/backup/cache</tencent.polaris.local.dir>
             </properties>
         </profile>
         <!-- 生产 -->
@@ -179,7 +179,7 @@
                 <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <!--Spring Cloud Tencent 本地缓存目录-->
-                <tencent.polaris.local.dir>./configurations/backup/tencent</tencent.polaris.local.dir>
+                <tencent.polaris.local.dir>./configurations/backup/cache</tencent.polaris.local.dir>
             </properties>
         </profile>
     </profiles>

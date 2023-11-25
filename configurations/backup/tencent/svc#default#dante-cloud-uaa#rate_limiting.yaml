@@ -1,7 +1,0 @@
----
-code: 200000
-info: "execute success"
-type: "RATE_LIMIT"
-service:
-  name: "dante-cloud-uaa"
-  namespace: "default"
