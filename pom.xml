@@ -63,21 +63,6 @@
         <docker.resource.name>${project.build.finalName}.${project.packaging}</docker.resource.name>
     </properties>
 
-    <!-- 所有的子项目默认依赖 -->
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-    </dependencies>
-
-    <!-- 管理依赖版本号,子项目不会默认依赖 -->
-    <dependencyManagement>
-        <dependencies>
-
-        </dependencies>
-    </dependencyManagement>
-
     <!-- 环境 -->
     <profiles>
         <!-- 开发 -->
@@ -92,7 +77,7 @@
                 <profile>development</profile>
                 <database>postgresql</database>
                 <!--基础设施：tencent、alibaba、spring-->
-                <facility>alibaba</facility>
+                <facility>tencent</facility>
                 <!--代码构建控制-->
                 <!--跳过构建源代码包-->
                 <skip.build.source.package>false</skip.build.source.package>
@@ -114,6 +99,8 @@
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <!--Spring Cloud Tencent 本地缓存目录-->
                 <tencent.polaris.local.dir>./configurations/backup/cache</tencent.polaris.local.dir>
+                <!--Spring Cloud Tencent 动态配置数据源类型 polaris: 从北极星服务端获取配置文件 local: 从本地磁盘读取配置文件-->
+                <tencent.polaris.data.source>polaris</tencent.polaris.data.source>
             </properties>
         </profile>
         <!-- Docker -->
@@ -147,6 +134,8 @@
                 <tencent.polaris.namespace>default</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 本地缓存目录-->
                 <tencent.polaris.local.dir>./configurations/backup/cache</tencent.polaris.local.dir>
+                <!--Spring Cloud Tencent 动态配置数据源类型 polaris: 从北极星服务端获取配置文件 local: 从本地磁盘读取配置文件-->
+                <tencent.polaris.data.source>polaris</tencent.polaris.data.source>
             </properties>
         </profile>
         <!-- 生产 -->
@@ -180,9 +169,23 @@
                 <tencent.polaris.config-addr>192.168.101.10:8093</tencent.polaris.config-addr>
                 <!--Spring Cloud Tencent 本地缓存目录-->
                 <tencent.polaris.local.dir>./configurations/backup/cache</tencent.polaris.local.dir>
+                <!--Spring Cloud Tencent 动态配置数据源类型 polaris: 从北极星服务端获取配置文件 local: 从本地磁盘读取配置文件-->
+                <tencent.polaris.data.source>polaris</tencent.polaris.data.source>
             </properties>
         </profile>
     </profiles>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>${netty.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <pluginManagement>
