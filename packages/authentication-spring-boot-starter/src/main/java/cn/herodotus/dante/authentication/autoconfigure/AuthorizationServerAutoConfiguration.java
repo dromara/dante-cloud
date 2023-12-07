@@ -123,7 +123,7 @@ public class AuthorizationServerAutoConfiguration {
         SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
 
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
-        httpSecurity.apply(authorizationServerConfigurer);
+        httpSecurity.with(authorizationServerConfigurer, (configurer) -> {});
 
         OAuth2AuthenticationFailureResponseHandler errorResponseHandler = new OAuth2AuthenticationFailureResponseHandler();
         authorizationServerConfigurer.clientAuthentication(endpoint -> {
@@ -179,7 +179,7 @@ public class AuthorizationServerAutoConfiguration {
                 .sessionManagement(oauth2sessionManagementConfigurerCustomer)
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
                 .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
-                .apply(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, oauth2AuthenticationProperties));
+                .with(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, oauth2AuthenticationProperties), (configurer) -> {});
 
         // 这里增加 DefaultAuthenticationEventPublisher 配置，是为了解决 ProviderManager 在初次使用时，外部定义DefaultAuthenticationEventPublisher 不会注入问题
         // 外部注入DefaultAuthenticationEventPublisher是标准配置方法，两处都保留是为了保险，还需要深入研究才能决定去掉哪个。

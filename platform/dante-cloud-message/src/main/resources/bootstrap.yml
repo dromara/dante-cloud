@@ -87,14 +87,11 @@ spring:
       ignored-interfaces:
         - eth0
     polaris:
-      enabled: true
       address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
       namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
-      discovery:
-        service: ${spring.application.name}
-        namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
       config:
         address: ${TENCENT_POLARIS_CONFIG_ADDR:grpc://@tencent.polaris.config-addr@}
+        data-source: ${TENCENT_POLARIS_DATA_SOURCE:@tencent.polaris.data.source@}
         local-file-root-path: ${TENCENT_POLARIS_LOCAL_DIR:@tencent.polaris.local.dir@}
         groups:
           - name: ${PROFILE:@profile@}

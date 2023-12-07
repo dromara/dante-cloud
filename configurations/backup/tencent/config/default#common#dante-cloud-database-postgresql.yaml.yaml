@@ -1,9 +1,0 @@
----
-namespace: "default"
-fileGroup: "common"
-fileName: "dante-cloud-database-postgresql.yaml"
-content: "herodotus:\r\n  database-information:\r\n    platform: postgresql\r\n  \
-  \  driver-class-name: org.postgresql.Driver\r\n    dialect: org.hibernate.dialect.PostgreSQLDialect\r\
-  \n    url: jdbc:postgresql://${herodotus.environment.database.host}:${herodotus.environment.database.port}/${herodotus.environment.database.name}"
-version: 1
-md5: "fa2caf8d3a7b8737d146f7ac4cae15e9"

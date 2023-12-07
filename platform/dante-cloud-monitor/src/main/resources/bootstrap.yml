@@ -44,12 +44,9 @@ spring:
 #      ignored-interfaces:
 #        - eth0
     polaris:
-      enabled: true
       address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
       namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
       discovery:
-        service: ${spring.application.name}
-        namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
         heartbeat-interval: 30
 ---
 # spring 全家桶基础设施配置
