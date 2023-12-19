@@ -11,13 +11,13 @@ body:
       required: true
   - type: checkboxes
     attributes:
-      label: 下载代码的前端和后端版本的一致性？
+      label: 下载的前端代码和后端代码版本的一致性？
       options:
-        - label: 我承诺已经认真检查过，前端工程代码版本和后端代码版本一致
+        - label: 我承诺已经认真检查过，前端工程代码版本和后端工程代码版本一致
           required: true
   - type: checkboxes
     attributes:
-      label: 在线文档和提问的智慧是否已经过？
+      label: 在线文档和《提问的智慧》是否已经认证阅读过？
       options:
         - label: 我承诺已经认真详细的看过文档 (https://www.herodotus.cn)
           required: true
@@ -39,13 +39,13 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: 预期结果
-      description: 请告诉我们你预期会发生什么。
-    validations:
-      required: true
-  - type: textarea
-    attributes:
       label: 实际结果
       description: 请告诉我们实际发生了什么。
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: 预期结果
+      description: 请告诉我们你预期会发生什么。
+    validations:
+      required: false
