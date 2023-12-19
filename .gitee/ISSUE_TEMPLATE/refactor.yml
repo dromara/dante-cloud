@@ -17,7 +17,7 @@ body:
   - type: textarea
     id: alternatives
     attributes:
-      label: 你考虑过哪些替代解决方案？
-      description: 清晰并简洁地描述你考虑过的任何替代解决方案或功能。
+      label: 你希望看到什么解决方案？
+      description: 清晰并简洁地描述你希望解决的问题或者已经思考的解决方案。
     validations:
       required: false

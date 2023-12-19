@@ -1,5 +1,5 @@
 name: 咨询探讨
-description: 对本项目功能设计和实现的咨询或探讨
+description: 对本项目功能设计和功能实现的咨询或探讨
 title: "[咨询探讨]: "
 labels: ["question"]
 body:
@@ -17,14 +17,14 @@ body:
   - type: textarea
     id: alternatives
     attributes:
-      label: 你考虑过哪些替代解决方案？
-      description: 清晰并简洁地描述你考虑过的任何替代解决方案或功能。
+      label: 你考虑过哪些解决方案或者替代方案？
+      description: 清晰并简洁地描述你考虑过的任何解决方案或者替代方案。
     validations:
       required: true
   - type: textarea
     id: additional-context
     attributes:
-      label: 你有其他上下文或截图吗？
-      description: 在此处添加有关功能请求的任何其他上下文或截图。
+      label: 你有其它上下文或截图吗？
+      description: 在此处添加有关功能请求的任何其它上下文或截图。
     validations:
       required: false
