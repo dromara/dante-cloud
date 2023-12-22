@@ -5,8 +5,8 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.1.3-blue.svg?logo=spring" alt="Spring Authorization Server 1.1.3"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.1.6-blue.svg?logo=spring" alt="Spring Boot 3.1.6"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.1.4-blue.svg?logo=spring" alt="Spring Authorization Server 1.1.4"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.1.7-blue.svg?logo=spring" alt="Spring Boot 3.1.7"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2022.0.4-blue.svg?logo=spring" alt="Spring Cloud 2022.0.4"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2022.0.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2022.0.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.12.4--2022.0.4-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.12.4-2022.0.4"></a>
@@ -38,7 +38,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.3、Spring Boot 3.1.6、Spring Cloud 2022.0.4、Spring Cloud Tencent 1.12.4-2022.0.4、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.3.0 等主流技术栈开发的多租户系统，遵循SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
+Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和服务能力开发平台，是采用领域驱动模型(DDD)设计思想的、全面拥抱 Spring Authorization Server 的、基于 OAuth2.1 协议的、支持智能电视、IoT等物联网设备认证的微服务架构。基于 Spring Authorization Server 1.1.4、Spring Boot 3.1.7、Spring Cloud 2022.0.4、Spring Cloud Tencent 1.12.4-2022.0.4、Spring Cloud Alibaba 2022.0.0.0、Nacos 2.3.0 等主流技术栈开发的多租户系统，遵循SpringBoot 编程思想，高度模块化和可配置化。具备服务发现、配置、熔断、限流、降级、监控、多级缓存、分布式事务、工作流等功能。
 
 ## 定位
 
@@ -153,11 +153,11 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 | 组件                          | 版本              |
 |-----------------------------|-----------------|
-| Spring Boot                 | 3.1.6           |
+| Spring Boot                 | 3.1.7           |
 | Spring Cloud                | 2022.0.4        |
 | Spring Cloud Alibaba        | 2022.0.0.0      |
 | Spring Cloud Tencent        | 1.12.4-2022.0.4 |
-| Spring Authorization Server | 1.1.3           |
+| Spring Authorization Server | 1.1.4           |
 | Spring Boot Admin           | 3.1.8           |
 | Nacos                       | 2.3.0           |
 | Sentinel                    | 1.8.6           |
