@@ -32,7 +32,7 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.2.0.2</version>
+        <version>3.2.1.0</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
