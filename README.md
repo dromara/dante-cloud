@@ -158,7 +158,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 | Spring Cloud Alibaba        | 2022.0.0.0      |
 | Spring Cloud Tencent        | 1.12.4-2022.0.4 |
 | Spring Authorization Server | 1.1.4           |
-| Spring Boot Admin           | 3.1.8           |
+| Spring Boot Admin           | 3.2.0           |
 | Nacos                       | 2.3.0           |
 | Sentinel                    | 1.8.6           |
 | Seata                       | 1.7.0           |
@@ -252,7 +252,11 @@ dante-cloud
 | 4  | [Spring Cloud 之 Session 共享及一致性处理](https://www.foxitsoftware.cn/bhds/payRead/pmq4wy) | 付费，有试读章节 | 深入浅出剖析微服务架构 Session 共享技术难点                                                       | ![Spring Cloud 之 Session 共享及一致性处理](./readme/cookbook/0004.png) |
 | 5  | [OAuth 2 中的鉴权和动态接口鉴权](https://www.foxitsoftware.cn/bhds/payRead/uxq6fi)             | 付费，有试读章节 | 带您跟随 Dante Cloud 源代码，由浅入深全面掌握 Spring Security 5 & 6 以及基于 OAuth2 的微服务动态接口鉴权的原理与实现 | ![OAuth 2 中的鉴权和动态接口鉴权](./readme/cookbook/0005.png)             |
 
-## [8]、授权协议
+## [8]、安全测试
+
+Dante Cloud 已通过由第三方进行的软件出厂安全测试。详情参见：[安全测试](https://www.herodotus.cn/guide/get-start/project-introduction.html#%E4%BA%94-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
+
+## [9]、授权协议
 
 本项目基于 Apache License Version 2.0 开源协议，可用于商业项目，但必须遵守以下补充条款。
 
@@ -263,7 +267,7 @@ dante-cloud
 - 如果你对本软件有改进，希望可以贡献给我们，双向奔赴互相成就才是王道。
 - 本项目已申请软件著作权，请尊重开源。
 
-## [9]、参与贡献
+## [10]、参与贡献
 
 1. 在 Gitee fork 项目到自己的 repo
 2. 把 fork 过去的项目也就是你的项目 clone 到你的本地
@@ -272,18 +276,18 @@ dante-cloud
 5. 登录 Gitee 在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
 6. 等待维护者合并
 
-## [10]、如何升级
+## [11]、如何升级
 
 尽量不修改 Dante Cloud 以外的项目源码，如 Dante Engine、Dante OSS。如果修改了，请 Pull Requests 上来，否则代码与官方不同步，可能会将对你的日后升级增加难度。
 
 每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/others/log/changelog.html。 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
 针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html。 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
 
-## [11]、交流反馈
+## [12]、交流反馈
 
 - 详见[【在线文档】](https://www.herodotus.cn) 交流反馈章节。
 
-## [12]、界面预览
+## [13]、界面预览
 
 <table>
     <tr>
@@ -318,13 +322,13 @@ dante-cloud
     </tr>
 </table>
 
-## [13]、谁在使用 Dante Cloud
+## [14]、谁在使用 Dante Cloud
 
 | 序号 | 名称   | 官网                      |
 |----|------|-------------------------|
 | 1  | 轻喜到家 | <https://qxdaojia.com/> |
 
-## [14]、鸣谢
+## [15]、鸣谢
 
 ### 赞助人列表
 
