@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.strategy.feign;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
-import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.assistant.definition.domain.Result;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

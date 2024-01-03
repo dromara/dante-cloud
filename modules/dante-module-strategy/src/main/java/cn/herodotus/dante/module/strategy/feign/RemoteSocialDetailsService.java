@@ -27,7 +27,7 @@ package cn.herodotus.dante.module.strategy.feign;
 
 import cn.herodotus.dante.module.common.ServiceNameConstants;
 import cn.herodotus.engine.assistant.core.domain.AccessPrincipal;
-import cn.herodotus.engine.assistant.core.domain.Result;
+import cn.herodotus.engine.assistant.definition.domain.Result;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.rest.core.annotation.Inner;
 import org.springframework.cloud.openfeign.FeignClient;
