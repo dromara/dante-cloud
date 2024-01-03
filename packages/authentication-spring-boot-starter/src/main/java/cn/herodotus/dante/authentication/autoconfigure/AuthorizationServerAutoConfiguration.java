@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.assistant.core.constants.DefaultConstants;
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
+import cn.herodotus.engine.assistant.definition.constants.DefaultConstants;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.engine.oauth2.authentication.consumer.OAuth2AuthorizationCodeAuthenticationProviderConsumer;
 import cn.herodotus.engine.oauth2.authentication.consumer.OAuth2ClientCredentialsAuthenticationProviderConsumer;
