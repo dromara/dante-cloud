@@ -28,7 +28,7 @@ package cn.herodotus.dante.bpmn.logic.processor;
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
 import cn.herodotus.dante.bpmn.logic.domain.debezium.Message;
 import cn.herodotus.dante.bpmn.logic.domain.enums.DebeziumEvent;
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
+import cn.herodotus.stirrup.kernel.engine.json.jackson2.utils.Jackson2Utils;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.apache.commons.lang3.ObjectUtils;
