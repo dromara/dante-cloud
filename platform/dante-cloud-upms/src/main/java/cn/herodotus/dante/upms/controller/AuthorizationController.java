@@ -26,7 +26,7 @@
 package cn.herodotus.dante.upms.controller;
 
 import cn.herodotus.dante.upms.service.AuthorizationService;
-import cn.herodotus.engine.assistant.definition.domain.Result;
+import cn.herodotus.stirrup.kernel.definition.domain.Result;
 import jakarta.validation.constraints.NotNull;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;

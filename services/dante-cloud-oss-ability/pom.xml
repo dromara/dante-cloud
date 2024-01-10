@@ -31,7 +31,7 @@
     <parent>
         <groupId>cn.herodotus.dante</groupId>
         <artifactId>services</artifactId>
-        <version>3.2.1.3</version>
+        <version>3.2.1.4</version>
     </parent>
 
     <artifactId>dante-cloud-oss-ability</artifactId>

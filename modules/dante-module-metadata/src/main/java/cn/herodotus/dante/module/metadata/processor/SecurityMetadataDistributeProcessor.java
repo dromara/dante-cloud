@@ -27,7 +27,6 @@ package cn.herodotus.dante.module.metadata.processor;
 
 import cn.herodotus.dante.module.metadata.converter.SysAttributeToSecurityAttributeConverter;
 import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.message.core.definition.strategy.StrategyEventManager;
 import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
@@ -86,7 +85,7 @@ public class SecurityMetadataDistributeProcessor implements StrategyEventManager
     /**
      * 将SysAuthority表中存在，但是SysSecurityAttribute中不存在的数据同步至SysSecurityAttribute，保证两侧数据一致
      */
-    @Transactional(rollbackFor = TransactionalRollbackException.class)
+    @Transactional(rollbackFor = Exception.class)
     public void postRequestMappings(List<RequestMapping> requestMappings) {
         List<SysInterface> storedInterfaces = sysInterfaceService.storeRequestMappings(requestMappings);
         if (CollectionUtils.isNotEmpty(storedInterfaces)) {

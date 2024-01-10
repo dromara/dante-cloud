@@ -26,7 +26,6 @@
 package cn.herodotus.dante.authentication.autoconfigure;
 
 import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
-import cn.herodotus.engine.assistant.definition.constants.DefaultConstants;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.engine.oauth2.authentication.consumer.OAuth2AuthorizationCodeAuthenticationProviderConsumer;
 import cn.herodotus.engine.oauth2.authentication.consumer.OAuth2ClientCredentialsAuthenticationProviderConsumer;
@@ -49,6 +48,7 @@ import cn.herodotus.engine.oauth2.management.response.OidcClientRegistrationResp
 import cn.herodotus.engine.rest.condition.properties.EndpointProperties;
 import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
 import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
+import cn.herodotus.stirrup.kernel.definition.constants.DefaultConstants;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
