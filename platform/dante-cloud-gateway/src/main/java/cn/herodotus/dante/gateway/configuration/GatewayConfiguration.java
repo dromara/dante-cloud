@@ -26,7 +26,7 @@
 package cn.herodotus.dante.gateway.configuration;
 
 import cn.herodotus.dante.gateway.handler.RefreshRoutesListener;
-import cn.herodotus.engine.assistant.core.annotation.ConditionalOnSwaggerEnabled;
+import cn.herodotus.stirrup.kernel.engine.annotation.ConditionalOnSwaggerEnabled;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.properties.SwaggerUiConfigParameters;
