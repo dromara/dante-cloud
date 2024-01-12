@@ -32,7 +32,7 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.7.2</version>
+        <version>3.1.7.3</version>
     </parent>
 
     <artifactId>service-spring-boot-starter</artifactId>
