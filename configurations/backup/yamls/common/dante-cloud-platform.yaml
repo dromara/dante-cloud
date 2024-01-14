@@ -47,3 +47,6 @@ spring:
       repository-type: indexed
       save-mode: always
       flush-mode: immediate
+
+sms:
+  is-print: false
