@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.upms.service;
 
-import cn.herodotus.engine.assistant.core.support.RestApiTemplate;
+import cn.herodotus.engine.assistant.definition.support.RestApiTemplate;
 import cn.zhxu.data.TypeRef;
 import cn.zhxu.okhttps.OkHttps;
 import org.dromara.hutool.core.codec.binary.Base64;
