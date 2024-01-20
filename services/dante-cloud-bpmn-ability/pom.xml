@@ -31,11 +31,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.2.1.7</version>
+        <version>3.2.2.0</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-ability</artifactId>
-    <version>3.2.1.7</version>
+    <version>3.2.2.0</version>
 
     <name>dante-cloud-bpmn-ability</name>
     <description>基于Camunda工作流的服务</description>
