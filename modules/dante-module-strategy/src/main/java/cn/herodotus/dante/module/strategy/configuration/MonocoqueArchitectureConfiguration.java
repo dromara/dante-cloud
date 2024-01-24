@@ -31,10 +31,10 @@ import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsServi
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.rest.condition.annotation.ConditionalOnMonocoqueArchitecture;
 import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
+import cn.herodotus.stirrup.web.core.annotation.ConditionalOnMonocoqueArchitecture;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

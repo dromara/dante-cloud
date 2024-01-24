@@ -50,6 +50,10 @@
             <groupId>cn.herodotus.stirrup</groupId>
             <artifactId>webflux-server-spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>web-core</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
