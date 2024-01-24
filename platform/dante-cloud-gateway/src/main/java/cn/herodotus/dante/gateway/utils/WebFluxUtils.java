@@ -26,7 +26,7 @@
 package cn.herodotus.dante.gateway.utils;
 
 import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
-import cn.herodotus.engine.assistant.definition.domain.Result;
+import cn.herodotus.stirrup.core.definition.domain.Result;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;

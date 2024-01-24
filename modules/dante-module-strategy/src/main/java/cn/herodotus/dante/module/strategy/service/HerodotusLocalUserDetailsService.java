@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.strategy.service;
 
 import cn.herodotus.dante.module.strategy.definition.AbstractStrategyUserDetailsService;
-import cn.herodotus.engine.assistant.definition.domain.oauth2.AccessPrincipal;
+import cn.herodotus.stirrup.core.definition.domain.secure.AccessPrincipal;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;

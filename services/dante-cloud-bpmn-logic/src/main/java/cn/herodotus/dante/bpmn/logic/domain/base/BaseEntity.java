@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.bpmn.logic.domain.base;
 
-import cn.herodotus.engine.assistant.definition.domain.base.Entity;
+import cn.herodotus.stirrup.core.definition.domain.base.Entity;
 import jakarta.persistence.MappedSuperclass;
 
 /**
