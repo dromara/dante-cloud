@@ -61,7 +61,7 @@
         </dependency>
 
 <!--        <dependency>-->
-<!--            <groupId>cn.herodotus.engine</groupId>-->
+<!--            <groupId>cn.herodotus.stirrup</groupId>-->
 <!--            <artifactId>facility-gateway-spring-boot-starter</artifactId>-->
 <!--        </dependency>-->
     </dependencies>
