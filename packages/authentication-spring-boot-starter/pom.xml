@@ -44,8 +44,8 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-authorization-server-autoconfigure</artifactId>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>oauth2-authentication-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 
