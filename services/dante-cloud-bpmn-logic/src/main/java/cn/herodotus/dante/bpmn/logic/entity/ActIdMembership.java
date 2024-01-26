@@ -26,7 +26,6 @@
 package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
@@ -50,13 +49,11 @@ import jakarta.persistence.*;
 public class ActIdMembership extends BaseEntity {
 
     @Id
-    @JSONField(name = "employee_id")
     @JsonProperty("employee_id")
     @Column(name = "user_id_")
     private String userId;
 
     @Id
-    @JSONField(name = "department_id")
     @JsonProperty("department_id")
     @Column(name = "group_id_")
     private String groupId;

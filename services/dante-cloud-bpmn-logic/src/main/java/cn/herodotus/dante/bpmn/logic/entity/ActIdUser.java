@@ -27,7 +27,6 @@ package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
 import cn.herodotus.dante.bpmn.logic.generator.ActIdUserUuidGenerator;
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -48,7 +47,6 @@ import java.util.Date;
 @Table(name = "act_id_user", indexes = {@Index(name = "act_id_user_id_idx", columnList = "id_")})
 public class ActIdUser extends BaseEntity {
 
-    @JSONField(name = "employee_id")
     @JsonProperty("employee_id")
     @Schema(title =  "人员ID")
     @Id
@@ -57,48 +55,40 @@ public class ActIdUser extends BaseEntity {
     private String id;
 
     @Schema(title =  "修订")
-    @JSONField(name = "reversion")
     @JsonProperty("reversion")
     @Column(name = "rev_")
     private Integer revision = 0;
 
     @Schema(title =  "姓")
-    @JSONField(name = "employee_name")
     @JsonProperty("employee_name")
     @Column(name = "first_")
     private String firstName;
 
     @Schema(title =  "名")
-    @JSONField(name = "mobile_phone_number")
     @JsonProperty("mobile_phone_number")
     @Column(name = "last_")
     private String lastName;
 
     @Schema(title =  "电子邮箱")
-    @JSONField(name = "email")
     @JsonProperty("email")
     @Column(name = "email_")
     private String email;
 
     @Schema(title =  "密码")
-    @JSONField(name = "password")
     @JsonProperty("password")
     @Column(name = "pwd_")
     private String password;
 
     @Schema(title =  "密码盐")
-    @JSONField(name = "salt")
     @JsonProperty("salt")
     @Column(name = "salt_")
     private String salt;
 
     @Schema(title =  "锁定过期时间")
-    @JSONField(name = "lock_expiration_time")
     @JsonProperty("lock_expiration_time")
     @Column(name = "lock_exp_time_")
     private Date LockExpirationTime;
 
-    @JSONField(name = "picture_id")
     @JsonProperty("picture_id")
     @Column(name = "picture_id_")
     private String pictureId;

@@ -25,7 +25,6 @@
 
 package cn.herodotus.dante.bpmn.logic.domain.debezium;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
@@ -50,7 +49,6 @@ public class Field implements Serializable {
 
     private Parameters parameters;
 
-    @JSONField(name = "default")
     @JsonProperty("default")
     private String defaultValue;
 

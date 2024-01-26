@@ -27,7 +27,6 @@ package cn.herodotus.dante.bpmn.logic.entity;
 
 import cn.herodotus.dante.bpmn.logic.domain.base.BaseEntity;
 import cn.herodotus.dante.bpmn.logic.generator.ActIdTenantMemberUuidGenerator;
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -51,7 +50,6 @@ import jakarta.persistence.*;
 })
 public class ActIdTenantMember extends BaseEntity {
 
-    @JSONField(name = "ownership_id")
     @JsonProperty("ownership_id")
     @Schema(title =  "人员ID")
     @Id
@@ -59,17 +57,14 @@ public class ActIdTenantMember extends BaseEntity {
     @Column(name = "id_", length = 64)
     private String id;
 
-    @JSONField(name = "organization_id")
     @JsonProperty("organization_id")
     @Column(name = "tenant_id_", length = 64)
     private String tenantId;
 
-    @JSONField(name = "department_id")
     @JsonProperty("department_id")
     @Column(name = "group_id_", length = 64)
     private String groupId;
 
-    @JSONField(name = "employee_id")
     @JsonProperty("employee_id")
     @Column(name = "user_id_", length = 64)
     private String userId;

@@ -38,7 +38,6 @@ import cn.herodotus.engine.oauth2.authentication.response.OAuth2AuthenticationFa
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
 import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
-import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationProperties;
 import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.engine.oauth2.core.enums.Certificate;
 import cn.herodotus.engine.oauth2.management.response.OAuth2AccessTokenResponseHandler;
@@ -48,6 +47,7 @@ import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
 import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
 import cn.herodotus.stirrup.core.definition.constants.DefaultConstants;
 import cn.herodotus.stirrup.core.foundation.utils.ResourceUtils;
+import cn.herodotus.stirrup.oauth2.authorization.properties.OAuth2AuthorizationProperties;
 import cn.herodotus.stirrup.web.service.properties.EndpointProperties;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;

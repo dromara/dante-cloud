@@ -27,9 +27,9 @@ package cn.herodotus.dante.gateway.filter;
 
 import cn.herodotus.dante.gateway.properties.GatewaySecurityProperties;
 import cn.herodotus.dante.gateway.utils.WebFluxUtils;
-import cn.herodotus.engine.assistant.core.utils.http.HeaderUtils;
 import cn.herodotus.stirrup.core.definition.constants.BaseConstants;
 import cn.herodotus.stirrup.core.definition.constants.ErrorCodes;
+import cn.herodotus.stirrup.core.definition.constants.HerodotusHeaders;
 import cn.herodotus.stirrup.core.definition.domain.Result;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.ObjectUtils;
@@ -84,7 +84,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         }
 
         // 2.外部进入的请求，如果包含 X_HERODOTUS_FROM_IN 请求头，认为是非法请求，直接拦截。X_HERODOTUS_FROM_IN 只能用于内部 Feign 间忽略权限使用
-        String fromIn = exchange.getRequest().getHeaders().getFirst(HeaderUtils.X_HERODOTUS_FROM_IN);
+        String fromIn = exchange.getRequest().getHeaders().getFirst(HerodotusHeaders.X_HERODOTUS_FROM_IN);
         if (ObjectUtils.isNotEmpty(fromIn)) {
             log.warn("[Herodotus] |- Illegal request to disable access!");
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_FORBIDDEN));
