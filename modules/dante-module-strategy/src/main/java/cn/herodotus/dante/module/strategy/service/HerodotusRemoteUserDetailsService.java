@@ -30,7 +30,7 @@ import cn.herodotus.dante.module.strategy.feign.RemoteSocialDetailsService;
 import cn.herodotus.dante.module.strategy.feign.RemoteUserDetailsService;
 import cn.herodotus.stirrup.core.definition.domain.Result;
 import cn.herodotus.stirrup.core.definition.domain.secure.AccessPrincipal;
-import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
+import cn.herodotus.stirrup.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 

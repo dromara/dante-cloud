@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.strategy.definition;
 
-import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.supplier.upms.logic.converter.SysUserToHerodotusUserConverter;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
+import cn.herodotus.stirrup.oauth2.core.definition.domain.HerodotusUser;
+import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.AuthenticationException;

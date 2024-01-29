@@ -25,9 +25,9 @@
 
 package cn.herodotus.dante.service.autoconfigure;
 
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2AuthorizeHttpRequestsConfigurerCustomer;
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
+import cn.herodotus.stirrup.oauth2.authorization.customizer.session.OAuth2SessionManagementConfigurerCustomer;
+import cn.herodotus.stirrup.oauth2.authorization.servlet.OAuth2AuthorizeHttpRequestsConfigurerCustomer;
+import cn.herodotus.stirrup.oauth2.authorization.servlet.OAuth2ResourceServerConfigurerCustomer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

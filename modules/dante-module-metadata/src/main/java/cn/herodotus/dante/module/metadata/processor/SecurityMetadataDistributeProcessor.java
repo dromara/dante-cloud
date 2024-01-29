@@ -29,13 +29,13 @@ import cn.herodotus.dante.module.metadata.converter.SysAttributeToSecurityAttrib
 import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
 import cn.herodotus.engine.message.core.definition.strategy.StrategyEventManager;
 import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
-import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysInterfaceService;
 import cn.herodotus.stirrup.oauth2.authorization.autoconfigure.bus.RemoteSecurityMetadataSyncEvent;
+import cn.herodotus.stirrup.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;

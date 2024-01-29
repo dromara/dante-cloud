@@ -68,6 +68,7 @@
         <module>authentication-spring-boot-starter</module>
         <module>service-spring-boot-starter</module>
         <module>facility-spring-boot-starter</module>
+        <module>authorization-reactive-spring-boot-starter</module>
     </modules>
 
 </project>

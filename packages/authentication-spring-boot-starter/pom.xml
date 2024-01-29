@@ -45,6 +45,11 @@
 
         <dependency>
             <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>web-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
             <artifactId>oauth2-authentication-autoconfigure</artifactId>
         </dependency>
     </dependencies>

@@ -25,9 +25,9 @@
 
 package cn.herodotus.dante.module.strategy.definition;
 
-import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusPermission;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
+import cn.herodotus.stirrup.oauth2.core.definition.domain.HerodotusPermission;
+import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 
 import java.util.List;
 import java.util.stream.Collectors;
