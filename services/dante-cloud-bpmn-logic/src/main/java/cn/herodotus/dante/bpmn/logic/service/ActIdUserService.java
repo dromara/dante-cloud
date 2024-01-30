@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.bpmn.logic.service;
 
-import cn.herodotus.dante.bpmn.logic.repository.ActIdUserRepository;
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.engine.data.core.service.WriteableService;
 import cn.herodotus.dante.bpmn.logic.entity.ActIdUser;
+import cn.herodotus.dante.bpmn.logic.repository.ActIdUserRepository;
+import cn.herodotus.stirrup.data.crud.repository.BaseJpaRepository;
+import cn.herodotus.stirrup.data.crud.service.JpaWriteableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  * @date : 2021/7/20 13:28
  */
 @Service
-public class ActIdUserService implements WriteableService<ActIdUser, String> {
+public class ActIdUserService implements JpaWriteableService<ActIdUser, String> {
 
     private final ActIdUserRepository actIdUserRepository;
 
@@ -49,7 +49,7 @@ public class ActIdUserService implements WriteableService<ActIdUser, String> {
     }
 
     @Override
-    public BaseRepository<ActIdUser, String> getRepository() {
+    public BaseJpaRepository<ActIdUser, String> getRepository() {
         return this.actIdUserRepository;
     }
 }

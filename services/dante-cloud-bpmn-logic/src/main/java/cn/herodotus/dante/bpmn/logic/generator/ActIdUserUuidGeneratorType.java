@@ -26,7 +26,7 @@
 package cn.herodotus.dante.bpmn.logic.generator;
 
 import cn.herodotus.dante.bpmn.logic.entity.ActIdUser;
-import cn.herodotus.engine.data.core.identifier.AbstractUuidGenerator;
+import cn.herodotus.stirrup.data.crud.generator.AbstractUuidGenerator;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.HibernateException;

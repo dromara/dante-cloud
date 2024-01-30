@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.bpmn.logic.repository;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.dante.bpmn.logic.entity.ActIdGroup;
+import cn.herodotus.stirrup.data.crud.repository.BaseJpaRepository;
 
 /**
  * <p>Description: 工作流组Repository </p>
@@ -34,5 +34,5 @@ import cn.herodotus.dante.bpmn.logic.entity.ActIdGroup;
  * @author : gengwei.zheng
  * @date : 2021/7/20 13:12
  */
-public interface ActIdGroupRepository extends BaseRepository<ActIdGroup, String> {
+public interface ActIdGroupRepository extends BaseJpaRepository<ActIdGroup, String> {
 }

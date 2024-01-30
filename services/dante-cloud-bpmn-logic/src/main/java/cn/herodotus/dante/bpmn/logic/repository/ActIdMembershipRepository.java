@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.bpmn.logic.repository;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
 import cn.herodotus.dante.bpmn.logic.entity.ActIdMembership;
+import cn.herodotus.stirrup.data.crud.repository.BaseJpaRepository;
 
 /**
  * <p>Description: 工作流成员Repository </p>
@@ -34,7 +34,7 @@ import cn.herodotus.dante.bpmn.logic.entity.ActIdMembership;
  * @author : gengwei.zheng
  * @date : 2021/7/20 13:13
  */
-public interface ActIdMembershipRepository extends BaseRepository<ActIdMembership, String> {
+public interface ActIdMembershipRepository extends BaseJpaRepository<ActIdMembership, String> {
 
     /**
      * 根据UserId和GroupId删除信息
