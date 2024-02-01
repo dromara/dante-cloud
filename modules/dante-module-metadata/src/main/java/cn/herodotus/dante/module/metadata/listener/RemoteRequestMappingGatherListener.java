@@ -25,9 +25,9 @@
 
 package cn.herodotus.dante.module.metadata.listener;
 
-import cn.herodotus.dante.module.metadata.processor.RequestMappingStoreProcessor;
-import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
+import cn.herodotus.dante.module.metadata.processor.AttributeTransmitterDistributeProcessor;
 import cn.herodotus.stirrup.core.foundation.json.jackson2.utils.Jackson2Utils;
+import cn.herodotus.stirrup.message.ability.domain.RequestMapping;
 import cn.herodotus.stirrup.oauth2.authorization.autoconfigure.bus.RemoteRequestMappingGatherEvent;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -50,11 +50,11 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
 
     private static final Logger log = LoggerFactory.getLogger(RemoteRequestMappingGatherListener.class);
 
-    private final RequestMappingStoreProcessor requestMappingStoreProcessor;
+    private final AttributeTransmitterDistributeProcessor attributeTransmitterDistributeProcessor;
 
     @Autowired
-    public RemoteRequestMappingGatherListener(RequestMappingStoreProcessor requestMappingStoreProcessor) {
-        this.requestMappingStoreProcessor = requestMappingStoreProcessor;
+    public RemoteRequestMappingGatherListener(AttributeTransmitterDistributeProcessor attributeTransmitterDistributeProcessor) {
+        this.attributeTransmitterDistributeProcessor = attributeTransmitterDistributeProcessor;
     }
 
     @Override
@@ -67,7 +67,8 @@ public class RemoteRequestMappingGatherListener implements ApplicationListener<R
         if (ObjectUtils.isNotEmpty(requestMapping)) {
             List<RequestMapping> requestMappings = Jackson2Utils.toList(requestMapping, RequestMapping.class);
             if (CollectionUtils.isNotEmpty(requestMappings)) {
-                requestMappingStoreProcessor.postProcess(requestMappings);
+                log.debug("[Herodotus] |- [4] Async store request mapping process BEGIN!");
+                attributeTransmitterDistributeProcessor.postRequestMappings(requestMappings);
             }
         }
     }

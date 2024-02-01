@@ -26,7 +26,7 @@
 package cn.herodotus.dante.module.social.configuration;
 
 import cn.herodotus.dante.module.social.processor.DefaultSocialAuthenticationHandler;
-import cn.herodotus.engine.access.all.configuration.AccessAllConfiguration;
+import cn.herodotus.stirrup.access.all.configuration.AccessAllConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -10,7 +10,7 @@
 
 package cn.herodotus.dante.module.metadata.converter;
 
-import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
+import cn.herodotus.engine.oauth2.core.definition.domain.AttributeTransmitter;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
 import org.apache.commons.collections4.CollectionUtils;
@@ -26,19 +26,21 @@ import java.util.Set;
  * @author : gengwei.zheng
  * @date : 2023/9/15 0:29
  */
-public class SysAttributeToSecurityAttributeConverter implements Converter<SysAttribute, SecurityAttribute> {
+public class SysAttributeToAttributeTransmitterConverter implements Converter<SysAttribute, AttributeTransmitter> {
     @Override
-    public SecurityAttribute convert(SysAttribute sysAttribute) {
-        SecurityAttribute securityAttribute = new SecurityAttribute();
-        securityAttribute.setAttributeId(sysAttribute.getAttributeId());
-        securityAttribute.setAttributeCode(sysAttribute.getAttributeCode());
-        securityAttribute.setWebExpression(sysAttribute.getWebExpression());
-        securityAttribute.setPermissions(permissionToCommaDelimitedString(sysAttribute.getPermissions()));
-        securityAttribute.setUrl(sysAttribute.getUrl());
-        securityAttribute.setRequestMethod(sysAttribute.getRequestMethod());
-        securityAttribute.setServiceId(sysAttribute.getServiceId());
-        securityAttribute.setAttributeName(sysAttribute.getDescription());
-        return securityAttribute;
+    public AttributeTransmitter convert(SysAttribute sysAttribute) {
+        AttributeTransmitter transmitter = new AttributeTransmitter();
+        transmitter.setAttributeId(sysAttribute.getAttributeId());
+        transmitter.setAttributeCode(sysAttribute.getAttributeCode());
+        transmitter.setWebExpression(sysAttribute.getWebExpression());
+        transmitter.setPermissions(permissionToCommaDelimitedString(sysAttribute.getPermissions()));
+        transmitter.setUrl(sysAttribute.getUrl());
+        transmitter.setRequestMethod(sysAttribute.getRequestMethod());
+        transmitter.setServiceId(sysAttribute.getServiceId());
+        transmitter.setAttributeName(sysAttribute.getDescription());
+        transmitter.setClassName(sysAttribute.getClassName());
+        transmitter.setMethodName(sysAttribute.getMethodName());
+        return transmitter;
 
 
     }

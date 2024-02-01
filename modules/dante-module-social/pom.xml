@@ -44,8 +44,8 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>access-sdk-all</artifactId>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>access-module-all</artifactId>
         </dependency>
     </dependencies>
 

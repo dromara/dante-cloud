@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.module.metadata.listener;
 
-import cn.herodotus.dante.module.metadata.processor.SecurityMetadataDistributeProcessor;
+import cn.herodotus.dante.module.metadata.processor.AttributeTransmitterDistributeProcessor;
 import cn.herodotus.engine.supplier.upms.logic.domain.event.SysAttributeChangeEvent;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import org.apache.commons.lang3.ObjectUtils;
@@ -45,10 +45,10 @@ public class SysAttributeChangeListener implements ApplicationListener<SysAttrib
 
     private static final Logger log = LoggerFactory.getLogger(SysAttributeChangeListener.class);
 
-    private final SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor;
+    private final AttributeTransmitterDistributeProcessor attributeTransmitterDistributeProcessor;
 
-    public SysAttributeChangeListener(SecurityMetadataDistributeProcessor securityMetadataDistributeProcessor) {
-        this.securityMetadataDistributeProcessor = securityMetadataDistributeProcessor;
+    public SysAttributeChangeListener(AttributeTransmitterDistributeProcessor attributeTransmitterDistributeProcessor) {
+        this.attributeTransmitterDistributeProcessor = attributeTransmitterDistributeProcessor;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SysAttributeChangeListener implements ApplicationListener<SysAttrib
         SysAttribute sysAttribute = event.getData();
         if (ObjectUtils.isNotEmpty(sysAttribute)) {
             log.debug("[Herodotus] |- Got SysAttribute, start to process SysAttribute change.");
-            securityMetadataDistributeProcessor.distributeChangedSecurityAttribute(sysAttribute);
+            attributeTransmitterDistributeProcessor.distributeChangedSecurityAttribute(sysAttribute);
         }
     }
 }

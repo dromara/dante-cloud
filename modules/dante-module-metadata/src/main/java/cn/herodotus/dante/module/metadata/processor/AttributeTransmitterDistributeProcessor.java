@@ -25,17 +25,17 @@
 
 package cn.herodotus.dante.module.metadata.processor;
 
-import cn.herodotus.dante.module.metadata.converter.SysAttributeToSecurityAttributeConverter;
+import cn.herodotus.dante.module.metadata.converter.SysAttributeToAttributeTransmitterConverter;
 import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
-import cn.herodotus.engine.message.core.definition.strategy.StrategyEventManager;
-import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
-import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
+import cn.herodotus.engine.oauth2.core.definition.domain.AttributeTransmitter;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysInterfaceService;
-import cn.herodotus.stirrup.oauth2.authorization.autoconfigure.bus.RemoteSecurityMetadataSyncEvent;
-import cn.herodotus.stirrup.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
+import cn.herodotus.stirrup.message.ability.domain.RequestMapping;
+import cn.herodotus.stirrup.message.core.definition.strategy.StrategyEventManager;
+import cn.herodotus.stirrup.oauth2.authorization.autoconfigure.bus.RemoteAttributeTransmitterSyncEvent;
+import cn.herodotus.stirrup.oauth2.authorization.processor.SecurityAttributeAnalyzer;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
@@ -53,33 +53,33 @@ import java.util.List;
  * @date : 2021/8/8 14:00
  */
 @Component
-public class SecurityMetadataDistributeProcessor implements StrategyEventManager<List<SecurityAttribute>> {
+public class AttributeTransmitterDistributeProcessor implements StrategyEventManager<List<AttributeTransmitter>> {
 
-    private static final Logger log = LoggerFactory.getLogger(SecurityMetadataDistributeProcessor.class);
+    private static final Logger log = LoggerFactory.getLogger(AttributeTransmitterDistributeProcessor.class);
 
     private final Converter<List<SysInterface>, List<SysAttribute>> toSysAttributes;
-    private final Converter<SysAttribute, SecurityAttribute> toSecurityAttribute;
+    private final Converter<SysAttribute, AttributeTransmitter> toAttributeTransmitter;
 
     private final SysAttributeService sysAttributeService;
     private final SysInterfaceService sysInterfaceService;
-    private final SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer;
+    private final SecurityAttributeAnalyzer securityAttributeAnalyzer;
 
-    public SecurityMetadataDistributeProcessor(SysAttributeService sysAttributeService, SysInterfaceService sysInterfaceService, SecurityMetadataSourceAnalyzer securityMetadataSourceAnalyzer) {
+    public AttributeTransmitterDistributeProcessor(SysAttributeService sysAttributeService, SysInterfaceService sysInterfaceService, SecurityAttributeAnalyzer securityAttributeAnalyzer) {
         this.sysAttributeService = sysAttributeService;
         this.sysInterfaceService = sysInterfaceService;
-        this.securityMetadataSourceAnalyzer = securityMetadataSourceAnalyzer;
+        this.securityAttributeAnalyzer = securityAttributeAnalyzer;
         this.toSysAttributes = new SysInterfacesToSysAttributesConverter();
-        this.toSecurityAttribute = new SysAttributeToSecurityAttributeConverter();
+        this.toAttributeTransmitter = new SysAttributeToAttributeTransmitterConverter();
     }
 
     @Override
-    public void postLocalProcess(List<SecurityAttribute> data) {
-        securityMetadataSourceAnalyzer.processSecurityAttribute(data);
+    public void postLocalProcess(List<AttributeTransmitter> data) {
+        securityAttributeAnalyzer.processAttributeTransmitters(data);
     }
 
     @Override
     public void postRemoteProcess(String data, String originService, String destinationService) {
-        publishEvent(new RemoteSecurityMetadataSyncEvent(data, originService, destinationService));
+        publishEvent(new RemoteAttributeTransmitterSyncEvent(data, originService, destinationService));
     }
 
     /**
@@ -114,15 +114,15 @@ public class SecurityMetadataDistributeProcessor implements StrategyEventManager
             String serviceId = item.getServiceId();
             List<SysAttribute> sysAttributes = sysAttributeService.findAllByServiceId(item.getServiceId());
             if (CollectionUtils.isNotEmpty(sysAttributes)) {
-                List<SecurityAttribute> securityAttributes = sysAttributes.stream().map(toSecurityAttribute::convert).toList();
+                List<AttributeTransmitter> attributeTransmitters = sysAttributes.stream().map(toAttributeTransmitter::convert).toList();
                 log.debug("[Herodotus] |- [6] Synchronization permissions to service [{}]", serviceId);
-                this.postProcess(serviceId, securityAttributes);
+                this.postProcess(serviceId, attributeTransmitters);
             }
         });
     }
 
     public void distributeChangedSecurityAttribute(SysAttribute sysAttribute) {
-        SecurityAttribute securityAttribute = toSecurityAttribute.convert(sysAttribute);
-        postProcess(securityAttribute.getServiceId(), ImmutableList.of(securityAttribute));
+        AttributeTransmitter attributeTransmitter = toAttributeTransmitter.convert(sysAttribute);
+        postProcess(attributeTransmitter.getServiceId(), ImmutableList.of(attributeTransmitter));
     }
 }

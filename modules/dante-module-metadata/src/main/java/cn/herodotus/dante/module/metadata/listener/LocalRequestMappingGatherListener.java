@@ -25,13 +25,12 @@
 
 package cn.herodotus.dante.module.metadata.listener;
 
-import cn.herodotus.dante.module.metadata.processor.RequestMappingStoreProcessor;
-import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
+import cn.herodotus.dante.module.metadata.processor.AttributeTransmitterDistributeProcessor;
 import cn.herodotus.engine.message.core.logic.event.RequestMappingGatherEvent;
+import cn.herodotus.stirrup.message.ability.domain.RequestMapping;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
@@ -50,11 +49,10 @@ public class LocalRequestMappingGatherListener implements ApplicationListener<Re
 
     private static final Logger log = LoggerFactory.getLogger(LocalRequestMappingGatherListener.class);
 
-    private final RequestMappingStoreProcessor requestMappingStoreProcessor;
+    private final AttributeTransmitterDistributeProcessor attributeTransmitterDistributeProcessor;
 
-    @Autowired
-    public LocalRequestMappingGatherListener(RequestMappingStoreProcessor requestMappingStoreProcessor) {
-        this.requestMappingStoreProcessor = requestMappingStoreProcessor;
+    public LocalRequestMappingGatherListener(AttributeTransmitterDistributeProcessor attributeTransmitterDistributeProcessor) {
+        this.attributeTransmitterDistributeProcessor = attributeTransmitterDistributeProcessor;
     }
 
     @Override
@@ -64,7 +62,7 @@ public class LocalRequestMappingGatherListener implements ApplicationListener<Re
 
         List<RequestMapping> requestMappings = event.getData();
         if (CollectionUtils.isNotEmpty(requestMappings)) {
-            requestMappingStoreProcessor.postProcess(requestMappings);
+            attributeTransmitterDistributeProcessor.postRequestMappings(requestMappings);
         }
     }
 }
