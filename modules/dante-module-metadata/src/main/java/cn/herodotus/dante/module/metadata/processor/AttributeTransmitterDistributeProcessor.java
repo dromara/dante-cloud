@@ -27,7 +27,6 @@ package cn.herodotus.dante.module.metadata.processor;
 
 import cn.herodotus.dante.module.metadata.converter.SysAttributeToAttributeTransmitterConverter;
 import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
-import cn.herodotus.engine.oauth2.core.definition.domain.AttributeTransmitter;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;
@@ -36,6 +35,7 @@ import cn.herodotus.stirrup.message.ability.domain.RequestMapping;
 import cn.herodotus.stirrup.message.core.definition.strategy.StrategyEventManager;
 import cn.herodotus.stirrup.oauth2.authorization.autoconfigure.bus.RemoteAttributeTransmitterSyncEvent;
 import cn.herodotus.stirrup.oauth2.authorization.processor.SecurityAttributeAnalyzer;
+import cn.herodotus.stirrup.oauth2.core.definition.domain.AttributeTransmitter;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
