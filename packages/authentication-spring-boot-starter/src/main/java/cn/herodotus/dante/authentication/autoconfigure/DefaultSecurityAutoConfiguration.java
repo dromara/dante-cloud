@@ -25,13 +25,10 @@
 
 package cn.herodotus.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
-import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
-import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
-import cn.herodotus.engine.oauth2.management.processor.HerodotusClientDetailsService;
-import cn.herodotus.engine.oauth2.management.processor.HerodotusUserDetailsService;
-import cn.herodotus.engine.oauth2.management.service.OAuth2ApplicationService;
 import cn.herodotus.stirrup.captcha.core.processor.CaptchaRendererFactory;
+import cn.herodotus.stirrup.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
+import cn.herodotus.stirrup.oauth2.authentication.properties.OAuth2AuthenticationProperties;
+import cn.herodotus.stirrup.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.stirrup.oauth2.authorization.customizer.session.OAuth2SessionManagementConfigurerCustomer;
 import cn.herodotus.stirrup.oauth2.authorization.servlet.HerodotusAccessDeniedHandler;
 import cn.herodotus.stirrup.oauth2.authorization.servlet.HerodotusAuthenticationEntryPoint;
@@ -39,6 +36,9 @@ import cn.herodotus.stirrup.oauth2.authorization.servlet.OAuth2AuthorizeHttpRequ
 import cn.herodotus.stirrup.oauth2.authorization.servlet.OAuth2ResourceServerConfigurerCustomer;
 import cn.herodotus.stirrup.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyUserDetailsService;
+import cn.herodotus.stirrup.oauth2.management.processor.HerodotusClientDetailsService;
+import cn.herodotus.stirrup.oauth2.management.processor.HerodotusUserDetailsService;
+import cn.herodotus.stirrup.oauth2.management.service.OAuth2ApplicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
