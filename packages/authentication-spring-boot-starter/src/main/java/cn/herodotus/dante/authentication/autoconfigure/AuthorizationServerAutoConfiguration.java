@@ -25,8 +25,6 @@
 
 package cn.herodotus.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
-import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
 import cn.herodotus.stirrup.core.definition.constants.DefaultConstants;
 import cn.herodotus.stirrup.core.foundation.utils.ResourceUtils;
 import cn.herodotus.stirrup.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
@@ -49,6 +47,8 @@ import cn.herodotus.stirrup.oauth2.management.response.OAuth2AccessTokenResponse
 import cn.herodotus.stirrup.oauth2.management.response.OAuth2DeviceVerificationResponseHandler;
 import cn.herodotus.stirrup.oauth2.management.response.OidcClientRegistrationResponseHandler;
 import cn.herodotus.stirrup.web.service.properties.EndpointProperties;
+import cn.herodotus.stirrup.web.servlet.crypto.HttpCryptoProcessor;
+import cn.herodotus.stirrup.web.servlet.tenant.MultiTenantFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;

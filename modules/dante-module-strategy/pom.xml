@@ -39,8 +39,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>rest-sdk-condition</artifactId>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>web-module-servlet</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
