@@ -26,8 +26,8 @@
 package cn.herodotus.dante.module.metadata.listener;
 
 import cn.herodotus.dante.module.metadata.processor.AttributeTransmitterDistributeProcessor;
-import cn.herodotus.engine.message.core.logic.event.RequestMappingGatherEvent;
 import cn.herodotus.stirrup.message.ability.domain.RequestMapping;
+import cn.herodotus.stirrup.message.ability.event.RequestMappingGatherEvent;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

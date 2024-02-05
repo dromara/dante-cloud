@@ -25,10 +25,10 @@
 
 package cn.herodotus.dante.module.metadata.listener;
 
-import cn.herodotus.engine.message.core.logic.domain.UserStatus;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import cn.herodotus.stirrup.core.foundation.json.jackson2.utils.Jackson2Utils;
 import cn.herodotus.stirrup.data.core.enums.DataItemStatus;
+import cn.herodotus.stirrup.message.ability.domain.UserStatus;
 import cn.herodotus.stirrup.oauth2.authorization.autoconfigure.bus.RemoteChangeUserStatusEvent;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;

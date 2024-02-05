@@ -195,14 +195,26 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 - Vue-Router 4
 - Vueliate
 
-## [4]、 版本号说明
+## [4]、 版本和分支
+
+### 一、版本号说明
 
 本系统版本号，分为四段。
 
-- 第一段和第二段，与 Spring Boot 版本对应，根据采用的 Spring Boot 版本变更。例如，当前采用 Spring Boot 2.4.6 版本，那么就以
-  2.4.X.X 开头
+- 第一段和第二段，与 Spring Boot 版本对应，根据采用的 Spring Boot 版本变更。例如，当前采用 Spring Boot 2.4.6 版本，那么就以 2.4.X.X 开头
 - 第三段，表示系统功能的变化
 - 第四段，表示系统功能维护及优化情况
+
+### 二、分支说明
+
+| 分支名称                   | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途          | 现状                                                     |
+|------------------------|-----------------------------------------|-----------|-------------|--------------------------------------------------------|
+| master                 | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17+   | 主要推广分支      | 可使用，但 Spring Cloud Alibaba、Tencent 等生态并为完全适配，部分功能受限    |
+| develop                | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17+   | 主要开发分支      | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支。开发分支不保证可用      |
+| reactive-develop       | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17+   | 响应式开发分支     | 下一代响应式微服务版本开发分支。开发分支不保证可用                              |
+| 3.1.X                  | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17+   | Stable 代码分支 | 稳定可用版本分支，2024年5月，Spring Boot 3.3 发布后将会停止维护             |
+| 2.7.X                  | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 停止维护分支      | 基于 Spring Boot 2.7 时代开发的代码分支，不再维护                      |
+| spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 停止维护分支      | 基于原 Spring Security OAuth2 实现的微服务，因相关组件均不在维护，所以该版本不再维护 |
 
 ## [5]、工程结构
 
