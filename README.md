@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.3.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.3.0"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.2.2.2-red.svg?logo=spring" alt="Version 3.2.2.2"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.2.2.2-red.svg?logo=spring" alt="Dante Engine 3.2.2.2"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.2.2.2-red.svg?logo=spring" alt="Dante OSS 3.2.2.2"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.2.2.3-red.svg?logo=spring" alt="Version 3.2.2.3"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.2.2.3-red.svg?logo=spring" alt="Dante Engine 3.2.2.3"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.2.2.3-red.svg?logo=spring" alt="Dante OSS 3.2.2.3"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -208,14 +208,14 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是一款企业级微服务架构和�
 
 ### 二、分支说明
 
-| 分支名称                   | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途          | 现状                                                     |
-|------------------------|-----------------------------------------|-----------|-------------|--------------------------------------------------------|
-| master                 | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17+   | 主要推广分支      | 可使用，但 Spring Cloud Alibaba、Tencent 等生态并为完全适配，部分功能受限    |
-| develop                | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17+   | 主要开发分支      | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支。开发分支不保证可用      |
-| reactive-develop       | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17+   | 响应式开发分支     | 下一代响应式微服务版本开发分支。开发分支不保证可用                              |
-| 3.1.X                  | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17+   | Stable 代码分支 | 稳定可用版本分支，2024年5月，Spring Boot 3.3 发布后将会停止维护             |
-| 2.7.X                  | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 停止维护分支      | 基于 Spring Boot 2.7 时代开发的代码分支，不再维护                      |
-| spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 停止维护分支      | 基于原 Spring Security OAuth2 实现的微服务，因相关组件均不在维护，所以该版本不再维护 |
+| 分支名称                   | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途                 | 现状                                                     |
+|------------------------|-----------------------------------------|-----------|--------------------|--------------------------------------------------------|
+| master                 | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17    | 主要发布分支             | 可使用，但 Spring Cloud Alibaba、Tencent 等生态并为完全适配，部分功能受限    |
+| develop                | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 17    | Development 分支     | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支。开发分支不保证可用      |
+| reactive-develop       | Spring Boot 3.2 和 Spring Cloud 2023.0.0 | JDK 21    | 响应式 Development 分支 | 下一代响应式微服务版本开发分支。开发分支不保证可用                              |
+| 3.1.X                  | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | Stable 代码分支        | 稳定可用版本分支，2024年5月，Spring Boot 3.3 发布后将会停止维护             |
+| 2.7.X                  | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码分支             | 基于 Spring Boot 2.7 时代开发的代码分支，不再维护                      |
+| spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码分支             | 基于原 Spring Security OAuth2 实现的微服务，因相关组件均不在维护，所以该版本不再维护 |
 
 ## [5]、工程结构
 
