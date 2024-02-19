@@ -28,9 +28,9 @@ package cn.herodotus.dante.module.strategy.configuration;
 import cn.herodotus.dante.module.social.configuration.SocialModuleConfiguration;
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalPermissionDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
-import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
+import cn.herodotus.stirrup.logic.upms.configuration.LogicUpmsConfiguration;
+import cn.herodotus.stirrup.logic.upms.service.security.SysPermissionService;
+import cn.herodotus.stirrup.logic.upms.service.security.SysUserService;
 import cn.herodotus.stirrup.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyUserDetailsService;
@@ -51,7 +51,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnMonocoqueArchitecture
-@Import({SupplierUpmsLogicConfiguration.class, SocialModuleConfiguration.class})
+@Import({LogicUpmsConfiguration.class, SocialModuleConfiguration.class})
 public class MonocoqueArchitectureConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(MonocoqueArchitectureConfiguration.class);

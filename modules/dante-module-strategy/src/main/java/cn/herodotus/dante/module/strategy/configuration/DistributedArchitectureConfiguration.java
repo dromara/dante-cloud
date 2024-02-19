@@ -33,9 +33,9 @@ import cn.herodotus.dante.module.strategy.service.HerodotusLocalPermissionDetail
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemotePermissionDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemoteUserDetailsService;
-import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
+import cn.herodotus.stirrup.logic.upms.configuration.LogicUpmsConfiguration;
+import cn.herodotus.stirrup.logic.upms.service.security.SysPermissionService;
+import cn.herodotus.stirrup.logic.upms.service.security.SysUserService;
 import cn.herodotus.stirrup.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyUserDetailsService;
@@ -70,7 +70,7 @@ public class DistributedArchitectureConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnLocalDataAccess
-    @Import({SupplierUpmsLogicConfiguration.class, SocialModuleConfiguration.class})
+    @Import({LogicUpmsConfiguration.class, SocialModuleConfiguration.class})
     static class DataAccessStrategyLocalConfiguration {
 
         @Bean

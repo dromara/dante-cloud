@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.module.metadata.listener;
 
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import cn.herodotus.stirrup.data.core.enums.DataItemStatus;
+import cn.herodotus.stirrup.logic.upms.service.security.SysUserService;
 import cn.herodotus.stirrup.message.ability.domain.UserStatus;
 import cn.herodotus.stirrup.message.ability.event.ChangeUserStatusEvent;
 import org.apache.commons.lang3.ObjectUtils;

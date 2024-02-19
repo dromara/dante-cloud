@@ -27,10 +27,10 @@ package cn.herodotus.dante.module.metadata.processor;
 
 import cn.herodotus.dante.module.metadata.converter.SysAttributeToAttributeTransmitterConverter;
 import cn.herodotus.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysInterfaceService;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysAttribute;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysInterface;
+import cn.herodotus.stirrup.logic.upms.service.security.SysAttributeService;
+import cn.herodotus.stirrup.logic.upms.service.security.SysInterfaceService;
 import cn.herodotus.stirrup.message.ability.domain.RequestMapping;
 import cn.herodotus.stirrup.message.core.definition.strategy.StrategyEventManager;
 import cn.herodotus.stirrup.oauth2.authorization.autoconfigure.bus.RemoteAttributeTransmitterSyncEvent;

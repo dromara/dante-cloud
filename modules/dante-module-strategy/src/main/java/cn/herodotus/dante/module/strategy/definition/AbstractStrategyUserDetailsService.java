@@ -25,8 +25,8 @@
 
 package cn.herodotus.dante.module.strategy.definition;
 
-import cn.herodotus.engine.supplier.upms.logic.converter.SysUserToHerodotusUserConverter;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
+import cn.herodotus.stirrup.logic.upms.converter.SysUserToHerodotusUserConverter;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysUser;
 import cn.herodotus.stirrup.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyUserDetailsService;
 import org.apache.commons.lang3.ObjectUtils;

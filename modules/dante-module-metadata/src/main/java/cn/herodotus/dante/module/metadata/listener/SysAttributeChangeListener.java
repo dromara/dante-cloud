@@ -26,8 +26,8 @@
 package cn.herodotus.dante.module.metadata.listener;
 
 import cn.herodotus.dante.module.metadata.processor.AttributeTransmitterDistributeProcessor;
-import cn.herodotus.engine.supplier.upms.logic.domain.event.SysAttributeChangeEvent;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
+import cn.herodotus.stirrup.logic.upms.domain.event.SysAttributeChangeEvent;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysAttribute;
 import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

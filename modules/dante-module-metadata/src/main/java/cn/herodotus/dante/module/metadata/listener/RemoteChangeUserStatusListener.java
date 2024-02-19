@@ -25,7 +25,7 @@
 
 package cn.herodotus.dante.module.metadata.listener;
 
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
+import cn.herodotus.stirrup.logic.upms.service.security.SysUserService;
 import cn.herodotus.stirrup.core.foundation.json.jackson2.utils.Jackson2Utils;
 import cn.herodotus.stirrup.data.core.enums.DataItemStatus;
 import cn.herodotus.stirrup.message.ability.domain.UserStatus;

@@ -27,7 +27,7 @@ package cn.herodotus.dante.upms.configuration;
 
 import cn.herodotus.dante.module.metadata.configuration.MetadataModuleConfiguration;
 import cn.herodotus.dante.module.social.configuration.SocialModuleConfiguration;
-import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
+import cn.herodotus.stirrup.logic.upms.configuration.LogicUpmsConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration(proxyBeanMethods = false)
 @Import({
-        SupplierUpmsLogicConfiguration.class,
+        LogicUpmsConfiguration.class,
         SocialModuleConfiguration.class,
         MetadataModuleConfiguration.class
 })

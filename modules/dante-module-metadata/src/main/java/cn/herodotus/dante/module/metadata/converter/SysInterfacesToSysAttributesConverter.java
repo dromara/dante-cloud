@@ -10,8 +10,8 @@
 
 package cn.herodotus.dante.module.metadata.converter;
 
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysAttribute;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysInterface;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.core.convert.converter.Converter;
 

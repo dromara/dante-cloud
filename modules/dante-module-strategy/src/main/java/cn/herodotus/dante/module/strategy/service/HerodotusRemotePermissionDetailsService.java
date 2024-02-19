@@ -29,7 +29,7 @@ import cn.herodotus.dante.module.strategy.definition.AbstractStrategyPermissionD
 import cn.herodotus.dante.module.strategy.feign.RemoteAuthorityDetailsService;
 import cn.herodotus.stirrup.core.definition.domain.Result;
 import cn.herodotus.stirrup.oauth2.core.definition.domain.HerodotusPermission;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysPermission;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;

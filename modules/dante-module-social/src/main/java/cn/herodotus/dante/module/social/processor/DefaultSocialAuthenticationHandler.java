@@ -25,17 +25,17 @@
 
 package cn.herodotus.dante.module.social.processor;
 
-import cn.herodotus.engine.supplier.upms.logic.converter.SysUserToHerodotusUserConverter;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysSocialUser;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysSocialUserService;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import cn.herodotus.stirrup.access.all.processor.AccessHandlerStrategyFactory;
 import cn.herodotus.stirrup.access.core.definition.AccessUserDetails;
 import cn.herodotus.stirrup.access.core.exception.AccessIdentityVerificationFailedException;
 import cn.herodotus.stirrup.core.definition.domain.secure.AccessPrincipal;
+import cn.herodotus.stirrup.core.definition.domain.secure.SocialUserDetails;
+import cn.herodotus.stirrup.logic.upms.converter.SysUserToHerodotusUserConverter;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysSocialUser;
+import cn.herodotus.stirrup.logic.upms.entity.security.SysUser;
+import cn.herodotus.stirrup.logic.upms.service.security.SysSocialUserService;
+import cn.herodotus.stirrup.logic.upms.service.security.SysUserService;
 import cn.herodotus.stirrup.oauth2.core.definition.domain.HerodotusUser;
-import cn.herodotus.stirrup.oauth2.core.definition.domain.SocialUserDetails;
 import cn.herodotus.stirrup.oauth2.core.exception.UsernameAlreadyExistsException;
 import cn.herodotus.stirrup.oauth2.core.servlet.definition.handler.AbstractSocialAuthenticationHandler;
 import cn.herodotus.stirrup.oauth2.core.servlet.exception.SocialCredentialsParameterBindingFailedException;
