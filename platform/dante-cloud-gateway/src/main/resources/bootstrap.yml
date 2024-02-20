@@ -129,6 +129,13 @@ spring:
               - dante-cloud-rest.yaml
               - dante-cloud-cache.yaml
 
+logging:
+  file:
+    name: logs/${spring.application.name}.log
+  level:
+    root: INFO
+    # 开发、调试需要的日志
+    cn.herodotus: info
 ---
 # spring 全家桶基础设施配置
 spring:

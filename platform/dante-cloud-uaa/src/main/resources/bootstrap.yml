@@ -123,7 +123,17 @@ spring:
           - name: service
             files:
               - ${spring.application.name}.yaml
-
+logging:
+  file:
+    name: logs/${spring.application.name}.log
+  level:
+    root: INFO
+    # 开发、调试需要的日志
+    org.springframework.security: info
+    org.springframework.web: info
+    org.springframework.cloud.bus: info
+    org.apache.kafka: warn
+    cn.herodotus: info
 ---
 # spring 全家桶基础设施配置
 spring:
