@@ -63,7 +63,7 @@
                 <profile>development</profile>
                 <database>postgresql</database>
                 <!--基础设施：tencent、alibaba、spring-->
-                <facility>alibaba</facility>
+                <facility>tencent</facility>
                 <!--代码构建控制-->
                 <!--跳过构建源代码包-->
                 <skip.build.source.package>false</skip.build.source.package>
@@ -78,7 +78,7 @@
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
-                <tencent.polaris.namespace>default</tencent.polaris.namespace>
+                <tencent.polaris.namespace>dante-reactive</tencent.polaris.namespace>
                 <!--Spring Cloud Tencent 配置 【(8091)grpc/tcp，默认注册中心端口;(8090)http/tcp，默认注册中心端口】-->
                 <tencent.polaris.server-addr>192.168.101.10:8091</tencent.polaris.server-addr>
                 <!--Spring Cloud Tencent Config 配置 【(8093)grpc/tcp，默认配置中心端口】-->
