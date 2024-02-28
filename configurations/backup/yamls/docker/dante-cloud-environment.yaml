@@ -10,7 +10,7 @@ herodotus:
       password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
     redis:
       host: 127.0.0.1
-      port: 6379
+      port: 16379
       password:
       database: 13
     kafka:
