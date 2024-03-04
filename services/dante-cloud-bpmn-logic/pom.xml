@@ -32,7 +32,7 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.1.9.0</version>
+        <version>3.1.9.1</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-logic</artifactId>
