@@ -33,7 +33,7 @@ import cn.herodotus.dante.module.strategy.service.HerodotusLocalPermissionDetail
 import cn.herodotus.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemotePermissionDetailsService;
 import cn.herodotus.dante.module.strategy.service.HerodotusRemoteUserDetailsService;
-import cn.herodotus.stirrup.logic.upms.configuration.LogicUpmsConfiguration;
+import cn.herodotus.stirrup.logic.upms.config.LogicUpmsConfiguration;
 import cn.herodotus.stirrup.logic.upms.service.security.SysPermissionService;
 import cn.herodotus.stirrup.logic.upms.service.security.SysUserService;
 import cn.herodotus.stirrup.oauth2.core.definition.handler.SocialAuthenticationHandler;

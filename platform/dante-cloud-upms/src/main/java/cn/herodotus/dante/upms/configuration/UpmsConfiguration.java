@@ -27,7 +27,7 @@ package cn.herodotus.dante.upms.configuration;
 
 import cn.herodotus.dante.module.metadata.configuration.MetadataModuleConfiguration;
 import cn.herodotus.dante.module.social.configuration.SocialModuleConfiguration;
-import cn.herodotus.stirrup.logic.upms.configuration.LogicUpmsConfiguration;
+import cn.herodotus.stirrup.logic.upms.config.LogicUpmsConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
