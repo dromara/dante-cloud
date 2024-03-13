@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.3.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.3.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.2.3.2-red.svg?logo=spring" alt="Version 3.2.3.2"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.2.3.2-red.svg?logo=spring" alt="Dante Engine 3.2.3.2"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.2.3.2-red.svg?logo=spring" alt="Dante OSS 3.2.3.2"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.2.3.3-red.svg?logo=spring" alt="Version 3.2.3.3"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.2.3.3-red.svg?logo=spring" alt="Dante Engine 3.2.3.3"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.2.3.3-red.svg?logo=spring" alt="Dante OSS 3.2.3.3"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -353,7 +353,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试。详情参�
 | 7  |  jacsty  | 2023-01-31 | 8  | hubert_rust | 2023-03-16 | 9  |  Zkey Z   | 2023-03-18 |
 | 10 |   志国欧巴   | 2023-03-27 | 11 |   michael   | 2023-04-07 | 12 |   大叔丨小巷   | 2023-04-11 |
 | 13 | sun_left | 2023-04-19 | 14 | time 丶 sand | 2023-07-06 | 15 |  印第安老斑鸠   | 2023-09-09 |
-| 16 |   一阵风    | 2023-12-10 | 17 |             |            | 18 |           |            |
+| 16 |   一阵风    | 2023-12-10 | 17 |    Jack     | 2024-03-01 | 18 |           |            |
 
 ### 开源项目
 
