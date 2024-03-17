@@ -27,12 +27,14 @@ package cn.herodotus.dante.authentication.autoconfigure;
 
 import cn.herodotus.stirrup.core.definition.constants.DefaultConstants;
 import cn.herodotus.stirrup.core.foundation.utils.ResourceUtils;
+import cn.herodotus.stirrup.logic.identity.response.OAuth2DeviceVerificationResponseHandler;
+import cn.herodotus.stirrup.oauth2.authentication.autoconfigure.response.OAuth2AccessTokenResponseHandler;
+import cn.herodotus.stirrup.oauth2.authentication.autoconfigure.response.OidcClientRegistrationResponseHandler;
 import cn.herodotus.stirrup.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.stirrup.oauth2.authentication.consumer.OAuth2AuthorizationCodeAuthenticationProviderConsumer;
 import cn.herodotus.stirrup.oauth2.authentication.consumer.OAuth2ClientCredentialsAuthenticationProviderConsumer;
 import cn.herodotus.stirrup.oauth2.authentication.customizer.OAuth2FormLoginConfigurerCustomizer;
 import cn.herodotus.stirrup.oauth2.authentication.oidc.HerodotusOidcUserInfoMapper;
-import cn.herodotus.stirrup.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.stirrup.oauth2.authentication.provider.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import cn.herodotus.stirrup.oauth2.authentication.provider.OAuth2SocialCredentialsAuthenticationConverter;
 import cn.herodotus.stirrup.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
@@ -42,10 +44,8 @@ import cn.herodotus.stirrup.oauth2.authorization.customizer.session.OAuth2Sessio
 import cn.herodotus.stirrup.oauth2.authorization.properties.OAuth2AuthorizationProperties;
 import cn.herodotus.stirrup.oauth2.authorization.servlet.OAuth2ResourceServerConfigurerCustomer;
 import cn.herodotus.stirrup.oauth2.core.definition.service.ClientDetailsService;
-import cn.herodotus.stirrup.oauth2.core.servlet.enums.Certificate;
-import cn.herodotus.stirrup.oauth2.management.response.OAuth2AccessTokenResponseHandler;
-import cn.herodotus.stirrup.oauth2.management.response.OAuth2DeviceVerificationResponseHandler;
-import cn.herodotus.stirrup.oauth2.management.response.OidcClientRegistrationResponseHandler;
+import cn.herodotus.stirrup.oauth2.core.enums.Certificate;
+import cn.herodotus.stirrup.oauth2.core.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.stirrup.web.service.properties.EndpointProperties;
 import cn.herodotus.stirrup.web.servlet.crypto.HttpCryptoProcessor;
 import cn.herodotus.stirrup.web.servlet.tenant.MultiTenantFilter;

@@ -27,18 +27,15 @@ package cn.herodotus.dante.authentication.autoconfigure;
 
 import cn.herodotus.stirrup.captcha.core.processor.CaptchaRendererFactory;
 import cn.herodotus.stirrup.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
-import cn.herodotus.stirrup.oauth2.authentication.properties.OAuth2AuthenticationProperties;
+import cn.herodotus.stirrup.oauth2.authentication.customizer.HerodotusUserDetailsService;
 import cn.herodotus.stirrup.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.stirrup.oauth2.authorization.customizer.session.OAuth2SessionManagementConfigurerCustomer;
 import cn.herodotus.stirrup.oauth2.authorization.servlet.HerodotusAccessDeniedHandler;
 import cn.herodotus.stirrup.oauth2.authorization.servlet.HerodotusAuthenticationEntryPoint;
 import cn.herodotus.stirrup.oauth2.authorization.servlet.OAuth2AuthorizeHttpRequestsConfigurerCustomer;
 import cn.herodotus.stirrup.oauth2.authorization.servlet.OAuth2ResourceServerConfigurerCustomer;
-import cn.herodotus.stirrup.oauth2.core.definition.service.ClientDetailsService;
 import cn.herodotus.stirrup.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.stirrup.oauth2.management.processor.HerodotusClientDetailsService;
-import cn.herodotus.stirrup.oauth2.management.processor.HerodotusUserDetailsService;
-import cn.herodotus.stirrup.oauth2.management.service.OAuth2ApplicationService;
+import cn.herodotus.stirrup.oauth2.core.properties.OAuth2AuthenticationProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -114,13 +111,5 @@ public class DefaultSecurityAutoConfiguration {
         HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(strategyUserDetailsService);
         log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
         return herodotusUserDetailsService;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
-        HerodotusClientDetailsService herodotusClientDetailsService = new HerodotusClientDetailsService(applicationService);
-        log.debug("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
-        return herodotusClientDetailsService;
     }
 }
