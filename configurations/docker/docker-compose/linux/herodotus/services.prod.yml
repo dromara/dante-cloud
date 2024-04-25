@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   monitor:
     image: ${MONITOR_SERVICE_NAME}:${VERSION}
