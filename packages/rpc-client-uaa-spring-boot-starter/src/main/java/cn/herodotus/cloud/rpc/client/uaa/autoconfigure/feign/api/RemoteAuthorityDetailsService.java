@@ -25,9 +25,9 @@
 
 package cn.herodotus.cloud.rpc.client.uaa.autoconfigure.feign.api;
 
+import cn.herodotus.cloud.module.common.constants.ServiceNameConstants;
 import cn.herodotus.stirrup.core.definition.domain.Result;
 import cn.herodotus.stirrup.logic.upms.entity.security.SysPermission;
-import cn.herodotus.cloud.module.common.constants.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
