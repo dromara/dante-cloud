@@ -1,0 +1,36 @@
+---
+namespace: "herodotus-reactive"
+fileGroup: "common"
+fileName: "herodotus-cloud-kafka.yaml"
+content: "spring:\r\n  cloud:\r\n    bus:\r\n      id: ${spring.application.name}:${server.port}\r\
+  \n      destination: herodotus-cloud-bus\r\n    stream:\r\n      kafka:\r\n    \
+  \    binder:\r\n          brokers: ${herodotus.environment.kafka.bootstrap-servers}\r\
+  \n          default-broker-port: 9092\r\n          auto-add-partitions: true\r\n\
+  \          auto-create-topics: true\r\n          min-partition-count: 1\r\n    \
+  \      configuration:\r\n            commit.interval.ms: 1000\r\n            default.key.serde:\
+  \ org.apache.kafka.common.serialization.Serdes$StringSerde\r\n            default.value.serde:\
+  \ org.apache.kafka.common.serialization.Serdes$StringSerde\r\n          producer-properties:\r\
+  \n            # 发生错误后，消息重发的次数。\r\n            retries: 1\r\n            # acks=0\
+  \ ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。\r\n            # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一\
+  个来自服务器成功响应。\r\n            # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。\r\
+  \n            acks: 1\r\n            #当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一\
+  个批次可以使用的内存大小，按照字节数计算。\r\n            batch.size: 16384\r\n            # 设置生产者内存缓\
+  冲区的大小。\r\n            buffer.memory: 33554432\r\n            # 10ms的延迟\r\n     \
+  \       linger.ms: 1\r\n          consumer-properties:\r\n            allow.auto.create.topics:\
+  \ true\r\n            auto.commit.interval.ms: 1000\r\n      function:\r\n     \
+  \   bindings:\r\n          busConsumer-out-0: springCloudBusOutput\r\n         \
+  \ busConsumer-in-0: springCloudBusInput\r\n          webSocketConsumer-out-0: webSocketMultipleInstanceSyncOutput\r\
+  \n          webSocketConsumer-in-0: webSocketMultipleInstanceSyncInput\r\n     \
+  \ bindings:\r\n        springCloudBusOutput:\r\n          content-type: application/json\r\
+  \n          destination: ${spring.cloud.bus.destination}\r\n        springCloudBusInput:\r\
+  \n          content-type: application/json\r\n          destination: ${spring.cloud.bus.destination}\r\
+  \n          group: ${spring.application.name}\r\n        webSocketMultipleInstanceSyncOutput:\r\
+  \n          content-type: application/json\r\n          destination: WebSocketMultipleInstanceSync\r\
+  \n        webSocketMultipleInstanceSyncInput:\r\n          content-type: application/json\r\
+  \n          destination: WebSocketMultipleInstanceSync"
+version: 1
+md5: "cd5bf330258908db90816fe2bd60c863"
+publicKey: null
+dataKey: null
+encrypted: false
+releaseTime: null

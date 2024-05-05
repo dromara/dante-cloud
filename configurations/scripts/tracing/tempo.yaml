@@ -1,0 +1,59 @@
+server:
+  http_listen_port: 3200
+
+distributor:
+  receivers:                           # this configuration will listen on all ports and protocols that tempo is capable of.
+    zipkin:
+
+ingester:
+  complete_block_timeout: 5s
+  trace_idle_period: 2s               # the length of time after a trace has not received spans to consider it complete and flush it
+  flush_check_period: 3s
+  max_block_bytes: 1_000_000           # cut the head block when it hits this size or ...
+  max_block_duration: 5m               #   this much time passes
+
+compactor:
+  compaction:
+    compaction_window: 1h              # blocks in this time window will be compacted together
+    max_block_bytes: 100_000_000       # maximum size of compacted blocks
+    block_retention: 1h
+    compacted_block_retention: 10m
+
+metrics_generator:
+  registry:
+    external_labels:
+      source: tempo
+      cluster: docker-compose
+  storage:
+    path: /tmp/tempo/generator/wal
+    remote_write:
+      - url: http://prometheus:9090/api/v1/write
+        send_exemplars: true
+
+storage:
+  trace:
+    backend: s3
+    s3:
+      bucket: tempo-data
+      endpoint: minio:9000
+      forcepathstyle: true
+      # set to false if endpoint is https
+      insecure: true
+      access_key: 2RO1WHelOwCFxp6Annr7
+      secret_key: h8wpmcmZZZfvMoCat4Vy3Zy1JJSl0fwM8JNsvNxa
+    block:
+      bloom_filter_false_positive: .05 # bloom filter false positive rate.  lower values create larger filters but fewer false positives
+      index_downsample_bytes: 1000     # number of bytes per index record
+      encoding: zstd                   # block encoding/compression.  options: none, gzip, lz4-64k, lz4-256k, lz4-1M, lz4, snappy, zstd, s2
+    wal:
+      path: /tmp/tempo/wal         # where to store the the wal locally
+    local:
+      path: /tmp/tempo/blocks
+    pool:
+      max_workers: 10
+      queue_depth: 100
+
+overrides:
+  defaults:
+    metrics_generator:
+      processors: [service-graphs, span-metrics]

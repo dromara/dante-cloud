@@ -1,0 +1,53 @@
+---
+code: 200000
+info: "execute success"
+type: "INSTANCE"
+service:
+  name: "herodotus-cloud-uaa"
+  namespace: "herodotus-reactive"
+  ports: "8846"
+  business: ""
+  department: ""
+  cmdb_mod1: ""
+  cmdb_mod2: ""
+  cmdb_mod3: ""
+  comment: ""
+  owners: "Polaris"
+  ctime: "2024-02-19 07:39:28"
+  mtime: "2024-02-19 07:39:28"
+  revision: "2691f486ad5794c76f2f436f87af69f5d79e17fd"
+  platform_id: ""
+  id: "1c806e725fc3475fb53145023494bed8"
+instances:
+- id: "d1dd902327754d223def0757ad36d6be07797a3c"
+  service: "herodotus-cloud-uaa"
+  namespace: "herodotus-reactive"
+  host: "192.168.101.10"
+  port: 8846
+  protocol: "http"
+  version: "1.0.0"
+  weight: 100
+  healthCheck:
+    type: "HEARTBEAT"
+    heartbeat:
+      ttl: 5
+  healthy: true
+  isolate: false
+  location: {}
+  metadata:
+    zone: ""
+    source_service_namespace: "herodotus-reactive"
+    internal-ip: "192.168.101.10"
+    version: "1.0.0"
+    protocol: "http"
+    region: ""
+    source_service_name: "herodotus-cloud-uaa"
+    internal-address: "192.168.101.10:0"
+    campus: ""
+  ctime: "2024-02-29 11:12:23"
+  mtime: "2024-02-29 11:12:23"
+  revision: "314be9d6e93246e295a1908a77982713"
+  enableHealthCheck: true
+aliasFor:
+  name: "herodotus-cloud-uaa"
+  namespace: "herodotus-reactive"

@@ -1,0 +1,61 @@
+server:
+  port: 8845
+spring:
+  application:
+    name: @artifactId@ #拿到POM文件中的值
+  profiles:
+    active: @facility@
+
+management:
+  health:
+    redis:
+      enabled: false
+herodotus:
+  platform:
+    architecture: monocoque
+
+---
+# spring cloud alibaba 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: alibaba
+  cloud:
+    nacos:
+      config:
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
+        file-extension: yaml
+      discovery:
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
+    httpclientfactories:
+      ok:
+        enabled: false
+
+---
+# spring cloud tencent 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: tencent
+  cloud:
+#    inetutils:
+#      ignored-interfaces:
+#        - eth0
+    polaris:
+      enabled: true
+      address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
+      namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
+      discovery:
+        heartbeat-interval: 30
+---
+# spring 全家桶基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: spring
+  cloud:
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}

@@ -1,0 +1,53 @@
+---
+code: 200000
+info: "execute success"
+type: "INSTANCE"
+service:
+  name: "herodotus-cloud-oss-ability"
+  namespace: "herodotus-reactive"
+  ports: "7073"
+  business: ""
+  department: ""
+  cmdb_mod1: ""
+  cmdb_mod2: ""
+  cmdb_mod3: ""
+  comment: ""
+  owners: "Polaris"
+  ctime: "2024-02-28 09:02:14"
+  mtime: "2024-02-28 09:02:14"
+  revision: "d5b83d2594e69e95ab9999a9488c564a36d08787"
+  platform_id: ""
+  id: "856ad16d7dc54914be78e4fb6c807382"
+instances:
+- id: "5e1d8c28279740c55b3871bc6f1220c498a78179"
+  service: "herodotus-cloud-oss-ability"
+  namespace: "herodotus-reactive"
+  host: "192.168.101.10"
+  port: 7073
+  protocol: "http"
+  version: "1.0.0"
+  weight: 100
+  healthCheck:
+    type: "HEARTBEAT"
+    heartbeat:
+      ttl: 5
+  healthy: true
+  isolate: false
+  location: {}
+  metadata:
+    internal-address: "192.168.101.10:0"
+    protocol: "http"
+    campus: ""
+    internal-ip: "192.168.101.10"
+    source_service_namespace: "herodotus-reactive"
+    source_service_name: "herodotus-cloud-oss-ability"
+    version: "1.0.0"
+    region: ""
+    zone: ""
+  ctime: "2024-02-29 11:12:44"
+  mtime: "2024-02-29 11:12:44"
+  revision: "9b27765d12944344bcfa611e430c1ecf"
+  enableHealthCheck: true
+aliasFor:
+  name: "herodotus-cloud-oss-ability"
+  namespace: "herodotus-reactive"

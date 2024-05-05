@@ -1,0 +1,50 @@
+---
+namespace: "herodotus-reactive"
+fileGroup: "common"
+fileName: "herodotus-cloud-database.yaml"
+content: "spring:\r\n  sql:\r\n    init:\r\n      mode: ${herodotus.switch.database.init-mode}\r\
+  \n      platform: ${herodotus.database-information.platform}\r\n      continue-on-error:\
+  \ true\r\n      encoding: UTF-8\r\n      username: ${herodotus.environment.database.username}\r\
+  \n      password: ${herodotus.environment.database.password}\r\n      # 第一种方式启动的\
+  时候 Jpa 会自动创建表，import.sql 只负责创建表单后的初始化数据。第二种方式启动的时候不会创建表，需要在初始化脚本中判断表是否存在，再初始化脚本的\
+  步骤\r\n      # refer: https://www.cnblogs.com/ityouknow/p/7089170.html\r\n      #\
+  \      data-locations:\r\n      #      schema-locations:\r\n  datasource:\r\n  \
+  \  driver-class-name: ${herodotus.database-information.driver-class-name}\r\n  \
+  \  url: ${herodotus.database-information.url}\r\n    username: ${herodotus.environment.database.username}\r\
+  \n    password: ${herodotus.environment.database.password}\r\n    type: com.zaxxer.hikari.HikariDataSource\r\
+  \n    hikari:\r\n      # Lowest acceptable connection timeout is 250 ms. Default:\
+  \ 30000 (30 seconds)\r\n      connection-timeout: 5000\r\n      connection-test-query:\
+  \ SELECT 1\r\n      # The minimum allowed value is 10000ms (10 seconds). Default:\
+  \ 600000 (10 minutes)\r\n      idle-timeout: 600000\r\n      minimum-idle: 5\r\n\
+  \      maximum-pool-size: 50\r\n      # We strongly recommend setting this value,\
+  \ and it should be at least 30 seconds less than any database or infrastructure\
+  \ imposed connection time limit.\r\n      # Default: 1800000 (30 minutes)\r\n  \
+  \    max-lifetime: 1800000\r\n      pool-name: Hikari\r\n      # Lowest acceptable\
+  \ validation timeout is 250 ms. Default: 5000\r\n      validation-timeout: 5000\r\
+  \n      data-source-properties:\r\n        prepStmtCacheSize: 250\r\n        prepStmtCacheSqlLimit:\
+  \ 2048\r\n        cachePrepStmts: true\r\n  jpa:\r\n    database: ${herodotus.database-information.platform}\r\
+  \n    # spring boot2.+后默认使用的是MyISAM引擎,增加如下配置修改为InnoDB模式，\r\n    # 这样不会出现：Specified\
+  \ key was too long; max key length is 1000 bytes 问题\r\n    database-platform: ${herodotus.database-information.platform}\r\
+  \n    open-in-view: true\r\n    show-sql: ${herodotus.switch.database.show-sql}\r\
+  \n    hibernate:\r\n      ddl-auto: ${herodotus.switch.database.ddl-auto}\r\n  \
+  \    #create 启动时删数据库中的表，然后创建，退出时不删除数据表\r\n      #create-drop 启动时删数据库中的表，然后创建，退出时\
+  删除数据表 如果表不存在报错\r\n      #update 如果启动时表格式不一致则更新表，原有数据保留\r\n      #validate 项目启动表结\
+  构进行校验 如果不一致则报错\r\n      naming:\r\n        physical-strategy: cn.herodotus.stirrup.data.hibernate.HerodotusPhysicalNamingStrategy\r\
+  \n    properties:\r\n      jakarta:\r\n        persistence:\r\n          sharedCache:\r\
+  \n            mode: ENABLE_SELECTIVE\r\n      hibernate:\r\n        dialect: ${herodotus.database-information.dialect}\r\
+  \n        format_sql: ${herodotus.switch.database.format-sql}\r\n        show_sql:\
+  \ ${herodotus.switch.database.show-sql}\r\n        generate_statistics: ${herodotus.switch.database.generate-statistics}\r\
+  \n        cache:\r\n          use_query_cache: true\r\n          use_second_level_cache:\
+  \ ${herodotus.switch.database.use-second-level-cache}\r\n          region:\r\n \
+  \           factory_class: cn.herodotus.stirrup.data.hibernate.spi.cache.HerodotusRegionFactory\r\
+  \n        jakarta:\r\n          cache:\r\n            missing_cache_strategy: create\r\
+  \n        temp:\r\n          use_jdbc_metadata_defaults: true\r\n\r\nmybatis-plus:\r\
+  \n  global-config:\r\n    banner: false\r\n    db-config:\r\n      table-underline:\
+  \ true\r\n  configuration:\r\n    cache-enabled: ${herodotus.switch.database.use-second-level-cache}\r\
+  \n    map-underscore-to-camel-case: true"
+version: 2
+md5: "784cd5248e70dcf4bb92fb13b9eaa07d"
+publicKey: null
+dataKey: null
+encrypted: false
+releaseTime: null

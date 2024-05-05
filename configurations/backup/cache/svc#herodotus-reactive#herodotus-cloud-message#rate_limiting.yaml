@@ -1,0 +1,7 @@
+---
+code: 200000
+info: "execute success"
+type: "RATE_LIMIT"
+service:
+  name: "herodotus-cloud-message"
+  namespace: "herodotus-reactive"

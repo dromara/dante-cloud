@@ -1,0 +1,64 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  grpc_listen_port: 9096
+
+common:
+  path_prefix: /loki
+  storage:
+    s3:
+      endpoint: minio:9000
+      insecure: true
+      bucketnames: loki-data
+      access_key_id: 2RO1WHelOwCFxp6Annr7
+      secret_access_key: h8wpmcmZZZfvMoCat4Vy3Zy1JJSl0fwM8JNsvNxa
+      s3forcepathstyle: true
+  replication_factor: 1
+  ring:
+    instance_addr: 0.0.0.0
+    kvstore:
+      store: inmemory
+
+storage_config:
+  #  aws:
+  # Note: use a fully qualified domain name, like localhost.
+  # full example: http://loki:supersecret@localhost.:9000
+  #    s3: http://lokiadmin:lokiadmin@192.168.101.10:9000/loki-data
+  #    s3forcepathstyle: true
+  boltdb_shipper:
+    active_index_directory: /loki/boltdb-shipper-active
+    cache_location: /loki/boltdb-shipper-cache
+    cache_ttl: 24h         # Can be increased for faster performance over longer query periods, uses more disk space
+    shared_store: s3
+
+schema_config:
+  configs:
+    - from: 2020-07-01
+      store: boltdb-shipper
+      object_store: s3
+      schema: v11
+      # index为索引数据，prefix表示设置索引存储文件夹的前缀，period表示设置当天24小时内的索引数据放在一个index_xxx目录，每天创建一个新index_xx索引目录
+      index:
+        prefix: index_
+        period: 24h
+      # 注意chunks存储的即为数据块
+      chunks:
+        prefix: chunks_
+        period: 24h
+
+ruler:
+  alertmanager_url: http://localhost:9093
+
+# By default, Loki will send anonymous, but uniquely-identifiable usage and configuration
+# analytics to Grafana Labs. These statistics are sent to https://stats.grafana.org/
+#
+# Statistics help us better understand how Loki is used, and they show us performance
+# levels for most users. This helps us prioritize features and documentation.
+# For more information on what's sent, look at
+# https://github.com/grafana/loki/blob/main/pkg/analytics/stats.go
+# Refer to the buildReport method to see what goes into a report.
+#
+# If you would like to disable reporting, uncomment the following lines:
+#analytics:
+#  reporting_enabled: false

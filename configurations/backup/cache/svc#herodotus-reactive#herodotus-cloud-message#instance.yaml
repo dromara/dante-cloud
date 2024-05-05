@@ -1,0 +1,53 @@
+---
+code: 200000
+info: "execute success"
+type: "INSTANCE"
+service:
+  name: "herodotus-cloud-message"
+  namespace: "herodotus-reactive"
+  ports: "7071"
+  business: ""
+  department: ""
+  cmdb_mod1: ""
+  cmdb_mod2: ""
+  cmdb_mod3: ""
+  comment: ""
+  owners: "Polaris"
+  ctime: "2024-02-28 09:02:38"
+  mtime: "2024-02-28 09:02:38"
+  revision: "bc796c37bf74035fac91b1a04ff82f07b7f75c48"
+  platform_id: ""
+  id: "71f2923c201247af9d873f882b59df91"
+instances:
+- id: "009c9984747311dd022b5c1cc157ecf9659e6f32"
+  service: "herodotus-cloud-message"
+  namespace: "herodotus-reactive"
+  host: "192.168.101.10"
+  port: 7071
+  protocol: "http"
+  version: "1.0.0"
+  weight: 100
+  healthCheck:
+    type: "HEARTBEAT"
+    heartbeat:
+      ttl: 5
+  healthy: true
+  isolate: false
+  location: {}
+  metadata:
+    source_service_name: "herodotus-cloud-message"
+    internal-ip: "192.168.101.10"
+    protocol: "http"
+    region: ""
+    zone: ""
+    campus: ""
+    source_service_namespace: "herodotus-reactive"
+    internal-address: "192.168.101.10:0"
+    version: "1.0.0"
+  ctime: "2024-02-29 11:13:07"
+  mtime: "2024-02-29 11:13:07"
+  revision: "15aa630c141140e288357ed346acedb6"
+  enableHealthCheck: true
+aliasFor:
+  name: "herodotus-cloud-message"
+  namespace: "herodotus-reactive"

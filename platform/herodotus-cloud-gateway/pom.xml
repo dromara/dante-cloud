@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2019-2022 ZHENGGENGWEI<码匠君>. All rights reserved.
+  ~
+  ~ - Author: ZHENGGENGWEI<码匠君>
+  ~ - Contact: herodotus@aliyun.com
+  ~ - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>platform</artifactId>
+        <groupId>cn.herodotus.cloud</groupId>
+        <version>3.3.0.0-RC2</version>
+    </parent>
+
+    <artifactId>herodotus-cloud-gateway</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>web-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>reactive-container-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.cloud</groupId>
+            <artifactId>facility-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>facility-gateway-spring-boot-starter</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- spring boot 默认插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- 拷贝插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+
+            <!-- Git信息记录插件 -->
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

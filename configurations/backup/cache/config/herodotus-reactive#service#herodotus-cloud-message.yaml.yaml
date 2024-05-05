@@ -1,0 +1,16 @@
+---
+namespace: "herodotus-reactive"
+fileGroup: "service"
+fileName: "herodotus-cloud-message.yaml"
+content: "spring:\r\n  security:\r\n    oauth2:\r\n      resourceserver:\r\n     \
+  \   jwt:\r\n          issuer-uri: ${herodotus.endpoint.issuer-uri}\r\n         \
+  \ jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}\r\n        opaquetoken:\r\n   \
+  \       client-id: 5e8a9dc4ade843b9953cdf3b108a0765\r\n          client-secret:\
+  \ b2985ee0306145109078c3eec7d65926\r\nherodotus:\r\n  message:\r\n    websocket:\r\
+  \n      mode: single"
+version: 1
+md5: "468f1a5b84f7b05e9dc4d0c4c84b6069"
+publicKey: null
+dataKey: null
+encrypted: false
+releaseTime: null

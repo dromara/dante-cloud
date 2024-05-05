@@ -1,0 +1,25 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${herodotus.endpoint.issuer-uri}
+          jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
+        opaquetoken:
+          client-id: 7299d999f2d3478497f382450f9a35ba
+          client-secret: 02895262878f45e8a16a15f68336f431
+
+herodotus:
+  oss:
+    dialect: minio
+    proxy:
+      source: http://localhost:3000/api/${spring.application.name}
+      destination: http://127.0.0.1:9000
+    minio:
+      endpoint: http://127.0.0.1:9000
+      access-key: herodotus
+      secret-key: herodotus
+    s3:
+      endpoint: http://127.0.0.1:9000
+      access-key: herodotus
+      secret-key: herodotus

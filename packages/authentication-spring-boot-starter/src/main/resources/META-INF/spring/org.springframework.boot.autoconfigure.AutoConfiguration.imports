@@ -1,0 +1,3 @@
+cn.herodotus.cloud.authentication.autoconfigure.AuthenticationAutoConfiguration
+cn.herodotus.cloud.authentication.autoconfigure.DefaultSecurityAutoConfiguration
+cn.herodotus.cloud.authentication.autoconfigure.AuthorizationServerAutoConfiguration

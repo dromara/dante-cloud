@@ -1,0 +1,28 @@
+---
+namespace: "herodotus-reactive"
+fileGroup: "common"
+fileName: "herodotus-cloud-rest.yaml"
+content: "server:\r\n  error:\r\n    include-exception: true\r\n    include-message:\
+  \ always\r\n    include-stacktrace: always\r\n    include-binding-errors: always\r\
+  \nspring:\r\n  thymeleaf:\r\n    mode: HTML\r\n    cache: false\r\n  cloud:\r\n\
+  \    openfeign:\r\n      okhttp:\r\n        enabled: true\r\n      httpclient:\r\
+  \n        enabled: false\r\n        time-to-live: 15\r\n        time-to-live-unit:\
+  \ seconds\r\n        connection-timeout: 30000\r\n        connection-timer-repeat:\
+  \ 3000\r\n        max-connections: 500\r\n        max-connections-per-route: 50\r\
+  \n        hc5:\r\n          connection-request-timeout: 15\r\n          connection-request-timeout-unit:\
+  \ seconds\r\n          socket-timeout: 15\r\n          socket-timeout-unit: seconds\r\
+  \n          pool-concurrency-policy: lax\r\n          pool-reuse-policy: lifo\r\n\
+  \      compression:\r\n        request:\r\n          enabled: true\r\n        response:\r\
+  \n          enabled: true\r\n    loadbalancer:\r\n      nacos:\r\n        enabled:\
+  \ true\r\nfeign:\r\n  sentinel:\r\n    enabled: true\r\n\r\nspringdoc:\r\n  api-docs:\r\
+  \n    resolve-schema-properties: true\r\n  swagger-ui:\r\n    enabled: ${herodotus.switch.swagger.enabled}\r\
+  \n    disable-swagger-default-url: true\r\n    operations-sorter: method\r\n   \
+  \ show-common-extensions: true\r\n    show-extensions: true\r\n    oauth:\r\n  \
+  \    use-pkce-with-authorization-code-grant: true\r\n      app-name: ${spring.application.name}\r\
+  \n\r\nherodotus:\r\n  rest:\r\n    scan:\r\n      enabled: ${herodotus.switch.rest.scan.enabled}"
+version: 1
+md5: "7823f8d1c695545ad91235b56e794a9f"
+publicKey: null
+dataKey: null
+encrypted: false
+releaseTime: null

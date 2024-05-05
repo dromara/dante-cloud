@@ -1,0 +1,37 @@
+herodotus:
+  sms:
+    enabled: true
+    sandbox: true
+    test-code: 12345678
+    default-channel: RECLUSE
+    recluse:
+      enabled: true
+      username: aaa
+      password: bbb
+      cm:
+        host: 192.168.101.10
+        port: 8888
+      ws:
+        host: 192.168.101.10
+        port: 9999
+      templates: { "VERIFICATION_CODE": "VERIFICATION_CODE" }
+    aliyun:
+      enabled: true
+      access-key-id: LTAIbpBsfsf
+      access-key-secret: qqTHQOJRlsfsfsdf
+      region-id: cn-shanghai
+      sign-name: sfsfsfsfs
+      version: 2017-05-25
+      templates: { "VERIFICATION_CODE": "SMS_180sfsfsf" }
+  access:
+    justauth:
+      enabled: true
+      configs:
+        GITEE:
+          client-id: 7c1623d76f3909757912338688cae8a061e241b56070face6d54114eb61c6766
+          client-secret: 8c343cad9ca732d54242f002d254239e17b68cab11c1d506a57822be82899914
+          redirect-uri: http://aw255fkfqy5m.ngrok.xiaomiqiu123.top/social/oauth2/callback/GITEE
+        OSCHINA:
+          client-id: 7c1623d76f3909757912338688cae8a061e241b56070face6d54114eb61c6766
+          client-secret: 8c343cad9ca732d54242f002d254239e17b68cab11c1d506a57822be82899914
+          redirect-uri: http://192.168.101.10:8847/herodotus-cloud-uaa/oauth/social/gitee

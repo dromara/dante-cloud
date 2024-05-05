@@ -1,0 +1,10 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${herodotus.endpoint.issuer-uri}
+          jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}
+        opaquetoken:
+          client-id: 8e0d16357b1a421aaae0292a3eb8bfaa
+          client-secret: 8eb1a32c7c1c49ff8b45e84906d9b6d6

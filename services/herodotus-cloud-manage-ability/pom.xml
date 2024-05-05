@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2020-2030 ZHENGGENGWEI<码匠君>. All rights reserved.
+  ~
+  ~ *   Author: ZHENGGENGWEI<码匠君>
+  ~ *   Contact: <herodotus@aliyun.com>
+  ~ *   Blog and source code availability: <https://gitee.com/herodotus/herodotus-cloud>
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.herodotus.cloud</groupId>
+        <artifactId>services</artifactId>
+        <version>3.3.0.0-RC2</version>
+    </parent>
+
+    <artifactId>herodotus-cloud-manage-ability</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.herodotus.cloud</groupId>
+            <artifactId>authorization-reactive-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-webmvc</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>rest-module-reactive-nacos</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>webflux-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- spring boot 默认插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- 拷贝插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+
+            <!-- Git信息记录插件 -->
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

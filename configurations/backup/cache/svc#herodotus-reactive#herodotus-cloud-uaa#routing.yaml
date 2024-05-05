@@ -1,0 +1,15 @@
+---
+code: 200000
+info: "execute success"
+type: "ROUTING"
+service:
+  name: "herodotus-cloud-uaa"
+  namespace: "herodotus-reactive"
+  revision: "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+routing:
+  service: "herodotus-cloud-uaa"
+  namespace: "herodotus-reactive"
+  revision: "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+aliasFor:
+  name: "herodotus-cloud-uaa"
+  namespace: "herodotus-reactive"

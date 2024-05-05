@@ -1,0 +1,32 @@
+---
+namespace: "herodotus-reactive"
+fileGroup: "common"
+fileName: "herodotus-cloud-platform.yaml"
+content: "herodotus:\r\n  endpoint:\r\n    uaa-service-name: herodotus-cloud-uaa\r\
+  \n    upms-service-name: herodotus-cloud-upms\r\n    message-service-name: herodotus-cloud-message\r\
+  \n    oss-service-name: herodotus-cloud-oss-ability\r\n    gateway-service-uri:\
+  \ ${herodotus.environment.gateway-server-addr}\r\n    uaa-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.uaa-service-name}\r\
+  \n    upms-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.upms-service-name}\r\
+  \n    message-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.message-service-name}\r\
+  \n    oss-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.oss-service-name}\r\
+  \n    access-token-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/token\r\n \
+  \   authorization-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/authorize\r\n\
+  \    token-revocation-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/revoke\r\
+  \n    token-introspection-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/introspect\r\
+  \n    jwk-set-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/jwks\r\n    issuer-uri:\
+  \ ${herodotus.endpoint.uaa-service-uri}\r\n    oidc-client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/connect/register\r\
+  \n    oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo\r\n  swagger:\r\
+  \n    enabled: ${herodotus.switch.swagger.enabled}\r\n  oauth2:\r\n    jwk:\r\n\
+  \      certificate: standard\r\n\r\nmanagement:\r\n  endpoints:\r\n    web:\r\n\
+  \      exposure:\r\n        include: '*'\r\n  endpoint:\r\n    shutdown:\r\n   \
+  \   enabled: true\r\n    health:\r\n      show-details: ALWAYS\r\n\r\nserver:\r\n\
+  \  shutdown: graceful\r\n  servlet:\r\n    session:\r\n      timeout: ${herodotus.session.timeout}\r\
+  \n\r\nspring:\r\n  session:\r\n    timeout: ${server.servlet.session.timeout}\r\n\
+  \    redis:\r\n      repository-type: indexed\r\n      save-mode: always\r\n   \
+  \   flush-mode: immediate\r\n\r\nsms:\r\n  is-print: false"
+version: 1
+md5: "43a14adc72f0be133865425c6a6055bc"
+publicKey: null
+dataKey: null
+encrypted: false
+releaseTime: null

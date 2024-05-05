@@ -1,0 +1,22 @@
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: caffeine
+      keyConvertor: fastjson2
+      limit: 10000
+  remote:
+    default:
+      type: redis.lettuce
+      keyConvertor: fastjson2
+      broadcastChannel: herodotus
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: ${spring.data.redis.lettuce.pool.min-idle}
+        maxIdle: ${spring.data.redis.lettuce.pool.max-idle}
+        maxTotal: ${spring.data.redis.lettuce.pool.max-active}
+        maxWait: ${spring.data.redis.lettuce.pool.max-wait}
+      uri:
+        - redis://${spring.data.redis.password}@${spring.data.redis.host}:${spring.data.redis.port}/${spring.data.redis.database}

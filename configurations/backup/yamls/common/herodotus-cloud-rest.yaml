@@ -1,0 +1,49 @@
+spring:
+  cloud:
+    openfeign:
+      okhttp:
+        enabled: true
+      httpclient:
+        enabled: false
+        time-to-live: 15
+        time-to-live-unit: seconds
+        connection-timeout: 30000
+        connection-timer-repeat: 3000
+        max-connections: 500
+        max-connections-per-route: 50
+        hc5:
+          connection-request-timeout: 15
+          connection-request-timeout-unit: seconds
+          socket-timeout: 15
+          socket-timeout-unit: seconds
+          pool-concurrency-policy: lax
+          pool-reuse-policy: lifo
+      compression:
+        request:
+          enabled: true
+        response:
+          enabled: true
+    loadbalancer:
+      nacos:
+        enabled: true
+feign:
+  sentinel:
+    enabled: true
+
+springdoc:
+  api-docs:
+    resolve-schema-properties: true
+  swagger-ui:
+    enabled: ${herodotus.switch.swagger.enabled}
+    disable-swagger-default-url: true
+    operations-sorter: method
+    show-common-extensions: true
+    show-extensions: true
+    oauth:
+      use-pkce-with-authorization-code-grant: true
+      app-name: ${spring.application.name}
+
+herodotus:
+  rest:
+    scan:
+      enabled: ${herodotus.switch.rest.scan.enabled}

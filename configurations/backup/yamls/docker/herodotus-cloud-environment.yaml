@@ -1,0 +1,49 @@
+herodotus:
+  environment:
+    gateway-server-addr: http://localhost:8847
+    database:
+      host: 127.0.0.1
+      port: 15432
+      name: herodotus_reactive
+      username: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+      password: ENC(VQOHWBUv8CXJE50zyMEhCozzElZhNbJ8suinU7Ph651G1xl4QPweElrhtXP4V0T8)
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
+      database: 11
+    kafka:
+      bootstrap-servers: 127.0.0.1:9092
+  switch:
+    database:
+      ddl-auto: update
+      init-mode: never
+      use-second-level-cache: true
+      show-sql: false
+      format-sql: false
+      generate-statistics: false
+    swagger:
+      enabled: true
+    rest:
+      scan:
+        enabled: true
+  session:
+    timeout: 2h
+  log:
+    level: info
+    loggers:
+      cn.herodotus: debug
+      com.alicp.jetcache: debug
+      org.springframework.security: info
+      org.springframework.web: debug
+      org.springframework.cloud.bus: info
+      org.apache.kafka: warn
+    loki:
+      url: http://192.168.101.10:3100/loki/api/v1/push
+    logstash:
+      host: 127.0.0.1
+      port: 5044
+
+jasypt:
+  encryptor:
+    password: ${JASPYT_HOME:2bda7d3a-dba1-45a4-b08e-cbd731a0418e}

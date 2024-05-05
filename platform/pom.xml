@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2019-2022 ZHENGGENGWEI<码匠君>. All rights reserved.
+  ~
+  ~ - Author: ZHENGGENGWEI<码匠君>
+  ~ - Contact: herodotus@aliyun.com
+  ~ - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>herodotus-cloud</artifactId>
+        <groupId>cn.herodotus.cloud</groupId>
+        <version>3.3.0.0-RC2</version>
+    </parent>
+
+    <artifactId>platform</artifactId>
+    <packaging>pom</packaging>
+
+    <name>herodotus-cloud-platform</name>
+
+    <modules>
+        <module>herodotus-cloud-gateway</module>
+        <module>herodotus-cloud-uaa</module>
+        <module>herodotus-cloud-upms</module>
+        <module>herodotus-cloud-monitor</module>
+        <module>herodotus-cloud-message</module>
+    </modules>
+
+</project>

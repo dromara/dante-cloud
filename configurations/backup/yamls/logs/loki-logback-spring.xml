@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2020-2030 ZHENGGENGWEI<码匠君>. All rights reserved.
+  ~
+  ~ *   Author: ZHENGGENGWEI<码匠君>
+  ~ *   Contact: <herodotus@aliyun.com>
+  ~ *   Blog and source code availability: <https://gitee.com/herodotus/herodotus-cloud>
+  -->
+
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+    <springProperty name="name" source="spring.application.name" />
+
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+        <http>
+            <url>http://192.168.101.10:3100/loki/api/v1/push</url>
+        </http>
+        <format>
+            <label>
+                <pattern>app=${name},host=${HOSTNAME},level=%level</pattern>
+                <readMarkers>true</readMarkers>
+            </label>
+            <message>
+                <pattern>
+                    {
+                    "level":"%level",
+                    "PID":"${PID:- }",
+                    "class":"%logger{39}",
+                    "thread":"%thread",
+                    "message": "%message",
+                    "traceId": "%X{traceId:-}",
+                    "spanId": "%X{spanId:-}",
+                    }
+                </pattern>
+            </message>
+            <sortByTime>true</sortByTime>
+        </format>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="LOKI" />
+    </root>
+
+</configuration>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2020-2030 ZHENGGENGWEI<码匠君>. All rights reserved.
+  ~
+  ~ - Author: ZHENGGENGWEI<码匠君>
+  ~ - Contact: herodotus@aliyun.com
+  ~ - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>packages</artifactId>
+        <groupId>cn.herodotus.cloud</groupId>
+        <version>3.3.0.0-RC2</version>
+    </parent>
+
+    <artifactId>authentication-spring-boot-starter</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.herodotus.cloud</groupId>
+            <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>oauth2-authentication-autoconfigure</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.herodotus.stirrup</groupId>
+            <artifactId>webmvc-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/java</directory>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <!-- 解决字体图标不显示以及Chrome控制台Failed to decode downloaded font错误的问题-->
+                    <!-- 主要原因是maven打包项目的时候对项目进行统一编码，这就导致字体文件被破坏，增加过滤配置，让maven不对字体文件进行处理-->
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>jks</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>old</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>pub</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

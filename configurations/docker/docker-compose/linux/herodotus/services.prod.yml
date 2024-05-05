@@ -1,0 +1,115 @@
+services:
+  monitor:
+    image: ${MONITOR_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile-Monitor
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${MONITOR_SERVICE_NAME}
+        - SERVICE_PORT=${MONITOR_SERVICE_PORT}
+    container_name: monitor
+    ports:
+      - ${MONITOR_SERVICE_PORT}:${MONITOR_SERVICE_PORT}
+
+  upms:
+    image: ${UPMS_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile-Monitor
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${UPMS_SERVICE_NAME}
+        - SERVICE_PORT=${UPMS_SERVICE_PORT}
+    container_name: upms
+    environment:
+      SW_AGENT_SERVICE_NAME: ${UPMS_SERVICE_NAME}
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - ${UPMS_SERVICE_PORT}:${UPMS_SERVICE_PORT}
+    depends_on:
+      - monitor
+
+  gateway:
+    image: ${GATEWAY_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${GATEWAY_SERVICE_NAME}
+        - SERVICE_PORT=${GATEWAY_SERVICE_PORT}
+    container_name: gateway
+    environment:
+      SW_AGENT_SERVICE_NAME: ${GATEWAY_SERVICE_NAME}
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - ${GATEWAY_SERVICE_PORT}:${GATEWAY_SERVICE_PORT}
+    depends_on:
+      - monitor
+
+  uaa:
+    image: ${UAA_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${UAA_SERVICE_NAME}
+        - SERVICE_PORT=${UAA_SERVICE_PORT}
+    container_name: uaa
+    environment:
+      SW_AGENT_SERVICE_NAME: ${UAA_SERVICE_NAME}
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - ${UAA_SERVICE_PORT}:${UAA_SERVICE_PORT}
+    depends_on:
+      - monitor
+
+  msg:
+    image: ${MESSAGE_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${MESSAGE_SERVICE_NAME}
+        - SERVICE_PORT=${MESSAGE_SERVICE_PORT}
+    container_name: msg
+    ports:
+      - ${MESSAGE_SERVICE_PORT}:${MESSAGE_SERVICE_PORT}
+    depends_on:
+      - upms
+
+  oss:
+    image: ${OSS_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${OSS_SERVICE_NAME}
+        - SERVICE_PORT=${OSS_SERVICE_PORT}
+    container_name: oss
+    ports:
+      - ${OSS_SERVICE_PORT}:${OSS_SERVICE_PORT}
+    depends_on:
+      - upms
+
+  bpmn:
+    image: ${BPMN_SERVICE_NAME}:${VERSION}
+    build:
+      context: ../../../context
+      dockerfile: production/Dockerfile
+      args:
+        - VERSION=${VERSION}
+        - SERVICE_NAME=${BPMN_SERVICE_NAME}
+        - SERVICE_PORT=${BPMN_SERVICE_PORT}
+    container_name: bpmn
+    environment:
+      SW_AGENT_SERVICE_NAME: ${BPMN_SERVICE_NAME}
+      SW_COLLECTOR_BACKEND_SERVICE: oap:11800
+    ports:
+      - ${BPMN_SERVICE_PORT}:${BPMN_SERVICE_PORT}
+    depends_on:
+      - monitor

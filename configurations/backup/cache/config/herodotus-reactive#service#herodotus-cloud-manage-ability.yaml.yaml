@@ -1,0 +1,15 @@
+---
+namespace: "herodotus-reactive"
+fileGroup: "service"
+fileName: "herodotus-cloud-manage-ability.yaml"
+content: "spring:\r\n  security:\r\n    oauth2:\r\n      resourceserver:\r\n     \
+  \   jwt:\r\n          issuer-uri: ${herodotus.endpoint.issuer-uri}\r\n         \
+  \ jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}\r\n        opaquetoken:\r\n   \
+  \       client-id: bc500674e11c4f6ebdf84a5fdd8c8f59\r\n          client-secret:\
+  \ ea429cd930ad44aa964e22646f6bd82c"
+version: 2
+md5: "d3b32706a2b399fe49a5f8f95205642b"
+publicKey: null
+dataKey: null
+encrypted: false
+releaseTime: null

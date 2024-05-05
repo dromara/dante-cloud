@@ -1,0 +1,69 @@
+herodotus:
+  endpoint:
+    uaa-service-name: herodotus-cloud-uaa
+    upms-service-name: herodotus-cloud-upms
+    message-service-name: herodotus-cloud-message
+    oss-service-name: herodotus-cloud-oss-ability
+    gateway-service-uri: ${herodotus.environment.gateway-server-addr}
+    uaa-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.uaa-service-name}
+    upms-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.upms-service-name}
+    message-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.message-service-name}
+    oss-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.oss-service-name}
+    access-token-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/token
+    authorization-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/authorize
+    token-revocation-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/revoke
+    token-introspection-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/introspect
+    jwk-set-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/jwks
+    issuer-uri: ${herodotus.endpoint.uaa-service-uri}
+    oidc-client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/connect/register
+    oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo
+  swagger:
+    enabled: ${herodotus.switch.swagger.enabled}
+  oauth2:
+    jwk:
+      certificate: standard
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: ALWAYS
+  tracing:
+    sampling:
+      probability: 1.0
+
+server:
+  shutdown: graceful
+  error:
+    include-exception: true
+    include-message: always
+    include-stacktrace: always
+    include-binding-errors: always
+  servlet:
+    session:
+      timeout: ${herodotus.session.timeout}
+  reactive:
+    session:
+      timeout: ${herodotus.session.timeout}
+
+spring:
+  threads:
+    virtual:
+      enabled: true
+  session:
+    timeout: ${server.servlet.session.timeout}
+    redis:
+      repository-type: indexed
+      save-mode: always
+      flush-mode: immediate
+  thymeleaf:
+    mode: HTML
+    cache: false
+
+sms:
+  is-print: false

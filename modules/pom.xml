@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2019-2022 ZHENGGENGWEI<码匠君>. All rights reserved.
+  ~
+  ~ - Author: ZHENGGENGWEI<码匠君>
+  ~ - Contact: herodotus@aliyun.com
+  ~ - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>herodotus-cloud</artifactId>
+        <groupId>cn.herodotus.cloud</groupId>
+        <version>3.3.0.0-RC2</version>
+    </parent>
+
+    <artifactId>modules</artifactId>
+    <packaging>pom</packaging>
+
+    <name>herodotus-cloud-modules</name>
+    <description>Herodotus Cloud 模组代码包分组，根据实际需求，组装各类模块形成可用模组</description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <skipSource>${skip.build.source.package}</skipSource>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>herodotus-module-common</module>
+        <module>herodotus-module-social</module>
+        <module>herodotus-module-metadata</module>
+    </modules>
+
+</project>

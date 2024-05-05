@@ -1,0 +1,8 @@
+# IntelliJ project files
+out/
+target/
+.idea/
+!.idea/icon.png
+*.log
+*.gz
+*.iml

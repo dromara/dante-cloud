@@ -1,0 +1,21 @@
+---
+code: 200000
+info: "execute success"
+type: "SERVICES"
+service:
+  name: ""
+  namespace: "herodotus-reactive"
+  revision: "f74a63af22d4deed40529b31bdd0d453a04c5859"
+services:
+- name: "herodotus-cloud-message"
+  namespace: "herodotus-reactive"
+- name: "herodotus-cloud-upms"
+  namespace: "herodotus-reactive"
+- name: "herodotus-cloud-gateway"
+  namespace: "herodotus-reactive"
+- name: "herodotus-cloud-oss-ability"
+  namespace: "herodotus-reactive"
+- name: "herodotus-cloud-uaa"
+  namespace: "herodotus-reactive"
+- name: "herodotus-cloud-manage-ability"
+  namespace: "herodotus-reactive"

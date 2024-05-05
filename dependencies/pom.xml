@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2019-2022 ZHENGGENGWEI<码匠君>. All rights reserved.
+  ~
+  ~ - Author: ZHENGGENGWEI<码匠君>
+  ~ - Contact: herodotus@aliyun.com
+  ~ - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.herodotus.professional</groupId>
+        <artifactId>dependencies</artifactId>
+        <version>3.3.0.0-RC2</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>cn.herodotus.cloud</groupId>
+    <artifactId>dependencies</artifactId>
+    <packaging>pom</packaging>
+
+    <name>dependencies</name>
+    <description>Herodotus Dependencies</description>
+
+    <properties>
+        <dante-oss-bom.version>${project.version}</dante-oss-bom.version>
+        <java.version>21</java.version>
+        <resource.delimiter>@</resource.delimiter>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Gengwei Zheng</name>
+            <email>herodotus@aliyun.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://gitee.com/herodotus/herodotus-cloud.git</url>
+    </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.herodotus.oss</groupId>
+                <artifactId>oss-bom</artifactId>
+                <version>${dante-oss-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Herodotus Cloud -->
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>herodotus-module-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>herodotus-module-social</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>herodotus-module-metadata</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>authentication-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>authorization-reactive-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>authorization-servlet-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>facility-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.herodotus.cloud</groupId>
+                <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

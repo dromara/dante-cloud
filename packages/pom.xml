@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+  ~
+  ~ Copyright 2019-2021 Zhenggengwei<码匠君>, herodotus@aliyun.com
+  ~
+  ~ This file is part of Herodotus Cloud.
+  ~
+  ~ Herodotus Cloud is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+  ~ General Public License as published by the Free Software Foundation; either version 2.1 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Herodotus Cloud is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+  ~ implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+  ~ License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License along with with Herodotus Cloud;
+  ~ if no see <https://gitee.com/herodotus/herodotus-cloud>
+  ~
+  ~ - Author: Zhenggengwei<码匠君>
+  ~ - Contact: herodotus@aliyun.com
+  ~ - License: GNU Lesser General Public License (LGPL)
+  ~ - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>herodotus-cloud</artifactId>
+        <groupId>cn.herodotus.cloud</groupId>
+        <version>3.3.0.0-RC2</version>
+    </parent>
+
+    <artifactId>packages</artifactId>
+    <packaging>pom</packaging>
+
+    <name>herodotus-cloud-packages</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <skipSource>${skip.build.source.package}</skipSource>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>authentication-spring-boot-starter</module>
+        <module>authorization-servlet-spring-boot-starter</module>
+        <module>facility-spring-boot-starter</module>
+        <module>authorization-reactive-spring-boot-starter</module>
+        <module>rpc-client-uaa-spring-boot-starter</module>
+        <module>rpc-server-upms-spring-boot-starter</module>
+    </modules>
+
+</project>

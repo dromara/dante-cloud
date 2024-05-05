@@ -1,0 +1,20 @@
+---
+namespace: "herodotus-reactive"
+fileGroup: "service"
+fileName: "herodotus-cloud-oss-ability.yaml"
+content: "spring:\r\n  security:\r\n    oauth2:\r\n      resourceserver:\r\n     \
+  \   jwt:\r\n          issuer-uri: ${herodotus.endpoint.issuer-uri}\r\n         \
+  \ jwk-set-uri: ${herodotus.endpoint.jwk-set-uri}\r\n        opaquetoken:\r\n   \
+  \       client-id: 7299d999f2d3478497f382450f9a35ba\r\n          client-secret:\
+  \ 02895262878f45e8a16a15f68336f431\r\n\r\nherodotus:\r\n  oss:\r\n    dialect: minio\r\
+  \n    proxy:\r\n      source: http://localhost:3000/api/${spring.application.name}\r\
+  \n      destination: http://127.0.0.1:9000\r\n    minio:\r\n      endpoint: http://127.0.0.1:9000\r\
+  \n      access-key: herodotus\r\n      secret-key: herodotus\r\n    s3:\r\n    \
+  \  endpoint: http://127.0.0.1:9000\r\n      access-key: herodotus\r\n      secret-key:\
+  \ herodotus"
+version: 1
+md5: "dd240507ed802d216ecedf0a38e1f24d"
+publicKey: null
+dataKey: null
+encrypted: false
+releaseTime: null

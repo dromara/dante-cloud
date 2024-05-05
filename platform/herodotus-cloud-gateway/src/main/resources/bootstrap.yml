@@ -1,0 +1,148 @@
+server:
+  port: 8847
+spring:
+  application:
+    name: @artifactId@ #拿到POM文件中的值
+  profiles:
+    active: @facility@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          #表明gateway开启服务注册和发现的功能，
+          #并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，
+          #这个router将以服务名开头的请求路径转发到对应的服务。
+          enabled: true
+          ##是将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了），
+          #比如以/service-hi/*的请求路径被路由转发到服务名为service-hi的服务上。
+          lower-case-service-id: true
+          ##比如url: http://wwww.zhangyu.com.cn/
+          ##其中path: demo/**
+          ##请求转发给http://wwww.zhangyu.com.cn/** ,去除掉demo前缀
+          ##等于1去掉一级
+          filters:
+            - StripPrefix=1
+    loadbalancer:
+      retry:
+        enabled: true # 内部已经默认开启这里列出来说明比较重要
+
+springdoc:
+  webjars:
+    prefix: /document
+
+
+herodotus:
+  gateway:
+    white-list:
+      - "/oauth2/token"
+      - "/oauth2/authorize"
+      - "/v3/api-docs/**"
+      - "/openapi*"
+      - "/open/**"
+
+---
+# spring cloud alibaba 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: alibaba
+  cloud:
+    nacos:
+      config:
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
+        file-extension: yaml
+        shared-configs:
+          - data-id: herodotus-cloud-environment.yaml
+            group: ${PROFILE:@profile@}
+          - data-id: herodotus-cloud-platform.yaml
+            group: common
+          - data-id: herodotus-cloud-redis.yaml
+            group: common
+          - data-id: herodotus-cloud-rest.yaml
+            group: common
+          - data-id: herodotus-cloud-cache.yaml
+            group: common
+      discovery:
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
+      eager: true #服务注启动，直接注册到dashboard
+#      datasource:
+#        flow:
+#          nacos:
+#            server-addr: @alibaba.config.server-addr@
+#            data-id: ${spring.application.name}-sentienl-flow.json
+#            group-id: management
+#            data-type: json
+#            rule-type: flow
+
+logging:
+  file:
+    name: logs/${spring.application.name}.log
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&tenant=${spring.cloud.nacos.config.namespace}&dataId=logback-spring.xml
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&dataId=logback-spring.xml
+  level:
+    root: INFO
+    # 关闭不必要的日志
+    org.reflections.Reflections: off
+    com.alibaba.nacos.client: error
+    com.alibaba.nacos.common.remote.client: error
+    com.ulisesbocchio: error
+    # 开发、调试需要的日志
+    cn.herodotus: debug
+    com.alicp.jetcache: info
+
+---
+# spring cloud tencent 基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: tencent
+  cloud:
+#    inetutils:
+#      ignored-interfaces:
+#        - eth0
+    polaris:
+      enabled: true
+      address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
+      namespace: ${TENCENT_POLARIS_NAMESPACE:@tencent.polaris.namespace@}
+      config:
+        address: ${TENCENT_POLARIS_CONFIG_ADDR:grpc://@tencent.polaris.config-addr@}
+        data-source: ${TENCENT_POLARIS_DATA_SOURCE:@tencent.polaris.data.source@}
+        local-file-root-path: ${TENCENT_POLARIS_LOCAL_DIR:@tencent.polaris.local.dir@}
+        groups:
+          - name: ${PROFILE:@profile@}
+            files:
+              - herodotus-cloud-environment.yaml
+          - name: common
+            files:
+              - herodotus-cloud-platform.yaml
+              - herodotus-cloud-redis.yaml
+              - herodotus-cloud-rest.yaml
+              - herodotus-cloud-cache.yaml
+logging:
+  file:
+    name: logs/${spring.application.name}.log
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&tenant=${spring.cloud.nacos.config.namespace}&dataId=logback-spring.xml
+  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&dataId=logback-spring.xml
+  level:
+    root: INFO
+    # 开发、调试需要的日志
+    cn.herodotus: trace
+
+---
+# spring 全家桶基础设施配置
+spring:
+  config:
+    activate:
+      on-profile: original
+  cloud:
+    zookeeper:
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}

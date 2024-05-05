@@ -1,0 +1,23 @@
+---
+code: 200000
+info: "execute success"
+type: "INSTANCE"
+service:
+  name: "herodotus-cloud-manage-ability"
+  namespace: "herodotus-reactive"
+  ports: ""
+  business: ""
+  department: ""
+  cmdb_mod1: ""
+  cmdb_mod2: ""
+  cmdb_mod3: ""
+  comment: ""
+  owners: "Polaris"
+  ctime: "2024-02-28 12:59:56"
+  mtime: "2024-02-28 12:59:56"
+  revision: "9c0d82e1cfe6c68213af5625c8dc48886734ec3e"
+  platform_id: ""
+  id: "2a6c6b900ad54c0d920930456e0353ee"
+aliasFor:
+  name: "herodotus-cloud-manage-ability"
+  namespace: "herodotus-reactive"

@@ -1,0 +1,29 @@
+name: 功能建议
+description: 对本项目提出一个功能建议
+title: "[功能建议]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢提出功能建议，我们将认证仔细考虑！
+  - type: textarea
+    id: desired-solution
+    attributes:
+      label: 你希望看到什么解决方案？
+      description: 清晰并简洁地描述你希望解决的问题或者已经思考的解决方案。
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 你有其他上下文或截图吗？
+      description: 在此处添加有关功能请求的任何其他上下文或截图。
+    validations:
+      required: false
+  - type: checkboxes
+    attributes:
+      label: 意向参与贡献
+      options:
+        - label: 我有意向参与具体功能的开发实现并将代码贡献回到上游社区
+          required: false

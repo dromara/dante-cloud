@@ -1,0 +1,2 @@
+cn.herodotus.cloud.rpc.client.uaa.autoconfigure.DistributedArchitectureAutoConfiguration
+cn.herodotus.cloud.rpc.client.uaa.autoconfigure.MonocoqueArchitectureAutoConfiguration
