@@ -25,7 +25,9 @@
 
 package cn.herodotus.cloud.bpmn.ability;
 
+import cn.herodotus.stirrup.logic.bpmn.autoconfigure.BpmnLogicAutoConfiguration;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
@@ -37,6 +39,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
+@ImportAutoConfiguration({
+		BpmnLogicAutoConfiguration.class
+})
 public class BpmnAbilityApplication {
 
 	public static void main(String[] args) {

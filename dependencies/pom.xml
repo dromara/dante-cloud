@@ -30,7 +30,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.herodotus.professional</groupId>
+        <groupId>cn.herodotus.stirrup</groupId>
         <artifactId>dependencies</artifactId>
         <version>3.3.0.0-RC2</version>
         <relativePath/>
