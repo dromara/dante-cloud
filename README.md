@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.3.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.3.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.11.1-red.svg?logo=spring" alt="Version 3.1.11.1"></a>
-    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.11.1-red.svg?logo=spring" alt="Dante Engine 3.1.11.1"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.1.11.1-red.svg?logo=spring" alt="Dante OSS 3.1.11.1"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.11.2-red.svg?logo=spring" alt="Version 3.1.11.2"></a>
+    <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.11.2-red.svg?logo=spring" alt="Dante Engine 3.1.11.2"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.1.11.2-red.svg?logo=spring" alt="Dante OSS 3.1.11.2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -47,19 +47,9 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安�
 - 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
 - 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
 
-## 背景
-
-回顾过往，发现很多工作，特别是很多会占用技术人员大量时间和精力的工作，大多数情况下并不是像技术攻关、新技术研究、业务架构设计、并发性能调优等有挑战性的工作，而往往都是因细节考虑欠缺、代码质量不高、在用技术老旧、欠缺优化迭代、系统难于维护、项目管理不善等问题产生的需要长期投入的、低效、低意义工作。
-
-**这也是为什么做 Dante Cloud 的初衷**：一方面是以 Dante Cloud 为载体，潜移默化地将过往项目建设的经验教训融入其中，尽可能地帮助使用者规避或者减少无效工作，提升工作效率和质量，有跟多的时间做更有意义的事情；另一方面不断地融合和使用各类新兴技术，帮助使用者尽可能多的了解、学习和运用新技术，让技术不再成为禁锢变为进步和提升的基石。
-
-**这也是为什么 Dante Cloud 与其它项目不同**：Dante Cloud 并不过分强调常规应用功能的堆叠与丰富化，因为作者认为纯开发工作仅占整个项目建设投入的 20%，减少开发投入、提升开发效率未必就能减少整个项目建设周期剩余80%工作投入。Dante Cloud 的远景目标是可以帮助使用者缩短整个项目的建设周期和减少无意义的工作投入，而不仅仅只是在开发效率方面的提升。
-
-> Dante Cloud 一直秉承“简洁、高效、包容、务实”的理念，不会采取任何额外的手段来获取更多的 Star，绝对真实就像其产品一样。如果你认可和喜欢 Dante Cloud，请不要吝啬你的赞美，项目右上角点颗小星星。
-
 ## 说明
 
-因 Spring Boot 2.7.X 和 3.0.X 将分别于 2023年11月18日 和 2023年11月24日 停止维护，考虑到技术发展趋势，决定停止 Dante Cloud 2.7.X 版本代码的维护，专注 3.1.X 维护及 3.2.X 开发。2.7.16.Final 版本是 Dante Cloud 2.7.X 系列最后一个版本，代码仍旧会保留，可在工程 2.7.X 分支中获取。
+新增文档站点 https://www.herodotus.vip 。 该站点目前包含矫正和重新梳理后的系统部署相关内容，后续计划根据系统涉及的详细知识点和模块，在该站点陆续补充对应设计实现和认知理解相关文章（主要面向 Dante Cloud 3.3.X (Reactive 版) 即将发布）。原有站点如无特殊原因，仍旧会保留。欢迎喜欢 Dante Cloud 的朋友持续关注！
 
 ## Dante Cloud 特性
 
