@@ -17,7 +17,7 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.cloud</groupId>
-        <version>3.3.0.0-RC3</version>
+        <version>3.3.0.0-RC4</version>
     </parent>
 
     <artifactId>facility-spring-boot-starter</artifactId>

@@ -30,11 +30,11 @@
 	<parent>
 		<artifactId>services</artifactId>
 		<groupId>cn.herodotus.cloud</groupId>
-		<version>3.3.0.0-RC3</version>
+		<version>3.3.0.0-RC4</version>
 	</parent>
 
 	<artifactId>herodotus-cloud-bpmn-ability</artifactId>
-	<version>3.3.0.0-RC3</version>
+	<version>3.3.0.0-RC4</version>
 	<name>herodotus-cloud-bpmn-ability</name>
 	<description>herodotus-cloud-bpmn-ability</description>
 
