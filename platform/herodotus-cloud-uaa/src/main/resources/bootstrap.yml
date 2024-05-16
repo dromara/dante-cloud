@@ -62,7 +62,6 @@ spring:
     #            group-id: management
     #            data-type: json
     #            rule-type: flow
-
 logging:
 #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v2/cs/configs?group=logs&tenant=${spring.cloud.nacos.config.namespace}&dataId=logback-spring.xml
   file:
