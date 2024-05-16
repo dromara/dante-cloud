@@ -36,8 +36,9 @@ import cn.herodotus.stirrup.oauth2.authentication.autoconfigure.response.OidcCli
 import cn.herodotus.stirrup.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.stirrup.oauth2.authentication.consumer.OAuth2AuthorizationCodeAuthenticationProviderConsumer;
 import cn.herodotus.stirrup.oauth2.authentication.consumer.OAuth2ClientCredentialsAuthenticationProviderConsumer;
+import cn.herodotus.stirrup.oauth2.authentication.consumer.OidcClientRegistrationAuthenticationProviderConsumer;
+import cn.herodotus.stirrup.oauth2.authentication.customizer.HerodotusOidcUserInfoMapper;
 import cn.herodotus.stirrup.oauth2.authentication.customizer.OAuth2FormLoginConfigurerCustomizer;
-import cn.herodotus.stirrup.oauth2.authentication.oidc.HerodotusOidcUserInfoMapper;
 import cn.herodotus.stirrup.oauth2.authentication.provider.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import cn.herodotus.stirrup.oauth2.authentication.provider.OAuth2SocialCredentialsAuthenticationConverter;
 import cn.herodotus.stirrup.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
@@ -164,6 +165,7 @@ public class AuthorizationServerAutoConfiguration {
         authorizationServerConfigurer.oidc(oidc -> {
             oidc.clientRegistrationEndpoint(endpoint -> {
                 endpoint.errorResponseHandler(errorResponseHandler);
+                endpoint.authenticationProviders(new OidcClientRegistrationAuthenticationProviderConsumer());
                 endpoint.clientRegistrationResponseHandler(oidcClientRegistrationResponseHandler);
             });
             oidc.userInfoEndpoint(userInfo -> userInfo
