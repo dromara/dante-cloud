@@ -42,8 +42,3 @@ springdoc:
     oauth:
       use-pkce-with-authorization-code-grant: true
       app-name: ${spring.application.name}
-
-herodotus:
-  rest:
-    scan:
-      enabled: ${herodotus.switch.rest.scan.enabled}

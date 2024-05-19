@@ -22,6 +22,8 @@ herodotus:
   oauth2:
     jwk:
       certificate: standard
+  platform:
+    architecture: distributed
 
 management:
   endpoints:

@@ -24,9 +24,6 @@ herodotus:
       generate-statistics: false
     swagger:
       enabled: true
-    rest:
-      scan:
-        enabled: true
   session:
     timeout: 2h
   log:
