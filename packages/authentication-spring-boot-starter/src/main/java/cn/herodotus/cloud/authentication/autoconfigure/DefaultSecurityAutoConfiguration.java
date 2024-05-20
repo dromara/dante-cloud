@@ -82,7 +82,8 @@ public class DefaultSecurityAutoConfiguration {
                     exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
                 })
                 .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
-                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, oauth2AuthenticationProperties, captchaRendererFactory), (configurer) -> {});
+                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, oauth2AuthenticationProperties, captchaRendererFactory), (configurer) -> {
+                });
 
         return httpSecurity.build();
     }
