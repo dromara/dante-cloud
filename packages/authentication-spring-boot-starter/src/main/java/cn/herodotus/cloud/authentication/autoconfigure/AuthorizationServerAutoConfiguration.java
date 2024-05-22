@@ -117,6 +117,7 @@ public class AuthorizationServerAutoConfiguration {
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
         httpSecurity.with(authorizationServerConfigurer, new OAuth2AuthorizationServerConfigurerCustomizer(httpSecurity, sessionRegistry, clientDetailsService, httpCryptoProcessor, oidcClientRegistrationResponseHandler, oauth2DeviceVerificationResponseHandler));
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
+
         // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
         httpSecurity.securityMatcher(endpointsMatcher)
                 // 开启请求认证
@@ -126,6 +127,7 @@ public class AuthorizationServerAutoConfiguration {
                 .formLogin(oauth2FormLoginConfigurerCustomizer)
                 .sessionManagement(oauth2sessionManagementConfigurerCustomer)
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
+                // 不配置 oauth2ResourceServer 就不会启用BearerTokenAuthenticationFilter
                 .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
                 .with(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, oauth2AuthenticationProperties), (configurer) -> {
                 });
