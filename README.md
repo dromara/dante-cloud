@@ -5,7 +5,7 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.2.4-blue.svg?logo=spring" alt="Spring Authorization Server 1.2.4"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.3.0-blue.svg?logo=spring" alt="Spring Authorization Server 1.3.0"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.3.0-blue.svg?logo=spring" alt="Spring Boot 3.3.0"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2023.0.1-blue.svg?logo=spring" alt="Spring Cloud 2023.0.1"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.0"></a>
@@ -147,7 +147,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安�
 | Spring Cloud                | 2023.0.1        |
 | Spring Cloud Alibaba        | 2023.0.1.0      |
 | Spring Cloud Tencent        | 1.14.0-2023.0.0 |
-| Spring Authorization Server | 1.2.4           |
+| Spring Authorization Server | 1.3.0           |
 | Spring Boot Admin           | 3.2.2           |
 | Nacos                       | 2.3.2           |
 | Sentinel                    | 1.8.7           |
@@ -343,7 +343,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试。详情参�
 | 7  |  jacsty  | 2023-01-31 | 8  | hubert_rust | 2023-03-16 | 9  |  Zkey Z   | 2023-03-18 |
 | 10 |   志国欧巴   | 2023-03-27 | 11 |   michael   | 2023-04-07 | 12 |   大叔丨小巷   | 2023-04-11 |
 | 13 | sun_left | 2023-04-19 | 14 | time 丶 sand | 2023-07-06 | 15 |  印第安老斑鸠   | 2023-09-09 |
-| 16 |   一阵风    | 2023-12-10 | 17 |    Jack     | 2024-03-01 | 18 |           |            |
+| 16 |   一阵风    | 2023-12-10 | 17 |    Jack     | 2024-03-01 | 18 | onehelper | 2024-05-24 |
 
 ### 开源项目
 
