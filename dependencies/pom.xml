@@ -48,7 +48,7 @@
     </licenses>
     <organization>
         <name>dromara</name>
-        <url>https://github.com/dromara/dante-cloud.git</url>
+        <url>https://dromara.org</url>
     </organization>
     <developers>
         <developer>
@@ -56,7 +56,7 @@
             <name>码匠君</name>
             <email>herodotus@aliyun.com</email>
             <organization>dromara</organization>
-            <organizationUrl>https://dromara.org.cn</organizationUrl>
+            <organizationUrl>https://dromara.org</organizationUrl>
             <timezone>+8</timezone>
         </developer>
     </developers>
