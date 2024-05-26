@@ -32,11 +32,11 @@
     <parent>
         <groupId>cn.herodotus.stirrup</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.3.0.0-RC5</version>
+        <version>3.3.0.0</version>
         <relativePath/>
     </parent>
 
-    <groupId>cn.herodotus.cloud</groupId>
+    <groupId>cn.herodotus.reactive</groupId>
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
@@ -53,26 +53,31 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <url>https://www.herodotus.cn</url>
     <licenses>
         <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <name>GNU AFFERO GENERAL PUBLIC LICENSE Version 3</name>
+            <url>https://www.gnu.org/licenses/agpl-3.0.html</url>
         </license>
     </licenses>
     <developers>
         <developer>
-            <name>Gengwei Zheng</name>
+            <id>herodotus-ecosystem</id>
+            <name>码匠君</name>
             <email>herodotus@aliyun.com</email>
+            <organization>dromara</organization>
+            <organizationUrl>https://dromara.org.cn</organizationUrl>
+            <timezone>+8</timezone>
         </developer>
     </developers>
     <scm>
-        <url>https://gitee.com/herodotus/herodotus-cloud.git</url>
+        <url>https://github.com/dromara/dante-cloud.git</url>
     </scm>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>cn.herodotus.oss</groupId>
+                <groupId>cn.herodotus.artemis</groupId>
                 <artifactId>oss-bom</artifactId>
                 <version>${dante-oss-bom.version}</version>
                 <type>pom</type>
@@ -80,47 +85,47 @@
             </dependency>
             <!-- Herodotus Cloud -->
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>herodotus-module-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>herodotus-module-social</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>herodotus-module-metadata</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>authentication-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>authorization-reactive-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>authorization-servlet-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>facility-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.cloud</groupId>
+                <groupId>cn.herodotus.reactive</groupId>
                 <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
