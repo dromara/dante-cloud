@@ -46,6 +46,10 @@
             <url>https://www.gnu.org/licenses/agpl-3.0.html</url>
         </license>
     </licenses>
+    <organization>
+        <name>dromara</name>
+        <url>https://github.com/dromara/dante-cloud.git</url>
+    </organization>
     <developers>
         <developer>
             <id>herodotus-ecosystem</id>
