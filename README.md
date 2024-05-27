@@ -38,7 +38,7 @@
 
 ## 企业级技术中台微服务架构与服务能力开发和管理平台
 
-Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安全漏洞**」为核心，**采用领域驱动模型(DDD)设计思想，完全基于 Spring 生态全域开源技术和 OAuth2.1 协议，支持智能电视、IoT等物联网设备认证**，满足**国家三级等保要求**、支持接口**国密数字信封加解密**、防刷、高防XSS和SQL注入等一系列安全体系的**多租户微服务解决方案**。
+**Dante Cloud** 是国内首个支持阻塞式和响应式融合的微服务。以「**高质量代码、低安全漏洞**」为核心，**采用领域驱动模型(DDD)设计思想，完全基于 Spring 生态全域开源技术和 OAuth2.1 协议，支持智能电视、IoT等物联网设备认证**，满足**国家三级等保要求**、支持接口**国密数字信封加解密**、防刷、高防XSS和SQL注入等一系列安全体系的**多租户微服务解决方案**。
 
 ## 定位
 
@@ -46,10 +46,6 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安�
 - 面向企业级应用和互联网应用设计开发，既兼顾传统项目的微服务化，又满足互联网应用开发建设、快速迭代的使用需求。
 - 平台架构使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，是帮助快速跨越架构技术选型、研究探索阶段的利器。
 - 代码简洁规范、结构合理清晰，是新技术开发应用的典型的、综合性案例，助力开发人员对新兴技术的学习和掌握。
-
-## 说明
-
-新增文档站点 https://www.herodotus.vip 。 该站点目前包含矫正和重新梳理后的系统部署相关内容，后续计划根据系统涉及的详细知识点和模块，在该站点陆续补充对应设计实现和认知理解相关文章（主要面向 Dante Cloud 3.3.X (Reactive 版) 即将发布）。原有站点如无特殊原因，仍旧会保留。欢迎喜欢 Dante Cloud 的朋友持续关注！
 
 ## Dante Cloud 特性
 
@@ -105,7 +101,11 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安�
 
 开发新手在群内提问或新开 Issue 提问前，请先阅读 [【提问的智慧】](https://www.herodotus.cn/others/question/)，并确保认真、详细地查阅过本项目 [【在线文档】](https://www.herodotus.cn)，特别是【常见问题】章节。避免浪费大家的宝贵时间；
 
-## [1]、总体架构
+## [1]、开源协议
+
+> 因近期出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，Dante Cloud 自 3.3.X 版本开始，开源协议修改为 AGPL 3.0。点击[【了解详情】](https://www.herodotus.vip/support/authorization.html)
+
+## [2]、总体架构
 
 ![输入图片说明](./readme/architecture.jpg)
 
@@ -123,11 +123,11 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安�
 
 ![输入图片说明](./readme/preview/skywalking.gif)
 
-## [2]、功能介绍
+## [3]、功能介绍
 
 <a href="https://www.herodotus.cn">详情见在线文档</a>
 
-## [3]、技术栈和版本说明
+## [4]、技术栈和版本说明
 
 ### （1）Spring 全家桶及核心技术版本
 
@@ -175,7 +175,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安�
 - Vue-Router 4
 - Vueliate
 
-## [4]、 版本和分支
+## [5]、 版本和分支
 
 ### 一、版本号说明
 
@@ -198,7 +198,7 @@ Dante Cloud  (但丁，原 Eurynome Cloud) 是以「**高质量代码、低安�
 | 2.7.X                  | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护          | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
 | spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护          | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
 
-## [5]、工程结构
+## [6]、工程结构
 
 ```
 dante-cloud
@@ -225,14 +225,14 @@ dante-cloud
 └──  └── dante-cloud-oss-ability -- 对象存储服务
 ```
 
-## [6]、项目地址
+## [7]、项目地址
 
 - 后端主工程地址：[https://gitee.com/dromara/dante-cloud](https://gitee.com/dromara/dante-cloud)
 - 后端核心组件库地址：[https://gitee.com/herodotus/dante-engine](https://gitee.com/herodotus/dante-engine)
 - 后端单体版示例工程地址：[https://gitee.com/herodotus/dante-cloud-athena](https://gitee.com/herodotus/dante-cloud-athena)
 - 前端工程地址：[https://gitee.com/herodotus/dante-cloud-ui](https://gitee.com/herodotus/dante-cloud-ui)
 
-## [7]、技术解析
+## [8]、技术解析
 
 **Dante Cloud 技术内幕高阶文档专栏（Cookbook）**
 
@@ -247,20 +247,9 @@ dante-cloud
 | 5  | [OAuth 2 中的鉴权和动态接口鉴权](https://www.foxitsoftware.cn/bhds/payRead/uxq6fi)             | 付费，有试读章节 | 带您跟随 Dante Cloud 源代码，由浅入深全面掌握 Spring Security 5 & 6 以及基于 OAuth2 的微服务动态接口鉴权的原理与实现 | ![OAuth 2 中的鉴权和动态接口鉴权](./readme/cookbook/0005.png)             |
 | 6  | [Spring Boot 3 之 Rest 接口传参方式详解](https://www.foxitsoftware.cn/bhds/payRead/kcsegy)   | 付费，有试读章节 | 一文让你彻底掌握 Spring Boot Rest 各种传参方式和方法的”正确打开方式“                                     | ![Spring Boot 3 之 Rest 接口传参方式详解](./readme/cookbook/0007.png)   |
 
-## [8]、安全测试
+## [9]、安全测试
 
 Dante Cloud 已通过由第三方进行的软件出厂安全测试。详情参见：[安全测试](https://www.herodotus.cn/guide/get-start/project-introduction.html#%E4%BA%94-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
-
-## [9]、授权协议
-
-本项目基于 Apache License Version 2.0 开源协议，可用于商业项目，但必须遵守以下补充条款。
-
-- 不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
-- 在延伸的代码中（修改现有源代码衍生的代码中）需要带有原来代码中的协议、版权声明和其他原作者 规定需要包含的说明（请尊重原作者的著作权，不要删除或修改文件中的Copyright和@author信息） 更不要，全局替换源代码中的 Dante Cloud、Herodotus 或 码匠君 等字样，否则你将违反本协议条款承担责任。
-- 您若套用本软件的一些代码或功能参考，请保留源文件中的版权和作者，需要在您的软件介绍明显位置 说明出处，举例：本软件基于 Dante Cloud 微服务架构，并附带链接：https://www.herodotus.cn
-- 任何基于本软件而产生的一切法律纠纷和责任，均与作者无关。
-- 如果你对本软件有改进，希望可以贡献给我们，双向奔赴互相成就才是王道。
-- 本项目已申请软件著作权，请尊重开源。
 
 ## [10]、参与贡献
 

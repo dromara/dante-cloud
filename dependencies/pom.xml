@@ -60,13 +60,17 @@
             <url>https://www.gnu.org/licenses/agpl-3.0.html</url>
         </license>
     </licenses>
+    <organization>
+        <name>dromara</name>
+        <url>https://dromara.org</url>
+    </organization>
     <developers>
         <developer>
             <id>herodotus-ecosystem</id>
             <name>码匠君</name>
             <email>herodotus@aliyun.com</email>
             <organization>dromara</organization>
-            <organizationUrl>https://dromara.org.cn</organizationUrl>
+            <organizationUrl>https://dromara.org</organizationUrl>
             <timezone>+8</timezone>
         </developer>
     </developers>
