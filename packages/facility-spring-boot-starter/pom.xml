@@ -28,7 +28,7 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>cn.herodotus.reactive</groupId>
-        <version>3.3.0.0</version>
+        <version>3.3.0.1</version>
     </parent>
 
     <artifactId>facility-spring-boot-starter</artifactId>
