@@ -79,7 +79,7 @@ logging:
     org.apache.kafka: warn
 grpc:
   server:
-    port: 6070
+    port: 5070
 
 ---
 # spring cloud tencent 基础设施配置

@@ -27,6 +27,7 @@ import cn.herodotus.stirrup.core.foundation.utils.ResourceUtils;
 import cn.herodotus.stirrup.core.identity.service.ClientDetailsService;
 import cn.herodotus.stirrup.logic.identity.response.OAuth2DeviceVerificationResponseHandler;
 import cn.herodotus.stirrup.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
+import cn.herodotus.stirrup.oauth2.authentication.autoconfigure.customizer.OAuth2ExceptionHandlingConfigurerCustomizer;
 import cn.herodotus.stirrup.oauth2.authentication.autoconfigure.response.OidcClientRegistrationResponseHandler;
 import cn.herodotus.stirrup.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.stirrup.oauth2.authentication.customizer.OAuth2FormLoginConfigurerCustomizer;
@@ -123,6 +124,7 @@ public class AuthorizationServerAutoConfiguration {
                 .formLogin(oauth2FormLoginConfigurerCustomizer)
                 .sessionManagement(oauth2sessionManagementConfigurerCustomer)
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
+                .exceptionHandling(new OAuth2ExceptionHandlingConfigurerCustomizer())
                 // 不配置 oauth2ResourceServer 就不会启用BearerTokenAuthenticationFilter
                 .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
                 .with(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, oauth2AuthenticationProperties), (configurer) -> {
