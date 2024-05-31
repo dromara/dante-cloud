@@ -53,8 +53,8 @@ spring:
         jakarta:
           cache:
             missing_cache_strategy: create
-        temp:
-          use_jdbc_metadata_defaults: true
+        boot:
+          allow_jdbc_metadata_access: true
 
 mybatis-plus:
   global-config:

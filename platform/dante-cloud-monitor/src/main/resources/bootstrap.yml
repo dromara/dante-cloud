@@ -22,6 +22,8 @@ spring:
       on-profile: alibaba
   cloud:
     nacos:
+      username: ${ALIBABA_USERNAME:@alibaba.username@}
+      password: ${ALIBABA_PASSWORD:@alibaba.password@}
       config:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
