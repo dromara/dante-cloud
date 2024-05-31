@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
-  ~
-  ~ Copyright 2020-2030 ZHENGGENGWEI<码匠君>. All rights reserved.
-  ~
-  ~ *   Author: ZHENGGENGWEI<码匠君>
-  ~ *   Contact: <herodotus@aliyun.com>
-  ~ *   Blog and source code availability: <https://gitee.com/herodotus/herodotus-cloud>
-  -->
-
 <configuration>
 
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
