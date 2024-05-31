@@ -18,6 +18,8 @@ spring:
       on-profile: alibaba
   cloud:
     nacos:
+      username: ${ALIBABA_USERNAME:@alibaba.username@}
+      password: ${ALIBABA_PASSWORD:@alibaba.password@}
       config:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
@@ -75,7 +77,7 @@ logging:
     com.ulisesbocchio: error
     # 开发、调试需要的日志
     cn.herodotus: debug
-    org.springframework.security: info
+    org.springframework.security: trace
     org.springframework.web: info
     com.alicp.jetcache: trace
     org.springframework.cloud.bus: info

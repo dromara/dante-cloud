@@ -28,7 +28,7 @@
     <parent>
         <groupId>cn.herodotus.reactive</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.3.0.1</version>
+        <version>3.3.0.2</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
@@ -81,6 +81,10 @@
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
                 <!--Spring Cloud Alibaba 配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <alibaba.namespace>00a14001-348d-40a7-82aa-e2e032f6e03c</alibaba.namespace>
+                <!--Spring Cloud Alibaba 鉴权用户名-->
+                <alibaba.username>nacos</alibaba.username>
+                <!--Spring Cloud Alibaba 鉴权密码-->
+                <alibaba.password>nacos</alibaba.password>
                 <!--Spring Cloud Alibaba 配置中心地址-->
                 <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
                 <!--Spring Cloud Alibaba 服务发现地址-->
@@ -113,6 +117,10 @@
                 <skip.copy.docker.resource>false</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--Spring Cloud Alibaba 鉴权用户名-->
+                <alibaba.username>nacos</alibaba.username>
+                <!--Spring Cloud Alibaba 鉴权密码-->
+                <alibaba.password>nacos</alibaba.password>
                 <!--Spring Cloud Alibaba 配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <alibaba.namespace></alibaba.namespace>
                 <!--Spring Cloud Alibaba 配置中心地址-->
@@ -147,6 +155,10 @@
                 <skip.copy.docker.resource>true</skip.copy.docker.resource>
                 <!--不执行git commit 构建-->
                 <skip.build.git.commit.info>false</skip.build.git.commit.info>
+                <!--Spring Cloud Alibaba 鉴权用户名-->
+                <alibaba.username>nacos</alibaba.username>
+                <!--Spring Cloud Alibaba 鉴权密码-->
+                <alibaba.password>nacos</alibaba.password>
                 <!--Spring Cloud Alibaba 配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <alibaba.namespace></alibaba.namespace>
                 <!--Spring Cloud Alibaba 配置中心地址-->

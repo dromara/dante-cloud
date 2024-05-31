@@ -28,7 +28,7 @@
     <parent>
         <artifactId>herodotus-cloud</artifactId>
         <groupId>cn.herodotus.reactive</groupId>
-        <version>3.3.0.1</version>
+        <version>3.3.0.2</version>
     </parent>
 
     <artifactId>services</artifactId>

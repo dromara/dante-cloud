@@ -1,0 +1,10 @@
+services:
+  opengauss:
+    image: enmotech/opengauss:latest
+    container_name: opengauss
+    environment:
+      GS_PASSWORD: Hero00362255!QAZ2wsx
+    volumes:
+      - D:\\local-cached\\docker-volumes\\db\\opengauss:/var/lib/opengauss
+    ports:
+      - "25432:5432"
