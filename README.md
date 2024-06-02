@@ -26,7 +26,7 @@
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
 <p align="center">
-    <a href="https://github.com/herodotus-cloud/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
+    <a href="https://github.com/dromara/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.cn">核心组件仓库</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.cn">文档</a>
@@ -35,6 +35,15 @@
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
 
 ---
+
+## 重要说明
+
+因频繁出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，特进行以下几项说明：
+
+1. Dante Cloud 项目自 3.3.X 版本开始，开源协议变更为 AGPL 3.0。
+2. 自2024年6月1日起，永久关闭 Dante Engine 工程不再开放。这不会影响使用，代码会持续更新并上传中央仓库，可以通过 source.jar 方式查看。
+3. 如自用需修改 Dante Engine 代码，可[【留言登记】](https://gitee.com/dromara/dante-cloud/issues/I65F5B)，联系作者开放私库。
+4. 商用 Dante Cloud 以及相关项目，不管阻塞式版本还是响应式版本，均需申请授权，点击[【了解详情】](https://www.herodotus.cn/support/authorization.html)
 
 ## 企业级技术中台微服务架构与服务能力开发和管理平台
 
@@ -118,13 +127,7 @@
 - 共享模块已进行优化配置，可编译成独立的组件，单独以组件形式进行发布。 
 - 代码以共享模块的方式进行单独维护开发，降低现有工程代码复杂度，便于后续功能的扩展和代码的复用。
 
-## 说明
-
-开发新手在群内提问或新开 Issue 提问前，请先阅读 [【提问的智慧】](https://www.herodotus.cn/others/question/)，并确保认真、详细地查阅过本项目 [【在线文档】](https://www.herodotus.cn)，特别是【常见问题】章节。避免浪费大家的宝贵时间；
-
 ## [1]、开源协议
-
-> 因近期出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，Dante Engine 自 3.3.X 版本开始，开源协议修改为 AGPL 3.0。点击[【了解详情】](https://www.herodotus.cn/support/authorization.html)
 
 ![开源协议](./readme/copyright/agplv3-155x51.png)
 
@@ -251,7 +254,6 @@ dante-cloud
 ## [7]、项目地址
 
 - 后端主工程地址：[https://gitee.com/dromara/dante-cloud](https://gitee.com/dromara/dante-cloud)
-- 后端核心组件库地址：[https://www.herodotus.cn](https://www.herodotus.cn)
 - 后端单体版示例工程地址：[https://gitee.com/herodotus/dante-cloud-athena](https://gitee.com/herodotus/dante-cloud-athena)
 - 前端工程地址：[https://gitee.com/herodotus/dante-cloud-ui](https://gitee.com/herodotus/dante-cloud-ui)
 
@@ -272,7 +274,7 @@ dante-cloud
 
 ## [9]、安全测试
 
-Dante Cloud 已通过由第三方进行的软件出厂安全测试。详情参见：[安全测试](https://www.herodotus.cn/guide/get-start/project-introduction.html#%E4%BA%94-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
+Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试](https://www.herodotus.cn/guide/get-start/project-introduction.html#%E4%BA%94-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
 
 ## [10]、参与贡献
 
