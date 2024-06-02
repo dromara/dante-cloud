@@ -28,8 +28,8 @@
 <p align="center">
     <a href="https://github.com/dromara/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
-    <a href="https://www.herodotus.cn">核心组件仓库</a> &nbsp; | &nbsp;
-    <a href="https://www.herodotus.cn">文档</a>
+    <a href="https://www.herodotus.cn">旧版文档</a>
+    <a href="https://www.herodotus.vip">新版文档</a>
 </p>
 
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
