@@ -26,11 +26,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.reactive</groupId>
-        <version>3.3.0.2</version>
+        <version>3.3.0.3</version>
     </parent>
 
     <artifactId>herodotus-cloud-monitor</artifactId>
-    <version>3.3.0.2</version>
+    <version>3.3.0.3</version>
     <name>herodotus-cloud-monitor</name>
     <description>herodotus-cloud-monitor</description>
 
