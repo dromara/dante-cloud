@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.3.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.3.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.0.3-red.svg?logo=spring" alt="Version 3.3.0.3"></a>
-    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.0.3-red.svg?logo=spring" alt="Dante Engine 3.3.0.3"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.0.3-red.svg?logo=spring" alt="Dante OSS 3.3.0.3"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.0.4-red.svg?logo=spring" alt="Version 3.3.0.4"></a>
+    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.0.4-red.svg?logo=spring" alt="Dante Engine 3.3.0.4"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.0.4-red.svg?logo=spring" alt="Dante OSS 3.3.0.4"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-AGPL--3.0-blue.svg?logo=apache" alt="License AGPL 3.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -259,7 +259,13 @@ dante-cloud
 
 ## [8]、技术解析
 
-**Dante Cloud 技术内幕高阶文档专栏（Cookbook）**
+**Dante Cloud 技术内幕高阶文档专栏（Cookbook）**。
+
+本专栏目标是：
+
+- 结合作者个人的工作经历、开发经验、技术理解以及 Dante Cloud 技术实现进行讲解
+- 涵盖基础知识、原理解析、高阶使用、个人心得、项目管理、团队管理等多方面内容，尽量满足不同经验、不同程度朋友的技术学习需求，
+- 希望可以让更多的朋友快速掌握 Dante Cloud 以及相关的技术内容。即使工作中不会用到 Dante Cloud，也可以将学到的知识应用于今后的其它工作中。
 
 > 因目前所使用的阅读产品支持度有限，想要购买阅读全文请点击对应文章链接，在电脑浏览器中打开后进行购买。购买后即可在小程序阅读全文，否则小程序端仅能阅读试读章节。
 
@@ -271,6 +277,8 @@ dante-cloud
 | 4  | [Spring Cloud 之 Session 共享及一致性处理](https://www.foxitsoftware.cn/bhds/payRead/pmq4wy) | 付费，有试读章节 | 深入浅出剖析微服务架构 Session 共享技术难点                                                       | ![Spring Cloud 之 Session 共享及一致性处理](./readme/cookbook/0004.png) |
 | 5  | [OAuth 2 中的鉴权和动态接口鉴权](https://www.foxitsoftware.cn/bhds/payRead/uxq6fi)             | 付费，有试读章节 | 带您跟随 Dante Cloud 源代码，由浅入深全面掌握 Spring Security 5 & 6 以及基于 OAuth2 的微服务动态接口鉴权的原理与实现 | ![OAuth 2 中的鉴权和动态接口鉴权](./readme/cookbook/0005.png)             |
 | 6  | [Spring Boot 3 之 Rest 接口传参方式详解](https://www.foxitsoftware.cn/bhds/payRead/kcsegy)   | 付费，有试读章节 | 一文让你彻底掌握 Spring Boot Rest 各种传参方式和方法的”正确打开方式“                                     | ![Spring Boot 3 之 Rest 接口传参方式详解](./readme/cookbook/0007.png)   |
+
+> 更多内容可以查看[【新版文档】](https://www.herodotus.vip)
 
 ## [9]、安全测试
 
