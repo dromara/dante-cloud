@@ -28,7 +28,7 @@
     <parent>
         <groupId>cn.herodotus.reactive</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.3.0.2</version>
+        <version>3.3.0.3</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
