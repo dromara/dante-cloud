@@ -35,6 +35,7 @@ import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoin
 import cn.herodotus.engine.oauth2.management.processor.HerodotusClientDetailsService;
 import cn.herodotus.engine.oauth2.management.processor.HerodotusUserDetailsService;
 import cn.herodotus.engine.oauth2.management.service.OAuth2ApplicationService;
+import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -66,6 +67,7 @@ public class DefaultSecurityAutoConfiguration {
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
             UserDetailsService userDetailsService,
+            HttpCryptoProcessor httpCryptoProcessor,
             OAuth2AuthenticationProperties authenticationProperties,
             CaptchaRendererFactory captchaRendererFactory,
             OAuth2SessionManagementConfigurerCustomer oauth2SessionManagementConfigurerCustomer,
@@ -86,7 +88,7 @@ public class DefaultSecurityAutoConfiguration {
                     exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
                 })
                 .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
-                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory), (configurer) -> {});
+                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory, httpCryptoProcessor), (configurer) -> {});
 
         // @formatter:on
         return httpSecurity.build();
