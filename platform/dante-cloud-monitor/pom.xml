@@ -26,11 +26,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.3.0.5</version>
+        <version>3.3.0.6</version>
     </parent>
 
     <artifactId>dante-cloud-monitor</artifactId>
-    <version>3.3.0.5</version>
+    <version>3.3.0.6</version>
     <name>dante-cloud-monitor</name>
     <description>dante-cloud-monitor</description>
     <dependencies>
