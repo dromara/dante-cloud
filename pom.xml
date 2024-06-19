@@ -208,7 +208,8 @@
                         </execution>
                         <execution>
                             <id>prepare-docker-resource</id>
-                            <phase>package</phase>
+                            <!--fix: #IA6J53 prepare 阶段会导致 jar 包中 manifest 信息缺失，导致 java -jar 运行失败-->
+                            <phase>install</phase>
                             <goals>
                                 <goal>run</goal>
                             </goals>
