@@ -323,11 +323,11 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 
 ### 个人
 
-| 序号 |                    昵称                    |         合规         | 序号 |                     昵称                     |         合规         | 序号 |                    昵称                    |         合规         | 序号 |                   昵称                   |         合规         |
-|:--:|:----------------------------------------:|:------------------:|:--:|:------------------------------------------:|:------------------:|:--:|:----------------------------------------:|:------------------:|:--:|:--------------------------------------:|:------------------:|
-| 1  | [Kaiser_Li](https://gitee.com/Kaiser_Li) | :white_check_mark: | 2  | [宁哥](https://gitee.com/seabuckthorn-syrup) | :white_check_mark: | 3  | [Nicolas](https://gitee.com/ailifeshow)  | :white_check_mark: | 4  | [龍飝龘龘](https://gitee.com/autumnchendq) | :white_check_mark: |
-| 5  |  [RSJB](https://gitee.com/jinjiaxing1)   | :white_check_mark: | 6  |        [ipi](https://gitee.com/ipi)        | :white_check_mark: | 7  | [zhouhailong](https://gitee.com/l-cloud) | :white_check_mark: | 8  |     [Ge](https://gitee.com/gtkwww)     | :white_check_mark: |
-| 9  |  [KohRong](https://gitee.com/loong024)   | :white_check_mark: | 10 |       [梦行](https://gitee.com/mx2913)       | :white_check_mark: | 11 |     [骆铘](https://gitee.com/clxhhsy)      | :white_check_mark: | 12 |                                        | :white_check_mark: |
+| 序号 |                    昵称                    |         合规         | 序号 |                     昵称                     |         合规         | 序号 |                    昵称                    |         合规         | 序号 |                        昵称                        |         合规         |
+|:--:|:----------------------------------------:|:------------------:|:--:|:------------------------------------------:|:------------------:|:--:|:----------------------------------------:|:------------------:|:--:|:------------------------------------------------:|:------------------:|
+| 1  | [Kaiser_Li](https://gitee.com/Kaiser_Li) | :white_check_mark: | 2  | [宁哥](https://gitee.com/seabuckthorn-syrup) | :white_check_mark: | 3  | [Nicolas](https://gitee.com/ailifeshow)  | :white_check_mark: | 4  |      [龍飝龘龘](https://gitee.com/autumnchendq)      | :white_check_mark: |
+| 5  |  [RSJB](https://gitee.com/jinjiaxing1)   | :white_check_mark: | 6  |        [ipi](https://gitee.com/ipi)        | :white_check_mark: | 7  | [zhouhailong](https://gitee.com/l-cloud) | :white_check_mark: | 8  |          [Ge](https://gitee.com/gtkwww)          | :white_check_mark: |
+| 9  |  [KohRong](https://gitee.com/loong024)   | :white_check_mark: | 10 |       [梦行](https://gitee.com/mx2913)       | :white_check_mark: | 11 |     [骆铘](https://gitee.com/clxhhsy)      | :white_check_mark: | 12 | [OnPeaceOfMind](https://gitee.com/onpeaceofmind) | :white_check_mark: |
 
 ## [14]、鸣谢
 
