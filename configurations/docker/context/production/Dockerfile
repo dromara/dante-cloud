@@ -1,6 +1,6 @@
-# Docker image for dante-cloud application
+# Docker image for herodotus-cloud application
 # VERSION 1.0.0
-# Author: gengwei.zheng
+# Author: herodotus
 
 ### 基础镜像，使用debian操作系统，使用 liberica-openjdk
 ### 本系统涉及图形验证码，有字体需求，而且采用的是非系统字体。
@@ -10,19 +10,29 @@
 ### 当然也可能是个人能力有限，一直没有找到正确解决的办法。如果你有更好的解决办法，欢迎提 ISSUE 和 PR。
 
 FROM quay.io/herodotus-cloud/liberica-openjdk-debian:17.0.11-10
-#FROM openjdk:17-jdk
 
 # 作者
-MAINTAINER 码匠君 <herodotus@aliyun.com>
+MAINTAINER herodotus <herodotus@aliyuan.com>
 
-# 外部传递参数
+#工作目录
+WORKDIR /usr/local/
+
+# 声明一个挂载点，容器内此路径会对应宿主机的某个文件夹
+VOLUME ["/usr/local/logs"]
+
+#定义参数（build构建时使用）
 ARG VERSION
 ARG SERVICE_NAME
 ARG SERVICE_PORT
+
+# 系统编码
+#设置环境变量（程序运行时使用）
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV JAVA_OPTS=""
+ENV PARAMS=""
 ENV VERSION=$VERSION
 ENV SERVICE_NAME=$SERVICE_NAME
 ENV SERVICE_PORT=$SERVICE_PORT
-
 # 系统编码
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 # 运行参数
@@ -30,15 +40,20 @@ ENV JAVA_OPTS=""
 ENV SW_AGENT_SERVICE_NAME=""
 ENV SW_COLLECTOR_BACKEND_SERVICE=""
 
-# 声明一个挂载点，容器内此路径会对应宿主机的某个文件夹
-VOLUME /tmp
+#声明了容器应该打开的端口并没有实际上将它打开
+EXPOSE ${SERVICE_PORT}
 
 # 应用构建成功后的jar文件被复制到镜像内，名字也改成了app.jar
 ADD ./target/${SERVICE_NAME}-${VERSION}.jar /usr/local/app.jar
 COPY ./agent/skywalking-agent-8.15.0.jar /usr/local/sw/agent.jar
+COPY ./agent/plugins/ /usr/local/sw/plugins/
+COPY ./agent/config/ /usr/local/sw/config/
 
-# 声明运行时端口
-EXPOSE ${SERVICE_PORT}
+# 康检查参数设置，每5秒检查一次，接口超时时间2秒，连续10次返回1就判定该容器不健康
+HEALTHCHECK --interval=5s \
+            --timeout=3s \
+            --retries=10 \
+            CMD curl -fs http://localhost:${SERVICE_PORT}/actuator/health || exit 1
 
 # 启动容器时的进程
-ENTRYPOINT java -javaagent:/usr/local/sw/agent.jar=agent.service_name=${SW_AGENT_SERVICE_NAME},collector.backend_service=${SW_COLLECTOR_BACKEND_SERVICE} ${JAVA_OPTS} -jar -Dfile.encoding=utf-8 /usr/local/app.jar
+ENTRYPOINT ["sh", "-c", "java -javaagent:/usr/local/sw/agent.jar=agent.service_name=$SW_AGENT_SERVICE_NAME,collector.backend_service=$SW_COLLECTOR_BACKEND_SERVICE $JAVA_OPTS -jar -Djava.awt.headless=true -Dfile.encoding=utf-8 /usr/local/app.jar"]
