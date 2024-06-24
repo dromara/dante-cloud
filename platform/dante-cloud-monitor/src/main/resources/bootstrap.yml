@@ -10,9 +10,6 @@ management:
   health:
     redis:
       enabled: false
-herodotus:
-  platform:
-    architecture: monocoque
 
 ---
 # spring cloud alibaba 基础设施配置
