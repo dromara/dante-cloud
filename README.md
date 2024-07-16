@@ -8,7 +8,7 @@
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.3.1-blue.svg?logo=spring" alt="Spring Authorization Server 1.3.1"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.3.1-blue.svg?logo=spring" alt="Spring Boot 3.3.1"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2023.0.3-blue.svg?logo=spring" alt="Spring Cloud 2023.0.3"></a>
-    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.0"></a>
+    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.2-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.2"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.14.0--2023.0.0-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.14.0--2023.0.0-SNAPSHOT"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.3.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.3.3"></a>
 </p>
@@ -158,7 +158,7 @@
 |-----------------------------|-----------------|
 | Spring Boot                 | 3.3.1           |
 | Spring Cloud                | 2023.0.3        |
-| Spring Cloud Alibaba        | 2023.0.1.0      |
+| Spring Cloud Alibaba        | 2023.0.1.2      |
 | Spring Cloud Tencent        | 1.14.0-2023.0.0 |
 | Spring Authorization Server | 1.3.1           |
 | Spring Boot Admin           | 3.2.2           |
@@ -323,11 +323,14 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 
 ### 个人
 
-| 序号 |                    昵称                    |         合规         | 序号 |                     昵称                     |         合规         | 序号 |                    昵称                    |         合规         | 序号 |                        昵称                        |         合规         |
-|:--:|:----------------------------------------:|:------------------:|:--:|:------------------------------------------:|:------------------:|:--:|:----------------------------------------:|:------------------:|:--:|:------------------------------------------------:|:------------------:|
-| 1  | [Kaiser_Li](https://gitee.com/Kaiser_Li) | :white_check_mark: | 2  | [宁哥](https://gitee.com/seabuckthorn-syrup) | :white_check_mark: | 3  | [Nicolas](https://gitee.com/ailifeshow)  | :white_check_mark: | 4  |      [龍飝龘龘](https://gitee.com/autumnchendq)      | :white_check_mark: |
-| 5  |  [RSJB](https://gitee.com/jinjiaxing1)   | :white_check_mark: | 6  |        [ipi](https://gitee.com/ipi)        | :white_check_mark: | 7  | [zhouhailong](https://gitee.com/l-cloud) | :white_check_mark: | 8  |          [Ge](https://gitee.com/gtkwww)          | :white_check_mark: |
-| 9  |  [KohRong](https://gitee.com/loong024)   | :white_check_mark: | 10 |       [梦行](https://gitee.com/mx2913)       | :white_check_mark: | 11 |     [骆铘](https://gitee.com/clxhhsy)      | :white_check_mark: | 12 | [OnPeaceOfMind](https://gitee.com/onpeaceofmind) | :white_check_mark: |
+| 序号 |                      昵称                       |         合规         | 序号 |                       昵称                       |         合规         | 序号 |                    昵称                    |         合规         | 序号 |                        昵称                        |         合规         |
+|:--:|:---------------------------------------------:|:------------------:|:--:|:----------------------------------------------:|:------------------:|:--:|:----------------------------------------:|:------------------:|:--:|:------------------------------------------------:|:------------------:|
+| 1  |   [Kaiser_Li](https://gitee.com/Kaiser_Li)    | :white_check_mark: | 2  |   [宁哥](https://gitee.com/seabuckthorn-syrup)   | :white_check_mark: | 3  | [Nicolas](https://gitee.com/ailifeshow)  | :white_check_mark: | 4  |      [龍飝龘龘](https://gitee.com/autumnchendq)      | :white_check_mark: |
+| 5  |     [RSJB](https://gitee.com/jinjiaxing1)     | :white_check_mark: | 6  |          [ipi](https://gitee.com/ipi)          | :white_check_mark: | 7  | [zhouhailong](https://gitee.com/l-cloud) | :white_check_mark: | 8  |          [Ge](https://gitee.com/gtkwww)          | :white_check_mark: |
+| 9  |     [KohRong](https://gitee.com/loong024)     | :white_check_mark: | 10 |         [梦行](https://gitee.com/mx2913)         | :white_check_mark: | 11 |     [骆铘](https://gitee.com/clxhhsy)      | :white_check_mark: | 12 | [OnPeaceOfMind](https://gitee.com/onpeaceofmind) | :white_check_mark: |
+| 13 | [SaltedFish](https://gitee.com/null_183_5304) | :white_check_mark: | 14 | [cryptoneedle](https://gitee.com/cryptoneedle) | :white_check_mark: | 15 |    [微笑的小虎](https://gitee.com/jfh1214)    | :white_check_mark: | 16 |       [wui](https://gitee.com/qazwuzhuhe)        | :white_check_mark: |
+| 17 |       [wiysy](https://gitee.com/wiysy)        | :white_check_mark: | 18 |    [p911gt3rs](https://gitee.com/p911gt3rs)    | :white_check_mark: | 19 |   [郝召豪](https://gitee.com/menghan1997)   | :white_check_mark: | 20 |         [zjoye](https://gitee.com/zjoye)         | :white_check_mark: |
+| 21 |       [尹建](https://gitee.com/westcars)        | :white_check_mark: | 22 |        [常相守](https://gitee.com/canzii)         | :white_check_mark: | 23 |    [yunnet](https://gitee.com/yunnet)    | :white_check_mark: | 24 |       [拔土豆的程序员](https://gitee.com/lizhifu)       | :white_check_mark: |
 
 ## [14]、鸣谢
 
