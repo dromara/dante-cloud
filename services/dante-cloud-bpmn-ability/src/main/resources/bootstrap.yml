@@ -48,7 +48,6 @@ spring:
       transport:
         port: 8719
         dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
-      eager: true #服务注启动，直接注册到dashboard
 #      datasource:
 #        flow:
 #          nacos:
