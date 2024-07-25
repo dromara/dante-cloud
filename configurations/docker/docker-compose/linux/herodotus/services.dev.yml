@@ -1,6 +1,6 @@
 services:
   upms:
-    image: quay.io/herodotus-cloud/${UPMS_SERVICE_NAME}:${VERSION}
+    image: quay.io/dante-cloud/${UPMS_SERVICE_NAME}:${VERSION}
     container_name: upms
     hostname: upms
     build:
@@ -16,10 +16,10 @@ services:
     ports:
       - ${UPMS_SERVICE_PORT}:${UPMS_SERVICE_PORT}
     volumes:
-      - /usr/local/herodotus-cloud/logs:/usr/local/logs
+      - /usr/local/dante-cloud/logs:/usr/local/logs
 
   uaa:
-    image: quay.io/herodotus-cloud/${UAA_SERVICE_NAME}:${VERSION}
+    image: quay.io/dante-cloud/${UAA_SERVICE_NAME}:${VERSION}
     container_name: uaa
     hostname: uaa
     build:
@@ -35,12 +35,12 @@ services:
     ports:
       - ${UAA_SERVICE_PORT}:${UAA_SERVICE_PORT}
     volumes:
-      - /usr/local/herodotus-cloud/logs:/usr/local/logs
+      - /usr/local/dante-cloud/logs:/usr/local/logs
     depends_on:
       - upms
 
   msg:
-    image: quay.io/herodotus-cloud/${MESSAGE_SERVICE_NAME}:${VERSION}
+    image: quay.io/dante-cloud/${MESSAGE_SERVICE_NAME}:${VERSION}
     container_name: msg
     hostname: msg
     build:
@@ -56,12 +56,12 @@ services:
     ports:
       - ${MESSAGE_SERVICE_PORT}:${MESSAGE_SERVICE_PORT}
     volumes:
-      - /usr/local/herodotus-cloud/logs:/usr/local/logs
+      - /usr/local/dante-cloud/logs:/usr/local/logs
     depends_on:
       - uaa
 
   oss:
-    image: quay.io/herodotus-cloud/${OSS_SERVICE_NAME}:${VERSION}
+    image: quay.io/dante-cloud/${OSS_SERVICE_NAME}:${VERSION}
     container_name: oss
     hostname: oss
     build:
@@ -77,12 +77,12 @@ services:
     ports:
       - ${OSS_SERVICE_PORT}:${OSS_SERVICE_PORT}
     volumes:
-      - /usr/local/herodotus-cloud/logs:/usr/local/logs
+      - /usr/local/dante-cloud/logs:/usr/local/logs
     depends_on:
       - msg
 
   gateway:
-    image: quay.io/herodotus-cloud/${GATEWAY_SERVICE_NAME}:${VERSION}
+    image: quay.io/dante-cloud/${GATEWAY_SERVICE_NAME}:${VERSION}
     container_name: gateway
     hostname: gateway
     build:
@@ -98,12 +98,12 @@ services:
     ports:
       - ${GATEWAY_SERVICE_PORT}:${GATEWAY_SERVICE_PORT}
     volumes:
-      - /usr/local/herodotus-cloud/logs:/usr/local/logs
+      - /usr/local/dante-cloud/logs:/usr/local/logs
     depends_on:
       - oss
 
   bpmn:
-    image: quay.io/herodotus-cloud/${BPMN_SERVICE_NAME}:${VERSION}
+    image: quay.io/dante-cloud/${BPMN_SERVICE_NAME}:${VERSION}
     container_name: bpmn
     hostname: bpmn
     build:
@@ -119,12 +119,12 @@ services:
     ports:
       - ${BPMN_SERVICE_PORT}:${BPMN_SERVICE_PORT}
     volumes:
-      - /usr/local/herodotus-cloud/logs:/usr/local/logs
+      - /usr/local/dante-cloud/logs:/usr/local/logs
     depends_on:
       - gateway
 
   monitor:
-    image: quay.io/herodotus-cloud/${MONITOR_SERVICE_NAME}:${VERSION}
+    image: quay.io/dante-cloud/${MONITOR_SERVICE_NAME}:${VERSION}
     container_name: monitor
     hostname: monitor
     build:
@@ -140,6 +140,6 @@ services:
     ports:
       - ${MONITOR_SERVICE_PORT}:${MONITOR_SERVICE_PORT}
     volumes:
-      - /usr/local/herodotus-cloud/logs:/usr/local/logs
+      - /usr/local/dante-cloud/logs:/usr/local/logs
     depends_on:
       - gateway

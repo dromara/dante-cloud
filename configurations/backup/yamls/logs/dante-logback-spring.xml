@@ -2,7 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <springProperty scope="context" name="SERVICE_NAME" source="spring.application.name" defaultValue="herodotus-cloud" />
+    <springProperty scope="context" name="SERVICE_NAME" source="spring.application.name" defaultValue="dante-cloud" />
     <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/${SERVICE_NAME}.log}"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">

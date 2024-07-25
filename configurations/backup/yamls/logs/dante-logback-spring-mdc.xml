@@ -6,7 +6,7 @@
     <property name="TRACE_ID_FILE_LOG_PATTERN" value="${TRACE_ID_FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} [%X{tid}] ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
     <property name="TRACE_ID_APM_LOG_PATTERN" value="${TRACE_ID_APM_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} [%X{tid}] ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
-    <springProperty scope="context" name="SERVICE_NAME" source="spring.application.name" defaultValue="herodotus-cloud" />
+    <springProperty scope="context" name="SERVICE_NAME" source="spring.application.name" defaultValue="dante-cloud" />
     <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/${SERVICE_NAME}.log}"/>
     
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
