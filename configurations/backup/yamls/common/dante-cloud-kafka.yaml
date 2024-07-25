@@ -2,7 +2,7 @@ spring:
   cloud:
     bus:
       id: ${spring.application.name}:${server.port}
-      destination: herodotus-cloud-bus
+      destination: dante-cloud-bus
     stream:
       kafka:
         binder:

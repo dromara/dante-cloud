@@ -5,7 +5,7 @@
  *
  * - Author: ZHENGGENGWEI<码匠君>
  * - Contact: herodotus@aliyun.com
- * - Blog and source code availability: https://gitee.com/herodotus/herodotus-cloud
+ * - Blog and source code availability: https://gitee.com/herodotus/dante-cloud
  */
 
 
