@@ -20,8 +20,8 @@
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-AGPL--3.0-blue.svg?logo=apache" alt="License AGPL 3.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/dante-cloud/dante-cloud?style=flat&logo=github" alt="Github star"></a>
-    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/dante-cloud/dante-cloud?style=flat&logo=github" alt="Github fork"></a>
+    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/dromara/dante-cloud?style=flat&logo=github" alt="Github star"></a>
+    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/dromara/dante-cloud?style=flat&logo=github" alt="Github fork"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
 </p>
