@@ -21,7 +21,7 @@
 
 package cn.herodotus.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.assistant.core.utils.ResourceUtils;
+import cn.herodotus.engine.assistant.core.utils.ResourceResolver;
 import cn.herodotus.engine.assistant.definition.constants.DefaultConstants;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.engine.oauth2.authentication.consumer.OAuth2AuthorizationCodeAuthenticationProviderConsumer;
@@ -195,7 +195,7 @@ public class AuthorizationServerAutoConfiguration {
         KeyPair keyPair = null;
         if (jwk.getCertificate() == Certificate.CUSTOM) {
             try {
-                Resource[] resource = ResourceUtils.getResources(jwk.getJksKeyStore());
+                Resource[] resource = ResourceResolver.getResources(jwk.getJksKeyStore());
                 if (ArrayUtils.isNotEmpty(resource)) {
                     KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(resource[0], jwk.getJksStorePassword().toCharArray());
                     keyPair = keyStoreKeyFactory.getKeyPair(jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
