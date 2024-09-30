@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.4.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.4.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.4.0-red.svg?logo=spring" alt="Version 3.3.4.0"></a>
-    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.4.0-red.svg?logo=spring" alt="Dante Engine 3.3.4.0"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.4.0-red.svg?logo=spring" alt="Dante OSS 3.3.4.0"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.4.1-red.svg?logo=spring" alt="Version 3.3.4.1"></a>
+    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.4.1-red.svg?logo=spring" alt="Dante Engine 3.3.4.1"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.4.1-red.svg?logo=spring" alt="Dante OSS 3.3.4.1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-AGPL--3.0-blue.svg?logo=apache" alt="License AGPL 3.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -325,7 +325,8 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | 37 | [lidinglin](https://gitee.com/lidinglin3452)  | :white_check_mark: | 38 |      [讲你知](https://gitee.com/PengKai0706)      | :white_check_mark: | 39 |  [onehelper](https://gitee.com/onehelper)  | :white_check_mark: | 40 |    [大将军王](https://gitee.com/xiaoxiangyueying)    | :white_check_mark: |
 | 41 |        [lbY](https://gitee.com/lbYue)         | :white_check_mark: | 42 |       [財財](https://gitee.com/a545932167)       | :white_check_mark: | 43 |   [medo1123](https://gitee.com/medo1123)   | :white_check_mark: | 44 |     [盗版不见了](https://gitee.com/watermelon006)     | :white_check_mark: |
 | 45 |     [song](https://gitee.com/Song_space)      | :white_check_mark: | 46 |     [天然喵](https://gitee.com/natural-meow)      | :white_check_mark: | 47 |   [firebull](https://gitee.com/firebull)   | :white_check_mark: | 48 |     [心有猛虎细嗅蔷薇](https://gitee.com/fenganye90)     | :white_check_mark: |
-| 49 |      [Sukari](https://gitee.com/Sukari)       | :white_check_mark: | 50 |         [生活](https://gitee.com/liveok)         | :white_check_mark: | 51 | [hero_zhjms](https://gitee.com/hero_zhjms) | :white_check_mark: | 52 |                                                  | :white_check_mark: |
+| 49 |      [Sukari](https://gitee.com/Sukari)       | :white_check_mark: | 50 |         [生活](https://gitee.com/liveok)         | :white_check_mark: | 51 | [hero_zhjms](https://gitee.com/hero_zhjms) | :white_check_mark: | 52 |         [panza](https://gitee.com/panza)         | :white_check_mark: |
+| 53 |       [nian8](https://gitee.com/nian8)        | :white_check_mark: | 54 |       [永恒](https://gitee.com/eternycyh)        | :white_check_mark: | 55 |   [klaus_pd](https://gitee.com/klaus_pd)   | :white_check_mark: | 56 |    [starry](https://gitee.com/starry_fanxin)     | :white_check_mark: |
 
 ## [14]、鸣谢
 

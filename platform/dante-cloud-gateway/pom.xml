@@ -28,7 +28,7 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.3.4.0</version>
+        <version>3.3.4.1</version>
     </parent>
 
     <artifactId>dante-cloud-gateway</artifactId>
