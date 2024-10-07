@@ -16,12 +16,14 @@
 --
 
 insert into ACT_GE_SCHEMA_LOG
-values ('1000', CURRENT_TIMESTAMP, '7.21.0');
+values ('1100', CURRENT_TIMESTAMP, '7.22.0');
 
-alter table ACT_RU_EXT_TASK
-  add column CREATE_TIME_ timestamp;
+alter table ACT_RU_TASK add TASK_STATE_ nvarchar(64);
 
-alter table ACT_RU_JOB
-  add column ROOT_PROC_INST_ID_ varchar(64);
+alter table ACT_HI_TASKINST add TASK_STATE_ nvarchar(64);
 
-create index ACT_IDX_JOB_ROOT_PROCINST on ACT_RU_JOB(ROOT_PROC_INST_ID_);
+alter table ACT_RU_JOB add BATCH_ID_ nvarchar(64);
+alter table ACT_HI_JOB_LOG add BATCH_ID_ nvarchar(64);
+
+alter table ACT_HI_PROCINST add RESTARTED_PROC_INST_ID_ nvarchar(64);
+create index ACT_IDX_HI_PRO_RST_PRO_INST_ID on ACT_HI_PROCINST(RESTARTED_PROC_INST_ID_);
