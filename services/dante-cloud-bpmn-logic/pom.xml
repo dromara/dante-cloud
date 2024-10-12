@@ -28,7 +28,7 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>cn.herodotus.dante</groupId>
-        <version>3.3.4.1</version>
+        <version>3.3.4.2</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-logic</artifactId>
