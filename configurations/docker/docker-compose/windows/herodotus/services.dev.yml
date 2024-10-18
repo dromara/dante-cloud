@@ -1,6 +1,6 @@
 services:
   upms:
-    image: quay.io/dante-cloud/${UPMS_SERVICE_NAME}:${VERSION}
+    image: ${UPMS_SERVICE_NAME}:${VERSION}
     container_name: upms
     hostname: upms
     build:
@@ -19,7 +19,7 @@ services:
       - D:\\local-cached\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
 
   uaa:
-    image: quay.io/dante-cloud/${UAA_SERVICE_NAME}:${VERSION}
+    image: ${UAA_SERVICE_NAME}:${VERSION}
     container_name: uaa
     hostname: uaa
     build:
@@ -40,7 +40,7 @@ services:
       - upms
 
   msg:
-    image: quay.io/dante-cloud/${MESSAGE_SERVICE_NAME}:${VERSION}
+    image: ${MESSAGE_SERVICE_NAME}:${VERSION}
     container_name: msg
     hostname: msg
     build:
@@ -61,7 +61,7 @@ services:
       - uaa
 
   oss:
-    image: quay.io/dante-cloud/${OSS_SERVICE_NAME}:${VERSION}
+    image: ${OSS_SERVICE_NAME}:${VERSION}
     container_name: oss
     hostname: oss
     build:
@@ -82,7 +82,7 @@ services:
       - msg
 
   gateway:
-    image: quay.io/dante-cloud/${GATEWAY_SERVICE_NAME}:${VERSION}
+    image: ${GATEWAY_SERVICE_NAME}:${VERSION}
     container_name: gateway
     hostname: gateway
     build:
@@ -103,7 +103,7 @@ services:
       - oss
 
   bpmn:
-    image: quay.io/dante-cloud/${BPMN_SERVICE_NAME}:${VERSION}
+    image: ${BPMN_SERVICE_NAME}:${VERSION}
     container_name: bpmn
     hostname: bpmn
     build:
@@ -124,7 +124,7 @@ services:
       - gateway
 
   monitor:
-    image: quay.io/dante-cloud/${MONITOR_SERVICE_NAME}:${VERSION}
+    image: ${MONITOR_SERVICE_NAME}:${VERSION}
     container_name: monitor
     hostname: monitor
     build:
