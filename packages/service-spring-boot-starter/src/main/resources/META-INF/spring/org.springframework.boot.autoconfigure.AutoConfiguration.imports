@@ -1,2 +1,2 @@
-cn.herodotus.dante.service.autoconfigure.ServiceAutoConfiguration
-cn.herodotus.dante.service.autoconfigure.ResourceServerAutoConfiguration
+org.dromara.dante.service.autoconfigure.ServiceAutoConfiguration
+org.dromara.dante.service.autoconfigure.ResourceServerAutoConfiguration

@@ -19,6 +19,6 @@
 # along with this program.  If not, see <https://www.herodotus.cn>.
 #
 
-cn.heordotus.dante.monomer.autoconfigure.MonomerAutoConfiguration
+org.dromara.dante.monomer.autoconfigure.MonomerAutoConfiguration
 org.dromara.dante.module.metadata.configuration.MetadataModuleConfiguration
 cn.herodotus.engine.supplier.message.configuration.SupplierMessageConfiguration

@@ -27,7 +27,7 @@
 
     <parent>
         <artifactId>packages</artifactId>
-        <groupId>cn.herodotus.dante</groupId>
+        <groupId>org.dromara.dante</groupId>
         <version>3.3.4.3</version>
     </parent>
 
@@ -35,7 +35,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-module-strategy</artifactId>
         </dependency>
 
