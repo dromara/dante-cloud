@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.herodotus.cn>.
  */
 
-package cn.herodotus.dante.bpmn.ability;
+package org.dromara.dante.bpmn.ability;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
