@@ -87,7 +87,7 @@ public class DistributedArchitectureConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnRemoteDataAccess
-    @EnableFeignClients(basePackages = {"cn.herodotus.dante.module.strategy.feign"})
+    @EnableFeignClients(basePackages = {"org.dromara.dante.module.strategy.feign"})
     static class DataAccessStrategyRemoteConfiguration {
 
         @Bean

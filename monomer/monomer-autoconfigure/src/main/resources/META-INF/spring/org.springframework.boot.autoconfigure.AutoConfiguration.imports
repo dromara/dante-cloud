@@ -20,5 +20,5 @@
 #
 
 org.dromara.dante.monomer.autoconfigure.MonomerAutoConfiguration
-org.dromara.dante.module.metadata.configuration.MetadataModuleConfiguration
+org.dromara.dante.module.metadata.config.MetadataModuleConfiguration
 cn.herodotus.engine.supplier.message.configuration.SupplierMessageConfiguration

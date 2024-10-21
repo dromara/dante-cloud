@@ -21,7 +21,7 @@
 
 package org.dromara.dante.upms.config;
 
-import org.dromara.dante.module.metadata.configuration.MetadataModuleConfiguration;
+import org.dromara.dante.module.metadata.config.MetadataModuleConfiguration;
 import org.dromara.dante.module.social.configuration.SocialModuleConfiguration;
 import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
 import jakarta.annotation.PostConstruct;

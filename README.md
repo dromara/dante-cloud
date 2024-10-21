@@ -328,6 +328,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | 49 |      [Sukari](https://gitee.com/Sukari)       | :white_check_mark: | 50 |         [生活](https://gitee.com/liveok)         | :white_check_mark: | 51 | [hero_zhjms](https://gitee.com/hero_zhjms) | :white_check_mark: | 52 |         [panza](https://gitee.com/panza)         | :white_check_mark: |
 | 53 |       [nian8](https://gitee.com/nian8)        | :white_check_mark: | 54 |       [永恒](https://gitee.com/eternycyh)        | :white_check_mark: | 55 |   [klaus_pd](https://gitee.com/klaus_pd)   | :white_check_mark: | 56 |    [starry](https://gitee.com/starry_fanxin)     | :white_check_mark: |
 | 57 |    [George96](https://gitee.com/george96)     | :white_check_mark: | 58 |  [chenfeida](https://gitee.com/cheffd_admin)   | :white_check_mark: | 59 |    [zt](https://gitee.com/javazhangtao)    | :white_check_mark: | 60 |          [曹维裕](https://gitee.com/dsky)           | :white_check_mark: |
+| 61 |      [弥悠](https://gitee.com/netherworld)      | :white_check_mark: | 62 |                                                | :white_check_mark: | 63 |                                            | :white_check_mark: | 64 |                                                  | :white_check_mark: |
 
 ## [14]、鸣谢
 
