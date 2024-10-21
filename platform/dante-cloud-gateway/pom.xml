@@ -27,7 +27,7 @@
 
     <parent>
         <artifactId>platform</artifactId>
-        <groupId>cn.herodotus.dante</groupId>
+        <groupId>org.dromara.dante</groupId>
         <version>3.3.4.3</version>
     </parent>
 
@@ -53,7 +53,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
 

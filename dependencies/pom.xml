@@ -32,7 +32,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>cn.herodotus.dante</groupId>
+    <groupId>org.dromara.dante</groupId>
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
@@ -80,48 +80,48 @@
             </dependency>
             <!-- Dante Cloud -->
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>dante-module-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>dante-module-strategy</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>authentication-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>service-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>facility-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>dante-module-social</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>dante-module-metadata</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>dante-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>cn.herodotus.dante</groupId>
+                <groupId>org.dromara.dante</groupId>
                 <artifactId>monomer-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
