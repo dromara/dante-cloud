@@ -19,33 +19,23 @@
  * along with this program.  If not, see <https://www.herodotus.cn>.
  */
 
-package cn.herodotus.dante.authentication.autoconfigure;
+package org.dromara.dante.oss.ability;
 
-import org.dromara.dante.module.strategy.config.DistributedArchitectureConfiguration;
-import org.dromara.dante.module.strategy.config.MonocoqueArchitectureConfiguration;
-import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * <p>Description: 策略模块配置 </p>
+ * <p>Description: 对象存储服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/1 17:58
+ * @date : 2023/6/5 16:27
  */
-@AutoConfiguration
-@Import({
-        DistributedArchitectureConfiguration.class,
-        MonocoqueArchitectureConfiguration.class
-})
-public class ArchitectureStrategyAutoConfiguration {
+@EnableDiscoveryClient
+@SpringBootApplication
+public class OssAbilityApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(ArchitectureStrategyAutoConfiguration.class);
-
-    @PostConstruct
-    public void postConstruct() {
-        log.debug("[Herodotus] |- Module [Strategy Module] Auto Configure.");
+    public static void main(String[] args) {
+        SpringApplication.run(OssAbilityApplication.class, args);
     }
 }

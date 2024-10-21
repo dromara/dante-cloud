@@ -19,35 +19,38 @@
  * along with this program.  If not, see <https://www.herodotus.cn>.
  */
 
-package cn.herodotus.dante.upms.configuration;
+package org.dromara.dante.module.metadata.configuration;
 
-import org.dromara.dante.module.metadata.configuration.MetadataModuleConfiguration;
-import org.dromara.dante.module.social.configuration.SocialModuleConfiguration;
-import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
+import cn.herodotus.engine.supplier.upms.rest.configuration.SupplierUpmsRestConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * <p>Description: Upms 服务配置 </p>
+ * <p>Description: UpmsRest配置类 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/1/19 15:24
+ * @date : 2021/1/5 11:58
  */
 @Configuration(proxyBeanMethods = false)
-@Import({
-        SupplierUpmsLogicConfiguration.class,
-        SocialModuleConfiguration.class,
-        MetadataModuleConfiguration.class
+@ComponentScan(basePackages = {
+        "org.dromara.dante.module.metadata.processor",
+        "org.dromara.dante.module.metadata.listener",
 })
-public class UpmsConfiguration {
+@Import({
+        SupplierUpmsRestConfiguration.class
+})
+public class MetadataModuleConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(UpmsConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(MetadataModuleConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Service [Upms Ability] Auto Configure.");
+        log.info("[Herodotus] |- SDK [Metadata Module] Auto Configure.");
     }
+
+
 }
