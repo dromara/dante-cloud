@@ -27,7 +27,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>monomer</artifactId>
-        <version>3.3.4.3</version>
+        <version>3.3.5.0</version>
     </parent>
 
     <artifactId>monomer-autoconfigure</artifactId>

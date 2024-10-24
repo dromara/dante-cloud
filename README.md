@@ -5,17 +5,17 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.3.2-blue.svg?logo=spring" alt="Spring Authorization Server 1.3.2"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.3.4-blue.svg?logo=spring" alt="Spring Boot 3.3.4"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.3.3-blue.svg?logo=spring" alt="Spring Authorization Server 1.3.3"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.3.5-blue.svg?logo=spring" alt="Spring Boot 3.3.5"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2023.0.3-blue.svg?logo=spring" alt="Spring Cloud 2023.0.3"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.2-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.2"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.14.0--2023.0.0-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.14.0--2023.0.0-SNAPSHOT"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.4.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.4.3"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.4.3-red.svg?logo=spring" alt="Version 3.3.4.3"></a>
-    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.4.3-red.svg?logo=spring" alt="Dante Engine 3.3.4.3"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.4.3-red.svg?logo=spring" alt="Dante OSS 3.3.4.3"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.5.0-red.svg?logo=spring" alt="Version 3.3.5.0"></a>
+    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.5.0-red.svg?logo=spring" alt="Dante Engine 3.3.5.0"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.5.0-red.svg?logo=spring" alt="Dante OSS 3.3.5.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-AGPL--3.0-blue.svg?logo=apache" alt="License AGPL 3.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -47,8 +47,8 @@
 
 ## Dante Cloud 响应式版本特性
 
-- `Spring Boot` 已升级至 3.3.4
-- `Spring Authorization Server` 已升级至 1.3.2
+- `Spring Boot` 已升级至 3.3.5
+- `Spring Authorization Server` 已升级至 1.3.3
 - 全面采用 Java 21，默认开启虚拟线程，以改善阻塞操作的处理降低系统资源的消耗
 - 支持传统的 `阻塞式` 微服务与基于 `Reactor` 和 `WebFlux` 的 `响应式` 微服务同时运行在一套系统之中
 - 不强制使用 `响应式` 方式开发，可根据自身项目对资源吞吐量、资源消耗、特殊功能性能保障的需求，灵活的选择是采用 `响应式` 还是 `阻塞式` 来开发对应的服务。
@@ -148,11 +148,11 @@
 
 | 组件                          | 版本              |
 |-----------------------------|-----------------|
-| Spring Boot                 | 3.3.4           |
+| Spring Boot                 | 3.3.5           |
 | Spring Cloud                | 2023.0.3        |
 | Spring Cloud Alibaba        | 2023.0.1.2      |
 | Spring Cloud Tencent        | 1.14.0-2023.0.0 |
-| Spring Authorization Server | 1.3.2           |
+| Spring Authorization Server | 1.3.3           |
 | Spring Boot Admin           | 3.3.4           |
 | Nacos                       | 2.4.3           |
 | Sentinel                    | 1.8.8           |
@@ -328,6 +328,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | 49 |      [Sukari](https://gitee.com/Sukari)       | :white_check_mark: | 50 |         [生活](https://gitee.com/liveok)         | :white_check_mark: | 51 | [hero_zhjms](https://gitee.com/hero_zhjms) | :white_check_mark: | 52 |         [panza](https://gitee.com/panza)         | :white_check_mark: |
 | 53 |       [nian8](https://gitee.com/nian8)        | :white_check_mark: | 54 |       [永恒](https://gitee.com/eternycyh)        | :white_check_mark: | 55 |   [klaus_pd](https://gitee.com/klaus_pd)   | :white_check_mark: | 56 |    [starry](https://gitee.com/starry_fanxin)     | :white_check_mark: |
 | 57 |    [George96](https://gitee.com/george96)     | :white_check_mark: | 58 |  [chenfeida](https://gitee.com/cheffd_admin)   | :white_check_mark: | 59 |    [zt](https://gitee.com/javazhangtao)    | :white_check_mark: | 60 |          [曹维裕](https://gitee.com/dsky)           | :white_check_mark: |
+| 61 |      [弥悠](https://gitee.com/netherworld)      | :white_check_mark: | 62 |                                                | :white_check_mark: | 63 |                                            | :white_check_mark: | 64 |                                                  | :white_check_mark: |
 
 ## [14]、鸣谢
 

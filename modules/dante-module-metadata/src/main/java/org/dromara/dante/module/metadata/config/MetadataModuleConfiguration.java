@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.herodotus.cn>.
  */
 
-package org.dromara.dante.module.metadata.configuration;
+package org.dromara.dante.module.metadata.config;
 
 import cn.herodotus.engine.supplier.upms.rest.configuration.SupplierUpmsRestConfiguration;
 import jakarta.annotation.PostConstruct;

@@ -28,7 +28,7 @@
     <parent>
         <artifactId>dante-cloud</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.3.4.3</version>
+        <version>3.3.5.0</version>
     </parent>
 
     <artifactId>platform</artifactId>
