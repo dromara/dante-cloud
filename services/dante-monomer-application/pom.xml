@@ -26,16 +26,26 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.dromara.dante</groupId>
-        <artifactId>dante-cloud</artifactId>
+        <artifactId>services</artifactId>
         <version>3.3.5.0</version>
     </parent>
 
-    <artifactId>monomer</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>dante-monomer-application</artifactId>
 
-    <modules>
-        <module>monomer-autoconfigure</module>
-        <module>monomer-application</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.dromara.dante</groupId>
+            <artifactId>dante-monomer-autoconfigure</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

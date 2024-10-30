@@ -122,7 +122,7 @@
             </dependency>
             <dependency>
                 <groupId>org.dromara.dante</groupId>
-                <artifactId>monomer-autoconfigure</artifactId>
+                <artifactId>dante-monomer-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

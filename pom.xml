@@ -274,6 +274,5 @@
         <module>packages</module>
         <module>platform</module>
         <module>services</module>
-        <module>monomer</module>
     </modules>
 </project>

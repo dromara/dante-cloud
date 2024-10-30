@@ -223,7 +223,8 @@ dante-cloud
 ├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
 ├    ├── dante-module-metadata -- 权限元数据同步模块
 ├    ├── dante-module-social -- 社交登录模块
-├    └── dante-module-strategy -- UAA 核心数据访问策略模块
+├    ├── dante-module-strategy -- UAA 核心数据访问策略模块
+├    └── dante-monomer-autoconfigure -- 单体版自动配置模块
 ├── packages -- 基础核心Starter
 ├    ├── authorization-spring-boot-starter -- OAuth2 认证基础Starter，主要用于 UAA 认证服务器以及单体版 Dante Cloud
 ├    ├── facility-spring-boot-starter -- 基础设施切换依赖starter
@@ -237,13 +238,13 @@ dante-cloud
 ├── services -- 平台业务服务
 ├    ├── dante-cloud-bpmn-ability -- 工作流服务
 ├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
-└──  └── dante-cloud-oss-ability -- 对象存储服务
+├    ├── dante-cloud-oss-ability -- 对象存储服务
+└──  └── dante-monomer-application -- Dante Cloud 单体版应用模块
 ```
 
 ## [7]、项目地址
 
 - 后端主工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
-- 后端单体版示例工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-athena](https://gitcode.com/HerodotusSoftware/dante-cloud-athena)
 - 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
 
 ## [8]、安全测试

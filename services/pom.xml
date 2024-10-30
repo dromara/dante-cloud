@@ -40,6 +40,7 @@
         <module>dante-cloud-bpmn-logic</module>
         <module>dante-cloud-bpmn-ability</module>
         <module>dante-cloud-oss-ability</module>
+        <module>dante-monomer-application</module>
     </modules>
 
 </project>
