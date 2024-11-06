@@ -26,16 +26,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.dromara.dante</groupId>
-        <artifactId>monomer</artifactId>
-        <version>3.3.5.0</version>
+        <artifactId>services</artifactId>
+        <version>3.3.5.1</version>
     </parent>
 
-    <artifactId>monomer-application</artifactId>
+    <artifactId>dante-monomer-application</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>
-            <artifactId>monomer-autoconfigure</artifactId>
+            <artifactId>dante-monomer-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 

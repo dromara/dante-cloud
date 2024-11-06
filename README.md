@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.4.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.4.3"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.5.0-red.svg?logo=spring" alt="Version 3.3.5.0"></a>
-    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.5.0-red.svg?logo=spring" alt="Dante Engine 3.3.5.0"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.5.0-red.svg?logo=spring" alt="Dante OSS 3.3.5.0"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.5.1-red.svg?logo=spring" alt="Version 3.3.5.1"></a>
+    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.5.1-red.svg?logo=spring" alt="Dante Engine 3.3.5.1"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.5.1-red.svg?logo=spring" alt="Dante OSS 3.3.5.1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-AGPL--3.0-blue.svg?logo=apache" alt="License AGPL 3.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -223,7 +223,8 @@ dante-cloud
 ├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
 ├    ├── dante-module-metadata -- 权限元数据同步模块
 ├    ├── dante-module-social -- 社交登录模块
-├    └── dante-module-strategy -- UAA 核心数据访问策略模块
+├    ├── dante-module-strategy -- UAA 核心数据访问策略模块
+├    └── dante-monomer-autoconfigure -- 单体版自动配置模块
 ├── packages -- 基础核心Starter
 ├    ├── authorization-spring-boot-starter -- OAuth2 认证基础Starter，主要用于 UAA 认证服务器以及单体版 Dante Cloud
 ├    ├── facility-spring-boot-starter -- 基础设施切换依赖starter
@@ -237,13 +238,13 @@ dante-cloud
 ├── services -- 平台业务服务
 ├    ├── dante-cloud-bpmn-ability -- 工作流服务
 ├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
-└──  └── dante-cloud-oss-ability -- 对象存储服务
+├    ├── dante-cloud-oss-ability -- 对象存储服务
+└──  └── dante-monomer-application -- Dante Cloud 单体版应用模块
 ```
 
 ## [7]、项目地址
 
 - 后端主工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
-- 后端单体版示例工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-athena](https://gitcode.com/HerodotusSoftware/dante-cloud-athena)
 - 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
 
 ## [8]、安全测试
@@ -328,21 +329,21 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | 49 |      [Sukari](https://gitee.com/Sukari)       | :white_check_mark: | 50 |         [生活](https://gitee.com/liveok)         | :white_check_mark: | 51 | [hero_zhjms](https://gitee.com/hero_zhjms) | :white_check_mark: | 52 |         [panza](https://gitee.com/panza)         | :white_check_mark: |
 | 53 |       [nian8](https://gitee.com/nian8)        | :white_check_mark: | 54 |       [永恒](https://gitee.com/eternycyh)        | :white_check_mark: | 55 |   [klaus_pd](https://gitee.com/klaus_pd)   | :white_check_mark: | 56 |    [starry](https://gitee.com/starry_fanxin)     | :white_check_mark: |
 | 57 |    [George96](https://gitee.com/george96)     | :white_check_mark: | 58 |  [chenfeida](https://gitee.com/cheffd_admin)   | :white_check_mark: | 59 |    [zt](https://gitee.com/javazhangtao)    | :white_check_mark: | 60 |          [曹维裕](https://gitee.com/dsky)           | :white_check_mark: |
-| 61 |      [弥悠](https://gitee.com/netherworld)      | :white_check_mark: | 62 |                                                | :white_check_mark: | 63 |                                            | :white_check_mark: | 64 |                                                  | :white_check_mark: |
+| 61 |      [弥悠](https://gitee.com/netherworld)      | :white_check_mark: | 62 |       [飞奔中](https://gitee.com/flyflyrun)       | :white_check_mark: | 63 |   [lovenoms](https://gitee.com/lovenoms)   | :white_check_mark: | 64 |                                                  | :white_check_mark: |
 
 ## [14]、鸣谢
 
 ### 赞助人列表
 
-| 序号 |   赞助人    |    赞助时间    | 序号 |     赞助人     |    赞助时间    | 序号 |    赞助人    |    赞助时间    |
-|:--:|:--------:|:----------:|:--:|:-----------:|:----------:|:--:|:---------:|:----------:|
-| 1  |  ご沉默菋噵   | 2021-10-25 | 2  |    偷土豆的人    | 2021-11-24 | 3  |  lorron   | 2022-04-04 |
-| 4  |   在云端    | 2022-12-26 | 5  |     西晽      | 2022-12-27 | 6  | p911gt3rs | 2023-01-03 |
-| 7  |  jacsty  | 2023-01-31 | 8  | hubert_rust | 2023-03-16 | 9  |  Zkey Z   | 2023-03-18 |
-| 10 |   志国欧巴   | 2023-03-27 | 11 |   michael   | 2023-04-07 | 12 |   大叔丨小巷   | 2023-04-11 |
-| 13 | sun_left | 2023-04-19 | 14 | time 丶 sand | 2023-07-06 | 15 |  印第安老斑鸠   | 2023-09-09 |
-| 16 |   一阵风    | 2023-12-10 | 17 |    Jack     | 2024-03-01 | 18 | onehelper | 2024-05-24 |
-| 19 |    宁哥    | 2024-05-29 | 20 |             |            | 21 |           |            |
+| 序号 |                    赞助人                     |    赞助时间    | 序号 |                      赞助人                       |    赞助时间    | 序号 |                   赞助人                    |    赞助时间    |
+|:--:|:------------------------------------------:|:----------:|:--:|:----------------------------------------------:|:----------:|:--:|:----------------------------------------:|:----------:|
+| 1  |                   ご沉默菋噵                    | 2021-10-25 | 2  |    [偷土豆的人](https://gitee.com/dongzongyang)     | 2021-11-24 | 3  |    [lorron](https://gitee.com/lorron)    | 2022-04-04 |
+| 4  |                    在云端                     | 2022-12-26 | 5  |        [西晽](https://gitee.com/syllvin)         | 2022-12-27 | 6  | [p911gt3rs](https://gitee.com/p911gt3rs) | 2023-01-03 |
+| 7  |     [jacsty](https://gitee.com/jacsty)     | 2023-01-31 | 8  |  [hubert_rust](https://gitee.com/hubert_rust)  | 2023-03-16 | 9  |   [Zkey Z](https://gitee.com/zkeyzvip)   | 2023-03-18 |
+| 10 |      [志国欧巴](https://gitee.com/zzgf16)      | 2023-03-27 | 11 |  [michael](https://gitee.com/yiminyangguang)   | 2023-04-07 | 12 |  [大叔丨小巷](https://gitee.com/yushui_wang)  | 2023-04-11 |
+| 13 |   [sun_left](https://gitee.com/sun_left)   | 2023-04-19 | 14 | [time、sand](https://gitee.com/tzy15680905763)  | 2023-07-06 | 15 |   [印第安老斑鸠](https://gitee.com/deadncut)   | 2023-09-09 |
+| 16 |                    一阵风                     | 2023-12-10 | 17 |                      Jack                      | 2024-03-01 | 18 | [onehelper](https://gitee.com/onehelper) | 2024-05-24 |
+| 19 | [宁哥](https://gitee.com/seabuckthorn-syrup) | 2024-05-29 | 20 | [cryptoneedle](https://gitee.com/cryptoneedle) | 2024-11-01 | 21 |                                          |            |
 
 ### 感谢 JetBrains 提供的免费开源 License
 

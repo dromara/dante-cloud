@@ -27,7 +27,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>platform</artifactId>
-        <version>3.3.5.0</version>
+        <version>3.3.5.1</version>
     </parent>
 
     <artifactId>dante-cloud-message</artifactId>

@@ -21,9 +21,9 @@
 
 package org.dromara.dante.monomer.autoconfigure;
 
+import jakarta.annotation.PostConstruct;
 import org.dromara.dante.monomer.autoconfigure.processor.MonomerBusBridge;
 import org.dromara.dante.monomer.autoconfigure.processor.MonomerCorsFilter;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

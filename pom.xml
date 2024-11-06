@@ -28,7 +28,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.3.5.0</version>
+        <version>3.3.5.1</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
@@ -274,6 +274,5 @@
         <module>packages</module>
         <module>platform</module>
         <module>services</module>
-        <module>monomer</module>
     </modules>
 </project>

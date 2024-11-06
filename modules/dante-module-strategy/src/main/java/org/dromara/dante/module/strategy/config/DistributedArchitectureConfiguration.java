@@ -99,7 +99,7 @@ public class DistributedArchitectureConfiguration {
 
         @Bean
         @ConditionalOnMissingBean
-        public StrategyPermissionDetailsService HerodotusRemotePermissionDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
+        public StrategyPermissionDetailsService herodotusRemotePermissionDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
             HerodotusRemotePermissionDetailsService herodotusRemotePermissionDetailsService = new HerodotusRemotePermissionDetailsService(remoteAuthorityDetailsService);
             log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Auto Configure.");
             return herodotusRemotePermissionDetailsService;

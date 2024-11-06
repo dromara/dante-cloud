@@ -19,7 +19,7 @@
  * along with this program.  If not, see <https://www.herodotus.cn>.
  */
 
-package org.dromara.dante.monomer.application;
+package org.dromara.dante.monomer.appliation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
