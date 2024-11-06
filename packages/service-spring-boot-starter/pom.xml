@@ -28,7 +28,7 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.3.5.0</version>
+        <version>3.3.5.1</version>
     </parent>
 
     <artifactId>service-spring-boot-starter</artifactId>
