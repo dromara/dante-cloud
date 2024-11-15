@@ -1,0 +1,18 @@
+# spring cloud alibaba 基础设施配置
+spring:
+  application:
+    name: @artifactId@ #拿到POM文件中的值
+  cloud:
+    nacos:
+      username: ${ALIBABA_USERNAME:@alibaba.username@}
+      password: ${ALIBABA_PASSWORD:@alibaba.password@}
+      config:
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
+        file-extension: yaml
+      discovery:
+        namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
+        server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
+    httpclientfactories:
+      ok:
+        enabled: false
