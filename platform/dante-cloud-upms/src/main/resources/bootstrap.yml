@@ -5,9 +5,6 @@ spring:
     name: @artifactId@ #拿到POM文件中的值
   profiles:
     active: @facility@
-  main:
-    allow-bean-definition-overriding: true
-    allow-circular-references: true
 
 ---
 # spring cloud alibaba 基础设施配置
@@ -15,6 +12,17 @@ spring:
   config:
     activate:
       on-profile: alibaba
+    import:
+      - nacos:dante-cloud-environment.yaml?group=${PROFILE:@profile@}
+      - nacos:dante-cloud-platform.yaml?group=common
+      - nacos:dante-cloud-database-${DATABASE:@database@}.yaml?group=common
+      - nacos:dante-cloud-database.yaml?group=common
+      - nacos:dante-cloud-redis.yaml?group=common
+      - nacos:dante-cloud-cache.yaml?group=common
+      - nacos:dante-cloud-rest.yaml?group=common
+      - nacos:dante-cloud-kafka.yaml?group=common
+      - nacos:dante-cloud-social.yaml?group=common
+      - nacos:${spring.application.name}.yaml?group=service
   cloud:
     nacos:
       username: ${ALIBABA_USERNAME:@alibaba.username@}
@@ -23,27 +31,6 @@ spring:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_CONFIG_SERVER_ADDR:@alibaba.config.server-addr@}
         file-extension: yaml
-        shared-configs:
-          - data-id: dante-cloud-environment.yaml
-            group: ${PROFILE:@profile@}
-          - data-id: dante-cloud-platform.yaml
-            group: common
-          - data-id: dante-cloud-database-${DATABASE:@database@}.yaml
-            group: common
-          - data-id: dante-cloud-database.yaml
-            group: common
-          - data-id: dante-cloud-redis.yaml
-            group: common
-          - data-id: dante-cloud-cache.yaml
-            group: common
-          - data-id: dante-cloud-rest.yaml
-            group: common
-          - data-id: dante-cloud-kafka.yaml
-            group: common
-          - data-id: dante-cloud-social.yaml
-            group: common
-          - data-id: ${spring.application.name}.yaml
-            group: service
       discovery:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}

@@ -6,11 +6,6 @@ spring:
   profiles:
     active: @facility@
 
-management:
-  health:
-    redis:
-      enabled: false
-
 ---
 # spring cloud alibaba 基础设施配置
 spring:
