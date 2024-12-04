@@ -6,16 +6,16 @@
 
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.3.3-blue.svg?logo=spring" alt="Spring Authorization Server 1.3.3"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.3.6-blue.svg?logo=spring" alt="Spring Boot 3.3.6"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2023.0.3-blue.svg?logo=spring" alt="Spring Cloud 2023.0.3"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.4.0-blue.svg?logo=spring" alt="Spring Boot 3.4.0"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2024.0.0-blue.svg?logo=spring" alt="Spring Cloud 2024.0.0"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.2-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.2"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.14.0--2023.0.0-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.14.0--2023.0.0-SNAPSHOT"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.4.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.4.3"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.3.6.1-red.svg?logo=spring" alt="Version 3.3.6.1"></a>
-    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.3.6.1-red.svg?logo=spring" alt="Dante Engine 3.3.6.1"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.3.6.1-red.svg?logo=spring" alt="Dante OSS 3.3.6.1"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.0.0-M1-red.svg?logo=spring" alt="Version 3.4.0.0-M1"></a>
+    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.0.0-M1-red.svg?logo=spring" alt="Dante Engine 3.4.0.0-M1"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.0.0-M1-red.svg?logo=spring" alt="Dante OSS 3.4.0.0-M1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -47,7 +47,7 @@
 
 ## Dante Cloud 响应式版本特性
 
-- `Spring Boot` 已升级至 3.3.6
+- `Spring Boot` 已升级至 3.4.0
 - `Spring Authorization Server` 已升级至 1.3.3
 - 全面采用 Java 21，默认开启虚拟线程，以改善阻塞操作的处理降低系统资源的消耗
 - 支持传统的 `阻塞式` 微服务与基于 `Reactor` 和 `WebFlux` 的 `响应式` 微服务同时运行在一套系统之中
@@ -163,12 +163,12 @@
 
 | 组件                          | 版本              |
 |-----------------------------|-----------------|
-| Spring Boot                 | 3.3.6           |
-| Spring Cloud                | 2023.0.3        |
+| Spring Boot                 | 3.4.0           |
+| Spring Cloud                | 2024.0.0        |
 | Spring Cloud Alibaba        | 2023.0.1.2      |
 | Spring Cloud Tencent        | 1.14.0-2023.0.0 |
 | Spring Authorization Server | 1.3.3           |
-| Spring Boot Admin           | 3.3.6           |
+| Spring Boot Admin           | 3.4.0           |
 | Nacos                       | 2.4.3           |
 | Sentinel                    | 1.8.8           |
 | Seata                       | 1.7.0           |
@@ -218,15 +218,14 @@
 
 ### 二、分支说明
 
-| 分支名称                   | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途                 | 现状                                                          |
-|------------------------|-----------------------------------------|-----------|--------------------|-------------------------------------------------------------|
-| master                 | Spring Boot 3.3 和 Spring Cloud 2023.0.3 | JDK 17    | 主要发布分支             | 推荐使用代码分支                                                    |
-| develop                | Spring Boot 3.3 和 Spring Cloud 2023.0.3 | JDK 17    | Development 分支     | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支。开发分支不保证可用           |
-| reactive-master        | Spring Boot 3.3 和 Spring Cloud 2023.0.3 | JDK 21    | 响应式版本主要发布分支        | 推荐使用代码分支                                                    |
-| reactive-develop       | Spring Boot 3.3 和 Spring Cloud 2023.0.3 | JDK 21    | 响应式 Development 分支 | 下一代响应式微服务版本开发分支。开发分支不保证可用                                   |
-| 3.1.X                  | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | 历史代码，不再维护          | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                      |
-| 2.7.X                  | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护          | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
-| spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护          | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
+|          分支名称          | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途             | 现状                                                          |
+|:----------------------:|-----------------------------------------|-----------|----------------|-------------------------------------------------------------|
+|         master         | Spring Boot 3.4 和 Spring Cloud 2024.0.0 | JDK 17    | 主要发布分支         | 推荐使用代码分支                                                    |
+|        develop         | Spring Boot 3.4 和 Spring Cloud 2024.0.0 | JDK 17    | Development 分支 | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                     |
+|      3.2.X-3.3.X       | Spring Boot 3.3 和 Spring Cloud 2023.0.X | JDK 17    | 稳定版本分支         | 稳定版本分支                                                      |
+|         3.1.X          | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                      |
+|         2.7.X          | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史版本，停止维护      | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
+| spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护      | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
 
 ## [6]、工程结构
 

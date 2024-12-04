@@ -28,7 +28,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.3.6.1</version>
+        <version>3.4.0.0-M1</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
