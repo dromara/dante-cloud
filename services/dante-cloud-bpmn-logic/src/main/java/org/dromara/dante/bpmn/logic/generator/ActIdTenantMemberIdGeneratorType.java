@@ -25,40 +25,35 @@
 
 package org.dromara.dante.bpmn.logic.generator;
 
-import cn.herodotus.engine.data.core.identifier.AbstractUuidGenerator;
-import org.apache.commons.lang3.ObjectUtils;
+import cn.herodotus.engine.data.core.identifier.AbstractIdGeneratorType;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.dante.bpmn.logic.entity.ActIdGroup;
-import org.hibernate.HibernateException;
+import org.dromara.dante.bpmn.logic.entity.ActIdTenantMember;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
 import java.lang.reflect.Member;
 
 /**
- * <p>Description: Camunda 组表 UUID 生成器 </p>
+ * <p>Description: Camunda 租户成员 UUID 生成器 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/20 12:57
+ * @date : 2021/7/20 13:09
  */
-public class ActIdGroupUuidGeneratorType extends AbstractUuidGenerator {
+public class ActIdTenantMemberIdGeneratorType extends AbstractIdGeneratorType {
 
-    public ActIdGroupUuidGeneratorType(ActIdGroupUuidGenerator config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
-        super(idMember);
+    public ActIdTenantMemberIdGeneratorType(ActIdTenantMemberIdGenerator config, Member member, CustomIdGeneratorCreationContext context) {
+        super(member);
     }
 
     @Override
-    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new HibernateException(new NullPointerException());
-        }
+    public Object generate(SharedSessionContractImplementor session, Object object) {
 
-        ActIdGroup actIdGroup = (ActIdGroup) object;
+        ActIdTenantMember actIdTenantMember = (ActIdTenantMember) object;
 
-        if (StringUtils.isEmpty(actIdGroup.getId())) {
+        if (StringUtils.isEmpty(actIdTenantMember.getId())) {
             return super.generate(session, object);
         } else {
-            return actIdGroup.getId();
+            return actIdTenantMember.getId();
         }
     }
 }

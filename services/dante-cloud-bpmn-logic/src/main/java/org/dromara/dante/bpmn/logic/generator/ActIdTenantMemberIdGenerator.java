@@ -35,13 +35,13 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * <p>Description: ActIdGroupUuid </p>
+ * <p>Description: ActIdTenantMemberUuid </p>
  *
  * @author : gengwei.zheng
  * @date : 2022/11/7 17:38
  */
-@IdGeneratorType(ActIdGroupUuidGeneratorType.class)
+@IdGeneratorType(ActIdTenantMemberIdGeneratorType.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target({FIELD, METHOD})
-public @interface ActIdGroupUuidGenerator {
+public @interface ActIdTenantMemberIdGenerator {
 }

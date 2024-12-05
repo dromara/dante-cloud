@@ -31,7 +31,7 @@ import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
-import org.dromara.dante.bpmn.logic.generator.ActIdGroupUuidGenerator;
+import org.dromara.dante.bpmn.logic.generator.ActIdGroupIdGenerator;
 
 /**
  * <p>Description: 工作流组表 </p>
@@ -50,7 +50,7 @@ public class ActIdGroup extends BaseEntity {
     @JsonProperty("department_id")
     @Schema(title = "部门ID")
     @Id
-    @ActIdGroupUuidGenerator
+    @ActIdGroupIdGenerator
     @Column(name = "id_", length = 64)
     private String id;
 

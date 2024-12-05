@@ -35,6 +35,10 @@ spring:
     loadbalancer:
       nacos:
         enabled: true
+  http:
+    client:
+      factory: jdk
+
 feign:
   sentinel:
     enabled: true

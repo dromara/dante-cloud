@@ -25,40 +25,23 @@
 
 package org.dromara.dante.bpmn.logic.generator;
 
-import cn.herodotus.engine.data.core.identifier.AbstractUuidGenerator;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.dromara.dante.bpmn.logic.entity.ActIdTenantMember;
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
+import org.hibernate.annotations.IdGeneratorType;
 
-import java.lang.reflect.Member;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 
 /**
- * <p>Description: Camunda 租户成员 UUID 生成器 </p>
+ * <p>Description: ActIdUserUuid </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/7/20 13:09
+ * @date : 2022/11/7 17:38
  */
-public class ActIdTenantMemberUuidGeneratorType extends AbstractUuidGenerator {
-
-    public ActIdTenantMemberUuidGeneratorType(ActIdTenantMemberUuidGenerator config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
-        super(idMember);
-    }
-
-    @Override
-    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new HibernateException(new NullPointerException());
-        }
-
-        ActIdTenantMember actIdTenantMember = (ActIdTenantMember) object;
-
-        if (StringUtils.isEmpty(actIdTenantMember.getId())) {
-            return super.generate(session, object);
-        } else {
-            return actIdTenantMember.getId();
-        }
-    }
+@IdGeneratorType(ActIdUserIdGeneratorType.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({FIELD, METHOD})
+public @interface ActIdUserIdGenerator {
 }

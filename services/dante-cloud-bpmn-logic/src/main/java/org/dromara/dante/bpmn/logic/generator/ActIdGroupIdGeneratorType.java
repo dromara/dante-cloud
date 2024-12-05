@@ -25,23 +25,35 @@
 
 package org.dromara.dante.bpmn.logic.generator;
 
-import org.hibernate.annotations.IdGeneratorType;
+import cn.herodotus.engine.data.core.identifier.AbstractIdGeneratorType;
+import org.apache.commons.lang3.StringUtils;
+import org.dromara.dante.bpmn.logic.entity.ActIdGroup;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
+import java.lang.reflect.Member;
 
 /**
- * <p>Description: ActIdTenantMemberUuid </p>
+ * <p>Description: Camunda 组表 UUID 生成器 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/11/7 17:38
+ * @date : 2021/7/20 12:57
  */
-@IdGeneratorType(ActIdTenantMemberUuidGeneratorType.class)
-@Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, METHOD})
-public @interface ActIdTenantMemberUuidGenerator {
+public class ActIdGroupIdGeneratorType extends AbstractIdGeneratorType {
+
+    public ActIdGroupIdGeneratorType(ActIdGroupIdGenerator config, Member member, CustomIdGeneratorCreationContext context) {
+        super(member);
+    }
+
+    @Override
+    public Object generate(SharedSessionContractImplementor session, Object object) {
+
+        ActIdGroup actIdGroup = (ActIdGroup) object;
+
+        if (StringUtils.isEmpty(actIdGroup.getId())) {
+            return super.generate(session, object);
+        } else {
+            return actIdGroup.getId();
+        }
+    }
 }

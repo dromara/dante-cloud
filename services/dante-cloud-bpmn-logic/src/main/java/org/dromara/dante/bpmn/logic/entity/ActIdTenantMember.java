@@ -31,7 +31,7 @@ import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
-import org.dromara.dante.bpmn.logic.generator.ActIdTenantMemberUuidGenerator;
+import org.dromara.dante.bpmn.logic.generator.ActIdTenantMemberIdGenerator;
 
 /**
  * <p>Description: Camunda 租户成员</p>
@@ -55,7 +55,7 @@ public class ActIdTenantMember extends BaseEntity {
     @JsonProperty("ownership_id")
     @Schema(title = "人员ID")
     @Id
-    @ActIdTenantMemberUuidGenerator
+    @ActIdTenantMemberIdGenerator
     @Column(name = "id_", length = 64)
     private String id;
 
