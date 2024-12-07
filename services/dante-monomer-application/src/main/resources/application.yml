@@ -26,6 +26,9 @@ spring:
       repository-type: indexed
       save-mode: always
       flush-mode: immediate
+  http:
+    client:
+      factory: jdk
 
 jasypt:
   encryptor:
