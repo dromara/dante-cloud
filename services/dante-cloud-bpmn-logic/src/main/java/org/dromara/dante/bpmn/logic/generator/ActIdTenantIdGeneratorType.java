@@ -25,11 +25,9 @@
 
 package org.dromara.dante.bpmn.logic.generator;
 
-import cn.herodotus.engine.data.core.identifier.AbstractUuidGenerator;
-import org.apache.commons.lang3.ObjectUtils;
+import cn.herodotus.engine.data.core.identifier.AbstractIdGeneratorType;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.dante.bpmn.logic.entity.ActIdTenant;
-import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
 
@@ -41,17 +39,14 @@ import java.lang.reflect.Member;
  * @author : gengwei.zheng
  * @date : 2021/7/20 13:01
  */
-public class ActIdTenantUuidGeneratorType extends AbstractUuidGenerator {
+public class ActIdTenantIdGeneratorType extends AbstractIdGeneratorType {
 
-    public ActIdTenantUuidGeneratorType(ActIdTenantUuidGenerator config, Member idMember, CustomIdGeneratorCreationContext creationContext) {
-        super(idMember);
+    public ActIdTenantIdGeneratorType(ActIdTenantIdGenerator config, Member member, CustomIdGeneratorCreationContext context) {
+        super(member);
     }
 
     @Override
-    public Object generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        if (ObjectUtils.isEmpty(object)) {
-            throw new HibernateException(new NullPointerException());
-        }
+    public Object generate(SharedSessionContractImplementor session, Object object) {
 
         ActIdTenant actIdTenant = (ActIdTenant) object;
 
