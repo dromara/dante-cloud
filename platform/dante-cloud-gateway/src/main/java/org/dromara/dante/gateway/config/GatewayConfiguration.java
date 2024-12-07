@@ -95,10 +95,9 @@ public class GatewayConfiguration {
     static class GatewaySwaggerConfiguration {
 
         @Bean
-        public RefreshRoutesListener refreshRoutesListener(RouteLocator routeLocator, SwaggerUiConfigParameters swaggerUiConfigParameters, SwaggerUiConfigProperties swaggerUiConfigProperties) {
+        public RefreshRoutesListener refreshRoutesListener(RouteLocator routeLocator, SwaggerUiConfigProperties swaggerUiConfigProperties) {
             RefreshRoutesListener refreshRoutesListener = new RefreshRoutesListener();
             refreshRoutesListener.setRouteLocator(routeLocator);
-            refreshRoutesListener.setSwaggerUiConfigParameters(swaggerUiConfigParameters);
             refreshRoutesListener.setSwaggerUiConfigProperties(swaggerUiConfigProperties);
             log.trace("[Herodotus] |- Bean [Refresh Routes Listener] in AliyunScanConfiguration Auto Configure.");
             return refreshRoutesListener;

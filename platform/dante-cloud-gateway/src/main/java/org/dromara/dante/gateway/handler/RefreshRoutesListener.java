@@ -61,15 +61,10 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
     @Value("${spring.application.name}")
     private String self;
     private RouteLocator routeLocator;
-    private SwaggerUiConfigParameters swaggerUiConfigParameters;
     private SwaggerUiConfigProperties swaggerUiConfigProperties;
 
     public void setRouteLocator(RouteLocator routeLocator) {
         this.routeLocator = routeLocator;
-    }
-
-    public void setSwaggerUiConfigParameters(SwaggerUiConfigParameters swaggerUiConfigParameters) {
-        this.swaggerUiConfigParameters = swaggerUiConfigParameters;
     }
 
     public void setSwaggerUiConfigProperties(SwaggerUiConfigProperties swaggerUiConfigProperties) {
@@ -86,9 +81,8 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
 
         Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> swaggerUrls = routes.stream().map(this::createSwaggerUrl).collect(Collectors.toSet());
 
-        if (ObjectUtils.isNotEmpty(swaggerUiConfigParameters)) {
+        if (ObjectUtils.isNotEmpty(swaggerUiConfigProperties)) {
             log.debug("[Herodotus] |- Services is Changed, update Urls");
-            swaggerUiConfigParameters.setUrls(swaggerUrls);
             swaggerUiConfigProperties.setUrls(swaggerUrls);
         }
     }
