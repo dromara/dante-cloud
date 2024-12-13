@@ -151,9 +151,11 @@ spring:
 
 springdoc:
   api-docs:
+    enabled: ${herodotus.switch.swagger.enabled}
     resolve-schema-properties: true
   swagger-ui:
     disable-swagger-default-url: true
+    enabled: ${herodotus.switch.swagger.enabled}
     operations-sorter: method
     show-common-extensions: true
     show-extensions: true
@@ -372,8 +374,10 @@ spring:
 
 springdoc:
   api-docs:
+    enabled: ${herodotus.switch.swagger.enabled}
     resolve-schema-properties: true
   swagger-ui:
+    enabled: ${herodotus.switch.swagger.enabled}
     disable-swagger-default-url: true
     operations-sorter: method
     show-common-extensions: true
