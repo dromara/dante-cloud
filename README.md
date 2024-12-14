@@ -1,6 +1,6 @@
 <p align="center"><img src="./readme/new-logo.png" height="300" width="400" alt="logo"/></p>
 <h2 align="center">简洁优雅 · 稳定高效 | 宁静致远 · 精益求精 </h2>
-<p align="center">“一套代码、两种架构，可以灵活切换微服务和单体两种架构”的企业级应用系统</p>
+<p align="center">“一套代码、两种架构，可以灵活切换微服务和单体两种架构”的企业级微服务系统</p>
 
 ---
 
