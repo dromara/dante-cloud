@@ -45,6 +45,7 @@ feign:
 
 springdoc:
   api-docs:
+    enabled: ${herodotus.switch.swagger.enabled}
     resolve-schema-properties: true
   swagger-ui:
     enabled: ${herodotus.switch.swagger.enabled}
