@@ -240,7 +240,7 @@ herodotus:
         OSCHINA:
           client-id: 7c1623d76f39097579123e8
           client-secret: 8c343cad9ca732d54242f002
-          redirect-uri: http://192.168.101.10:8847/herodotus-cloud-uaa/oauth/social/gitee
+          redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
   oss:
     dialect: minio
     proxy:
@@ -463,7 +463,7 @@ herodotus:
         OSCHINA:
           client-id: 7c1623d76f39097579123e8
           client-secret: 8c343cad9ca732d54242f002
-          redirect-uri: http://192.168.101.10:8847/herodotus-cloud-uaa/oauth/social/gitee
+          redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
   oss:
     dialect: minio
     proxy:
@@ -480,7 +480,7 @@ herodotus:
 
 logging:
   file:
-    name: logs/herodotus-cloud-athena.log
+    name: logs/dante-cloud-athena.log
   level:
     root: info
     org.springframework: info
@@ -692,7 +692,7 @@ herodotus:
         OSCHINA:
           client-id: 7c1623d76f39097579123e8
           client-secret: 8c343cad9ca732d54242f002
-          redirect-uri: http://192.168.101.10:8847/herodotus-cloud-uaa/oauth/social/gitee
+          redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
   oss:
     dialect: minio
     proxy:
