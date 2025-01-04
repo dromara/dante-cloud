@@ -13,15 +13,15 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.4.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.4.3"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.1.0-red.svg?logo=spring" alt="Version 3.4.1.0"></a>
-    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.1.0-red.svg?logo=spring" alt="Dante Engine 3.4.1.0"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.1.0-red.svg?logo=spring" alt="Dante OSS 3.4.1.0"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.1.1-red.svg?logo=spring" alt="Version 3.4.1.1"></a>
+    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.1.1-red.svg?logo=spring" alt="Dante Engine 3.4.1.1"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.1.1-red.svg?logo=spring" alt="Dante OSS 3.4.1.1"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
-    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/herodotus-cloud/dante-cloud?style=flat&logo=github" alt="Github star"></a>
-    <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/herodotus-cloud/dante-cloud?style=flat&logo=github" alt="Github fork"></a>
+    <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/dromara/dante-cloud?style=flat&logo=github" alt="Github star"></a>
+    <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/dromara/dante-cloud?style=flat&logo=github" alt="Github fork"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/fork.svg?theme=dark" alt="Gitee fork"></a>
     <a href='https://gitcode.com/dromara/dante-cloud'><img src='https://gitcode.com/dromara/dante-cloud/star/badge.svg' alt='Gitee star'></a>
@@ -46,6 +46,8 @@
 ### 理念
 
 **Dante Cloud** 一直秉承着“简洁、高效、包容、务实”的理念，使用微服务领域及周边相关的各类新兴技术或主流技术进行建设，不断地深耕细作、去粗取精、用心打造。目标是构建一款`代码质量高、维护投入低、安全防护强`的，可以帮助用户快速跨越架构技术选型、技术研究探索阶段，降低传统项目中因安全漏洞、技术负债、低质代码等潜在隐患所产生的高维护投入，期望像项目名字寓意一样，在行业变革的时期承上启下，助力企业信息化建设和变革的产品。
+
+Dante Cloud 核心关注点是：**「高质量的系统代码」**、**「合理的系统架构」**、**「低耦合的模块划分」**、**「高安全性系统实现」**、**「灵活的功能扩展能力」**，**「优质的微服务实现」**。不会像其它一些系统一样，追求 **业务功能** 的 **丰富** 性。堆叠大量无法做到真正通用的功能，反倒会成为负担和干扰，不如由用户自己按照需求灵活设计和实现。
 
 ## Dante Cloud 响应式版本特性
 
