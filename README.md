@@ -286,7 +286,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html。 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
 
 
-## [11]、如何升级
+## [11]、友情链接
 
 以下是一些与项目相关的推荐资源或合作伙伴：
 
