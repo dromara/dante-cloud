@@ -15,6 +15,115 @@
  Date: 12/10/2024 21:28:52
 */
 
+-- ----------------------------
+-- Sequence structure for config_info_aggr_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."config_info_aggr_id_seq";
+CREATE SEQUENCE "public"."config_info_aggr_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for config_info_beta_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."config_info_beta_id_seq";
+CREATE SEQUENCE "public"."config_info_beta_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for config_info_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."config_info_id_seq";
+CREATE SEQUENCE "public"."config_info_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for config_info_tag_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."config_info_tag_id_seq";
+CREATE SEQUENCE "public"."config_info_tag_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for config_tags_relation_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."config_tags_relation_id_seq";
+CREATE SEQUENCE "public"."config_tags_relation_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for config_tags_relation_nid_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."config_tags_relation_nid_seq";
+CREATE SEQUENCE "public"."config_tags_relation_nid_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for group_capacity_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."group_capacity_id_seq";
+CREATE SEQUENCE "public"."group_capacity_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for his_config_info_nid_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."his_config_info_nid_seq";
+CREATE SEQUENCE "public"."his_config_info_nid_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for tenant_capacity_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."tenant_capacity_id_seq";
+CREATE SEQUENCE "public"."tenant_capacity_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for tenant_info_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."tenant_info_id_seq";
+CREATE SEQUENCE "public"."tenant_info_id_seq"
+    INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
 
 -- ----------------------------
 -- Table structure for config_info
