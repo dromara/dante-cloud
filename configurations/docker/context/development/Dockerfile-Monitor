@@ -12,7 +12,7 @@
 FROM quay.io/herodotus-cloud/liberica-openjdk-debian:17.0.14-10
 #FROM openjdk:17-jdk
 # 作者
-MAINTAINER herodotus <herodotus@aliyun.com>
+LABEL maintainer="herodotus@aliyun.com"
 
 #定义参数（build构建时使用）
 ARG VERSION

@@ -12,7 +12,7 @@
 FROM quay.io/herodotus-cloud/liberica-openjdk-debian:17.0.14-10
 
 # 作者
-MAINTAINER herodotus <herodotus@aliyuan.com>
+LABEL maintainer="herodotus@aliyun.com"
 
 #工作目录
 WORKDIR /usr/local/
