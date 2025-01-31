@@ -173,7 +173,7 @@
 | Spring Cloud Tencent        | 1.14.0-2023.0.0 |
 | Spring Authorization Server | 1.4.1           |
 | Spring Boot Admin           | 3.4.1           |
-| Nacos                       |            |
+| Nacos                       | 2.5.0           |
 | Sentinel                    | 1.8.8           |
 | Seata                       | 1.7.0           |
 
