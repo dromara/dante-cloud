@@ -10,7 +10,7 @@
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2024.0.0-blue.svg?logo=spring" alt="Spring Cloud 2024.0.0"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.2-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.2"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.14.0--2023.0.0-blue.svg?logo=tencentqq" alt="Spring Cloud Tencent 1.14.0--2023.0.0-SNAPSHOT"></a>
-    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos--brightgreen.svg?logo=alibabadotcom" alt="Nacos "></a>
+    <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.5.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.5.0"></a>
 </p>
 <p align="center">
     <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.2.0-red.svg?logo=spring" alt="Version 3.4.2.0"></a>
