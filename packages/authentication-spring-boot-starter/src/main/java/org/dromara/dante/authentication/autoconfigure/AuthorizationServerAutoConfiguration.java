@@ -30,6 +30,7 @@ import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2Authentication
 import cn.herodotus.engine.oauth2.authentication.customizer.OAuth2FormLoginConfigurerCustomizer;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
+import cn.herodotus.engine.oauth2.authorization.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
 import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
 import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
 import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationProperties;
@@ -45,7 +46,6 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.apache.commons.lang3.ArrayUtils;
-import org.dromara.dante.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
