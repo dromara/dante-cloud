@@ -25,9 +25,9 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
+import jakarta.annotation.PostConstruct;
 import org.dromara.dante.module.strategy.config.DistributedArchitectureConfiguration;
 import org.dromara.dante.module.strategy.config.MonocoqueArchitectureConfiguration;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
