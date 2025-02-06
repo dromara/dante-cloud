@@ -145,15 +145,19 @@
 
 ![输入图片说明](./readme/architecture.jpg)
 
-### （1） 方法级动态权限
+### （1） Passkey 通用密钥「无密码」登录
+
+![输入图片说明](./readme/preview/passkey.gif)
+
+### （2） 方法级动态权限
 
 ![输入图片说明](./readme/preview/oauth2expression.gif)
 
-### （2） Minio 控制台使用 Dante Cloud 登录认证
+### （3） Minio 控制台使用 Dante Cloud 登录认证
 
 ![输入图片说明](./readme/preview/minio-login.gif)
 
-### （3） 服务调用链监控
+### （4） 服务调用链监控
 
 ![输入图片说明](./readme/preview/skywalking.gif)
 
