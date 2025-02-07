@@ -27,9 +27,9 @@
     <a href='https://gitcode.com/dromara/dante-cloud'><img src='https://gitcode.com/dromara/dante-cloud/star/badge.svg' alt='Gitee star'></a>
 </p>
 <p align="center">
+    <a href="https://gitcode.com/dromara/dante-cloud">GitCode 仓库</a> &nbsp; | &nbsp;
     <a href="https://github.com/dromara/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
-    <a href="https://gitcode.com/dromara/dante-cloud">GitCode 仓库</a> &nbsp; | &nbsp;
     <a href="https://dante-cloud.dromara.org">开源版本文档</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.cn">开源备用文档</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.vip">企业版本文档</a>
@@ -70,7 +70,21 @@
 
 因频繁出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，Dante Engine 子项目需登记申请，等审批后开放源码，[【查看详情或登记】](https://gitee.com/dromara/dante-cloud/issues/IB5KL0)
 
-## [2]、总体架构
+## [2]、项目地址
+
+- 后端主工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
+- 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
+
+## [3]、参与贡献
+
+1. 在 GitCode fork 项目到自己的 repo
+2. 把 fork 过去的项目也就是你的项目 clone 到你的本地
+3. 修改代码（记得一定要修改 develop 分支）
+4. commit 代码，push 到自己的库（develop 分支）
+5. 登录 GitCode 在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
+6. 等待维护者合并
+
+## [4]、总体架构
 
 ![输入图片说明](./readme/architecture.jpg)
 
@@ -90,7 +104,121 @@
 
 ![输入图片说明](./readme/preview/skywalking.gif)
 
-## [3]、功能介绍
+## [5]、技术栈和版本说明
+
+### （1）Spring 全家桶及核心技术版本
+
+| 组件                          | 版本              |
+|-----------------------------|-----------------|
+| Spring Boot                 | 3.4.2           |
+| Spring Cloud                | 2024.0.0        |
+| Spring Cloud Alibaba        | 2023.0.1.2      |
+| Spring Cloud Tencent        | 1.14.0-2023.0.0 |
+| Spring Authorization Server | 1.4.1           |
+| Spring Boot Admin           | 3.4.1           |
+| Nacos                       | 2.5.0           |
+| Sentinel                    | 1.8.8           |
+| Seata                       | 1.7.0           |
+
+> Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
+
+### （2）所涉及的相关的技术：
+
+- 持久层框架： Spring Data Jpa & Mybatis Plus
+- API 网关：Spring Cloud Gateway
+- 服务注册&发现和配置中心: Alibaba Nacos、Tencent Polaris
+- 服务消费：Spring Cloud OpenFeign & RestTemplate & OkHttps
+- 负载均衡：Spring Cloud Loadbalancer
+- 服务熔断&降级&限流：Alibaba Sentinel、Tencent Polaris
+- 服务监控：Spring Boot Admin
+- 消息队列：使用 Spring Cloud 消息总线 Spring Cloud Bus 默认 Kafka 适配 RabbitMQ
+- 链路跟踪：Skywalking
+- 分布式事务：Seata
+- 数据缓存：JetCache (Redis + Caffeine) 多级缓存
+- 数据库： Postgresql，MySQL，Oracle ...
+- JSON 序列化：Jackson & FastJson
+- 文件服务：阿里云 OSS/Minio
+- 数据调试：p6spy
+- 日志中心：ELK
+- 日志收集：Logstash Logback Encoder
+
+### (3) 前端工程技术栈
+
+- Vue 3
+- Vite 6
+- Pinia
+- Typescript 5
+- Quasar 2
+- Vue-Router 4
+- Vueliate
+
+## [6]、工程结构
+
+```
+dante-cloud
+├── configurations -- 配置文件脚本和统一Docker build上下文目录
+├── dependencies -- 工程Maven顶级依赖，统一控制版本和依赖
+├── module -- 依赖组件半成品拼装工程
+├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
+├    ├── dante-module-metadata -- 权限元数据同步模块
+├    ├── dante-module-social -- 社交登录模块
+├    ├── dante-module-strategy -- UAA 核心数据访问策略模块
+├    └── dante-monomer-autoconfigure -- 单体版自动配置模块
+├── packages -- 基础核心Starter
+├    ├── authorization-spring-boot-starter -- OAuth2 认证基础Starter，主要用于 UAA 认证服务器以及单体版 Dante Cloud
+├    ├── facility-spring-boot-starter -- 基础设施切换依赖starter
+├    └── service-spring-boot-starter -- 平台接入应用服务通用 Starter
+├── platform -- 平台核心服务
+├    ├── dante-cloud-gateway -- 服务网关
+├    ├── dante-cloud-message -- 消息服务
+├    ├── dante-cloud-monitor -- Spring Boot Admin 监控服务
+├    ├── dante-cloud-upms -- 统一权限管理系统服务
+├    └── dante-cloud-uaa -- 账户管理和统一认证模块
+├── services -- 平台业务服务
+├    ├── dante-cloud-bpmn-ability -- 工作流服务
+├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
+├    ├── dante-cloud-oss-ability -- 对象存储服务
+└──  └── dante-monomer-application -- Dante Cloud 单体版应用模块
+```
+
+## [7]、 版本和分支
+
+### 一、版本号说明
+
+本系统版本号，分为四段。
+
+- 第一段和第二段，与 Spring Boot 版本对应，根据采用的 Spring Boot 版本变更。例如，当前采用 Spring Boot 2.4.6 版本，那么就以
+  2.4.X.X 开头
+- 第三段，表示系统功能的变化
+- 第四段，表示系统功能维护及优化情况
+
+### 二、分支说明
+
+|          分支名称          | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途             | 现状                                                          |
+|:----------------------:|-----------------------------------------|-----------|----------------|-------------------------------------------------------------|
+|         master         | Spring Boot 3.4 和 Spring Cloud 2024.0.0 | JDK 17    | 主要发布分支         | 推荐使用代码分支                                                    |
+|        develop         | Spring Boot 3.4 和 Spring Cloud 2024.0.0 | JDK 17    | Development 分支 | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                     |
+|      3.2.X-3.3.X       | Spring Boot 3.3 和 Spring Cloud 2023.0.X | JDK 17    | 稳定版本分支         | 稳定版本分支                                                      |
+|         3.1.X          | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                      |
+|         2.7.X          | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史版本，停止维护      | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
+| spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护      | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
+
+## [8]、安全测试
+
+Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/support/comparison.html#%E4%BA%8C-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
+
+## [9]、如何升级
+
+尽量不修改 Dante Cloud 以外的项目源码，如 Dante Engine、Dante OSS。如果修改了，请 Pull Requests 上来，否则代码与官方不同步，可能会将对你的日后升级增加难度。
+
+每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/others/log/changelog.html。 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
+针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html。 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
+
+## [10]、交流反馈
+
+- 详见[【在线文档】](https://www.herodotus.cn) 交流反馈章节。
+
+## [11]、特性详解
 
 ### Dante Cloud 响应式版本特性
 
@@ -163,146 +291,7 @@
 - 共享模块已进行优化配置，可编译成独立的组件，单独以组件形式进行发布。
 - 代码以共享模块的方式进行单独维护开发，降低现有工程代码复杂度，便于后续功能的扩展和代码的复用。
 
-## [4]、技术栈和版本说明
-
-### （1）Spring 全家桶及核心技术版本
-
-| 组件                          | 版本              |
-|-----------------------------|-----------------|
-| Spring Boot                 | 3.4.2           |
-| Spring Cloud                | 2024.0.0        |
-| Spring Cloud Alibaba        | 2023.0.1.2      |
-| Spring Cloud Tencent        | 1.14.0-2023.0.0 |
-| Spring Authorization Server | 1.4.1           |
-| Spring Boot Admin           | 3.4.1           |
-| Nacos                       | 2.5.0           |
-| Sentinel                    | 1.8.8           |
-| Seata                       | 1.7.0           |
-
-> Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
-
-### （2）所涉及的相关的技术：
-
-- 持久层框架： Spring Data Jpa & Mybatis Plus
-- API 网关：Spring Cloud Gateway
-- 服务注册&发现和配置中心: Alibaba Nacos、Tencent Polaris
-- 服务消费：Spring Cloud OpenFeign & RestTemplate & OkHttps
-- 负载均衡：Spring Cloud Loadbalancer
-- 服务熔断&降级&限流：Alibaba Sentinel、Tencent Polaris
-- 服务监控：Spring Boot Admin
-- 消息队列：使用 Spring Cloud 消息总线 Spring Cloud Bus 默认 Kafka 适配 RabbitMQ
-- 链路跟踪：Skywalking
-- 分布式事务：Seata
-- 数据缓存：JetCache (Redis + Caffeine) 多级缓存
-- 数据库： Postgresql，MySQL，Oracle ...
-- JSON 序列化：Jackson & FastJson
-- 文件服务：阿里云 OSS/Minio
-- 数据调试：p6spy
-- 日志中心：ELK
-- 日志收集：Logstash Logback Encoder
-
-### (3) 前端工程技术栈
-
-- Vue 3
-- Vite 5
-- Pinia
-- Typescript 5
-- Quasar 2
-- Vue-Router 4
-- Vueliate
-
-## [5]、 版本和分支
-
-### 一、版本号说明
-
-本系统版本号，分为四段。
-
-- 第一段和第二段，与 Spring Boot 版本对应，根据采用的 Spring Boot 版本变更。例如，当前采用 Spring Boot 2.4.6 版本，那么就以
-  2.4.X.X 开头
-- 第三段，表示系统功能的变化
-- 第四段，表示系统功能维护及优化情况
-
-### 二、分支说明
-
-|          分支名称          | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途             | 现状                                                          |
-|:----------------------:|-----------------------------------------|-----------|----------------|-------------------------------------------------------------|
-|         master         | Spring Boot 3.4 和 Spring Cloud 2024.0.0 | JDK 17    | 主要发布分支         | 推荐使用代码分支                                                    |
-|        develop         | Spring Boot 3.4 和 Spring Cloud 2024.0.0 | JDK 17    | Development 分支 | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                     |
-|      3.2.X-3.3.X       | Spring Boot 3.3 和 Spring Cloud 2023.0.X | JDK 17    | 稳定版本分支         | 稳定版本分支                                                      |
-|         3.1.X          | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                      |
-|         2.7.X          | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史版本，停止维护      | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
-| spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护      | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
-
-## [6]、工程结构
-
-```
-dante-cloud
-├── configurations -- 配置文件脚本和统一Docker build上下文目录
-├── dependencies -- 工程Maven顶级依赖，统一控制版本和依赖
-├── module -- 依赖组件半成品拼装工程
-├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
-├    ├── dante-module-metadata -- 权限元数据同步模块
-├    ├── dante-module-social -- 社交登录模块
-├    ├── dante-module-strategy -- UAA 核心数据访问策略模块
-├    └── dante-monomer-autoconfigure -- 单体版自动配置模块
-├── packages -- 基础核心Starter
-├    ├── authorization-spring-boot-starter -- OAuth2 认证基础Starter，主要用于 UAA 认证服务器以及单体版 Dante Cloud
-├    ├── facility-spring-boot-starter -- 基础设施切换依赖starter
-├    └── service-spring-boot-starter -- 平台接入应用服务通用 Starter
-├── platform -- 平台核心服务
-├    ├── dante-cloud-gateway -- 服务网关
-├    ├── dante-cloud-message -- 消息服务
-├    ├── dante-cloud-monitor -- Spring Boot Admin 监控服务
-├    ├── dante-cloud-upms -- 统一权限管理系统服务
-├    └── dante-cloud-uaa -- 账户管理和统一认证模块
-├── services -- 平台业务服务
-├    ├── dante-cloud-bpmn-ability -- 工作流服务
-├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
-├    ├── dante-cloud-oss-ability -- 对象存储服务
-└──  └── dante-monomer-application -- Dante Cloud 单体版应用模块
-```
-
-## [7]、项目地址
-
-- 后端主工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
-- 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
-
-## [8]、安全测试
-
-Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/support/comparison.html#%E4%BA%8C-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
-
-## [9]、参与贡献
-
-1. 在 Gitee fork 项目到自己的 repo
-2. 把 fork 过去的项目也就是你的项目 clone 到你的本地
-3. 修改代码（记得一定要修改 develop 分支）
-4. commit 代码，push 到自己的库（develop 分支）
-5. 登录 Gitee 在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
-6. 等待维护者合并
-
-## [10]、如何升级
-
-尽量不修改 Dante Cloud 以外的项目源码，如 Dante Engine、Dante OSS。如果修改了，请 Pull Requests 上来，否则代码与官方不同步，可能会将对你的日后升级增加难度。
-
-每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/others/log/changelog.html。 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
-针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html。 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
-
-
-## [11]、友情链接
-
-以下是一些与项目相关的推荐资源或合作伙伴：
-
-| 名称            | 描述                                  | 链接                                        |
-|---------------|-------------------------------------|-------------------------------------------| 
-| **VectoRex**  | VectoRex 项目的官方文档，包含详细的使用指南和 API 参考。 | [查看文档](https://vectorex-doc.m78cloud.cn/) |
-| **Warm-Flow** | 国产工作流引擎🎉，简洁轻量，jar包快速引入设计器          | [查看文档](https://warm-flow.dromara.org/)    |
-| **Skyeye云**   | 集成OA、CRM、ERP、MES、PM、行政等为一体智能制造软件。   | [查看文档](https://gitee.com/dromara/skyeye)  |
-
-## [12]、交流反馈
-
-- 详见[【在线文档】](https://www.herodotus.cn) 交流反馈章节。
-
-## [13]、界面预览
+## [12]、界面预览
 
 <table>
     <tr>
@@ -337,6 +326,16 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
     </tr>
 </table>
 
+## [13]、友情链接
+
+以下是一些与项目相关的推荐资源或合作伙伴：
+
+| 名称            | 描述                                  | 链接                                        |
+|---------------|-------------------------------------|-------------------------------------------| 
+| **VectoRex**  | VectoRex 项目的官方文档，包含详细的使用指南和 API 参考。 | [查看文档](https://vectorex-doc.m78cloud.cn/) |
+| **Warm-Flow** | 国产工作流引擎🎉，简洁轻量，jar包快速引入设计器          | [查看文档](https://warm-flow.dromara.org/)    |
+| **Skyeye云**   | 集成OA、CRM、ERP、MES、PM、行政等为一体智能制造软件。   | [查看文档](https://gitee.com/dromara/skyeye)  |
+
 ## [14]、鸣谢
 
 ### 赞助人列表
@@ -350,7 +349,3 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | 13 |   [sun_left](https://gitee.com/sun_left)   | 2023-04-19 | 14 | [time、sand](https://gitee.com/tzy15680905763)  | 2023-07-06 | 15 |   [印第安老斑鸠](https://gitee.com/deadncut)   | 2023-09-09 |
 | 16 |                    一阵风                     | 2023-12-10 | 17 |                      Jack                      | 2024-03-01 | 18 | [onehelper](https://gitee.com/onehelper) | 2024-05-24 |
 | 19 | [宁哥](https://gitee.com/seabuckthorn-syrup) | 2024-05-29 | 20 | [cryptoneedle](https://gitee.com/cryptoneedle) | 2024-11-01 | 21 |                  别吓跑我的鱼                  | 2025-01-10 |
-
-### 感谢 JetBrains 提供的免费开源 License
-
-![https://jb.gg/OpenSourceSupport](./readme/jb_beam.svg)
