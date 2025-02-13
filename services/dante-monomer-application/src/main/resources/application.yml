@@ -573,7 +573,7 @@ spring:
           allow_jdbc_metadata_access: true
   data:
     redis:
-      database: 4
+      database: 6
       host: 192.168.101.10
       password:
       port: 16379
