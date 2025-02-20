@@ -31,11 +31,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.4.2.2</version>
+        <version>3.4.3.0</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-ability</artifactId>
-    <version>3.4.2.2</version>
+    <version>3.4.3.0</version>
 
     <name>dante-cloud-bpmn-ability</name>
     <description>基于Camunda工作流的服务</description>
@@ -44,10 +44,22 @@
         <dependency>
             <groupId>org.dromara.dante</groupId>
             <artifactId>service-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>fastjson</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.dromara.dante</groupId>
             <artifactId>dante-cloud-bpmn-logic</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>fastjson</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
@@ -58,6 +70,10 @@
                     <groupId>org.springframework.boot</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
         </dependency>
     </dependencies>
 
