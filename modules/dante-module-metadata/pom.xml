@@ -32,7 +32,7 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.4.3.0</version>
+        <version>3.4.3.1</version>
     </parent>
 
     <artifactId>dante-module-metadata</artifactId>
