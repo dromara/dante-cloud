@@ -211,8 +211,8 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 
 尽量不修改 Dante Cloud 以外的项目源码，如 Dante Engine、Dante OSS。如果修改了，请 Pull Requests 上来，否则代码与官方不同步，可能会将对你的日后升级增加难度。
 
-每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/others/log/changelog.html。 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
-针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html。 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
+每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/others/log/changelog.html 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
+针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
 
 ## [10]、交流反馈
 
