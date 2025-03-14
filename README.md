@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.5.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.5.0"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.3.2-red.svg?logo=spring" alt="Version 3.4.3.2"></a>
-    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.3.2-red.svg?logo=spring" alt="Dante Engine 3.4.3.2"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.3.2-red.svg?logo=spring" alt="Dante OSS 3.4.3.2"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.3.3-red.svg?logo=spring" alt="Version 3.4.3.3"></a>
+    <a href="https://www.herodotus.cn" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.3.3-red.svg?logo=spring" alt="Dante Engine 3.4.3.3"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.3.3-red.svg?logo=spring" alt="Dante OSS 3.4.3.3"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
@@ -33,6 +33,7 @@
     <a href="https://dante-cloud.dromara.org">开源版本文档</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.cn">开源备用文档</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.vip">企业版本文档</a>
+    <a href="https://www.herodotus.vip/get-started/preview/online.html">系统演示</a>
 </p>
 
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
@@ -75,7 +76,15 @@
 - 后端主工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
 - 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
 
-## [3]、参与贡献
+## [3]、在线演示
+
+- 演示地址：[【点击查看详情】](https://www.herodotus.vip/get-started/preview/online.html)
+
+## [4]、安全测试
+
+Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/support/comparison.html#%E4%BA%8C-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
+
+## [5]、参与贡献
 
 1. 在 GitCode fork 项目到自己的 repo
 2. 把 fork 过去的项目也就是你的项目 clone 到你的本地
@@ -84,7 +93,7 @@
 5. 登录 GitCode 在你首页可以看到一个 pull request 按钮，点击它，填写一些说明信息，然后提交即可。
 6. 等待维护者合并
 
-## [4]、总体架构
+## [6]、总体架构
 
 ![输入图片说明](./readme/architecture.jpg)
 
@@ -104,7 +113,7 @@
 
 ![输入图片说明](./readme/preview/skywalking.gif)
 
-## [5]、技术栈和版本说明
+## [7]、技术栈和版本说明
 
 ### （1）Spring 全家桶及核心技术版本
 
@@ -152,7 +161,7 @@
 - Vue-Router 4
 - Vueliate
 
-## [6]、工程结构
+## [8]、工程结构
 
 ```
 dante-cloud
@@ -181,7 +190,7 @@ dante-cloud
 └──  └── dante-monomer-application -- Dante Cloud 单体版应用模块
 ```
 
-## [7]、 版本和分支
+## [9]、 版本和分支
 
 ### 一、版本号说明
 
@@ -203,22 +212,18 @@ dante-cloud
 |         2.7.X          | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史版本，停止维护      | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
 | spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护      | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
 
-## [8]、安全测试
-
-Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/support/comparison.html#%E4%BA%8C-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
-
-## [9]、如何升级
+## [10]、如何升级
 
 尽量不修改 Dante Cloud 以外的项目源码，如 Dante Engine、Dante OSS。如果修改了，请 Pull Requests 上来，否则代码与官方不同步，可能会将对你的日后升级增加难度。
 
 每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/others/log/changelog.html 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
 针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/guide/get-start/notices.html 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
 
-## [10]、交流反馈
+## [11]、交流反馈
 
 - 详见[【在线文档】](https://www.herodotus.cn) 交流反馈章节。
 
-## [11]、特性详解
+## [12]、特性详解
 
 ### Dante Cloud 响应式版本特性
 
@@ -291,7 +296,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 - 共享模块已进行优化配置，可编译成独立的组件，单独以组件形式进行发布。
 - 代码以共享模块的方式进行单独维护开发，降低现有工程代码复杂度，便于后续功能的扩展和代码的复用。
 
-## [12]、界面预览
+## [13]、界面预览
 
 <table>
     <tr>
@@ -326,7 +331,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
     </tr>
 </table>
 
-## [13]、友情链接
+## [14]、友情链接
 
 以下是一些与项目相关的推荐资源或合作伙伴：
 
@@ -336,7 +341,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | **Warm-Flow** | 国产工作流引擎🎉，简洁轻量，jar包快速引入设计器          | [查看文档](https://warm-flow.dromara.org/)    |
 | **Skyeye云**   | 集成OA、CRM、ERP、MES、PM、行政等为一体智能制造软件。   | [查看文档](https://gitee.com/dromara/skyeye)  |
 
-## [14]、鸣谢
+## [15]、鸣谢
 
 ### 赞助人列表
 
@@ -349,4 +354,4 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | 13 |   [sun_left](https://gitee.com/sun_left)   | 2023-04-19 | 14 | [time、sand](https://gitee.com/tzy15680905763)  | 2023-07-06 | 15 |   [印第安老斑鸠](https://gitee.com/deadncut)   | 2023-09-09 |
 | 16 |                    一阵风                     | 2023-12-10 | 17 |                      Jack                      | 2024-03-01 | 18 | [onehelper](https://gitee.com/onehelper) | 2024-05-24 |
 | 19 | [宁哥](https://gitee.com/seabuckthorn-syrup) | 2024-05-29 | 20 | [cryptoneedle](https://gitee.com/cryptoneedle) | 2024-11-01 | 21 |                  别吓跑我的鱼                  | 2025-01-10 |
-| 22 | [代码裁缝](https://gitee.com/code-tailor) | 2025-03-01 | 23 | |  | 24 |                                  |  |
+| 22 |   [代码裁缝](https://gitee.com/code-tailor)    | 2025-03-01 | 23 |                    Go ahead                    | 2025-03-10 | 24 |                                          |            |
