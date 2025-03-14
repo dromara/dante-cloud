@@ -30,7 +30,7 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.4.3.2</version>
+        <version>3.4.3.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

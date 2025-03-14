@@ -47,6 +47,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
+import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -104,10 +105,12 @@ public class DefaultSecurityAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean
     public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
+        DefaultOAuth2AuthenticationEventPublisher publisher = new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
+        // 设置默认的错误 Event 类型。在遇到默认字典中没有的错误时，默认抛出。
+        publisher.setDefaultAuthenticationFailureEvent(AuthenticationFailureBadCredentialsEvent.class);
         log.debug("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
-        return new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
+        return publisher;
     }
 
     @Bean
