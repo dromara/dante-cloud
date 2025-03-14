@@ -32,7 +32,7 @@
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
     <a href="https://dante-cloud.dromara.org">开源版本文档</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.cn">开源备用文档</a> &nbsp; | &nbsp;
-    <a href="https://www.herodotus.vip">企业版本文档</a>
+    <a href="https://www.herodotus.vip">企业版本文档</a> &nbsp; | &nbsp;
     <a href="https://www.herodotus.vip/get-started/preview/online.html">系统演示</a>
 </p>
 
