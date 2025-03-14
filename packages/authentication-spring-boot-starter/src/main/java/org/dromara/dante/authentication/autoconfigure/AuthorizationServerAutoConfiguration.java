@@ -121,10 +121,6 @@ public class AuthorizationServerAutoConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .formLogin(oauth2FormLoginConfigurerCustomizer)
                 .sessionManagement(oauth2sessionManagementConfigurerCustomer)
-                .exceptionHandling(exceptions -> {
-                    exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
-                    exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
-                })
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
                 .with(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, oauth2AuthenticationProperties), (configurer) -> {
                 });
