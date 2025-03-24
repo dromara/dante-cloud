@@ -124,10 +124,10 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 | Spring Cloud Alibaba        | 2023.0.1.2      |
 | Spring Cloud Tencent        | 1.14.0-2023.0.0 |
 | Spring Authorization Server | 1.4.2           |
-| Spring Boot Admin           | 3.4.4           |
+| Spring Boot Admin           | 3.4.5           |
 | Nacos                       | 2.5.1           |
 | Sentinel                    | 1.8.8           |
-| Seata                       | 2.2.0           |
+| Seata                       | 2.3.0           |
 
 > Spring 全家桶版本对应关系，详见：[版本说明](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)
 
