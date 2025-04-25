@@ -9,7 +9,7 @@
 ### 在 debian 下则没有这问题。以目前了解的情况看，猜测 alpine 下，为了缩小体系，缺失的内容应该不只是字体库，还有其它内容。
 ### 当然也可能是个人能力有限，一直没有找到正确解决的办法。如果你有更好的解决办法，欢迎提 ISSUE 和 PR。
 
-FROM quay.io/herodotus-cloud/liberica-openjdk-debian:17.0.14-10
+FROM quay.io/herodotus-cloud/liberica-openjdk-debian:17.0.15-10
 
 # 作者
 LABEL maintainer="herodotus@aliyun.com"
