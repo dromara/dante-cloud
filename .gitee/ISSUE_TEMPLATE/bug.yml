@@ -19,7 +19,7 @@ body:
     attributes:
       label: 在线文档和《提问的智慧》是否已经认证阅读过？
       options:
-        - label: 我承诺已经认真详细的看过文档 (https://www.herodotus.cn)
+        - label: 我承诺已经认真详细的看过文档 (https://dante-cloud.dromara.org)
           required: true
   - type: checkboxes
     attributes:
