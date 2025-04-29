@@ -17,7 +17,7 @@
   ~ GNU Affero General Public License for more details.
   ~
   ~ You should have received a copy of the GNU Affero General Public License
-  ~ along with this program.  If not, see <https://www.herodotus.cn>.
+  ~ along with this program.  If not, see <https://www.herodotus.vip>.
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -39,7 +39,7 @@
     <name>dante-cloud-dependencies</name>
     <description>Dante Dependencies</description>
 
-    <url>https://www.herodotus.cn</url>
+    <url>https://www.herodotus.vip</url>
     <licenses>
         <license>
             <name>Apache License Version 2.0</name>
