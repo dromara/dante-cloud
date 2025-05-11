@@ -79,8 +79,9 @@ Dante Cloud **“一套代码、两种架构”** 的特点，可以帮助企业
 
 ## [2]、项目地址
 
-- 后端主工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
+- 后端工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
 - 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
+- 对象存储工程地址：[https://gitcode.com/HerodotusSoftware/dante-oss](https://gitcode.com/HerodotusSoftware/dante-oss)
 
 ## [3]、在线演示
 
