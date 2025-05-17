@@ -13,9 +13,9 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.5.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.5.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.5.1-red.svg?logo=spring" alt="Version 3.4.5.1"></a>
-    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.5.1-red.svg?logo=spring" alt="Dante Engine 3.4.5.1"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.5.1-red.svg?logo=spring" alt="Dante OSS 3.4.5.1"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.5.2-red.svg?logo=spring" alt="Version 3.4.5.2"></a>
+    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.5.2-red.svg?logo=spring" alt="Dante Engine 3.4.5.2"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.5.2-red.svg?logo=spring" alt="Dante OSS 3.4.5.2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -79,8 +79,9 @@ Dante Cloud **“一套代码、两种架构”** 的特点，可以帮助企业
 
 ## [2]、项目地址
 
-- 后端主工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
+- 后端工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
 - 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
+- 对象存储工程地址：[https://gitcode.com/HerodotusSoftware/dante-oss](https://gitcode.com/HerodotusSoftware/dante-oss)
 
 ## [3]、在线演示
 
