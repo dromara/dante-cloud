@@ -32,7 +32,7 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.4.5.2</version>
+        <version>3.4.6.0</version>
     </parent>
 
     <artifactId>dante-module-strategy</artifactId>
