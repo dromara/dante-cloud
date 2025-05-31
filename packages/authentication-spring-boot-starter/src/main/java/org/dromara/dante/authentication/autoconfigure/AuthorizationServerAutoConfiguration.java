@@ -174,6 +174,7 @@ public class AuthorizationServerAutoConfiguration {
         return AuthorizationServerSettings.builder()
                 .issuer(endpointProperties.getIssuerUri())
                 .authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())
+                .pushedAuthorizationRequestEndpoint(endpointProperties.getPushedAuthorizationRequestEndpoint())
                 .deviceAuthorizationEndpoint(endpointProperties.getDeviceAuthorizationEndpoint())
                 .deviceVerificationEndpoint(endpointProperties.getDeviceVerificationEndpoint())
                 .tokenEndpoint(endpointProperties.getAccessTokenEndpoint())

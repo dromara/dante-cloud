@@ -5,17 +5,17 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.4.2-blue.svg?logo=spring" alt="Spring Authorization Server 1.4.2"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.4.6-blue.svg?logo=spring" alt="Spring Boot 3.4.6"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2024.0.1-blue.svg?logo=spring" alt="Spring Cloud 2024.0.1"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.5.0-blue.svg?logo=spring" alt="Spring Authorization Server 1.5.0"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.0-blue.svg?logo=spring" alt="Spring Boot 3.5.0"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg?logo=spring" alt="Spring Cloud 2025.0.0"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.1.2-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.1.2"></a>
-    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-1.14.0--2023.0.0-blue.svg?logo=qq" alt="Spring Cloud Tencent 1.14.0--2023.0.0-SNAPSHOT"></a>
+    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.0.1.0--2023.0.3-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.0.1.0--2023.0.3"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-2.5.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 2.5.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.4.6.0-red.svg?logo=spring" alt="Version 3.4.6.0"></a>
-    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.4.6.0-red.svg?logo=spring" alt="Dante Engine 3.4.6.0"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.4.6.0-red.svg?logo=spring" alt="Dante OSS 3.4.6.0"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.0.0-red.svg?logo=spring" alt="Version 3.5.0.0"></a>
+    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.0.0-red.svg?logo=spring" alt="Dante Engine 3.5.0.0"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.0.0-red.svg?logo=spring" alt="Dante OSS 3.5.0.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -80,8 +80,8 @@ Dante Cloud **“一套代码、两种架构”** 的特点，可以帮助企业
 ## [2]、项目地址
 
 - 后端工程地址：[https://gitcode.com/dromara/dante-cloud](https://gitcode.com/dromara/dante-cloud)
-- 前端工程地址：[https://gitcode.com/HerodotusSoftware/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
-- 对象存储工程地址：[https://gitcode.com/HerodotusSoftware/dante-oss](https://gitcode.com/HerodotusSoftware/dante-oss)
+- 前端工程地址：[https://gitcode.com/herodotus/dante-cloud-ui](https://gitcode.com/HerodotusSoftware/dante-cloud-ui)
+- 对象存储工程地址：[https://gitcode.com/herodotus/dante-oss](https://gitcode.com/herodotus/dante-oss)
 
 ## [3]、在线演示
 
@@ -126,12 +126,12 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 
 | 组件                          | 版本              |
 |-----------------------------|-----------------|
-| Spring Boot                 | 3.4.6           |
-| Spring Cloud                | 2024.0.1        |
+| Spring Boot                 | 3.5.0           |
+| Spring Cloud                | 2025.0.0        |
 | Spring Cloud Alibaba        | 2023.0.1.2      |
 | Spring Cloud Tencent        | 1.14.0-2023.0.0 |
-| Spring Authorization Server | 1.4.2           |
-| Spring Boot Admin           | 3.4.6           |
+| Spring Authorization Server | 1.5.0           |
+| Spring Boot Admin           | 3.5.0           |
 | Nacos                       | 2.5.1           |
 | Sentinel                    | 1.8.8           |
 | Seata                       | 2.3.0           |
@@ -212,9 +212,10 @@ dante-cloud
 
 |          分支名称          | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途             | 现状                                                          |
 |:----------------------:|-----------------------------------------|-----------|----------------|-------------------------------------------------------------|
-|         master         | Spring Boot 3.4 和 Spring Cloud 2024.0.1 | JDK 17    | 主要发布分支         | 推荐使用代码分支                                                    |
-|        develop         | Spring Boot 3.4 和 Spring Cloud 2024.0.1 | JDK 17    | Development 分支 | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                     |
-|      3.2.X-3.3.X       | Spring Boot 3.3 和 Spring Cloud 2023.0.X | JDK 17    | 稳定版本分支         | 稳定版本分支                                                      |
+|         master         | Spring Boot 3.5 和 Spring Cloud 2025.0.X | JDK 17    | 主要发布分支         | 推荐使用代码分支                                                    |
+|        develop         | Spring Boot 3.5 和 Spring Cloud 2025.0.X | JDK 17    | Development 分支 | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                     |
+|         3.4.X          | Spring Boot 3.4 和 Spring Cloud 2024.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.4 时代开发的代码分支，稳定可用，不再维护                      |
+|      3.2.X-3.3.X       | Spring Boot 3.3 和 Spring Cloud 2023.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.3 时代开发的代码分支，稳定可用，不再维护                      |
 |         3.1.X          | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                      |
 |         2.7.X          | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史版本，停止维护      | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
 | spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护      | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
@@ -234,8 +235,8 @@ dante-cloud
 
 ### Dante Cloud 响应式版本特性
 
-- `Spring Boot` 已升级至 3.4.6
-- `Spring Authorization Server` 已升级至 1.4.2
+- `Spring Boot` 已升级至 3.5.0
+- `Spring Authorization Server` 已升级至 1.5.0
 - 全面采用 Java 21，默认开启虚拟线程，以改善阻塞操作的处理降低系统资源的消耗
 - 支持传统的 `阻塞式` 微服务与基于 `Reactor` 和 `WebFlux` 的 `响应式` 微服务同时运行在一套系统之中
 - 不强制使用 `响应式` 方式开发，可根据自身项目对资源吞吐量、资源消耗、特殊功能性能保障的需求，灵活的选择是采用 `响应式` 还是 `阻塞式` 来开发对应的服务。

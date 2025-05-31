@@ -63,19 +63,19 @@ spring:
     password: athena
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
-      connection-timeout: 5000
-      connection-test-query: SELECT 1
-      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
-      idle-timeout: 600000
-      minimum-idle: 10
-      maximum-pool-size: 20
-      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit.
-      # Default: 1800000 (30 minutes)
-      max-lifetime: 1800000
       pool-name: Hikari
+      connection-test-query: SELECT 1
+      minimum-idle: 5
+      maximum-pool-size: 20
+      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
+      connection-timeout: 30000
+      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
+      idle-timeout: 120000
+      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit. Default: 1800000 (30 minutes)
+      max-lifetime: 1800000
       # Lowest acceptable validation timeout is 250 ms. Default: 5000
       validation-timeout: 5000
+      leak-detection-threshold: 60000
       data-source-properties:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
@@ -107,6 +107,9 @@ spring:
         format_sql: true
         show_sql: false
         generate_statistics: false
+        order_inserts: true
+        order_updates: true
+        default_batch_fetch_size: 30
         cache:
           use_query_cache: true
           use_second_level_cache: true
@@ -117,6 +120,15 @@ spring:
             missing_cache_strategy: create
         boot:
           allow_jdbc_metadata_access: true
+        connection:
+          handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
+        jdbc:
+          batch_size: 50
+        query:
+          in_clause_parameter_padding: true
+          fail_on_pagination_over_collection_fetch: true
+          optimizer:
+            enabled: true
   data:
     redis:
       database: 4
@@ -291,19 +303,19 @@ spring:
     password: athena
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
-      connection-timeout: 5000
-      connection-test-query: SELECT 1
-      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
-      idle-timeout: 600000
-      minimum-idle: 10
-      maximum-pool-size: 20
-      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit.
-      # Default: 1800000 (30 minutes)
-      max-lifetime: 1800000
       pool-name: Hikari
+      connection-test-query: SELECT 1
+      minimum-idle: 5
+      maximum-pool-size: 20
+      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
+      connection-timeout: 30000
+      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
+      idle-timeout: 120000
+      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit. Default: 1800000 (30 minutes)
+      max-lifetime: 1800000
       # Lowest acceptable validation timeout is 250 ms. Default: 5000
       validation-timeout: 5000
+      leak-detection-threshold: 60000
       data-source-properties:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
@@ -335,6 +347,9 @@ spring:
         format_sql: true
         show_sql: true
         generate_statistics: false
+        order_inserts: true
+        order_updates: true
+        default_batch_fetch_size: 30
         cache:
           use_query_cache: true
           use_second_level_cache: true
@@ -345,6 +360,15 @@ spring:
             missing_cache_strategy: create
         boot:
           allow_jdbc_metadata_access: true
+        connection:
+          handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
+        jdbc:
+          batch_size: 50
+        query:
+          in_clause_parameter_padding: true
+          fail_on_pagination_over_collection_fetch: true
+          optimizer:
+            enabled: true
   data:
     redis:
       database: 5
@@ -517,19 +541,19 @@ spring:
     password: athena
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
-      connection-timeout: 5000
-      connection-test-query: SELECT 1
-      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
-      idle-timeout: 600000
-      minimum-idle: 10
-      maximum-pool-size: 20
-      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit.
-      # Default: 1800000 (30 minutes)
-      max-lifetime: 1800000
       pool-name: Hikari
+      connection-test-query: SELECT 1
+      minimum-idle: 5
+      maximum-pool-size: 20
+      # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
+      connection-timeout: 30000
+      # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
+      idle-timeout: 120000
+      # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit. Default: 1800000 (30 minutes)
+      max-lifetime: 1800000
       # Lowest acceptable validation timeout is 250 ms. Default: 5000
       validation-timeout: 5000
+      leak-detection-threshold: 60000
       data-source-properties:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
@@ -561,6 +585,9 @@ spring:
         format_sql: true
         show_sql: false
         generate_statistics: false
+        order_inserts: true
+        order_updates: true
+        default_batch_fetch_size: 30
         cache:
           use_query_cache: true
           use_second_level_cache: true
@@ -571,6 +598,15 @@ spring:
             missing_cache_strategy: create
         boot:
           allow_jdbc_metadata_access: true
+        connection:
+          handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
+        jdbc:
+          batch_size: 50
+        query:
+          in_clause_parameter_padding: true
+          fail_on_pagination_over_collection_fetch: true
+          optimizer:
+            enabled: true
   data:
     redis:
       database: 6

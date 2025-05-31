@@ -14,18 +14,26 @@ spring:
     password: ${herodotus.environment.database.password}
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      connection-timeout: 5000
-      connection-test-query: SELECT 1
-      idle-timeout: 600000
-      minimum-idle: 5
-      maximum-pool-size: 50
-      max-lifetime: 1800000
       pool-name: Hikari
+      connection-test-query: SELECT 1
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 120000
+      max-lifetime: 1800000
       validation-timeout: 5000
+      leak-detection-threshold: 60000
       data-source-properties:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         cachePrepStmts: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatement: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
   jpa:
     database: ${herodotus.database-information.platform}
     database-platform: ${herodotus.database-information.platform}
@@ -45,6 +53,9 @@ spring:
         format_sql: ${herodotus.switch.database.format-sql}
         show_sql: ${herodotus.switch.database.show-sql}
         generate_statistics: ${herodotus.switch.database.generate-statistics}
+        order_inserts: true
+        order_updates: true
+        default_batch_fetch_size: 30
         cache:
           use_query_cache: true
           use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
@@ -55,6 +66,15 @@ spring:
             missing_cache_strategy: create
         boot:
           allow_jdbc_metadata_access: true
+        connection:
+          handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
+        jdbc:
+          batch_size: 50
+        query:
+          in_clause_parameter_padding: true
+          fail_on_pagination_over_collection_fetch: true
+          optimizer:
+            enabled: true
 
 mybatis-plus:
   global-config:
