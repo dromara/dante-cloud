@@ -11,6 +11,7 @@ herodotus:
     oss-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.oss-service-name}
     access-token-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/token
     authorization-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/authorize
+    pushed-authorization-request-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/par
     token-revocation-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/revoke
     token-introspection-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/introspect
     jwk-set-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/jwks

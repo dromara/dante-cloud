@@ -7,21 +7,23 @@ spring:
     active: @facility@
   cloud:
     gateway:
-      discovery:
-        locator:
-          #表明gateway开启服务注册和发现的功能，
-          #并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，
-          #这个router将以服务名开头的请求路径转发到对应的服务。
-          enabled: true
-          ##是将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了），
-          #比如以/service-hi/*的请求路径被路由转发到服务名为service-hi的服务上。
-          lower-case-service-id: true
-          ##比如url: http://wwww.zhangyu.com.cn/
-          ##其中path: demo/**
-          ##请求转发给http://wwww.zhangyu.com.cn/** ,去除掉demo前缀
-          ##等于1去掉一级
-          filters:
-            - StripPrefix=1
+      server:
+        webflux:
+          discovery:
+            locator:
+              #表明gateway开启服务注册和发现的功能，
+              #并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，
+              #这个router将以服务名开头的请求路径转发到对应的服务。
+              enabled: true
+              ##是将请求路径上的服务名配置为小写（因为服务注册的时候，向注册中心注册时将服务名转成大写的了），
+              #比如以/service-hi/*的请求路径被路由转发到服务名为service-hi的服务上。
+              lower-case-service-id: true
+              ##比如url: http://wwww.zhangyu.com.cn/
+              ##其中path: demo/**
+              ##请求转发给http://wwww.zhangyu.com.cn/** ,去除掉demo前缀
+              ##等于1去掉一级
+              filters:
+                - StripPrefix=1
     loadbalancer:
       retry:
         enabled: true # 内部已经默认开启这里列出来说明比较重要
