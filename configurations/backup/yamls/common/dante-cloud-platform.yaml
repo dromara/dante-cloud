@@ -46,7 +46,6 @@ spring:
     timeout: ${server.servlet.session.timeout}
     redis:
       repository-type: indexed
-      save-mode: always
       flush-mode: immediate
 
 sms:
