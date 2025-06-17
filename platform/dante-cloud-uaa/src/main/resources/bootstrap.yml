@@ -37,10 +37,11 @@ spring:
       discovery:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
-      sentinel:
-        transport:
-          port: 8719
-          dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
+    sentinel:
+      eager: true
+      transport:
+        port: 8719
+        dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
     #      datasource:
     #        flow:
     #          nacos:
