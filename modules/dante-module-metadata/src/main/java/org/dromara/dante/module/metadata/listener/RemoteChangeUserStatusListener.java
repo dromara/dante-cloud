@@ -58,7 +58,7 @@ public class RemoteChangeUserStatusListener implements ApplicationListener<Remot
     @Override
     public void onApplicationEvent(RemoteChangeUserStatusEvent event) {
 
-        log.info("[Herodotus] |- Request mapping gather REMOTE listener, response event!");
+        log.info("[Herodotus] |- Request mapping gather REMOTE listener, response service [{}] event!", event.getOriginService());
 
         String data = event.getData();
         log.debug("[Herodotus] |- Fetch data [{}]", data);
