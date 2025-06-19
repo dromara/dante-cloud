@@ -1,17 +1,10 @@
 server:
-  port: 7073
+  port: 7070
 spring:
   application:
     name: @artifactId@ #拿到POM文件中的值
   profiles:
     active: @facility@
-  sql:
-    init:
-      # 第一种方式启动的时候 Jpa 会自动创建表，import.sql 只负责创建表单后的初始化数据。第二种方式启动的时候不会创建表，需要在初始化脚本中判断表是否存在，再初始化脚本的步骤
-      # refer: https://www.cnblogs.com/ityouknow/p/7089170.html
-      data-locations:
-        #        - classpath*:sqls/oss-data-mysql.sql
-        - classpath*:sqls/oss-data-postgresql.sql
 
 ---
 # spring cloud alibaba 基础设施配置
@@ -28,6 +21,7 @@ spring:
       - nacos:dante-cloud-cache.yaml?group=common
       - nacos:dante-cloud-rest.yaml?group=common
       - nacos:dante-cloud-kafka.yaml?group=common
+      - nacos:dante-cloud-social.yaml?group=common
       - nacos:${spring.application.name}.yaml?group=service
   cloud:
     nacos:
@@ -41,6 +35,7 @@ spring:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
     sentinel:
+      eager: true
       transport:
         port: 8719
         dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
@@ -52,7 +47,6 @@ spring:
 #            group-id: management
 #            data-type: json
 #            rule-type: flow
-
 logging:
   file:
     name: logs/${spring.application.name}.log
@@ -66,6 +60,7 @@ logging:
     com.alibaba.nacos.common.remote.client: error
     com.ulisesbocchio: error
     # 开发、调试需要的日志
+    cn.herodotus: debug
     org.springframework.security: info
     org.springframework.web: debug
     com.alicp.jetcache: debug
@@ -113,12 +108,15 @@ logging:
     name: logs/${spring.application.name}.log
   level:
     root: INFO
+    # 关闭不必要的日志
+    org.reflections.Reflections: off
+    com.ulisesbocchio: error
     # 开发、调试需要的日志
     org.springframework.security: info
     org.springframework.web: debug
+    com.alicp.jetcache: debug
     org.springframework.cloud.bus: info
     org.apache.kafka: warn
-    cn.herodotus: info
 ---
 # spring 全家桶基础设施配置
 spring:

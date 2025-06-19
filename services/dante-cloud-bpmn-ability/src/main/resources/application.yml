@@ -1,5 +1,5 @@
 server:
-  port: 7071
+  port: 7072
 spring:
   application:
     name: @artifactId@ #拿到POM文件中的值
@@ -34,6 +34,7 @@ spring:
         namespace: ${ALIBABA_NAMESPACE:@alibaba.namespace@}
         server-addr: ${ALIBABA_DISCOVERY_SERVER_ADDR:@alibaba.discovery.server-addr@}
     sentinel:
+      eager: true
       transport:
         port: 8719
         dashboard: ${ALIBABA_SENTINEL_SERVER_ADDR:@alibaba.sentinel.server-addr@}
@@ -45,11 +46,10 @@ spring:
 #            group-id: management
 #            data-type: json
 #            rule-type: flow
+
 logging:
   file:
     name: logs/${spring.application.name}.log
-  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&tenant=${spring.cloud.nacos.config.namespace}&dataId=logback-spring.xml
-  #  config: http://${spring.cloud.nacos.config.server-addr}/nacos/v1/cs/configs?group=logs&dataId=logback-spring.xml
   level:
     root: INFO
     # 关闭不必要的日志
@@ -58,9 +58,10 @@ logging:
     com.alibaba.nacos.common.remote.client: error
     com.ulisesbocchio: error
     # 开发、调试需要的日志
+    cn.herodotus: info
     org.springframework.security: info
-    org.springframework.web: debug
-    com.alicp.jetcache: debug
+    org.springframework.web: info
+    com.alicp.jetcache: info
     org.springframework.cloud.bus: info
     org.apache.kafka: warn
 
@@ -71,9 +72,9 @@ spring:
     activate:
       on-profile: tencent
   cloud:
-#    inetutils:
-#      ignored-interfaces:
-#        - eth0
+    #    inetutils:
+    #      ignored-interfaces:
+    #        - eth0
     polaris:
       enabled: true
       address: ${TENCENT_POLARIS_SERVER_ADDR:grpc://@tencent.polaris.server-addr@}
@@ -95,7 +96,6 @@ spring:
               - dante-cloud-cache.yaml
               - dante-cloud-rest.yaml
               - dante-cloud-kafka.yaml
-              - dante-cloud-social.yaml
           - name: service
             files:
               - ${spring.application.name}.yaml
@@ -116,11 +116,8 @@ logging:
 spring:
   config:
     activate:
-      on-profile: spring
+      on-profile: original
   cloud:
-    inetutils:
-      ignored-interfaces:
-        - eth0
     zookeeper:
       discovery:
         instance-host: ${spring.cloud.client.ip-address}
