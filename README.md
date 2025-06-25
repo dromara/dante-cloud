@@ -81,7 +81,7 @@ Dante Cloud 所使用的核心组件如下：
 | 8  | Spring Data Envers          | sms-spring-boot-starter |
 | 9  | Spring Cloud                | --                      |
 | 10 | Spring Cloud Bus            | --                      |
-| 11 | String Cloud Stream         | --                      |
+| 11 | Spring Cloud Stream         | --                      |
 | 12 | Spring Cloud Gateway        | --                      |
 | 13 | Spring Cloud Loadbalancer   | --                      |
 | 14 | Spring Cloud OpenFegin      | --                      |
