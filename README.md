@@ -6,16 +6,16 @@
 
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.5.1-blue.svg?logo=spring" alt="Spring Authorization Server 1.5.1"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.3-blue.svg?logo=spring" alt="Spring Boot 3.5.3"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.4-blue.svg?logo=spring" alt="Spring Boot 3.5.4"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg?logo=spring" alt="Spring Cloud 2025.0.0"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.3.3-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.3.3"></a>
-    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.0.1.0--2023.0.3-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.0.1.0--2023.0.3"></a>
+    <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.0.2.2--2024.0.1-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.0.2.2--2024.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.0.2-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.0.2"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.3.2-red.svg?logo=spring" alt="Version 3.5.3.2"></a>
-    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.3.2-red.svg?logo=spring" alt="Dante Engine 3.5.3.2"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.3.2-red.svg?logo=spring" alt="Dante OSS 3.5.3.2"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.4.0-red.svg?logo=spring" alt="Version 3.5.4.0"></a>
+    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.4.0-red.svg?logo=spring" alt="Dante Engine 3.5.4.0"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.4.0-red.svg?logo=spring" alt="Dante OSS 3.5.4.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -222,7 +222,7 @@ dante-cloud
 
 ### Dante Cloud 响应式版本特性
 
-- `Spring Boot` 已升级至 3.5.3
+- `Spring Boot` 已升级至 3.5.4
 - `Spring Authorization Server` 已升级至 1.5.1
 - 全面采用 Java 21，默认开启虚拟线程，以改善阻塞操作的处理降低系统资源的消耗
 - 支持传统的 `阻塞式` 微服务与基于 `Reactor` 和 `WebFlux` 的 `响应式` 微服务同时运行在一套系统之中

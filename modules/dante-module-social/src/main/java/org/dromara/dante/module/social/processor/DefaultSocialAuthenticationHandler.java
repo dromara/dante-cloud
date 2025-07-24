@@ -42,7 +42,7 @@ import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.hutool.core.bean.BeanUtil;
+import cn.hutool.v7.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
