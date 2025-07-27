@@ -371,7 +371,7 @@ FROM
             "sys_attribute" sa
         WHERE
                 sa.url LIKE'%security%'
-          AND sa.url != '/security/element/tree' UNION
+          AND (sa.url != '/security/element/tree' OR sa.url != '/security/dictionary/items/{category}') UNION
         SELECT
             '4' AS permission_id,
             sa.attribute_id
