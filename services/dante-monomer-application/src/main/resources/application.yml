@@ -135,7 +135,7 @@ spring:
       host: 192.168.101.10
       password:
       port: 16379
-      timeout: 200ms
+      timeout: 3000ms
       lettuce:
         pool:
           enabled: true
@@ -146,7 +146,7 @@ spring:
           # 最小空闲连接数 (保持预热连接)。保持预热连接，应对突发流量
           min-idle: 8
           # 短等待避免线程阻塞，超时快速失败
-          max-wait: 50ms
+          max-wait: 5000ms
           # 空闲连接检查间隔
           time-between-eviction-runs: 30s
         shutdown-timeout: 200ms
@@ -380,7 +380,7 @@ spring:
       host: 192.168.101.10
       password:
       port: 16379
-      timeout: 200ms
+      timeout: 3000ms
       lettuce:
         pool:
           enabled: true
@@ -391,7 +391,7 @@ spring:
           # 最小空闲连接数 (保持预热连接)。保持预热连接，应对突发流量
           min-idle: 8
           # 短等待避免线程阻塞，超时快速失败
-          max-wait: 50ms
+          max-wait: 5000ms
           # 空闲连接检查间隔
           time-between-eviction-runs: 30s
         shutdown-timeout: 200ms
@@ -623,7 +623,7 @@ spring:
       host: 192.168.101.10
       password:
       port: 16379
-      timeout: 200ms
+      timeout: 3000ms
       lettuce:
         pool:
           enabled: true
@@ -634,7 +634,7 @@ spring:
           # 最小空闲连接数 (保持预热连接)。保持预热连接，应对突发流量
           min-idle: 8
           # 短等待避免线程阻塞，超时快速失败
-          max-wait: 50ms
+          max-wait: 5000ms
           # 空闲连接检查间隔
           time-between-eviction-runs: 30s
         shutdown-timeout: 200ms
