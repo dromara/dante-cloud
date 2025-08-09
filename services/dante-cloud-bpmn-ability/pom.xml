@@ -31,11 +31,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.5.4.1</version>
+        <version>3.5.4.2</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-ability</artifactId>
-    <version>3.5.4.1</version>
+    <version>3.5.4.2</version>
 
     <name>dante-cloud-bpmn-ability</name>
     <description>基于Camunda工作流的服务</description>
