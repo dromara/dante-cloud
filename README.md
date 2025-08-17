@@ -114,7 +114,7 @@ Dante Cloud 所使用的核心组件如下：
 
 ### 3. 重要说明
 
-因频繁出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，Dante Engine 子项目需登记申请，等审批后开放源码，[【查看详情或登记】](https://gitee.com/dromara/dante-cloud/issues/IB5KL0)
+因频繁出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，Dante Engine 子项目需登记申请，等审批后开放源码，[【查看详情或登记】](https://gitee.com/dromara/dante-cloud/issues/ICTBWZ)
 
 ## [2]、项目地址
 
