@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        感谢提出功能建议，我们将认证仔细考虑！
+        感谢提出功能建议，我们将认真仔细考虑和评估，但不保证一定会增加该功能！
   - type: textarea
     id: desired-solution
     attributes:
@@ -17,13 +17,7 @@ body:
   - type: textarea
     id: additional-context
     attributes:
-      label: 你有其他上下文或截图吗？
+      label: 你有其他上下文或相关的、可以参考截图吗？
       description: 在此处添加有关功能请求的任何其他上下文或截图。
     validations:
       required: false
-  - type: checkboxes
-    attributes:
-      label: 意向参与贡献
-      options:
-        - label: 我有意向参与具体功能的开发实现并将代码贡献回到上游社区
-          required: false

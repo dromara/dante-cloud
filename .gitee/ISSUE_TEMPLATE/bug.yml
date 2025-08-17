@@ -17,15 +17,15 @@ body:
           required: true
   - type: checkboxes
     attributes:
-      label: 在线文档和《提问的智慧》是否已经认证阅读过？
+      label: 在线文档是否已经认证阅读过？
       options:
-        - label: 我承诺已经认真详细的看过文档 (https://dante-cloud.dromara.org)
+        - label: 我承诺已经认真详细的看过文档 (https://www.herodotus.vip)
           required: true
   - type: checkboxes
     attributes:
       label: 这个问题是否已经存在？
       options:
-        - label: 我已经搜索过现有的问题 (https://gitee.com/dromara/dante-cloud/issues)
+        - label: 我已经搜索过现有的问题ISSUE (https://gitee.com/dromara/dante-cloud/issues)
           required: true
   - type: textarea
     attributes:
@@ -35,12 +35,6 @@ body:
         1. ...
         2. ...
         3. ...
-    validations:
-      required: true
-  - type: textarea
-    attributes:
-      label: 实际结果
-      description: 请告诉我们实际发生了什么。
     validations:
       required: true
   - type: textarea
