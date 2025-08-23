@@ -26,7 +26,6 @@
 package org.dromara.dante.gateway.handler;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +91,7 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
 
         String data = API_URI;
 
-        if (StringUtils.containsIgnoreCase(service, "bpmn")) {
+        if (Strings.CI.contains(service, "bpmn")) {
             data = "/openapi.json";
         }
 
