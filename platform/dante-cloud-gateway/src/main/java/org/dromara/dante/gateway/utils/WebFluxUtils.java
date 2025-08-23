@@ -27,6 +27,7 @@ package org.dromara.dante.gateway.utils;
 
 import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
 import cn.herodotus.engine.assistant.definition.domain.Result;
+import org.apache.commons.lang3.Strings;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;
@@ -106,7 +107,7 @@ public class WebFluxUtils {
     }
 
     public static boolean isJsonMediaType(String contentType) {
-        return MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(contentType) || MediaType.APPLICATION_JSON_UTF8_VALUE.equalsIgnoreCase(contentType);
+        return Strings.CI.equals(MediaType.APPLICATION_JSON_VALUE, contentType) || Strings.CI.equals(MediaType.APPLICATION_JSON_UTF8_VALUE, contentType);
     }
 
     /**
