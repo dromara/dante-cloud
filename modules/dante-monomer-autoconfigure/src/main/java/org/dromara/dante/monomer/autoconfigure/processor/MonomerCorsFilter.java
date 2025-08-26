@@ -32,6 +32,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
@@ -63,7 +64,7 @@ public class MonomerCorsFilter implements Filter {
         response.setHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE, "3600");
         response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, StringUtils.join(ACCESS_CONTROL_ALLOW_HEADERS, SymbolConstants.COMMA));
 
-        if (HttpMethod.OPTIONS.name().equalsIgnoreCase(request.getMethod())) {
+        if (Strings.CI.equals(HttpMethod.OPTIONS.name(), request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
             chain.doFilter(servletRequest, servletResponse);

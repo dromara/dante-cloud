@@ -30,6 +30,7 @@ import cn.herodotus.engine.assistant.definition.constants.ErrorCodes;
 import cn.herodotus.engine.assistant.definition.domain.Result;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.hc.core5.http.HttpStatus;
 import org.dromara.dante.gateway.utils.WebFluxUtils;
 import org.jetbrains.annotations.NotNull;
@@ -208,7 +209,7 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
     }
 
     private Boolean isPostRequest(HttpMethod method, String contentType) {
-        return (method == HttpMethod.POST || method == HttpMethod.PUT) && (MediaType.APPLICATION_FORM_URLENCODED_VALUE.equalsIgnoreCase(contentType) || MediaType.APPLICATION_JSON_VALUE.equals(contentType));
+        return (method == HttpMethod.POST || method == HttpMethod.PUT) && (Strings.CI.equals(MediaType.APPLICATION_FORM_URLENCODED_VALUE, contentType) || MediaType.APPLICATION_JSON_VALUE.equals(contentType));
     }
 
     /**

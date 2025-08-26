@@ -32,6 +32,7 @@ import cn.herodotus.engine.assistant.definition.domain.Result;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.hc.core5.http.HttpStatus;
 import org.dromara.dante.gateway.properties.GatewaySecurityProperties;
 import org.dromara.dante.gateway.utils.WebFluxUtils;
@@ -91,7 +92,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
         }
 
         String webSocketToken = exchange.getRequest().getHeaders().getFirst(com.google.common.net.HttpHeaders.SEC_WEBSOCKET_PROTOCOL);
-        if (StringUtils.isNotBlank(webSocketToken) && StringUtils.endsWith(webSocketToken, ".stomp")) {
+        if (StringUtils.isNotBlank(webSocketToken) && Strings.CS.endsWith(webSocketToken, ".stomp")) {
             return chain.filter(exchange);
         }
 

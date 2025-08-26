@@ -29,7 +29,6 @@ import cn.herodotus.engine.assistant.core.annotation.ConditionalOnSwaggerEnabled
 import org.dromara.dante.gateway.handler.RefreshRoutesListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springdoc.core.properties.SwaggerUiConfigParameters;
 import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.context.annotation.Bean;

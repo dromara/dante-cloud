@@ -25,6 +25,7 @@
 
 package org.dromara.dante.gateway.filter;
 
+import org.apache.commons.lang3.Strings;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -57,9 +58,9 @@ public class GlobalCacheBodyFilter implements GlobalFilter, Ordered {
         HttpHeaders headers = exchange.getRequest().getHeaders();
         String contentType = headers.getFirst(HttpHeaders.CONTENT_TYPE);
         if (method == HttpMethod.POST || method == HttpMethod.PUT) {
-            if (MediaType.APPLICATION_FORM_URLENCODED_VALUE.equalsIgnoreCase(contentType)
-                    || MediaType.APPLICATION_JSON_VALUE.equalsIgnoreCase(contentType)
-                    || MediaType.APPLICATION_JSON_UTF8_VALUE.equals(contentType)) {
+            if (Strings.CI.equals(MediaType.APPLICATION_FORM_URLENCODED_VALUE, contentType)
+                    || Strings.CI.equals(MediaType.APPLICATION_JSON_VALUE, contentType)
+                    || Strings.CI.equals(MediaType.APPLICATION_JSON_UTF8_VALUE, contentType)) {
                 return DataBufferUtils.join(exchange.getRequest().getBody())
                         .flatMap(dataBuffer -> {
                             byte[] bytes = new byte[dataBuffer.readableByteCount()];

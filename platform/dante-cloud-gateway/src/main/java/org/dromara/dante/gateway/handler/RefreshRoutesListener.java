@@ -26,11 +26,10 @@
 package org.dromara.dante.gateway.handler;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties;
-import org.springdoc.core.properties.SwaggerUiConfigParameters;
 import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
@@ -76,7 +75,8 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
 
         List<String> routes = new ArrayList<>();
         routeLocator.getRoutes()
-                .filter(route -> route.getUri().getHost() != null && Objects.equals(route.getUri().getScheme(), "lb") && !self.equalsIgnoreCase(route.getUri().getHost()))
+                .filter(route -> route.getUri().getHost() != null && Objects.equals(route.getUri().getScheme(), "lb") && !Strings.CI.equals
+                        (self, route.getUri().getHost()))
                 .subscribe(route -> routes.add(route.getUri().getHost()));
 
         Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> swaggerUrls = routes.stream().map(this::createSwaggerUrl).collect(Collectors.toSet());
@@ -91,7 +91,7 @@ public class RefreshRoutesListener implements ApplicationListener<RefreshRoutesE
 
         String data = API_URI;
 
-        if (StringUtils.containsIgnoreCase(service, "bpmn")) {
+        if (Strings.CI.contains(service, "bpmn")) {
             data = "/openapi.json";
         }
 
