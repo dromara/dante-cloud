@@ -144,7 +144,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 ## [6]、总体架构
 
 <p align="center">
-  <img width="95%" src="./readme/architecture.svg" alt="Dante Cloud Architecture"/>
+  <img width="100%" src="./readme/architecture.svg" alt="Dante Cloud Architecture"/>
 </p>
 
 ### （1） Passkey 通用密钥「无密码」登录
