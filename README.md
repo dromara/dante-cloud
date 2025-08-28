@@ -143,7 +143,7 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 
 ## [6]、总体架构
 
-<p align="center" style="text-align:center">
+<p align="center">
   <img width="95%" src="./readme/architecture.svg" alt="Dante Cloud Architecture"/>
 </p>
 
