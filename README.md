@@ -143,23 +143,23 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 
 ## [6]、总体架构
 
-![输入图片说明](./readme/architecture.jpg)
+![系统架构图](./readme/architecture.svg)
 
 ### （1） Passkey 通用密钥「无密码」登录
 
-![输入图片说明](./readme/preview/passkey.gif)
+![Passkey功能示意图](./readme/preview/passkey.gif)
 
 ### （2） 方法级动态权限
 
-![输入图片说明](./readme/preview/oauth2expression.gif)
+![方法级动态权限功能示意](./readme/preview/oauth2expression.gif)
 
 ### （3） Minio 控制台使用 Dante Cloud 登录认证
 
-![输入图片说明](./readme/preview/minio-login.gif)
+![Minio登录示意](./readme/preview/minio-login.gif)
 
 ### （4） 服务调用链监控
 
-![输入图片说明](./readme/preview/skywalking.gif)
+![服务调用链](./readme/preview/skywalking.gif)
 
 ## [7]、工程结构
 
