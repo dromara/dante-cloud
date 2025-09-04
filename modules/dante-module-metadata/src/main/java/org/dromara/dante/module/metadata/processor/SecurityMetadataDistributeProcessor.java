@@ -25,9 +25,9 @@
 
 package org.dromara.dante.module.metadata.processor;
 
+import cn.herodotus.engine.core.foundation.exception.transaction.TransactionalRollbackException;
 import org.dromara.dante.module.metadata.converter.SysAttributeToSecurityAttributeConverter;
 import org.dromara.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
-import cn.herodotus.engine.assistant.core.exception.transaction.TransactionalRollbackException;
 import cn.herodotus.engine.message.core.definition.strategy.StrategyEventManager;
 import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;

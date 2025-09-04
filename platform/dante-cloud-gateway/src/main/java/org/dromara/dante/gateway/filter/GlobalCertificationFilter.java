@@ -26,7 +26,7 @@
 package org.dromara.dante.gateway.filter;
 
 import cn.herodotus.engine.assistant.core.utils.http.HeaderUtils;
-import cn.herodotus.engine.assistant.definition.constants.BaseConstants;
+import cn.herodotus.engine.core.definition.constant.BaseConstants;
 import cn.herodotus.engine.core.definition.constant.ErrorCodes;
 import cn.herodotus.engine.core.definition.domain.Result;
 import jakarta.annotation.Resource;
