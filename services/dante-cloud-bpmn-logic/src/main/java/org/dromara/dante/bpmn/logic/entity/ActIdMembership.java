@@ -31,7 +31,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
+import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
 
 /**
  * <p>Description: 工作流人员和组关系 </p>
@@ -47,7 +47,7 @@ import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
         @Index(name = "act_id_membership_uid_idx", columnList = "user_id_"),
         @Index(name = "act_id_membership_gid_idx", columnList = "group_id_")
 })
-public class ActIdMembership extends BaseEntity {
+public class ActIdMembership extends BaseBpmnEntity {
 
     @Id
     @JSONField(name = "employee_id")

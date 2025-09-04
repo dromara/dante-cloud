@@ -25,12 +25,12 @@
 
 package org.dromara.dante.module.strategy.service;
 
-import org.dromara.dante.module.strategy.definition.AbstractStrategyPermissionDetailsService;
-import org.dromara.dante.module.strategy.feign.RemoteAuthorityDetailsService;
-import cn.herodotus.engine.assistant.definition.domain.Result;
+import cn.herodotus.engine.core.definition.domain.Result;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusPermission;
 import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
 import org.apache.commons.collections4.CollectionUtils;
+import org.dromara.dante.module.strategy.definition.AbstractStrategyPermissionDetailsService;
+import org.dromara.dante.module.strategy.feign.RemoteAuthorityDetailsService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.domain.base;
 
-import cn.herodotus.engine.assistant.definition.domain.base.Entity;
+import cn.herodotus.engine.core.definition.domain.BaseEntity;
 import jakarta.persistence.MappedSuperclass;
 
 /**
@@ -35,5 +35,5 @@ import jakarta.persistence.MappedSuperclass;
  * @date : 2021/7/20 18:56
  */
 @MappedSuperclass
-public abstract class BaseEntity implements Entity {
+public abstract class BaseBpmnEntity implements BaseEntity {
 }

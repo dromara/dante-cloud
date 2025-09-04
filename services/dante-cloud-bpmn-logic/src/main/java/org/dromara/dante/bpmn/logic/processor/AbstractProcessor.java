@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
+import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
 import org.dromara.dante.bpmn.logic.domain.debezium.Message;
 import org.dromara.dante.bpmn.logic.domain.enums.DebeziumEvent;
 import org.slf4j.Logger;
@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
  * @author : gengwei.zheng
  * @date : 2021/7/20 15:41
  */
-public abstract class AbstractProcessor<T extends BaseEntity> {
+public abstract class AbstractProcessor<T extends BaseBpmnEntity> {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractProcessor.class);
 

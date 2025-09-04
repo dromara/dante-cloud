@@ -25,11 +25,11 @@
 
 package org.dromara.dante.module.strategy.feign;
 
-import org.dromara.dante.module.common.ServiceNameConstants;
-import cn.herodotus.engine.assistant.definition.domain.Result;
 import cn.herodotus.engine.assistant.definition.domain.oauth2.AccessPrincipal;
+import cn.herodotus.engine.core.definition.domain.Result;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
 import cn.herodotus.engine.rest.core.annotation.Inner;
+import org.dromara.dante.module.common.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.PathVariable;

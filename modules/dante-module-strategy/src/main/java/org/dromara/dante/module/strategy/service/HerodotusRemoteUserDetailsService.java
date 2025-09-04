@@ -25,13 +25,13 @@
 
 package org.dromara.dante.module.strategy.service;
 
+import cn.herodotus.engine.assistant.definition.domain.oauth2.AccessPrincipal;
+import cn.herodotus.engine.core.definition.domain.Result;
+import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
+import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
 import org.dromara.dante.module.strategy.definition.AbstractStrategyUserDetailsService;
 import org.dromara.dante.module.strategy.feign.RemoteSocialDetailsService;
 import org.dromara.dante.module.strategy.feign.RemoteUserDetailsService;
-import cn.herodotus.engine.assistant.definition.domain.Result;
-import cn.herodotus.engine.assistant.definition.domain.oauth2.AccessPrincipal;
-import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusUser;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysUser;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**

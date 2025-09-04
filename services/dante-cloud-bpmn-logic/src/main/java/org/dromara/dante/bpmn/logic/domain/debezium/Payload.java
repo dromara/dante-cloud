@@ -29,7 +29,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
+import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -40,7 +40,7 @@ import java.util.Date;
  * @author : gengwei.zheng
  * @date : 2021/7/20 19:01
  */
-public class Payload<T extends BaseEntity> implements Serializable {
+public class Payload<T extends BaseBpmnEntity> implements Serializable {
 
     private T before;
 
