@@ -59,7 +59,7 @@ public class AuthorizationService implements RestApiTemplate {
                 .addUrlPara("redirect_uri", "http://192.168.101.10:8847/dante-cloud-upms/open/authorized")
                 .post()
                 .getBody()
-                .toBean(new TypeRef<Map<String, Object>>() {
+                .toBean(new TypeRef<>() {
                 });
     }
 }

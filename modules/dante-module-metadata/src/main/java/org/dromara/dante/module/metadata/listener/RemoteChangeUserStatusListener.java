@@ -25,7 +25,7 @@
 
 package org.dromara.dante.module.metadata.listener;
 
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
+import cn.herodotus.engine.core.definition.utils.Jackson2Utils;
 import cn.herodotus.engine.data.core.enums.DataItemStatus;
 import cn.herodotus.engine.message.core.logic.domain.UserStatus;
 import cn.herodotus.engine.oauth2.resource.autoconfigure.bus.RemoteChangeUserStatusEvent;

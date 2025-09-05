@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.processor;
 
-import cn.herodotus.engine.assistant.core.json.jackson2.utils.Jackson2Utils;
+import cn.herodotus.engine.core.definition.utils.Jackson2Utils;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.apache.commons.lang3.ObjectUtils;

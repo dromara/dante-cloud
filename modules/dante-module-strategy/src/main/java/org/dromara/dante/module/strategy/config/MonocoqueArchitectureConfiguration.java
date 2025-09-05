@@ -25,17 +25,18 @@
 
 package org.dromara.dante.module.strategy.config;
 
-import org.dromara.dante.module.social.config.SocialModuleConfiguration;
-import org.dromara.dante.module.strategy.service.HerodotusLocalPermissionDetailsService;
-import org.dromara.dante.module.strategy.service.HerodotusLocalUserDetailsService;
+import cn.herodotus.engine.core.foundation.condition.ConditionalOnArchitecture;
+import cn.herodotus.engine.core.foundation.enums.Architecture;
 import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.rest.condition.annotation.ConditionalOnMonocoqueArchitecture;
 import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
 import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import jakarta.annotation.PostConstruct;
+import org.dromara.dante.module.social.config.SocialModuleConfiguration;
+import org.dromara.dante.module.strategy.service.HerodotusLocalPermissionDetailsService;
+import org.dromara.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -50,7 +51,7 @@ import org.springframework.context.annotation.Import;
  * @date : 2022/2/1 21:27
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnMonocoqueArchitecture
+@ConditionalOnArchitecture(Architecture.MONOCOQUE)
 @Import({SupplierUpmsLogicConfiguration.class, SocialModuleConfiguration.class})
 public class MonocoqueArchitectureConfiguration {
 

@@ -25,6 +25,17 @@
 
 package org.dromara.dante.module.strategy.config;
 
+import cn.herodotus.engine.core.foundation.condition.ConditionalOnArchitecture;
+import cn.herodotus.engine.core.foundation.enums.Architecture;
+import cn.herodotus.engine.core.foundation.enums.DataAccessStrategy;
+import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
+import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
+import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
+import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
+import cn.herodotus.engine.web.core.condition.ConditionalOnDataAccessStrategy;
+import jakarta.annotation.PostConstruct;
 import org.dromara.dante.module.social.config.SocialModuleConfiguration;
 import org.dromara.dante.module.strategy.feign.RemoteAuthorityDetailsService;
 import org.dromara.dante.module.strategy.feign.RemoteSocialDetailsService;
@@ -33,16 +44,6 @@ import org.dromara.dante.module.strategy.service.HerodotusLocalPermissionDetails
 import org.dromara.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import org.dromara.dante.module.strategy.service.HerodotusRemotePermissionDetailsService;
 import org.dromara.dante.module.strategy.service.HerodotusRemoteUserDetailsService;
-import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.rest.condition.annotation.ConditionalOnDistributedArchitecture;
-import cn.herodotus.engine.rest.condition.annotation.ConditionalOnLocalDataAccess;
-import cn.herodotus.engine.rest.condition.annotation.ConditionalOnRemoteDataAccess;
-import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -58,7 +59,7 @@ import org.springframework.context.annotation.Import;
  * @date : 2022/2/1 21:26
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnDistributedArchitecture
+@ConditionalOnArchitecture(Architecture.DISTRIBUTED)
 public class DistributedArchitectureConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DistributedArchitectureConfiguration.class);
@@ -69,7 +70,7 @@ public class DistributedArchitectureConfiguration {
     }
 
     @Configuration(proxyBeanMethods = false)
-    @ConditionalOnLocalDataAccess
+    @ConditionalOnDataAccessStrategy(DataAccessStrategy.LOCAL)
     @Import({SupplierUpmsLogicConfiguration.class, SocialModuleConfiguration.class})
     static class DataAccessStrategyLocalConfiguration {
 
@@ -90,7 +91,7 @@ public class DistributedArchitectureConfiguration {
     }
 
     @Configuration(proxyBeanMethods = false)
-    @ConditionalOnRemoteDataAccess
+    @ConditionalOnDataAccessStrategy(DataAccessStrategy.REMOTE)
     @EnableFeignClients(basePackages = {"org.dromara.dante.module.strategy.feign"})
     static class DataAccessStrategyRemoteConfiguration {
 

@@ -25,7 +25,7 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.assistant.core.utils.ResourceResolver;
+import cn.herodotus.engine.core.foundation.utils.ResourceResolverUtils;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.engine.oauth2.authentication.customizer.OAuth2FormLoginConfigurerCustomizer;
 import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
@@ -136,7 +136,7 @@ public class AuthorizationServerAutoConfiguration {
         KeyPair keyPair = null;
         if (jwk.getCertificate() == Certificate.CUSTOM) {
             try {
-                Resource[] resource = ResourceResolver.getResources(jwk.getJksKeyStore());
+                Resource[] resource = ResourceResolverUtils.getResources(jwk.getJksKeyStore());
                 if (ArrayUtils.isNotEmpty(resource)) {
                     KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(resource[0], jwk.getJksStorePassword().toCharArray());
                     keyPair = keyStoreKeyFactory.getKeyPair(jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
