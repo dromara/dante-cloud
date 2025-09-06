@@ -26,19 +26,19 @@
 package org.dromara.dante.module.metadata.processor;
 
 import cn.herodotus.engine.core.foundation.exception.transaction.TransactionalRollbackException;
-import org.dromara.dante.module.metadata.converter.SysAttributeToSecurityAttributeConverter;
-import org.dromara.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
+import cn.herodotus.engine.logic.upms.entity.security.SysAttribute;
+import cn.herodotus.engine.logic.upms.entity.security.SysInterface;
+import cn.herodotus.engine.logic.upms.service.security.SysAttributeService;
+import cn.herodotus.engine.logic.upms.service.security.SysInterfaceService;
 import cn.herodotus.engine.message.core.definition.strategy.StrategyEventManager;
 import cn.herodotus.engine.message.core.logic.domain.RequestMapping;
 import cn.herodotus.engine.oauth2.authorization.processor.SecurityMetadataSourceAnalyzer;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
 import cn.herodotus.engine.oauth2.resource.autoconfigure.bus.RemoteSecurityMetadataSyncEvent;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysInterface;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysAttributeService;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysInterfaceService;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.collections4.CollectionUtils;
+import org.dromara.dante.module.metadata.converter.SysAttributeToSecurityAttributeConverter;
+import org.dromara.dante.module.metadata.converter.SysInterfacesToSysAttributesConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;

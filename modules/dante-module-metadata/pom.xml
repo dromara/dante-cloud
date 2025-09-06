@@ -39,13 +39,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
-            <artifactId>dante-module-social</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>supplier-sdk-upms-rest</artifactId>
+            <artifactId>rest-module-servlet-upms</artifactId>
         </dependency>
 
         <dependency>

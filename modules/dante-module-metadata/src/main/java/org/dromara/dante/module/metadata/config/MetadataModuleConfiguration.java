@@ -25,13 +25,12 @@
 
 package org.dromara.dante.module.metadata.config;
 
-import cn.herodotus.engine.supplier.upms.rest.configuration.SupplierUpmsRestConfiguration;
+import cn.herodotus.engine.rest.servlet.upms.annotation.EnableHerodotusRestServletUpms;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * <p>Description: UpmsRest配置类 </p>
@@ -44,9 +43,7 @@ import org.springframework.context.annotation.Import;
         "org.dromara.dante.module.metadata.processor",
         "org.dromara.dante.module.metadata.listener",
 })
-@Import({
-        SupplierUpmsRestConfiguration.class
-})
+@EnableHerodotusRestServletUpms
 public class MetadataModuleConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(MetadataModuleConfiguration.class);

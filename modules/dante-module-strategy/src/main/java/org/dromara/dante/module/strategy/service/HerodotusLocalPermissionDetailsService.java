@@ -25,10 +25,10 @@
 
 package org.dromara.dante.module.strategy.service;
 
+import cn.herodotus.engine.logic.upms.entity.security.SysPermission;
+import cn.herodotus.engine.logic.upms.service.security.SysPermissionService;
 import org.dromara.dante.module.strategy.definition.AbstractStrategyPermissionDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.domain.HerodotusPermission;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;

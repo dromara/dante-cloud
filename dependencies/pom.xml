@@ -107,11 +107,6 @@
 
             <dependency>
                 <groupId>org.dromara.dante</groupId>
-                <artifactId>dante-module-social</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.dromara.dante</groupId>
                 <artifactId>dante-module-metadata</artifactId>
                 <version>${project.version}</version>
             </dependency>

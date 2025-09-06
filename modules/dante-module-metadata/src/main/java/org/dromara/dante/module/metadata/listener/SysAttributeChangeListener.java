@@ -25,10 +25,10 @@
 
 package org.dromara.dante.module.metadata.listener;
 
-import org.dromara.dante.module.metadata.processor.SecurityMetadataDistributeProcessor;
-import cn.herodotus.engine.supplier.upms.logic.domain.event.SysAttributeChangeEvent;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
+import cn.herodotus.engine.logic.upms.domain.event.SysAttributeChangeEvent;
+import cn.herodotus.engine.logic.upms.entity.security.SysAttribute;
 import org.apache.commons.lang3.ObjectUtils;
+import org.dromara.dante.module.metadata.processor.SecurityMetadataDistributeProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;

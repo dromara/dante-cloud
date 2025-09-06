@@ -25,9 +25,9 @@
 
 package org.dromara.dante.module.metadata.converter;
 
+import cn.herodotus.engine.logic.upms.entity.security.SysAttribute;
+import cn.herodotus.engine.logic.upms.entity.security.SysPermission;
 import cn.herodotus.engine.oauth2.core.definition.domain.SecurityAttribute;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysAttribute;
-import cn.herodotus.engine.supplier.upms.logic.entity.security.SysPermission;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.StringUtils;

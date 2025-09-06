@@ -27,14 +27,13 @@ package org.dromara.dante.module.strategy.config;
 
 import cn.herodotus.engine.core.foundation.condition.ConditionalOnArchitecture;
 import cn.herodotus.engine.core.foundation.enums.Architecture;
-import cn.herodotus.engine.oauth2.core.definition.handler.SocialAuthenticationHandler;
+import cn.herodotus.engine.logic.upms.annotation.EnableHerodotusLogicUpms;
+import cn.herodotus.engine.logic.upms.definition.SocialAuthenticationHandler;
+import cn.herodotus.engine.logic.upms.service.security.SysPermissionService;
+import cn.herodotus.engine.logic.upms.service.security.SysUserService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyPermissionDetailsService;
 import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.supplier.upms.logic.configuration.SupplierUpmsLogicConfiguration;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysPermissionService;
-import cn.herodotus.engine.supplier.upms.logic.service.security.SysUserService;
 import jakarta.annotation.PostConstruct;
-import org.dromara.dante.module.social.config.SocialModuleConfiguration;
 import org.dromara.dante.module.strategy.service.HerodotusLocalPermissionDetailsService;
 import org.dromara.dante.module.strategy.service.HerodotusLocalUserDetailsService;
 import org.slf4j.Logger;
@@ -42,7 +41,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
  * <p>Description: 单体式架构配置 </p>
@@ -52,7 +50,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnArchitecture(Architecture.MONOCOQUE)
-@Import({SupplierUpmsLogicConfiguration.class, SocialModuleConfiguration.class})
+@EnableHerodotusLogicUpms
 public class MonocoqueArchitectureConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(MonocoqueArchitectureConfiguration.class);

@@ -43,8 +43,8 @@
             <artifactId>rest-sdk-condition</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
-            <artifactId>dante-module-social</artifactId>
+            <groupId>cn.herodotus.engine</groupId>
+            <artifactId>logic-module-upms</artifactId>
         </dependency>
 
         <dependency>
