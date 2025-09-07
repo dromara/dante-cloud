@@ -25,7 +25,7 @@
 
 package org.dromara.dante.gateway.config;
 
-import cn.herodotus.engine.web.core.condition.ConditionalOnSwagger;
+import cn.herodotus.engine.web.core.condition.ConditionalOnSwaggerEnabled;
 import org.dromara.dante.gateway.handler.RefreshRoutesListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +90,7 @@ public class GatewayConfiguration {
     }
 
     @Configuration(proxyBeanMethods = false)
-    @ConditionalOnSwagger
+    @ConditionalOnSwaggerEnabled
     static class GatewaySwaggerConfiguration {
 
         @Bean
