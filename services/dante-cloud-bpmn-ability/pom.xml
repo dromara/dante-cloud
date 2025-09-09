@@ -43,7 +43,7 @@
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>
-            <artifactId>service-spring-boot-starter</artifactId>
+            <artifactId>authorization-servlet-spring-boot-starter</artifactId>
             <exclusions>
                 <exclusion>
                     <artifactId>fastjson</artifactId>

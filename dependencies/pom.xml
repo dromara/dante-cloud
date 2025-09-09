@@ -86,17 +86,12 @@
             </dependency>
             <dependency>
                 <groupId>org.dromara.dante</groupId>
-                <artifactId>dante-module-strategy</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.dromara.dante</groupId>
                 <artifactId>authentication-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.dromara.dante</groupId>
-                <artifactId>service-spring-boot-starter</artifactId>
+                <artifactId>authorization-servlet-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -104,12 +99,17 @@
                 <artifactId>facility-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.dromara.dante</groupId>
-                <artifactId>dante-module-metadata</artifactId>
+                <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.dromara.dante</groupId>
+                <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.dromara.dante</groupId>
                 <artifactId>dante-cloud-bpmn-logic</artifactId>

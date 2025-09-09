@@ -61,6 +61,7 @@ Dante Cloud 并未使用任何复杂难懂或难以上手掌握的技术，项�
 - **数字转型用户**：如果您的业务复杂度上升到一定阶段、或者您正在考虑进行数字化转型，可以直接选择使用微服务版本，不用再为“基础组件碎片化，需花大量时间整合、踩坑版本兼容”等问题而苦恼。
 - **复杂项目用户**：可以直接选择微服务版本，节省大量前期搭建基础设施、解决通用技术问题的时间，直接聚焦于业务开发。
 - **初创团队用户**：可以先使用单体版进行开发，只要代码放置规范、模块划分合理，后期可以根据需要无缝迁移至微服务架构
+- **技术尝鲜用户**：项目使用中力争生态圈中较新的技术或者组件，而不拘泥局限于常规成熟的技术内容，目标是探索新型技术并用其来为业务的创新服务。喜欢技术尝鲜的用户可以尝鲜使用。
 - **学习提升用户**：本项目集成了成熟的技术选型、优雅的代码设计和清晰的领域划分，编码风格和代码设计一直也在极尽努力尽量与 Spring 生态的标准规范用法保持一致，是深入学习掌握 Spring 生态各组件的优秀案例
 
 > 想要从传统项目转型至微服务项目的用户，**建议详细阅读《企业IT架构转型之道：阿里巴巴中台战略思想与架构实战》一书（可以先读前几章）之后再上手本项目！**
@@ -116,22 +117,24 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 
 ## [5]、工程结构
 
-```
+### 1. 主工程结构
+
+```shell
 dante-cloud
 ├── configurations -- 配置文件脚本和统一Docker build上下文目录
 ├── dependencies -- 工程Maven顶级依赖，统一控制版本和依赖
-├── module -- 依赖组件半成品拼装工程
+├── module -- 依赖组件半成品拼装工程(可以再此建立业务代码模块，以模块的形式实现代码的共享以及架构的切换)
 ├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
-├    ├── dante-module-metadata -- 权限元数据同步模块
-├    ├── dante-module-strategy -- UAA 核心数据访问策略模块
 ├    └── dante-monomer-autoconfigure -- 单体版自动配置模块
 ├── packages -- 基础核心Starter
-├    ├── authorization-spring-boot-starter -- OAuth2 认证基础Starter，主要用于 UAA 认证服务器以及单体版 Dante Cloud
-├    ├── facility-spring-boot-starter -- 基础设施切换依赖starter
-├    └── service-spring-boot-starter -- 平台接入应用服务通用 Starter
+├    ├── authentication-spring-boot-starter -- OAuth2 授权服务器自动配置 Starter(主要用于 UAA 认证服务器以及单体版 Dante Cloud)
+├    ├── authorization-servlet-spring-boot-starter -- 阻塞式 OAuth2 资源服务器自动配置 Starter(除了 Monitor 等特殊服务以外，所有服务均需依赖)
+├    ├── facility-spring-boot-starter -- 基础设施切换依赖 Starter
+├    ├── rpc-client-uaa-spring-boot-starter -- 服务间通信客户端自动配置 Starter(UAA 作为客户端端访问其它服务)
+├    └── rpc-server-upms-spring-boot-starter -- 服务间通信服务端自动配置 Starter(UPMS 作为服务端为其它服务提供访问)
 ├── platform -- 平台核心服务
-├    ├── dante-cloud-gateway -- 服务网关
-├    ├── dante-cloud-message -- 消息服务
+├    ├── dante-cloud-gateway -- 统一网关服务
+├    ├── dante-cloud-message -- 系统消息服务
 ├    ├── dante-cloud-monitor -- Spring Boot Admin 监控服务
 ├    ├── dante-cloud-upms -- 统一权限管理系统服务
 ├    └── dante-cloud-uaa -- 账户管理和统一认证模块
@@ -140,6 +143,73 @@ dante-cloud
 ├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
 ├    ├── dante-cloud-oss-ability -- 对象存储服务
 └──  └── dante-monomer-application -- Dante Cloud 单体版应用模块
+```
+
+### 2. 组件库结构
+
+```shell
+dante-engine
+├── dependencies -- 工程 Maven 顶级依赖，统一控制版本和依赖
+├── engine-assistant -- 辅助功能模块
+├    ├── assistant-access -- 第三方登录接入辅助功能模块
+├    └── assistant-captcha -- 验证码辅助功能模块
+├── engine-cache -- 缓存功能模块
+├    ├── cache-core -- 缓存通用代码模块
+├    ├── cache-module-caffeine -- Caffeine 缓存功能封装模块
+├    ├── cache-module-jetcache -- JetCache 缓存功能封装模块
+├    ├── cache-module-redis -- Redis 缓存功能封装模块
+├    └── cache-module-redisson -- Redisson 缓存功能封装模块
+├── engine-core -- 基础核心模块
+├    ├── core-autoconfigure -- 核心自动配置模块
+├    ├── core-definition -- 核心定义模块
+├    ├── core-foundation -- 基础通用模块
+├    └── core-identity -- 身份认证通用模块
+├── engine-data -- 数据访问模块
+├    ├── data-core -- 数据访问通用代码模块
+├    ├── data-core-jpa -- 以 JPA 作为数据访问层的通用代码模块
+├    ├── data-core-mongodb -- 以 MongoDB 作为数据访问层的通用代码模块
+├    ├── data-module-hibernate -- Hibernate 扩展模块
+├    └── data-module-tenant -- 基于 JPA 的多租户扩展配置模块
+├── engine-logic -- 系统内置功能业务逻辑模块
+├    ├── logic-module-identity -- 身份认证功能业务逻辑模块
+├    ├── logic-module-message -- 系统消息业务逻辑模块
+├    └── logic-module-upms -- UPMS 业务逻辑模块
+├── engine-message -- 消息模块
+├    ├── message-autoconfigure -- 消息自动配置模块
+├    ├── message-core -- 消息通用代码模块
+├    └── message-module-websocket-servlet -- 基于 Servlet 环境下的 Websocket 功能封装模块
+├── engine-oauth2 -- OAuth2 认证模块
+├    ├── oauth2-authentication-autoconfigure -- OAuth2 授权服务器基础内容自动配置模块
+├    ├── oauth2-authorization-autoconfigure -- OAuth2 资源服务器基础内容自动配置模块
+├    ├── oauth2-core -- OAuth2 共性通用代码模块
+├    ├── oauth2-module-authentication -- Spring Authorization Server 授权服务器核心功能封装模块
+├    ├── oauth2-module-authorization -- Spring Authorization Server 资源服务器核心功能封装模块
+├    ├── oauth2-module-extension -- Spring Authorization Server 功能扩展模块
+├    └── oauth2-module-persistence-jpa -- 以 JPA 作为 SAS 核心数据访问层代码实现模块
+├── engine-rest -- 系统内置功能 REST 接口模块
+├    ├── rest-module-servlet-identity -- 身份认证功能 Servlet 环境 REST 接口模块
+├    ├── rest-module-servlet-message -- 消息功能 Servlet 环境 REST 接口模块
+├    └── rest-module-servlet-upms -- UPMS 功能 Servlet 环境 REST 接口模块
+├── engine-starter -- Starters
+├    ├── cache-spring-boot-starter -- 缓存自动配置 Starter
+├    ├── captcha-spring-boot-starter -- 验证码自动配置 Starter
+├    ├── data-mongodb-spring-boot-starter -- MongoDB 数据访问层自动配置 Starter
+├    ├── data-rdbms-spring-boot-starter -- 关系型数据库数据访问层自动配置 Starter
+├    ├── facility-alibaba-spring-boot-starter -- 面向 Spring Cloud Alibaba 的微服务基础设施适配 Starter
+├    ├── facility-gateway-spring-boot-starter -- Alibaba Sentinel 在 Gateway 环境下基础设施适配 Starter
+├    ├── facility-kafka-spring-boot-starter -- 基于 Kafka 的消息事件自动配置 Starter
+├    ├── facility-tencent-spring-boot-starter -- 面向 Spring Cloud Tencent 的微服务基础设施适配模块 Starter
+├    ├── logging-spring-boot-starter -- 日志收集和聚合自动配置 Starter
+├    ├── reactive-container-spring-boot-starter -- Reactive 容器基础配置自动配置 Starter
+├    ├── servlet-container-spring-boot-starter -- Servlet 容器基础配置自动配置 Starter
+├    ├── servlet-message-spring-boot-starter -- Servlet 环境消息模块自动配置 Starter
+├    └── webmvc-spring-boot-starter -- WebMvc 类型应用自动配置 Starter
+├── engine-web -- Web 模块
+├    ├── web-core -- Web 通用代码模块
+├    ├── web-module-api -- Rest 接口通用代码模块
+├    ├── web-module-service -- 微服务通用代码模块
+├    └── web-module-servlet -- Servlet 环境 Web 服务专有基础代码模块
+└──  readme -- README 相关素材放置目录
 ```
 
 ## [6]、 版本和分支

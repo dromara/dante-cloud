@@ -66,8 +66,10 @@
 
     <modules>
         <module>authentication-spring-boot-starter</module>
-        <module>service-spring-boot-starter</module>
+        <module>authorization-servlet-spring-boot-starter</module>
         <module>facility-spring-boot-starter</module>
+        <module>rpc-client-uaa-spring-boot-starter</module>
+        <module>rpc-server-upms-spring-boot-starter</module>
     </modules>
 
 </project>

@@ -1,4 +1,2 @@
-org.dromara.dante.authentication.autoconfigure.AuthenticationAutoConfiguration
-org.dromara.dante.authentication.autoconfigure.ArchitectureStrategyAutoConfiguration
 org.dromara.dante.authentication.autoconfigure.DefaultSecurityAutoConfiguration
 org.dromara.dante.authentication.autoconfigure.AuthorizationServerAutoConfiguration

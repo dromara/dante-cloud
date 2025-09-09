@@ -25,22 +25,17 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
+import cn.herodotus.engine.core.autoconfigure.oauth2.OAuth2AuthorizationProperties;
+import cn.herodotus.engine.core.foundation.enums.Certificate;
 import cn.herodotus.engine.core.foundation.utils.ResourceResolverUtils;
+import cn.herodotus.engine.core.identity.service.ClientDetailsService;
+import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
-import cn.herodotus.engine.oauth2.authentication.customizer.OAuth2FormLoginConfigurerCustomizer;
-import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.authorization.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
-import cn.herodotus.engine.oauth2.authorization.properties.OAuth2AuthorizationProperties;
-import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
-import cn.herodotus.engine.oauth2.core.enums.Certificate;
-import cn.herodotus.engine.oauth2.management.response.OAuth2DeviceVerificationResponseHandler;
-import cn.herodotus.engine.oauth2.management.response.OidcClientRegistrationResponseHandler;
-import cn.herodotus.engine.rest.condition.properties.EndpointProperties;
-import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
-import cn.herodotus.engine.rest.protect.tenant.MultiTenantFilter;
+import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import cn.herodotus.engine.web.service.properties.EndpointProperties;
+import cn.herodotus.engine.web.servlet.tenant.MultiTenantFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -95,13 +90,8 @@ public class AuthorizationServerAutoConfiguration {
             PasswordEncoder passwordEncoder,
             UserDetailsService userDetailsService,
             ClientDetailsService clientDetailsService,
-            HttpCryptoProcessor httpCryptoProcessor,
-            OidcClientRegistrationResponseHandler oidcClientRegistrationResponseHandler,
-            OAuth2AuthenticationProperties oauth2AuthenticationProperties,
-            OAuth2DeviceVerificationResponseHandler oauth2DeviceVerificationResponseHandler,
-            OAuth2FormLoginConfigurerCustomizer oauth2FormLoginConfigurerCustomizer,
-            OAuth2ResourceServerConfigurerCustomer oauth2ResourceServerConfigurerCustomer,
-            OAuth2SessionManagementConfigurerCustomer oauth2sessionManagementConfigurerCustomer
+            OAuth2AuthenticationConfigurerManager authenticationConfigurerManager,
+            ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
 
         log.debug("[Herodotus] |- Bean [Authorization Server Security Filter Chain] Auto Configure.");
@@ -115,14 +105,14 @@ public class AuthorizationServerAutoConfiguration {
                 // 不配置 oauth2ResourceServer 就不会启用BearerTokenAuthenticationFilter
                 // 当前的版本 SAS(1.4.1) 环境下，oauth2ResourceServer 必须在 with(authorizationServerConfigurer 前面配置，否则会导致应用无法启动
                 // 主要原因是 OAuth2AuthorizationServerConfigurer 默认 jwt 配置与 Opaqua 配置冲突。see：https://stackoverflow.com/questions/79336064/oidcuserinfoauthenticationprovider-doesnt-support-for-opaque-token-bearer-autho
-                .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
-                .with(authorizationServerConfigurer, new OAuth2AuthorizationServerConfigurerCustomizer(httpSecurity, sessionRegistry, clientDetailsService, httpCryptoProcessor, oidcClientRegistrationResponseHandler, oauth2DeviceVerificationResponseHandler))
+                .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())
+                .with(authorizationServerConfigurer, new OAuth2AuthorizationServerConfigurerCustomizer(httpSecurity, sessionRegistry, clientDetailsService, authenticationConfigurerManager))
                 // 开启请求认证
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-                .formLogin(oauth2FormLoginConfigurerCustomizer)
-                .sessionManagement(oauth2sessionManagementConfigurerCustomer)
+                .formLogin(authenticationConfigurerManager.getOAuth2FormLoginConfigurerCustomizer())
+                .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
-                .with(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, oauth2AuthenticationProperties), (configurer) -> {
+                .with(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties()), (configurer) -> {
                 });
 
         return httpSecurity.build();

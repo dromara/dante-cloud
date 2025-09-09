@@ -26,20 +26,12 @@
 package org.dromara.dante.authentication.autoconfigure;
 
 import cn.herodotus.engine.core.foundation.support.captcha.CaptchaRendererFactory;
+import cn.herodotus.engine.core.identity.strategy.StrategyUserDetailsService;
+import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
-import cn.herodotus.engine.oauth2.authentication.properties.OAuth2AuthenticationProperties;
+import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusUserDetailsService;
 import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2AuthorizeHttpRequestsConfigurerCustomer;
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2ResourceServerConfigurerCustomer;
-import cn.herodotus.engine.oauth2.authorization.customizer.OAuth2SessionManagementConfigurerCustomer;
-import cn.herodotus.engine.oauth2.core.definition.service.ClientDetailsService;
-import cn.herodotus.engine.oauth2.core.definition.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.oauth2.core.response.HerodotusAccessDeniedHandler;
-import cn.herodotus.engine.oauth2.core.response.HerodotusAuthenticationEntryPoint;
-import cn.herodotus.engine.oauth2.management.processor.HerodotusClientDetailsService;
-import cn.herodotus.engine.oauth2.management.processor.HerodotusUserDetailsService;
-import cn.herodotus.engine.oauth2.management.service.OAuth2ApplicationService;
-import cn.herodotus.engine.rest.protect.crypto.processor.HttpCryptoProcessor;
+import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -72,12 +64,9 @@ public class DefaultSecurityAutoConfiguration {
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
             UserDetailsService userDetailsService,
-            HttpCryptoProcessor httpCryptoProcessor,
-            OAuth2AuthenticationProperties authenticationProperties,
             CaptchaRendererFactory captchaRendererFactory,
-            OAuth2SessionManagementConfigurerCustomer oauth2SessionManagementConfigurerCustomer,
-            OAuth2ResourceServerConfigurerCustomer oauth2ResourceServerConfigurerCustomer,
-            OAuth2AuthorizeHttpRequestsConfigurerCustomer oauth2AuthorizeHttpRequestsConfigurerCustomer
+            OAuth2AuthenticationConfigurerManager authenticationConfigurerManager,
+            ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
 
         log.debug("[Herodotus] |- Bean [Default Security Filter Chain] Auto Configure.");
@@ -86,14 +75,12 @@ public class DefaultSecurityAutoConfiguration {
 
         // @formatter:off
         httpSecurity
-                .authorizeHttpRequests(oauth2AuthorizeHttpRequestsConfigurerCustomer)
-                .sessionManagement(oauth2SessionManagementConfigurerCustomer)
-                .exceptionHandling(exceptions -> {
-                    exceptions.authenticationEntryPoint(new HerodotusAuthenticationEntryPoint());
-                    exceptions.accessDeniedHandler(new HerodotusAccessDeniedHandler());
-                })
-                .oauth2ResourceServer(oauth2ResourceServerConfigurerCustomer)
-                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationProperties, captchaRendererFactory, httpCryptoProcessor), (configurer) -> {});
+                .authorizeHttpRequests(authorizationConfigurerManager.getOAuth2AuthorizeHttpRequestsConfigurerCustomer())
+                .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
+                .exceptionHandling(authorizationConfigurerManager.getOAuth2ExceptionHandlingConfigurerCustomizer())
+                .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())
+                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties(), captchaRendererFactory, authenticationConfigurerManager.getHttpCryptoProcessor()), (configurer) -> {
+                });
 
         // @formatter:on
         return httpSecurity.build();
@@ -119,13 +106,5 @@ public class DefaultSecurityAutoConfiguration {
         HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(strategyUserDetailsService);
         log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
         return herodotusUserDetailsService;
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public ClientDetailsService clientDetailsService(OAuth2ApplicationService applicationService) {
-        HerodotusClientDetailsService herodotusClientDetailsService = new HerodotusClientDetailsService(applicationService);
-        log.debug("[Herodotus] |- Bean [Herodotus Client Details Service] Auto Configure.");
-        return herodotusClientDetailsService;
     }
 }
