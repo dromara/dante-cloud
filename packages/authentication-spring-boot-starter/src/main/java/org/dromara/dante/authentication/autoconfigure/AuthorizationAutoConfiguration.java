@@ -29,10 +29,10 @@ import cn.herodotus.engine.core.autoconfigure.oauth2.OAuth2AuthorizationProperti
 import cn.herodotus.engine.core.foundation.enums.Certificate;
 import cn.herodotus.engine.core.foundation.utils.ResourceResolverUtils;
 import cn.herodotus.engine.core.identity.service.ClientDetailsService;
+import cn.herodotus.engine.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.oauth2.authorization.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
 import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
 import cn.herodotus.engine.web.service.properties.EndpointProperties;
 import cn.herodotus.engine.web.servlet.tenant.MultiTenantFilter;
@@ -80,9 +80,9 @@ import java.util.UUID;
  * @date : 2022/2/12 20:57
  */
 @AutoConfiguration
-public class AuthorizationServerAutoConfiguration {
+public class AuthorizationAutoConfiguration {
 
-    private static final Logger log = LoggerFactory.getLogger(AuthorizationServerAutoConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(AuthorizationAutoConfiguration.class);
 
     @PostConstruct
     public void postConstruct() {
