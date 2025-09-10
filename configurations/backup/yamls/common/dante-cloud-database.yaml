@@ -42,7 +42,7 @@ spring:
     hibernate:
       ddl-auto: ${herodotus.switch.database.ddl-auto}
       naming:
-        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.engine.data.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       jakarta:
         persistence:
@@ -61,7 +61,7 @@ spring:
           use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.engine.data.jpa.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.engine.data.hibernate.spi.cache.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
