@@ -31,7 +31,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>platform</artifactId>
-        <version>3.5.5.2</version>
+        <version>3.5.5.3</version>
     </parent>
 
     <artifactId>dante-cloud-message</artifactId>
@@ -39,15 +39,11 @@
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>
-            <artifactId>service-spring-boot-starter</artifactId>
+            <artifactId>authorization-servlet-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>message-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>supplier-sdk-message</artifactId>
+            <artifactId>servlet-message-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 

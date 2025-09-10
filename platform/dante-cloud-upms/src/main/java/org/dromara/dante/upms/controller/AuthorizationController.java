@@ -25,7 +25,7 @@
 
 package org.dromara.dante.upms.controller;
 
-import cn.herodotus.engine.assistant.definition.domain.Result;
+import cn.herodotus.engine.core.definition.domain.Result;
 import jakarta.validation.constraints.NotNull;
 import org.apache.commons.collections4.MapUtils;
 import org.dromara.dante.upms.service.AuthorizationService;

@@ -30,22 +30,24 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.5.5.2</version>
+        <version>3.5.5.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dante-cloud-upms</artifactId>
-    <version>3.5.5.2</version>
+    <version>3.5.5.3</version>
 
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>
-            <artifactId>service-spring-boot-starter</artifactId>
+            <artifactId>authorization-servlet-spring-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.dromara.dante</groupId>
-            <artifactId>dante-module-metadata</artifactId>
+            <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>

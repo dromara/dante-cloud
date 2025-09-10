@@ -32,7 +32,7 @@
     <parent>
         <artifactId>modules</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.5.5.2</version>
+        <version>3.5.5.3</version>
     </parent>
 
     <artifactId>dante-module-common</artifactId>
@@ -40,7 +40,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.herodotus.engine</groupId>
-            <artifactId>assistant-core</artifactId>
+            <artifactId>core-foundation</artifactId>
         </dependency>
     </dependencies>
 

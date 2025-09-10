@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.repository;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
+import cn.herodotus.engine.data.core.jpa.repository.BaseJpaRepository;
 import org.dromara.dante.bpmn.logic.entity.ActIdMembership;
 
 /**
@@ -34,7 +34,7 @@ import org.dromara.dante.bpmn.logic.entity.ActIdMembership;
  * @author : gengwei.zheng
  * @date : 2021/7/20 13:13
  */
-public interface ActIdMembershipRepository extends BaseRepository<ActIdMembership, String> {
+public interface ActIdMembershipRepository extends BaseJpaRepository<ActIdMembership, String> {
 
     /**
      * 根据UserId和GroupId删除信息

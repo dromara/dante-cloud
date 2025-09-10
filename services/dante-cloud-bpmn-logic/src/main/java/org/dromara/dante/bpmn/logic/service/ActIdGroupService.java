@@ -25,8 +25,8 @@
 
 package org.dromara.dante.bpmn.logic.service;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
-import cn.herodotus.engine.data.core.service.WriteableService;
+import cn.herodotus.engine.data.core.jpa.repository.BaseJpaRepository;
+import cn.herodotus.engine.data.core.jpa.service.BaseJpaWriteableService;
 import org.dromara.dante.bpmn.logic.entity.ActIdGroup;
 import org.dromara.dante.bpmn.logic.repository.ActIdGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  * @date : 2021/7/20 13:25
  */
 @Service
-public class ActIdGroupService implements WriteableService<ActIdGroup, String> {
+public class ActIdGroupService implements BaseJpaWriteableService<ActIdGroup, String> {
 
     private final ActIdGroupRepository actIdGroupRepository;
 
@@ -49,7 +49,7 @@ public class ActIdGroupService implements WriteableService<ActIdGroup, String> {
     }
 
     @Override
-    public BaseRepository<ActIdGroup, String> getRepository() {
+    public BaseJpaRepository<ActIdGroup, String> getRepository() {
         return this.actIdGroupRepository;
     }
 }

@@ -13,9 +13,6 @@ spring:
     name:  @artifactId@
   profiles:
     active: development-postgresql
-  main:
-    allow-bean-definition-overriding: true
-    log-startup-info: false
   data:
     redis:
       repositories:
@@ -29,12 +26,12 @@ spring:
     client:
       factory: jdk
 
+sms:
+  is-print: false
+
 jasypt:
   encryptor:
     password: ${JASPYT_HOME:2bda7d3a-dba1-45a4-b08e-cbd731a0418e}
-
-sms:
-  is-print: false
 ---
 # 开发环境配置
 spring:
@@ -95,7 +92,7 @@ spring:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
       naming:
-        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.engine.data.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       jakarta:
         persistence:
@@ -114,7 +111,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.engine.data.jpa.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.engine.data.hibernate.spi.cache.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -167,11 +164,11 @@ spring:
 
 springdoc:
   api-docs:
-    enabled: ${herodotus.swagger.enabled}
+    enabled: ${herodotus.platform.swagger.enabled}
     resolve-schema-properties: true
   swagger-ui:
     disable-swagger-default-url: true
-    enabled: ${herodotus.swagger.enabled}
+    enabled: ${herodotus.platform.swagger.enabled}
     operations-sorter: method
     show-common-extensions: true
     show-extensions: true
@@ -215,48 +212,32 @@ jetcache:
 
 herodotus:
   platform:
-    architecture: monocoque
-  swagger:
-    # Swagger中不知道哪里包含Kafka的注解，会自动启动，如果不连接到Kafka会导致启动失败。暂时没有解决，先取消掉。
-    enabled: false
-  endpoint:
-    issuer-uri: http://localhost:${server.port}
-  rest:
-    scan:
-      enabled: true
+    swagger:
+      # Swagger中不知道哪里包含Kafka的注解，会自动启动，如果不连接到Kafka会导致启动失败。暂时没有解决，先取消掉。
+      enabled: false
   cache:
     instances:
       data-upms-sys-employee-:
         expire: 2h
-  captcha:
-    graphics:
-      letter: num_and_upper_char
-      font: action
-  sms:
-    enabled: true
-    sandbox: true
-    test-code: 12345678
-    default-channel: ALIYUN
-    aliyun:
-      enabled: true
-      access-key-id: LTAIbpBuZdddd
-      access-key-secret: qqTHQOJRlc7ddd
-      region-id: cn-shanghai
-      sign-name: bradddd
-      version: 2017-05-25
-      templates: { "VERIFICATION_CODE": "SMS_1800" }
-  access:
-    justauth:
-      enabled: true
-      configs:
-        GITEE:
-          client-id: 7c1623d76f39097579ddcae8a061
-          client-secret: 8c343cad9ca732d54242f
-          redirect-uri: http://aw255/social/oauth2/callback/GITEE
-        OSCHINA:
-          client-id: 7c1623d76f39097579123e8
-          client-secret: 8c343cad9ca732d54242f002
-          redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
+  endpoint:
+    issuer-uri: http://localhost:${server.port}
+  assistant:
+    captcha:
+      graphics:
+        letter: num_and_upper_char
+        font: action
+    access:
+      justauth:
+        enabled: true
+        configs:
+          GITEE:
+            client-id: 7c1623d76f39097579ddcae8a061
+            client-secret: 8c343cad9ca732d54242f
+            redirect-uri: http://aw255/social/oauth2/callback/GITEE
+          OSCHINA:
+            client-id: 7c1623d76f39097579123e8
+            client-secret: 8c343cad9ca732d54242f002
+            redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
   oss:
     dialect: minio
     proxy:
@@ -277,7 +258,7 @@ logging:
   level:
     root: INFO
     org.springframework: info
-    org.springframework.security: info
+    org.springframework.security: debug
     org.springframework.web: info
     cn.herodotus: debug
     com.alicp.jetcache: info
@@ -340,7 +321,7 @@ spring:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
       naming:
-        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.engine.data.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       jakarta:
         persistence:
@@ -359,7 +340,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.engine.data.jpa.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.engine.data.hibernate.spi.cache.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -407,10 +388,10 @@ spring:
 
 springdoc:
   api-docs:
-    enabled: ${herodotus.swagger.enabled}
+    enabled: ${herodotus.platform.swagger.enabled}
     resolve-schema-properties: true
   swagger-ui:
-    enabled: ${herodotus.swagger.enabled}
+    enabled: ${herodotus.platform.swagger.enabled}
     disable-swagger-default-url: true
     operations-sorter: method
     show-common-extensions: true
@@ -455,48 +436,32 @@ jetcache:
 
 herodotus:
   platform:
-    architecture: monocoque
-  swagger:
-    # Swagger中不知道哪里包含Kafka的注解，会自动启动，如果不连接到Kafka会导致启动失败。暂时没有解决，先取消掉。
-    enabled: false
-  endpoint:
-    issuer-uri: http://localhost:${server.port}
-  rest:
-    scan:
-      enabled: true
+    swagger:
+      # Swagger中不知道哪里包含Kafka的注解，会自动启动，如果不连接到Kafka会导致启动失败。暂时没有解决，先取消掉。
+      enabled: false
   cache:
     instances:
       data-upms-sys-employee-:
         expire: 2h
-  captcha:
-    graphics:
-      letter: num_and_upper_char
-      font: action
-  sms:
-    enabled: true
-    sandbox: true
-    test-code: 12345678
-    default-channel: ALIYUN
-    aliyun:
-      enabled: true
-      access-key-id: LTAIbpBuZdddd
-      access-key-secret: qqTHQOJRlc7ddd
-      region-id: cn-shanghai
-      sign-name: bradddd
-      version: 2017-05-25
-      templates: { "VERIFICATION_CODE": "SMS_1800" }
-  access:
-    justauth:
-      enabled: true
-      configs:
-        GITEE:
-          client-id: 7c1623d76f39097579ddcae8a061
-          client-secret: 8c343cad9ca732d54242f
-          redirect-uri: http://aw255/social/oauth2/callback/GITEE
-        OSCHINA:
-          client-id: 7c1623d76f39097579123e8
-          client-secret: 8c343cad9ca732d54242f002
-          redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
+  endpoint:
+    issuer-uri: http://localhost:${server.port}
+  assistant:
+    captcha:
+      graphics:
+        letter: num_and_upper_char
+        font: action
+    access:
+      justauth:
+        enabled: true
+        configs:
+          GITEE:
+            client-id: 7c1623d76f39097579ddcae8a061
+            client-secret: 8c343cad9ca732d54242f
+            redirect-uri: http://aw255/social/oauth2/callback/GITEE
+          OSCHINA:
+            client-id: 7c1623d76f39097579123e8
+            client-secret: 8c343cad9ca732d54242f002
+            redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
   oss:
     dialect: minio
     proxy:
@@ -583,14 +548,14 @@ spring:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
       naming:
-        physical-strategy: cn.herodotus.engine.data.jpa.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.engine.data.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       jakarta:
         persistence:
           sharedCache:
             mode: ENABLE_SELECTIVE
       hibernate:
-        dialect: cn.herodotus.engine.data.jpa.hibernate.dialect.OpenGaussDialect
+        dialect: cn.herodotus.engine.data.hibernate.dialect.OpenGaussDialect
         format_sql: true
         show_sql: false
         generate_statistics: false
@@ -602,7 +567,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.engine.data.jpa.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.engine.data.hibernate.spi.cache.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -701,48 +666,32 @@ jetcache:
 
 herodotus:
   platform:
-    architecture: monocoque
-  swagger:
-    # Swagger中不知道哪里包含Kafka的注解，会自动启动，如果不连接到Kafka会导致启动失败。暂时没有解决，先取消掉。
-    enabled: false
-  endpoint:
-    issuer-uri: http://localhost:${server.port}
-  rest:
-    scan:
-      enabled: true
+    swagger:
+      # Swagger中不知道哪里包含Kafka的注解，会自动启动，如果不连接到Kafka会导致启动失败。暂时没有解决，先取消掉。
+      enabled: false
   cache:
     instances:
       data-upms-sys-employee-:
         expire: 2h
-  captcha:
-    graphics:
-      letter: num_and_upper_char
-      font: action
-  sms:
-    enabled: true
-    sandbox: true
-    test-code: 12345678
-    default-channel: ALIYUN
-    aliyun:
-      enabled: true
-      access-key-id: LTAIbpBuZdddd
-      access-key-secret: qqTHQOJRlc7ddd
-      region-id: cn-shanghai
-      sign-name: bradddd
-      version: 2017-05-25
-      templates: { "VERIFICATION_CODE": "SMS_1800" }
-  access:
-    justauth:
-      enabled: true
-      configs:
-        GITEE:
-          client-id: 7c1623d76f39097579ddcae8a061
-          client-secret: 8c343cad9ca732d54242f
-          redirect-uri: http://aw255/social/oauth2/callback/GITEE
-        OSCHINA:
-          client-id: 7c1623d76f39097579123e8
-          client-secret: 8c343cad9ca732d54242f002
-          redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
+  endpoint:
+    issuer-uri: http://localhost:${server.port}
+  assistant:
+    captcha:
+      graphics:
+        letter: num_and_upper_char
+        font: action
+    access:
+      justauth:
+        enabled: true
+        configs:
+          GITEE:
+            client-id: 7c1623d76f39097579ddcae8a061
+            client-secret: 8c343cad9ca732d54242f
+            redirect-uri: http://aw255/social/oauth2/callback/GITEE
+          OSCHINA:
+            client-id: 7c1623d76f39097579123e8
+            client-secret: 8c343cad9ca732d54242f002
+            redirect-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth/social/gitee
   oss:
     dialect: minio
     proxy:

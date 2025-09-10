@@ -31,11 +31,11 @@
     <parent>
         <artifactId>services</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.5.5.2</version>
+        <version>3.5.5.3</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-ability</artifactId>
-    <version>3.5.5.2</version>
+    <version>3.5.5.3</version>
 
     <name>dante-cloud-bpmn-ability</name>
     <description>基于Camunda工作流的服务</description>
@@ -43,7 +43,7 @@
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>
-            <artifactId>service-spring-boot-starter</artifactId>
+            <artifactId>authorization-servlet-spring-boot-starter</artifactId>
             <exclusions>
                 <exclusion>
                     <artifactId>fastjson</artifactId>

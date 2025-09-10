@@ -25,7 +25,7 @@
 
 package org.dromara.dante.gateway.config;
 
-import cn.herodotus.engine.assistant.core.annotation.ConditionalOnSwaggerEnabled;
+import cn.herodotus.engine.web.core.condition.ConditionalOnSwaggerEnabled;
 import org.dromara.dante.gateway.handler.RefreshRoutesListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,7 +98,7 @@ public class GatewayConfiguration {
             RefreshRoutesListener refreshRoutesListener = new RefreshRoutesListener();
             refreshRoutesListener.setRouteLocator(routeLocator);
             refreshRoutesListener.setSwaggerUiConfigProperties(swaggerUiConfigProperties);
-            log.trace("[Herodotus] |- Bean [Refresh Routes Listener] in AliyunScanConfiguration Auto Configure.");
+            log.trace("[Herodotus] |- Bean [Refresh Routes Listener] in AliyunScanConfiguration Configure.");
             return refreshRoutesListener;
         }
     }

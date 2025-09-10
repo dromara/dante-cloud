@@ -25,11 +25,9 @@
 
 package org.dromara.dante.upms;
 
-import org.dromara.dante.upms.config.UpmsConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.Import;
 
 /**
  * <p>Description: 用户中心服务 </p>
@@ -39,7 +37,6 @@ import org.springframework.context.annotation.Import;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-@Import(UpmsConfiguration.class)
 public class UpmsApplication {
 
     public static void main(String[] args) {

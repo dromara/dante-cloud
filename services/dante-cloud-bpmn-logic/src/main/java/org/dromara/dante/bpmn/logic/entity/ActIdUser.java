@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
+import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
 import org.dromara.dante.bpmn.logic.generator.ActIdUserIdGenerator;
 
 import java.util.Date;
@@ -46,7 +46,7 @@ import java.util.Date;
 @Schema(name = "Camunda用户")
 @Entity
 @Table(name = "act_id_user", indexes = {@Index(name = "act_id_user_id_idx", columnList = "id_")})
-public class ActIdUser extends BaseEntity {
+public class ActIdUser extends BaseBpmnEntity {
 
     @JSONField(name = "employee_id")
     @JsonProperty("employee_id")

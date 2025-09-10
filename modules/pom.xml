@@ -32,7 +32,7 @@
     <parent>
         <artifactId>dante-cloud</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.5.5.2</version>
+        <version>3.5.5.3</version>
     </parent>
 
     <artifactId>modules</artifactId>
@@ -66,9 +66,6 @@
 
     <modules>
         <module>dante-module-common</module>
-        <module>dante-module-social</module>
-        <module>dante-module-metadata</module>
-        <module>dante-module-strategy</module>
         <module>dante-monomer-autoconfigure</module>
     </modules>
 

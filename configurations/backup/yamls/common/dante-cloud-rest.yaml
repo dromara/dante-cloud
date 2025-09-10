@@ -1,13 +1,4 @@
-server:
-  error:
-    include-exception: true
-    include-message: always
-    include-stacktrace: always
-    include-binding-errors: always
 spring:
-  thymeleaf:
-    mode: HTML
-    cache: false
   cloud:
     openfeign:
       okhttp:
@@ -56,8 +47,3 @@ springdoc:
     oauth:
       use-pkce-with-authorization-code-grant: true
       app-name: ${spring.application.name}
-
-herodotus:
-  rest:
-    scan:
-      enabled: ${herodotus.switch.rest.scan.enabled}

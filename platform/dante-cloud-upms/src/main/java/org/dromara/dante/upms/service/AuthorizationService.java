@@ -25,10 +25,10 @@
 
 package org.dromara.dante.upms.service;
 
-import cn.herodotus.engine.assistant.definition.support.RestApiTemplate;
+import cn.herodotus.engine.core.definition.support.RestApiTemplate;
+import cn.hutool.v7.core.codec.binary.Base64;
 import cn.zhxu.data.TypeRef;
 import cn.zhxu.okhttps.OkHttps;
-import cn.hutool.v7.core.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -59,7 +59,7 @@ public class AuthorizationService implements RestApiTemplate {
                 .addUrlPara("redirect_uri", "http://192.168.101.10:8847/dante-cloud-upms/open/authorized")
                 .post()
                 .getBody()
-                .toBean(new TypeRef<Map<String, Object>>() {
+                .toBean(new TypeRef<>() {
                 });
     }
 }

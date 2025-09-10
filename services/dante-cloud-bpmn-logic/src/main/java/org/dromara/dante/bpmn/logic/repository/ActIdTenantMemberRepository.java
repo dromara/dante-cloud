@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.repository;
 
-import cn.herodotus.engine.data.core.repository.BaseRepository;
+import cn.herodotus.engine.data.core.jpa.repository.BaseJpaRepository;
 import org.dromara.dante.bpmn.logic.entity.ActIdTenantMember;
 
 /**
@@ -34,5 +34,5 @@ import org.dromara.dante.bpmn.logic.entity.ActIdTenantMember;
  * @author : gengwei.zheng
  * @date : 2021/7/20 13:13
  */
-public interface ActIdTenantMemberRepository extends BaseRepository<ActIdTenantMember, String> {
+public interface ActIdTenantMemberRepository extends BaseJpaRepository<ActIdTenantMember, String> {
 }

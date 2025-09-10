@@ -26,7 +26,7 @@
 package org.dromara.dante.bpmn.logic.domain.debezium;
 
 import com.google.common.base.MoreObjects;
-import org.dromara.dante.bpmn.logic.domain.base.BaseEntity;
+import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
 
 import java.io.Serializable;
 
@@ -36,7 +36,7 @@ import java.io.Serializable;
  * @author : gengwei.zheng
  * @date : 2021/7/20 19:03
  */
-public class Message<T extends BaseEntity> implements Serializable {
+public class Message<T extends BaseBpmnEntity> implements Serializable {
 
     private Field schema;
     private Payload<T> payload;
