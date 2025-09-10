@@ -258,7 +258,7 @@ logging:
   level:
     root: INFO
     org.springframework: info
-    org.springframework.security: info
+    org.springframework.security: debug
     org.springframework.web: info
     cn.herodotus: debug
     com.alicp.jetcache: info
