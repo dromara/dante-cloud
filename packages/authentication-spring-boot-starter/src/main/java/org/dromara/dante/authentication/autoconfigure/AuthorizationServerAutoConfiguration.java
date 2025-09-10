@@ -40,6 +40,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +84,11 @@ public class AuthorizationServerAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(AuthorizationServerAutoConfiguration.class);
 
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Auto [Authorization Server] Configure.");
+    }
+
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(
@@ -94,7 +100,7 @@ public class AuthorizationServerAutoConfiguration {
             ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
 
-        log.debug("[Herodotus] |- Bean [Authorization Server Security Filter Chain] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Authorization Server Security Filter Chain] Configure.");
 
         SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
 

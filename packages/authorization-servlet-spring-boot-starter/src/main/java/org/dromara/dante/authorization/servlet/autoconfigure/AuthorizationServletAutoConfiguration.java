@@ -53,7 +53,7 @@ public class AuthorizationServletAutoConfiguration {
             ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
 
-        log.debug("[Herodotus] |- Bean [Resource Server Security Filter Chain] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Resource Server Security Filter Chain] Configure.");
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
 

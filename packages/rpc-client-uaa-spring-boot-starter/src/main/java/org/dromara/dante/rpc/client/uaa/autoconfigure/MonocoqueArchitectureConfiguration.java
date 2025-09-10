@@ -57,14 +57,14 @@ public class MonocoqueArchitectureConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- SDK [Module Monocoque Architecture] Auto Configure.");
+        log.debug("[Herodotus] |- Auto [Module Monocoque Architecture] Configure.");
     }
 
     @Bean
     @ConditionalOnMissingBean
     public StrategyPermissionDetailsService herodotusLocalPermissionDetailsService(SysPermissionService sysPermissionService) {
         LocalStrategyPermissionDetailsService service = new LocalStrategyPermissionDetailsService(sysPermissionService);
-        log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
+        log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Configure.");
         return service;
     }
 
@@ -72,7 +72,7 @@ public class MonocoqueArchitectureConfiguration {
     @ConditionalOnMissingBean
     public StrategyUserDetailsService herodotusLocalUserDetailsService(SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
         LocalStrategyUserDetailsService service = new LocalStrategyUserDetailsService(sysUserService, socialAuthenticationHandler);
-        log.debug("[Herodotus] |- Strategy [Local User Details Service] Auto Configure.");
+        log.debug("[Herodotus] |- Strategy [Local User Details Service] Configure.");
         return service;
     }
 }

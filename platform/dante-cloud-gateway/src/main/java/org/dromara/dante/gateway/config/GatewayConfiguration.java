@@ -98,7 +98,7 @@ public class GatewayConfiguration {
             RefreshRoutesListener refreshRoutesListener = new RefreshRoutesListener();
             refreshRoutesListener.setRouteLocator(routeLocator);
             refreshRoutesListener.setSwaggerUiConfigProperties(swaggerUiConfigProperties);
-            log.trace("[Herodotus] |- Bean [Refresh Routes Listener] in AliyunScanConfiguration Auto Configure.");
+            log.trace("[Herodotus] |- Bean [Refresh Routes Listener] in AliyunScanConfiguration Configure.");
             return refreshRoutesListener;
         }
     }

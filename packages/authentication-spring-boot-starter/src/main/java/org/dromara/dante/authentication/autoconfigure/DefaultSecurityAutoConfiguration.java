@@ -30,16 +30,13 @@ import cn.herodotus.engine.core.identity.strategy.StrategyUserDetailsService;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
 import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusUserDetailsService;
-import cn.herodotus.engine.oauth2.authentication.response.DefaultOAuth2AuthenticationEventPublisher;
 import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationEventPublisher;
-import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -60,6 +57,11 @@ public class DefaultSecurityAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultSecurityAutoConfiguration.class);
 
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Auto [Default Security] Configure.");
+    }
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
@@ -69,7 +71,7 @@ public class DefaultSecurityAutoConfiguration {
             ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
 
-        log.debug("[Herodotus] |- Bean [Default Security Filter Chain] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Default Security Filter Chain] Configure.");
         // 禁用CSRF 开启跨域
         httpSecurity.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
 
@@ -92,19 +94,10 @@ public class DefaultSecurityAutoConfiguration {
     }
 
     @Bean
-    public AuthenticationEventPublisher authenticationEventPublisher(ApplicationContext applicationContext) {
-        DefaultOAuth2AuthenticationEventPublisher publisher = new DefaultOAuth2AuthenticationEventPublisher(applicationContext);
-        // 设置默认的错误 Event 类型。在遇到默认字典中没有的错误时，默认抛出。
-        publisher.setDefaultAuthenticationFailureEvent(AuthenticationFailureBadCredentialsEvent.class);
-        log.debug("[Herodotus] |- Bean [Authentication Event Publisher] Auto Configure.");
-        return publisher;
-    }
-
-    @Bean
     @ConditionalOnMissingBean
     public UserDetailsService userDetailsService(StrategyUserDetailsService strategyUserDetailsService) {
         HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(strategyUserDetailsService);
-        log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Auto Configure.");
+        log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Configure.");
         return herodotusUserDetailsService;
     }
 }

@@ -64,7 +64,7 @@ public class DistributedArchitectureConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.debug("[Herodotus] |- Module [Distributed Architecture] Auto Configure.");
+        log.debug("[Herodotus] |- Auto [Distributed Architecture] Configure.");
     }
 
     @Configuration(proxyBeanMethods = false)
@@ -76,7 +76,7 @@ public class DistributedArchitectureConfiguration {
         @ConditionalOnMissingBean
         public StrategyUserDetailsService localStrategyUserDetailsService(SysUserService sysUserService, SocialAuthenticationHandler socialAuthenticationHandler) {
             LocalStrategyUserDetailsService service = new LocalStrategyUserDetailsService(sysUserService, socialAuthenticationHandler);
-            log.debug("[Herodotus] |- Strategy [Local User Details Service] Auto Configure.");
+            log.debug("[Herodotus] |- Strategy [Local User Details Service] Configure.");
             return service;
         }
 
@@ -84,7 +84,7 @@ public class DistributedArchitectureConfiguration {
         @ConditionalOnMissingBean
         public StrategyPermissionDetailsService localStrategyPermissionDetailsService(SysPermissionService sysPermissionService) {
             LocalStrategyPermissionDetailsService service = new LocalStrategyPermissionDetailsService(sysPermissionService);
-            log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Auto Configure.");
+            log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Configure.");
             return service;
         }
     }
@@ -98,7 +98,7 @@ public class DistributedArchitectureConfiguration {
         @ConditionalOnMissingBean
         public StrategyUserDetailsService feignStrategyUserDetailsService(RemoteUserDetailsService remoteUserDetailsService, RemoteSocialDetailsService remoteSocialDetailsService) {
             FeignStrategyUserDetailsService service = new FeignStrategyUserDetailsService(remoteUserDetailsService, remoteSocialDetailsService);
-            log.debug("[Herodotus] |- Strategy [Remote User Details Service] Auto Configure.");
+            log.debug("[Herodotus] |- Strategy [Remote User Details Service] Configure.");
             return service;
         }
 
@@ -106,7 +106,7 @@ public class DistributedArchitectureConfiguration {
         @ConditionalOnMissingBean
         public StrategyPermissionDetailsService feignStrategyPermissionDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
             FeignStrategyPermissionDetailsService service = new FeignStrategyPermissionDetailsService(remoteAuthorityDetailsService);
-            log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Auto Configure.");
+            log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Configure.");
             return service;
         }
     }

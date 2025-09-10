@@ -47,7 +47,7 @@ public class RpcServerUpmsAutoConfiguration {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("[Herodotus] |- Starter [Rpc Server Upms] Auto Configure.");
+        log.info("[Herodotus] |- Starter [Rpc Server Upms] Configure.");
     }
 
     @Configuration(proxyBeanMethods = false)
