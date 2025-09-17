@@ -89,7 +89,7 @@ Dante Cloud 并未使用任何复杂难懂或难以上手掌握的技术，项�
 
 ## [2]、安全测试
 
-Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/support/comparison.html#%E4%BA%8C-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
+Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/guide/security/compliance.html)
 
 ## [3]、总体架构
 

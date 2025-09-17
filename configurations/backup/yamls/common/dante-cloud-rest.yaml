@@ -35,6 +35,7 @@ feign:
     enabled: true
 
 springdoc:
+  default-flat-param-object: true
   api-docs:
     enabled: ${herodotus.switch.swagger.enabled}
     resolve-schema-properties: true
