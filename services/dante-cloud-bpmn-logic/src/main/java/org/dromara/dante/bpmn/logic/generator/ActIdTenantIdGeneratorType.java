@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.generator;
 
-import cn.herodotus.engine.data.core.identifier.AbstractIdGeneratorType;
+import cn.herodotus.engine.data.hibernate.generator.AbstractIdGeneratorType;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.dante.bpmn.logic.entity.ActIdTenant;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

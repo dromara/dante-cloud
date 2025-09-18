@@ -31,7 +31,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>services</artifactId>
-        <version>3.5.5.3</version>
+        <version>3.5.6.0</version>
     </parent>
 
     <artifactId>dante-monomer-application</artifactId>

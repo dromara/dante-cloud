@@ -25,7 +25,6 @@
 
 package org.dromara.dante.bpmn.logic.domain.debezium;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -48,11 +47,9 @@ public class Payload<T extends BaseBpmnEntity> implements Serializable {
 
     private Source source;
 
-    @JSONField(name = "op")
     @JsonProperty("op")
     private String operation;
 
-    @JSONField(name = "ts_ms")
     @JsonProperty("ts_ms")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp;

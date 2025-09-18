@@ -25,7 +25,6 @@
 
 package org.dromara.dante.bpmn.logic.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -46,7 +45,6 @@ import org.dromara.dante.bpmn.logic.generator.ActIdGroupIdGenerator;
 @Table(name = "act_id_group", indexes = {@Index(name = "act_id_group_id_idx", columnList = "id_")})
 public class ActIdGroup extends BaseBpmnEntity {
 
-    @JSONField(name = "department_id")
     @JsonProperty("department_id")
     @Schema(title = "部门ID")
     @Id
@@ -55,19 +53,16 @@ public class ActIdGroup extends BaseBpmnEntity {
     private String id;
 
     @Schema(title = "修订")
-    @JSONField(name = "revision")
     @JsonProperty("revision")
     @Column(name = "rev_")
     private Integer revision;
 
     @Schema(title = "名称")
-    @JSONField(name = "department_name")
     @JsonProperty("department_name")
     @Column(name = "name_")
     private String name;
 
     @Schema(title = "类型")
-    @JSONField(name = "organization_id")
     @JsonProperty("organization_id")
     @Column(name = "type_")
     private String type;

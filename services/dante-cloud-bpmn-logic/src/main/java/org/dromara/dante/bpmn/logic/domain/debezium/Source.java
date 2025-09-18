@@ -25,7 +25,6 @@
 
 package org.dromara.dante.bpmn.logic.domain.debezium;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -47,32 +46,26 @@ public class Source implements Serializable {
     private String connector;
 
     private String name;
-    @JSONField(name = "ts_ms")
     @JsonProperty("ts_ms")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp;
 
     private String snapshot;
 
-    @JSONField(name = "db")
     @JsonProperty("db")
     private String databaseName;
 
     private String[] sequence;
 
-    @JSONField(name = "schema")
     @JsonProperty("schema")
     private String schemaName;
 
-    @JSONField(name = "table")
     @JsonProperty("table")
     private String tableName;
 
-    @JSONField(name = "txId")
     @JsonProperty("txId")
     private Integer transactionId;
 
-    @JSONField(name = "lsn")
     @JsonProperty("lsn")
     private BigInteger LogSequenceNumber;
 
