@@ -6,16 +6,16 @@
 
 <p align="center">
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.5.2-blue.svg?logo=spring" alt="Spring Authorization Server 1.5.2"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.5-blue.svg?logo=spring" alt="Spring Boot 3.5.5"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.6-blue.svg?logo=spring" alt="Spring Boot 3.5.6"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg?logo=spring" alt="Spring Cloud 2025.0.0"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.3.3-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.3.3"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.0.2.2--2024.0.1-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.0.2.2--2024.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.0.3-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.0.3"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.5.3-red.svg?logo=spring" alt="Version 3.5.5.3"></a>
-    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.5.3-red.svg?logo=spring" alt="Dante Engine 3.5.5.3"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.5.3-red.svg?logo=spring" alt="Dante OSS 3.5.5.3"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.6.0-red.svg?logo=spring" alt="Version 3.5.6.0"></a>
+    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.6.0-red.svg?logo=spring" alt="Dante Engine 3.5.6.0"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.6.0-red.svg?logo=spring" alt="Dante OSS 3.5.6.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -89,7 +89,7 @@ Dante Cloud 并未使用任何复杂难懂或难以上手掌握的技术，项�
 
 ## [2]、安全测试
 
-Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/support/comparison.html#%E4%BA%8C-%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95)
+Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/guide/security/compliance.html)
 
 ## [3]、总体架构
 

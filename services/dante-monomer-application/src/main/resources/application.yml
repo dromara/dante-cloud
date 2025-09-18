@@ -163,6 +163,7 @@ spring:
           client-secret: a05fe1fc50ed42a4990c6c6fc4bec398
 
 springdoc:
+  default-flat-param-object: true
   api-docs:
     enabled: ${herodotus.platform.swagger.enabled}
     resolve-schema-properties: true
@@ -387,6 +388,7 @@ spring:
           client-secret: a05fe1fc50ed42a4990c6c6fc4bec398
 
 springdoc:
+  default-flat-param-object: true
   api-docs:
     enabled: ${herodotus.platform.swagger.enabled}
     resolve-schema-properties: true
@@ -619,6 +621,7 @@ spring:
           client-secret: a05fe1fc50ed42a4990c6c6fc4bec398
 
 springdoc:
+  default-flat-param-object: true
   api-docs:
     resolve-schema-properties: true
   swagger-ui:
