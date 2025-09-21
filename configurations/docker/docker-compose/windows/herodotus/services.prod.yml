@@ -19,7 +19,7 @@ services:
     ports:
       - ${UPMS_SERVICE_PORT}:${UPMS_SERVICE_PORT}
     volumes:
-      - D:\\local-cached\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
+      - E:\\Workspaces\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
 
   uaa:
     image: ${UAA_SERVICE_NAME}:${VERSION}
@@ -41,7 +41,7 @@ services:
     ports:
       - ${UAA_SERVICE_PORT}:${UAA_SERVICE_PORT}
     volumes:
-      - D:\\local-cached\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
+      - E:\\Workspaces\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
     depends_on:
       - upms
 
@@ -87,7 +87,7 @@ services:
     ports:
       - ${OSS_SERVICE_PORT}:${OSS_SERVICE_PORT}
     volumes:
-      - D:\\local-cached\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
+      - E:\\Workspaces\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
     depends_on:
       - msg
 
@@ -111,7 +111,7 @@ services:
     ports:
       - ${GATEWAY_SERVICE_PORT}:${GATEWAY_SERVICE_PORT}
     volumes:
-      - D:\\local-cached\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
+      - E:\\Workspaces\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
     depends_on:
       - oss
 
@@ -135,7 +135,7 @@ services:
     ports:
       - ${BPMN_SERVICE_PORT}:${BPMN_SERVICE_PORT}
     volumes:
-      - D:\\local-cached\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
+      - E:\\Workspaces\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
     depends_on:
       - gateway
 
@@ -156,6 +156,6 @@ services:
     ports:
       - ${MONITOR_SERVICE_PORT}:${MONITOR_SERVICE_PORT}
     volumes:
-      - D:\\local-cached\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
+      - E:\\Workspaces\\docker-volumes\\dante-cloud\\logs:/usr/local/logs
     depends_on:
       - gateway
