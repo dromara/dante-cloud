@@ -30,11 +30,11 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.5.6.0</version>
+        <version>3.5.6.1</version>
     </parent>
 
     <artifactId>dante-cloud-monitor</artifactId>
-    <version>3.5.6.0</version>
+    <version>3.5.6.1</version>
 
     <name>dante-cloud-monitor</name>
     <description>dante-cloud-monitor</description>
