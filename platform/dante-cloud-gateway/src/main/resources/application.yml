@@ -24,9 +24,17 @@ spring:
               ##等于1去掉一级
               filters:
                 - StripPrefix=1
+          metrics:
+            enabled: true
     loadbalancer:
       retry:
         enabled: true # 内部已经默认开启这里列出来说明比较重要
+
+    # 临时修复如果先启动 Gateway 再启动其它服务，服务发现就会失败，调用接口出现 404 的问题 fix: #ID18CG
+    nacos:
+      discovery:
+        heart-beat:
+          enabled: true
 
 springdoc:
   webjars:
@@ -93,6 +101,7 @@ logging:
     org.springframework.cloud.gateway: debug
     # 开发、调试需要的日志
     cn.herodotus: trace
+    org.dromara: debug
     com.alicp.jetcache: info
 
 ---
