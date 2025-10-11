@@ -34,6 +34,7 @@ import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2Authentication
 import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import cn.herodotus.engine.oauth2.core.properties.OAuth2AuthenticationProperties;
 import cn.herodotus.engine.web.service.properties.EndpointProperties;
 import cn.herodotus.engine.web.servlet.tenant.MultiTenantFilter;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -117,6 +118,7 @@ public class AuthorizationAutoConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .formLogin(authenticationConfigurerManager.getOAuth2FormLoginConfigurerCustomizer())
                 .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
+                .exceptionHandling(authenticationConfigurerManager.getOAuth2ExceptionHandlingConfigurerCustomizer())
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
                 .with(new OAuth2AuthenticationProviderConfigurer(sessionRegistry, passwordEncoder, userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties()), (configurer) -> {
                 });
@@ -125,9 +127,9 @@ public class AuthorizationAutoConfiguration {
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource(OAuth2AuthorizationProperties authorizationProperties) throws NoSuchAlgorithmException {
+    public JWKSource<SecurityContext> jwkSource(OAuth2AuthenticationProperties authenticationProperties) throws NoSuchAlgorithmException {
 
-        OAuth2AuthorizationProperties.Jwk jwk = authorizationProperties.getJwk();
+        OAuth2AuthenticationProperties.Jwk jwk = authenticationProperties.getJwk();
 
         KeyPair keyPair = null;
         if (jwk.getCertificate() == Certificate.CUSTOM) {
