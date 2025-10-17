@@ -8,7 +8,7 @@
     <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.5.2-blue.svg?logo=spring" alt="Spring Authorization Server 1.5.2"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.6-blue.svg?logo=spring" alt="Spring Boot 3.5.6"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg?logo=spring" alt="Spring Cloud 2025.0.0"></a>
-    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.3.3-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.3.3"></a>
+    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.3.4-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.3.4"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.0.2.2--2024.0.1-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.0.2.2--2024.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.1.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.1.0"></a>
 </p>
@@ -54,18 +54,29 @@
 
 ### 三、适用用户
 
-微服务技术并不是落伍了，而是进入了成熟期，它的适用场景和边界被更清晰地定义了。微服务不再是一个“必须要有”的选项，而是一个“权衡之后”的选择。同时，**Dante Cloud** 也并未使用任何复杂难懂或难以上手掌握的技术，项目中所涉及核心关键组件中，其中 **「近 80% 均为 Spring 生态原生组件」**。技术实现均为各组件标准用法的组合与应用，编码风格和代码设计一直也在极尽努力尽量与 Spring 生态的标准规范用法保持一致，只不过经过大量的版本迭代和重构之后逐渐形成了一定的封装与抽象。
+微服务技术并不是 **「落伍」**了，而是进入了 **「成熟期」**，它的 **「适用场景和边界被更清晰地定义」** 了。微服务不再是一个 **「必须要有」** 的选项，而是一个 **「权衡之后」** 的选择。
 
-本项目适用的用户如下：
+**Dante Cloud** 也并未使用任何复杂难懂或难以上手掌握的技术，项目中所涉及核心关键组件中，其中 **「近 80% 均为 Spring 生态原生组件」**。技术实现均为各组件标准用法的组合与应用，编码风格和代码设计一直也在极尽努力尽量与 Spring 生态的标准规范用法保持一致，只不过经过大量的版本迭代和重构之后逐渐形成了一定的封装与抽象。
 
-- **「传统项目用户」**：可以先体验的单体版，先从“前后端分离”以及“多端适配”开始，尝试不同于传统内嵌页面的开发模式。
-- **「数字转型用户」**：如果您正在考虑进行数字化转型，可以直接选择使用微服务版本，不用再为“基础组件碎片化，需花大量时间整合、踩坑版本兼容”等问题而苦恼。
-- **「复杂项目用户」**：如果您的业务复杂度上升到一定阶段，可以直接选择使用微服务版本，直接聚焦于业务开发，节省大量前期搭建基础设施、解决通用技术问题的时间。
+因此，我们推荐以下用户体检和使用 **Dante Cloud**
+
+- **「传统项目用户」**：可以先体验和使用单体版，先从“前后端分离”以及“多端适配”开始，尝试不同于传统内嵌页面的开发模式。之后也可以平滑迁移至微服务版。
+- **「数字转型用户」**：如果您正在考虑进行数字化转型，可以直接选择使用微服务版，不用再为“基础组件碎片化，需花大量时间整合、踩坑版本兼容”等问题而苦恼。
+- **「复杂项目用户」**：如果您的业务复杂度上升到一定阶段，可以直接选择使用微服务版，直接聚焦于业务开发，节省大量前期搭建基础设施、解决通用技术问题的时间。
 - **「初创团队用户」**：可以先使用单体版进行开发，只要代码放置规范、模块划分合理，后期可以根据需要无缝迁移至微服务架构
 - **「技术尝鲜用户」**：本项目并不拘泥局限于常规成熟的技术内容，目标是探索新型技术并用其来为业务的创新服务。喜欢技术尝鲜的用户可以尝鲜使用。
 - **「学习提升用户」**：本项目代码实现优雅和领域划分清晰，编码风格和模块实现尽最大可能与 Spring 生态规范保持一致，是深入学习 Spring 生态组件和提升技能的优秀案例
 
 > 想要从传统项目转型至微服务项目的用户，**建议详细阅读《企业IT架构转型之道：阿里巴巴中台战略思想与架构实战》一书（可以先读前几章）之后再上手本项目！**
+
+对于以下用户我们不建议选择 **Dante Cloud**
+
+- **「单体拥趸用户」**：如果您觉得单体架构可以满足目前您所有的架构需求，那么建议选择其它更专业的单体项目。
+- **「主流技术用户」**：如果您只擅长 mysql、mybatis 等主流技术，本项目会让您觉得格格不入，建议选择更适配您技术体系项目。
+- **「功能丰富用户」**：本项目定位是基础平台，自认为没有能力做到功能既丰富又通用，如果您追求功能的丰富性，那么本项目并不适合。
+- **「会话思维用户」**：基于 Token 的前后端分离开发思想，与传统基于 Session 的开发思想有较大不同，如果您希望找到一套围绕 Session 的前后端分离系统，那么本项目并不适用。
+- **「极简编程用户」**：如果您希望通过前端界面就可以快速了解整个系统的架构设计和实现，或者希望通过界面妥妥拽拽就可以生成代码，这与本项目的开发理念、设计哲学背道而驰。
+- **「审美品鉴用户」**：本项目前端为使用组件库纯手搓构建，没有专业的美工和设计，初衷是为后端开发人员接触前端提供一套更友好的途径，所以不能保证符合您的审美。
 
 ## [1]、开源协议
 
