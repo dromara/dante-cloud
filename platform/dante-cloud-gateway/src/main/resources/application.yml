@@ -30,12 +30,6 @@ spring:
       retry:
         enabled: true # 内部已经默认开启这里列出来说明比较重要
 
-    # 临时修复如果先启动 Gateway 再启动其它服务，服务发现就会失败，调用接口出现 404 的问题 fix: #ID18CG
-    nacos:
-      discovery:
-        heart-beat:
-          enabled: true
-
 springdoc:
   webjars:
     prefix: /document
