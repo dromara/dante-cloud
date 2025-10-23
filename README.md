@@ -5,17 +5,17 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.5.2-blue.svg?logo=spring" alt="Spring Authorization Server 1.5.2"></a>
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.6-blue.svg?logo=spring" alt="Spring Boot 3.5.6"></a>
+    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.5.3-blue.svg?logo=spring" alt="Spring Authorization Server 1.5.3"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.7-blue.svg?logo=spring" alt="Spring Boot 3.5.7"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg?logo=spring" alt="Spring Cloud 2025.0.0"></a>
-    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2023.0.3.4-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2023.0.3.4"></a>
+    <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2025.0.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2025.0.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.0.2.2--2024.0.1-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.0.2.2--2024.0.1"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.1.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.1.0"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.6.3-red.svg?logo=spring" alt="Version 3.5.6.3"></a>
-    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.6.3-red.svg?logo=spring" alt="Dante Engine 3.5.6.3"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.6.3-red.svg?logo=spring" alt="Dante OSS 3.5.6.3"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.7.0-red.svg?logo=spring" alt="Version 3.5.7.0"></a>
+    <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.7.0-red.svg?logo=spring" alt="Dante Engine 3.5.7.0"></a>
+    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.7.0-red.svg?logo=spring" alt="Dante OSS 3.5.7.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -71,12 +71,12 @@
 
 对于以下用户我们不建议选择 **Dante Cloud**
 
-- **「单体拥趸用户」**：如果您觉得单体架构可以满足目前您所有的架构需求，那么建议选择其它更专业的单体项目。
-- **「主流技术用户」**：如果您只擅长 mysql、mybatis 等主流技术，本项目会让您觉得格格不入，建议选择更适配您技术体系项目。
-- **「功能丰富用户」**：本项目定位是基础平台，自认为没有能力做到功能既丰富又通用，如果您追求功能的丰富性，那么本项目并不适合。
-- **「会话思维用户」**：基于 Token 的前后端分离架构与传统基于 Session 的传统单体开发思想有较大不同，本项目无法让您完全沿用原有设计思路和开发思维。
-- **「极简编程用户」**：如果您希望通过界面拖拖拽拽就可以生成代码，或者连文档都不用看、更不用学习就可以完全掌握，这与本项目的产品定位、开发理念、设计哲学背道而驰。
-- **「审美品鉴用户」**：本项目前端为使用组件库纯手搓构建，没有专业的美工和设计，初衷是为后端开发人员接触前端提供一条更友好的途径，所以不能保证符合您的审美。
+- **「单体拥趸用户」**：如果您觉得单体架构可以满足您所有的架构需求，微服务繁琐庞大无法比拟单体的“方便”、“快捷”，那么建议选择其它更专业的单体项目。
+- **「主流技术用户」**：如果您只擅长 mysql、mybatis 等主流技术，本项目所涉及的基础技术体系可能会让您觉得格格不入，建议选择更适配您技术体系项目。
+- **「功能丰富用户」**：本项目定位是基础平台，自认为没有能力做到功能既丰富又通用，如果您追求拥有丰富的、开箱即用的功能后台系统，那么本项目并不适合。
+- **「会话思维用户」**：基于 Token 的前后端分离架构与传统基于 Session 的传统单体开发思想有较大不同，本项目无法让您完全沿用原有单体设计思路和开发思维。
+- **「极简编程用户」**：如果您希望通过界面拖拽就可以生成代码，或者不看文档、不用学习就可以轻松掌握相关技术，这需求与本项目的产品定位、开发理念、设计哲学背道而驰。
+- **「审美品鉴用户」**：本项目前端是使用组件库纯手搓构建，没有专业的美工也没有照搬主流框架，初衷是为后端开发人员接触前端提供一条更友好的途径，所以不能保证符合您的审美。
 
 ## [1]、开源协议
 
