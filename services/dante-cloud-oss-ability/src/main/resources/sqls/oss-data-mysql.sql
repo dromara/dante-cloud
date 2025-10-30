@@ -350,8 +350,8 @@ FROM
     `sys_attribute` sa
     WHERE
     sa.url = '/security/element/tree'
+    OR sa.url = '/security/dictionary/items/{category}'
     OR sa.url = '/oauth2/sign-out'
-    OR sa.url LIKE'%enum%'
     OR sa.url LIKE'%message%' UNION
     SELECT
     '2' AS permission_id,
@@ -368,7 +368,7 @@ FROM
     `sys_attribute` sa
     WHERE
     sa.url LIKE'%security%'
-    AND (sa.url != '/security/element/tree' OR sa.url != '/security/dictionary/items/{category}') UNION
+    AND sa.url != '/security/element/tree' AND sa.url != '/security/dictionary/items/{category}' UNION
     SELECT
     '4' AS permission_id,
     sa.attribute_id
