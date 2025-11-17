@@ -45,6 +45,19 @@ server:
   servlet:
     session:
       timeout: ${herodotus.session.timeout}
+  tomcat:
+    connection-timeout: 20000 #在请求延迟高时，避免线程被快速占满
+    threads:
+      max: 500 #最大工作线程数,提高并发请求处理能力
+      min-spare: 50 # 最小空闲线程数, 避免流量突增时临时创建线程的延迟
+    max-connections: 10000 # 最大连接数,提升同时处理的连接数上限
+    accept-count: 1000 #等待队列长度
+    keep-alive-timeout: 30000 #减少重复建立TCP连接的开销
+    max-keep-alive-requests: 100
+  compression:
+    enabled: true    # 启用GZIP压缩
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json # 压缩类型
+    min-response-size: 1024  # 最小压缩响应大小
 
 spring:
   session:
