@@ -5,7 +5,6 @@
 ---
 
 <p align="center">
-    <a href="https://github.com/spring-projects/spring-authorization-server" target="_blank"><img src="https://img.shields.io/badge/Spring%20Authorization%20Server-1.5.3-blue.svg?logo=spring" alt="Spring Authorization Server 1.5.3"></a>
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-3.5.8-blue.svg?logo=spring" alt="Spring Boot 3.5.8"></a>
     <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.0.0-blue.svg?logo=spring" alt="Spring Cloud 2025.0.0"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2025.0.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2025.0.0.0"></a>
@@ -15,8 +14,7 @@
 <p align="center">
     <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.5.8.0-red.svg?logo=spring" alt="Version 3.5.8.0"></a>
     <a href="https://www.herodotus.vip" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.5.8.0-red.svg?logo=spring" alt="Dante Engine 3.5.8.0"></a>
-    <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.5.8.0-red.svg?logo=spring" alt="Dante OSS 3.5.8.0"></a>
-    <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
+    <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
     <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/dromara/dante-cloud?style=flat&logo=github" alt="Github star"></a>
@@ -239,8 +237,9 @@ dante-engine
 
 |          分支名称          | 对应 Spring 生态版本                          | 对应 JDK 版本 | 用途             | 现状                                                          |
 |:----------------------:|-----------------------------------------|-----------|----------------|-------------------------------------------------------------|
-|         master         | Spring Boot 3.5 和 Spring Cloud 2025.0.X | JDK 17    | 主要发布分支         | 推荐使用代码分支                                                    |
-|        develop         | Spring Boot 3.5 和 Spring Cloud 2025.0.X | JDK 17    | Development 分支 | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                     |
+|         master         | Spring Boot 4.0 和 Spring Cloud 2025.1.X | JDK 25    | 主要发布分支         | 推荐使用代码分支                                                    |
+|        develop         | Spring Boot 4.0 和 Spring Cloud 2025.1.X | JDK 25    | Development 分支 | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                     |
+|         3.5.X          | Spring Boot 3.5 和 Spring Cloud 2025.0.X | JDK 17    | 历史版本           | 基于 Spring Boot 3.5 时代开发的代码分支，稳定可用                           |
 |         3.4.X          | Spring Boot 3.4 和 Spring Cloud 2024.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.4 时代开发的代码分支，稳定可用，不再维护                      |
 |      3.2.X-3.3.X       | Spring Boot 3.3 和 Spring Cloud 2023.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.3 时代开发的代码分支，稳定可用，不再维护                      |
 |         3.1.X          | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                      |
