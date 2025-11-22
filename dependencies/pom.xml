@@ -71,13 +71,6 @@
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>cn.herodotus.oss</groupId>
-                <artifactId>oss-bom</artifactId>
-                <version>${dante-oss-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <!-- Dante Cloud -->
             <dependency>
                 <groupId>org.dromara.dante</groupId>
