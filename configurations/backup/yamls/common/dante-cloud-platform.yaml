@@ -53,6 +53,9 @@ server:
     min-response-size: 1024  # 最小压缩响应大小
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   session:
     timeout: ${server.servlet.session.timeout}
     redis:
