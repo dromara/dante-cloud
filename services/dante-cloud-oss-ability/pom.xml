@@ -31,7 +31,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>services</artifactId>
-        <version>3.5.8.0</version>
+        <version>4.0.0.0-M1</version>
     </parent>
 
     <artifactId>dante-cloud-oss-ability</artifactId>
@@ -42,7 +42,7 @@
             <artifactId>authorization-servlet-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.herodotus.oss</groupId>
+            <groupId>cn.herodotus.engine</groupId>
             <artifactId>oss-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>

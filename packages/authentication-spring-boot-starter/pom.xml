@@ -32,7 +32,7 @@
     <parent>
         <artifactId>packages</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>3.5.8.0</version>
+        <version>4.0.0.0-M1</version>
     </parent>
 
     <artifactId>authentication-spring-boot-starter</artifactId>

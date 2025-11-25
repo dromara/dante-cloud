@@ -28,7 +28,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.5.8.0</version>
+        <version>4.0.0.0-M1</version>
         <relativePath>dependencies/pom.xml</relativePath>
     </parent>
 
@@ -46,7 +46,7 @@
     <!-- ${project.xxx} 当前pom文件的任意节点的内容 如project.artifactId -->
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>25</java.version>
         <resource.delimiter>@</resource.delimiter>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

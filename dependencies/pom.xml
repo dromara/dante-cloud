@@ -28,7 +28,7 @@
     <parent>
         <groupId>cn.herodotus.engine</groupId>
         <artifactId>dependencies</artifactId>
-        <version>3.5.8.0</version>
+        <version>4.0.0.0-M1</version>
         <relativePath/>
     </parent>
 
@@ -71,13 +71,6 @@
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>cn.herodotus.oss</groupId>
-                <artifactId>oss-bom</artifactId>
-                <version>${dante-oss-bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <!-- Dante Cloud -->
             <dependency>
                 <groupId>org.dromara.dante</groupId>
