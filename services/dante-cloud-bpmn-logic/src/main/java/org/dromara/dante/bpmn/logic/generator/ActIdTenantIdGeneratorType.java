@@ -29,7 +29,7 @@ import cn.herodotus.engine.data.hibernate.generator.AbstractIdGeneratorType;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.dante.bpmn.logic.entity.ActIdTenant;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
+import org.hibernate.generator.GeneratorCreationContext;
 
 import java.lang.reflect.Member;
 
@@ -41,7 +41,7 @@ import java.lang.reflect.Member;
  */
 public class ActIdTenantIdGeneratorType extends AbstractIdGeneratorType {
 
-    public ActIdTenantIdGeneratorType(ActIdTenantIdGenerator config, Member member, CustomIdGeneratorCreationContext context) {
+    public ActIdTenantIdGeneratorType(ActIdTenantIdGenerator config, Member member, GeneratorCreationContext context) {
         super(member);
     }
 

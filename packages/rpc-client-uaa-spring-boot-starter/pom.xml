@@ -38,7 +38,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>oauth2-core</artifactId>
         </dependency>
 
@@ -48,7 +48,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>logic-module-upms</artifactId>
         </dependency>
 

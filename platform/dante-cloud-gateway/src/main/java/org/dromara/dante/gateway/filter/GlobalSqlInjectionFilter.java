@@ -25,15 +25,14 @@
 
 package org.dromara.dante.gateway.filter;
 
+import cn.herodotus.dante.web.utils.SqlInjectionUtils;
 import cn.herodotus.engine.core.definition.constant.ErrorCodes;
 import cn.herodotus.engine.core.definition.domain.Result;
-import cn.herodotus.engine.core.foundation.utils.SqlInjectionUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.hc.core5.http.HttpStatus;
 import org.dromara.dante.gateway.utils.WebFluxUtils;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -146,13 +145,11 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
 
                 // 由于post的body只能订阅一次，由于上面代码中已经订阅过一次body。所以要再次封装请求到request才行，不然会报错请求已经订阅过
                 request = new ServerHttpRequestDecorator(request) {
-                    @NotNull
                     @Override
                     public HttpHeaders getHeaders() {
                         return headers;
                     }
 
-                    @NotNull
                     @Override
                     public Flux<DataBuffer> getBody() {
                         return bodyFlux;

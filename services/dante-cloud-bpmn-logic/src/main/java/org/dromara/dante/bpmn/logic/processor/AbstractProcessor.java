@@ -25,9 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.processor;
 
-import cn.herodotus.engine.core.definition.utils.Jackson2Utils;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import cn.herodotus.engine.core.definition.utils.JacksonUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
@@ -35,6 +33,8 @@ import org.dromara.dante.bpmn.logic.domain.debezium.Message;
 import org.dromara.dante.bpmn.logic.domain.enums.DebeziumEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.JavaType;
+import tools.jackson.databind.type.TypeFactory;
 
 /**
  * <p>Description: CRUD 消息抽象处理器 </p>
@@ -65,9 +65,9 @@ public abstract class AbstractProcessor<T extends BaseBpmnEntity> {
     private Message<T> convert(String body, Class<T> clazz) {
         if (StringUtils.isNotBlank(body)) {
 
-            TypeFactory typeFactory = Jackson2Utils.getTypeFactory();
+            TypeFactory typeFactory = JacksonUtils.getTypeFactory();
             JavaType javaType = typeFactory.constructParametricType(Message.class, clazz);
-            Message<T> response = Jackson2Utils.toObject(body, javaType);
+            Message<T> response = JacksonUtils.toObject(body, javaType);
 
             if (ObjectUtils.isNotEmpty(response)) {
                 log.debug("[Herodotus] |- Convert Object is : [{}]", response);

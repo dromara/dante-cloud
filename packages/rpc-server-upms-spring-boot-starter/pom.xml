@@ -38,12 +38,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>oauth2-authorization-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>rest-module-servlet-upms</artifactId>
         </dependency>
     </dependencies>

@@ -39,7 +39,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>core-foundation</artifactId>
         </dependency>
     </dependencies>

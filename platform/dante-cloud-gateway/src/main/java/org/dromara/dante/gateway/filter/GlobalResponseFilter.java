@@ -25,7 +25,6 @@
 
 package org.dromara.dante.gateway.filter;
 
-import org.jetbrains.annotations.NotNull;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,10 +85,8 @@ public class GlobalResponseFilter implements GlobalFilter, Ordered {
     @SuppressWarnings("unchecked")
     private ServerHttpResponse decorate(ServerWebExchange exchange) {
         return new ServerHttpResponseDecorator(exchange.getResponse()) {
-
-            @NotNull
             @Override
-            public Mono<Void> writeWith(@NotNull Publisher<? extends DataBuffer> body) {
+            public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
 
                 String originalResponseContentType = exchange.getAttribute(ORIGINAL_RESPONSE_CONTENT_TYPE_ATTR);
                 HttpHeaders httpHeaders = new HttpHeaders();
@@ -113,7 +110,7 @@ public class GlobalResponseFilter implements GlobalFilter, Ordered {
                 return bodyInserter.insert(outputMessage, new BodyInserterContext()).then(Mono.defer(() -> {
                     Flux<DataBuffer> messageBody = outputMessage.getBody();
                     HttpHeaders headers = getDelegate().getHeaders();
-                    if (!headers.containsKey(HttpHeaders.TRANSFER_ENCODING) || headers.containsKey(HttpHeaders.CONTENT_LENGTH)) {
+                    if (!headers.containsHeader(HttpHeaders.TRANSFER_ENCODING) || headers.containsHeader(HttpHeaders.CONTENT_LENGTH)) {
                         messageBody = messageBody.doOnNext(data -> headers.setContentLength(data.readableByteCount()));
                     }
                     return getDelegate().writeWith(messageBody);
@@ -133,9 +130,8 @@ public class GlobalResponseFilter implements GlobalFilter, Ordered {
                 };
             }
 
-            @NotNull
             @Override
-            public Mono<Void> writeAndFlushWith(@NotNull Publisher<? extends Publisher<? extends DataBuffer>> body) {
+            public Mono<Void> writeAndFlushWith(Publisher<? extends Publisher<? extends DataBuffer>> body) {
                 return writeWith(Flux.from(body).flatMapSequential(p -> p));
             }
         };

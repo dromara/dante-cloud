@@ -38,17 +38,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>facility-alibaba-spring-boot-starter</artifactId>
         </dependency>
 
 <!--        <dependency>-->
-<!--            <groupId>cn.herodotus.engine</groupId>-->
+<!--            <groupId>cn.herodotus.dante</groupId>-->
 <!--            <artifactId>facility-tencent-spring-boot-starter</artifactId>-->
 <!--        </dependency>-->
 
         <!--        <dependency>-->
-        <!--            <groupId>cn.herodotus.engine</groupId>-->
+        <!--            <groupId>cn.herodotus.dante</groupId>-->
         <!--            <artifactId>facility-orginal-spring-boot-starter</artifactId>-->
         <!--        </dependency>-->
     </dependencies>

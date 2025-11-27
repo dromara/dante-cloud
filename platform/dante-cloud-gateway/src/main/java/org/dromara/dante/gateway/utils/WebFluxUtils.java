@@ -26,7 +26,7 @@
 package org.dromara.dante.gateway.utils;
 
 import cn.herodotus.engine.core.definition.domain.Result;
-import cn.herodotus.engine.core.definition.utils.Jackson2Utils;
+import cn.herodotus.engine.core.definition.utils.JacksonUtils;
 import org.apache.commons.lang3.Strings;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -99,7 +99,7 @@ public class WebFluxUtils {
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.setStatusCode(HttpStatus.valueOf(result.getStatus()));
 
-        String jsonResult = Jackson2Utils.toJson(result);
+        String jsonResult = JacksonUtils.toJson(result);
         byte[] bytes = jsonResult.getBytes(StandardCharsets.UTF_8);
 
         DataBuffer buffer = response.bufferFactory().wrap(bytes);
@@ -107,7 +107,7 @@ public class WebFluxUtils {
     }
 
     public static boolean isJsonMediaType(String contentType) {
-        return Strings.CI.equals(MediaType.APPLICATION_JSON_VALUE, contentType) || Strings.CI.equals(MediaType.APPLICATION_JSON_UTF8_VALUE, contentType);
+        return Strings.CI.equals(MediaType.APPLICATION_JSON_VALUE, contentType);
     }
 
     /**

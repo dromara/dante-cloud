@@ -26,7 +26,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.herodotus.engine</groupId>
+        <groupId>cn.herodotus.dante</groupId>
         <artifactId>dependencies</artifactId>
         <version>4.0.0.0-M1</version>
         <relativePath/>
