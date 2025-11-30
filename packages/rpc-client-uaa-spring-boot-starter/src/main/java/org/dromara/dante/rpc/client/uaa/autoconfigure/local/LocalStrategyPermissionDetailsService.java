@@ -25,9 +25,9 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.local;
 
-import cn.herodotus.engine.core.identity.domain.HerodotusPermission;
-import cn.herodotus.engine.logic.upms.entity.security.SysPermission;
-import cn.herodotus.engine.logic.upms.service.security.SysPermissionService;
+import cn.herodotus.dante.logic.upms.entity.security.SysPermission;
+import cn.herodotus.dante.logic.upms.service.security.SysPermissionService;
+import cn.herodotus.dante.security.domain.HerodotusPermission;
 import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.definition.AbstractStrategyPermissionDetailsService;
 

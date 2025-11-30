@@ -98,7 +98,7 @@ spring:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
       naming:
-        physical-strategy: cn.herodotus.engine.data.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.dante.data.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       jakarta:
         persistence:
@@ -117,7 +117,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.engine.data.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.data.hibernate.spi.cache.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -328,7 +328,7 @@ spring:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
       naming:
-        physical-strategy: cn.herodotus.engine.data.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.dante.data.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       jakarta:
         persistence:
@@ -347,7 +347,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.engine.data.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.data.hibernate.spi.cache.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -556,14 +556,14 @@ spring:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
       naming:
-        physical-strategy: cn.herodotus.engine.data.hibernate.HerodotusPhysicalNamingStrategy
+        physical-strategy: cn.herodotus.dante.data.hibernate.HerodotusPhysicalNamingStrategy
     properties:
       jakarta:
         persistence:
           sharedCache:
             mode: ENABLE_SELECTIVE
       hibernate:
-        dialect: cn.herodotus.engine.data.hibernate.dialect.OpenGaussDialect
+        dialect: cn.herodotus.dante.data.hibernate.dialect.OpenGaussDialect
         format_sql: true
         show_sql: false
         generate_statistics: false
@@ -575,7 +575,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.engine.data.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.data.hibernate.spi.cache.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create

@@ -40,7 +40,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>oauth2-authorization-autoconfigure</artifactId>
+            <artifactId>dante-authorization-autoconfigure</artifactId>
         </dependency>
 
         <dependency>

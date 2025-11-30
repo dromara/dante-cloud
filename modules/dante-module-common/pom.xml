@@ -40,7 +40,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>core-foundation</artifactId>
+            <artifactId>dante-spring</artifactId>
         </dependency>
     </dependencies>
 

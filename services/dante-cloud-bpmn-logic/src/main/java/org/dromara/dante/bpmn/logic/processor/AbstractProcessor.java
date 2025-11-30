@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.processor;
 
-import cn.herodotus.engine.core.definition.utils.JacksonUtils;
+import cn.herodotus.dante.core.utils.JacksonUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;

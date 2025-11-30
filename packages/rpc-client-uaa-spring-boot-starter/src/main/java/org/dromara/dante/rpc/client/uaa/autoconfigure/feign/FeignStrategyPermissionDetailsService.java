@@ -25,9 +25,9 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.feign;
 
-import cn.herodotus.engine.core.definition.domain.Result;
-import cn.herodotus.engine.core.identity.domain.HerodotusPermission;
-import cn.herodotus.engine.logic.upms.entity.security.SysPermission;
+import cn.herodotus.dante.core.domain.Result;
+import cn.herodotus.dante.logic.upms.entity.security.SysPermission;
+import cn.herodotus.dante.security.domain.HerodotusPermission;
 import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.definition.AbstractStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteAuthorityDetailsService;

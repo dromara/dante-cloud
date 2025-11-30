@@ -25,17 +25,17 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
+import cn.herodotus.dante.oauth2.commons.properties.OAuth2AuthenticationProperties;
+import cn.herodotus.dante.security.service.ClientDetailsService;
+import cn.herodotus.dante.spring.enums.Certificate;
 import cn.herodotus.dante.spring.utils.ResourceResolverUtils;
-import cn.herodotus.engine.core.foundation.enums.Certificate;
-import cn.herodotus.engine.core.identity.service.ClientDetailsService;
-import cn.herodotus.engine.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
-import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
-import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
-import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
-import cn.herodotus.engine.oauth2.core.properties.OAuth2AuthenticationProperties;
-import cn.herodotus.engine.web.service.properties.EndpointProperties;
-import cn.herodotus.engine.web.servlet.tenant.MultiTenantFilter;
+import cn.herodotus.dante.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
+import cn.herodotus.dante.oauth2.authentication.utils.OAuth2ConfigurerUtils;
+import cn.herodotus.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import cn.herodotus.dante.web.properties.EndpointProperties;
+import cn.herodotus.dante.webmvc.autoconfigure.tenant.MultiTenantFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;

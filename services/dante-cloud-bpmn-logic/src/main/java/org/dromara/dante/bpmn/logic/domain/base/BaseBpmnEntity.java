@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.domain.base;
 
-import cn.herodotus.engine.core.definition.domain.BaseEntity;
+import cn.herodotus.dante.core.domain.BaseEntity;
 import jakarta.persistence.MappedSuperclass;
 
 /**

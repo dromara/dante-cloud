@@ -25,10 +25,10 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.definition;
 
-import cn.herodotus.engine.core.identity.domain.HerodotusUser;
-import cn.herodotus.engine.core.identity.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.logic.upms.converter.SysUserToHerodotusUserConverter;
-import cn.herodotus.engine.logic.upms.entity.security.SysUser;
+import cn.herodotus.dante.logic.upms.converter.SysUserToHerodotusUserConverter;
+import cn.herodotus.dante.logic.upms.entity.security.SysUser;
+import cn.herodotus.dante.security.domain.HerodotusUser;
+import cn.herodotus.dante.security.strategy.StrategyUserDetailsService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.AuthenticationException;

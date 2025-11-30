@@ -25,9 +25,9 @@
 
 package org.dromara.dante.monomer.autoconfigure.processor;
 
-import cn.herodotus.engine.core.definition.constant.HerodotusHeaders;
-import cn.herodotus.engine.core.definition.constant.SymbolConstants;
-import cn.herodotus.engine.web.core.servlet.utils.HeaderUtils;
+import cn.herodotus.dante.core.constant.HerodotusHeaders;
+import cn.herodotus.dante.core.constant.SymbolConstants;
+import cn.herodotus.dante.web.servlet.utils.HeaderUtils;
 import com.google.common.net.HttpHeaders;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

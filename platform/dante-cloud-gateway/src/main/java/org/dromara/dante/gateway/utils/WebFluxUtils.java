@@ -25,8 +25,8 @@
 
 package org.dromara.dante.gateway.utils;
 
-import cn.herodotus.engine.core.definition.domain.Result;
-import cn.herodotus.engine.core.definition.utils.JacksonUtils;
+import cn.herodotus.dante.core.domain.Result;
+import cn.herodotus.dante.core.utils.JacksonUtils;
 import org.apache.commons.lang3.Strings;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;

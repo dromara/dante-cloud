@@ -35,7 +35,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>rest-module-servlet-upms</artifactId>
+            <artifactId>dante-rest-servlet-upms</artifactId>
         </dependency>
 
         <dependency>
