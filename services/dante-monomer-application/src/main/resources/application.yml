@@ -3,11 +3,6 @@ server:
   servlet:
     session:
       timeout: 2h
-  error:
-    include-exception: true
-    include-message: always
-    include-stacktrace: always
-    include-binding-errors: always
   jetty:
     connection-idle-timeout: 30000 #在请求延迟高时，避免线程被快速占满
   compression:
@@ -25,12 +20,16 @@ spring:
         enabled: false
   session:
     timeout: ${server.servlet.session.timeout}
-    redis:
-      repository-type: indexed
-      flush-mode: immediate
+  web:
+    error:
+      include-exception: true
+      include-message: always
+      include-stacktrace: always
+      include-binding-errors: always
   http:
-    client:
-      factory: jdk
+    clients:
+      imperative:
+        factory: jdk
 
 sms:
   is-print: false
@@ -117,7 +116,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.dante.data.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.data.hibernate.cache.spi.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -347,7 +346,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.dante.data.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.data.hibernate.cache.spi.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -575,7 +574,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: cn.herodotus.dante.data.hibernate.spi.cache.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.data.hibernate.cache.spi.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create

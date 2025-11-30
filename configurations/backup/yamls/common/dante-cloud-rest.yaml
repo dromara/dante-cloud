@@ -27,8 +27,9 @@ spring:
       nacos:
         enabled: true
   http:
-    client:
-      factory: jdk
+    clients:
+      imperative:
+        factory: jdk
 
 feign:
   sentinel:
