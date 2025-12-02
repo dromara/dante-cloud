@@ -27,7 +27,7 @@ package org.dromara.dante.gateway.filter;
 
 import cn.herodotus.dante.core.constant.ErrorCodes;
 import cn.herodotus.dante.core.domain.Result;
-import cn.herodotus.dante.web.utils.SqlInjectionUtils;
+import cn.herodotus.dante.spring.utils.SqlInjectionUtils;
 import io.netty.buffer.ByteBufAllocator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
