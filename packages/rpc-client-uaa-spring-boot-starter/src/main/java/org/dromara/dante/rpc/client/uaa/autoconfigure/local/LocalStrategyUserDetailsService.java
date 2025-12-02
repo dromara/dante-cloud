@@ -25,11 +25,11 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.local;
 
-import cn.herodotus.engine.core.identity.domain.AccessPrincipal;
-import cn.herodotus.engine.core.identity.domain.HerodotusUser;
-import cn.herodotus.engine.logic.upms.definition.SocialAuthenticationHandler;
-import cn.herodotus.engine.logic.upms.entity.security.SysUser;
-import cn.herodotus.engine.logic.upms.service.security.SysUserService;
+import cn.herodotus.dante.logic.upms.definition.SocialAuthenticationHandler;
+import cn.herodotus.dante.logic.upms.entity.security.SysUser;
+import cn.herodotus.dante.logic.upms.service.security.SysUserService;
+import cn.herodotus.dante.security.domain.AccessPrincipal;
+import cn.herodotus.dante.security.domain.HerodotusUser;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.definition.AbstractStrategyUserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 

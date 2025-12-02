@@ -25,18 +25,17 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.core.autoconfigure.oauth2.OAuth2AuthorizationProperties;
-import cn.herodotus.engine.core.foundation.enums.Certificate;
-import cn.herodotus.engine.core.foundation.utils.ResourceResolverUtils;
-import cn.herodotus.engine.core.identity.service.ClientDetailsService;
-import cn.herodotus.engine.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
-import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
-import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
-import cn.herodotus.engine.oauth2.authentication.utils.OAuth2ConfigurerUtils;
-import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
-import cn.herodotus.engine.oauth2.core.properties.OAuth2AuthenticationProperties;
-import cn.herodotus.engine.web.service.properties.EndpointProperties;
-import cn.herodotus.engine.web.servlet.tenant.MultiTenantFilter;
+import cn.herodotus.dante.oauth2.commons.properties.OAuth2AuthenticationProperties;
+import cn.herodotus.dante.security.service.ClientDetailsService;
+import cn.herodotus.dante.spring.enums.Certificate;
+import cn.herodotus.dante.spring.utils.ResourceResolverUtils;
+import cn.herodotus.dante.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
+import cn.herodotus.dante.oauth2.authentication.utils.OAuth2ConfigurerUtils;
+import cn.herodotus.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import cn.herodotus.dante.web.properties.EndpointProperties;
+import cn.herodotus.dante.webmvc.autoconfigure.tenant.MultiTenantFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -51,13 +50,13 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.encrypt.KeyStoreKeyFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
-import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
@@ -73,8 +72,8 @@ import java.util.UUID;
 /**
  * <p>Description: 认证服务器配置 </p>
  * <p>
- * 1. 权限核心处理 {@link org.springframework.security.web.access.intercept.FilterSecurityInterceptor}
- * 2. 默认的权限判断 {@link org.springframework.security.access.vote.AffirmativeBased}
+ * 1. 权限核心处理 {@link org.springframework.security.web.access.intercept.AuthorizationFilter}
+ * 2. 默认的权限判断
  * 3. 模式决策 {@link org.springframework.security.authentication.ProviderManager}
  *
  * @author : gengwei.zheng
@@ -105,7 +104,7 @@ public class AuthorizationAutoConfiguration {
 
         SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
 
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer.authorizationServer();
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
 
         // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
         httpSecurity.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())

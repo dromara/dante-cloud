@@ -25,11 +25,11 @@
 
 package org.dromara.dante.bpmn.logic.generator;
 
-import cn.herodotus.engine.data.hibernate.generator.AbstractIdGeneratorType;
+import cn.herodotus.dante.data.hibernate.generator.AbstractIdGeneratorType;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.dante.bpmn.logic.entity.ActIdTenantMember;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.factory.spi.CustomIdGeneratorCreationContext;
+import org.hibernate.generator.GeneratorCreationContext;
 
 import java.lang.reflect.Member;
 
@@ -41,7 +41,7 @@ import java.lang.reflect.Member;
  */
 public class ActIdTenantMemberIdGeneratorType extends AbstractIdGeneratorType {
 
-    public ActIdTenantMemberIdGeneratorType(ActIdTenantMemberIdGenerator config, Member member, CustomIdGeneratorCreationContext context) {
+    public ActIdTenantMemberIdGeneratorType(ActIdTenantMemberIdGenerator config, Member member, GeneratorCreationContext context) {
         super(member);
     }
 

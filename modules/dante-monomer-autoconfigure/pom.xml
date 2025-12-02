@@ -27,15 +27,15 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>modules</artifactId>
-        <version>4.0.0.0-M1</version>
+        <version>4.0.0.0-M2</version>
     </parent>
 
     <artifactId>dante-monomer-autoconfigure</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>rest-module-servlet-upms</artifactId>
+            <groupId>cn.herodotus.dante</groupId>
+            <artifactId>dante-rest-servlet-upms</artifactId>
         </dependency>
 
         <dependency>
@@ -44,12 +44,12 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>servlet-message-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>oss-spring-boot-starter</artifactId>
         </dependency>
 

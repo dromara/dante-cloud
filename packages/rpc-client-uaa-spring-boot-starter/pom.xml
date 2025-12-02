@@ -31,15 +31,15 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>packages</artifactId>
-        <version>4.0.0.0-M1</version>
+        <version>4.0.0.0-M2</version>
     </parent>
 
     <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-core</artifactId>
+            <groupId>cn.herodotus.dante</groupId>
+            <artifactId>dante-oauth2-commons</artifactId>
         </dependency>
 
         <dependency>
@@ -48,8 +48,8 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>logic-module-upms</artifactId>
+            <groupId>cn.herodotus.dante</groupId>
+            <artifactId>dante-logic-upms</artifactId>
         </dependency>
 
         <dependency>

@@ -31,7 +31,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>platform</artifactId>
-        <version>4.0.0.0-M1</version>
+        <version>4.0.0.0-M2</version>
     </parent>
 
     <artifactId>dante-cloud-message</artifactId>
@@ -42,7 +42,7 @@
             <artifactId>authorization-servlet-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>servlet-message-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>

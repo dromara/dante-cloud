@@ -25,10 +25,10 @@
 
 package org.dromara.dante.gateway.filter;
 
-import cn.herodotus.engine.core.definition.constant.ErrorCodes;
-import cn.herodotus.engine.core.definition.constant.HerodotusHeaders;
-import cn.herodotus.engine.core.definition.constant.SystemConstants;
-import cn.herodotus.engine.core.definition.domain.Result;
+import cn.herodotus.dante.core.constant.ErrorCodes;
+import cn.herodotus.dante.core.constant.HerodotusHeaders;
+import cn.herodotus.dante.core.constant.SystemConstants;
+import cn.herodotus.dante.core.domain.Result;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;

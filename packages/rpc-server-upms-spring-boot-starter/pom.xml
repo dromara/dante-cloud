@@ -31,20 +31,20 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>packages</artifactId>
-        <version>4.0.0.0-M1</version>
+        <version>4.0.0.0-M2</version>
     </parent>
 
     <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>oauth2-authorization-autoconfigure</artifactId>
+            <groupId>cn.herodotus.dante</groupId>
+            <artifactId>dante-authorization-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.engine</groupId>
-            <artifactId>rest-module-servlet-upms</artifactId>
+            <groupId>cn.herodotus.dante</groupId>
+            <artifactId>dante-rest-servlet-upms</artifactId>
         </dependency>
     </dependencies>
 

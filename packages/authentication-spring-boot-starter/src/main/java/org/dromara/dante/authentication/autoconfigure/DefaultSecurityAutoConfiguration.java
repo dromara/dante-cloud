@@ -25,12 +25,12 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
-import cn.herodotus.engine.core.foundation.support.captcha.CaptchaRendererFactory;
-import cn.herodotus.engine.core.identity.strategy.StrategyUserDetailsService;
-import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
-import cn.herodotus.engine.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
-import cn.herodotus.engine.oauth2.authentication.customizer.HerodotusUserDetailsService;
-import cn.herodotus.engine.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
+import cn.herodotus.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
+import cn.herodotus.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import cn.herodotus.dante.security.strategy.StrategyUserDetailsService;
+import cn.herodotus.dante.spring.support.captcha.CaptchaRendererFactory;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,7 +81,7 @@ public class DefaultSecurityAutoConfiguration {
                 .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
                 .exceptionHandling(authorizationConfigurerManager.getOAuth2ExceptionHandlingConfigurerCustomizer())
                 .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())
-                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties(), captchaRendererFactory, authenticationConfigurerManager.getHttpCryptoProcessor()), (configurer) -> {
+                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties(), captchaRendererFactory, authenticationConfigurerManager.getDigitalEnvelopeProcessor()), (configurer) -> {
                 });
 
         // @formatter:on

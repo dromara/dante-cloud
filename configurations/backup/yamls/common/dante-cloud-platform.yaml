@@ -37,11 +37,6 @@ management:
 
 server:
   shutdown: graceful
-  error:
-    include-exception: true
-    include-message: always
-    include-stacktrace: always
-    include-binding-errors: always
   servlet:
     session:
       timeout: ${herodotus.session.timeout}
@@ -58,9 +53,12 @@ spring:
       enabled: true
   session:
     timeout: ${server.servlet.session.timeout}
-    redis:
-      repository-type: indexed
-      flush-mode: immediate
+  web:
+    error:
+      include-exception: true
+      include-message: always
+      include-stacktrace: always
+      include-binding-errors: always
   thymeleaf:
     mode: HTML
     cache: false
