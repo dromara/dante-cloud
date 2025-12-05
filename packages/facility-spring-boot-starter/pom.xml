@@ -49,7 +49,7 @@
 
         <dependency>
             <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
+            <artifactId>feign-java11</artifactId>
         </dependency>
 
         <dependency>
