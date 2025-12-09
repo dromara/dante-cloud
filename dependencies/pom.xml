@@ -27,7 +27,7 @@
 
     <parent>
         <groupId>org.dromara.dante</groupId>
-        <artifactId>dependencies</artifactId>
+        <artifactId>dante-bom</artifactId>
         <version>4.0.0.0-M3</version>
         <relativePath/>
     </parent>
@@ -35,7 +35,7 @@
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
-    <name>dante-cloud-dependencies</name>
+    <name>Dante Cloud Dependencies</name>
     <description>Dante Dependencies</description>
 
     <url>https://www.herodotus.vip</url>
