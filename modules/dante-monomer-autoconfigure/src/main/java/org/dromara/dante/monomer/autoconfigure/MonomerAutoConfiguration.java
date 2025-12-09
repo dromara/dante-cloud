@@ -25,7 +25,7 @@
 
 package org.dromara.dante.monomer.autoconfigure;
 
-import cn.herodotus.dante.rest.servlet.upms.annotation.EnableHerodotusRestServletUpms;
+import org.dromara.dante.rest.servlet.upms.annotation.EnableHerodotusRestServletUpms;
 import jakarta.annotation.PostConstruct;
 import org.dromara.dante.monomer.autoconfigure.processor.MonomerBusBridge;
 import org.dromara.dante.monomer.autoconfigure.processor.MonomerCorsFilter;

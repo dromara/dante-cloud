@@ -25,7 +25,7 @@
 
 package org.dromara.dante.bpmn.logic.repository;
 
-import cn.herodotus.dante.data.jpa.repository.BaseJpaRepository;
+import org.dromara.dante.data.jpa.repository.BaseJpaRepository;
 import org.dromara.dante.bpmn.logic.entity.ActIdTenant;
 
 /**

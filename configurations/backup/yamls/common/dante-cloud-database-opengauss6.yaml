@@ -2,5 +2,5 @@ herodotus:
   database-information:
     platform: postgresql
     driver-class-name: org.opengauss.Driver
-    dialect: cn.herodotus.dante.data.hibernate.dialect.OpenGaussDialect
+    dialect: org.dromara.dante.data.hibernate.dialect.OpenGaussDialect
     url: jdbc:opengauss://${herodotus.environment.database.host}:${herodotus.environment.database.port}/${herodotus.environment.database.name}

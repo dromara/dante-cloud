@@ -39,7 +39,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-spring</artifactId>
         </dependency>
     </dependencies>

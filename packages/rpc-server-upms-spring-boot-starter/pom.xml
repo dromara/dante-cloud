@@ -38,12 +38,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-authorization-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-rest-servlet-upms</artifactId>
         </dependency>
     </dependencies>

@@ -25,16 +25,16 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure;
 
-import cn.herodotus.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
-import cn.herodotus.dante.logic.upms.definition.SocialAuthenticationHandler;
-import cn.herodotus.dante.logic.upms.service.security.SysPermissionService;
-import cn.herodotus.dante.logic.upms.service.security.SysUserService;
-import cn.herodotus.dante.security.strategy.StrategyPermissionDetailsService;
-import cn.herodotus.dante.security.strategy.StrategyUserDetailsService;
-import cn.herodotus.dante.spring.condition.ConditionalOnArchitecture;
-import cn.herodotus.dante.spring.enums.Architecture;
-import cn.herodotus.dante.spring.enums.DataAccessStrategy;
-import cn.herodotus.dante.web.condition.ConditionalOnDataAccessStrategy;
+import org.dromara.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
+import org.dromara.dante.logic.upms.definition.SocialAuthenticationHandler;
+import org.dromara.dante.logic.upms.service.security.SysPermissionService;
+import org.dromara.dante.logic.upms.service.security.SysUserService;
+import org.dromara.dante.security.strategy.StrategyPermissionDetailsService;
+import org.dromara.dante.security.strategy.StrategyUserDetailsService;
+import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
+import org.dromara.dante.spring.enums.Architecture;
+import org.dromara.dante.spring.enums.DataAccessStrategy;
+import org.dromara.dante.web.condition.ConditionalOnDataAccessStrategy;
 import jakarta.annotation.PostConstruct;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.FeignStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.FeignStrategyUserDetailsService;

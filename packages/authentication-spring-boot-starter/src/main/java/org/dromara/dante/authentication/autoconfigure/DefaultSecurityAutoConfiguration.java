@@ -25,12 +25,12 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
-import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
-import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
-import cn.herodotus.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
-import cn.herodotus.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
-import cn.herodotus.dante.security.strategy.StrategyUserDetailsService;
-import cn.herodotus.dante.spring.support.captcha.CaptchaRendererFactory;
+import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
+import org.dromara.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
+import org.dromara.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
+import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import org.dromara.dante.security.strategy.StrategyUserDetailsService;
+import org.dromara.dante.spring.support.captcha.CaptchaRendererFactory;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

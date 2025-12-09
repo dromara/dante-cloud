@@ -25,7 +25,7 @@
 
 package org.dromara.dante.message;
 
-import cn.herodotus.dante.rest.servlet.message.annotation.EnableHerodotusRestServletMessage;
+import org.dromara.dante.rest.servlet.message.annotation.EnableHerodotusRestServletMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

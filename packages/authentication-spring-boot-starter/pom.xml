@@ -44,7 +44,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-authentication-autoconfigure</artifactId>
         </dependency>
     </dependencies>
