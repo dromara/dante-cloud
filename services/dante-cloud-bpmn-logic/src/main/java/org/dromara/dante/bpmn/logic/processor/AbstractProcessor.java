@@ -25,12 +25,12 @@
 
 package org.dromara.dante.bpmn.logic.processor;
 
-import org.dromara.dante.core.jackson.JacksonUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
 import org.dromara.dante.bpmn.logic.domain.debezium.Message;
 import org.dromara.dante.bpmn.logic.domain.enums.DebeziumEvent;
+import org.dromara.dante.core.jackson.JacksonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tools.jackson.databind.JavaType;

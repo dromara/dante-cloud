@@ -25,17 +25,11 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure;
 
+import jakarta.annotation.PostConstruct;
 import org.dromara.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
 import org.dromara.dante.logic.upms.definition.SocialAuthenticationHandler;
 import org.dromara.dante.logic.upms.service.security.SysPermissionService;
 import org.dromara.dante.logic.upms.service.security.SysUserService;
-import org.dromara.dante.security.strategy.StrategyPermissionDetailsService;
-import org.dromara.dante.security.strategy.StrategyUserDetailsService;
-import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
-import org.dromara.dante.spring.enums.Architecture;
-import org.dromara.dante.spring.enums.DataAccessStrategy;
-import org.dromara.dante.web.condition.ConditionalOnDataAccessStrategy;
-import jakarta.annotation.PostConstruct;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.FeignStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.FeignStrategyUserDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteAuthorityDetailsService;
@@ -43,6 +37,12 @@ import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteSocialDeta
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteUserDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyUserDetailsService;
+import org.dromara.dante.security.strategy.StrategyPermissionDetailsService;
+import org.dromara.dante.security.strategy.StrategyUserDetailsService;
+import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
+import org.dromara.dante.spring.enums.Architecture;
+import org.dromara.dante.spring.enums.DataAccessStrategy;
+import org.dromara.dante.web.condition.ConditionalOnDataAccessStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -25,10 +25,10 @@
 
 package org.dromara.dante.bpmn.logic.service;
 
-import org.dromara.dante.data.jpa.repository.BaseJpaRepository;
-import org.dromara.dante.data.jpa.service.BaseJpaWriteableService;
 import org.dromara.dante.bpmn.logic.entity.ActIdMembership;
 import org.dromara.dante.bpmn.logic.repository.ActIdMembershipRepository;
+import org.dromara.dante.data.jpa.repository.BaseJpaRepository;
+import org.dromara.dante.data.jpa.service.BaseJpaWriteableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -25,8 +25,8 @@
 
 package org.dromara.dante.bpmn.logic.domain.base;
 
-import org.dromara.dante.core.domain.BaseEntity;
 import jakarta.persistence.MappedSuperclass;
+import org.dromara.dante.core.domain.BaseEntity;
 
 /**
  * <p>Description: Camunda 工作流应用基础实体 </p>

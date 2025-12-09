@@ -25,12 +25,12 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.feign;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.dante.core.domain.Result;
 import org.dromara.dante.logic.upms.entity.security.SysPermission;
-import org.dromara.dante.security.domain.HerodotusPermission;
-import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.definition.AbstractStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteAuthorityDetailsService;
+import org.dromara.dante.security.domain.HerodotusPermission;
 
 import java.util.ArrayList;
 import java.util.List;

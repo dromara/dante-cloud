@@ -25,8 +25,8 @@
 
 package org.dromara.dante.bpmn.logic.repository;
 
-import org.dromara.dante.data.jpa.repository.BaseJpaRepository;
 import org.dromara.dante.bpmn.logic.entity.ActIdTenantMember;
+import org.dromara.dante.data.jpa.repository.BaseJpaRepository;
 
 /**
  * <p>Description: 工作流租户成员Repository </p>
