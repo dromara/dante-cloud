@@ -25,23 +25,23 @@
 
 package org.dromara.dante.authentication.autoconfigure;
 
-import org.dromara.dante.oauth2.commons.properties.OAuth2AuthenticationProperties;
-import org.dromara.dante.security.service.ClientDetailsService;
-import org.dromara.dante.spring.enums.Certificate;
-import org.dromara.dante.spring.utils.ResourceResolverUtils;
-import org.dromara.dante.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
-import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
-import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
-import org.dromara.dante.oauth2.authentication.utils.OAuth2ConfigurerUtils;
-import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
-import org.dromara.dante.web.properties.EndpointProperties;
-import org.dromara.dante.webmvc.autoconfigure.tenant.MultiTenantFilter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang3.ArrayUtils;
+import org.dromara.dante.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
+import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
+import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
+import org.dromara.dante.oauth2.authentication.utils.OAuth2ConfigurerUtils;
+import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import org.dromara.dante.oauth2.commons.properties.OAuth2AuthenticationProperties;
+import org.dromara.dante.security.service.ClientDetailsService;
+import org.dromara.dante.spring.enums.Certificate;
+import org.dromara.dante.spring.utils.ResourceResolverUtils;
+import org.dromara.dante.web.properties.EndpointProperties;
+import org.dromara.dante.webmvc.autoconfigure.tenant.MultiTenantFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

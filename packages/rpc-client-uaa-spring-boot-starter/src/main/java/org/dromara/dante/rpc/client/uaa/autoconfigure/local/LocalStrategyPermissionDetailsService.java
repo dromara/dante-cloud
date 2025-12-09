@@ -25,11 +25,11 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.local;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.dante.logic.upms.entity.security.SysPermission;
 import org.dromara.dante.logic.upms.service.security.SysPermissionService;
-import org.dromara.dante.security.domain.HerodotusPermission;
-import org.apache.commons.collections4.CollectionUtils;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.definition.AbstractStrategyPermissionDetailsService;
+import org.dromara.dante.security.domain.HerodotusPermission;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -25,8 +25,8 @@
 
 package org.dromara.dante.rpc.server.upms.autoconfigure;
 
-import org.dromara.dante.rest.servlet.upms.annotation.EnableHerodotusRestServletUpms;
 import jakarta.annotation.PostConstruct;
+import org.dromara.dante.rest.servlet.upms.annotation.EnableHerodotusRestServletUpms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

@@ -28,7 +28,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>dante-bom</artifactId>
-        <version>4.0.0.0-M3</version>
+        <version>4.0.0.0-M4</version>
         <relativePath/>
     </parent>
 
@@ -62,10 +62,6 @@
     <scm>
         <url>https://github.com/dromara/dante-cloud.git</url>
     </scm>
-
-    <properties>
-        <dante-oss-bom.version>${project.version}</dante-oss-bom.version>
-    </properties>
 
     <!-- 管理依赖版本号,子项目不会默认依赖 -->
     <dependencyManagement>
