@@ -39,12 +39,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>reactive-container-spring-boot-starter</artifactId>
         </dependency>
 
@@ -54,7 +54,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>facility-gateway-spring-boot-starter</artifactId>
         </dependency>
 

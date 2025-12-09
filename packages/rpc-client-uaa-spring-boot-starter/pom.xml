@@ -38,7 +38,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-oauth2-commons</artifactId>
         </dependency>
 
@@ -48,7 +48,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>dante-logic-upms</artifactId>
         </dependency>
 

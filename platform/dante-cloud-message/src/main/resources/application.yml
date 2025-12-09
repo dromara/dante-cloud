@@ -59,7 +59,7 @@ logging:
     com.alibaba.nacos.common.remote.client: error
     com.ulisesbocchio: error
     # 开发、调试需要的日志
-    cn.herodotus: debug
+    org.dromara: debug
     org.springframework.security: info
     org.springframework.web: debug
     com.alicp.jetcache: debug
@@ -112,7 +112,7 @@ logging:
     org.springframework.web: debug
     org.springframework.cloud.bus: info
     org.apache.kafka: warn
-    cn.herodotus: info
+    org.dromara: info
 ---
 # spring 全家桶基础设施配置
 spring:

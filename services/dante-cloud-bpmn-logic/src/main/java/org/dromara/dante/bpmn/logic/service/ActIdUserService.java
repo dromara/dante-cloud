@@ -25,8 +25,8 @@
 
 package org.dromara.dante.bpmn.logic.service;
 
-import cn.herodotus.dante.data.jpa.repository.BaseJpaRepository;
-import cn.herodotus.dante.data.jpa.service.BaseJpaWriteableService;
+import org.dromara.dante.data.jpa.repository.BaseJpaRepository;
+import org.dromara.dante.data.jpa.service.BaseJpaWriteableService;
 import org.dromara.dante.bpmn.logic.entity.ActIdUser;
 import org.dromara.dante.bpmn.logic.repository.ActIdUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

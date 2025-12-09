@@ -25,10 +25,10 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.feign;
 
-import cn.herodotus.dante.core.domain.Result;
-import cn.herodotus.dante.logic.upms.entity.security.SysUser;
-import cn.herodotus.dante.security.domain.AccessPrincipal;
-import cn.herodotus.dante.security.domain.HerodotusUser;
+import org.dromara.dante.core.domain.Result;
+import org.dromara.dante.logic.upms.entity.security.SysUser;
+import org.dromara.dante.security.domain.AccessPrincipal;
+import org.dromara.dante.security.domain.HerodotusUser;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.definition.AbstractStrategyUserDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteSocialDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteUserDetailsService;

@@ -41,7 +41,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
+            <groupId>org.dromara.dante</groupId>
             <artifactId>servlet-container-spring-boot-starter</artifactId>
         </dependency>
         <dependency>

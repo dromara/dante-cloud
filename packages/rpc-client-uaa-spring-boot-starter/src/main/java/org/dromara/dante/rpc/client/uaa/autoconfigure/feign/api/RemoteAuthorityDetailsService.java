@@ -25,8 +25,8 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api;
 
-import cn.herodotus.dante.core.domain.Result;
-import cn.herodotus.dante.logic.upms.entity.security.SysPermission;
+import org.dromara.dante.core.domain.Result;
+import org.dromara.dante.logic.upms.entity.security.SysPermission;
 import org.dromara.dante.module.common.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

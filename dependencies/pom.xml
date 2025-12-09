@@ -26,13 +26,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.herodotus.dante</groupId>
+        <groupId>org.dromara.dante</groupId>
         <artifactId>dependencies</artifactId>
         <version>4.0.0.0-M3</version>
         <relativePath/>
     </parent>
 
-    <groupId>org.dromara.dante</groupId>
     <artifactId>dependencies</artifactId>
     <packaging>pom</packaging>
 
