@@ -27,10 +27,11 @@ package org.dromara.dante.bpmn.logic.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.dromara.dante.bpmn.logic.domain.base.BaseBpmnEntity;
+
+import java.util.Objects;
 
 /**
  * <p>Description: 工作流人员和组关系 </p>
@@ -88,19 +89,16 @@ public class ActIdMembership extends BaseBpmnEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
         ActIdMembership that = (ActIdMembership) o;
-        return Objects.equal(userId, that.userId) && Objects.equal(groupId, that.groupId);
+        return Objects.equals(userId, that.userId) && Objects.equals(groupId, that.groupId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(userId, groupId);
+        return Objects.hash(userId, groupId);
     }
 
     @Override
