@@ -32,7 +32,7 @@
     <parent>
         <artifactId>dante-cloud</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>4.0.0.0-M4</version>
+        <version>4.0.0.0-M5</version>
     </parent>
 
     <artifactId>services</artifactId>
