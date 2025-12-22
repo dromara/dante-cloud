@@ -52,7 +52,6 @@ spring:
     import:
       - nacos:dante-cloud-environment.yaml?group=${PROFILE:@profile@}
       - nacos:dante-cloud-platform.yaml?group=common
-      - nacos:dante-cloud-redis.yaml?group=common
       - nacos:dante-cloud-cache.yaml?group=common
       - nacos:dante-cloud-rest.yaml?group=common
   cloud:
@@ -94,7 +93,6 @@ logging:
     com.ulisesbocchio: error
     org.springframework.cloud.gateway: debug
     # 开发、调试需要的日志
-    org.dromara: trace
     org.dromara: debug
     com.alicp.jetcache: info
 
@@ -123,7 +121,6 @@ spring:
           - name: common
             files:
               - dante-cloud-platform.yaml
-              - dante-cloud-redis.yaml
               - dante-cloud-rest.yaml
               - dante-cloud-cache.yaml
 
