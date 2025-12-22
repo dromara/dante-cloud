@@ -18,28 +18,13 @@ herodotus:
     issuer-uri: ${herodotus.endpoint.uaa-service-uri}
     oidc-client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/connect/register
     oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo
-  oauth2:
-    jwk:
-      certificate: standard
   platform:
     architecture: distributed
     swagger:
       enabled: ${herodotus.switch.swagger.enabled}
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-  endpoint:
-    health:
-      show-details: ALWAYS
-
 server:
   shutdown: graceful
-  servlet:
-    session:
-      timeout: ${herodotus.session.timeout}
   jetty:
     connection-idle-timeout: 30000 #在请求延迟高时，避免线程被快速占满
   compression:
@@ -48,20 +33,46 @@ server:
     min-response-size: 1024  # 最小压缩响应大小
 
 spring:
-  threads:
-    virtual:
-      enabled: true
-  session:
-    timeout: ${server.servlet.session.timeout}
+  cloud:
+    loadbalancer:
+      nacos:
+        enabled: true
+  http:
+    clients:
+      imperative:
+        factory: jdk
   web:
     error:
       include-exception: true
       include-message: always
       include-stacktrace: always
       include-binding-errors: always
-  thymeleaf:
-    mode: HTML
-    cache: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: ALWAYS
+
+springdoc:
+  default-flat-param-object: true
+  api-docs:
+    enabled: ${herodotus.switch.swagger.enabled}
+    resolve-schema-properties: true
+  swagger-ui:
+    enabled: ${herodotus.switch.swagger.enabled}
+    disable-swagger-default-url: true
+    operations-sorter: method
+    show-common-extensions: true
+    show-extensions: true
+    oauth:
+      use-pkce-with-authorization-code-grant: true
+      app-name: ${spring.application.name}
 
 sms:
   is-print: false

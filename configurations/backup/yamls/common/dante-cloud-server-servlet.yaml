@@ -1,4 +1,22 @@
+herodotus:
+  oauth2:
+    jwk:
+      certificate: standard
+
+server:
+  servlet:
+    session:
+      timeout: ${herodotus.session.timeout}
+
 spring:
+  threads:
+    virtual:
+      enabled: true
+  session:
+    timeout: ${server.servlet.session.timeout}
+  thymeleaf:
+    mode: HTML
+    cache: false
   cloud:
     openfeign:
       http2client:
@@ -23,29 +41,7 @@ spring:
           enabled: true
         response:
           enabled: true
-    loadbalancer:
-      nacos:
-        enabled: true
-  http:
-    clients:
-      imperative:
-        factory: jdk
 
 feign:
   sentinel:
     enabled: true
-
-springdoc:
-  default-flat-param-object: true
-  api-docs:
-    enabled: ${herodotus.switch.swagger.enabled}
-    resolve-schema-properties: true
-  swagger-ui:
-    enabled: ${herodotus.switch.swagger.enabled}
-    disable-swagger-default-url: true
-    operations-sorter: method
-    show-common-extensions: true
-    show-extensions: true
-    oauth:
-      use-pkce-with-authorization-code-grant: true
-      app-name: ${spring.application.name}

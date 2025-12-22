@@ -53,7 +53,7 @@ spring:
       - nacos:dante-cloud-environment.yaml?group=${PROFILE:@profile@}
       - nacos:dante-cloud-platform.yaml?group=common
       - nacos:dante-cloud-cache.yaml?group=common
-      - nacos:dante-cloud-rest.yaml?group=common
+      - nacos:dante-cloud-server-reactive.yaml?group=common
   cloud:
     nacos:
       username: ${ALIBABA_USERNAME:@alibaba.username@}
@@ -121,7 +121,7 @@ spring:
           - name: common
             files:
               - dante-cloud-platform.yaml
-              - dante-cloud-rest.yaml
+              - dante-cloud-server-reactive.yaml
               - dante-cloud-cache.yaml
 
 logging:

@@ -25,7 +25,7 @@ spring:
       - nacos:dante-cloud-database-${DATABASE:@database@}.yaml?group=common
       - nacos:dante-cloud-database.yaml?group=common
       - nacos:dante-cloud-cache.yaml?group=common
-      - nacos:dante-cloud-rest.yaml?group=common
+      - nacos:dante-cloud-server-servlet.yaml?group=common
       - nacos:dante-cloud-kafka.yaml?group=common
       - nacos:${spring.application.name}.yaml?group=service
   cloud:
@@ -100,7 +100,7 @@ spring:
               - dante-cloud-database-${DATABASE:@database@}.yaml
               - dante-cloud-database.yaml
               - dante-cloud-cache.yaml
-              - dante-cloud-rest.yaml
+              - dante-cloud-server-servlet.yaml
               - dante-cloud-kafka.yaml
               - dante-cloud-social.yaml
           - name: service
