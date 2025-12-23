@@ -163,48 +163,50 @@ dante-cloud
 
 ```shell
 dante-engine
-├── dependencies -- 工程 Maven 顶级依赖，统一控制版本和依赖
-├── engine-assistant -- 辅助功能模块
-├    ├── assistant-access -- 第三方登录接入辅助功能模块
-├    └── assistant-captcha -- 验证码辅助功能模块
-├── engine-cache -- 缓存功能模块
-├    ├── cache-core -- 缓存通用代码模块
-├    ├── cache-module-caffeine -- Caffeine 缓存功能封装模块
-├    ├── cache-module-jetcache -- JetCache 缓存功能封装模块
-├    ├── cache-module-redis -- Redis 缓存功能封装模块
-├    └── cache-module-redisson -- Redisson 缓存功能封装模块
-├── engine-core -- 基础核心模块
-├    ├── core-autoconfigure -- 核心自动配置模块
-├    ├── core-definition -- 核心定义模块
-├    ├── core-foundation -- 基础通用模块
-├    └── core-identity -- 身份认证通用模块
-├── engine-data -- 数据访问模块
-├    ├── data-core -- 数据访问通用代码模块
-├    ├── data-core-jpa -- 以 JPA 作为数据访问层的通用代码模块
-├    ├── data-core-mongodb -- 以 MongoDB 作为数据访问层的通用代码模块
-├    ├── data-module-hibernate -- Hibernate 扩展模块
-├    └── data-module-tenant -- 基于 JPA 的多租户扩展配置模块
-├── engine-logic -- 系统内置功能业务逻辑模块
-├    ├── logic-module-identity -- 身份认证功能业务逻辑模块
-├    ├── logic-module-message -- 系统消息业务逻辑模块
-├    └── logic-module-upms -- UPMS 业务逻辑模块
-├── engine-message -- 消息模块
-├    ├── message-autoconfigure -- 消息自动配置模块
-├    ├── message-core -- 消息通用代码模块
-├    └── message-module-websocket-servlet -- 基于 Servlet 环境下的 Websocket 功能封装模块
-├── engine-oauth2 -- OAuth2 认证模块
-├    ├── oauth2-authentication-autoconfigure -- OAuth2 授权服务器基础内容自动配置模块
-├    ├── oauth2-authorization-autoconfigure -- OAuth2 资源服务器基础内容自动配置模块
-├    ├── oauth2-core -- OAuth2 共性通用代码模块
-├    ├── oauth2-module-authentication -- Spring Authorization Server 授权服务器核心功能封装模块
-├    ├── oauth2-module-authorization -- Spring Authorization Server 资源服务器核心功能封装模块
-├    ├── oauth2-module-extension -- Spring Authorization Server 功能扩展模块
-├    └── oauth2-module-persistence-jpa -- 以 JPA 作为 SAS 核心数据访问层代码实现模块
-├── engine-rest -- 系统内置功能 REST 接口模块
-├    ├── rest-module-servlet-identity -- 身份认证功能 Servlet 环境 REST 接口模块
-├    ├── rest-module-servlet-message -- 消息功能 Servlet 环境 REST 接口模块
-├    └── rest-module-servlet-upms -- UPMS 功能 Servlet 环境 REST 接口模块
-├── engine-starter -- Starters
+├── dante-assistant -- 辅助功能模块
+├    ├── dante-assistant-access -- 第三方登录接入辅助功能模块
+├    ├── dante-assistant-captcha -- 验证码辅助功能模块
+├    └── dante-assistant-oss -- AWS SDK V2 对象存储辅助功能模
+├── dante-bom -- 工程 Maven 顶级依赖，统一控制版本和依赖
+├── dante-cache -- 缓存功能模块
+├    ├── dante-cache-caffeine -- Caffeine 缓存功能封装模块
+├    ├── dante-cache-commons -- 缓存通用代码模块
+├    ├── dante-cache-jetcache -- JetCache 缓存功能封装模块
+├    └── dante-cache-redis -- Redis 缓存功能封装模块
+├── dante-data -- 数据访问模块
+├    ├── dante-data-commons -- 数据访问通用代码模块
+├    ├── dante-data-jpa -- 以 JPA 作为数据访问层的通用代码模块
+├    ├── dante-data-mongodb -- 以 MongoDB 作为数据访问层的通用代码模块
+├    └── dante-data-rest -- 关联数据访问层的REST开发通用代码模块
+├── dante-framework -- Dante Cloud 框架核心基础模块
+├    ├── dante-autoconfigure -- 基础自动配置模块
+├    ├── dante-core -- 核心定义模块
+├    ├── dante-hibernate -- Hibernate 扩展模块
+├    ├── dante-security -- Security 相关基础代码模块
+├    ├── dante-spring -- SpringBoot 相关基础代码模块
+├    └── dante-web -- Web 服务 相关基础代码模块
+├── dante-logic -- 系统内置功能业务逻辑模块
+├    ├── dante-logic-identity -- 身份认证功能业务逻辑模块
+├    ├── dante-logic-message -- 系统消息业务逻辑模块
+├    └── dante-logic-upms -- UPMS 业务逻辑模块
+├── dante-message -- 消息模块
+├    ├── dante-message-autoconfigure -- 消息自动配置模块
+├    ├── dante-message-commons -- 消息通用代码模块
+├    └── dante-message-servlet-websocket -- 基于 Servlet 环境下的 Websocket 功能封装模块
+├── dante-oauth2 -- OAuth2 认证模块
+├    ├── dante-authentication-autoconfigure -- OAuth2 授权服务器基础内容自动配置模块
+├    ├── dante-authorization-autoconfigure -- OAuth2 资源服务器基础内容自动配置模块
+├    ├── dante-oauth2-authentication -- Spring Authorization Server 授权服务器核心功能封装模块
+├    ├── dante-oauth2-authorization -- Spring Authorization Server 资源服务器核心功能封装模块
+├    ├── dante-oauth2-commons -- OAuth2 共性通用代码模块
+├    ├── dante-oauth2-extension -- Spring Authorization Server 功能扩展模块
+├    └── dante-oauth2-persistence-jpa -- 以 JPA 作为 SAS 核心数据访问层代码实现模块
+├── dante-rest -- 系统内置功能 REST 接口模块
+├    ├── dante-rest-oss -- 对象存储功能 REST 接口模块
+├    ├── dante-rest-servlet-identity -- 身份认证功能 Servlet 环境 REST 接口模块
+├    ├── dante-rest-servlet-message -- 消息功能 Servlet 环境 REST 接口模块
+├    └── dante-rest-servlet-upms -- UPMS 功能 Servlet 环境 REST 接口模块
+├── dante-starter -- Starters
 ├    ├── cache-spring-boot-starter -- 缓存自动配置 Starter
 ├    ├── captcha-spring-boot-starter -- 验证码自动配置 Starter
 ├    ├── data-mongodb-spring-boot-starter -- MongoDB 数据访问层自动配置 Starter
@@ -214,15 +216,13 @@ dante-engine
 ├    ├── facility-kafka-spring-boot-starter -- 基于 Kafka 的消息事件自动配置 Starter
 ├    ├── facility-tencent-spring-boot-starter -- 面向 Spring Cloud Tencent 的微服务基础设施适配模块 Starter
 ├    ├── logging-spring-boot-starter -- 日志收集和聚合自动配置 Starter
+├    ├── oss-spring-boot-starter -- 基于 AWS SDK V2 对象存储自动配置 Starter
 ├    ├── reactive-container-spring-boot-starter -- Reactive 容器基础配置自动配置 Starter
-├    ├── servlet-container-spring-boot-starter -- Servlet 容器基础配置自动配置 Starter
+├    ├── servlet-container-spring-boot-starter -- 基于 JPA 的多租户自动配置 Starter
 ├    ├── servlet-message-spring-boot-starter -- Servlet 环境消息模块自动配置 Starter
+├    ├── tenant-spring-boot-starter -- 基于 JPA 的多租户自动配置 Starter
+├    ├── web-spring-boot-starter -- Web 微服务通用 Starter
 ├    └── webmvc-spring-boot-starter -- WebMvc 类型应用自动配置 Starter
-├── engine-web -- Web 模块
-├    ├── web-core -- Web 通用代码模块
-├    ├── web-module-api -- Rest 接口通用代码模块
-├    ├── web-module-service -- 微服务通用代码模块
-├    └── web-module-servlet -- Servlet 环境 Web 服务专有基础代码模块
 └──  readme -- README 相关素材放置目录
 ```
 
