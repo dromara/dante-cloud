@@ -24,9 +24,8 @@ spring:
       - nacos:dante-cloud-platform.yaml?group=common
       - nacos:dante-cloud-database-${DATABASE:@database@}.yaml?group=common
       - nacos:dante-cloud-database.yaml?group=common
-      - nacos:dante-cloud-redis.yaml?group=common
       - nacos:dante-cloud-cache.yaml?group=common
-      - nacos:dante-cloud-rest.yaml?group=common
+      - nacos:dante-cloud-server-servlet.yaml?group=common
       - nacos:dante-cloud-kafka.yaml?group=common
       - nacos:${spring.application.name}.yaml?group=service
   cloud:
@@ -62,7 +61,6 @@ logging:
   level:
     root: INFO
     # 关闭不必要的日志
-    org.reflections.Reflections: off
     com.alibaba.nacos.client: error
     com.alibaba.nacos.common.remote.client: error
     com.ulisesbocchio: error
@@ -100,9 +98,8 @@ spring:
               - dante-cloud-platform.yaml
               - dante-cloud-database-${DATABASE:@database@}.yaml
               - dante-cloud-database.yaml
-              - dante-cloud-redis.yaml
               - dante-cloud-cache.yaml
-              - dante-cloud-rest.yaml
+              - dante-cloud-server-servlet.yaml
               - dante-cloud-kafka.yaml
               - dante-cloud-social.yaml
           - name: service

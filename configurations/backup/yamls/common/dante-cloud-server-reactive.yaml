@@ -1,0 +1,8 @@
+server:
+  reactive:
+    session:
+      timeout: ${herodotus.session.timeout}
+
+spring:
+  session:
+    timeout: ${server.reactive.session.timeout}
