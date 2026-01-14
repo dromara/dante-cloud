@@ -36,6 +36,7 @@
     </parent>
 
     <artifactId>authorization-servlet-spring-boot-starter</artifactId>
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>

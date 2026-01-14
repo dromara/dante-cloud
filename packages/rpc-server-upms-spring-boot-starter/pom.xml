@@ -35,6 +35,7 @@
     </parent>
 
     <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
