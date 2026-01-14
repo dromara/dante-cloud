@@ -33,10 +33,11 @@
     </parent>
 
     <artifactId>dependencies</artifactId>
+    <name>dante-cloud-dependencies</name>
+
     <packaging>pom</packaging>
 
-    <name>Dante Cloud Dependencies</name>
-    <description>Dante Dependencies</description>
+    <description>Dante Cloud Dependencies</description>
 
     <url>https://www.herodotus.vip</url>
     <licenses>
