@@ -37,6 +37,8 @@
     <artifactId>dante-cloud-message</artifactId>
     <name>${project.artifactId}</name>
 
+    <description>Dante Cloud 平台消息服务</description>
+
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>

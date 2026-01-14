@@ -37,6 +37,8 @@
     <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
     <name>${project.artifactId}</name>
 
+    <description>Dante Cloud 服务间通信服务端自动配置 Starter(UPMS 作为服务端为其它服务提供访问)</description>
+
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>

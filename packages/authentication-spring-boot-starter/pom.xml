@@ -38,6 +38,8 @@
     <artifactId>authentication-spring-boot-starter</artifactId>
     <name>${project.artifactId}</name>
 
+    <description>Dante Cloud OAuth2 授权服务器自动配置 Starter(主要用于微服务版和单体版统一认证)</description>
+
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>

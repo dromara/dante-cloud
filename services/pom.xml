@@ -36,9 +36,11 @@
     </parent>
 
     <artifactId>services</artifactId>
+    <name>dante-cloud-services</name>
+
     <packaging>pom</packaging>
 
-    <name>dante-cloud-services</name>
+    <description>Dante Cloud 平台业务服务相关模块分组</description>
 
     <modules>
         <module>dante-cloud-bpmn-logic</module>

@@ -36,9 +36,11 @@
     </parent>
 
     <artifactId>packages</artifactId>
+    <name>dante-cloud-packages</name>
+
     <packaging>pom</packaging>
 
-    <name>dante-cloud-packages</name>
+    <description>Dante Cloud 服务基础核心 Starter 分组模块</description>
 
     <build>
         <plugins>

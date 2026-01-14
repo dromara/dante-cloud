@@ -37,6 +37,8 @@
     <artifactId>facility-spring-boot-starter</artifactId>
     <name>${project.artifactId}</name>
 
+    <description>Dante Cloud 基础设施切换依赖 Starter(用于切换 Alibaba、Tencent和原生微服务基础设施环境)</description>
+
     <dependencies>
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>

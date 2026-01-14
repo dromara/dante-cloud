@@ -37,6 +37,8 @@
     <artifactId>dante-cloud-upms</artifactId>
     <name>${project.artifactId}</name>
 
+    <description>Dante Cloud 统一权限管理系统服务</description>
+
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>

@@ -37,7 +37,7 @@
     <artifactId>dante-cloud-bpmn-ability</artifactId>
     <name>${project.artifactId}</name>
 
-    <description>基于Camunda工作流的服务</description>
+    <description>Dante Cloud 工作流服务</description>
 
     <dependencies>
         <dependency>

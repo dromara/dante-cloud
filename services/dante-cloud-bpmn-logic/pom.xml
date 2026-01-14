@@ -38,6 +38,8 @@
     <artifactId>dante-cloud-bpmn-logic</artifactId>
     <name>${project.artifactId}</name>
 
+    <description>Dante Cloud 工作流基础代码模块</description>
+
     <dependencies>
         <dependency>
             <groupId>org.dromara.dante</groupId>

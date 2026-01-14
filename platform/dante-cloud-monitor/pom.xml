@@ -36,7 +36,7 @@
     <artifactId>dante-cloud-monitor</artifactId>
     <name>${project.artifactId}</name>
 
-    <description>dante-cloud-monitor</description>
+    <description>Dante Cloud Spring Boot Admin 监控服务</description>
 
     <dependencies>
         <dependency>

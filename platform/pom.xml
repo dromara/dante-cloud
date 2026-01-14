@@ -36,9 +36,11 @@
     </parent>
 
     <artifactId>platform</artifactId>
+    <name>dante-cloud-platform</name>
+
     <packaging>pom</packaging>
 
-    <name>dante-cloud-platform</name>
+    <description>Dante Cloud 平台核心服务相关模块分组</description>
 
     <modules>
         <module>dante-cloud-gateway</module>
