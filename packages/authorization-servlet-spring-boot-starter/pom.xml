@@ -36,6 +36,9 @@
     </parent>
 
     <artifactId>authorization-servlet-spring-boot-starter</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 阻塞式 OAuth2 资源服务器自动配置 Starter(除了 Monitor 等特殊服务以外，所有服务均需依赖)</description>
 
     <dependencies>
         <dependency>

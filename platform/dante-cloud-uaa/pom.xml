@@ -36,6 +36,9 @@
     </parent>
 
     <artifactId>dante-cloud-uaa</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 账户管理和统一认证模块</description>
 
     <dependencies>
         <dependency>

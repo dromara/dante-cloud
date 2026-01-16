@@ -36,6 +36,9 @@
     </parent>
 
     <artifactId>dante-cloud-gateway</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 统一网关服务</description>
 
     <dependencies>
         <dependency>

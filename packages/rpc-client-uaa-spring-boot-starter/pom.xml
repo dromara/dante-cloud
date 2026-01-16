@@ -35,6 +35,9 @@
     </parent>
 
     <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 服务间通信客户端自动配置 Starter(UAA 作为客户端端访问其它服务)</description>
 
     <dependencies>
         <dependency>

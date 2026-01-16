@@ -36,9 +36,11 @@
     </parent>
 
     <artifactId>modules</artifactId>
+    <name>dante-cloud-modules</name>
+
     <packaging>pom</packaging>
 
-    <name>dante-cloud-modules</name>
+    <description>Dante Cloud “半成品”组件模块分组(可以再此建立业务代码模块，以模块的形式实现代码的共享以及架构的切换)</description>
 
     <build>
         <plugins>

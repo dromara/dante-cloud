@@ -13,7 +13,7 @@
 </p>
 <p align="center">
     <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.1.0-M2-red.svg?logo=spring" alt="Version 4.0.1.0-M2"></a>
-        <a href="https://gitee.com/dromara/dante-cloud/issues/ICTBWZ" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.1.0-M2-red.svg?logo=spring" alt="Dante Engine 4.0.1.0-M2"></a>
+    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.1.0-M2-red.svg?logo=spring" alt="Dante Engine 4.0.1.0-M2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -99,7 +99,7 @@
 
 ### 3. 重要说明
 
-因频繁出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，Dante Engine 子项目需登记申请，等审批后开放源码，[【查看详情或登记】](https://gitee.com/dromara/dante-cloud/issues/ICTBWZ)
+因频繁出现修改包名、删除作者版权信息、二次开源的行为，为保护作者权益，Dante Engine 子项目需登记申请，等审批后开放源码，[【查看详情或登记】](https://gitee.com/dromara/dante-cloud/issues/IDKCZD)
 
 ## [2]、安全测试
 
@@ -137,24 +137,24 @@ Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保�
 dante-cloud
 ├── configurations -- 配置文件脚本和统一Docker build上下文目录
 ├── dependencies -- 工程Maven顶级依赖，统一控制版本和依赖
-├── module -- 依赖组件半成品拼装工程(可以再此建立业务代码模块，以模块的形式实现代码的共享以及架构的切换)
-├    ├── dante-module-common -- Module 相关模块公共辅助代码模块
+├── module -- “半成品”组件模块分组(可以再此建立业务代码模块，以模块的形式实现代码的共享以及架构的切换)
+├    ├── dante-module-common -- 微服务版公共辅助代码模块
 ├    └── dante-monomer-autoconfigure -- 单体版自动配置模块
 ├── packages -- 基础核心Starter
-├    ├── authentication-spring-boot-starter -- OAuth2 授权服务器自动配置 Starter(主要用于 UAA 认证服务器以及单体版 Dante Cloud)
+├    ├── authentication-spring-boot-starter -- OAuth2 授权服务器自动配置 Starter(主要用于微服务版和单体版统一认证)
 ├    ├── authorization-servlet-spring-boot-starter -- 阻塞式 OAuth2 资源服务器自动配置 Starter(除了 Monitor 等特殊服务以外，所有服务均需依赖)
-├    ├── facility-spring-boot-starter -- 基础设施切换依赖 Starter
+├    ├── facility-spring-boot-starter -- 基础设施切换依赖 Starter(用于切换 Alibaba、Tencent和原生微服务基础设施环境)
 ├    ├── rpc-client-uaa-spring-boot-starter -- 服务间通信客户端自动配置 Starter(UAA 作为客户端端访问其它服务)
 ├    └── rpc-server-upms-spring-boot-starter -- 服务间通信服务端自动配置 Starter(UPMS 作为服务端为其它服务提供访问)
 ├── platform -- 平台核心服务
 ├    ├── dante-cloud-gateway -- 统一网关服务
-├    ├── dante-cloud-message -- 系统消息服务
+├    ├── dante-cloud-message -- 平台消息服务
 ├    ├── dante-cloud-monitor -- Spring Boot Admin 监控服务
-├    ├── dante-cloud-upms -- 统一权限管理系统服务
-├    └── dante-cloud-uaa -- 账户管理和统一认证模块
+├    ├── dante-cloud-uaa -- 账户管理和统一认证模块
+├    └── dante-cloud-upms -- 统一权限管理系统服务
 ├── services -- 平台业务服务
 ├    ├── dante-cloud-bpmn-ability -- 工作流服务
-├    ├── dante-cloud-bpmn-logic -- 工作流基础代码包
+├    ├── dante-cloud-bpmn-logic -- 工作流基础代码模块
 ├    ├── dante-cloud-oss-ability -- 对象存储服务
 └──  └── dante-monomer-application -- Dante Cloud 单体版应用模块
 ```
@@ -302,17 +302,7 @@ dante-engine
     </tr>
 </table>
 
-## [9]、友情链接
-
-以下是一些与项目相关的推荐资源或合作伙伴：
-
-| 名称            | 描述                                  | 链接                                        |
-|---------------|-------------------------------------|-------------------------------------------| 
-| **VectoRex**  | VectoRex 项目的官方文档，包含详细的使用指南和 API 参考。 | [查看文档](https://vectorex-doc.m78cloud.cn/) |
-| **Warm-Flow** | 国产工作流引擎🎉，简洁轻量，jar包快速引入设计器          | [查看文档](https://warm-flow.dromara.org/)    |
-| **Skyeye云**   | 集成OA、CRM、ERP、MES、PM、行政等为一体智能制造软件。   | [查看文档](https://gitee.com/dromara/skyeye)  |
-
-## [10]、鸣谢
+## [9]、鸣谢
 
 ### 赞助人列表
 

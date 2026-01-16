@@ -35,6 +35,9 @@
     </parent>
 
     <artifactId>dante-cloud-oss-ability</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 对象存储服务</description>
 
     <dependencies>
         <dependency>

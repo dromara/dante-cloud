@@ -34,10 +34,9 @@
     </parent>
 
     <artifactId>dante-cloud-monitor</artifactId>
-    <version>4.0.1.0-M2</version>
+    <name>${project.artifactId}</name>
 
-    <name>dante-cloud-monitor</name>
-    <description>dante-cloud-monitor</description>
+    <description>Dante Cloud Spring Boot Admin 监控服务</description>
 
     <dependencies>
         <dependency>

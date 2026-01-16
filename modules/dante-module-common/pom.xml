@@ -36,6 +36,9 @@
     </parent>
 
     <artifactId>dante-module-common</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 微服务版公共辅助代码模块</description>
 
     <dependencies>
         <dependency>

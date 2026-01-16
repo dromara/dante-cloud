@@ -31,6 +31,9 @@
     </parent>
 
     <artifactId>dante-monomer-autoconfigure</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 单体版自动配置模块</description>
 
     <dependencies>
         <dependency>

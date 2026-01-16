@@ -33,9 +33,10 @@
     </parent>
 
     <artifactId>dante-cloud</artifactId>
+    <name>${project.artifactId}</name>
+
     <packaging>pom</packaging>
 
-    <name>dante-cloud</name>
     <description>Top Dante project pom.xml file</description>
 
     <!-- ${basedir} 项目根目录 -->

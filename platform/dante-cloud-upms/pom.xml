@@ -35,7 +35,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dante-cloud-upms</artifactId>
-    <version>4.0.1.0-M2</version>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 统一权限管理系统服务</description>
 
     <dependencies>
         <dependency>
