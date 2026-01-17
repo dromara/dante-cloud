@@ -6,7 +6,7 @@
 -- Version 2.0; you may not use this file except in compliance with the License.
 -- You may obtain a copy of the License at
 --
---     http://www.apache.org/licenses/LICENSE-2.0
+--     https://www.apache.org/licenses/LICENSE-2.0
 --
 -- Unless required by applicable law or agreed to in writing, software
 -- distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,9 +19,9 @@ insert into ACT_GE_SCHEMA_LOG
 values ('600', CURRENT_TIMESTAMP, '7.17.0');
 
 -- https://jira.camunda.com/browse/CAM-14006 --
-ALTER TABLE ACT_RU_JOB 
+ALTER TABLE ACT_RU_JOB
   ADD LAST_FAILURE_LOG_ID_ NVARCHAR2(64);
-  
+
 ALTER TABLE ACT_RU_EXT_TASK
   ADD LAST_FAILURE_LOG_ID_ NVARCHAR2(64);
 

@@ -6,7 +6,7 @@
 -- Version 2.0; you may not use this file except in compliance with the License.
 -- You may obtain a copy of the License at
 --
---     http://www.apache.org/licenses/LICENSE-2.0
+--     https://www.apache.org/licenses/LICENSE-2.0
 --
 -- Unless required by applicable law or agreed to in writing, software
 -- distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,11 +17,11 @@
 
 -- AUTHORIZATION --
 
--- add grant authorizations for group camunda-admin:
+-- add grant authorizations for group operaton-admin:
 INSERT INTO
   ACT_RU_AUTHORIZATION (ID_, TYPE_, GROUP_ID_, RESOURCE_TYPE_, RESOURCE_ID_, PERMS_, REV_)
 VALUES
-  ('camunda-admin-grant-drd', 1, 'camunda-admin', 14, '*', 2147483647, 1);
+  ('operaton-admin-grant-drd', 1, 'operaton-admin', 14, '*', 2147483647, 1);
 
 -- decision requirements definition --
 

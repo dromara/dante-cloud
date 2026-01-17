@@ -6,7 +6,7 @@
 -- Version 2.0; you may not use this file except in compliance with the License.
 -- You may obtain a copy of the License at
 --
---     http://www.apache.org/licenses/LICENSE-2.0
+--     https://www.apache.org/licenses/LICENSE-2.0
 --
 -- Unless required by applicable law or agreed to in writing, software
 -- distributed under the License is distributed on an "AS IS" BASIS,
@@ -131,14 +131,14 @@ ALTER TABLE ACT_RU_JOB
 
 -- AUTHORIZATION --
 
--- add grant authorizations for group camunda-admin:
+-- add grant authorizations for group operaton-admin:
 INSERT INTO
   ACT_RU_AUTHORIZATION (ID_, TYPE_, GROUP_ID_, RESOURCE_TYPE_, RESOURCE_ID_, PERMS_, REV_)
 VALUES
-  ('camunda-admin-grant-process-definition', 1, 'camunda-admin', 6, '*', 2147483647, 1),
-  ('camunda-admin-grant-task', 1, 'camunda-admin', 7, '*', 2147483647, 1),
-  ('camunda-admin-grant-process-instance', 1, 'camunda-admin', 8, '*', 2147483647, 1),
-  ('camunda-admin-grant-deployment', 1, 'camunda-admin', 9, '*', 2147483647, 1);
+  ('operaton-admin-grant-process-definition', 1, 'operaton-admin', 6, '*', 2147483647, 1),
+  ('operaton-admin-grant-task', 1, 'operaton-admin', 7, '*', 2147483647, 1),
+  ('operaton-admin-grant-process-instance', 1, 'operaton-admin', 8, '*', 2147483647, 1),
+  ('operaton-admin-grant-deployment', 1, 'operaton-admin', 9, '*', 2147483647, 1);
 
 -- add global grant authorizations for new authorization resources:
 -- DEPLOYMENT

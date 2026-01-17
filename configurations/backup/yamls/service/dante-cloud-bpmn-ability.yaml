@@ -14,7 +14,7 @@ springdoc:
     disable-swagger-default-url: true
     urls-primary-name: CamundaRestAPI
     urls:
-      - url: /openapi.json
+      - url: /operaton-rest-api.json
         name: CamundaRestAPI
 
 camunda:
