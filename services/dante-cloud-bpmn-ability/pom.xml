@@ -61,8 +61,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+            <groupId>org.operaton.bpm.springboot</groupId>
+            <artifactId>operaton-bpm-spring-boot-starter-rest</artifactId>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-boot-starter-tomcat</artifactId>

@@ -12,12 +12,12 @@ spring:
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true
-    urls-primary-name: CamundaRestAPI
+    urls-primary-name: OperatonRestAPI
     urls:
       - url: /operaton-rest-api.json
-        name: CamundaRestAPI
+        name: OperatonRestAPI
 
-camunda:
+operaton:
   bpm:
     database:
       type: postgres
