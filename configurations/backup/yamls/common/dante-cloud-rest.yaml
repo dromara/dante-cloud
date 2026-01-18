@@ -1,7 +1,7 @@
 spring:
   cloud:
     openfeign:
-      okhttp:
+      http2client:
         enabled: true
       httpclient:
         enabled: false
