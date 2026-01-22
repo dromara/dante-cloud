@@ -6,7 +6,7 @@
 -- Version 2.0; you may not use this file except in compliance with the License.
 -- You may obtain a copy of the License at
 --
---     http://www.apache.org/licenses/LICENSE-2.0
+--     https://www.apache.org/licenses/LICENSE-2.0
 --
 -- Unless required by applicable law or agreed to in writing, software
 -- distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,5 +16,5 @@
 --
 
 -- increase the field length https://app.camunda.com/jira/browse/CAM-8177 --
-ALTER TABLE ACT_RU_AUTHORIZATION 
+ALTER TABLE ACT_RU_AUTHORIZATION
   ALTER COLUMN RESOURCE_ID_ nvarchar(255);

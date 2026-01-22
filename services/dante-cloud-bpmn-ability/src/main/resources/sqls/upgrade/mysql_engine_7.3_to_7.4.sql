@@ -6,7 +6,7 @@
 -- Version 2.0; you may not use this file except in compliance with the License.
 -- You may obtain a copy of the License at
 --
---     http://www.apache.org/licenses/LICENSE-2.0
+--     https://www.apache.org/licenses/LICENSE-2.0
 --
 -- Unless required by applicable law or agreed to in writing, software
 -- distributed under the License is distributed on an "AS IS" BASIS,
@@ -124,11 +124,11 @@ create index ACT_IDX_HI_DEC_IN_CLAUSE on ACT_HI_DEC_IN(DEC_INST_ID_, CLAUSE_ID_)
 create index ACT_IDX_HI_DEC_OUT_INST on ACT_HI_DEC_OUT(DEC_INST_ID_);
 create index ACT_IDX_HI_DEC_OUT_RULE on ACT_HI_DEC_OUT(RULE_ORDER_, CLAUSE_ID_);
 
--- add grant authorization for group camunda-admin:
+-- add grant authorization for group operaton-admin:
 INSERT INTO
   ACT_RU_AUTHORIZATION (ID_, TYPE_, GROUP_ID_, RESOURCE_TYPE_, RESOURCE_ID_, PERMS_, REV_)
 VALUES
-  ('camunda-admin-grant-decision-definition', 1, 'camunda-admin', 10, '*', 2147483647, 1);
+  ('operaton-admin-grant-decision-definition', 1, 'operaton-admin', 10, '*', 2147483647, 1);
 
 -- external tasks --
 
@@ -171,7 +171,7 @@ ALTER TABLE ACT_RU_JOB
   MODIFY COLUMN SUSPENSION_STATE_ integer
   DEFAULT 1;
 
-  -- relevant for jobs created in Camunda 7.0
+  -- relevant for jobs created in Operaton 7.0
 UPDATE ACT_RU_JOB
   SET SUSPENSION_STATE_ = 1
   WHERE SUSPENSION_STATE_ IS NULL;

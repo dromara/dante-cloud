@@ -8,7 +8,7 @@
     Version 2.0; you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-        http://www.apache.org/licenses/LICENSE-2.0
+        https://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,7 @@
 
   <property name="db.name" value="db2" dbms="db2"/>
   <property name="db.name" value="h2" dbms="h2"/>
+  <property name="db.name" value="mariadb" dbms="mariadb"/>
   <property name="db.name" value="mssql" dbms="mssql"/>
   <property name="db.name" value="mysql" dbms="mysql"/>
   <property name="db.name" value="oracle" dbms="oracle"/>
@@ -139,10 +140,6 @@
              stripComments="true"/>
   </changeSet>
 
-  <changeSet author="Camunda" id="7.22.0-tag">
-    <tagDatabase tag="7.22.0"/>
-  </changeSet>
-
   <changeSet author="Camunda" id="7.22-to-7.23">
     <sqlFile path="upgrade/${db.name}_engine_7.22_to_7.23.sql"
              encoding="UTF-8"
@@ -155,7 +152,7 @@
     <tagDatabase tag="7.23.0"/>
   </changeSet>
 
-  <changeSet author="Camunda" id="7.23-to-7.24">
+  <changeSet author="Operaton" id="7.23-to-7.24">
     <sqlFile path="upgrade/${db.name}_engine_7.23_to_7.24.sql"
              encoding="UTF-8"
              relativeToChangelogFile="true"
@@ -163,7 +160,7 @@
              stripComments="true"/>
   </changeSet>
 
-  <changeSet author="Camunda" id="7.24.0-tag">
+  <changeSet author="Operaton" id="7.24.0-tag">
     <tagDatabase tag="7.24.0"/>
   </changeSet>
 
