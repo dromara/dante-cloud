@@ -26,7 +26,7 @@
 package org.dromara.dante.rpc.server.upms.autoconfigure;
 
 import jakarta.annotation.PostConstruct;
-import org.dromara.dante.rest.servlet.upms.annotation.EnableHerodotusRestServletUpms;
+import org.dromara.dante.rest.upms.annotation.EnableHerodotusRestUpms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -40,7 +40,7 @@ import org.springframework.context.annotation.Configuration;
  * @date : 2024/4/24 23:12
  */
 @AutoConfiguration
-@EnableHerodotusRestServletUpms
+@EnableHerodotusRestUpms
 public class RpcServerUpmsAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(RpcServerUpmsAutoConfiguration.class);

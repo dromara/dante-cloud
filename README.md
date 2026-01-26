@@ -12,8 +12,8 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.1.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.1.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.2.0-M1-red.svg?logo=spring" alt="Version 4.0.2.0-M1"></a>
-    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.2.0-M1-red.svg?logo=spring" alt="Dante Engine 4.0.2.0-M1"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.2.0-M2-red.svg?logo=spring" alt="Version 4.0.2.0-M2"></a>
+    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.2.0-M2-red.svg?logo=spring" alt="Dante Engine 4.0.2.0-M2"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -203,9 +203,9 @@ dante-engine
 ├    └── dante-oauth2-persistence-jpa -- 以 JPA 作为 SAS 核心数据访问层代码实现模块
 ├── dante-rest -- 系统内置功能 REST 接口模块
 ├    ├── dante-rest-oss -- 对象存储功能 REST 接口模块
-├    ├── dante-rest-servlet-identity -- 身份认证功能 Servlet 环境 REST 接口模块
-├    ├── dante-rest-servlet-message -- 消息功能 Servlet 环境 REST 接口模块
-├    └── dante-rest-servlet-upms -- UPMS 功能 Servlet 环境 REST 接口模块
+├    ├── dante-rest-identity -- 身份认证功能 Servlet 环境 REST 接口模块
+├    ├── dante-rest-message -- 消息功能 Servlet 环境 REST 接口模块
+├    └── dante-rest-upms -- UPMS 功能 Servlet 环境 REST 接口模块
 ├── dante-starter -- Starters
 ├    ├── cache-spring-boot-starter -- 缓存自动配置 Starter
 ├    ├── captcha-spring-boot-starter -- 验证码自动配置 Starter

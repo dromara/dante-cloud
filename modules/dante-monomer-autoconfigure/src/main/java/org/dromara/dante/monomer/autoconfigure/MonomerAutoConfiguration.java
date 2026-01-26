@@ -28,7 +28,7 @@ package org.dromara.dante.monomer.autoconfigure;
 import jakarta.annotation.PostConstruct;
 import org.dromara.dante.monomer.autoconfigure.processor.MonomerBusBridge;
 import org.dromara.dante.monomer.autoconfigure.processor.MonomerCorsFilter;
-import org.dromara.dante.rest.servlet.upms.annotation.EnableHerodotusRestServletUpms;
+import org.dromara.dante.rest.upms.annotation.EnableHerodotusRestUpms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -42,7 +42,7 @@ import org.springframework.context.annotation.Bean;
  * @date : 2024/10/3 17:38
  */
 @AutoConfiguration
-@EnableHerodotusRestServletUpms
+@EnableHerodotusRestUpms
 public class MonomerAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(MonomerAutoConfiguration.class);
