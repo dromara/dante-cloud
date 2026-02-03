@@ -30,7 +30,7 @@
     <parent>
         <artifactId>platform</artifactId>
         <groupId>org.dromara.dante</groupId>
-        <version>4.0.2.0-M2</version>
+        <version>4.0.2.0-M3</version>
     </parent>
 
     <artifactId>dante-cloud-monitor</artifactId>

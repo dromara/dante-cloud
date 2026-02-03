@@ -6,14 +6,14 @@
 
 <p align="center">
     <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-4.0.2-blue.svg?logo=springboot" alt="Spring Boot 4.0.2"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.1.0-blue.svg?logo=springboot" alt="Spring Cloud 2025.1.0"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.1.1-blue.svg?logo=springboot" alt="Spring Cloud 2025.1.1"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2025.1.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2025.1.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.1.0.3--2024.0.2-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.1.0.3-2024.0.2"></a>
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.1.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.1.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.2.0-M2-red.svg?logo=spring" alt="Version 4.0.2.0-M2"></a>
-    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.2.0-M2-red.svg?logo=spring" alt="Dante Engine 4.0.2.0-M2"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.2.0-M3-red.svg?logo=spring" alt="Version 4.0.2.0-M3"></a>
+    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.2.0-M3-red.svg?logo=spring" alt="Dante Engine 4.0.2.0-M3"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -36,7 +36,7 @@
 
 ## 重要说明
 
-因诸多周边依赖尚未适配 Spring Boot 4 和 Spring Cloud 2025.1.0。当前 4.0.X 版本还在持续开发中。之所以将不完善代码同步至 Master 分支，仅是为了作为代码标记、补充Git变更记录、验证组件库自动发布。便于后续开发以及未来用户更新代码，防止变更过多引起检出失败等问题。目前很多功能不保证可用，如需使用建议使用 **3.5.X 分支** 代码。
+因诸多周边依赖尚未适配 Spring Boot 4 和 Spring Cloud 2025.1.1。当前 4.0.X 版本还在持续开发中。之所以将不完善代码同步至 Master 分支，仅是为了作为代码标记、补充Git变更记录、验证组件库自动发布。便于后续开发以及未来用户更新代码，防止变更过多引起检出失败等问题。目前很多功能不保证可用，如需使用建议使用 **3.5.X 分支** 代码。
 
 ## 企业级技术中台与云原生微服务基座
 
