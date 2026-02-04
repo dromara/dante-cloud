@@ -317,3 +317,18 @@ dante-engine
 | 19 | [宁哥](https://gitee.com/seabuckthorn-syrup) | 2024-05-29 | 20 | [cryptoneedle](https://gitee.com/cryptoneedle) | 2024-11-01 | 21 |                  别吓跑我的鱼                  | 2025-01-10 |
 | 22 |   [代码裁缝](https://gitee.com/code-tailor)    | 2025-03-01 | 23 |                    Go ahead                    | 2025-03-10 | 24 |    [hoku](https://gitee.com/hoku888)     | 2025-06-18 |
 | 25 |                     飞翔                     | 2025-07-19 | 26 |                                                |            | 27 |                                          |            |
+
+## [10]、关注我
+
+<table align="center">
+  <tr>
+    <th align="center">
+      <p>公众号：码匠君</p>
+    </th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./readme/公众号.jpg" alt="公众号" height="200px">
+    </td>
+  </tr>
+</table>
