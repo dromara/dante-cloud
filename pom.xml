@@ -26,15 +26,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.dromara.dante</groupId>
-        <artifactId>dependencies</artifactId>
+        <groupId>cn.herodotus.ecosystem</groupId>
+        <artifactId>herodotus-ecosystem-parent</artifactId>
         <version>4.0.2.0-M3</version>
-        <relativePath>dependencies/pom.xml</relativePath>
+        <relativePath/>
     </parent>
 
+    <groupId>org.dromara.dante</groupId>
     <artifactId>dante-cloud</artifactId>
     <name>${project.artifactId}</name>
-
     <packaging>pom</packaging>
 
     <description>Top Dante project pom.xml file</description>
@@ -45,20 +45,31 @@
     <!-- ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version} -->
     <!-- ${project.packaging} 打包类型，缺省为jar -->
     <!-- ${project.xxx} 当前pom文件的任意节点的内容 如project.artifactId -->
-
     <properties>
-        <java.version>25</java.version>
-        <resource.delimiter>@</resource.delimiter>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
         <!--配置参数-->
         <!--为了便于Docker的构建，减少上下文影响，将所有Docker资源放置在同一个目录中进行构建-->
         <docker.build.directory>../../configurations/docker/context/target</docker.build.directory>
         <docker.resource.name>${project.build.finalName}.${project.packaging}</docker.resource.name>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.dromara.dante</groupId>
+                <artifactId>dante-engine-dependencies</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.dromara.dante</groupId>
+                <artifactId>dante-cloud-dependencies</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <!-- 环境 -->
     <profiles>
@@ -182,6 +193,102 @@
                 <!--Spring Cloud Tencent 动态配置数据源类型 polaris: 从北极星服务端获取配置文件 local: 从本地磁盘读取配置文件-->
                 <tencent.polaris.data.source>polaris</tencent.polaris.data.source>
             </properties>
+        </profile>
+
+        <!-- 覆盖 herodotus-ecosystem-parent 中的 release 和 github action profile 实现非服务模块的发布-->
+        <!-- 非服务模块代码不涉及动态配置信息，所以不需要有像前面一样的配置信息-->
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <configuration>
+                            <excludeArtifacts>
+                                <excludeArtifact>platform</excludeArtifact>
+                                <excludeArtifact>dante-cloud-gateway</excludeArtifact>
+                                <excludeArtifact>dante-cloud-message</excludeArtifact>
+                                <excludeArtifact>dante-cloud-monitor</excludeArtifact>
+                                <excludeArtifact>dante-cloud-uaa</excludeArtifact>
+                                <excludeArtifact>dante-cloud-upms</excludeArtifact>
+                                <excludeArtifact>service</excludeArtifact>
+                                <excludeArtifact>dante-cloud-bpmn-ability</excludeArtifact>
+                                <excludeArtifact>dante-cloud-bpmn-logic</excludeArtifact>
+                                <excludeArtifact>dante-cloud-oss-ability</excludeArtifact>
+                                <excludeArtifact>dante-monomer-application</excludeArtifact>
+                            </excludeArtifacts>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>githubAction</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- 必须配置，用于 gpg 非交互式密码输入 -->
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <configuration>
+                            <excludeArtifacts>
+                                <excludeArtifact>platform</excludeArtifact>
+                                <excludeArtifact>dante-cloud-gateway</excludeArtifact>
+                                <excludeArtifact>dante-cloud-message</excludeArtifact>
+                                <excludeArtifact>dante-cloud-monitor</excludeArtifact>
+                                <excludeArtifact>dante-cloud-uaa</excludeArtifact>
+                                <excludeArtifact>dante-cloud-upms</excludeArtifact>
+                                <excludeArtifact>service</excludeArtifact>
+                                <excludeArtifact>dante-cloud-bpmn-ability</excludeArtifact>
+                                <excludeArtifact>dante-cloud-bpmn-logic</excludeArtifact>
+                                <excludeArtifact>dante-cloud-oss-ability</excludeArtifact>
+                                <excludeArtifact>dante-monomer-application</excludeArtifact>
+                            </excludeArtifacts>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
