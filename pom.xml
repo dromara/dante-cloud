@@ -224,7 +224,7 @@
                                 <excludeArtifact>dante-cloud-monitor</excludeArtifact>
                                 <excludeArtifact>dante-cloud-uaa</excludeArtifact>
                                 <excludeArtifact>dante-cloud-upms</excludeArtifact>
-                                <excludeArtifact>service</excludeArtifact>
+                                <excludeArtifact>services</excludeArtifact>
                                 <excludeArtifact>dante-cloud-bpmn-ability</excludeArtifact>
                                 <excludeArtifact>dante-cloud-bpmn-logic</excludeArtifact>
                                 <excludeArtifact>dante-cloud-oss-ability</excludeArtifact>
@@ -279,7 +279,7 @@
                                 <excludeArtifact>dante-cloud-monitor</excludeArtifact>
                                 <excludeArtifact>dante-cloud-uaa</excludeArtifact>
                                 <excludeArtifact>dante-cloud-upms</excludeArtifact>
-                                <excludeArtifact>service</excludeArtifact>
+                                <excludeArtifact>services</excludeArtifact>
                                 <excludeArtifact>dante-cloud-bpmn-ability</excludeArtifact>
                                 <excludeArtifact>dante-cloud-bpmn-logic</excludeArtifact>
                                 <excludeArtifact>dante-cloud-oss-ability</excludeArtifact>
