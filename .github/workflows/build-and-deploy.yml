@@ -1,0 +1,33 @@
+name: Publish package to the Maven Central Repository
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    name: Deploy package to the Maven Central Repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v6.0.2
+
+      - name: Set up Apache Maven Central
+        uses: actions/setup-java@v5.2.0
+        with:
+          distribution: 'liberica'
+          java-version: '25'
+          server-id: sonatype-nexus-staging
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_CENTRAL_TOKEN
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+      - name: Publish to Apache Maven Central
+        run: mvn -P githubAction --batch-mode deploy -DskipTests
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_TOKEN_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.OSSRH_TOKEN_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
