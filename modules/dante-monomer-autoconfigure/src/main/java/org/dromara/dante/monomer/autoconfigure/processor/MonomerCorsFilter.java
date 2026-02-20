@@ -53,7 +53,7 @@ public class MonomerCorsFilter implements Filter {
 
     private static final String[] ACCESS_CONTROL_ALLOW_METHODS = new String[]{HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(), HttpMethod.DELETE.name(), HttpMethod.OPTIONS.name()};
 
-    private static final String[] ACCESS_CONTROL_ALLOW_HEADERS = new String[]{HttpHeaders.X_REQUESTED_WITH, HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE, "X-XSRF-TOKEN", HerodotusHeaders.X_HERODOTUS_SESSION_ID, HerodotusHeaders.X_HERODOTUS_TENANT_ID};
+    private static final String[] ACCESS_CONTROL_ALLOW_HEADERS = new String[]{HttpHeaders.X_REQUESTED_WITH, HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE, "X-XSRF-TOKEN", HerodotusHeaders.X_HERODOTUS_SESSION_ID, HerodotusHeaders.X_HERODOTUS_TENANT_ID, HerodotusHeaders.X_HERODOTUS_API_VERSION};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {

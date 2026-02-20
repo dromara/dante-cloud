@@ -26,6 +26,11 @@ spring:
       include-message: always
       include-stacktrace: always
       include-binding-errors: always
+  mvc:
+    apiversion:
+      use:
+        header: X-Herodotus-Api-Version
+      default: v1
   http:
     clients:
       imperative:
@@ -157,6 +162,7 @@ spring:
       single-server-config:
         address: redis://${spring.data.redis.host}:${spring.data.redis.port}
   #        password: ${spring.data.redis.password}
+
   thymeleaf:
     mode: HTML
     cache: false
@@ -382,6 +388,7 @@ spring:
           # 空闲连接检查间隔
           time-between-eviction-runs: 30s
         shutdown-timeout: 200ms
+
   thymeleaf:
     mode: HTML
     cache: false
@@ -615,6 +622,7 @@ spring:
       single-server-config:
         address: redis://${spring.data.redis.host}:${spring.data.redis.port}
   #        password: ${spring.data.redis.password}
+
   thymeleaf:
     mode: HTML
     cache: false

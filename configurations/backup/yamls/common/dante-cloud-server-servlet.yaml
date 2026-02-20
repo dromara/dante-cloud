@@ -14,6 +14,11 @@ spring:
       enabled: true
   session:
     timeout: ${server.servlet.session.timeout}
+  mvc:
+    apiversion:
+      use:
+        header: X-Herodotus-Api-Version
+      default: v1
   thymeleaf:
     mode: HTML
     cache: false
