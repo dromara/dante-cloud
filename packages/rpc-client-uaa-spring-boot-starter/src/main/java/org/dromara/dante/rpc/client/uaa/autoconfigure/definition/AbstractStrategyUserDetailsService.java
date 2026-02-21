@@ -29,7 +29,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.dromara.dante.logic.upms.converter.SysUserToHerodotusUserConverter;
 import org.dromara.dante.logic.upms.entity.security.SysUser;
 import org.dromara.dante.security.domain.HerodotusUser;
-import org.dromara.dante.security.strategy.StrategyUserDetailsService;
+import org.dromara.dante.security.service.StrategyUserDetailsService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
