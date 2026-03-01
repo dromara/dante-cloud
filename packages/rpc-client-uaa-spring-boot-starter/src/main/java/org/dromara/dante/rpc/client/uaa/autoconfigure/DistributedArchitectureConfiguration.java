@@ -37,8 +37,8 @@ import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteSocialDeta
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteUserDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyUserDetailsService;
-import org.dromara.dante.security.strategy.StrategyPermissionDetailsService;
-import org.dromara.dante.security.strategy.StrategyUserDetailsService;
+import org.dromara.dante.security.service.StrategyPermissionDetailsService;
+import org.dromara.dante.security.service.StrategyUserDetailsService;
 import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
 import org.dromara.dante.spring.enums.Architecture;
 import org.dromara.dante.spring.enums.DataAccessStrategy;

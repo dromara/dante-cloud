@@ -30,8 +30,8 @@ import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationCo
 import org.dromara.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
 import org.dromara.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
 import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
-import org.dromara.dante.security.strategy.StrategyUserDetailsService;
-import org.dromara.dante.spring.support.captcha.CaptchaRendererFactory;
+import org.dromara.dante.security.definition.CaptchaProcessor;
+import org.dromara.dante.security.service.StrategyUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -66,7 +66,7 @@ public class DefaultSecurityAutoConfiguration {
     SecurityFilterChain defaultSecurityFilterChain(
             HttpSecurity httpSecurity,
             UserDetailsService userDetailsService,
-            CaptchaRendererFactory captchaRendererFactory,
+            CaptchaProcessor captchaProcessor,
             OAuth2AuthenticationConfigurerManager authenticationConfigurerManager,
             ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
@@ -81,7 +81,7 @@ public class DefaultSecurityAutoConfiguration {
                 .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
                 .exceptionHandling(authorizationConfigurerManager.getOAuth2ExceptionHandlingConfigurerCustomizer())
                 .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())
-                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties(), captchaRendererFactory, authenticationConfigurerManager.getDigitalEnvelopeProcessor()), (configurer) -> {
+                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties(), captchaProcessor, authenticationConfigurerManager.getDigitalEnvelopeProcessor()), (configurer) -> {
                 });
 
         // @formatter:on
