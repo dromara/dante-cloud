@@ -28,16 +28,11 @@ package org.dromara.dante.rpc.client.uaa.autoconfigure;
 import jakarta.annotation.PostConstruct;
 import org.dromara.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
 import org.dromara.dante.logic.upms.definition.SocialAuthenticationHandler;
-import org.dromara.dante.logic.upms.service.security.SysPermissionService;
 import org.dromara.dante.logic.upms.service.security.SysUserService;
-import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.FeignStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.FeignStrategyUserDetailsService;
-import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteAuthorityDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteSocialDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api.RemoteUserDetailsService;
-import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyUserDetailsService;
-import org.dromara.dante.security.service.StrategyPermissionDetailsService;
 import org.dromara.dante.security.service.StrategyUserDetailsService;
 import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
 import org.dromara.dante.spring.enums.Architecture;
@@ -79,14 +74,6 @@ public class DistributedArchitectureConfiguration {
             log.debug("[Herodotus] |- Strategy [Local User Details Service] Configure.");
             return service;
         }
-
-        @Bean
-        @ConditionalOnMissingBean
-        public StrategyPermissionDetailsService localStrategyPermissionDetailsService(SysPermissionService sysPermissionService) {
-            LocalStrategyPermissionDetailsService service = new LocalStrategyPermissionDetailsService(sysPermissionService);
-            log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Configure.");
-            return service;
-        }
     }
 
     @Configuration(proxyBeanMethods = false)
@@ -99,14 +86,6 @@ public class DistributedArchitectureConfiguration {
         public StrategyUserDetailsService feignStrategyUserDetailsService(RemoteUserDetailsService remoteUserDetailsService, RemoteSocialDetailsService remoteSocialDetailsService) {
             FeignStrategyUserDetailsService service = new FeignStrategyUserDetailsService(remoteUserDetailsService, remoteSocialDetailsService);
             log.debug("[Herodotus] |- Strategy [Remote User Details Service] Configure.");
-            return service;
-        }
-
-        @Bean
-        @ConditionalOnMissingBean
-        public StrategyPermissionDetailsService feignStrategyPermissionDetailsService(RemoteAuthorityDetailsService remoteAuthorityDetailsService) {
-            FeignStrategyPermissionDetailsService service = new FeignStrategyPermissionDetailsService(remoteAuthorityDetailsService);
-            log.debug("[Herodotus] |- Strategy [Remote Permission Details Service] Configure.");
             return service;
         }
     }
