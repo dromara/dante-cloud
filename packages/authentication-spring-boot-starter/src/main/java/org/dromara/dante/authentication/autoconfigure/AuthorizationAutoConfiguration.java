@@ -34,6 +34,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.dromara.dante.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
 import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
+import org.dromara.dante.oauth2.authentication.jwk.JwkSetGenerator;
 import org.dromara.dante.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
 import org.dromara.dante.oauth2.commons.properties.OAuth2AuthenticationProperties;
@@ -45,6 +46,7 @@ import org.dromara.dante.webmvc.autoconfigure.tenant.MultiTenantFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.ssl.SslBundles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -126,35 +128,9 @@ public class AuthorizationAutoConfiguration {
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource(OAuth2AuthenticationProperties authenticationProperties) throws NoSuchAlgorithmException {
-
-        OAuth2AuthenticationProperties.Jwk jwk = authenticationProperties.getJwk();
-
-        KeyPair keyPair = null;
-        if (jwk.getCertificate() == Certificate.CUSTOM) {
-            try {
-                Resource[] resource = ResourceResolverUtils.getResources(jwk.getJksKeyStore());
-                if (ArrayUtils.isNotEmpty(resource)) {
-                    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(resource[0], jwk.getJksStorePassword().toCharArray());
-                    keyPair = keyStoreKeyFactory.getKeyPair(jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
-                }
-            } catch (IOException e) {
-                log.error("[Herodotus] |- Read custom certificate under resource folder error!", e);
-            }
-
-        } else {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        }
-
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
-        JWKSet jwkSet = new JWKSet(rsaKey);
+    public JWKSource<SecurityContext> jwkSource(OAuth2AuthenticationProperties oauth2AuthenticationProperties, SslBundles sslBundles) {
+        JwkSetGenerator generator = new JwkSetGenerator(oauth2AuthenticationProperties, sslBundles);
+        JWKSet jwkSet = generator.generate();
         return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
     }
 
