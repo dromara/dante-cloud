@@ -5,6 +5,10 @@ spring:
     name: @artifactId@ #拿到POM文件中的值
   profiles:
     active: @facility@
+  cloud:
+    circuitbreaker:
+      sentinel:
+        enabled: false
 
 ---
 # spring cloud alibaba 基础设施配置
