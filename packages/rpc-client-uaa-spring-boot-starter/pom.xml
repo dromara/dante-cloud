@@ -56,8 +56,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.dromara.dante</groupId>
+            <artifactId>feign-spring-boot-starter</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

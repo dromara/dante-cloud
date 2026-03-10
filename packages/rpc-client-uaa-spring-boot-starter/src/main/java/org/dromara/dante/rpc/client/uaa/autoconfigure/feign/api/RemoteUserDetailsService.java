@@ -25,8 +25,8 @@
 
 package org.dromara.dante.rpc.client.uaa.autoconfigure.feign.api;
 
-import org.dromara.dante.core.annotation.Inner;
 import org.dromara.dante.core.domain.Result;
+import org.dromara.dante.feign.autoconfigure.annotation.Inner;
 import org.dromara.dante.logic.upms.entity.security.SysUser;
 import org.dromara.dante.module.common.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
