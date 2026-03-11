@@ -31,7 +31,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>packages</artifactId>
-        <version>4.0.3.0-RC2</version>
+        <version>4.0.3.0</version>
     </parent>
 
     <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
@@ -56,8 +56,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.dromara.dante</groupId>
+            <artifactId>feign-spring-boot-starter</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

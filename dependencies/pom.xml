@@ -28,7 +28,7 @@
     <parent>
         <groupId>cn.herodotus.ecosystem</groupId>
         <artifactId>herodotus-ecosystem-parent</artifactId>
-        <version>4.0.3.0-RC2</version>
+        <version>4.0.3.0</version>
         <relativePath/>
     </parent>
 

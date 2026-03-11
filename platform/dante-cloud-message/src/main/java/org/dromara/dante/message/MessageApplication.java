@@ -25,7 +25,6 @@
 
 package org.dromara.dante.message;
 
-import org.dromara.dante.rest.message.annotation.EnableHerodotusRestMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -38,7 +37,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableHerodotusRestMessage
 public class MessageApplication {
 
     public static void main(String[] args) {

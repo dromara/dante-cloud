@@ -12,8 +12,8 @@
     <a href="https://nacos.io/zh-cn/index.html" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.1.1-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.1.1"></a>
 </p>
 <p align="center">
-    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.3.0-RC2-red.svg?logo=spring" alt="Version 4.0.3.0-RC2"></a>
-    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.3.0-RC2-red.svg?logo=spring" alt="Dante Engine 4.0.3.0-RC2"></a>
+    <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-4.0.3.0-red.svg?logo=spring" alt="Version 4.0.3.0"></a>
+    <a href="https://gitee.com/dromara/dante-cloud/issues/IDKCZD" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.0.3.0-red.svg?logo=spring" alt="Dante Engine 4.0.3.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
     <a href="./LICENSE"><img src="https://shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://blog.csdn.net/Pointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
@@ -33,10 +33,6 @@
 <h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
 
 ---
-
-## 重要说明
-
-因诸多周边依赖尚未适配 Spring Boot 4 和 Spring Cloud 2025.1.1。当前 4.0.X 版本还在持续开发中。之所以将不完善代码同步至 Master 分支，仅是为了作为代码标记、补充Git变更记录、验证组件库自动发布。便于后续开发以及未来用户更新代码，防止变更过多引起检出失败等问题。目前很多功能不保证可用，如需使用建议使用 **3.5.X 分支** 代码。
 
 ## 企业级技术中台与云原生微服务基座
 
@@ -84,7 +80,7 @@
 
 ### 1. 变更声明
 
-自 **v3.3.6.0** 版本起，Dante Cloud 以及 Dante OSS 和 Dante Engine 子项目开源协议 **【永久】** 变更为 Apache License Version 2.0。可用于个人学习、毕设，允许商业使用，但禁止二次开源。
+自 **v3.3.6.0** 版本起，Dante Cloud 以及 Dante Engine 子项目开源协议 **【永久】** 变更为 Apache License Version 2.0。可用于个人学习、毕设，允许商业使用，但禁止二次开源。
 
 ### 2. 补充条款
 

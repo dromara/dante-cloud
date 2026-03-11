@@ -28,11 +28,8 @@ package org.dromara.dante.rpc.client.uaa.autoconfigure;
 import jakarta.annotation.PostConstruct;
 import org.dromara.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
 import org.dromara.dante.logic.upms.definition.SocialAuthenticationHandler;
-import org.dromara.dante.logic.upms.service.security.SysPermissionService;
 import org.dromara.dante.logic.upms.service.security.SysUserService;
-import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyPermissionDetailsService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyUserDetailsService;
-import org.dromara.dante.security.service.StrategyPermissionDetailsService;
 import org.dromara.dante.security.service.StrategyUserDetailsService;
 import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
 import org.dromara.dante.spring.enums.Architecture;
@@ -58,14 +55,6 @@ public class MonocoqueArchitectureConfiguration {
     @PostConstruct
     public void postConstruct() {
         log.debug("[Herodotus] |- Auto [Module Monocoque Architecture] Configure.");
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public StrategyPermissionDetailsService herodotusLocalPermissionDetailsService(SysPermissionService sysPermissionService) {
-        LocalStrategyPermissionDetailsService service = new LocalStrategyPermissionDetailsService(sysPermissionService);
-        log.debug("[Herodotus] |- Strategy [Local Permission Details Service] Configure.");
-        return service;
     }
 
     @Bean

@@ -26,48 +26,35 @@
 package org.dromara.dante.authentication.autoconfigure;
 
 import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.annotation.PostConstruct;
-import org.apache.commons.lang3.ArrayUtils;
-import org.dromara.dante.oauth2.authentication.autoconfigure.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
 import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
+import org.dromara.dante.oauth2.authentication.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
+import org.dromara.dante.oauth2.authentication.jwk.JwkSetGenerator;
 import org.dromara.dante.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
 import org.dromara.dante.oauth2.commons.properties.OAuth2AuthenticationProperties;
 import org.dromara.dante.security.service.ClientDetailsService;
-import org.dromara.dante.spring.enums.Certificate;
-import org.dromara.dante.spring.utils.ResourceResolverUtils;
 import org.dromara.dante.web.properties.EndpointProperties;
 import org.dromara.dante.webmvc.autoconfigure.tenant.MultiTenantFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.ssl.SslBundles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.io.Resource;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.authorization.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.encrypt.KeyStoreKeyFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
-
-import java.io.IOException;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.UUID;
 
 /**
  * <p>Description: 认证服务器配置 </p>
@@ -104,18 +91,15 @@ public class AuthorizationAutoConfiguration {
 
         SessionRegistry sessionRegistry = OAuth2ConfigurerUtils.getOptionalBean(httpSecurity, SessionRegistry.class);
 
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
-
         // 仅拦截 OAuth2 Authorization Server 的相关 endpoint
-        httpSecurity.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+        httpSecurity
                 // 不配置 oauth2ResourceServer 就不会启用BearerTokenAuthenticationFilter
                 // 当前的版本 SAS(1.4.1) 环境下，oauth2ResourceServer 必须在 with(authorizationServerConfigurer 前面配置，否则会导致应用无法启动
                 // 主要原因是 OAuth2AuthorizationServerConfigurer 默认 jwt 配置与 Opaqua 配置冲突。see：https://stackoverflow.com/questions/79336064/oidcuserinfoauthenticationprovider-doesnt-support-for-opaque-token-bearer-autho
                 .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())
-                .with(authorizationServerConfigurer, new OAuth2AuthorizationServerConfigurerCustomizer(httpSecurity, sessionRegistry, clientDetailsService, authenticationConfigurerManager))
+                .oauth2AuthorizationServer(new OAuth2AuthorizationServerConfigurerCustomizer(httpSecurity, sessionRegistry, clientDetailsService, authenticationConfigurerManager))
                 // 开启请求认证
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-                .formLogin(authenticationConfigurerManager.getOAuth2FormLoginConfigurerCustomizer())
                 .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
                 .exceptionHandling(authenticationConfigurerManager.getOAuth2ExceptionHandlingConfigurerCustomizer())
                 .addFilterBefore(new MultiTenantFilter(), AuthorizationFilter.class)
@@ -126,35 +110,9 @@ public class AuthorizationAutoConfiguration {
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource(OAuth2AuthenticationProperties authenticationProperties) throws NoSuchAlgorithmException {
-
-        OAuth2AuthenticationProperties.Jwk jwk = authenticationProperties.getJwk();
-
-        KeyPair keyPair = null;
-        if (jwk.getCertificate() == Certificate.CUSTOM) {
-            try {
-                Resource[] resource = ResourceResolverUtils.getResources(jwk.getJksKeyStore());
-                if (ArrayUtils.isNotEmpty(resource)) {
-                    KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(resource[0], jwk.getJksStorePassword().toCharArray());
-                    keyPair = keyStoreKeyFactory.getKeyPair(jwk.getJksKeyAlias(), jwk.getJksKeyPassword().toCharArray());
-                }
-            } catch (IOException e) {
-                log.error("[Herodotus] |- Read custom certificate under resource folder error!", e);
-            }
-
-        } else {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        }
-
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
-        JWKSet jwkSet = new JWKSet(rsaKey);
+    public JWKSource<SecurityContext> jwkSource(OAuth2AuthenticationProperties oauth2AuthenticationProperties, SslBundles sslBundles) {
+        JwkSetGenerator generator = new JwkSetGenerator(oauth2AuthenticationProperties, sslBundles);
+        JWKSet jwkSet = generator.generate();
         return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
     }
 

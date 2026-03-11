@@ -20,6 +20,13 @@ spring:
         enabled: false
   session:
     timeout: ${server.servlet.session.timeout}
+  threads:
+    virtual:
+      enabled: true
+  http:
+    clients:
+      imperative:
+        factory: jdk
   web:
     error:
       include-exception: true
@@ -31,10 +38,25 @@ spring:
       use:
         header: X-Herodotus-Api-Version
       default: v1
-  http:
-    clients:
-      imperative:
-        factory: jdk
+  ssl:
+    bundle:
+      jks:
+        dante-cloud-sas:
+          key:
+            alias: dante-cloud-sas
+            password: 123456
+          keystore:
+            location: classpath:certificate/dante-cloud-sas_keystore.p12
+            password: 123456
+            type: PKCS12
+          truststore:
+            location: classpath:certificate/dante-cloud-sas_truststore.p12
+            password: password
+            type: PKCS12
+herodotus:
+  oauth2:
+    authentication:
+      ssl-bundle-provider: dante-cloud-sas
 
 sms:
   is-print: false
