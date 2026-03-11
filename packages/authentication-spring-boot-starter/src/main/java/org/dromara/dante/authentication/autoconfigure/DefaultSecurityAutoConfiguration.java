@@ -44,6 +44,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -78,6 +80,7 @@ public class DefaultSecurityAutoConfiguration {
         // @formatter:off
         httpSecurity
                 .authorizeHttpRequests(authorizationConfigurerManager.getOAuth2AuthorizeHttpRequestsConfigurerCustomer())
+                .formLogin(authenticationConfigurerManager.getOAuth2FormLoginConfigurerCustomizer())
                 .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
                 .exceptionHandling(authorizationConfigurerManager.getOAuth2ExceptionHandlingConfigurerCustomizer())
                 .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())

@@ -9,6 +9,22 @@ spring:
     circuitbreaker:
       sentinel:
         enabled: false
+  security:
+    oauth2:
+      client:
+        registration:
+          dante-cloud:
+            provider: dante-cloud
+            client-id: 0ca42420efae46da91e51ee5cd8f27ad
+            client-secret: 2a6280e17b6e43fb8e9c681f21630f19
+            scope: openid,profile,email
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://192.168.101.10:8847/dante-cloud-monitor/login/oauth2/code/{registrationId}"
+        provider:
+          dante-cloud:
+            issuer-uri: http://192.168.101.10:8847/dante-cloud-uaa
+            authorization-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth2/authorize
+            token-uri: http://192.168.101.10:8847/dante-cloud-uaa/oauth2/token
 
 ---
 # spring cloud alibaba 基础设施配置

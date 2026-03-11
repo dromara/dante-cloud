@@ -38,7 +38,8 @@ springdoc:
 herodotus:
   gateway:
     white-list:
-      - "/oauth2/**"
+      - "/oauth2/token"
+      - "/oauth2/authorize"
       - "/v3/api-docs/**"
       - "/openapi*"
       - "/open/**"
