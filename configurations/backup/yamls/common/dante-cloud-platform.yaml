@@ -1,23 +1,27 @@
 herodotus:
   endpoint:
-    uaa-service-name: dante-cloud-uaa
-    upms-service-name: dante-cloud-upms
-    message-service-name: dante-cloud-message
-    oss-service-name: dante-cloud-oss-ability
+    uaa-service-name: herodotus-cloud-uaa
+    upms-service-name: herodotus-cloud-upms
+    message-service-name: herodotus-cloud-message
+    oss-service-name: herodotus-cloud-oss-ability
+    iot-service-name: herodotus-cloud-iot-ability
     gateway-service-uri: ${herodotus.environment.gateway-server-addr}
     uaa-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.uaa-service-name}
     upms-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.upms-service-name}
     message-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.message-service-name}
     oss-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.oss-service-name}
+    iot-service-uri: ${herodotus.endpoint.gateway-service-uri}/${herodotus.endpoint.iot-service-name}
     access-token-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/token
     authorization-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/authorize
     pushed-authorization-request-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/par
     token-revocation-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/revoke
     token-introspection-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/introspect
+    client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/register
     jwk-set-uri: ${herodotus.endpoint.uaa-service-uri}/oauth2/jwks
-    issuer-uri: ${herodotus.endpoint.uaa-service-uri}
     oidc-client-registration-uri: ${herodotus.endpoint.uaa-service-uri}/connect/register
+    oidc-logout: ${herodotus.endpoint.uaa-service-uri}/connect/logout
     oidc-user-info-uri: ${herodotus.endpoint.uaa-service-uri}/userinfo
+    issuer-uri: ${herodotus.endpoint.uaa-service-uri}
   platform:
     architecture: distributed
     swagger:
