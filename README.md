@@ -28,10 +28,10 @@
     <a href="https://atomgit.com/dromara/dante-cloud">Atomgit 仓库</a> &nbsp; | &nbsp;
     <a href="https://github.com/dromara/dante-cloud">Github 仓库</a> &nbsp; | &nbsp;
     <a href="https://gitee.com/dromara/dante-cloud">Gitee 仓库</a> &nbsp; | &nbsp;
-    <a href="https://www.herodotus.vip">在线文档</a>
+    <a href="https://www.herodotus.cn">在线文档</a>
 </p>
 
-<h1 align="center"> 如果您觉得有帮助，请点右上角 "Star" 支持一下，谢谢！</h1>
+<h1 align="center"> 支持本项目除了 Fork、Pull 和 Download Zip，还可以点右上角 "Star"！</h1>
 
 ---
 
@@ -87,7 +87,7 @@
 1. 自 **v4.0.5.0** 版本起，Dante Cloud 核心库 Dante Engine 子项目全面开放。
 2. 自 **v4.0.5.1** 版本起，为了提升维护效率，Dante Cloud 企业版和开源版前端合并，新版本前端（Vuetify 版）源代码也全面开放。
 
-> 注意：新版前端（Vuetify 版）与旧版前端（Quasar 版）共享模块，开发时需要以（Vuetify 版）为主，详情参见：[前端【共享模块】](https://www.herodotus.vip/get-started/install/frontend.html#_5-%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9D%97)
+> 注意：新版前端（Vuetify 版）与旧版前端（Quasar 版）共享模块，开发时需要以（Vuetify 版）为主，详情参见：[前端【共享模块】](https://www.herodotus.cn/get-started/install/frontend.html#_5-%E5%85%B1%E4%BA%AB%E6%A8%A1%E5%9D%97)
 
 # [一]、项目地址
 
@@ -192,14 +192,14 @@ dante-cloud
 
 # [五]、安全测试
 
-Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.vip/guide/security/compliance.html)
+Dante Cloud 已通过由第三方进行的软件出厂安全测试以及等保测试。详情参见：[安全测试说明](https://www.herodotus.cn/guide/security/compliance.html)
 
 # [六]、如何升级
 
 尽量不修改 Dante Cloud 以外的项目源码，如 Dante Engine、Dante OSS。如果修改了，请 Pull Requests 上来，否则代码与官方不同步，可能会将对你的日后升级增加难度。
 
-每个版本升级，我们都会附带详细更新日志：https://www.herodotus.vip/logs/ 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
-针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.vip/breaking/ 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
+每个版本升级，我们都会附带详细更新日志：https://www.herodotus.cn/logs/ 在这里，你可以看到 Dante Cloud 新增哪些新功能和改进。
+针对有较大变化、差异的版本，我们都会负载详细的升级指南：https://www.herodotus.cn/breaking/ 在这里，你可以看到 Dante Cloud 不同版本对应升级方法。
 
 # [七]、功能展示
 

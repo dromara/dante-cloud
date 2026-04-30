@@ -19,7 +19,7 @@ body:
     attributes:
       label: 在线文档是否已经认证阅读过？
       options:
-        - label: 我承诺已经认真详细的看过文档 (https://www.herodotus.vip)
+        - label: 我承诺已经认真详细的看过文档 (https://www.herodotus.cn)
           required: true
   - type: checkboxes
     attributes:
