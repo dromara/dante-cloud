@@ -31,7 +31,7 @@ import org.dromara.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureC
 import org.dromara.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
 import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
 import org.dromara.dante.security.definition.CaptchaProcessor;
-import org.dromara.dante.security.service.StrategyUserDetailsService;
+import org.dromara.dante.security.definition.StrategyUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -44,8 +44,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.RememberMeServices;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
  * <p>Description: 默认安全配置 </p>
