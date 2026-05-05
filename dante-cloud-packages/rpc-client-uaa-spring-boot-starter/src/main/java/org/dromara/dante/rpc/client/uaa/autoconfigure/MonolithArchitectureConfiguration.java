@@ -30,7 +30,7 @@ import org.dromara.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
 import org.dromara.dante.logic.upms.definition.SocialAuthenticationHandler;
 import org.dromara.dante.logic.upms.service.security.SysUserService;
 import org.dromara.dante.rpc.client.uaa.autoconfigure.local.LocalStrategyUserDetailsService;
-import org.dromara.dante.security.service.StrategyUserDetailsService;
+import org.dromara.dante.security.definition.StrategyUserDetailsService;
 import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
 import org.dromara.dante.spring.enums.Architecture;
 import org.slf4j.Logger;
