@@ -92,11 +92,14 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       pool-name: Hikari
-      connection-test-query: SELECT 1
       minimum-idle: 5
-      maximum-pool-size: 20
+      maximum-pool-size: 30
       # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
-      connection-timeout: 30000
+      # 30 秒太长，高并发时线程卡住 30s 才失败，用户体验差。缩短至 3~10s 快速失败，让上层重试或降级。
+      connection-timeout: 10000
+      # the interval in which connections will be tested for aliveness, thus keeping them alive by the act of checking. Value is in milliseconds, default is 0 (disabled)
+      # 防止连接被数据库/防火墙空闲断开。应 小于 数据库 idle_in_transaction_session_timeout 或防火墙超时。
+      keepalive-time: 60000
       # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
       idle-timeout: 120000
       # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit. Default: 1800000 (30 minutes)
@@ -105,21 +108,17 @@ spring:
       validation-timeout: 5000
       leak-detection-threshold: 60000
       data-source-properties:
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        cachePrepStmts: true
-        cacheResultSetMetadata: true
-        cacheServerConfiguration: true
-        useServerPrepStmts: true
-        useLocalSessionState: true
-        rewriteBatchedStatement: true
-        elideSetAutoCommits: true
-        maintainTimeStats: false
+        # 将批量 insert 改写为多行 insert，显著提升批量插入性能
+        reWriteBatchedInserts: true
+        # 预编译阈值：执行超过 N 次才使用服务端预编译，避免单次 SQL 也花代价预编译
+        prepareThreshold: 5
+        # 根据业务需要可调整默认 fetchSize（默认 0 即一次拉取全部，大结果集可改为 200~500）
+        # defaultRowFetchSize: 200
   jpa:
     database: postgresql
     database-platform: ${spring.jpa.database}
     generate-ddl: true
-    open-in-view: true
+    open-in-view: false
     hibernate:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
@@ -132,12 +131,12 @@ spring:
             mode: ENABLE_SELECTIVE
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+        format_sql: false
         show_sql: false
         generate_statistics: false
         order_inserts: true
         order_updates: true
-        default_batch_fetch_size: 30
+        default_batch_fetch_size: 16
         cache:
           use_query_cache: true
           use_second_level_cache: true
@@ -153,6 +152,13 @@ spring:
           handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
         jdbc:
           batch_size: 50
+          # 让版本化数据（@Version）也能批量更新
+          batch_versioned_data: true
+          # 明确时区，避免数据库时区不确定造成转换开销
+          time_zone: UTC
+          lob:
+            # 避免一些 JDBC 驱动需要环境上下文创建 LOB
+            non_contextual_creation: true
         query:
           in_clause_parameter_padding: true
           fail_on_pagination_over_collection_fetch: true
@@ -317,11 +323,14 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       pool-name: Hikari
-      connection-test-query: SELECT 1
       minimum-idle: 5
-      maximum-pool-size: 20
+      maximum-pool-size: 30
       # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
-      connection-timeout: 30000
+      # 30 秒太长，高并发时线程卡住 30s 才失败，用户体验差。缩短至 3~10s 快速失败，让上层重试或降级。
+      connection-timeout: 10000
+      # the interval in which connections will be tested for aliveness, thus keeping them alive by the act of checking. Value is in milliseconds, default is 0 (disabled)
+      # 防止连接被数据库/防火墙空闲断开。应 小于 数据库 idle_in_transaction_session_timeout 或防火墙超时。
+      keepalive-time: 60000
       # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
       idle-timeout: 120000
       # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit. Default: 1800000 (30 minutes)
@@ -330,21 +339,17 @@ spring:
       validation-timeout: 5000
       leak-detection-threshold: 60000
       data-source-properties:
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        cachePrepStmts: true
-        cacheResultSetMetadata: true
-        cacheServerConfiguration: true
-        useServerPrepStmts: true
-        useLocalSessionState: true
-        rewriteBatchedStatement: true
-        elideSetAutoCommits: true
-        maintainTimeStats: false
+        # 将批量 insert 改写为多行 insert，显著提升批量插入性能
+        reWriteBatchedInserts: true
+        # 预编译阈值：执行超过 N 次才使用服务端预编译，避免单次 SQL 也花代价预编译
+        prepareThreshold: 5
+        # 根据业务需要可调整默认 fetchSize（默认 0 即一次拉取全部，大结果集可改为 200~500）
+        # defaultRowFetchSize: 200
   jpa:
     database: mysql
     database-platform: ${spring.jpa.database}
     generate-ddl: true
-    open-in-view: true
+    open-in-view: false
     hibernate:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
@@ -357,12 +362,12 @@ spring:
             mode: ENABLE_SELECTIVE
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-        format_sql: true
-        show_sql: true
+        format_sql: false
+        show_sql: false
         generate_statistics: false
         order_inserts: true
         order_updates: true
-        default_batch_fetch_size: 30
+        default_batch_fetch_size: 16
         cache:
           use_query_cache: true
           use_second_level_cache: true
@@ -378,6 +383,13 @@ spring:
           handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
         jdbc:
           batch_size: 50
+          # 让版本化数据（@Version）也能批量更新
+          batch_versioned_data: true
+          # 明确时区，避免数据库时区不确定造成转换开销
+          time_zone: UTC
+          lob:
+            # 避免一些 JDBC 驱动需要环境上下文创建 LOB
+            non_contextual_creation: true
         query:
           in_clause_parameter_padding: true
           fail_on_pagination_over_collection_fetch: true
@@ -540,11 +552,14 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       pool-name: Hikari
-      connection-test-query: SELECT 1
       minimum-idle: 5
-      maximum-pool-size: 20
+      maximum-pool-size: 30
       # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
-      connection-timeout: 30000
+      # 30 秒太长，高并发时线程卡住 30s 才失败，用户体验差。缩短至 3~10s 快速失败，让上层重试或降级。
+      connection-timeout: 10000
+      # the interval in which connections will be tested for aliveness, thus keeping them alive by the act of checking. Value is in milliseconds, default is 0 (disabled)
+      # 防止连接被数据库/防火墙空闲断开。应 小于 数据库 idle_in_transaction_session_timeout 或防火墙超时。
+      keepalive-time: 60000
       # The minimum allowed value is 10000ms (10 seconds). Default: 600000 (10 minutes)
       idle-timeout: 120000
       # We strongly recommend setting this value, and it should be at least 30 seconds less than any database or infrastructure imposed connection time limit. Default: 1800000 (30 minutes)
@@ -553,21 +568,17 @@ spring:
       validation-timeout: 5000
       leak-detection-threshold: 60000
       data-source-properties:
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        cachePrepStmts: true
-        cacheResultSetMetadata: true
-        cacheServerConfiguration: true
-        useServerPrepStmts: true
-        useLocalSessionState: true
-        rewriteBatchedStatement: true
-        elideSetAutoCommits: true
-        maintainTimeStats: false
+        # 将批量 insert 改写为多行 insert，显著提升批量插入性能
+        reWriteBatchedInserts: true
+        # 预编译阈值：执行超过 N 次才使用服务端预编译，避免单次 SQL 也花代价预编译
+        prepareThreshold: 5
+        # 根据业务需要可调整默认 fetchSize（默认 0 即一次拉取全部，大结果集可改为 200~500）
+        # defaultRowFetchSize: 200
   jpa:
     database: postgresql
     database-platform: ${spring.jpa.database}
     generate-ddl: true
-    open-in-view: true
+    open-in-view: false
     hibernate:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.spring.jpa.hibernate.ddl-auto=update
       ddl-auto: update
@@ -580,12 +591,12 @@ spring:
             mode: ENABLE_SELECTIVE
       hibernate:
         dialect: org.dromara.dante.hibernate.dialect.OpenGaussDialect
-        format_sql: true
+        format_sql: false
         show_sql: false
         generate_statistics: false
         order_inserts: true
         order_updates: true
-        default_batch_fetch_size: 30
+        default_batch_fetch_size: 16
         cache:
           use_query_cache: true
           use_second_level_cache: true
@@ -601,6 +612,13 @@ spring:
           handling_mode: DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION
         jdbc:
           batch_size: 50
+          # 让版本化数据（@Version）也能批量更新
+          batch_versioned_data: true
+          # 明确时区，避免数据库时区不确定造成转换开销
+          time_zone: UTC
+          lob:
+            # 避免一些 JDBC 驱动需要环境上下文创建 LOB
+            non_contextual_creation: true
         query:
           in_clause_parameter_padding: true
           fail_on_pagination_over_collection_fetch: true
