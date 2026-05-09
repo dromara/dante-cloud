@@ -27,7 +27,7 @@ A good report contains:
 
 ## Scope and supported versions
 
-dante-cloud is a Spring Cloud / Spring Authorization Server-based microservice and OAuth2 framework supporting password, client_credentials, authorization_code, social login flows, as well as opaque token handling and built-in XSS defences. The maintainers support security fixes on the latest 4.x minor release line. Older releases will not generally receive backports.
+dante-cloud is a Spring Cloud / Spring Authorization Server-based microservice and OAuth2 framework supporting password, client_credentials, authorization_code, urn:ietf:params:oauth:grant-type:device_code, passkey, social login flows, as well as opaque token handling and built-in XSS defences. The maintainers support security fixes on the latest 4.x minor release line. Older releases will not generally receive backports.
 
 In-scope vulnerability classes include:
 
