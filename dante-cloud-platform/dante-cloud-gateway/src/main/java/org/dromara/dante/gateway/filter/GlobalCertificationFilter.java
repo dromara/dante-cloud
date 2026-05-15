@@ -33,7 +33,7 @@ import org.apache.hc.core5.http.HttpStatus;
 import org.dromara.dante.core.constant.ErrorCodes;
 import org.dromara.dante.core.constant.HerodotusHeaders;
 import org.dromara.dante.core.domain.Result;
-import org.dromara.dante.core.utils.TokenUtils;
+import org.dromara.dante.core.utils.AccessTokenUtils;
 import org.dromara.dante.gateway.properties.GatewaySecurityProperties;
 import org.dromara.dante.gateway.utils.WebFluxUtils;
 import org.slf4j.Logger;
@@ -98,7 +98,7 @@ public class GlobalCertificationFilter implements GlobalFilter, Ordered {
 
         // 3.非免登陆地址，获取token 检查token，如果为空，或者不是 Bearer XXX形式，则认为未授权。
         String token = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        if (!TokenUtils.isToken(token)) {
+        if (!AccessTokenUtils.isAccessToken(token)) {
             log.warn("[Herodotus] |- Token is not Well Formed!");
             return WebFluxUtils.writeJsonResponse(exchange.getResponse(), new Result<String>().type(ErrorCodes.ACCESS_DENIED).status(HttpStatus.SC_UNAUTHORIZED));
         }
