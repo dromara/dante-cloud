@@ -36,7 +36,6 @@ import org.dromara.dante.oauth2.authentication.jwk.JwkSetGenerator;
 import org.dromara.dante.oauth2.authentication.utils.OAuth2ConfigurerUtils;
 import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
 import org.dromara.dante.oauth2.commons.properties.OAuth2AuthenticationProperties;
-import org.dromara.dante.oauth2.commons.properties.OAuth2Properties;
 import org.dromara.dante.security.definition.ClientDetailsService;
 import org.dromara.dante.web.properties.EndpointProperties;
 import org.dromara.dante.webmvc.autoconfigure.tenant.MultiTenantFilter;
@@ -84,7 +83,6 @@ public class AuthorizationAutoConfiguration {
             PasswordEncoder passwordEncoder,
             UserDetailsService userDetailsService,
             ClientDetailsService clientDetailsService,
-            OAuth2Properties oauth2Properties,
             OAuth2AuthenticationConfigurerManager authenticationConfigurerManager,
             ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
@@ -99,7 +97,7 @@ public class AuthorizationAutoConfiguration {
                 // 当前的版本 SAS(1.4.1) 环境下，oauth2ResourceServer 必须在 with(authorizationServerConfigurer 前面配置，否则会导致应用无法启动
                 // 主要原因是 OAuth2AuthorizationServerConfigurer 默认 jwt 配置与 Opaqua 配置冲突。see：https://stackoverflow.com/questions/79336064/oidcuserinfoauthenticationprovider-doesnt-support-for-opaque-token-bearer-autho
                 .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())
-                .oauth2AuthorizationServer(new OAuth2AuthorizationServerConfigurerCustomizer(httpSecurity, sessionRegistry, clientDetailsService, oauth2Properties, authenticationConfigurerManager))
+                .oauth2AuthorizationServer(new OAuth2AuthorizationServerConfigurerCustomizer(httpSecurity, sessionRegistry, clientDetailsService, authenticationConfigurerManager))
                 // 开启请求认证
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
                 .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())

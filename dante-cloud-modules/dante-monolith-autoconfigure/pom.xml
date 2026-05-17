@@ -27,7 +27,7 @@
     <parent>
         <groupId>org.dromara.dante</groupId>
         <artifactId>dante-cloud-modules</artifactId>
-        <version>4.0.6.2</version>
+        <version>4.0.6.3</version>
     </parent>
 
     <artifactId>dante-monolith-autoconfigure</artifactId>
