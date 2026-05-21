@@ -25,10 +25,10 @@
 
 package org.dromara.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign;
 
-import org.dromara.dante.core.support.file.OssPresignedUrlGenerator;
-import org.dromara.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.api.RemoteOssPresignedUrlService;
 import org.dromara.dante.core.domain.Result;
+import org.dromara.dante.core.support.file.OssPresignedUrlGenerator;
 import org.dromara.dante.web.definition.dto.OssPresigned;
+import org.dromara.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.api.RemoteOssPresignedUrlService;
 
 /**
  * <p>Description: 基于 Feign 的 Oss 预签名URL生成器 </p>

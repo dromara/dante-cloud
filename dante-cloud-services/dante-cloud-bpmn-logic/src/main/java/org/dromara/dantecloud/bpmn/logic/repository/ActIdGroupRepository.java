@@ -25,8 +25,8 @@
 
 package org.dromara.dantecloud.bpmn.logic.repository;
 
-import org.dromara.dantecloud.bpmn.logic.entity.ActIdGroup;
 import org.dromara.dante.data.jpa.repository.BaseJpaRepository;
+import org.dromara.dantecloud.bpmn.logic.entity.ActIdGroup;
 
 /**
  * <p>Description: 工作流组Repository </p>

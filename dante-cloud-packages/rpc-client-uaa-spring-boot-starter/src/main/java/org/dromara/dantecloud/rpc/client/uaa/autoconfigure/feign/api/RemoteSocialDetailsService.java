@@ -25,11 +25,11 @@
 
 package org.dromara.dantecloud.rpc.client.uaa.autoconfigure.feign.api;
 
-import org.dromara.dantecloud.commons.ServiceNameConstants;
 import org.dromara.dante.core.domain.Result;
 import org.dromara.dante.feign.autoconfigure.annotation.Inner;
 import org.dromara.dante.security.domain.AccessPrincipal;
 import org.dromara.dante.security.domain.HerodotusUser;
+import org.dromara.dantecloud.commons.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.PathVariable;
