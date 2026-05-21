@@ -30,7 +30,7 @@
 
     <parent>
         <artifactId>dante-cloud-services</artifactId>
-        <groupId>org.dromara.dante</groupId>
+        <groupId>org.dromara.dantecloud</groupId>
         <version>4.0.6.3</version>
     </parent>
 
@@ -41,7 +41,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>org.dromara.dantecloud</groupId>
             <artifactId>authorization-servlet-spring-boot-starter</artifactId>
             <exclusions>
                 <exclusion>
@@ -51,7 +51,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>org.dromara.dantecloud</groupId>
             <artifactId>dante-cloud-bpmn-logic</artifactId>
             <exclusions>
                 <exclusion>

@@ -23,4 +23,4 @@
 # 6. 若您的项目无法满足以上几点，可申请商业授权
 #
 
-org.dromara.dante.rpc.server.upms.autoconfigure.RpcServerUpmsAutoConfiguration
+org.dromara.dantecloud.rpc.server.upms.autoconfigure.RpcServerUpmsAutoConfiguration

@@ -29,7 +29,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>dante-cloud-platform</artifactId>
-        <groupId>org.dromara.dante</groupId>
+        <groupId>org.dromara.dantecloud</groupId>
         <version>4.0.6.3</version>
     </parent>
 
@@ -44,7 +44,7 @@
             <artifactId>servlet-container-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>org.dromara.dantecloud</groupId>
             <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
 
