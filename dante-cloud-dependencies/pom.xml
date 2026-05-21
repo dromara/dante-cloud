@@ -83,48 +83,48 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>dante-cloud-commons</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>authentication-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>authorization-servlet-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>facility-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>rpc-client-oss-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>dante-cloud-bpmn-logic</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>org.dromara.dantecloud</groupId>
                 <artifactId>dante-monolith-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
