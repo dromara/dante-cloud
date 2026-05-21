@@ -23,24 +23,23 @@
  * 6. 若您的项目无法满足以上几点，可申请商业授权
  */
 
-package org.dromara.dante.upms;
+package org.dromara.dantecloud.message;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * <p>Description: 用户中心服务 </p>
+ * <p>Description: 消息服务 </p>
  *
  * @author : gengwei.zheng
- * @date : 2021/11/13 22:10
+ * @date : 2022/12/25 21:45
  */
-@EnableDiscoveryClient
 @SpringBootApplication
-public class UpmsApplication {
+@EnableDiscoveryClient
+public class MessageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UpmsApplication.class, args);
+        SpringApplication.run(MessageApplication.class, args);
     }
-
 }

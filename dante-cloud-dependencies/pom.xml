@@ -32,7 +32,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>org.dromara.dante</groupId>
+    <groupId>org.dromara.dantecloud</groupId>
     <artifactId>dante-cloud-dependencies</artifactId>
     <name>${project.artifactId}</name>
     <packaging>pom</packaging>
