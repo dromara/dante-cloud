@@ -25,9 +25,9 @@
 
 package org.dromara.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.api;
 
-import org.dromara.dantecloud.commons.ServiceNameConstants;
 import org.dromara.dante.core.domain.Result;
 import org.dromara.dante.web.definition.dto.OssPresigned;
+import org.dromara.dantecloud.commons.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;

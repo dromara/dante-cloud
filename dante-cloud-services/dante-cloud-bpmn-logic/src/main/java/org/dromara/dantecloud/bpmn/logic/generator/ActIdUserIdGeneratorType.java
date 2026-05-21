@@ -27,8 +27,8 @@ package org.dromara.dantecloud.bpmn.logic.generator;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.dromara.dantecloud.bpmn.logic.entity.ActIdUser;
 import org.dromara.dante.hibernate.generator.AbstractIdGeneratorType;
+import org.dromara.dantecloud.bpmn.logic.entity.ActIdUser;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.generator.GeneratorCreationContext;

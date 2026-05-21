@@ -25,8 +25,8 @@
 
 package org.dromara.dantecloud.gateway.config;
 
-import org.dromara.dantecloud.gateway.handler.RefreshRoutesListener;
 import org.dromara.dante.web.condition.ConditionalOnSwaggerEnabled;
+import org.dromara.dantecloud.gateway.handler.RefreshRoutesListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.properties.SwaggerUiConfigProperties;
