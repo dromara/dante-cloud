@@ -42,7 +42,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>org.dromara.dantecloud</groupId>
             <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
         </dependency>
 

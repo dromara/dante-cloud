@@ -46,7 +46,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>org.dromara.dantecloud</groupId>
             <artifactId>dante-cloud-commons</artifactId>
         </dependency>
 

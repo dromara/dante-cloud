@@ -41,7 +41,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>org.dromara.dantecloud</groupId>
             <artifactId>authorization-servlet-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
