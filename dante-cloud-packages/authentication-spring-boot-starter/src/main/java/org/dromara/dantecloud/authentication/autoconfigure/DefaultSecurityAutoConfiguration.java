@@ -26,6 +26,7 @@
 package org.dromara.dantecloud.authentication.autoconfigure;
 
 import jakarta.annotation.PostConstruct;
+import org.dromara.dante.core.constant.BaseConstants;
 import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import org.dromara.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
 import org.dromara.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
@@ -44,6 +45,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 /**
  * <p>Description: 默认安全配置 </p>
@@ -67,6 +70,7 @@ public class DefaultSecurityAutoConfiguration {
             HttpSecurity httpSecurity,
             UserDetailsService userDetailsService,
             CaptchaProcessor captchaProcessor,
+            RememberMeServices rememberMeServices,
             OAuth2AuthenticationConfigurerManager authenticationConfigurerManager,
             ServletOAuth2AuthorizationConfigurerManager authorizationConfigurerManager
     ) throws Exception {
@@ -79,10 +83,16 @@ public class DefaultSecurityAutoConfiguration {
         httpSecurity
                 .authorizeHttpRequests(authorizationConfigurerManager.getOAuth2AuthorizeHttpRequestsConfigurerCustomer())
                 .formLogin(authenticationConfigurerManager.getOAuth2FormLoginConfigurerCustomizer())
+                .rememberMe(rememberMe -> rememberMe
+                        // 必须要指定 key 才能找到对应的 RememberMeServices
+                        .key(BaseConstants.PROPERTY_PREFIX_HERODOTUS)
+                        .rememberMeServices(rememberMeServices)
+                        .rememberMeParameter(authenticationConfigurerManager.getOAuth2AuthenticationProperties().getFormLogin().getRememberMeParameter())
+                )
                 .sessionManagement(authorizationConfigurerManager.getOAuth2SessionManagementConfigurerCustomer())
                 .exceptionHandling(authorizationConfigurerManager.getOAuth2ExceptionHandlingConfigurerCustomizer())
                 .oauth2ResourceServer(authorizationConfigurerManager.getOAuth2ResourceServerConfigurerCustomer())
-                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, authenticationConfigurerManager.getOAuth2AuthenticationProperties(), captchaProcessor, authenticationConfigurerManager.getDigitalEnvelopeProcessor()), (configurer) -> {
+                .with(new OAuth2FormLoginSecureConfigurer<>(userDetailsService, rememberMeServices, authenticationConfigurerManager.getOAuth2AuthenticationProperties(), captchaProcessor, authenticationConfigurerManager.getDigitalEnvelopeProcessor()), (configurer) -> {
                 });
 
         // @formatter:on
@@ -100,5 +110,13 @@ public class DefaultSecurityAutoConfiguration {
         HerodotusUserDetailsService herodotusUserDetailsService = new HerodotusUserDetailsService(strategyUserDetailsService);
         log.debug("[Herodotus] |- Bean [Herodotus User Details Service] Configure.");
         return herodotusUserDetailsService;
+    }
+
+    @Bean
+    public RememberMeServices rememberMeServices(UserDetailsService userDetailsService) {
+        TokenBasedRememberMeServices.RememberMeTokenAlgorithm encodingAlgorithm = TokenBasedRememberMeServices.RememberMeTokenAlgorithm.SHA256;
+        TokenBasedRememberMeServices rememberMe = new TokenBasedRememberMeServices(BaseConstants.PROPERTY_PREFIX_HERODOTUS, userDetailsService, encodingAlgorithm);
+        rememberMe.setMatchingAlgorithm(TokenBasedRememberMeServices.RememberMeTokenAlgorithm.MD5);
+        return rememberMe;
     }
 }
