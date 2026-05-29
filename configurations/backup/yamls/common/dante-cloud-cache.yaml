@@ -29,8 +29,7 @@ spring:
 jetcache:
   statIntervalMinutes: 15
   areaInCacheName: false
-  decodeFilterAllowPatterns:
-    - org.hibernate.cache.internal
+  decodeFilterEnabled: false
   local:
     default:
       type: caffeine
