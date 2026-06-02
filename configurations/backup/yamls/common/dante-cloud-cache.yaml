@@ -29,15 +29,16 @@ spring:
 jetcache:
   statIntervalMinutes: 15
   areaInCacheName: false
+  decodeFilterEnabled: false
   local:
     default:
       type: caffeine
-      keyConvertor: fastjson2
+      keyConvertor: jackson3
       limit: 10000
   remote:
     default:
       type: redis.lettuce
-      keyConvertor: fastjson2
+      keyConvertor: jackson3
       broadcastChannel: herodotus
       valueEncoder: java
       valueDecoder: java
