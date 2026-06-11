@@ -30,7 +30,7 @@
     <parent>
         <artifactId>dante-cloud-platform</artifactId>
         <groupId>org.dromara.dantecloud</groupId>
-        <version>4.0.6.5</version>
+        <version>4.0.7.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
