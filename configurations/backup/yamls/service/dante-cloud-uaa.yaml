@@ -22,7 +22,7 @@ spring:
             type: PKCS12
           truststore:
             location: classpath:certificate/dante-cloud-sas_truststore.p12
-            password: password
+            password: 123456
             type: PKCS12
 herodotus:
   oauth2:
