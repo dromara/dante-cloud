@@ -57,9 +57,6 @@
   <img width="100%" src="./readme/architecture.svg" alt="Dante Cloud Architecture"/>
 </p>
 
-![平台架构](./readme/architecture.svg)
-
-
 ## 三、适用用户
 
 微服务技术并不是 **「落伍」** 了，而是进入了 **「成熟期」**，它的 **「适用场景和边界被更清晰地定义」** 了。微服务不再是一个 **「必须要有」** 的选项，而是一个 **「权衡之后」** 的选择。
