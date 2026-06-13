@@ -54,9 +54,8 @@
 这是 Dante Cloud 微服务最大的特色之一：**“一套代码、两种架构”**。可以帮助企业在项目早期以单体架构快速建设项目、方便开发人员在本地进行开发以及新技术研究。在项目后期随着用户规模增大以及并发需求提升时，可以快速无缝迁移至微服务架构。
 
 <p align="center">
-  <img width="100%" src="./readme/architecture.svg" alt="Dante Cloud Architecture"/>
+  <img width="100%" src="./readme/architecture.gif" alt="Dante Cloud Architecture"/>
 </p>
-
 
 ## 三、适用用户
 
