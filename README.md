@@ -55,8 +55,9 @@
 
 <p align="center">
   <img width="100%" src="./readme/architecture.svg" alt="Dante Cloud Architecture"/>
-  ![平台架构](./readme/architecture.svg)
 </p>
+
+![平台架构](./readme/architecture.svg)
 
 
 ## 三、适用用户
