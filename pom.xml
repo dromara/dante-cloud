@@ -55,7 +55,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>cn.herodotus.drawloom</groupId>
+                <groupId>cn.herodotus.dante</groupId>
                 <artifactId>dante-dependencies</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>

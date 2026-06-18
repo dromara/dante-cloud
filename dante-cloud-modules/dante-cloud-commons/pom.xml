@@ -42,7 +42,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-spring</artifactId>
         </dependency>
     </dependencies>

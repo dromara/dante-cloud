@@ -41,7 +41,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-oauth2-commons</artifactId>
         </dependency>
 
@@ -51,12 +51,12 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-logic-upms</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>feign-spring-boot-starter</artifactId>
             <optional>true</optional>
         </dependency>

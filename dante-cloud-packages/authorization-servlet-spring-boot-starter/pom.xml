@@ -42,7 +42,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-authorization-autoconfigure</artifactId>
         </dependency>
 
@@ -52,7 +52,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>webmvc-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>

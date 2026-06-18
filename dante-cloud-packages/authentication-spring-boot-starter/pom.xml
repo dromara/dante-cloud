@@ -47,7 +47,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-authentication-autoconfigure</artifactId>
         </dependency>
     </dependencies>

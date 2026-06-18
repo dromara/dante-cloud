@@ -17,12 +17,12 @@
     <dependencies>
 
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-web</artifactId>
         </dependency>
 
@@ -32,7 +32,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.drawloom</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>feign-spring-boot-starter</artifactId>
             <optional>true</optional>
         </dependency>
