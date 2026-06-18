@@ -31,7 +31,7 @@
 
     <parent>
         <artifactId>dante-cloud-services</artifactId>
-        <groupId>cn.herodotus.dante</groupId>
+        <groupId>cn.herodotus.dantecloud</groupId>
         <version>4.1.0.0</version>
     </parent>
 
