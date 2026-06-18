@@ -29,7 +29,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>dante-cloud-platform</artifactId>
-        <groupId>org.dromara.dantecloud</groupId>
+        <groupId>cn.herodotus.dante</groupId>
         <version>4.1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -41,12 +41,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dantecloud</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>authorization-servlet-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dantecloud</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
         </dependency>
 

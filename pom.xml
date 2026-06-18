@@ -32,7 +32,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>org.dromara.dantecloud</groupId>
+    <groupId>cn.herodotus.dante</groupId>
     <artifactId>dante-cloud</artifactId>
     <name>${project.artifactId}</name>
     <packaging>pom</packaging>
@@ -55,14 +55,14 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.dromara.dante</groupId>
+                <groupId>cn.herodotus.drawloom</groupId>
                 <artifactId>dante-dependencies</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.dromara.dantecloud</groupId>
+                <groupId>cn.herodotus.dante</groupId>
                 <artifactId>dante-cloud-dependencies</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>

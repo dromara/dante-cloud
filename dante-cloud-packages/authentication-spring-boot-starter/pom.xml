@@ -31,7 +31,7 @@
 
     <parent>
         <artifactId>dante-cloud-packages</artifactId>
-        <groupId>org.dromara.dantecloud</groupId>
+        <groupId>cn.herodotus.dante</groupId>
         <version>4.1.0.0</version>
     </parent>
 
@@ -42,12 +42,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dantecloud</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>rpc-client-uaa-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>cn.herodotus.drawloom</groupId>
             <artifactId>dante-authentication-autoconfigure</artifactId>
         </dependency>
     </dependencies>
