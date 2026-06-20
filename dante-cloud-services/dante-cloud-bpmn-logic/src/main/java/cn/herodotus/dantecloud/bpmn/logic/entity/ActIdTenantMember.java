@@ -25,12 +25,12 @@
 
 package cn.herodotus.dantecloud.bpmn.logic.entity;
 
+import cn.herodotus.dantecloud.bpmn.logic.domain.base.BaseBpmnEntity;
+import cn.herodotus.dantecloud.bpmn.logic.generator.ActIdTenantMemberIdGenerator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import cn.herodotus.dantecloud.bpmn.logic.domain.base.BaseBpmnEntity;
-import cn.herodotus.dantecloud.bpmn.logic.generator.ActIdTenantMemberIdGenerator;
 
 /**
  * <p>Description: Camunda 租户成员</p>

@@ -25,7 +25,7 @@
 
 package cn.herodotus.dantecloud.gateway.config;
 
-import org.dromara.dante.web.condition.ConditionalOnSwaggerEnabled;
+import cn.herodotus.dante.web.condition.ConditionalOnSwaggerEnabled;
 import cn.herodotus.dantecloud.gateway.handler.RefreshRoutesListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

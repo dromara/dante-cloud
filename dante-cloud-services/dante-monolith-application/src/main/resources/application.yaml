@@ -142,7 +142,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: org.dromara.dante.hibernate.cache.spi.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.hibernate.cache.spi.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -295,7 +295,7 @@ logging:
     org.springframework: info
     org.springframework.security: debug
     org.springframework.web: info
-    org.dromara: debug
+    cn.herodotus: debug
     com.alicp.jetcache: info
 
 ---
@@ -374,7 +374,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: org.dromara.dante.hibernate.cache.spi.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.hibernate.cache.spi.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -522,7 +522,7 @@ logging:
     org.springframework: info
     org.springframework.security: info
     org.springframework.web: info
-    org.dromara: info
+    cn.herodotus: info
     com.alicp.jetcache: info
 
 
@@ -592,7 +592,7 @@ spring:
           sharedCache:
             mode: ENABLE_SELECTIVE
       hibernate:
-        dialect: org.dromara.dante.hibernate.dialect.OpenGaussDialect
+        dialect: cn.herodotus.dante.hibernate.dialect.OpenGaussDialect
         format_sql: false
         show_sql: false
         generate_statistics: false
@@ -604,7 +604,7 @@ spring:
           use_second_level_cache: true
           use_minimal_puts: true
           region:
-            factory_class: org.dromara.dante.hibernate.cache.spi.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.hibernate.cache.spi.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
@@ -755,7 +755,7 @@ logging:
     org.springframework: info
     org.springframework.security: info
     org.springframework.web: info
-    org.dromara: debug
+    cn.herodotus: debug
     com.alicp.jetcache: info
 
 ---

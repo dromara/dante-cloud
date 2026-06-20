@@ -25,10 +25,10 @@
 
 package cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api;
 
-import org.dromara.dante.autoconfigure.file.FileProperties;
-import org.dromara.dante.core.support.file.FileTemplate;
-import org.dromara.dante.core.support.file.JsonSchemaFileManager;
-import org.dromara.dante.core.support.file.OssTransformer;
+import cn.herodotus.dante.autoconfigure.file.FileProperties;
+import cn.herodotus.dante.core.support.file.FileTemplate;
+import cn.herodotus.dante.core.support.file.JsonSchemaFileManager;
+import cn.herodotus.dante.core.support.file.OssTransformer;
 
 /**
  * <p>Description: JsonSchema对象存储管理器 </p>

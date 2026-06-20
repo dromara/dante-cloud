@@ -25,19 +25,19 @@
 
 package cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure;
 
-import jakarta.annotation.PostConstruct;
-import org.dromara.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
-import org.dromara.dante.logic.upms.definition.SocialAuthenticationHandler;
-import org.dromara.dante.logic.upms.service.security.SysUserService;
-import org.dromara.dante.security.definition.StrategyUserDetailsService;
-import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
-import org.dromara.dante.spring.enums.Architecture;
-import org.dromara.dante.spring.enums.DataAccessStrategy;
-import org.dromara.dante.web.condition.ConditionalOnDataAccessStrategy;
+import cn.herodotus.dante.logic.upms.annotation.EnableHerodotusLogicUpms;
+import cn.herodotus.dante.logic.upms.definition.SocialAuthenticationHandler;
+import cn.herodotus.dante.logic.upms.service.security.SysUserService;
+import cn.herodotus.dante.security.definition.StrategyUserDetailsService;
+import cn.herodotus.dante.spring.condition.ConditionalOnArchitecture;
+import cn.herodotus.dante.spring.enums.Architecture;
+import cn.herodotus.dante.spring.enums.DataAccessStrategy;
+import cn.herodotus.dante.web.condition.ConditionalOnDataAccessStrategy;
 import cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.FeignStrategyUserDetailsService;
 import cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.api.RemoteSocialDetailsService;
 import cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.api.RemoteUserDetailsService;
 import cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.local.LocalStrategyUserDetailsService;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -78,7 +78,7 @@ public class DistributedArchitectureConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnDataAccessStrategy(DataAccessStrategy.REMOTE)
-    @EnableFeignClients(basePackages = {"org.dromara.dantecloud.rpc.client.uaa.autoconfigure.feign.api"})
+    @EnableFeignClients(basePackages = {"cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.api"})
     static class DataAccessStrategyRemoteConfiguration {
 
         @Bean

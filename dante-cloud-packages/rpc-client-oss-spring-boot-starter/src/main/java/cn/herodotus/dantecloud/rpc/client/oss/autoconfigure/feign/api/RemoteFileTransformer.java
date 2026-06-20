@@ -25,8 +25,8 @@
 
 package cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api;
 
-import org.dromara.dante.core.support.file.AbstractOssPresignedUrlTransformer;
-import org.dromara.dante.core.support.file.OssPresignedUrlGenerator;
+import cn.herodotus.dante.core.support.file.AbstractOssPresignedUrlTransformer;
+import cn.herodotus.dante.core.support.file.OssPresignedUrlGenerator;
 import org.springframework.stereotype.Component;
 
 /**

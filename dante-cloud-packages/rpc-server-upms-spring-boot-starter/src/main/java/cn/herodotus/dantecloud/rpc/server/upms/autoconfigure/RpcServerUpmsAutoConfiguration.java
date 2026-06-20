@@ -25,8 +25,8 @@
 
 package cn.herodotus.dantecloud.rpc.server.upms.autoconfigure;
 
+import cn.herodotus.dante.rest.upms.annotation.EnableHerodotusRestUpms;
 import jakarta.annotation.PostConstruct;
-import org.dromara.dante.rest.upms.annotation.EnableHerodotusRestUpms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -52,7 +52,7 @@ public class RpcServerUpmsAutoConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ComponentScan(basePackages = {
-            "org.dromara.dantecloud.rpc.server.upms.autoconfigure.feign"
+            "cn.herodotus.dantecloud.rpc.server.upms.autoconfigure.feign"
     })
     static class FeignConfiguration {
 

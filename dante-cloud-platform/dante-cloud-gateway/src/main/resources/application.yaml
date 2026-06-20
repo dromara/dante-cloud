@@ -94,7 +94,7 @@ logging:
     com.ulisesbocchio: error
     org.springframework.cloud.gateway: debug
     # 开发、调试需要的日志
-    org.dromara: debug
+    cn.herodotus: debug
     com.alicp.jetcache: info
 
 ---
@@ -131,7 +131,7 @@ logging:
   level:
     root: INFO
     # 开发、调试需要的日志
-    org.dromara: debug
+    cn.herodotus: debug
 
 ---
 # spring 全家桶基础设施配置

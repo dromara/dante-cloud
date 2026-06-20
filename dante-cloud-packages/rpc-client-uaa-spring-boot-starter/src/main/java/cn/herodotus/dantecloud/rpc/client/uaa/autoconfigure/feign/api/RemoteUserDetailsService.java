@@ -25,9 +25,9 @@
 
 package cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.api;
 
-import org.dromara.dante.core.domain.Result;
-import org.dromara.dante.feign.autoconfigure.annotation.Inner;
-import org.dromara.dante.logic.upms.entity.security.SysUser;
+import cn.herodotus.dante.core.domain.Result;
+import cn.herodotus.dante.feign.autoconfigure.annotation.Inner;
+import cn.herodotus.dante.logic.upms.entity.security.SysUser;
 import cn.herodotus.dantecloud.commons.ServiceNameConstants;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

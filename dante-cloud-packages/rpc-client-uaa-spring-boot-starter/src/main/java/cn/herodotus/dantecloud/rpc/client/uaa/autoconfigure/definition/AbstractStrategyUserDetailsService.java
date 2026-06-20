@@ -25,11 +25,11 @@
 
 package cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.definition;
 
+import cn.herodotus.dante.logic.upms.converter.SysUserToHerodotusUserConverter;
+import cn.herodotus.dante.logic.upms.entity.security.SysUser;
+import cn.herodotus.dante.security.definition.StrategyUserDetailsService;
+import cn.herodotus.dante.security.domain.HerodotusUser;
 import org.apache.commons.lang3.ObjectUtils;
-import org.dromara.dante.logic.upms.converter.SysUserToHerodotusUserConverter;
-import org.dromara.dante.logic.upms.entity.security.SysUser;
-import org.dromara.dante.security.definition.StrategyUserDetailsService;
-import org.dromara.dante.security.domain.HerodotusUser;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

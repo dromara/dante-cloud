@@ -25,17 +25,17 @@
 
 package cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api;
 
-import jakarta.annotation.PostConstruct;
-import org.dromara.dante.autoconfigure.file.FileProperties;
-import org.dromara.dante.core.support.file.FileTemplate;
-import org.dromara.dante.core.support.file.JsonSchemaFileManager;
-import org.dromara.dante.core.support.file.OssPresignedUrlGenerator;
-import org.dromara.dante.core.support.file.OssTransformer;
-import org.dromara.dante.feign.autoconfigure.annotation.Inner;
-import org.dromara.dante.spring.condition.ConditionalOnArchitecture;
-import org.dromara.dante.spring.enums.Architecture;
+import cn.herodotus.dante.autoconfigure.file.FileProperties;
+import cn.herodotus.dante.core.support.file.FileTemplate;
+import cn.herodotus.dante.core.support.file.JsonSchemaFileManager;
+import cn.herodotus.dante.core.support.file.OssPresignedUrlGenerator;
+import cn.herodotus.dante.core.support.file.OssTransformer;
+import cn.herodotus.dante.feign.autoconfigure.annotation.Inner;
+import cn.herodotus.dante.spring.condition.ConditionalOnArchitecture;
+import cn.herodotus.dante.spring.enums.Architecture;
 import cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.FeignOssPresignedUrlGenerator;
 import cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.api.RemoteOssPresignedUrlService;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -64,7 +64,7 @@ public class RpcClientOssAutoConfiguration {
 
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(Inner.class)
-    @EnableFeignClients(basePackages = {"org.dromara.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.api"})
+    @EnableFeignClients(basePackages = {"cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.api"})
     static class OssPresignedUrlFeignConfiguration {
 
         @Bean

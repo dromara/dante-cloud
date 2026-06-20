@@ -29,7 +29,7 @@ herodotus:
   log:
     level: info
     loggers:
-      org.dromara: debug
+      cn.herodotus: debug
       com.alicp.jetcache: debug
       org.springframework.security: info
       org.springframework.web: debug

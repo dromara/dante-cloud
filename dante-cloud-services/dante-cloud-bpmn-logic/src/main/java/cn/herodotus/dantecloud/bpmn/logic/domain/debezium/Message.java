@@ -25,8 +25,8 @@
 
 package cn.herodotus.dantecloud.bpmn.logic.domain.debezium;
 
-import com.google.common.base.MoreObjects;
 import cn.herodotus.dantecloud.bpmn.logic.domain.base.BaseBpmnEntity;
+import com.google.common.base.MoreObjects;
 
 import java.io.Serializable;
 

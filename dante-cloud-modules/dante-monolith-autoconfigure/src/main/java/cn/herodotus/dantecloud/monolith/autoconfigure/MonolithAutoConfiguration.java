@@ -25,10 +25,10 @@
 
 package cn.herodotus.dantecloud.monolith.autoconfigure;
 
+import cn.herodotus.dante.rest.upms.annotation.EnableHerodotusRestUpms;
 import cn.herodotus.dantecloud.monolith.autoconfigure.processor.MonolithBusBridge;
 import cn.herodotus.dantecloud.monolith.autoconfigure.processor.MonolithCorsFilter;
 import jakarta.annotation.PostConstruct;
-import org.dromara.dante.rest.upms.annotation.EnableHerodotusRestUpms;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

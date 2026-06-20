@@ -25,14 +25,14 @@
 
 package cn.herodotus.dantecloud.authentication.autoconfigure;
 
+import cn.herodotus.dante.core.constant.BaseConstants;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
+import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
+import cn.herodotus.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
+import cn.herodotus.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
+import cn.herodotus.dante.security.definition.CaptchaProcessor;
+import cn.herodotus.dante.security.definition.StrategyUserDetailsService;
 import jakarta.annotation.PostConstruct;
-import org.dromara.dante.core.constant.BaseConstants;
-import org.dromara.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
-import org.dromara.dante.oauth2.authentication.configurer.OAuth2FormLoginSecureConfigurer;
-import org.dromara.dante.oauth2.authentication.customizer.HerodotusUserDetailsService;
-import org.dromara.dante.oauth2.authorization.servlet.ServletOAuth2AuthorizationConfigurerManager;
-import org.dromara.dante.security.definition.CaptchaProcessor;
-import org.dromara.dante.security.definition.StrategyUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

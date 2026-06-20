@@ -116,7 +116,7 @@ logging:
     org.springframework.web: debug
     org.springframework.cloud.bus: info
     org.apache.kafka: warn
-    org.dromara: info
+    cn.herodotus: info
 ---
 # spring 全家桶基础设施配置
 spring:

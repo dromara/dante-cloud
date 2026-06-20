@@ -25,16 +25,16 @@
 
 package cn.herodotus.dantecloud.rpc.server.upms.autoconfigure.feign;
 
+import cn.herodotus.dante.core.domain.Result;
+import cn.herodotus.dante.logic.upms.definition.SocialAuthenticationHandler;
+import cn.herodotus.dante.security.domain.AccessPrincipal;
+import cn.herodotus.dante.security.domain.HerodotusUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.ObjectUtils;
-import org.dromara.dante.core.domain.Result;
-import org.dromara.dante.logic.upms.definition.SocialAuthenticationHandler;
-import org.dromara.dante.security.domain.AccessPrincipal;
-import org.dromara.dante.security.domain.HerodotusUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

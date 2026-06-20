@@ -25,9 +25,9 @@
 
 package cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign;
 
-import org.dromara.dante.core.domain.Result;
-import org.dromara.dante.core.support.file.OssPresignedUrlGenerator;
-import org.dromara.dante.web.definition.dto.OssPresigned;
+import cn.herodotus.dante.core.domain.Result;
+import cn.herodotus.dante.core.support.file.OssPresignedUrlGenerator;
+import cn.herodotus.dante.web.definition.dto.OssPresigned;
 import cn.herodotus.dantecloud.rpc.client.oss.autoconfigure.feign.api.feign.api.RemoteOssPresignedUrlService;
 
 /**

@@ -25,10 +25,10 @@
 
 package cn.herodotus.dantecloud.bpmn.logic.domain.debezium;
 
+import cn.herodotus.dantecloud.bpmn.logic.domain.base.BaseBpmnEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
-import cn.herodotus.dantecloud.bpmn.logic.domain.base.BaseBpmnEntity;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -64,7 +64,7 @@ spring:
           use_second_level_cache: ${herodotus.switch.database.use-second-level-cache}
           use_minimal_puts: true
           region:
-            factory_class: org.dromara.dante.hibernate.cache.spi.HerodotusRegionFactory
+            factory_class: cn.herodotus.dante.hibernate.cache.spi.HerodotusRegionFactory
         jakarta:
           cache:
             missing_cache_strategy: create
