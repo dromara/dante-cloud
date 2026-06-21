@@ -31,7 +31,7 @@
 
     <parent>
         <artifactId>dante-cloud-packages</artifactId>
-        <groupId>org.dromara.dantecloud</groupId>
+        <groupId>cn.herodotus.dantecloud</groupId>
         <version>4.1.0.0</version>
     </parent>
 
@@ -42,17 +42,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-authorization-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dantecloud</groupId>
+            <groupId>cn.herodotus.dantecloud</groupId>
             <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>webmvc-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>

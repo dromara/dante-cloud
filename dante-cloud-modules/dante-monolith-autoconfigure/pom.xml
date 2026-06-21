@@ -25,7 +25,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.dromara.dantecloud</groupId>
+        <groupId>cn.herodotus.dantecloud</groupId>
         <artifactId>dante-cloud-modules</artifactId>
         <version>4.1.0.0</version>
     </parent>
@@ -37,22 +37,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-rest-upms</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dantecloud</groupId>
+            <groupId>cn.herodotus.dantecloud</groupId>
             <artifactId>authentication-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>servlet-message-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.dromara.dante</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>oss-spring-boot-starter</artifactId>
         </dependency>
 

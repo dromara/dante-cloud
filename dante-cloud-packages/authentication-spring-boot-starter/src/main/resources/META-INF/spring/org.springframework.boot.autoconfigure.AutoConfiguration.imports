@@ -23,5 +23,5 @@
 # 6. 若您的项目无法满足以上几点，可申请商业授权
 #
 
-org.dromara.dantecloud.authentication.autoconfigure.DefaultSecurityAutoConfiguration
-org.dromara.dantecloud.authentication.autoconfigure.AuthorizationAutoConfiguration
+cn.herodotus.dantecloud.authentication.autoconfigure.DefaultSecurityAutoConfiguration
+cn.herodotus.dantecloud.authentication.autoconfigure.AuthorizationAutoConfiguration
