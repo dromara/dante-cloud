@@ -10,16 +10,11 @@ spring:
           client-secret: 02895262878f45e8a16a15f68336f431
 
 herodotus:
-  oss:
-    dialect: minio
-    proxy:
-      source: http://localhost:3000/api/${spring.application.name}
-      destination: http://127.0.0.1:9000
-    minio:
-      endpoint: http://127.0.0.1:9000
-      access-key: herodotus
-      secret-key: herodotus
-    s3:
-      endpoint: http://127.0.0.1:9000
-      access-key: herodotus
-      secret-key: herodotus
+  assistant:
+    oss:
+      endpoint: http://192.168.101.10:9000
+      access-key: 0CVolH2VcdMoqcYXbxMK
+      secret-key: DyLrGDx3kte7yUJIc1OobEwZ2dkyrxT38nR9byUl
+      proxy:
+        source: http://localhost:3000/api
+        destination: http://127.0.0.1:9000
