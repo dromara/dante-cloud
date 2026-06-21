@@ -131,8 +131,8 @@ spring:
             mode: ENABLE_SELECTIVE
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-        show_sql: true
+        format_sql: false
+        show_sql: false
         generate_statistics: false
         order_inserts: true
         order_updates: true
