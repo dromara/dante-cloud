@@ -56,9 +56,11 @@
             <artifactId>facility-spring-boot-starter</artifactId>
         </dependency>
 
+        <!--该依赖仅在基础设施为 Spring Cloud Alibaba 时有意义-->
+        <!--如果使用其它基础设施，例如：Spring Cloud Tencent 或者原生环境，可以将下面依赖注释掉-->
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>facility-gateway-spring-boot-starter</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
         </dependency>
 
         <dependency>
