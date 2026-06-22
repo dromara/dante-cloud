@@ -23,26 +23,36 @@
  * 6. 若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.api;
+package cn.herodotus.dantecloud.facility.alibaba.autoconfigure.enhance;
 
-import cn.herodotus.dante.core.domain.Result;
-import cn.herodotus.dante.logic.upms.entity.security.SysUser;
-import cn.herodotus.dantecloud.commons.ServiceNameConstants;
-import cn.herodotus.dantecloud.feign.autoconfigure.annotation.Inner;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import feign.Target;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
- * <p>Description: 远程 User Details 服务 </p>
+ * <p>Description: Feign 统一 Fallback 工厂 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/17 10:55
+ * @date : 2022/5/30 15:09
  */
-@FeignClient(contextId = "remoteUserDetailsService", value = ServiceNameConstants.SERVICE_NAME_UPMS)
-public interface RemoteUserDetailsService {
+public class HerodotusFallbackFactory<T> implements FallbackFactory<T> {
 
-    @Inner
-    @GetMapping("/security/user/sign-in/{username}")
-    Result<SysUser> findByUsername(@PathVariable("username") String username);
+    private final Target<T> target;
+
+    public HerodotusFallbackFactory(Target<T> target) {
+        this.target = target;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public T create(Throwable cause) {
+        final Class<T> targetType = target.type();
+        final String targetName = target.name();
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(targetType);
+        enhancer.setUseCache(true);
+        enhancer.setCallback(new HerodotusFeignFallback<>(targetType, targetName, cause));
+        return (T) enhancer.create();
+    }
+
 }

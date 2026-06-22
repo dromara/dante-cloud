@@ -23,26 +23,26 @@
  * 6. 若您的项目无法满足以上几点，可申请商业授权
  */
 
-package cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.api;
+package cn.herodotus.dantecloud.facility.tencent.autoconfigure;
 
-import cn.herodotus.dante.core.domain.Result;
-import cn.herodotus.dante.logic.upms.entity.security.SysUser;
-import cn.herodotus.dantecloud.commons.ServiceNameConstants;
-import cn.herodotus.dantecloud.feign.autoconfigure.annotation.Inner;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 
 /**
- * <p>Description: 远程 User Details 服务 </p>
+ * <p>Description: 基础设置自动配置 </p>
  *
  * @author : gengwei.zheng
- * @date : 2022/2/17 10:55
+ * @date : 2022/2/5 19:09
  */
-@FeignClient(contextId = "remoteUserDetailsService", value = ServiceNameConstants.SERVICE_NAME_UPMS)
-public interface RemoteUserDetailsService {
+@AutoConfiguration
+public class FacilityTencentAutoConfiguration {
 
-    @Inner
-    @GetMapping("/security/user/sign-in/{username}")
-    Result<SysUser> findByUsername(@PathVariable("username") String username);
+    private static final Logger log = LoggerFactory.getLogger(FacilityTencentAutoConfiguration.class);
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("[Herodotus] |- Starter [Facility Tencent] Configure.");
+    }
 }

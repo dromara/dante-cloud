@@ -217,6 +217,13 @@
                         <artifactId>central-publishing-maven-plugin</artifactId>
                         <configuration>
                             <excludeArtifacts>
+                                <excludeArtifact>authorization-servlet-spring-boot-starter</excludeArtifact>
+                                <excludeArtifact>facility-alibaba-spring-boot-starter</excludeArtifact>
+                                <excludeArtifact>facility-spring-boot-starter</excludeArtifact>
+                                <excludeArtifact>facility-tencent-spring-boot-starter</excludeArtifact>
+                                <excludeArtifact>feign-spring-boot-starter</excludeArtifact>
+                                <excludeArtifact>rpc-client-oss-spring-boot-starter</excludeArtifact>
+                                <excludeArtifact>rpc-server-upms-spring-boot-starter</excludeArtifact>
                                 <excludeArtifact>platform</excludeArtifact>
                                 <excludeArtifact>dante-cloud-gateway</excludeArtifact>
                                 <excludeArtifact>dante-cloud-message</excludeArtifact>
