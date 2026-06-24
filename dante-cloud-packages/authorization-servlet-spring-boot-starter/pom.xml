@@ -32,7 +32,7 @@
     <parent>
         <artifactId>dante-cloud-packages</artifactId>
         <groupId>cn.herodotus.dantecloud</groupId>
-        <version>4.1.0.1</version>
+        <version>4.1.0.2</version>
     </parent>
 
     <artifactId>authorization-servlet-spring-boot-starter</artifactId>

@@ -15,11 +15,11 @@
     <a href="https://my.oschina.net/pointerv" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
     <a href="https://bell-sw.com/pages/downloads/#downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-25%2B-green.svg?logo=openjdk" alt="Java 25"></a>
-    <a href="https://github.com/dromara/dante-cloud" target="_blank"><img src="https://img.shields.io/badge/Version-4.1.0.1-red.svg?logo=spring" alt="Version 4.1.0.1"></a>
-    <a href="https://github.com/dante-compass/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.1.0.1-red.svg?logo=spring" alt="Dante Engine 4.1.0.1"></a>
-    <a href="https://github.com/dante-compass/thingsbrain" target="_blank"><img src="https://img.shields.io/badge/ThingsBrain-4.1.0.1-red.svg?logo=spring" alt="ThingsBrain 4.1.0.1"></a>
-    <a href="https://github.com/dante-compass/dante-cloud-ui" target="_blank"><img src="https://img.shields.io/badge/Dante%20Cloud%20UI-4.1.0.1-blue.svg?logo=quasar&logoColor=%23050A14" alt="Dante Cloud UI 4.1.0.1"></a>
-    <a href="https://github.com/dante-compass/herodotus-cloud-ui-vuetify" target="_blank"><img src="https://img.shields.io/badge/Dante%20Cloud%20UI(New)-4.1.0.1-blue.svg?logo=vuetify&logoColor=%231867C0" alt="Dante Cloud UI(New) 4.1.0.1"></a>
+    <a href="https://github.com/dromara/dante-cloud" target="_blank"><img src="https://img.shields.io/badge/Version-4.1.0.2-red.svg?logo=spring" alt="Version 4.1.0.2"></a>
+    <a href="https://github.com/dante-compass/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-4.1.0.2-red.svg?logo=spring" alt="Dante Engine 4.1.0.2"></a>
+    <a href="https://github.com/dante-compass/thingsbrain" target="_blank"><img src="https://img.shields.io/badge/ThingsBrain-4.1.0.2-red.svg?logo=spring" alt="ThingsBrain 4.1.0.2"></a>
+    <a href="https://github.com/dante-compass/dante-cloud-ui" target="_blank"><img src="https://img.shields.io/badge/Dante%20Cloud%20UI-4.1.0.2-blue.svg?logo=quasar&logoColor=%23050A14" alt="Dante Cloud UI 4.1.0.2"></a>
+    <a href="https://github.com/dante-compass/herodotus-cloud-ui-vuetify" target="_blank"><img src="https://img.shields.io/badge/Dante%20Cloud%20UI(New)-4.1.0.2-blue.svg?logo=vuetify&logoColor=%231867C0" alt="Dante Cloud UI(New) 4.1.0.2"></a>
     <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/dromara/dante-cloud.svg?label=Github%20Stars" alt="Github star"></a>
     <a href="https://github.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/dromara/dante-cloud.svg?label=Github%20Forks" alt="Github fork"></a>
     <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
@@ -39,11 +39,18 @@
 
 # 重要说明：
 
-因 Maven 中央仓库将于 `2026年08月11日` 开启 **发布配额限制措施**（当前为普通用户每月限制发布 7 次、内容大小 80 M、文件数量 1000），所以为了不影响用户的正常使用，Dante Cloud 及 Dante Engine 将 Maven 坐标及包名由原来 Dromara 社区的 `org.dromara` 变更为 `cn.herodotus`。同时，Dante Cloud 也会同步降低发版频率。对由此给大家带来不便，深表歉意。
+因 Maven 中央仓库将于 `2026年08月11日` 开启 **发布配额限制措施**（当前为普通用户每月限制发布 7 次、内容大小 80 M、文件数量 1000）， Maven 中央仓库发布限制详情：[【原文地址】](https://central.sonatype.org/publish/maven-central-publishing-limits/)
 
-Maven 中央仓库发布限制详情：[【原文地址】](https://central.sonatype.org/publish/maven-central-publishing-limits/)
+为了降低 Maven 中央仓库新措施对项目的影响，对项目进行了多项重构措施：
 
-> 注意：本次坐标调整尽量将代码变化降到最低。如果您已经在使用 Dante Cloud 进行开发，升级 Dante Cloud 版本号之后，将 `org.dromara` 替换为 `cn.herodotus`；如果条件允许，建议重新检出代码。 除了代码以外，Nacos 配置文件中也包含需要替换内容，可以手动搜索替换或者重新导入完整配置
+1. 将 Maven 坐标及包名由原来 Dromara 社区的 `org.dromara` 变更为 `cn.herodotus`
+2. 将工程代码进行重构，对可以合并的模块进行了合并，对不必要的或者使用率较低模块，特别是 Starter 类型模块，进行了删减。
+
+由于 Dante Cloud 模块较多，虽然做了大量的努力，但始终无法在保持模块合理性的前提下，满足 Maven 中央文件数量的限制（向中央仓库发布一个 jar 是按照 24 个文件计算，包含：signatures, checksums, source jars, javadocs）
+
+为此，将会降低项目向 Maven 中央仓库的发布频率和次数，仅对重要的版本更新向中央仓库推送发布。所以，后续在使用本项目时，大多数情形下需要用户自己编译 Dante Engine 工程代码。
+
+> 当前 Maven 中央仓库的限制规则并不完全确定，可能会存在调整，Dante Cloud 会结合变化情况，适时调整发布策略。您也可以点个 Star 持续关注更新！
 
 # 企业级技术中台与云原生微服务基座
 
@@ -152,7 +159,11 @@ dante-cloud
 ├── dante-cloud-packages -- 基础核心Starter
 ├    ├── authentication-spring-boot-starter -- OAuth2 授权服务器自动配置 Starter(主要用于微服务版和单体版统一认证)
 ├    ├── authorization-servlet-spring-boot-starter -- 阻塞式 OAuth2 资源服务器自动配置 Starter(除了 Monitor 等特殊服务以外，所有服务均需依赖)
+├    ├── facility-alibaba-spring-boot-starter -- 面向 Spring Cloud Alibaba 的微服务基础设施适配 Starter
 ├    ├── facility-spring-boot-starter -- 基础设施切换依赖 Starter(用于切换 Alibaba、Tencent和原生微服务基础设施环境)
+├    ├── facility-tencent-spring-boot-starter -- 面向 Spring Cloud Tencent 的微服务基础设施适配模块 Starter
+├    ├── fegin-client-spring-boot-starter -- Feign 客户端自动配置 Starter
+├    ├── rpc-client-oss-spring-boot-starter -- 服务间通信客户端自动配置 Starter(OSS 作为客户端访问其它服务)
 ├    ├── rpc-client-uaa-spring-boot-starter -- 服务间通信客户端自动配置 Starter(UAA 作为客户端端访问其它服务)
 ├    └── rpc-server-upms-spring-boot-starter -- 服务间通信服务端自动配置 Starter(UPMS 作为服务端为其它服务提供访问)
 ├── dante-cloud-platform -- 平台核心服务
