@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.herodotus.dantecloud</groupId>
+        <artifactId>dante-cloud-packages</artifactId>
+        <version>4.1.0.2</version>
+    </parent>
+
+    <artifactId>feign-spring-boot-starter</artifactId>
+    <name>${project.artifactId}</name>
+
+    <description>Dante Cloud 云原生微服务基座组件库 Feign 自动配置 Starter</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.herodotus.dante</groupId>
+            <artifactId>dante-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.herodotus.dante</groupId>
+            <artifactId>dante-autoconfigure</artifactId>
+        </dependency>
+        <!--OpenFeign 自动配置，仅在 Servlet 环境下使用-->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-hc5</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-java11</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

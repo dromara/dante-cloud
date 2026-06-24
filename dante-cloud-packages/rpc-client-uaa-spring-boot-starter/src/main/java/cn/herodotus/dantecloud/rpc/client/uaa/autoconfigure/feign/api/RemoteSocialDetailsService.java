@@ -26,10 +26,10 @@
 package cn.herodotus.dantecloud.rpc.client.uaa.autoconfigure.feign.api;
 
 import cn.herodotus.dante.core.domain.Result;
-import cn.herodotus.dante.feign.autoconfigure.annotation.Inner;
 import cn.herodotus.dante.security.domain.AccessPrincipal;
 import cn.herodotus.dante.security.domain.HerodotusUser;
 import cn.herodotus.dantecloud.commons.ServiceNameConstants;
+import cn.herodotus.dantecloud.feign.autoconfigure.annotation.Inner;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -2,9 +2,12 @@ name: Publish package to the Maven Central Repository
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
+    inputs:
+      release_tag:
+        description: '要发布的 Git 标签（例如 v1.0.0）'
+        required: true
+        type: string
+        default: 'v'   # 可设置默认值，但仍需用户填写
 
 jobs:
   deploy:
@@ -13,6 +16,8 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v7.0.0
+        with:
+          ref: ${{ github.event.inputs.release_tag }}
 
       - name: Set up Apache Maven Central
         uses: actions/setup-java@v5.3.0

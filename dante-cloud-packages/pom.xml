@@ -32,7 +32,7 @@
     <parent>
         <artifactId>dante-cloud</artifactId>
         <groupId>cn.herodotus.dantecloud</groupId>
-        <version>4.1.0.1</version>
+        <version>4.1.0.2</version>
     </parent>
 
     <artifactId>dante-cloud-packages</artifactId>
@@ -73,6 +73,9 @@
         <module>rpc-client-oss-spring-boot-starter</module>
         <module>rpc-client-uaa-spring-boot-starter</module>
         <module>rpc-server-upms-spring-boot-starter</module>
+        <module>feign-spring-boot-starter</module>
+        <module>facility-alibaba-spring-boot-starter</module>
+        <module>facility-tencent-spring-boot-starter</module>
     </modules>
 
 </project>

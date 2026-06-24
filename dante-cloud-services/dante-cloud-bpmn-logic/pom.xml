@@ -32,7 +32,7 @@
     <parent>
         <artifactId>dante-cloud-services</artifactId>
         <groupId>cn.herodotus.dantecloud</groupId>
-        <version>4.1.0.1</version>
+        <version>4.1.0.2</version>
     </parent>
 
     <artifactId>dante-cloud-bpmn-logic</artifactId>
@@ -42,13 +42,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>webmvc-spring-boot-starter</artifactId>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
-
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>facility-kafka-spring-boot-starter</artifactId>
+            <artifactId>webmvc-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
