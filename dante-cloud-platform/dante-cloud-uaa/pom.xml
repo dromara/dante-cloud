@@ -32,7 +32,7 @@
     <parent>
         <artifactId>dante-cloud-platform</artifactId>
         <groupId>cn.herodotus.dantecloud</groupId>
-        <version>4.1.0.2</version>
+        <version>4.1.0.3</version>
     </parent>
 
     <artifactId>dante-cloud-uaa</artifactId>
