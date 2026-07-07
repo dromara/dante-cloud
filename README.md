@@ -98,37 +98,7 @@
 - **「极简编程用户」**：如果您希望基于自己现有知识，不看文档不用学习就可以快速搭建应用，或者通过拖拽生成代码简化开发，这与本项目的产品定位、开发理念、设计哲学背道而驰。
 - **「审美品鉴用户」**：本项目前端是使用组件库纯手搓构建，没有专业的美工也没有照搬主流框架，初衷是为后端开发人员接触前端提供一条更友好的途径，所以不能保证符合您的审美。
 
-# [一]、项目地址
-
-## 1. Dante Cloud 主工程
-
-- **Gitee**：[https://gitee.com/dromara/dante-cloud](https://gitee.com/dromara/dante-cloud)
-- **Github**：[https://github.com/dromara/dante-cloud](https://github.com/dromara/dante-cloud)
-- **AtomGit**：[https://atomgit.com/dromara/dante-cloud](https://atomgit.com/dromara/dante-cloud)
-
-## 2. Dante Engine 核心组件库
-
-- **Gitee**：[https://gitee.com/dante-compass/dante-engine](https://gitee.com/dante-compass/dante-engine)
-- **Github**：[https://github.com/dante-compass/dante-engine](https://github.com/dante-compass/dante-engine)
-- **AtomGit**：[https://atomgit.com/dante-compass/dante-engine](https://atomgit.com/dante-compass/dante-engine)
-
-## 3. UI 前端工程（旧版）
-
-- **Gitee**：[https://gitee.com/dante-compass/dante-cloud-ui](https://gitee.com/dante-compass/dante-cloud-ui)
-- **Github**：[https://github.com/dante-compass/dante-cloud-ui](https://github.com/dante-compass/dante-cloud-ui)
-- **AtomGit**：[https://atomgit.com/dante-compass/dante-cloud-ui](https://atomgit.com/dante-compass/dante-cloud-ui)
-
-## 4. UI 前端工程（新版）
-
-- **Gitee**：[https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify](https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify)
-- **Github**：[https://github.com/dante-compass/herodotus-cloud-ui-vuetify](https://github.com/dante-compass/herodotus-cloud-ui-vuetify)
-
-## 5. ThingsBrain 基于 Dante Cloud 的物联网平台（加速开发中...）
-
-- **Gitee**：[https://gitee.com/dante-compass/thingsbrain](https://gitee.com/dante-compass/thingsbrain)
-- **Github**：[https://github.com/dante-compass/thingsbrain](https://github.com/dante-compass/thingsbrain)
-
-# [二]、开源协议
+# [一]、开源协议
 
 ## 1. 协议声明
 
@@ -147,7 +117,13 @@
 
 如果您确实需要删除作者或版权信息，需要争得作者同意及授权。或者在 [【使用公司及组织】](https://gitee.com/dromara/dante-cloud/issues/ICAOHG) 下进行登记，经作者整理登记信息形成表格后，可视为正式授权。
 
-# [三]、工程结构
+# [二]、工程结构
+
+`Dante Cloud` 自 2.7.X 版本起，由原有单一的工程拆分为 `Dante Cloud` 和 `Dante Engine` 两个工程。`Dante Cloud` 为主要应用运行以及子模块组合工程，`Dante Engine` 为核心组件库工程。
+
+该种设计是对于原有工程代码高度抽象，不仅可以提升底层通用代码的复用性，让代码不局限于 `Dante Cloud` 项目本身还可以为更多的项目所使用。用户使用 `Dante Cloud`，收获的不仅是一套微服务系统，更是一套可以灵活拆分和状态装配的组件库。可以像乐高一样随意组合搭建您自己的应用系统。
+
+## 1. 主工程 Dante Cloud 工程结构
 
 ```shell
 dante-cloud
@@ -179,7 +155,67 @@ dante-cloud
 └──  └── dante-monolith-application -- Dante Cloud 单体版应用模块
 ```
 
-# [四]、版本分支
+## 2. 组件库 Dante Engine 工程结构
+
+```shell
+dante-engine
+├── dante-assistant -- 辅助功能模块
+├    ├── dante-assistant-access -- 第三方登录接入辅助功能模块
+├    ├── dante-assistant-captcha -- 验证码辅助功能模块
+├    └── dante-assistant-oss -- AWS SDK V2 对象存储辅助功能模
+├── dante-data -- 数据访问模块
+├    ├── dante-data-commons -- 数据访问通用代码模块
+├    ├── dante-data-jpa -- 以 JPA 作为数据访问层的通用代码模块
+├    └── dante-data-rest -- 关联数据访问层的REST开发通用代码模块
+├── dante-dependencies -- 工程 Bom 定义，统一管理工程模块
+├── dante-framework -- Dante Cloud 框架核心基础模块
+├    ├── dante-autoconfigure -- 基础自动配置模块
+├    ├── dante-cache -- 缓存相关基础代码模块
+├    ├── dante-core -- 核心定义模块
+├    ├── dante-hibernate -- Hibernate 扩展模块
+├    ├── dante-security -- Security 相关基础代码模块
+├    ├── dante-spring -- SpringBoot 相关基础代码模块
+├    └── dante-web -- Web 服务相关基础代码模块
+├── dante-logic -- 系统内置功能业务逻辑模块
+├    ├── dante-logic-identity -- 身份认证功能业务逻辑模块
+├    ├── dante-logic-message -- 系统消息业务逻辑模块
+├    └── dante-logic-upms -- UPMS 业务逻辑模块
+├── dante-message -- 消息模块
+├    ├── dante-message-autoconfigure -- 消息自动配置模块
+├    ├── dante-message-commons -- 消息通用代码模块
+├    ├── dante-message-emqx -- Emqx 封装模块
+├    └── dante-message-servlet-websocket -- 基于 Servlet 环境下的 Websocket 功能封装模块
+├── dante-oauth2 -- OAuth2 认证模块
+├    ├── dante-authentication-autoconfigure -- OAuth2 授权服务器基础内容自动配置模块
+├    ├── dante-authorization-autoconfigure -- OAuth2 资源服务器基础内容自动配置模块
+├    ├── dante-oauth2-authentication -- Spring Authorization Server 授权服务器核心功能封装模块
+├    ├── dante-oauth2-authorization -- Spring Authorization Server 资源服务器核心功能封装模块
+├    ├── dante-oauth2-commons -- OAuth2 共性通用代码模块
+├    └── dante-oauth2-extension -- Spring Authorization Server 功能扩展模块
+├── dante-persistence -- 数据访问层模块
+├    ├── dante-persistence-commons -- 数据访问层通用代码模块
+├    ├── dante-persistence-autoconfigure -- 数据访问层模块自动配置
+├    └── dante-persistence-sas-jpa -- 以 JPA 作为 SAS 核心数据访问层代码实现模块
+├── dante-rest -- 系统内置功能 REST 接口模块
+├    ├── dante-rest-oss -- 对象存储功能 REST 接口模块
+├    ├── dante-rest-identity -- 身份认证功能 REST 接口模块
+├    ├── dante-rest-message -- 消息功能 REST 接口模块
+├    └── dante-rest-upms -- UPMS 功能 REST 接口模块
+├── dante-starter -- Starters
+├    ├── cache-spring-boot-starter -- 缓存自动配置 Starter
+├    ├── data-rdbms-spring-boot-starter -- 关系型数据库数据访问层自动配置 Starter
+├    ├── logging-spring-boot-starter -- 日志收集和聚合自动配置 Starter
+├    ├── oss-spring-boot-starter -- 基于 AWS SDK V2 对象存储自动配置 Starter
+├    ├── reactive-container-spring-boot-starter -- Reactive 容器基础配置自动配置 Starter
+├    ├── servlet-container-spring-boot-starter -- 基于 JPA 的多租户自动配置 Starter
+├    ├── servlet-message-spring-boot-starter -- Servlet 环境消息模块自动配置 Starter
+├    ├── tenant-spring-boot-starter -- 基于 JPA 的多租户自动配置 Starter
+├    ├── web-spring-boot-starter -- Web 微服务通用 Starter
+├    └── webmvc-spring-boot-starter -- WebMvc 类型应用自动配置 Starter
+└──  readme -- README 相关素材放置目录
+```
+
+# [三]、版本分支
 
 ## 1. 版本号说明
 
@@ -202,6 +238,36 @@ dante-cloud
 |         3.1.X          | Spring Boot 3.1 和 Spring Cloud 2022.0.X | JDK 17    | 历史版本，停止维护      | 基于 Spring Boot 3.1 时代开发的代码分支，稳定可用，不再维护                      |
 |         2.7.X          | Spring Boot 2.7 和 Spring Cloud 2021.0.X | JDK 8     | 历史版本，停止维护      | 基于 Spring Boot 2.7 时代开发的代码分支，稳定可用，不再维护                      |
 | spring-security-oauth2 | Spring Boot 2.6 和 Spring Cloud 2021.0.X | JDK 8     | 历史代码，不再维护      | 基于原 Spring Security OAuth2 实现的微服务，稳定可用，因相关组件均不在维护，所以该版本不再维护 |
+
+# [四]、项目地址
+
+## 1. Dante Cloud 主工程
+
+- **Gitee**：[https://gitee.com/dromara/dante-cloud](https://gitee.com/dromara/dante-cloud)
+- **Github**：[https://github.com/dromara/dante-cloud](https://github.com/dromara/dante-cloud)
+- **AtomGit**：[https://atomgit.com/dromara/dante-cloud](https://atomgit.com/dromara/dante-cloud)
+
+## 2. Dante Engine 核心组件库
+
+- **Gitee**：[https://gitee.com/dante-compass/dante-engine](https://gitee.com/dante-compass/dante-engine)
+- **Github**：[https://github.com/dante-compass/dante-engine](https://github.com/dante-compass/dante-engine)
+- **AtomGit**：[https://atomgit.com/dante-compass/dante-engine](https://atomgit.com/dante-compass/dante-engine)
+
+## 3. UI 前端工程（旧版）
+
+- **Gitee**：[https://gitee.com/dante-compass/dante-cloud-ui](https://gitee.com/dante-compass/dante-cloud-ui)
+- **Github**：[https://github.com/dante-compass/dante-cloud-ui](https://github.com/dante-compass/dante-cloud-ui)
+- **AtomGit**：[https://atomgit.com/dante-compass/dante-cloud-ui](https://atomgit.com/dante-compass/dante-cloud-ui)
+
+## 4. UI 前端工程（新版）
+
+- **Gitee**：[https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify](https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify)
+- **Github**：[https://github.com/dante-compass/herodotus-cloud-ui-vuetify](https://github.com/dante-compass/herodotus-cloud-ui-vuetify)
+
+## 5. ThingsBrain 基于 Dante Cloud 的物联网平台（加速开发中...）
+
+- **Gitee**：[https://gitee.com/dante-compass/thingsbrain](https://gitee.com/dante-compass/thingsbrain)
+- **Github**：[https://github.com/dante-compass/thingsbrain](https://github.com/dante-compass/thingsbrain)
 
 # [五]、安全测试
 
