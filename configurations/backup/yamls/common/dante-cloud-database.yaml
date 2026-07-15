@@ -40,7 +40,7 @@ spring:
   jpa:
     database: ${herodotus.database-information.platform}
     database-platform: ${herodotus.database-information.platform}
-    open-in-view: false
+    open-in-view: true
     show-sql: ${herodotus.switch.database.show-sql}
     hibernate:
       ddl-auto: ${herodotus.switch.database.ddl-auto}
