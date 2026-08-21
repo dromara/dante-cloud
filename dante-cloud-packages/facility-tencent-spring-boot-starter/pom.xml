@@ -34,21 +34,59 @@
         <version>4.1.1.0</version>
     </parent>
 
-    <artifactId>rpc-server-upms-spring-boot-starter</artifactId>
+    <artifactId>facility-tencent-spring-boot-starter</artifactId>
     <name>${project.artifactId}</name>
 
-    <description>Dante Cloud 服务间通信服务端自动配置 Starter(UPMS 作为服务端为其它服务提供访问)</description>
+    <description>Dante Cloud 云原生微服务基座组件库面向 Spring Cloud Tencent 的微服务基础设施适配模块 Starter</description>
 
     <dependencies>
-        <dependency>
-            <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-authorization-autoconfigure</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
-            <artifactId>dante-rest-upms</artifactId>
+            <artifactId>dante-spring</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.tencent.cloud</groupId>
+            <artifactId>spring-cloud-starter-tencent-polaris-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tencent.cloud</groupId>
+            <artifactId>spring-cloud-starter-tencent-polaris-config</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcpkix-jdk15to18</artifactId>
+                    <groupId>org.bouncycastle</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tencent.cloud</groupId>
+            <artifactId>spring-cloud-starter-tencent-polaris-circuitbreaker</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tencent.cloud</groupId>
+            <artifactId>spring-cloud-starter-tencent-polaris-ratelimit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tencent.cloud</groupId>
+            <artifactId>spring-cloud-starter-tencent-polaris-router</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tencent.cloud</groupId>
+            <artifactId>spring-cloud-starter-tencent-metadata-transfer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
