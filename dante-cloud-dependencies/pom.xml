@@ -28,7 +28,7 @@
     <parent>
         <groupId>cn.herodotus.ecosystem</groupId>
         <artifactId>herodotus-ecosystem-parent</artifactId>
-        <version>4.1.0.4</version>
+        <version>4.1.1.0</version>
         <relativePath/>
     </parent>
 
@@ -105,11 +105,6 @@
             <dependency>
                 <groupId>cn.herodotus.dantecloud</groupId>
                 <artifactId>facility-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.herodotus.dantecloud</groupId>
-                <artifactId>facility-tencent-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

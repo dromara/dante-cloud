@@ -77,7 +77,7 @@ spring:
           # 让版本化数据（@Version）也能批量更新
           batch_versioned_data: true
           # 明确时区，避免数据库时区不确定造成转换开销
-          time_zone: UTC
+          time_zone: Asia/Shanghai
           lob:
             # 避免一些 JDBC 驱动需要环境上下文创建 LOB
             non_contextual_creation: true
