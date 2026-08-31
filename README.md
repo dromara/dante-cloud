@@ -249,7 +249,7 @@ dante-engine
 - **Gitee**：[https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify](https://gitee.com/dante-compass/herodotus-cloud-ui-vuetify)
 - **Github**：[https://github.com/dante-compass/herodotus-cloud-ui-vuetify](https://github.com/dante-compass/herodotus-cloud-ui-vuetify)
 
-## 5. ThingsBrain 基于 Dante Cloud 的物联网平台（加速开发中...）
+## 5. ThingsBrain 基于 Dante Cloud 的物联网平台
 
 - **Gitee**：[https://gitee.com/dante-compass/thingsbrain](https://gitee.com/dante-compass/thingsbrain)
 - **Github**：[https://github.com/dante-compass/thingsbrain](https://github.com/dante-compass/thingsbrain)
