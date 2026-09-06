@@ -25,6 +25,7 @@
 
 package cn.herodotus.dantecloud.authentication.autoconfigure;
 
+import cn.herodotus.dante.core.constant.SystemConstants;
 import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationConfigurerManager;
 import cn.herodotus.dante.oauth2.authentication.configurer.OAuth2AuthenticationProviderConfigurer;
 import cn.herodotus.dante.oauth2.authentication.customizer.OAuth2AuthorizationServerConfigurerCustomizer;
@@ -125,7 +126,7 @@ public class AuthorizationAutoConfiguration {
     }
 
     @Bean
-    public AuthorizationServerSettings authorizationServerSettings(EndpointProperties endpointProperties) {
+    public AuthorizationServerSettings authorizationServerSettings(EndpointProperties endpointProperties, OAuth2AuthenticationProperties oauth2AuthenticationProperties) {
         return AuthorizationServerSettings.builder()
                 .issuer(endpointProperties.getIssuerUri())
                 .authorizationEndpoint(endpointProperties.getAuthorizationEndpoint())
@@ -139,6 +140,7 @@ public class AuthorizationAutoConfiguration {
                 .oidcLogoutEndpoint(endpointProperties.getOidcLogoutEndpoint())
                 .oidcUserInfoEndpoint(endpointProperties.getOidcUserInfoEndpoint())
                 .oidcClientRegistrationEndpoint(endpointProperties.getOidcClientRegistrationEndpoint())
+                .setting(SystemConstants.PARAMETER__CLIENT_ID_METADATA_DOCUMENT_SUPPORTED, oauth2AuthenticationProperties.getClientIdMetadataDocument().getEnabled())
                 .build();
     }
 }
