@@ -140,7 +140,8 @@ public class AuthorizationAutoConfiguration {
                 .oidcLogoutEndpoint(endpointProperties.getOidcLogoutEndpoint())
                 .oidcUserInfoEndpoint(endpointProperties.getOidcUserInfoEndpoint())
                 .oidcClientRegistrationEndpoint(endpointProperties.getOidcClientRegistrationEndpoint())
-                .setting(SystemConstants.PARAMETER__CLIENT_ID_METADATA_DOCUMENT_SUPPORTED, oauth2AuthenticationProperties.getClientIdMetadataDocument().getEnabled())
+                .setting(SystemConstants.AUTHORIZATION_SERVER_SETTINGS__CLIENT_ID_METADATA_DOCUMENT_SUPPORTED, oauth2AuthenticationProperties.getMcp().getSupportClientIdMetadataDocument())
+                .setting(SystemConstants.AUTHORIZATION_SERVER_SETTINGS__PARAMETER__AUTHORIZATION_RESPONSE_ISS_PARAMETER_SUPPORTED, oauth2AuthenticationProperties.getMcp().getSupportAuthorizationResponseIssParameter())
                 .build();
     }
 }
