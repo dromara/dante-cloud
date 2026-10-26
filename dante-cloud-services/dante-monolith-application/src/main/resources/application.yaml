@@ -6,14 +6,15 @@ server:
   jetty:
     connection-idle-timeout: 30000 #在请求延迟高时，避免线程被快速占满
   compression:
-    enabled: true    # 启用GZIP压缩
+    enabled: true # 启用GZIP压缩
     mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json # 压缩类型
-    min-response-size: 1024  # 最小压缩响应大小
+    min-response-size: 1024 # 最小压缩响应大小
 spring:
   application:
     name:  @artifactId@
   profiles:
     active: development-postgresql
+  #    active: development-preview
   data:
     redis:
       repositories:
@@ -23,6 +24,10 @@ spring:
   threads:
     virtual:
       enabled: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   http:
     clients:
       imperative:
