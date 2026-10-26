@@ -38,7 +38,7 @@ import org.springframework.cloud.stream.function.FunctionConfiguration;
 @SpringBootApplication(exclude = {FunctionConfiguration.class})
 public class MonolithApplication {
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         SpringApplication.run(MonolithApplication.class, args);
     }
 }
