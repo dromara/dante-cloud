@@ -42,6 +42,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-web</artifactId>
         </dependency>
@@ -91,4 +96,21 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>gateway-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skipTests>false</skipTests>
+                            <argLine>-Dfile.encoding=ISO-8859-1</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
