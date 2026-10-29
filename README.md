@@ -10,7 +10,7 @@
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2025.1.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2025.1.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.2.0.0--2025.1.1-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.2.0.0-2025.1.1"></a>
     <a href="https://spring.io/projects/spring-ai" target="_blank"><img src="https://img.shields.io/badge/Spring%20AI-2.0.2-blue.svg?logo=spring" alt="Spring AI 2.0.2"></a>
-    <a href="https://nacos.io/docs/latest/overview/" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.2.4-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.2.4"></a>
+    <a href="https://nacos.io/docs/latest/overview/" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.3.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.3.0"></a>
 </p>
 <p align="center">
     <a href="https://my.oschina.net/pointerv" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
