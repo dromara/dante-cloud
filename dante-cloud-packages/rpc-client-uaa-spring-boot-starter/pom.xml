@@ -56,7 +56,7 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.herodotus.dantecloud</groupId>
+            <groupId>cn.herodotus.dante</groupId>
             <artifactId>feign-spring-boot-starter</artifactId>
             <optional>true</optional>
         </dependency>
