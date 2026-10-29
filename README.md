@@ -158,6 +158,7 @@ dante-engine
 ├    ├── dante-cache -- 缓存相关基础代码模块
 ├    ├── dante-core -- 核心定义模块
 ├    ├── dante-hibernate -- Hibernate 扩展模块
+├    ├── dante-messaging -- Messaging 相关基础代码模块
 ├    ├── dante-security -- Security 相关基础代码模块
 ├    ├── dante-spring -- SpringBoot 相关基础代码模块
 ├    └── dante-web -- Web 服务相关基础代码模块
@@ -167,7 +168,6 @@ dante-engine
 ├    └── dante-logic-upms -- UPMS 业务逻辑模块
 ├── dante-message -- 消息模块
 ├    ├── dante-message-autoconfigure -- 消息自动配置模块
-├    ├── dante-message-commons -- 消息通用代码模块
 ├    ├── dante-message-emqx -- Emqx 封装模块
 ├    └── dante-message-servlet-websocket -- 基于 Servlet 环境下的 Websocket 功能封装模块
 ├── dante-oauth2 -- OAuth2 认证模块
@@ -189,6 +189,9 @@ dante-engine
 ├── dante-starter -- Starters
 ├    ├── cache-spring-boot-starter -- 缓存自动配置 Starter
 ├    ├── data-rdbms-spring-boot-starter -- 关系型数据库数据访问层自动配置 Starter
+├    ├── facility-alibaba-spring-boot-starter -- 面向 Spring Cloud Alibaba 的微服务基础设施适配 Starter
+├    ├── facility-tencent-spring-boot-starter -- 面向 Spring Cloud Tencent 的微服务基础设施适配模块 Starter
+├    ├── fegin-spring-boot-starter -- Feign 客户端自动配置 Starter
 ├    ├── logging-spring-boot-starter -- 日志收集和聚合自动配置 Starter
 ├    ├── oss-spring-boot-starter -- 基于 AWS SDK V2 对象存储自动配置 Starter
 ├    ├── reactive-container-spring-boot-starter -- Reactive 容器基础配置自动配置 Starter
