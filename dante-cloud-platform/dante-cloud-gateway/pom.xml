@@ -46,6 +46,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>cn.herodotus.dante</groupId>
             <artifactId>dante-web</artifactId>
