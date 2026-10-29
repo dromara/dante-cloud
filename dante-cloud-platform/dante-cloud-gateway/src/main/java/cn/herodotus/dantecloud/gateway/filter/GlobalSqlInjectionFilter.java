@@ -134,7 +134,7 @@ public class GlobalSqlInjectionFilter implements GlobalFilter, Ordered {
 
 
                 // 由于修改了传递参数，需要重新设置CONTENT_LENGTH，长度是字节长度，不是字符串长度
-                int length = bodyString.getBytes().length;
+                int length = newBytes.length;
                 headers.remove(HttpHeaders.CONTENT_LENGTH);
                 headers.setContentLength(length);
 
