@@ -273,7 +273,7 @@ herodotus:
         letter: num_and_upper_char
         font: action
     access:
-      justauth:
+      anduin:
         enabled: true
         configs:
           GITEE:
@@ -500,7 +500,7 @@ herodotus:
         letter: num_and_upper_char
         font: action
     access:
-      justauth:
+      anduin:
         enabled: true
         configs:
           GITEE:
@@ -733,7 +733,7 @@ herodotus:
         letter: num_and_upper_char
         font: action
     access:
-      justauth:
+      anduin:
         enabled: true
         configs:
           GITEE:
