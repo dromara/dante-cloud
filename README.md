@@ -5,11 +5,11 @@
 ---
 
 <p align="center">
-    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-4.1.3-blue.svg?logo=springboot" alt="Spring Boot 4.1.3"></a>
-    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2025.1.5-blue.svg?logo=springboot" alt="Spring Cloud 2025.1.5"></a>
+    <a href="https://spring.io/projects/spring-boot" target="_blank"><img src="https://img.shields.io/badge/Spring%20Boot-4.2.0-blue.svg?logo=springboot" alt="Spring Boot 4.2.0"></a>
+    <a href="https://spring.io/projects/spring-cloud" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud-2026.0.0-blue.svg?logo=springboot" alt="Spring Cloud 2026.0.0"></a>
     <a href="https://github.com/alibaba/spring-cloud-alibaba" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2025.1.0.0-blue.svg?logo=alibabadotcom" alt="Spring Cloud Alibaba 2025.1.0.0"></a>
     <a href="https://github.com/Tencent/spring-cloud-tencent" target="_blank"><img src="https://img.shields.io/badge/Spring%20Cloud%20Tencent-2.2.0.0--2025.1.1-blue.svg?logo=qq" alt="Spring Cloud Tencent 2.2.0.0-2025.1.1"></a>
-    <a href="https://spring.io/projects/spring-ai" target="_blank"><img src="https://img.shields.io/badge/Spring%20AI-2.0.3-blue.svg?logo=spring" alt="Spring AI 2.0.3"></a>
+    <a href="https://spring.io/projects/spring-ai" target="_blank"><img src="https://img.shields.io/badge/Spring%20AI-2.1.0-blue.svg?logo=spring" alt="Spring AI 2.1.0"></a>
     <a href="https://nacos.io/docs/latest/overview/" target="_blank"><img src="https://img.shields.io/badge/Nacos-3.3.0-brightgreen.svg?logo=alibabadotcom" alt="Nacos 3.3.0"></a>
 </p>
 <p align="center">
@@ -217,9 +217,10 @@ dante-engine
 
 |        分支名称        | 对应 Spring 生态版本                     | 对应 JDK 版本 | 用途               | 现状                                                                                           |
 |:----------------------:|------------------------------------------|---------------|--------------------|------------------------------------------------------------------------------------------------|
-|         master         | Spring Boot 4.1 和 Spring Cloud 2025.1.5 | JDK 25        | 主要发布分支       | 推荐使用代码分支                                                                               |
-|        develop         | Spring Boot 4.1 和 Spring Cloud 2025.1.5 | JDK 25        | Development 分支   | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                                   |
-|         4.0.X          | Spring Boot 4.0 和 Spring Cloud 2025.1.1 | JDK 25        | 历史版本，停止维护 | 基于 Spring Boot 4.0 时代开发的代码分支，稳定可用，停止维护                                    |
+|         master         | Spring Boot 4.2 和 Spring Cloud 2026.0.0 | JDK 25        | 主要发布分支       | 推荐使用代码分支                                                                               |
+|        develop         | Spring Boot 4.2 和 Spring Cloud 2026.0.0 | JDK 25        | Development 分支   | 新功能、ISSUE 均以此分支作为开发，发布后会 PR 至 master 分支                                   |
+|         4.1.X          | Spring Boot 4.1 和 Spring Cloud 2025.1.5 | JDK 25        | 历史版本           | 基于 Spring Boot 4.1 时代开发的代码分支，稳定可用                                              |
+|         4.0.X          | Spring Boot 4.0 和 Spring Cloud 2025.1.1 | JDK 25        | 历史版本，停止维护 | 基于 Spring Boot 4.0 时代开发的代码分支，稳定可用，不再维护                                    |
 |         3.5.X          | Spring Boot 3.5 和 Spring Cloud 2025.0.X | JDK 17        | 历史版本，停止维护 | 基于 Spring Boot 3.5 时代开发的代码分支，稳定可用，停止维护                                    |
 |         3.4.X          | Spring Boot 3.4 和 Spring Cloud 2024.0.X | JDK 17        | 历史版本，停止维护 | 基于 Spring Boot 3.4 时代开发的代码分支，稳定可用，停止维护                                    |
 |      3.2.X-3.3.X       | Spring Boot 3.3 和 Spring Cloud 2023.0.X | JDK 17        | 历史版本，停止维护 | 基于 Spring Boot 3.3 时代开发的代码分支，稳定可用，停止维护                                    |
