@@ -5,7 +5,7 @@ herodotus:
         enabled: true
         sandbox: true
         test-code: 12345678
-      justauth:
+      anduin:
         enabled: true
         configs:
           GITEE:

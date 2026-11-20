@@ -28,7 +28,7 @@
     <parent>
         <groupId>cn.herodotus.ecosystem</groupId>
         <artifactId>herodotus-ecosystem-parent</artifactId>
-        <version>4.1.2.0</version>
+        <version>4.1.3.0</version>
         <relativePath/>
     </parent>
 
@@ -38,6 +38,38 @@
     <packaging>pom</packaging>
 
     <description>Top Dante project pom.xml file</description>
+
+    <url>https://github.com/dromara/dante-cloud</url>
+
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/dromara/dante-cloud</url>
+        <connection>scm:git:git@github.com:dromara/dante-cloud.git</connection>
+        <developerConnection>scm:git:git@github.com:dromara/dante-cloud.git</developerConnection>
+    </scm>
+
+    <organization>
+        <name>dromara</name>
+        <url>https://dromara.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>herodotus-ecosystem</id>
+            <name>码匠君</name>
+            <email>herodotus@aliyun.com</email>
+            <organization>dromara</organization>
+            <organizationUrl>https://dromara.org</organizationUrl>
+            <url>https://github.com/herodotus-ecosystem</url>
+        </developer>
+    </developers>
 
     <!-- ${basedir} 项目根目录 -->
     <!-- ${project.build.directory} 构建目录，缺省为target -->
@@ -98,7 +130,7 @@
                 <!--Spring Cloud Alibaba 鉴权密码-->
                 <alibaba.password>nacos</alibaba.password>
                 <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <alibaba.namespace></alibaba.namespace>
+                <alibaba.namespace>8c5f383d-f7e8-46ae-81e1-a7a77ee20e0a</alibaba.namespace>
                 <!--Spring Cloud Alibaba配置中心地址-->
                 <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
                 <!--Spring Cloud Alibaba服务发现地址-->
@@ -139,7 +171,7 @@
                 <!--Spring Cloud Alibaba配置中心地址-->
                 <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
                 <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <alibaba.namespace></alibaba.namespace>
+                <alibaba.namespace>8c5f383d-f7e8-46ae-81e1-a7a77ee20e0a</alibaba.namespace>
                 <!--Spring Cloud Alibaba服务发现地址-->
                 <alibaba.discovery.server-addr>192.168.101.10:8848</alibaba.discovery.server-addr>
                 <alibaba.sentinel.server-addr>192.168.101.10:8858</alibaba.sentinel.server-addr>
@@ -176,7 +208,7 @@
                 <alibaba.password>nacos</alibaba.password>
                 <!--Spring Cloud Alibaba配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
                 <!--<alibaba.namespace>8fdcc073-2e51-4722-8274-3f5b76362bb8</alibaba.namespace>-->
-                <alibaba.namespace></alibaba.namespace>
+                <alibaba.namespace>8c5f383d-f7e8-46ae-81e1-a7a77ee20e0a</alibaba.namespace>
                 <!--Spring Cloud Alibaba配置中心地址-->
                 <alibaba.config.server-addr>192.168.101.10:8848</alibaba.config.server-addr>
                 <!--Spring Cloud Alibaba服务发现地址-->
@@ -217,19 +249,13 @@
                         <artifactId>central-publishing-maven-plugin</artifactId>
                         <configuration>
                             <excludeArtifacts>
-                                <excludeArtifact>authorization-servlet-spring-boot-starter</excludeArtifact>
-                                <excludeArtifact>facility-alibaba-spring-boot-starter</excludeArtifact>
-                                <excludeArtifact>facility-spring-boot-starter</excludeArtifact>
-                                <excludeArtifact>feign-spring-boot-starter</excludeArtifact>
-                                <excludeArtifact>rpc-client-oss-spring-boot-starter</excludeArtifact>
-                                <excludeArtifact>rpc-server-upms-spring-boot-starter</excludeArtifact>
-                                <excludeArtifact>platform</excludeArtifact>
+                                <excludeArtifact>dante-cloud-platform</excludeArtifact>
                                 <excludeArtifact>dante-cloud-gateway</excludeArtifact>
                                 <excludeArtifact>dante-cloud-message</excludeArtifact>
                                 <excludeArtifact>dante-cloud-monitor</excludeArtifact>
                                 <excludeArtifact>dante-cloud-uaa</excludeArtifact>
                                 <excludeArtifact>dante-cloud-upms</excludeArtifact>
-                                <excludeArtifact>services</excludeArtifact>
+                                <excludeArtifact>dante-cloud-services</excludeArtifact>
                                 <excludeArtifact>dante-cloud-bpmn-ability</excludeArtifact>
                                 <excludeArtifact>dante-cloud-bpmn-logic</excludeArtifact>
                                 <excludeArtifact>dante-cloud-oss-ability</excludeArtifact>
