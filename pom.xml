@@ -28,7 +28,7 @@
     <parent>
         <groupId>cn.herodotus.ecosystem</groupId>
         <artifactId>herodotus-ecosystem-parent</artifactId>
-        <version>4.1.2.0</version>
+        <version>4.1.3.0</version>
         <relativePath/>
     </parent>
 
@@ -38,6 +38,38 @@
     <packaging>pom</packaging>
 
     <description>Top Dante project pom.xml file</description>
+
+    <url>https://github.com/dromara/dante-cloud</url>
+
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/dromara/dante-cloud</url>
+        <connection>scm:git:git@github.com:dromara/dante-cloud.git</connection>
+        <developerConnection>scm:git:git@github.com:dromara/dante-cloud.git</developerConnection>
+    </scm>
+
+    <organization>
+        <name>dromara</name>
+        <url>https://dromara.org</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>herodotus-ecosystem</id>
+            <name>码匠君</name>
+            <email>herodotus@aliyun.com</email>
+            <organization>dromara</organization>
+            <organizationUrl>https://dromara.org</organizationUrl>
+            <url>https://github.com/herodotus-ecosystem</url>
+        </developer>
+    </developers>
 
     <!-- ${basedir} 项目根目录 -->
     <!-- ${project.build.directory} 构建目录，缺省为target -->
