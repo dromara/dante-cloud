@@ -44,7 +44,7 @@ spring:
   http:
     clients:
       imperative:
-        factory: jdk
+        factory: jetty
   web:
     error:
       include-exception: true
