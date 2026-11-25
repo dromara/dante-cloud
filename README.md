@@ -28,6 +28,7 @@
     <a href='https://atomgit.com/dromara/dante-cloud'><img src='https://atomgit.com/dromara/dante-cloud/star/badge.svg' alt='Atomgit star'></a>
     <a href="https://www.herodotus.cn"><img src="https://visitor-badge.laobi.icu/badge?page_id=dante-cloud&title=Total%20Visits" alt="Total Visits"></a>
     <a href="https://deepwiki.com/dromara/dante-cloud" target="_blank"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+    <a href="https://hub.xerj.org/contributors/herodotus-ecosystem" target="_blank"><img src="https://hub.xerj.org/contributors/herodotus-ecosystem/badge.svg" alt="XERJ Corpus Hub contributor"></a>
 </p>
 <p align="center">
     <a href="https://atomgit.com/dromara/dante-cloud">Atomgit 仓库</a> &nbsp; | &nbsp;
