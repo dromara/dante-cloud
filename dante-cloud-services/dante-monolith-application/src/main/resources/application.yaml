@@ -95,13 +95,14 @@ spring:
     username: athena
     password: athena
     type: com.zaxxer.hikari.HikariDataSource
+    connection-fetch: lazy
     hikari:
       pool-name: Hikari
       minimum-idle: 5
-      maximum-pool-size: 30
+      maximum-pool-size: 50
       # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
       # 30 秒太长，高并发时线程卡住 30s 才失败，用户体验差。缩短至 3~10s 快速失败，让上层重试或降级。
-      connection-timeout: 10000
+      connection-timeout: 3000
       # the interval in which connections will be tested for aliveness, thus keeping them alive by the act of checking. Value is in milliseconds, default is 0 (disabled)
       # 防止连接被数据库/防火墙空闲断开。应 小于 数据库 idle_in_transaction_session_timeout 或防火墙超时。
       keepalive-time: 60000
@@ -327,13 +328,14 @@ spring:
     username: athena
     password: athena
     type: com.zaxxer.hikari.HikariDataSource
+    connection-fetch: lazy
     hikari:
       pool-name: Hikari
       minimum-idle: 5
-      maximum-pool-size: 30
+      maximum-pool-size: 50
       # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
       # 30 秒太长，高并发时线程卡住 30s 才失败，用户体验差。缩短至 3~10s 快速失败，让上层重试或降级。
-      connection-timeout: 10000
+      connection-timeout: 3000
       # the interval in which connections will be tested for aliveness, thus keeping them alive by the act of checking. Value is in milliseconds, default is 0 (disabled)
       # 防止连接被数据库/防火墙空闲断开。应 小于 数据库 idle_in_transaction_session_timeout 或防火墙超时。
       keepalive-time: 60000
@@ -557,13 +559,14 @@ spring:
     username: athena
     password: athena
     type: com.zaxxer.hikari.HikariDataSource
+    connection-fetch: lazy
     hikari:
       pool-name: Hikari
       minimum-idle: 5
-      maximum-pool-size: 30
+      maximum-pool-size: 50
       # Lowest acceptable connection timeout is 250 ms. Default: 30000 (30 seconds)
       # 30 秒太长，高并发时线程卡住 30s 才失败，用户体验差。缩短至 3~10s 快速失败，让上层重试或降级。
-      connection-timeout: 10000
+      connection-timeout: 3000
       # the interval in which connections will be tested for aliveness, thus keeping them alive by the act of checking. Value is in milliseconds, default is 0 (disabled)
       # 防止连接被数据库/防火墙空闲断开。应 小于 数据库 idle_in_transaction_session_timeout 或防火墙超时。
       keepalive-time: 60000
